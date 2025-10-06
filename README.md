@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # gunnchAI3k 🔒🛡️
 
 **Enterprise-Grade AI Security Assistant** - Zero-Trust, Executive-Controlled AI
@@ -71,7 +70,7 @@ cd gunnchAI3k
 npm install
 
 # Configure environment
-cp .env.example .env
+cp env.example .env
 # Edit .env with your credentials
 
 # Start the bot
@@ -117,6 +116,12 @@ npm run dev
 - `/optimize` - Get efficiency suggestions
 - `/predict` - Forecast outcomes
 
+### **Security Commands**
+- `/security` - Security and compliance information
+- `/approve` - Approve AI actions (Executive only)
+- `/reject` - Reject AI actions (Executive only)
+- `/audit` - View audit logs and events
+
 ---
 
 ## 🏗️ **Architecture**
@@ -161,18 +166,13 @@ graph TB
 gunnchAI3k/
 ├── src/
 │   ├── core/           # AI learning engine
-│   ├── discord/        # Discord bot integration
-│   ├── cursor/         # Cursor IDE integration
-│   ├── github/         # GitHub API integration
-│   ├── learning/       # Machine learning modules
+│   ├── security/       # Security modules
+│   ├── integrations/   # External integrations
 │   └── utils/          # Utility functions
-├── data/
-│   ├── decisions/      # Decision history
-│   ├── patterns/       # Learned patterns
-│   └── models/         # AI models
-├── docs/              # Documentation
-├── tests/             # Test suites
-└── config/            # Configuration files
+├── data/               # Database and storage
+├── docs/               # Documentation
+├── tests/              # Test suites
+└── config/             # Configuration files
 ```
 
 ---
@@ -277,7 +277,3 @@ MIT License - see [LICENSE](LICENSE) file for details.
 **Built with ❤️ by gunnchOS3k**
 
 *Empowering founders to focus on what matters most - building the future.*
-=======
-# gunnchAI3k
-Smart Gunncho Enabled Bot - AI-Powered Executive Assistant
->>>>>>> becad9ccaa8cdbd9f8c85f3b34d383e8bee001ad
