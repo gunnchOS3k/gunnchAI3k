@@ -711,7 +711,8 @@ class GunnchAI3k {
         { name: '🧠 Learning', value: '/learn - Teach from decisions\n/analyze - Strategic analysis\n/suggest - AI recommendations', inline: false },
         { name: '📊 Tracking', value: '/track - Monitor metrics\n/update - Report progress\n/assign - Create tasks', inline: false },
         { name: '🎯 Intelligence', value: '/pattern - Analyze patterns\n/risk - Assess risks\n/optimize - Get suggestions\n/predict - Forecast outcomes', inline: false },
-        { name: '🔧 Management', value: '/meeting - Schedule meetings\n/announce - Share information\n/focus - Control notifications', inline: false }
+        { name: '🔧 Management', value: '/meeting - Schedule meetings\n/announce - Share information\n/focus - Control notifications', inline: false },
+        { name: '🔒 Security', value: '/security - Security and compliance info\n/approve - Approve AI actions (Executive)\n/reject - Reject AI actions (Executive)\n/audit - View audit logs and events', inline: false }
       )
       .setColor(0x3498db)
       .setTimestamp();
