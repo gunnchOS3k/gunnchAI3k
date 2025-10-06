@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # gunnchAI3k 🔒🛡️
 
 **Enterprise-Grade AI Security Assistant** - Zero-Trust, Executive-Controlled AI
@@ -276,3 +277,7 @@ MIT License - see [LICENSE](LICENSE) file for details.
 **Built with ❤️ by gunnchOS3k**
 
 *Empowering founders to focus on what matters most - building the future.*
+=======
+# gunnchAI3k
+Smart Gunncho Enabled Bot - AI-Powered Executive Assistant
+>>>>>>> becad9ccaa8cdbd9f8c85f3b34d383e8bee001ad
