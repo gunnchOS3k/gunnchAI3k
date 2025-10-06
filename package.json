@@ -1,0 +1,84 @@
+{
+  "name": "gunnchai3k",
+  "version": "1.0.0",
+  "description": "Smart Gunncho Enabled Bot - AI-Powered Executive Assistant",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts",
+    "build": "tsc",
+    "deploy": "npm run build && npm start",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "train": "tsx src/ai/train.ts",
+    "analyze": "tsx src/ai/analyze.ts",
+    "optimize": "tsx src/ai/optimize.ts",
+    "test:discord": "jest tests/discord.test.ts",
+    "test:cursor": "jest tests/cursor.test.ts",
+    "test:github": "jest tests/github.test.ts",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "format": "prettier --write src/**/*.ts"
+  },
+  "keywords": [
+    "ai",
+    "assistant",
+    "discord",
+    "cursor",
+    "learning",
+    "executive",
+    "productivity",
+    "automation"
+  ],
+  "author": "gunnchOS3k",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.3.1",
+    "node-fetch": "^3.3.2",
+    "openai": "^4.20.1",
+    "tensorflow": "^4.15.0",
+    "natural": "^6.7.0",
+    "compromise": "^14.10.0",
+    "sentiment": "^5.0.2",
+    "winston": "^3.11.0",
+    "cron": "^3.1.6",
+    "express": "^4.18.2",
+    "ws": "^8.14.2",
+    "sqlite3": "^5.1.6",
+    "redis": "^4.6.10",
+    "axios": "^1.6.2",
+    "cheerio": "^1.0.0-rc.12",
+    "pdf-parse": "^1.1.1",
+    "mammoth": "^1.6.0",
+    "csv-parser": "^3.0.0",
+    "json2csv": "^6.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/jest": "^29.5.8",
+    "@types/express": "^4.17.21",
+    "@types/ws": "^8.5.10",
+    "@types/natural": "^5.2.3",
+    "@types/sentiment": "^5.0.0",
+    "tsx": "^4.6.0",
+    "typescript": "^5.3.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.1",
+    "eslint": "^8.55.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "prettier": "^3.1.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gunnchOS3k/gunnchAI3k.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gunnchOS3k/gunnchAI3k/issues"
+  },
+  "homepage": "https://github.com/gunnchOS3k/gunnchAI3k#readme"
+}
