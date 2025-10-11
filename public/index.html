@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="theme-color" content="#4ecdc4">
+    <meta name="description" content="gunnchAI3k Hub - Your digital home for games, projects, and profile">
+    <meta name="keywords" content="games, hub, profile, anime aggressors, 3k mlv, mobile">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180x180.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/icons/icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/icons/icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/icons/icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/icons/icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/icons/icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/icons/icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/icons/icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="/icons/icon-57x57.png">
+    
+    <!-- Standard Icons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/icon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/icon-16x16.png">
+    
+    <!-- Microsoft Tiles -->
+    <meta name="msapplication-TileColor" content="#1a1a2e">
+    <meta name="msapplication-TileImage" content="/icons/icon-144x144.png">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://gunnchai3k.hub/">
+    <meta property="og:title" content="gunnchAI3k Hub">
+    <meta property="og:description" content="Your digital home for games, projects, and profile">
+    <meta property="og:image" content="/screenshots/og-image.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://gunnchai3k.hub/">
+    <meta property="twitter:title" content="gunnchAI3k Hub">
+    <meta property="twitter:description" content="Your digital home for games, projects, and profile">
+    <meta property="twitter:image" content="/screenshots/twitter-image.png">
+    
+    <title>gunnchAI3k Hub</title>
+    
+    <!-- Mobile-First CSS -->
+    <style>
+        /* Mobile Hub CSS Variables */
+        :root {
+            --primary-color: #4ecdc4;
+            --secondary-color: #1a1a2e;
+            --accent-color: #ff6b6b;
+            --text-color: #ffffff;
+            --background-color: #1a1a2e;
+            --surface-color: #2a2a3a;
+            --border-color: #4a4a5a;
+            --success-color: #00ff88;
+            --warning-color: #ffaa00;
+            --error-color: #ff4444;
+            
+            /* Mobile Variables */
+            --font-size-base: 16px;
+            --font-size-large: 18px;
+            --font-size-xl: 20px;
+            --line-height-base: 1.6;
+            
+            /* Touch Target Variables */
+            --touch-target-min: 44px;
+            --touch-target-comfortable: 48px;
+            --touch-target-large: 56px;
+            
+            /* Spacing Variables */
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+        }
+        
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-size: var(--font-size-base);
+            line-height: var(--line-height-base);
+            color: var(--text-color);
+            background-color: var(--background-color);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+        
+        /* Mobile Hub Container */
+        .hub-container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: var(--spacing-md);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Header */
+        .hub-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-md) 0;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .hub-title {
+            font-size: var(--font-size-xl);
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .profile-button {
+            background: var(--surface-color);
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            width: var(--touch-target-large);
+            height: var(--touch-target-large);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .profile-button:hover {
+            border-color: var(--primary-color);
+            transform: scale(1.05);
+        }
+        
+        /* Game Launcher */
+        .game-launcher {
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .launcher-title {
+            font-size: var(--font-size-large);
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .games-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-md);
+        }
+        
+        @media (min-width: 768px) {
+            .games-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        /* Game Card */
+        .game-card {
+            background: var(--surface-color);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: var(--spacing-lg);
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            min-height: var(--touch-target-large);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .game-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(78, 205, 196, 0.3);
+        }
+        
+        .game-card:active {
+            transform: translateY(0);
+        }
+        
+        .game-icon {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .game-title {
+            font-size: var(--font-size-large);
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .game-description {
+            font-size: var(--font-size-base);
+            color: var(--text-color);
+            opacity: 0.8;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .game-status {
+            font-size: 14px;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-weight: 500;
+        }
+        
+        .game-status.online {
+            background: var(--success-color);
+            color: var(--background-color);
+        }
+        
+        .game-status.offline {
+            background: var(--warning-color);
+            color: var(--background-color);
+        }
+        
+        /* Project Gallery */
+        .project-gallery {
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .gallery-title {
+            font-size: var(--font-size-large);
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-md);
+        }
+        
+        @media (min-width: 768px) {
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        /* Project Card */
+        .project-card {
+            background: var(--surface-color);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: var(--spacing-md);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .project-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-1px);
+        }
+        
+        .project-title {
+            font-size: var(--font-size-base);
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .project-description {
+            font-size: 14px;
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+        
+        /* Social Feed */
+        .social-feed {
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .feed-title {
+            font-size: var(--font-size-large);
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .feed-item {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: var(--spacing-md);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .feed-item-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .feed-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            margin-right: var(--spacing-sm);
+        }
+        
+        .feed-username {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .feed-content {
+            font-size: var(--font-size-base);
+            color: var(--text-color);
+        }
+        
+        /* Quick Actions */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .action-button {
+            background: var(--primary-color);
+            color: var(--background-color);
+            border: none;
+            border-radius: 8px;
+            padding: var(--spacing-md);
+            font-size: var(--font-size-base);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-height: var(--touch-target-min);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+        
+        .action-button:hover {
+            background: #3bb5a8;
+            transform: translateY(-1px);
+        }
+        
+        .action-button:active {
+            transform: translateY(0);
+        }
+        
+        /* Mobile Optimizations */
+        @media (max-width: 480px) {
+            .hub-container {
+                padding: var(--spacing-sm);
+            }
+            
+            .game-card {
+                padding: var(--spacing-md);
+            }
+            
+            .action-button {
+                width: 100%;
+                margin: var(--spacing-xs) 0;
+            }
+        }
+        
+        /* Tablet Optimizations */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .hub-container {
+                padding: var(--spacing-lg);
+            }
+        }
+        
+        /* Desktop Optimizations */
+        @media (min-width: 1024px) {
+            .hub-container {
+                max-width: 1200px;
+                padding: var(--spacing-xl);
+            }
+        }
+        
+        /* Loading State */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 200px;
+            font-size: var(--font-size-large);
+            color: var(--primary-color);
+        }
+        
+        .loading::after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border-color);
+            border-top: 2px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: var(--spacing-sm);
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="hub-container">
+        <!-- Header -->
+        <header class="hub-header">
+            <h1 class="hub-title">🏠 gunnchAI3k Hub</h1>
+            <button class="profile-button" onclick="openProfile()">
+                👤
+            </button>
+        </header>
+        
+        <!-- Main Content -->
+        <main>
+            <!-- Game Launcher -->
+            <section class="game-launcher">
+                <h2 class="launcher-title">🎮 Your Games</h2>
+                <div class="games-grid">
+                    <div class="game-card" onclick="launchGame('anime-aggressors')">
+                        <div class="game-icon">⚔️</div>
+                        <h3 class="game-title">Anime Aggressors</h3>
+                        <p class="game-description">Shōnen-style PvP arena brawler</p>
+                        <span class="game-status online">Online</span>
+                    </div>
+                    
+                    <div class="game-card" onclick="launchGame('3k-mlv')">
+                        <div class="game-icon">🏠</div>
+                        <h3 class="game-title">3k MLV</h3>
+                        <p class="game-description">My Little Vicinity - Cozy multiplayer hub</p>
+                        <span class="game-status online">Online</span>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Project Gallery -->
+            <section class="project-gallery">
+                <h2 class="gallery-title">📁 Your Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-card" onclick="openProject('finds')">
+                        <h3 class="project-title">FINDS</h3>
+                        <p class="project-description">Shark hotspot forecaster using satellite data</p>
+                    </div>
+                    
+                    <div class="project-card" onclick="openProject('edgegesture')">
+                        <h3 class="project-title">EdgeGesture</h3>
+                        <p class="project-description">On-device ML for fall detection</p>
+                    </div>
+                    
+                    <div class="project-card" onclick="openProject('gunnchai3k')">
+                        <h3 class="project-title">gunnchAI3k</h3>
+                        <p class="project-description">AI-powered Discord bot with learning system</p>
+                    </div>
+                    
+                    <div class="project-card" onclick="openProject('portfolio')">
+                        <h3 class="project-title">Portfolio</h3>
+                        <p class="project-description">Your professional portfolio website</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Social Feed -->
+            <section class="social-feed">
+                <h2 class="feed-title">📱 Activity Feed</h2>
+                <div class="feed-item">
+                    <div class="feed-item-header">
+                        <div class="feed-avatar">🤖</div>
+                        <span class="feed-username">gunnchAI3k</span>
+                    </div>
+                    <div class="feed-content">Welcome to your digital home! All your games and projects are now accessible from one place.</div>
+                </div>
+                
+                <div class="feed-item">
+                    <div class="feed-item-header">
+                        <div class="feed-avatar">⚔️</div>
+                        <span class="feed-username">Anime Aggressors</span>
+                    </div>
+                    <div class="feed-content">New update available! Enhanced mobile controls and performance optimizations.</div>
+                </div>
+                
+                <div class="feed-item">
+                    <div class="feed-item-header">
+                        <div class="feed-avatar">🏠</div>
+                        <span class="feed-username">3k MLV</span>
+                    </div>
+                    <div class="feed-content">Your virtual neighborhood is ready! Connect with friends and showcase your projects.</div>
+                </div>
+            </section>
+            
+            <!-- Quick Actions -->
+            <section class="quick-actions">
+                <button class="action-button" onclick="openSettings()">
+                    ⚙️ Settings
+                </button>
+                <button class="action-button" onclick="openHelp()">
+                    ❓ Help
+                </button>
+                <button class="action-button" onclick="shareHub()">
+                    📤 Share
+                </button>
+                <button class="action-button" onclick="installApp()">
+                    📱 Install
+                </button>
+            </section>
+        </main>
+    </div>
+    
+    <!-- Mobile Hub JavaScript -->
+    <script>
+        // Mobile Hub Features
+        class MobileHub {
+            constructor() {
+                this.init();
+            }
+            
+            init() {
+                this.setupPWA();
+                this.setupOfflineSupport();
+                this.setupHubFeatures();
+                this.setupPerformanceOptimization();
+            }
+            
+            setupPWA() {
+                // Register service worker
+                if ('serviceWorker' in navigator) {
+                    navigator.serviceWorker.register('/sw.js')
+                        .then(registration => {
+                            console.log('🏠 Hub Service Worker registered:', registration);
+                        })
+                        .catch(error => {
+                            console.log('❌ Hub Service Worker registration failed:', error);
+                        });
+                }
+                
+                // Handle install prompt
+                let deferredPrompt;
+                window.addEventListener('beforeinstallprompt', (e) => {
+                    e.preventDefault();
+                    deferredPrompt = e;
+                    this.showInstallButton();
+                });
+            }
+            
+            setupOfflineSupport() {
+                // Check online status
+                window.addEventListener('online', () => {
+                    this.updateGameStatus('online');
+                });
+                
+                window.addEventListener('offline', () => {
+                    this.updateGameStatus('offline');
+                });
+                
+                // Initial status
+                this.updateGameStatus(navigator.onLine ? 'online' : 'offline');
+            }
+            
+            setupHubFeatures() {
+                // Hub-specific features
+                this.hubFeatures = {
+                    games: [
+                        {
+                            id: 'anime-aggressors',
+                            name: 'Anime Aggressors',
+                            description: 'Shōnen-style PvP arena brawler',
+                            url: '/games/anime-aggressors',
+                            status: 'online'
+                        },
+                        {
+                            id: '3k-mlv',
+                            name: '3k MLV',
+                            description: 'My Little Vicinity - Cozy multiplayer hub',
+                            url: '/games/3k-mlv',
+                            status: 'online'
+                        }
+                    ],
+                    projects: [
+                        {
+                            id: 'finds',
+                            name: 'FINDS',
+                            description: 'Shark hotspot forecaster using satellite data',
+                            url: '/projects/finds'
+                        },
+                        {
+                            id: 'edgegesture',
+                            name: 'EdgeGesture',
+                            description: 'On-device ML for fall detection',
+                            url: '/projects/edgegesture'
+                        },
+                        {
+                            id: 'gunnchai3k',
+                            name: 'gunnchAI3k',
+                            description: 'AI-powered Discord bot with learning system',
+                            url: '/projects/gunnchai3k'
+                        },
+                        {
+                            id: 'portfolio',
+                            name: 'Portfolio',
+                            description: 'Your professional portfolio website',
+                            url: '/projects/portfolio'
+                        }
+                    ]
+                };
+            }
+            
+            setupPerformanceOptimization() {
+                // Optimize for current phones
+                this.performanceOptimizations = {
+                    memoryManagement: {
+                        maxMemoryUsage: '512MB',
+                        lazyLoading: true,
+                        imageCompression: true,
+                        codeSplitting: true
+                    },
+                    graphicsOptimization: {
+                        textureCompression: true,
+                        levelOfDetail: true,
+                        frameRate: '60fps',
+                        resolution: '1080p'
+                    },
+                    processingOptimization: {
+                        backgroundTasks: 'minimal',
+                        realTimeProcessing: 'optimized',
+                        batteryOptimization: true,
+                        thermalManagement: true
+                    }
+                };
+            }
+            
+            updateGameStatus(status) {
+                const gameStatuses = document.querySelectorAll('.game-status');
+                gameStatuses.forEach(statusElement => {
+                    statusElement.textContent = status === 'online' ? 'Online' : 'Offline';
+                    statusElement.className = `game-status ${status}`;
+                });
+            }
+            
+            showInstallButton() {
+                // Show install button when PWA is ready
+                console.log('📱 PWA install prompt available');
+            }
+        }
+        
+        // Hub Feature Functions
+        function launchGame(gameId) {
+            const games = {
+                'anime-aggressors': {
+                    name: 'Anime Aggressors',
+                    url: 'https://gunnchOS3k.github.io/anime-aggressors/',
+                    description: 'Shōnen-style PvP arena brawler'
+                },
+                '3k-mlv': {
+                    name: '3k MLV',
+                    url: 'https://gunnchOS3k.github.io/3k-mlv/',
+                    description: 'My Little Vicinity - Cozy multiplayer hub'
+                }
+            };
+            
+            const game = games[gameId];
+            if (game) {
+                alert(`🎮 Launching ${game.name}\n\n${game.description}\n\nOpening in new tab...`);
+                window.open(game.url, '_blank');
+            }
+        }
+        
+        function openProject(projectId) {
+            const projects = {
+                'finds': {
+                    name: 'FINDS',
+                    url: 'https://gunnchOS3k.github.io/FINDS-Sharks-From-Space/',
+                    description: 'Shark hotspot forecaster using satellite data'
+                },
+                'edgegesture': {
+                    name: 'EdgeGesture',
+                    url: 'https://github.com/gunnchOS3k/EdgeGesture-Fall-2025-Edge-AI-Qualcomm-Hackathon',
+                    description: 'On-device ML for fall detection'
+                },
+                'gunnchai3k': {
+                    name: 'gunnchAI3k',
+                    url: 'https://github.com/gunnchOS3k/gunnchAI3k',
+                    description: 'AI-powered Discord bot with learning system'
+                },
+                'portfolio': {
+                    name: 'Portfolio',
+                    url: 'https://gunnchOS3k.github.io/edmund-gunn-portfolio/',
+                    description: 'Your professional portfolio website'
+                }
+            };
+            
+            const project = projects[projectId];
+            if (project) {
+                alert(`📁 Opening ${project.name}\n\n${project.description}\n\nOpening in new tab...`);
+                window.open(project.url, '_blank');
+            }
+        }
+        
+        function openProfile() {
+            alert('👤 Profile\n\nYour profile information:\n• Username: gunnchOS3k\n• Bio: AI enthusiast and developer\n• Links: GitHub, LinkedIn, Website\n• Preferences: Dark theme, notifications enabled');
+        }
+        
+        function openSettings() {
+            alert('⚙️ Settings\n\nHub settings:\n• Theme: Dark\n• Notifications: Enabled\n• Auto-update: Enabled\n• Offline mode: Enabled');
+        }
+        
+        function openHelp() {
+            alert('❓ Help\n\nHub features:\n• Game launcher for quick access\n• Project gallery for showcasing work\n• Social feed for updates\n• Offline support for current phones');
+        }
+        
+        function shareHub() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'gunnchAI3k Hub',
+                    text: 'Check out my digital home for games and projects!',
+                    url: window.location.href
+                });
+            } else {
+                alert('📤 Share Hub\n\nShare your digital home with friends!\n\nCopy this link: ' + window.location.href);
+            }
+        }
+        
+        function installApp() {
+            if ('serviceWorker' in navigator) {
+                // Trigger PWA install
+                alert('📱 Installing gunnchAI3k Hub\n\nThe app will be added to your home screen for easy access to your games and projects.');
+            } else {
+                alert('📱 PWA not supported\n\nPlease use a modern browser to install the app.');
+            }
+        }
+        
+        // Initialize Mobile Hub
+        document.addEventListener('DOMContentLoaded', () => {
+            new MobileHub();
+        });
+    </script>
+</body>
+</html>
