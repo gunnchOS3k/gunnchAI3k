@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="theme-color" content="#4ecdc4">
+    <meta name="description" content="gunnchAI3k Nintendo DS Simple - Tap-to-Connect Multiplayer">
+    
+    <title>gunnchAI3k Nintendo DS Simple</title>
+    
+    <style>
+        /* Nintendo DS Simple CSS */
+        :root {
+            --primary-color: #4ecdc4;
+            --secondary-color: #1a1a2e;
+            --accent-color: #ff6b6b;
+            --text-color: #ffffff;
+            --background-color: #1a1a2e;
+            --surface-color: #2a2a3a;
+            --border-color: #4a4a5a;
+            --success-color: #00ff88;
+            --warning-color: #ffaa00;
+            --error-color: #ff4444;
+            
+            /* Nintendo DS Variables */
+            --font-size-base: 16px;
+            --font-size-large: 18px;
+            --font-size-xl: 20px;
+            --line-height-base: 1.6;
+            
+            /* Touch Target Variables */
+            --touch-target-min: 44px;
+            --touch-target-comfortable: 48px;
+            --touch-target-large: 56px;
+            
+            /* Spacing Variables */
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-size: var(--font-size-base);
+            line-height: var(--line-height-base);
+            color: var(--text-color);
+            background: linear-gradient(135deg, var(--background-color) 0%, #2a2a3a 100%);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+        
+        /* Nintendo DS Container */
+        .nintendo-ds-container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: var(--spacing-md);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Header */
+        .nintendo-ds-header {
+            text-align: center;
+            padding: var(--spacing-lg) 0;
+            border-bottom: 3px solid var(--primary-color);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .nintendo-ds-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .nintendo-ds-subtitle {
+            font-size: var(--font-size-large);
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+        
+        /* Instant Join Section */
+        .instant-join {
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .instant-join-title {
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-lg);
+            text-align: center;
+        }
+        
+        .join-methods {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        @media (min-width: 768px) {
+            .join-methods {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        /* Join Method Cards */
+        .join-method {
+            background: var(--surface-color);
+            border: 3px solid var(--border-color);
+            border-radius: 16px;
+            padding: var(--spacing-lg);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-height: var(--touch-target-large);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .join-method:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(78, 205, 196, 0.3);
+        }
+        
+        .join-method:active {
+            transform: translateY(-2px);
+        }
+        
+        .join-method.nfc {
+            border-color: var(--success-color);
+        }
+        
+        .join-method.bluetooth {
+            border-color: var(--warning-color);
+        }
+        
+        .join-method.local {
+            border-color: var(--primary-color);
+        }
+        
+        .join-method.qr {
+            border-color: var(--accent-color);
+        }
+        
+        .method-icon {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .method-title {
+            font-size: var(--font-size-large);
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .method-desc {
+            font-size: var(--font-size-base);
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+        
+        /* Game Discovery */
+        .game-discovery {
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .discovery-title {
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-lg);
+            text-align: center;
+        }
+        
+        .discovery-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: var(--spacing-lg);
+            border-bottom: 2px solid var(--border-color);
+        }
+        
+        .discovery-tab {
+            padding: var(--spacing-md) var(--spacing-lg);
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            font-size: var(--font-size-base);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .discovery-tab.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+        
+        .discovery-tab:hover {
+            color: var(--primary-color);
+        }
+        
+        .discovery-content {
+            display: none;
+        }
+        
+        .discovery-content.active {
+            display: block;
+        }
+        
+        /* Game Lists */
+        .game-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+        }
+        
+        .game-item {
+            background: var(--surface-color);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: var(--spacing-lg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .game-item:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        
+        .game-info {
+            flex: 1;
+        }
+        
+        .game-name {
+            font-size: var(--font-size-large);
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .game-details {
+            font-size: var(--font-size-base);
+            color: var(--text-color);
+            opacity: 0.8;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .game-status {
+            font-size: 14px;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-weight: 500;
+            display: inline-block;
+        }
+        
+        .game-status.online {
+            background: var(--success-color);
+            color: var(--background-color);
+        }
+        
+        .game-status.offline {
+            background: var(--warning-color);
+            color: var(--background-color);
+        }
+        
+        .game-status.full {
+            background: var(--error-color);
+            color: var(--text-color);
+        }
+        
+        .join-button {
+            background: var(--primary-color);
+            color: var(--background-color);
+            border: none;
+            border-radius: 8px;
+            padding: var(--spacing-md) var(--spacing-lg);
+            font-size: var(--font-size-base);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-height: var(--touch-target-min);
+        }
+        
+        .join-button:hover {
+            background: #3bb5a8;
+            transform: translateY(-1px);
+        }
+        
+        .join-button:active {
+            transform: translateY(0);
+        }
+        
+        .join-button:disabled {
+            background: var(--border-color);
+            color: var(--text-color);
+            cursor: not-allowed;
+        }
+        
+        /* PictoChat */
+        .pictochat {
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .pictochat-title {
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-lg);
+            text-align: center;
+        }
+        
+        .pictochat-messages {
+            background: var(--surface-color);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .pictochat-message {
+            margin-bottom: var(--spacing-md);
+            padding: var(--spacing-sm);
+            border-radius: 8px;
+            background: var(--background-color);
+        }
+        
+        .message-sender {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .message-content {
+            color: var(--text-color);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .message-time {
+            font-size: 12px;
+            color: var(--text-color);
+            opacity: 0.6;
+        }
+        
+        .pictochat-input {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+        
+        .pictochat-input input {
+            flex: 1;
+            padding: var(--spacing-md);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--surface-color);
+            color: var(--text-color);
+            font-size: var(--font-size-base);
+        }
+        
+        .pictochat-input input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .pictochat-input button {
+            background: var(--primary-color);
+            color: var(--background-color);
+            border: none;
+            border-radius: 8px;
+            padding: var(--spacing-md) var(--spacing-lg);
+            font-size: var(--font-size-base);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-height: var(--touch-target-min);
+        }
+        
+        .pictochat-input button:hover {
+            background: #3bb5a8;
+        }
+        
+        /* Status Messages */
+        .status-message {
+            text-align: center;
+            padding: var(--spacing-md);
+            border-radius: 8px;
+            margin-bottom: var(--spacing-md);
+            font-weight: 500;
+        }
+        
+        .status-message.success {
+            background: var(--success-color);
+            color: var(--background-color);
+        }
+        
+        .status-message.error {
+            background: var(--error-color);
+            color: var(--text-color);
+        }
+        
+        .status-message.info {
+            background: var(--primary-color);
+            color: var(--background-color);
+        }
+        
+        /* Loading States */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100px;
+            font-size: var(--font-size-large);
+            color: var(--primary-color);
+        }
+        
+        .loading::after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border-color);
+            border-top: 2px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: var(--spacing-sm);
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Mobile Optimizations */
+        @media (max-width: 480px) {
+            .nintendo-ds-container {
+                padding: var(--spacing-sm);
+            }
+            
+            .join-methods {
+                grid-template-columns: 1fr;
+            }
+            
+            .game-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--spacing-md);
+            }
+            
+            .join-button {
+                width: 100%;
+            }
+        }
+        
+        /* Tablet Optimizations */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .nintendo-ds-container {
+                padding: var(--spacing-lg);
+            }
+        }
+        
+        /* Desktop Optimizations */
+        @media (min-width: 1024px) {
+            .nintendo-ds-container {
+                max-width: 1200px;
+                padding: var(--spacing-xl);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="nintendo-ds-container">
+        <!-- Header -->
+        <header class="nintendo-ds-header">
+            <h1 class="nintendo-ds-title">🎮 gunnchAI3k</h1>
+            <p class="nintendo-ds-subtitle">Nintendo DS Simple - Tap-to-Connect Multiplayer</p>
+        </header>
+        
+        <!-- Status Messages -->
+        <div id="status-messages"></div>
+        
+        <!-- Instant Join Section -->
+        <section class="instant-join">
+            <h2 class="instant-join-title">⚡ Join Game Instantly</h2>
+            <div class="join-methods">
+                <div class="join-method nfc" onclick="nfcJoin()">
+                    <div class="method-icon">📱</div>
+                    <div class="method-title">NFC Tap</div>
+                    <div class="method-desc">Tap phones together</div>
+                </div>
+                
+                <div class="join-method bluetooth" onclick="bluetoothJoin()">
+                    <div class="method-icon">📡</div>
+                    <div class="method-title">Bluetooth</div>
+                    <div class="method-desc">Connect via Bluetooth</div>
+                </div>
+                
+                <div class="join-method local" onclick="localJoin()">
+                    <div class="method-icon">🌐</div>
+                    <div class="method-title">Local Network</div>
+                    <div class="method-desc">Same WiFi network</div>
+                </div>
+                
+                <div class="join-method qr" onclick="qrJoin()">
+                    <div class="method-icon">📷</div>
+                    <div class="method-title">QR Code</div>
+                    <div class="method-desc">Scan QR code</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Game Discovery -->
+        <section class="game-discovery">
+            <h2 class="discovery-title">🔍 Discover Games</h2>
+            <div class="discovery-tabs">
+                <button class="discovery-tab active" onclick="showTab('nfc')">NFC</button>
+                <button class="discovery-tab" onclick="showTab('bluetooth')">Bluetooth</button>
+                <button class="discovery-tab" onclick="showTab('local')">Local Network</button>
+                <button class="discovery-tab" onclick="showTab('pictochat')">PictoChat</button>
+            </div>
+            
+            <!-- NFC Games -->
+            <div id="nfc-content" class="discovery-content active">
+                <div class="game-list">
+                    <div class="game-item">
+                        <div class="game-info">
+                            <div class="game-name">Anime Aggressors</div>
+                            <div class="game-details">Host: John's Phone • 2/4 players</div>
+                            <span class="game-status online">Online</span>
+                        </div>
+                        <button class="join-button" onclick="joinNFCGame('anime-aggressors')">Join</button>
+                    </div>
+                    
+                    <div class="game-item">
+                        <div class="game-info">
+                            <div class="game-name">3k MLV</div>
+                            <div class="game-details">Host: Sarah's Phone • 1/8 players</div>
+                            <span class="game-status online">Online</span>
+                        </div>
+                        <button class="join-button" onclick="joinNFCGame('3k-mlv')">Join</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Bluetooth Games -->
+            <div id="bluetooth-content" class="discovery-content">
+                <div class="game-list">
+                    <div class="game-item">
+                        <div class="game-info">
+                            <div class="game-name">Anime Aggressors</div>
+                            <div class="game-details">Host: John's Phone • 2/4 players • 📶 Strong</div>
+                            <span class="game-status online">Online</span>
+                        </div>
+                        <button class="join-button" onclick="joinBluetoothGame('anime-aggressors')">Join</button>
+                    </div>
+                    
+                    <div class="game-item">
+                        <div class="game-info">
+                            <div class="game-name">3k MLV</div>
+                            <div class="game-details">Host: Sarah's Phone • 1/8 players • 📶 Medium</div>
+                            <span class="game-status online">Online</span>
+                        </div>
+                        <button class="join-button" onclick="joinBluetoothGame('3k-mlv')">Join</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Local Network Games -->
+            <div id="local-content" class="discovery-content">
+                <div class="game-list">
+                    <div class="game-item">
+                        <div class="game-info">
+                            <div class="game-name">Anime Aggressors</div>
+                            <div class="game-details">Host: John's iPhone • 3/4 players • Ping: 5ms</div>
+                            <span class="game-status online">Online</span>
+                        </div>
+                        <button class="join-button" onclick="joinLocalGame('anime-aggressors')">Join</button>
+                    </div>
+                    
+                    <div class="game-item">
+                        <div class="game-info">
+                            <div class="game-name">3k MLV</div>
+                            <div class="game-details">Host: Sarah's Android • 2/8 players • Ping: 8ms</div>
+                            <span class="game-status online">Online</span>
+                        </div>
+                        <button class="join-button" onclick="joinLocalGame('3k-mlv')">Join</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- PictoChat -->
+            <div id="pictochat-content" class="discovery-content">
+                <div class="pictochat">
+                    <h3 class="pictochat-title">💬 PictoChat</h3>
+                    
+                    <div class="pictochat-messages" id="pictochat-messages">
+                        <div class="pictochat-message">
+                            <div class="message-sender">John</div>
+                            <div class="message-content">Hey! Want to play Anime Aggressors?</div>
+                            <div class="message-time">2:30 PM</div>
+                        </div>
+                        
+                        <div class="pictochat-message">
+                            <div class="message-sender">Sarah</div>
+                            <div class="message-content">Sure! I'm in 3k MLV right now</div>
+                            <div class="message-time">2:31 PM</div>
+                        </div>
+                        
+                        <div class="pictochat-message">
+                            <div class="message-sender">gunnchAI3k</div>
+                            <div class="message-content">Welcome to PictoChat! Tap to connect and start chatting with nearby players.</div>
+                            <div class="message-time">2:32 PM</div>
+                        </div>
+                    </div>
+                    
+                    <div class="pictochat-input">
+                        <input type="text" id="pictochat-input" placeholder="Type a message..." />
+                        <button onclick="sendPictoChatMessage()">Send</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Nintendo DS Simple JavaScript -->
+    <script>
+        // Nintendo DS Simple Multiplayer System
+        class NintendoDSSimple {
+            constructor() {
+                this.init();
+            }
+            
+            init() {
+                this.setupEventListeners();
+                this.startDiscovery();
+            }
+            
+            setupEventListeners() {
+                // Setup event listeners for various connection methods
+                document.addEventListener('DOMContentLoaded', () => {
+                    this.setupPictoChatInput();
+                });
+            }
+            
+            setupPictoChatInput() {
+                const input = document.getElementById('pictochat-input');
+                if (input) {
+                    input.addEventListener('keypress', (e) => {
+                        if (e.key === 'Enter') {
+                            this.sendPictoChatMessage();
+                        }
+                    });
+                }
+            }
+            
+            startDiscovery() {
+                // Start discovering games via all methods
+                console.log('🔍 Starting game discovery...');
+            }
+            
+            showStatusMessage(message, type = 'info') {
+                const statusContainer = document.getElementById('status-messages');
+                if (statusContainer) {
+                    const messageDiv = document.createElement('div');
+                    messageDiv.className = `status-message ${type}`;
+                    messageDiv.textContent = message;
+                    statusContainer.appendChild(messageDiv);
+                    
+                    // Auto-remove after 5 seconds
+                    setTimeout(() => {
+                        messageDiv.remove();
+                    }, 5000);
+                }
+            }
+        }
+        
+        // Global functions for UI interactions
+        function nfcJoin() {
+            console.log('📱 NFC Join clicked');
+            showStatusMessage('📱 Tap phones together to join game!', 'info');
+        }
+        
+        function bluetoothJoin() {
+            console.log('📡 Bluetooth Join clicked');
+            showStatusMessage('📡 Searching for Bluetooth games...', 'info');
+        }
+        
+        function localJoin() {
+            console.log('🌐 Local Join clicked');
+            showStatusMessage('🌐 Scanning local network for games...', 'info');
+        }
+        
+        function qrJoin() {
+            console.log('📷 QR Join clicked');
+            showStatusMessage('📷 Open camera to scan QR code', 'info');
+        }
+        
+        function showTab(tabName) {
+            // Hide all tabs
+            const contents = document.querySelectorAll('.discovery-content');
+            contents.forEach(content => content.classList.remove('active'));
+            
+            const tabs = document.querySelectorAll('.discovery-tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Show selected tab
+            const selectedContent = document.getElementById(`${tabName}-content`);
+            const selectedTab = document.querySelector(`[onclick="showTab('${tabName}')"]`);
+            
+            if (selectedContent) {
+                selectedContent.classList.add('active');
+            }
+            
+            if (selectedTab) {
+                selectedTab.classList.add('active');
+            }
+        }
+        
+        function joinNFCGame(gameId) {
+            console.log(`🎮 Joining NFC game: ${gameId}`);
+            showStatusMessage(`🎮 Joining ${gameId} via NFC...`, 'info');
+        }
+        
+        function joinBluetoothGame(gameId) {
+            console.log(`📡 Joining Bluetooth game: ${gameId}`);
+            showStatusMessage(`📡 Joining ${gameId} via Bluetooth...`, 'info');
+        }
+        
+        function joinLocalGame(gameId) {
+            console.log(`🌐 Joining local game: ${gameId}`);
+            showStatusMessage(`🌐 Joining ${gameId} via local network...`, 'info');
+        }
+        
+        function sendPictoChatMessage() {
+            const input = document.getElementById('pictochat-input');
+            const messagesContainer = document.getElementById('pictochat-messages');
+            
+            if (input && messagesContainer && input.value.trim()) {
+                const message = input.value.trim();
+                
+                // Add message to chat
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'pictochat-message';
+                messageDiv.innerHTML = `
+                    <div class="message-sender">You</div>
+                    <div class="message-content">${message}</div>
+                    <div class="message-time">${new Date().toLocaleTimeString()}</div>
+                `;
+                
+                messagesContainer.appendChild(messageDiv);
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                
+                // Clear input
+                input.value = '';
+                
+                console.log('💬 PictoChat message sent:', message);
+            }
+        }
+        
+        function showStatusMessage(message, type = 'info') {
+            const statusContainer = document.getElementById('status-messages');
+            if (statusContainer) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `status-message ${type}`;
+                messageDiv.textContent = message;
+                statusContainer.appendChild(messageDiv);
+                
+                // Auto-remove after 5 seconds
+                setTimeout(() => {
+                    messageDiv.remove();
+                }, 5000);
+            }
+        }
+        
+        // Initialize Nintendo DS Simple system
+        document.addEventListener('DOMContentLoaded', () => {
+            new NintendoDSSimple();
+        });
+    </script>
+</body>
+</html>
