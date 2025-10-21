@@ -1,0 +1,114 @@
+# Probability and Stochastic Processes - Course Notes
+
+## Week 1: Basic Probability Concepts
+
+### Sample Space and Events
+- Sample space (S): The set of all possible outcomes of an experiment
+- Event: A subset of the sample space
+- Probability axioms:
+  1. P(A) ≥ 0 for any event A
+  2. P(S) = 1
+  3. For mutually exclusive events A₁, A₂, ...: P(A₁ ∪ A₂ ∪ ...) = P(A₁) + P(A₂) + ...
+
+### Conditional Probability
+- P(A|B) = P(A ∩ B) / P(B)
+- The probability of event A given that event B has occurred
+
+### Bayes' Theorem
+- P(A|B) = P(B|A) × P(A) / P(B)
+- Used to update probabilities based on new information
+
+### Independence
+- Events A and B are independent if P(A ∩ B) = P(A) × P(B)
+- Equivalent to P(A|B) = P(A)
+
+## Week 2: Random Variables
+
+### Discrete Random Variables
+- Probability mass function (PMF): p(x) = P(X = x)
+- Cumulative distribution function (CDF): F(x) = P(X ≤ x)
+
+### Continuous Random Variables
+- Probability density function (PDF): f(x) such that P(a ≤ X ≤ b) = ∫ₐᵇ f(x) dx
+- Cumulative distribution function (CDF): F(x) = P(X ≤ x) = ∫₋∞ˣ f(t) dt
+
+### Expected Value and Variance
+- E[X] = Σ x p(x) (discrete) or E[X] = ∫ x f(x) dx (continuous)
+- Var(X) = E[X²] - (E[X])²
+
+## Week 3: Joint Distributions
+
+### Joint PMF/PDF
+- For discrete: p(x,y) = P(X = x, Y = y)
+- For continuous: f(x,y) such that P((X,Y) ∈ A) = ∬ₐ f(x,y) dx dy
+
+### Marginal Distributions
+- p_X(x) = Σ_y p(x,y) (discrete)
+- f_X(x) = ∫ f(x,y) dy (continuous)
+
+### Independence
+- X and Y are independent if f(x,y) = f_X(x) f_Y(y) for all x,y
+
+## Week 4: Functions of Random Variables
+
+### Change of Variables
+- For Y = g(X): f_Y(y) = f_X(g⁻¹(y)) |d/dy g⁻¹(y)|
+- For Z = g(X,Y): Use Jacobian determinant
+
+### Sum of Random Variables
+- Convolution formula for independent variables
+- Central Limit Theorem
+
+## Week 5: Moment Generating Functions
+
+### MGF Definition
+- M_X(t) = E[e^(tX)]
+- M_X(t) = Σ e^(tx) p(x) (discrete) or M_X(t) = ∫ e^(tx) f(x) dx (continuous)
+
+### Properties
+- M_X(0) = 1
+- M'_X(0) = E[X]
+- M''_X(0) = E[X²]
+- M_(aX+b)(t) = e^(bt) M_X(at)
+
+## Week 6: Common Distributions
+
+### Discrete Distributions
+- Bernoulli: P(X = 1) = p, P(X = 0) = 1-p
+- Binomial: P(X = k) = C(n,k) p^k (1-p)^(n-k)
+- Poisson: P(X = k) = e^(-λ) λ^k / k!
+
+### Continuous Distributions
+- Uniform: f(x) = 1/(b-a) for a ≤ x ≤ b
+- Exponential: f(x) = λ e^(-λx) for x ≥ 0
+- Normal: f(x) = (1/√(2πσ²)) e^(-(x-μ)²/(2σ²))
+
+## Week 7: Central Limit Theorem
+
+### Statement
+- If X₁, X₂, ..., Xₙ are i.i.d. with mean μ and variance σ², then
+- (X̄ - μ)/(σ/√n) → N(0,1) as n → ∞
+
+### Applications
+- Approximating binomial with normal
+- Confidence intervals
+- Hypothesis testing
+
+## Week 8: Midterm Review
+
+### Key Topics
+1. Basic probability concepts
+2. Conditional probability and Bayes' theorem
+3. Random variables and their distributions
+4. Joint distributions and independence
+5. Functions of random variables
+6. Moment generating functions
+7. Common distributions
+8. Central Limit Theorem
+
+### Practice Problems
+- Work through all homework problems
+- Review lecture examples
+- Practice with past exams
+- Focus on areas of weakness
+

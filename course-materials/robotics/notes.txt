@@ -1,0 +1,188 @@
+# Robotics and Control Systems - Course Notes
+
+## Week 1: Introduction to Robotics
+
+### What is a Robot?
+- A robot is a reprogrammable, multifunctional manipulator designed to move material, parts, tools, or specialized devices through variable programmed motions for the performance of a variety of tasks
+- Key characteristics: programmability, mechanical capability, flexibility
+
+### Types of Robots
+1. **Industrial Robots**: Manufacturing, assembly, welding, painting
+2. **Service Robots**: Cleaning, delivery, medical assistance
+3. **Mobile Robots**: Autonomous vehicles, drones, underwater vehicles
+4. **Humanoid Robots**: Human-like appearance and movement
+
+### Robot Components
+- **Manipulator**: The mechanical arm and wrist
+- **End-effector**: The tool or gripper at the end of the arm
+- **Actuators**: Motors that provide motion
+- **Sensors**: Provide feedback about position, force, vision
+- **Controller**: Computer that processes sensor data and commands actuators
+
+## Week 2: Robot Kinematics
+
+### Forward Kinematics
+- Given joint angles, find the position and orientation of the end-effector
+- For a 6-DOF robot: T₀₆ = T₀₁(θ₁) × T₁₂(θ₂) × T₂₃(θ₃) × T₃₄(θ₄) × T₄₅(θ₅) × T₅₆(θ₆)
+- Each transformation matrix Tᵢ₍ᵢ₊₁₎ represents the relationship between consecutive links
+
+### Inverse Kinematics
+- Given desired end-effector pose, find the required joint angles
+- More complex than forward kinematics
+- May have multiple solutions or no solution
+- Common methods: geometric, algebraic, numerical
+
+### Denavit-Hartenberg Parameters
+- Systematic way to describe robot geometry
+- Four parameters per joint: aᵢ, αᵢ, dᵢ, θᵢ
+- aᵢ: link length
+- αᵢ: link twist
+- dᵢ: link offset
+- θᵢ: joint angle
+
+### Example: 2-DOF Planar Robot
+- Link 1: length L₁, angle θ₁
+- Link 2: length L₂, angle θ₂
+- Forward kinematics:
+  - x = L₁cos(θ₁) + L₂cos(θ₁ + θ₂)
+  - y = L₁sin(θ₁) + L₂sin(θ₁ + θ₂)
+- Inverse kinematics:
+  - θ₂ = ±arccos((x² + y² - L₁² - L₂²)/(2L₁L₂))
+  - θ₁ = atan2(y,x) - atan2(L₂sin(θ₂), L₁ + L₂cos(θ₂))
+
+## Week 3: Robot Dynamics
+
+### Newton-Euler Formulation
+- Based on Newton's second law: F = ma
+- For rotational motion: τ = Iα
+- Recursive algorithm for computing joint torques
+
+### Lagrangian Formulation
+- Based on energy principles
+- L = T - V (kinetic energy - potential energy)
+- Euler-Lagrange equation: d/dt(∂L/∂q̇) - ∂L/∂q = τ
+
+### Dynamic Model
+- M(q)q̈ + C(q,q̇)q̇ + G(q) = τ
+- M(q): inertia matrix
+- C(q,q̇): Coriolis and centrifugal terms
+- G(q): gravitational terms
+- τ: joint torques
+
+### Example: 2-DOF Planar Robot Dynamics
+- Kinetic energy: T = ½(m₁v₁² + m₂v₂² + I₁ω₁² + I₂ω₂²)
+- Potential energy: V = m₁gy₁ + m₂gy₂
+- Lagrangian: L = T - V
+- Apply Euler-Lagrange to get equations of motion
+
+## Week 4: Robot Control
+
+### Control Objectives
+- **Position Control**: Move to desired position
+- **Trajectory Tracking**: Follow desired path in time
+- **Force Control**: Apply desired forces
+- **Impedance Control**: Control position and force simultaneously
+
+### PID Control
+- Proportional-Integral-Derivative controller
+- u(t) = Kₚe(t) + Kᵢ∫e(τ)dτ + Kₐė(t)
+- Kₚ: proportional gain
+- Kᵢ: integral gain
+- Kₐ: derivative gain
+
+### Computed Torque Control
+- Uses dynamic model to compute required torques
+- τ = M(q)(q̈_d + Kₚe + Kₐė) + C(q,q̇)q̇ + G(q)
+- q̈_d: desired acceleration
+- e = q_d - q: position error
+- ė = q̇_d - q̇: velocity error
+
+### Adaptive Control
+- Adjusts controller parameters based on system behavior
+- Useful when robot parameters are unknown or changing
+- Model Reference Adaptive Control (MRAC)
+- Self-Tuning Regulators
+
+## Week 5: Robot Sensors
+
+### Position Sensors
+- **Encoders**: Measure joint angles
+- **Potentiometers**: Analog position measurement
+- **Resolvers**: High-precision angle measurement
+
+### Force/Torque Sensors
+- **Strain gauges**: Measure deformation
+- **Piezoelectric sensors**: Measure force through electrical charge
+- **Six-axis force/torque sensors**: Measure forces and torques in all directions
+
+### Vision Sensors
+- **Cameras**: 2D image capture
+- **Stereo vision**: 3D depth perception
+- **LIDAR**: Light Detection and Ranging
+- **RGB-D cameras**: Color and depth information
+
+### Proximity Sensors
+- **Ultrasonic**: Sound-based distance measurement
+- **Infrared**: Light-based distance measurement
+- **Capacitive**: Electric field-based sensing
+
+## Week 6: Robot Programming
+
+### Programming Languages
+- **Robot-specific languages**: RAPID (ABB), KRL (KUKA), RPL (Universal Robots)
+- **General-purpose languages**: C++, Python, MATLAB
+- **Visual programming**: Blockly, Scratch for robotics
+
+### Programming Paradigms
+- **Teach and Playback**: Manual teaching of positions
+- **Offline Programming**: Program without robot present
+- **Simulation**: Test programs in virtual environment
+- **Machine Learning**: Learn from demonstration or experience
+
+### Robot Operating System (ROS)
+- Open-source framework for robot software
+- Provides tools and libraries for robot development
+- Node-based architecture
+- Message passing between nodes
+- Package management system
+
+## Week 7: Robot Applications
+
+### Manufacturing
+- **Assembly**: Precise part placement and joining
+- **Welding**: Automated welding processes
+- **Painting**: Uniform coating application
+- **Material Handling**: Moving parts between stations
+
+### Service Robotics
+- **Cleaning**: Floor cleaning, window cleaning
+- **Delivery**: Package delivery, food service
+- **Healthcare**: Surgical assistance, rehabilitation
+- **Entertainment**: Humanoid robots, pet robots
+
+### Mobile Robotics
+- **Autonomous Vehicles**: Self-driving cars
+- **Drones**: Aerial surveillance, delivery
+- **Underwater Robots**: Ocean exploration, maintenance
+- **Space Robots**: Satellite servicing, planetary exploration
+
+## Week 8: Future of Robotics
+
+### Emerging Technologies
+- **Artificial Intelligence**: Machine learning, computer vision
+- **Soft Robotics**: Flexible, compliant robots
+- **Swarm Robotics**: Multiple robots working together
+- **Human-Robot Interaction**: Natural communication
+
+### Challenges
+- **Safety**: Ensuring robots don't harm humans
+- **Reliability**: Robust operation in uncertain environments
+- **Cost**: Making robots affordable for widespread use
+- **Ethics**: Addressing social and ethical implications
+
+### Research Areas
+- **Biomimetics**: Learning from nature
+- **Nanorobotics**: Microscopic robots
+- **Brain-Computer Interfaces**: Direct neural control
+- **Quantum Robotics**: Quantum computing applications
+

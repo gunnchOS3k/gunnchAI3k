@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3kMLV Arcade - Download</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="favicon.png">
+</head>
+<body>
+    <div class="container">
+        <header class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">3kMLV Arcade</h1>
+                <p class="hero-subtitle">Ultra-High Performance Gaming Platform</p>
+                <p class="hero-description">Download the open-source version that works offline, just like Temple Run and Jetpack Joyride!</p>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- System Detection Section -->
+            <section class="detection-section">
+                <div class="detection-card">
+                    <h2>🔍 Auto-Detecting Your System</h2>
+                    <div id="detection-status" class="detection-status">
+                        <div class="spinner"></div>
+                        <p>Analyzing your device...</p>
+                    </div>
+                    <div id="detection-result" class="detection-result" style="display: none;">
+                        <div class="result-content">
+                            <div class="device-info">
+                                <h3 id="device-name">Your Device</h3>
+                                <p id="device-details">Device details will appear here</p>
+                            </div>
+                            <div class="recommended-download">
+                                <h4>Recommended Download:</h4>
+                                <div id="download-button" class="download-button">
+                                    <!-- Download button will be inserted here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Manual Download Section -->
+            <section class="manual-downloads">
+                <h2>📱 Manual Downloads</h2>
+                <p>Can't detect your system? Choose your platform manually:</p>
+                
+                <div class="download-grid">
+                    <!-- Desktop Downloads -->
+                    <div class="download-category">
+                        <h3>🖥️ Desktop</h3>
+                        <div class="download-options">
+                            <div class="download-option">
+                                <h4>Windows (x64)</h4>
+                                <p>For Windows 10/11 PCs</p>
+                                <a href="downloads/windows/3kmlv-arcade-windows-x64.exe" class="btn-download">
+                                    Download Windows x64
+                                </a>
+                            </div>
+                            <div class="download-option">
+                                <h4>macOS (Intel)</h4>
+                                <p>For Intel Macs</p>
+                                <a href="downloads/macos/3kmlv-arcade-macos-intel.dmg" class="btn-download">
+                                    Download macOS Intel
+                                </a>
+                            </div>
+                            <div class="download-option">
+                                <h4>macOS (Apple Silicon)</h4>
+                                <p>For M1/M2 Macs (MacBook Pro 13" M2)</p>
+                                <a href="downloads/macos/3kmlv-arcade-macos-arm64.dmg" class="btn-download">
+                                    Download macOS ARM64
+                                </a>
+                            </div>
+                            <div class="download-option">
+                                <h4>Linux (x64)</h4>
+                                <p>For Linux systems</p>
+                                <a href="downloads/linux/3kmlv-arcade-linux-x64.AppImage" class="btn-download">
+                                    Download Linux x64
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Downloads -->
+                    <div class="download-category">
+                        <h3>📱 Mobile</h3>
+                        <div class="download-options">
+                            <div class="download-option">
+                                <h4>iOS (iPhone 13 Mini)</h4>
+                                <p>For iPhone 13 Mini and compatible devices</p>
+                                <a href="downloads/ios/3kmlv-arcade-ios.ipa" class="btn-download">
+                                    Download iOS
+                                </a>
+                            </div>
+                            <div class="download-option">
+                                <h4>Android (Redmi 15 Pro)</h4>
+                                <p>For Redmi 15 Pro and compatible devices</p>
+                                <a href="downloads/android/3kmlv-arcade-android-redmi.apk" class="btn-download">
+                                    Download Android Redmi
+                                </a>
+                            </div>
+                            <div class="download-option">
+                                <h4>Android (Google Pixel 6a)</h4>
+                                <p>For Google Pixel 6a and compatible devices</p>
+                                <a href="downloads/android/3kmlv-arcade-android-pixel.apk" class="btn-download">
+                                    Download Android Pixel
+                                </a>
+                            </div>
+                            <div class="download-option">
+                                <h4>Android (Universal)</h4>
+                                <p>For all Android devices</p>
+                                <a href="downloads/android/3kmlv-arcade-android-universal.apk" class="btn-download">
+                                    Download Android Universal
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section class="features-section">
+                <h2>🚀 Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Ultra-High Performance</h3>
+                        <p>120 FPS gaming with C++/Rust backend for maximum performance</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">☁️</div>
+                        <h3>Cloud Gaming</h3>
+                        <p>EdgeIO integration for ultra-low latency cloud gaming</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📱</div>
+                        <h3>Multi-Platform</h3>
+                        <p>Works on Windows, macOS, Linux, iOS, and Android</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎮</div>
+                        <h3>Offline Gaming</h3>
+                        <p>Play offline like Temple Run and Jetpack Joyride</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔧</div>
+                        <h3>Open Source</h3>
+                        <p>Completely open source and customizable</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🌐</div>
+                        <h3>No Internet Required</h3>
+                        <p>Full functionality without internet connection</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Installation Instructions -->
+            <section class="installation-section">
+                <h2>📋 Installation Instructions</h2>
+                <div class="installation-tabs">
+                    <button class="tab-button active" onclick="showTab('windows')">Windows</button>
+                    <button class="tab-button" onclick="showTab('macos')">macOS</button>
+                    <button class="tab-button" onclick="showTab('linux')">Linux</button>
+                    <button class="tab-button" onclick="showTab('ios')">iOS</button>
+                    <button class="tab-button" onclick="showTab('android')">Android</button>
+                </div>
+
+                <div id="windows-instructions" class="tab-content active">
+                    <h3>Windows Installation</h3>
+                    <ol>
+                        <li>Download the Windows x64 executable</li>
+                        <li>Run the installer as administrator</li>
+                        <li>Follow the installation wizard</li>
+                        <li>Launch 3kMLV Arcade from Start Menu</li>
+                    </ol>
+                </div>
+
+                <div id="macos-instructions" class="tab-content">
+                    <h3>macOS Installation</h3>
+                    <ol>
+                        <li>Download the appropriate DMG for your Mac (Intel or Apple Silicon)</li>
+                        <li>Open the DMG file</li>
+                        <li>Drag 3kMLV Arcade to Applications folder</li>
+                        <li>Launch from Applications or Spotlight</li>
+                    </ol>
+                </div>
+
+                <div id="linux-instructions" class="tab-content">
+                    <h3>Linux Installation</h3>
+                    <ol>
+                        <li>Download the AppImage file</li>
+                        <li>Make it executable: <code>chmod +x 3kmlv-arcade-linux-x64.AppImage</code></li>
+                        <li>Run: <code>./3kmlv-arcade-linux-x64.AppImage</code></li>
+                    </ol>
+                </div>
+
+                <div id="ios-instructions" class="tab-content">
+                    <h3>iOS Installation</h3>
+                    <ol>
+                        <li>Download the IPA file</li>
+                        <li>Use AltStore, Sideloadly, or similar tool</li>
+                        <li>Install the app on your device</li>
+                        <li>Trust the developer certificate in Settings</li>
+                    </ol>
+                </div>
+
+                <div id="android-instructions" class="tab-content">
+                    <h3>Android Installation</h3>
+                    <ol>
+                        <li>Download the APK file</li>
+                        <li>Enable "Install from unknown sources" in Settings</li>
+                        <li>Install the APK file</li>
+                        <li>Launch 3kMLV Arcade</li>
+                    </ol>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <p>&copy; 2024 3kMLV Arcade. Open Source Gaming Platform.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/gunnchos/3kmlv-arcade">GitHub</a>
+                    <a href="https://discord.gg/3kmlv">Discord</a>
+                    <a href="mailto:support@3kmlv.com">Support</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="system-detection.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

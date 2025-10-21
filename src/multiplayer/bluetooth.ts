@@ -198,3 +198,4 @@ export class BluetoothGameDiscovery {
     this.devices.clear();
   }
 }
+

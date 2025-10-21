@@ -288,3 +288,4 @@ export class InstantGameJoiner {
     return methods;
   }
 }
+

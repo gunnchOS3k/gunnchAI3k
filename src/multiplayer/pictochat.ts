@@ -239,3 +239,4 @@ export class PictoChat {
     return 'user123'; // This would come from user profile
   }
 }
+

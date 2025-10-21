@@ -1,0 +1,120 @@
+{
+  "expo": {
+    "name": "3kMLV Arcade",
+    "slug": "3kmlv-arcade",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#000000"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.gunnchos.3kmlv.arcade",
+      "buildNumber": "1.0.0",
+      "infoPlist": {
+        "NSCameraUsageDescription": "This app needs access to camera for game scanning and AR features.",
+        "NSMicrophoneUsageDescription": "This app needs access to microphone for voice commands and game audio.",
+        "NSPhotoLibraryUsageDescription": "This app needs access to photo library for game screenshots and media.",
+        "NSLocationWhenInUseUsageDescription": "This app needs location access for local multiplayer features.",
+        "NSBluetoothPeripheralUsageDescription": "This app needs Bluetooth access for controller connectivity.",
+        "NSBluetoothAlwaysUsageDescription": "This app needs Bluetooth access for controller connectivity.",
+        "NSLocalNetworkUsageDescription": "This app needs local network access for multiplayer gaming.",
+        "NSUserTrackingUsageDescription": "This app uses tracking for personalized gaming experiences.",
+        "NSAppTransportSecurity": {
+          "NSAllowsArbitraryLoads": true,
+          "NSExceptionDomains": {
+            "edgeio.com": {
+              "NSExceptionAllowsInsecureHTTPLoads": true,
+              "NSExceptionMinimumTLSVersion": "1.0"
+            }
+          }
+        }
+      },
+      "config": {
+        "usesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#000000"
+      },
+      "package": "com.gunnchos.3kmlv.arcade",
+      "versionCode": 1,
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.BLUETOOTH",
+        "android.permission.BLUETOOTH_ADMIN",
+        "android.permission.ACCESS_NETWORK_STATE",
+        "android.permission.INTERNET",
+        "android.permission.WAKE_LOCK",
+        "android.permission.VIBRATE",
+        "android.permission.SYSTEM_ALERT_WINDOW",
+        "android.permission.REQUEST_INSTALL_PACKAGES",
+        "android.permission.ACCESS_WIFI_STATE",
+        "android.permission.CHANGE_WIFI_STATE",
+        "android.permission.ACCESS_BACKGROUND_LOCATION",
+        "android.permission.FOREGROUND_SERVICE",
+        "android.permission.SYSTEM_OVERLAY_WINDOW"
+      ],
+      "intentFilters": [
+        {
+          "action": "android.intent.action.VIEW",
+          "data": [
+            {
+              "scheme": "3kmlv",
+              "host": "game"
+            }
+          ],
+          "category": [
+            "android.intent.category.DEFAULT",
+            "android.intent.category.BROWSABLE"
+          ]
+        }
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
+    },
+    "windows": {
+      "package": "com.gunnchos.3kmlv.arcade",
+      "version": "1.0.0.0"
+    },
+    "plugins": [
+      "expo-camera",
+      "expo-media-library",
+      "expo-notifications",
+      "expo-sensors",
+      "expo-gl",
+      "expo-three",
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "newArchEnabled": true,
+            "deploymentTarget": "13.0"
+          },
+          "android": {
+            "newArchEnabled": true,
+            "minSdkVersion": 21,
+            "targetSdkVersion": 33,
+            "compileSdkVersion": 33
+          }
+        }
+      ]
+    ]
+  }
+}

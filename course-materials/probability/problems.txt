@@ -1,0 +1,161 @@
+# Probability and Stochastic Processes - Practice Problems
+
+## Problem Set 1: Basic Probability
+
+### Problem 1.1
+A fair coin is flipped 3 times. Find the probability of getting:
+a) Exactly 2 heads
+b) At least 2 heads
+c) No heads
+
+**Solution:**
+a) P(exactly 2 heads) = C(3,2) × (1/2)² × (1/2)¹ = 3 × 1/4 × 1/2 = 3/8
+b) P(at least 2 heads) = P(2 heads) + P(3 heads) = 3/8 + 1/8 = 1/2
+c) P(no heads) = (1/2)³ = 1/8
+
+### Problem 1.2
+A deck of 52 cards is shuffled. What is the probability of drawing:
+a) An ace
+b) A red card
+c) An ace or a red card
+
+**Solution:**
+a) P(ace) = 4/52 = 1/13
+b) P(red) = 26/52 = 1/2
+c) P(ace or red) = P(ace) + P(red) - P(ace and red) = 4/52 + 26/52 - 2/52 = 28/52 = 7/13
+
+## Problem Set 2: Conditional Probability
+
+### Problem 2.1
+In a class of 30 students, 18 are girls and 12 are boys. If 6 girls and 4 boys wear glasses, find:
+a) P(student wears glasses)
+b) P(student is a girl | student wears glasses)
+c) P(student wears glasses | student is a girl)
+
+**Solution:**
+a) P(glasses) = (6+4)/30 = 10/30 = 1/3
+b) P(girl | glasses) = P(girl and glasses)/P(glasses) = (6/30)/(10/30) = 6/10 = 3/5
+c) P(glasses | girl) = P(glasses and girl)/P(girl) = (6/30)/(18/30) = 6/18 = 1/3
+
+### Problem 2.2
+A factory produces items with 5% defect rate. A quality control test correctly identifies 95% of defective items and 90% of non-defective items. If an item passes the test, what is the probability it is actually defective?
+
+**Solution:**
+Let D = defective, T = passes test
+P(D) = 0.05, P(T|D) = 0.05, P(T|D') = 0.90
+P(D|T) = P(T|D)P(D)/P(T) = (0.05)(0.05)/(0.05×0.05 + 0.95×0.90) = 0.0025/0.8575 ≈ 0.0029
+
+## Problem Set 3: Random Variables
+
+### Problem 3.1
+Let X be the number of heads in 4 coin flips. Find:
+a) The PMF of X
+b) E[X]
+c) Var(X)
+
+**Solution:**
+a) X ~ Binomial(4, 0.5)
+   P(X = k) = C(4,k) × (0.5)^k × (0.5)^(4-k) = C(4,k) × (0.5)⁴
+   P(X = 0) = 1/16, P(X = 1) = 4/16, P(X = 2) = 6/16, P(X = 3) = 4/16, P(X = 4) = 1/16
+b) E[X] = np = 4 × 0.5 = 2
+c) Var(X) = np(1-p) = 4 × 0.5 × 0.5 = 1
+
+### Problem 3.2
+Let X be uniformly distributed on [0,2]. Find:
+a) P(X < 1)
+b) P(0.5 < X < 1.5)
+c) E[X] and Var(X)
+
+**Solution:**
+a) P(X < 1) = ∫₀¹ (1/2) dx = 1/2
+b) P(0.5 < X < 1.5) = ∫₀.₅¹.₅ (1/2) dx = 1/2
+c) E[X] = (0+2)/2 = 1, Var(X) = (2-0)²/12 = 1/3
+
+## Problem Set 4: Joint Distributions
+
+### Problem 4.1
+Let X and Y have joint PMF:
+P(X=0,Y=0) = 0.1, P(X=0,Y=1) = 0.2, P(X=1,Y=0) = 0.3, P(X=1,Y=1) = 0.4
+Find:
+a) P(X = 0)
+b) P(Y = 1 | X = 0)
+c) Are X and Y independent?
+
+**Solution:**
+a) P(X = 0) = P(X=0,Y=0) + P(X=0,Y=1) = 0.1 + 0.2 = 0.3
+b) P(Y = 1 | X = 0) = P(X=0,Y=1)/P(X=0) = 0.2/0.3 = 2/3
+c) P(X=0,Y=1) = 0.2 ≠ P(X=0)P(Y=1) = 0.3 × 0.6 = 0.18, so not independent
+
+### Problem 4.2
+Let X and Y be independent exponential random variables with parameters λ₁ and λ₂. Find the PDF of Z = X + Y.
+
+**Solution:**
+Since X and Y are independent, f(x,y) = f_X(x)f_Y(y) = λ₁e^(-λ₁x) × λ₂e^(-λ₂y)
+For Z = X + Y, we use convolution:
+f_Z(z) = ∫₀ᶻ f_X(x)f_Y(z-x) dx = ∫₀ᶻ λ₁e^(-λ₁x) × λ₂e^(-λ₂(z-x)) dx
+= λ₁λ₂e^(-λ₂z) ∫₀ᶻ e^(-(λ₁-λ₂)x) dx
+If λ₁ ≠ λ₂: f_Z(z) = (λ₁λ₂/(λ₁-λ₂))(e^(-λ₂z) - e^(-λ₁z))
+If λ₁ = λ₂: f_Z(z) = λ²ze^(-λz) (Gamma(2,λ))
+
+## Problem Set 5: Functions of Random Variables
+
+### Problem 5.1
+Let X ~ Uniform(0,1). Find the PDF of Y = -ln(X).
+
+**Solution:**
+X ~ Uniform(0,1), so f_X(x) = 1 for 0 < x < 1
+Y = -ln(X), so X = e^(-Y)
+dx/dy = -e^(-y)
+f_Y(y) = f_X(e^(-y)) × |dx/dy| = 1 × e^(-y) = e^(-y) for y > 0
+So Y ~ Exponential(1)
+
+### Problem 5.2
+Let X₁, X₂ be independent N(0,1). Find the PDF of R = √(X₁² + X₂²).
+
+**Solution:**
+This is the Rayleigh distribution.
+f_R(r) = r e^(-r²/2) for r ≥ 0
+
+## Problem Set 6: Moment Generating Functions
+
+### Problem 6.1
+Find the MGF of X ~ Binomial(n,p) and use it to find E[X] and Var(X).
+
+**Solution:**
+M_X(t) = E[e^(tX)] = Σ(k=0 to n) e^(tk) C(n,k) p^k (1-p)^(n-k)
+= Σ(k=0 to n) C(n,k) (pe^t)^k (1-p)^(n-k) = (pe^t + 1-p)^n
+M'_X(t) = n(pe^t + 1-p)^(n-1) × pe^t
+M'_X(0) = n(pe^0 + 1-p)^(n-1) × pe^0 = np
+M''_X(t) = n(n-1)(pe^t + 1-p)^(n-2) × (pe^t)² + n(pe^t + 1-p)^(n-1) × pe^t
+M''_X(0) = n(n-1)p² + np = n²p² - np² + np
+Var(X) = M''_X(0) - (M'_X(0))² = n²p² - np² + np - n²p² = np(1-p)
+
+### Problem 6.2
+Let X₁, X₂, ..., Xₙ be independent N(μ,σ²). Find the MGF of Sₙ = X₁ + X₂ + ... + Xₙ.
+
+**Solution:**
+M_Sₙ(t) = E[e^(t(X₁+X₂+...+Xₙ))] = E[e^(tX₁)] × E[e^(tX₂)] × ... × E[e^(tXₙ)]
+= (M_X(t))ⁿ where M_X(t) = e^(μt + σ²t²/2)
+So M_Sₙ(t) = e^(nμt + nσ²t²/2)
+Therefore Sₙ ~ N(nμ, nσ²)
+
+## Problem Set 7: Central Limit Theorem
+
+### Problem 7.1
+A fair die is rolled 100 times. Use the CLT to approximate P(150 ≤ S ≤ 170) where S is the sum of the rolls.
+
+**Solution:**
+Let Xᵢ be the result of the i-th roll. E[Xᵢ] = 3.5, Var(Xᵢ) = 35/12
+S = X₁ + X₂ + ... + X₁₀₀
+E[S] = 100 × 3.5 = 350, Var(S) = 100 × 35/12 = 3500/12
+By CLT: (S - 350)/√(3500/12) ≈ N(0,1)
+P(150 ≤ S ≤ 170) = P((150-350)/√(3500/12) ≤ (S-350)/√(3500/12) ≤ (170-350)/√(3500/12))
+= P(-11.0 ≤ Z ≤ -9.9) ≈ 0
+
+### Problem 7.2
+A factory produces items with mean weight 100g and standard deviation 5g. What is the probability that the average weight of 25 items exceeds 102g?
+
+**Solution:**
+Let X̄ be the sample mean. By CLT: X̄ ~ N(100, 5²/25) = N(100, 1)
+P(X̄ > 102) = P((X̄-100)/1 > (102-100)/1) = P(Z > 2) ≈ 0.0228
+

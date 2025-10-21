@@ -13,6 +13,13 @@ import { AuditManager } from './security/audit';
 import { EncryptionManager } from './security/encryption';
 import { AuthorizationManager, User, UserRole } from './security/authorization';
 import { ComplianceManager } from './security/compliance';
+import { StudyCopilotBot } from './study/bot';
+import { EmergencyStudyBot } from './study/emergency-bot';
+import { LockInBot } from './study/lock-in';
+import { JarvisOmniscient } from './study/jarvis-core';
+import { JockieMusicPowers } from './music/jockie-powers';
+import { SSJInfinity } from './study/ssj-infinity';
+import { ssjInfinityEngine } from './ssj-infinity-engine';
 
 config();
 
@@ -33,6 +40,14 @@ class GunnchAI3k {
   private encryptionManager: EncryptionManager;
   private authorizationManager: AuthorizationManager;
   private complianceManager: ComplianceManager;
+  
+  // Study Copilot
+  private studyCopilot: StudyCopilotBot;
+  private emergencyStudy: EmergencyStudyBot;
+  private lockInBot: LockInBot;
+  private jarvisOmniscient: JarvisOmniscient;
+  private jockieMusic: JockieMusicPowers;
+  private ssjInfinity: SSJInfinity;
 
   constructor() {
     this.client = new Client({
@@ -62,6 +77,12 @@ class GunnchAI3k {
     this.githubIntegration = new GitHubIntegration();
     this.cursorIntegration = new CursorIntegration();
     this.notificationManager = new NotificationManager(this.client);
+    this.studyCopilot = new StudyCopilotBot(this.client);
+    this.emergencyStudy = new EmergencyStudyBot(this.client);
+    this.lockInBot = new LockInBot(this.client);
+    this.jarvisOmniscient = new JarvisOmniscient(this.client);
+    this.jockieMusic = new JockieMusicPowers(this.client);
+    this.ssjInfinity = new SSJInfinity(this.client);
   }
 
   async initialize() {
@@ -109,6 +130,102 @@ class GunnchAI3k {
     await this.registerCommands();
     await this.setupEventHandlers();
     await this.client.login(process.env.DISCORD_BOT_TOKEN);
+  }
+
+  private async setupEventHandlers() {
+    this.client.on('ready', () => {
+      this.logger.info(`gunnchAI3k is online! Logged in as ${this.client.user?.tag}`);
+    });
+
+    this.client.on('interactionCreate', async (interaction) => {
+      if (interaction.isCommand()) {
+        await this.handleCommand(interaction);
+      }
+    });
+
+    this.client.on('messageCreate', async (message) => {
+      if (message.author.bot) return;
+      
+      // Check if bot is mentioned
+      if (message.mentions.has(this.client.user!)) {
+        await this.handleMention(message);
+      }
+      
+      // Check for natural language commands
+      await this.handleNaturalLanguage(message);
+    });
+  }
+
+  private async handleMention(message: any) {
+    // Use basic SSJ Infinity for natural language processing
+    try {
+      const response = await this.ssjInfinity.processMention(message);
+      if (response) {
+        await message.reply(response);
+      }
+    } catch (error) {
+      this.logger.error('Error in SSJ Infinity processing:', error);
+      // Fallback to basic response
+      await message.reply("I'm here to help! What can I do for you? 🚀");
+    }
+  }
+
+  private async handleMusicCommand(message: any, query: string) {
+    try {
+      // Search for music using SSJ Infinity Engine
+      const track = await ssjInfinityEngine.searchMusic(query);
+      
+      if (track) {
+        // Use the existing music system to play the track
+        await this.jockieMusic.processNaturalLanguageCommand(
+          `play ${query}`, 
+          message.author.id
+        );
+      }
+    } catch (error) {
+      this.logger.error('Error handling music command:', error);
+    }
+  }
+
+  private async handleNaturalLanguage(message: any) {
+    const content = message.content.toLowerCase();
+    
+    // Check for music-related natural language first (highest priority)
+    if (this.isMusicRelatedMessage(content)) {
+      const response = await this.jockieMusic.processNaturalLanguageCommand(message.content, message.author.id);
+      if (response) {
+        await message.reply(response);
+        return; // Don't process other commands if music command was handled
+      }
+    }
+  }
+
+  private isMusicRelatedMessage(content: string): boolean {
+    const musicKeywords = [
+      'play', 'song', 'music', 'track', 'listen', 'hear', 'jam', 'vibe',
+      'by', 'artist', 'album', 'playlist', 'sound', 'audio', 'tune',
+      'meet me there', 'lucki', 'drake', 'spotify', 'youtube', 'apple music'
+    ];
+    
+    const playKeywords = ['play', 'put on', 'start', 'begin', 'queue'];
+    
+    // Check for YouTube URLs
+    const hasYouTubeUrl = /https?:\/\/(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)/.test(content);
+    
+    // Check for play keywords
+    const hasPlayKeyword = playKeywords.some(keyword => content.includes(keyword));
+    
+    // Check for music keywords
+    const hasMusicKeyword = musicKeywords.some(keyword => content.includes(keyword));
+    
+    // Check for artist/song pattern
+    const hasArtistPattern = /\bby\s+\w+/i.test(content);
+    
+    // Check for specific song mentions
+    const hasSongMention = /meet me there|lucki|drake|kanye|travis|future/i.test(content);
+    
+    // Return true if it's a YouTube URL with play keyword, or regular music command
+    return hasYouTubeUrl || (hasPlayKeyword && (hasMusicKeyword || hasArtistPattern || hasSongMention));
   }
 
   private async registerCommands() {
@@ -330,6 +447,366 @@ class GunnchAI3k {
               { name: 'AI Actions', value: 'ai' },
               { name: 'User Actions', value: 'user' }
             )
+        ),
+      
+      // Study Copilot Commands
+      new SlashCommandBuilder()
+        .setName('study')
+        .setDescription('Study Copilot v2 - AI-powered study assistance')
+        .addSubcommand(subcommand =>
+          subcommand
+            .setName('start')
+            .setDescription('Begin a new study session with course materials')
+        )
+        .addSubcommand(subcommand =>
+          subcommand
+            .setName('make-notes')
+            .setDescription('Regenerate study materials with new inputs')
+        )
+        .addSubcommand(subcommand =>
+          subcommand
+            .setName('quiz')
+            .setDescription('Generate a quiz for a specific topic')
+            .addStringOption(option =>
+              option.setName('topic')
+                .setDescription('Topic to quiz on')
+                .setRequired(true)
+            )
+            .addIntegerOption(option =>
+              option.setName('items')
+                .setDescription('Number of quiz items (1-10)')
+                .setMinValue(1)
+                .setMaxValue(10)
+                .setRequired(false)
+            )
+        )
+        .addSubcommand(subcommand =>
+          subcommand
+            .setName('explain')
+            .setDescription('Get explanation for a specific concept')
+            .addStringOption(option =>
+              option.setName('concept')
+                .setDescription('Concept to explain')
+                .setRequired(true)
+            )
+        )
+        .addSubcommand(subcommand =>
+          subcommand
+            .setName('plan')
+            .setDescription('Create a custom study plan')
+            .addIntegerOption(option =>
+              option.setName('days')
+                .setDescription('Days until exam/assignment')
+                .setRequired(true)
+            )
+            .addIntegerOption(option =>
+              option.setName('hours')
+                .setDescription('Hours per day available')
+                .setRequired(true)
+            )
+        )
+        .addSubcommand(subcommand =>
+          subcommand
+            .setName('assignment-mode')
+            .setDescription('Convert assignment into guided lesson')
+        ),
+      
+      // Emergency Study Commands
+      new SlashCommandBuilder()
+        .setName('emergency')
+        .setDescription('🚨 ALL HANDS ON DECK - Emergency study session for midterms/finals')
+        .addSubcommand(subcommand =>
+          subcommand
+            .setName('start')
+            .setDescription('Start emergency study session')
+            .addStringOption(option =>
+              option.setName('course')
+                .setDescription('Course name')
+                .setRequired(true)
+            )
+            .addStringOption(option =>
+              option.setName('exam-date')
+                .setDescription('Exam date (YYYY-MM-DD)')
+                .setRequired(true)
+            )
+            .addStringOption(option =>
+              option.setName('level')
+                .setDescription('How behind are you?')
+                .setRequired(true)
+                .addChoices(
+                  { name: 'Behind (4-6 hours/day)', value: 'behind' },
+                  { name: 'Very Behind (6-8 hours/day)', value: 'very-behind' },
+                  { name: 'Critical (8+ hours/day)', value: 'critical' }
+                )
+            )
+        )
+        .addSubcommand(subcommand =>
+          subcommand
+            .setName('schedule')
+            .setDescription('Get daily study schedule')
+            .addIntegerOption(option =>
+              option.setName('day')
+                .setDescription('Day number (1-7)')
+                .setMinValue(1)
+                .setMaxValue(7)
+                .setRequired(true)
+            )
+        )
+        .addSubcommand(subcommand =>
+          subcommand
+            .setName('problems')
+            .setDescription('Get practice problems for today')
+            .addStringOption(option =>
+              option.setName('topic')
+                .setDescription('Specific topic (optional)')
+                .setRequired(false)
+            )
+        )
+        .addSubcommand(subcommand =>
+          subcommand
+            .setName('reference')
+            .setDescription('Get quick reference guide')
+        )
+        .addSubcommand(subcommand =>
+          subcommand
+            .setName('mock-exam')
+            .setDescription('Take a mock exam')
+            .addIntegerOption(option =>
+              option.setName('duration')
+                .setDescription('Exam duration in minutes')
+                .setMinValue(30)
+                .setMaxValue(180)
+                .setRequired(false)
+            )
+        )
+        .addSubcommand(subcommand =>
+          subcommand
+            .setName('strategies')
+            .setDescription('Get emergency study strategies')
+        )
+        .addSubcommand(subcommand =>
+          subcommand
+            .setName('progress')
+            .setDescription('Check your progress')
+        ),
+      
+      // Lock In Command
+      new SlashCommandBuilder()
+        .setName('lock-in')
+        .setDescription('🔒 LOCK IN - Academic Warrior Mode for serious studying')
+        .addStringOption(option =>
+          option.setName('course')
+            .setDescription('Course name to lock in for')
+            .setRequired(true)
+        )
+        .addStringOption(option =>
+          option.setName('exam-date')
+            .setDescription('Exam date (YYYY-MM-DD)')
+            .setRequired(true)
+        )
+        .addStringOption(option =>
+          option.setName('warrior-level')
+            .setDescription('Your academic warrior level')
+            .setRequired(false)
+            .addChoices(
+              { name: 'Rookie (4-6 hours/day)', value: 'Rookie' },
+              { name: 'Veteran (6-8 hours/day)', value: 'Veteran' },
+              { name: 'Elite (8+ hours/day)', value: 'Elite' },
+              { name: 'Legend (10+ hours/day)', value: 'Legend' }
+            )
+        ),
+      
+      // Jarvis Omniscient Commands
+      new SlashCommandBuilder()
+        .setName('jarvis')
+        .setDescription('🧠 Jarvis - Omniscient Study + Tech Copilot')
+        .addSubcommand(subcommand =>
+          subcommand
+            .setName('start')
+            .setDescription('Start Jarvis study session')
+            .addStringOption(option =>
+              option.setName('course')
+                .setDescription('Course name')
+                .setRequired(true)
+            )
+            .addStringOption(option =>
+              option.setName('syllabus')
+                .setDescription('Syllabus (file or URL)')
+                .setRequired(false)
+            )
+            .addStringOption(option =>
+              option.setName('assignment')
+                .setDescription('Assignment (file)')
+                .setRequired(false)
+            )
+            .addStringOption(option =>
+              option.setName('lecture')
+                .setDescription('Latest lecture slide (file)')
+                .setRequired(false)
+            )
+            .addStringOption(option =>
+              option.setName('due-dates')
+                .setDescription('Due dates (comma-separated)')
+                .setRequired(false)
+            )
+            .addIntegerOption(option =>
+              option.setName('hours-per-week')
+                .setDescription('Hours available per week')
+                .setMinValue(1)
+                .setMaxValue(40)
+                .setRequired(false)
+            )
+        )
+        .addSubcommand(subcommand =>
+          subcommand
+            .setName('compute')
+            .setDescription('Compute math/science expressions')
+            .addStringOption(option =>
+              option.setName('expression')
+                .setDescription('Math expression or LaTeX')
+                .setRequired(true)
+            )
+        )
+        .addSubcommand(subcommand =>
+          subcommand
+            .setName('research')
+            .setDescription('Research topics with citations')
+            .addStringOption(option =>
+              option.setName('query')
+                .setDescription('Research query')
+                .setRequired(true)
+            )
+        )
+        .addSubcommand(subcommand =>
+          subcommand
+            .setName('assignment-mode')
+            .setDescription('Guided lesson mode (Attempt → Hint → Step → Final)')
+            .addStringOption(option =>
+              option.setName('topic')
+                .setDescription('Assignment topic')
+                .setRequired(true)
+            )
+        )
+        .addSubcommand(subcommand =>
+          subcommand
+            .setName('make-notes')
+            .setDescription('Regenerate study materials')
+        )
+        .addSubcommand(subcommand =>
+          subcommand
+            .setName('quiz')
+            .setDescription('Retrieval practice quiz')
+            .addStringOption(option =>
+              option.setName('topic')
+                .setDescription('Quiz topic')
+                .setRequired(true)
+            )
+            .addIntegerOption(option =>
+              option.setName('items')
+                .setDescription('Number of quiz items')
+                .setMinValue(1)
+                .setMaxValue(10)
+                .setRequired(false)
+            )
+        )
+        .addSubcommand(subcommand =>
+          subcommand
+            .setName('update')
+            .setDescription('Check for latest improvements')
+        )
+        .addSubcommand(subcommand =>
+          subcommand
+            .setName('settings')
+            .setDescription('Configure Jarvis settings')
+            .addBooleanOption(option =>
+              option.setName('local-mode')
+                .setDescription('Use local mode only (no cloud lookups)')
+                .setRequired(false)
+            )
+            .addBooleanOption(option =>
+              option.setName('cloud-lookups')
+                .setDescription('Allow cloud research and computation')
+                .setRequired(false)
+            )
+        ),
+      
+      // Jockie Music Commands
+      new SlashCommandBuilder()
+        .setName('music')
+        .setDescription('🎵 Jockie Music Powers - Multi-source music bot')
+        .addSubcommand(subcommand =>
+          subcommand
+            .setName('play')
+            .setDescription('Play music from various sources')
+            .addStringOption(option =>
+              option.setName('query')
+                .setDescription('Song name, artist, or URL')
+                .setRequired(true)
+            )
+            .addStringOption(option =>
+              option.setName('source')
+                .setDescription('Music source')
+                .setRequired(false)
+                .addChoices(
+                  { name: 'Spotify', value: 'spotify' },
+                  { name: 'Apple Music', value: 'apple' },
+                  { name: 'Deezer', value: 'deezer' },
+                  { name: 'SoundCloud', value: 'soundcloud' },
+                  { name: 'YouTube', value: 'youtube' }
+                )
+            )
+        )
+        .addSubcommand(subcommand =>
+          subcommand
+            .setName('pause')
+            .setDescription('Pause the current track')
+        )
+        .addSubcommand(subcommand =>
+          subcommand
+            .setName('resume')
+            .setDescription('Resume the current track')
+        )
+        .addSubcommand(subcommand =>
+          subcommand
+            .setName('skip')
+            .setDescription('Skip to the next track')
+        )
+        .addSubcommand(subcommand =>
+          subcommand
+            .setName('stop')
+            .setDescription('Stop music and clear queue')
+        )
+        .addSubcommand(subcommand =>
+          subcommand
+            .setName('queue')
+            .setDescription('Show the current queue')
+        )
+        .addSubcommand(subcommand =>
+          subcommand
+            .setName('volume')
+            .setDescription('Set the volume')
+            .addIntegerOption(option =>
+              option.setName('level')
+                .setDescription('Volume level (0-100)')
+                .setMinValue(0)
+                .setMaxValue(100)
+                .setRequired(true)
+            )
+        )
+        .addSubcommand(subcommand =>
+          subcommand
+            .setName('search')
+            .setDescription('Search for music')
+            .addStringOption(option =>
+              option.setName('query')
+                .setDescription('Search query')
+                .setRequired(true)
+            )
+        )
+        .addSubcommand(subcommand =>
+          subcommand
+            .setName('nowplaying')
+            .setDescription('Show currently playing track')
         )
     ];
 
@@ -352,6 +829,7 @@ class GunnchAI3k {
       this.logger.info('🧠 Learning engine active');
       this.logger.info('📊 Analytics tracking enabled');
       this.logger.info('🔔 Smart notifications configured');
+      this.logger.info('🚀 SSJ Infinity mode activated - Doctoral intelligence with comedian empathy!');
     });
 
     this.client.on('interactionCreate', async interaction => {
@@ -426,6 +904,24 @@ class GunnchAI3k {
         break;
       case 'audit':
         await this.handleAuditCommand(interaction, options);
+        break;
+      case 'study':
+        await this.studyCopilot.handleInteraction(interaction);
+        break;
+      case 'emergency':
+        await this.emergencyStudy.handleInteraction(interaction);
+        break;
+      case 'lock-in':
+        await this.lockInBot.handleInteraction(interaction);
+        break;
+      case 'jarvis':
+        await this.jarvisOmniscient.handleInteraction(interaction);
+        break;
+      case 'music':
+        await this.jockieMusic.handleInteraction(interaction);
+        break;
+      case 'help':
+        await this.handleHelpCommand(interaction);
         break;
     }
   }
@@ -712,6 +1208,10 @@ class GunnchAI3k {
         { name: '📊 Tracking', value: '/track - Monitor metrics\n/update - Report progress\n/assign - Create tasks', inline: false },
         { name: '🎯 Intelligence', value: '/pattern - Analyze patterns\n/risk - Assess risks\n/optimize - Get suggestions\n/predict - Forecast outcomes', inline: false },
         { name: '🔧 Management', value: '/meeting - Schedule meetings\n/announce - Share information\n/focus - Control notifications', inline: false },
+        { name: '📚 Study Copilot v2', value: '/study start - Begin study session\n/study quiz - Generate quiz\n/study explain - Get explanations\n/study plan - Create study plan\n/study assignment-mode - Guided lessons', inline: false },
+        { name: '🚨 Emergency Study', value: '/emergency start - ALL HANDS ON DECK\n/emergency schedule - Daily study plan\n/emergency problems - Practice problems\n/emergency reference - Quick reference\n/emergency mock-exam - Take mock exam', inline: false },
+        { name: '🔒 Lock In Mode', value: '/lock-in - Academic Warrior Mode\nWarrior levels: Rookie/Veteran/Elite/Legend\nSlay the academic animal and wear the A-grade skin!', inline: false },
+        { name: '🧠 Jarvis Omniscient', value: '/jarvis start - Omniscient Study + Tech Copilot\n/jarvis compute - Math/science computation\n/jarvis research - Research with citations\n/jarvis assignment-mode - Guided lessons', inline: false },
         { name: '🔒 Security', value: '/security - Security and compliance info\n/approve - Approve AI actions (Executive)\n/reject - Reject AI actions (Executive)\n/audit - View audit logs and events', inline: false }
       )
       .setColor(0x3498db)
@@ -949,6 +1449,27 @@ class GunnchAI3k {
     }
   }
 
+  private async handleHelpCommand(interaction: any) {
+    const embed = new EmbedBuilder()
+      .setTitle('🤖 gunnchAI3k - Your AI Assistant')
+      .setDescription('I\'m your comprehensive AI assistant with multiple specialized modes!')
+      .setColor(0x00ff00)
+      .setThumbnail('https://via.placeholder.com/150')
+      .addFields(
+        { name: '🧠 Study Copilot v2', value: '`/study start` - Start a study session\n`/study assignment-mode` - Guided assignment help\n`/study make-notes` - Generate study materials', inline: false },
+        { name: '🚨 Emergency Study', value: '`/emergency start` - ALL HANDS ON DECK for midterm week\n`/emergency schedule` - Get crash course schedule\n`/emergency practice` - Practice problems', inline: false },
+        { name: '🔒 Lock In Mode', value: '`/lock-in` - Academic Warrior Mode\n`/lock-in status` - Check your academic power level\n`/lock-in trophies` - View your achievements', inline: false },
+        { name: '🤖 Jarvis Omniscient', value: '`/jarvis start` - Omniscient study session\n`/jarvis compute` - Math/science computation\n`/jarvis research` - Research with citations', inline: false },
+        { name: '🎵 Jockie Music Powers', value: '`/music play` - Play music from any source\n`/music search` - Search for music\n`/music queue` - Show current queue\n`/music nowplaying` - Current track info', inline: false },
+        { name: '💬 Natural Language', value: 'Just mention me and say "lock me in for [subject]" or "play music" for instant responses!', inline: false },
+        { name: '🚀 SSJ Infinity Mode', value: 'Mention me for:\n• "flashcards" - Get instant study cards\n• "practice test" - Generate practice exams\n• "weekly assessment" - Check your knowledge\n• "help me study" - Get personalized study help', inline: false }
+      )
+      .setFooter({ text: 'gunnchAI3k - Study-Tech Omniscient v3 with Jockie Music Powers' })
+      .setTimestamp();
+
+    await interaction.reply({ embeds: [embed] });
+  }
+
   private async getUser(userId: string): Promise<User> {
     // This would typically fetch from database
     // For now, return a mock executive user
@@ -961,6 +1482,130 @@ class GunnchAI3k {
       mfaEnabled: true,
       isActive: true
     };
+  }
+
+  async start() {
+    try {
+      await this.initialize();
+      
+      // Initialize SSJ Infinity Engine (temporarily disabled for basic functionality)
+      // this.logger.info('🚀 Initializing SSJ Infinity Engine...');
+      // await ssjInfinityEngine.initialize();
+      // this.logger.info('✅ SSJ Infinity Engine ready!');
+      
+      await this.registerSlashCommands();
+      await this.setupEventHandlers();
+      await this.setupGracefulShutdown();
+      await this.client.login(process.env.DISCORD_BOT_TOKEN);
+    } catch (error) {
+      this.logger.error('Failed to start gunnchAI3k:', error);
+      process.exit(1);
+    }
+  }
+
+  private async registerSlashCommands() {
+    try {
+      const commands = [
+        new SlashCommandBuilder()
+          .setName('help')
+          .setDescription('Get help with gunnchAI3k commands'),
+        new SlashCommandBuilder()
+          .setName('career')
+          .setDescription('Interactive career guidance'),
+        new SlashCommandBuilder()
+          .setName('tutor')
+          .setDescription('Study assistance and tutoring'),
+        new SlashCommandBuilder()
+          .setName('fun')
+          .setDescription('Tech trivia and fun facts'),
+        new SlashCommandBuilder()
+          .setName('emergency')
+          .setDescription('Emergency study mode')
+          .addSubcommand(subcommand =>
+            subcommand
+              .setName('start')
+              .setDescription('Start emergency study session')
+              .addStringOption(option =>
+                option.setName('subject')
+                  .setDescription('Subject to study')
+                  .setRequired(true)
+              )
+          )
+          .addSubcommand(subcommand =>
+            subcommand
+              .setName('problems')
+              .setDescription('Get practice problems')
+          ),
+        new SlashCommandBuilder()
+          .setName('music')
+          .setDescription('Music commands')
+          .addSubcommand(subcommand =>
+            subcommand
+              .setName('play')
+              .setDescription('Play music')
+              .addStringOption(option =>
+                option.setName('query')
+                  .setDescription('Song name or YouTube URL')
+                  .setRequired(true)
+              )
+          )
+          .addSubcommand(subcommand =>
+            subcommand
+              .setName('stop')
+              .setDescription('Stop music')
+          )
+          .addSubcommand(subcommand =>
+            subcommand
+              .setName('nowplaying')
+              .setDescription('Show currently playing')
+          )
+      ];
+
+      const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_BOT_TOKEN!);
+      
+      this.logger.info('Started refreshing application (/) commands.');
+      
+          await rest.put(
+            Routes.applicationCommands(process.env.DISCORD_CLIENT_ID!),
+            { body: commands }
+          );
+      
+      this.logger.info('Slash commands registered successfully');
+    } catch (error) {
+      this.logger.error('Failed to register slash commands:', error);
+      throw error;
+    }
+  }
+
+  private async setupGracefulShutdown() {
+    // Handle graceful shutdown
+    process.on('SIGINT', async () => {
+      this.logger.info('🛑 Received SIGINT, shutting down gracefully...');
+      await this.ssjInfinity.notifySleepMode();
+      await this.client.destroy();
+      process.exit(0);
+    });
+
+    process.on('SIGTERM', async () => {
+      this.logger.info('🛑 Received SIGTERM, shutting down gracefully...');
+      await this.ssjInfinity.notifySleepMode();
+      await this.client.destroy();
+      process.exit(0);
+    });
+
+    // Handle uncaught exceptions
+    process.on('uncaughtException', async (error) => {
+      this.logger.error('💥 Uncaught Exception:', error);
+      await this.ssjInfinity.notifySleepMode();
+      process.exit(1);
+    });
+
+    // Handle unhandled promise rejections
+    process.on('unhandledRejection', async (reason, promise) => {
+      this.logger.error('💥 Unhandled Rejection at:', promise, 'reason:', reason);
+      await this.ssjInfinity.notifySleepMode();
+      process.exit(1);
+    });
   }
 }
 

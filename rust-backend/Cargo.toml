@@ -1,0 +1,45 @@
+[package]
+name = "gunnchai3k-backend"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# Discord API
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tokio = { version = "1.0", features = ["full"] }
+reqwest = { version = "0.11", features = ["json"] }
+futures = "0.3"
+
+# Audio Processing
+rodio = "0.17"
+cpal = "0.15"
+symphonia = { version = "0.5", features = ["mp3", "flac", "aac"] }
+
+# High Performance
+rayon = "1.7"
+crossbeam = "0.8"
+dashmap = "5.4"
+lru = "0.12"
+
+# Async Runtime
+async-trait = "0.1"
+tracing = "0.1"
+tracing-subscriber = "0.3"
+
+# FFI for Node.js integration
+neon = "0.10"
+neon-build = "0.10"
+
+# Natural Language Processing
+tokenizers = "0.15"
+candle-core = "0.3"
+candle-nn = "0.3"
+
+# Music Search
+youtube-dl-rs = "0.1"
+yt-dlp-rs = "0.1"
+
+[lib]
+crate-type = ["cdylib"]
+

@@ -162,3 +162,4 @@ export class NFCGameSharing {
     return this.isListening;
   }
 }
+

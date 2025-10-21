@@ -1,0 +1,250 @@
+# Robotics and Control Systems - Practice Problems
+
+## Problem Set 1: Robot Kinematics
+
+### Problem 1.1: Forward Kinematics
+A 2-DOF planar robot has links of length L₁ = 1m and L₂ = 0.8m. The joint angles are θ₁ = 30° and θ₂ = 45°. Find the position (x, y) of the end-effector.
+
+**Solution:**
+x = L₁cos(θ₁) + L₂cos(θ₁ + θ₂)
+x = 1×cos(30°) + 0.8×cos(75°) = 1×0.866 + 0.8×0.259 = 0.866 + 0.207 = 1.073m
+
+y = L₁sin(θ₁) + L₂sin(θ₁ + θ₂)
+y = 1×sin(30°) + 0.8×sin(75°) = 1×0.5 + 0.8×0.966 = 0.5 + 0.773 = 1.273m
+
+### Problem 1.2: Inverse Kinematics
+For the same 2-DOF robot, find the joint angles to position the end-effector at (x, y) = (1.2, 0.8).
+
+**Solution:**
+r = √(x² + y²) = √(1.2² + 0.8²) = √(1.44 + 0.64) = √2.08 = 1.443
+
+θ₂ = ±arccos((r² - L₁² - L₂²)/(2L₁L₂))
+θ₂ = ±arccos((2.08 - 1 - 0.64)/(2×1×0.8)) = ±arccos(0.44/1.6) = ±arccos(0.275) = ±74.0°
+
+For θ₂ = +74.0°:
+θ₁ = atan2(y,x) - atan2(L₂sin(θ₂), L₁ + L₂cos(θ₂))
+θ₁ = atan2(0.8,1.2) - atan2(0.8×sin(74°), 1 + 0.8×cos(74°))
+θ₁ = 33.69° - atan2(0.769, 1.221) = 33.69° - 32.17° = 1.52°
+
+### Problem 1.3: Workspace Analysis
+For a 2-DOF planar robot with L₁ = 1m and L₂ = 0.5m, determine the workspace boundary.
+
+**Solution:**
+Inner radius: |L₁ - L₂| = |1 - 0.5| = 0.5m
+Outer radius: L₁ + L₂ = 1 + 0.5 = 1.5m
+Workspace is an annulus (ring) with inner radius 0.5m and outer radius 1.5m.
+
+## Problem Set 2: Robot Dynamics
+
+### Problem 2.1: Kinetic Energy
+A 2-DOF planar robot has masses m₁ = 2kg, m₂ = 1kg and moments of inertia I₁ = 0.1kg⋅m², I₂ = 0.05kg⋅m². The link lengths are L₁ = 0.5m, L₂ = 0.3m. Find the kinetic energy when θ₁ = 45°, θ₂ = 30°, θ̇₁ = 2 rad/s, θ̇₂ = 1 rad/s.
+
+**Solution:**
+First, find the velocities:
+v₁² = (L₁θ̇₁)² = (0.5×2)² = 1 m²/s²
+v₂² = (L₁θ̇₁)² + (L₂(θ̇₁ + θ̇₂))² + 2L₁L₂θ̇₁(θ̇₁ + θ̇₂)cos(θ₂)
+v₂² = (0.5×2)² + (0.3×3)² + 2×0.5×0.3×2×3×cos(30°)
+v₂² = 1 + 0.81 + 1.8×0.866 = 1 + 0.81 + 1.559 = 3.369 m²/s²
+
+Kinetic energy:
+T = ½(m₁v₁² + m₂v₂² + I₁θ̇₁² + I₂(θ̇₁ + θ̇₂)²)
+T = ½(2×1 + 1×3.369 + 0.1×4 + 0.05×9)
+T = ½(2 + 3.369 + 0.4 + 0.45) = ½(6.219) = 3.110 J
+
+### Problem 2.2: Dynamic Equations
+Derive the dynamic equations for a 1-DOF pendulum with mass m, length L, and angle θ.
+
+**Solution:**
+Kinetic energy: T = ½mL²θ̇²
+Potential energy: V = -mgLcos(θ)
+Lagrangian: L = T - V = ½mL²θ̇² + mgLcos(θ)
+
+Euler-Lagrange equation:
+d/dt(∂L/∂θ̇) - ∂L/∂θ = τ
+d/dt(mL²θ̇) - (-mgLsin(θ)) = τ
+mL²θ̈ + mgLsin(θ) = τ
+
+### Problem 2.3: Inertia Matrix
+For a 2-DOF planar robot, find the inertia matrix M(q) when θ₁ = 0°, θ₂ = 90°.
+
+**Solution:**
+M₁₁ = m₁L₁²/3 + m₂(L₁² + L₂²/3 + L₁L₂cos(θ₂))
+M₁₁ = m₁L₁²/3 + m₂(L₁² + L₂²/3 + L₁L₂×0) = m₁L₁²/3 + m₂(L₁² + L₂²/3)
+
+M₁₂ = M₂₁ = m₂(L₂²/3 + L₁L₂cos(θ₂)/2)
+M₁₂ = m₂(L₂²/3 + L₁L₂×0/2) = m₂L₂²/3
+
+M₂₂ = m₂L₂²/3
+
+## Problem Set 3: Robot Control
+
+### Problem 3.1: PID Control
+A robot joint has a desired position of 90° and current position of 85°. The velocity error is -0.1 rad/s. If Kₚ = 10, Kᵢ = 2, Kₐ = 1, find the control torque.
+
+**Solution:**
+Position error: e = 90° - 85° = 5° = 0.087 rad
+Velocity error: ė = -0.1 rad/s
+Integral error: ∫e dt = 0.087t (assuming constant error)
+
+Control torque:
+τ = Kₚe + Kᵢ∫e dt + Kₐė
+τ = 10×0.087 + 2×0.087t + 1×(-0.1)
+τ = 0.87 + 0.174t - 0.1 = 0.77 + 0.174t
+
+### Problem 3.2: Computed Torque Control
+For a 1-DOF robot with m = 1kg, L = 1m, design a computed torque controller to track θ_d = sin(t).
+
+**Solution:**
+Desired trajectory: θ_d = sin(t), θ̇_d = cos(t), θ̈_d = -sin(t)
+Position error: e = θ_d - θ = sin(t) - θ
+Velocity error: ė = θ̇_d - θ̇ = cos(t) - θ̇
+
+Controller: τ = m(L²θ̈_d + Kₚe + Kₐė) + mgLsin(θ)
+τ = 1(1²(-sin(t)) + Kₚ(sin(t) - θ) + Kₐ(cos(t) - θ̇)) + 1×9.81×1×sin(θ)
+τ = -sin(t) + Kₚ(sin(t) - θ) + Kₐ(cos(t) - θ̇) + 9.81sin(θ)
+
+### Problem 3.3: Stability Analysis
+Analyze the stability of a PD controller for a 1-DOF robot with τ = Kₚe + Kₐė.
+
+**Solution:**
+Closed-loop system: mL²θ̈ = Kₚ(θ_d - θ) + Kₐ(θ̇_d - θ̇)
+Error dynamics: mL²ë + Kₐė + Kₚe = 0
+Characteristic equation: mL²s² + Kₐs + Kₚ = 0
+
+For stability, all roots must have negative real parts:
+s = (-Kₐ ± √(Kₐ² - 4mL²Kₚ))/(2mL²)
+
+Stable if: Kₐ > 0 and Kₚ > 0 and Kₐ² ≥ 4mL²Kₚ (critically damped or overdamped)
+
+## Problem Set 4: Robot Sensors
+
+### Problem 4.1: Encoder Resolution
+A robot joint uses an encoder with 1000 pulses per revolution. If the joint rotates at 1 rad/s, what is the pulse frequency?
+
+**Solution:**
+Pulses per radian = 1000/(2π) = 159.15 pulses/rad
+Pulse frequency = 159.15 × 1 rad/s = 159.15 Hz
+
+### Problem 4.2: Force Sensor Calibration
+A 6-axis force/torque sensor has the following calibration matrix:
+F = [100 0 0; 0 100 0; 0 0 100; 0 0 0; 0 0 0; 0 0 0]
+If the raw sensor readings are [50, 30, 20, 0, 0, 0], what are the actual forces?
+
+**Solution:**
+F_actual = F × [50, 30, 20]ᵀ
+F_x = 100×50 = 5000 N
+F_y = 100×30 = 3000 N
+F_z = 100×20 = 2000 N
+F_actual = [5000, 3000, 2000, 0, 0, 0]ᵀ
+
+### Problem 4.3: Vision System
+A camera with focal length f = 5mm captures an object at distance d = 1m. If the object height is h = 0.1m, what is the image height?
+
+**Solution:**
+Using similar triangles: h_image/h_object = f/d
+h_image = h_object × f/d = 0.1 × 0.005/1 = 0.0005m = 0.5mm
+
+## Problem Set 5: Robot Programming
+
+### Problem 5.1: Trajectory Planning
+Plan a cubic trajectory for a robot joint from θ₀ = 0° to θ_f = 90° in 2 seconds.
+
+**Solution:**
+Cubic polynomial: θ(t) = a₀ + a₁t + a₂t² + a₃t³
+Boundary conditions:
+θ(0) = 0° = 0 rad, θ(2) = 90° = π/2 rad
+θ̇(0) = 0, θ̇(2) = 0
+
+Solving: a₀ = 0, a₁ = 0, a₂ = 3π/8, a₃ = -π/8
+θ(t) = (3π/8)t² - (π/8)t³
+
+### Problem 5.2: Collision Avoidance
+A robot must move from (0,0) to (2,2) while avoiding a circular obstacle at (1,1) with radius 0.5. Plan a path.
+
+**Solution:**
+Direct path distance: √(2² + 2²) = √8 = 2.83
+Obstacle distance from path: |1×2 - 1×2 + 0|/√(2² + 2²) = 0/√8 = 0
+Since 0 < 0.5, the direct path intersects the obstacle.
+
+Alternative path: Go around the obstacle
+Path 1: (0,0) → (0.5,0) → (0.5,2) → (2,2)
+Path 2: (0,0) → (2,0.5) → (2,2)
+Choose the shorter path.
+
+### Problem 5.3: ROS Node Communication
+Design a ROS node that publishes joint positions and subscribes to joint commands.
+
+**Solution:**
+```python
+#!/usr/bin/env python
+import rospy
+from std_msgs.msg import Float64MultiArray
+from sensor_msgs.msg import JointState
+
+class RobotController:
+    def __init__(self):
+        rospy.init_node('robot_controller')
+        self.joint_positions = [0, 0, 0, 0, 0, 0]
+        self.pub = rospy.Publisher('/joint_states', JointState, queue_size=10)
+        self.sub = rospy.Subscriber('/joint_commands', Float64MultiArray, self.command_callback)
+        
+    def command_callback(self, msg):
+        # Update joint positions based on commands
+        self.joint_positions = list(msg.data)
+        
+    def publish_positions(self):
+        joint_state = JointState()
+        joint_state.header.stamp = rospy.Time.now()
+        joint_state.name = ['joint1', 'joint2', 'joint3', 'joint4', 'joint5', 'joint6']
+        joint_state.position = self.joint_positions
+        self.pub.publish(joint_state)
+
+if __name__ == '__main__':
+    controller = RobotController()
+    rate = rospy.Rate(10)  # 10 Hz
+    while not rospy.is_shutdown():
+        controller.publish_positions()
+        rate.sleep()
+```
+
+## Problem Set 6: Robot Applications
+
+### Problem 6.1: Pick and Place
+A robot must pick up an object at (0.5, 0.3, 0.1) and place it at (0.8, 0.6, 0.2). Plan the trajectory.
+
+**Solution:**
+Pick trajectory:
+1. Move to approach position: (0.5, 0.3, 0.2)
+2. Move down to object: (0.5, 0.3, 0.1)
+3. Close gripper
+4. Move up: (0.5, 0.3, 0.2)
+
+Place trajectory:
+1. Move to approach position: (0.8, 0.6, 0.3)
+2. Move down to place position: (0.8, 0.6, 0.2)
+3. Open gripper
+4. Move up: (0.8, 0.6, 0.3)
+
+### Problem 6.2: Assembly Task
+A robot must insert a peg into a hole. The peg has diameter 10mm and the hole has diameter 10.1mm. Design a compliance strategy.
+
+**Solution:**
+Use force control with compliance:
+1. Approach the hole with light contact force
+2. If contact force exceeds threshold, stop and search for hole
+3. Use spiral search pattern to find hole center
+4. Apply gentle downward force while maintaining contact
+5. Use force feedback to detect successful insertion
+
+### Problem 6.3: Human-Robot Collaboration
+Design a safety system for a robot working alongside humans.
+
+**Solution:**
+Multi-layer safety approach:
+1. **Physical barriers**: Light curtains, safety fences
+2. **Speed and force limiting**: Reduce speed when humans detected
+3. **Proximity sensors**: Stop robot when human within 1m
+4. **Vision system**: Detect humans and adjust behavior
+5. **Emergency stop**: Multiple emergency stop buttons
+6. **Risk assessment**: Continuous evaluation of collision risk
+

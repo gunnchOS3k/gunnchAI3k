@@ -600,3 +600,4 @@ class FriendTownSystem {
 ---
 
 **🎮 Nintendo DS Simple multiplayer is ready!** Tap two phones together and instantly join games, just like the good old days of PictoChat and Mario Kart DS! 📱✨
+
