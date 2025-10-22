@@ -314,6 +314,9 @@ export class SSJInfinity {
   async processMention(message: Message): Promise<string | null> {
     const content = message.content.toLowerCase();
     const userId = message.author.id;
+    const user = message.author.username;
+    
+    this.logger.info(`⚡ SSJ Infinity processing mention from ${user}: "${content}"`);
     
     // Check for various study-related requests
     if (this.isFlashcardRequest(content)) {
@@ -334,6 +337,25 @@ export class SSJInfinity {
     
     if (this.isLockInRequest(content)) {
       return await this.handleLockInRequest(message);
+    }
+    
+    // Check for midterm-specific requests
+    if (content.includes('midterm') || content.includes('exam')) {
+      return `⚡ **MIDTERM MODE ACTIVATED!** ⚡\n\nI'm your **study savior** for the midterm! Let me help you:\n\n🧠 **For Probability & Robotics:**\n• \`@gunnchAI3k flashcards for probability\` - Get probability flashcards\n• \`@gunnchAI3k practice test for robotics\` - Generate robotics practice test\n• \`@gunnchAI3k weekly assessment for probability\` - Check your knowledge\n• \`@gunnchAI3k lock me in for probability\` - Academic warrior mode\n\n📚 **I have access to your course materials!** I can help you master chapters 2, 3, and 4 for robotics and ace the probability midterm!\n\n**I'm here to be your north star!** ⭐ Just tell me what you need!`;
+    }
+    
+    // Check for subject-specific requests
+    if (content.includes('probability')) {
+      return `⚡ **PROBABILITY MODE ACTIVATED!** ⚡\n\nI'm your **probability study companion**! Let me help you:\n\n🧠 **Probability Study Tools:**\n• \`@gunnchAI3k flashcards for probability\` - Get probability flashcards\n• \`@gunnchAI3k practice test for probability\` - Generate probability practice test\n• \`@gunnchAI3k weekly assessment for probability\` - Check your knowledge\n• \`@gunnchAI3k lock me in for probability\` - Academic warrior mode\n\n📚 **I have access to your probability materials!** I can help you master the concepts and ace the midterm!\n\n**I'm here to be your north star!** ⭐ Just tell me what you need!`;
+    }
+    
+    if (content.includes('robotics')) {
+      return `⚡ **ROBOTICS MODE ACTIVATED!** ⚡\n\nI'm your **robotics study companion**! Let me help you:\n\n🧠 **Robotics Study Tools:**\n• \`@gunnchAI3k flashcards for robotics\` - Get robotics flashcards\n• \`@gunnchAI3k practice test for robotics\` - Generate robotics practice test\n• \`@gunnchAI3k weekly assessment for robotics\` - Check your knowledge\n• \`@gunnchAI3k lock me in for robotics\` - Academic warrior mode\n\n📚 **I have access to your robotics materials!** I can help you master chapters 2, 3, and 4 and ace the midterm!\n\n**I'm here to be your north star!** ⭐ Just tell me what you need!`;
+    }
+    
+    // Check for study-related keywords
+    if (content.includes('study') || content.includes('learn') || content.includes('help')) {
+      return `⚡ **STUDY MODE ACTIVATED!** ⚡\n\nI'm your **study savior**! Let me help you:\n\n🧠 **Study Commands:**\n• \`@gunnchAI3k flashcards\` - Get instant study cards\n• \`@gunnchAI3k practice test\` - Generate practice exams\n• \`@gunnchAI3k weekly assessment\` - Check your knowledge\n• \`@gunnchAI3k help me study\` - Get personalized study help\n• \`@gunnchAI3k lock me in for [subject]\` - Academic warrior mode\n\n📚 **I have access to your course materials!** I can help you master the content and ace the midterm!\n\n**I'm here to be your north star!** ⭐ Just tell me what you need!`;
     }
     
     // Default empathetic response

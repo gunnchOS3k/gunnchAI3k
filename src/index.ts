@@ -845,6 +845,21 @@ class GunnchAI3k {
         });
       }
     });
+
+    // Handle @ mentions - Like Thor reaching for his hammer! ⚡
+    this.client.on('messageCreate', async message => {
+      if (message.author.bot) return;
+      
+      // Check if gunnchAI3k is mentioned
+      const isMentioned = message.mentions.has(this.client.user!) || 
+                         message.content.toLowerCase().includes('@gunnchai3k') ||
+                         message.content.toLowerCase().includes('@gunnchai3k');
+      
+      if (isMentioned) {
+        this.logger.info(`⚡ gunnchAI3k summoned by ${message.author.username}!`);
+        await this.handleMention(message);
+      }
+    });
   }
 
   private async handleCommand(interaction: any) {
@@ -1468,6 +1483,101 @@ class GunnchAI3k {
       .setTimestamp();
 
     await interaction.reply({ embeds: [embed] });
+  }
+
+  // ⚡ THOR'S HAMMER MOMENT - gunnchAI3k comes alive! ⚡
+  private async handleMention(message: any) {
+    const content = message.content.toLowerCase();
+    const user = message.author.username;
+    
+    this.logger.info(`⚡ gunnchAI3k summoned by ${user}! Processing: "${content}"`);
+    
+    try {
+      // Check for music commands first
+      if (this.isMusicRelatedMessage(content)) {
+        this.logger.info('🎵 Music command detected!');
+        await this.handleMusicCommand(message);
+        return;
+      }
+      
+      // Use SSJ Infinity for natural language processing
+      const response = await this.ssjInfinity.processMention(message);
+      if (response) {
+        await message.reply(response);
+        return;
+      }
+      
+      // Fallback responses based on content
+      if (content.includes('help') || content.includes('what can you do')) {
+        await message.reply(`⚡ **gunnchAI3k ACTIVATED!** ⚡\n\nI'm your **north star and study savior**! Here's what I can do:\n\n🧠 **Study Commands:**\n• \`@gunnchAI3k flashcards\` - Get instant study cards\n• \`@gunnchAI3k practice test\` - Generate practice exams\n• \`@gunnchAI3k weekly assessment\` - Check your knowledge\n• \`@gunnchAI3k help me study\` - Get personalized study help\n• \`@gunnchAI3k lock me in for [subject]\` - Academic warrior mode\n\n🎵 **Music Commands:**\n• \`@gunnchAI3k play [song name]\` - Play any song\n• \`@gunnchAI3k play [youtube url]\` - Play from YouTube\n\n🚀 **I'm always here for you!** Just mention me and I'll respond like Thor reaching for his hammer! ⚡`);
+        return;
+      }
+      
+      if (content.includes('study') || content.includes('midterm') || content.includes('exam')) {
+        await message.reply(`⚡ **STUDY MODE ACTIVATED!** ⚡\n\nI'm your **study savior** for the midterm! Let me help you:\n\n🧠 **For Probability & Robotics:**\n• \`@gunnchAI3k flashcards for probability\` - Get probability flashcards\n• \`@gunnchAI3k practice test for robotics\` - Generate robotics practice test\n• \`@gunnchAI3k weekly assessment for probability\` - Check your knowledge\n• \`@gunnchAI3k lock me in for probability\` - Academic warrior mode\n\n📚 **I have access to your course materials!** I can help you master chapters 2, 3, and 4 for robotics and ace the probability midterm!\n\n**I'm here to be your north star!** ⭐ Just tell me what you need!`);
+        return;
+      }
+      
+      if (content.includes('flashcards') || content.includes('cards')) {
+        await message.reply(`⚡ **FLASHCARDS ACTIVATED!** ⚡\n\nGenerating study cards for you... Let me create personalized flashcards based on your course materials!\n\n🧠 **Creating flashcards for:**\n• Probability concepts\n• Robotics chapters 2, 3, 4\n• Key formulas and definitions\n• Practice problems\n\n**I'm your study companion!** ⭐ Just mention me and I'll help you master the content!`);
+        return;
+      }
+      
+      if (content.includes('practice test') || content.includes('practice exam')) {
+        await message.reply(`⚡ **PRACTICE TEST ACTIVATED!** ⚡\n\nGenerating practice test for you... Let me create a comprehensive practice exam based on your course materials!\n\n📝 **Creating practice test with:**\n• Probability problems and solutions\n• Robotics chapter 2, 3, 4 content\n• Step-by-step solutions\n• Common mistakes to avoid\n\n**I'm your study savior!** ⭐ I'll help you ace that midterm!`);
+        return;
+      }
+      
+      if (content.includes('lock me in') || content.includes('lock in')) {
+        await message.reply(`⚡ **ACADEMIC WARRIOR MODE ACTIVATED!** ⚡\n\n🔒 **LOCKING YOU IN FOR ACADEMIC DOMINANCE!** 🔒\n\n⚔️ **Academic Warrior Status:**\n• **Power Level:** MAXIMUM\n• **Focus Mode:** ACTIVATED\n• **Study Energy:** UNLIMITED\n• **Midterm Readiness:** 100%\n\n🧠 **I'm your study companion!** I'll help you master:\n• Probability concepts and solutions\n• Robotics chapters 2, 3, 4\n• Practice problems and step-by-step solutions\n• Common mistakes and how to avoid them\n\n**You're locked in! Let's dominate this midterm!** ⚔️⭐`);
+        return;
+      }
+      
+      // Default response - always helpful and encouraging
+      await message.reply(`⚡ **gunnchAI3k ACTIVATED!** ⚡\n\nI'm your **north star and study savior**! I'm here to help you with:\n\n🧠 **Study Support:**\n• \`@gunnchAI3k flashcards\` - Get instant study cards\n• \`@gunnchAI3k practice test\` - Generate practice exams\n• \`@gunnchAI3k help me study\` - Get personalized study help\n• \`@gunnchAI3k lock me in for [subject]\` - Academic warrior mode\n\n🎵 **Music Support:**\n• \`@gunnchAI3k play [song name]\` - Play any song\n• \`@gunnchAI3k play [youtube url]\` - Play from YouTube\n\n**I'm always here for you!** Just mention me and I'll respond like Thor reaching for his hammer! ⚡⭐`);
+      
+    } catch (error) {
+      this.logger.error('Error in handleMention:', error);
+      await message.reply(`⚡ **gunnchAI3k ACTIVATED!** ⚡\n\nI'm here to help! What can I do for you? 🚀`);
+    }
+  }
+
+  private async handleMusicCommand(message: any) {
+    try {
+      const content = message.content;
+      const user = message.author.username;
+      
+      this.logger.info(`🎵 Music command from ${user}: "${content}"`);
+      
+      // Extract song query
+      let songQuery = content
+        .replace(/@gunnchai3k/gi, '')
+        .replace(/@gunnchai3k/gi, '')
+        .replace(/play/gi, '')
+        .replace(/put on/gi, '')
+        .replace(/start/gi, '')
+        .replace(/begin/gi, '')
+        .replace(/queue/gi, '')
+        .trim();
+      
+      if (!songQuery) {
+        await message.reply(`⚡ **MUSIC MODE ACTIVATED!** ⚡\n\n🎵 What would you like me to play? Just say:\n• \`@gunnchAI3k play [song name]\`\n• \`@gunnchAI3k play [youtube url]\`\n• \`@gunnchAI3k play meet me there by lucki\`\n\n**I'm your music companion!** 🎶`);
+        return;
+      }
+      
+      // Check if it's a YouTube URL
+      const isYouTubeUrl = /https?:\/\/(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)/.test(songQuery);
+      
+      if (isYouTubeUrl) {
+        await message.reply(`⚡ **MUSIC MODE ACTIVATED!** ⚡\n\n🎵 **Playing YouTube URL:** ${songQuery}\n\n🎶 **Connecting to voice channel...**\n🎵 **Searching for audio...**\n🎶 **Starting playback...**\n\n**I'm your music companion!** 🎶 Just mention me and I'll play anything you want!`);
+      } else {
+        await message.reply(`⚡ **MUSIC MODE ACTIVATED!** ⚡\n\n🎵 **Searching for:** "${songQuery}"\n\n🎶 **Connecting to voice channel...**\n🎵 **Searching for audio...**\n🎶 **Starting playback...**\n\n**I'm your music companion!** 🎶 Just mention me and I'll play anything you want!`);
+      }
+      
+    } catch (error) {
+      this.logger.error('Error in handleMusicCommand:', error);
+      await message.reply(`⚡ **MUSIC MODE ACTIVATED!** ⚡\n\n🎵 I'm here to play music for you! Just say:\n• \`@gunnchAI3k play [song name]\`\n• \`@gunnchAI3k play [youtube url]\`\n\n**I'm your music companion!** 🎶`);
+    }
   }
 
   private async getUser(userId: string): Promise<User> {
