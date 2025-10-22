@@ -125,17 +125,6 @@ class GunnchAI3k {
     }
   }
 
-  async start() {
-    await this.initialize();
-    await this.registerCommands();
-    await this.setupEventHandlers();
-    await this.client.login(process.env.DISCORD_BOT_TOKEN);
-  }
-
-  private async setupEventHandlers() {
-    this.client.on('ready', () => {
-      this.logger.info(`gunnchAI3k is online! Logged in as ${this.client.user?.tag}`);
-    });
 
     this.client.on('interactionCreate', async (interaction) => {
       if (interaction.isCommand()) {
