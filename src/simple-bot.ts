@@ -2,11 +2,13 @@ import 'dotenv/config';
 import { Client, GatewayIntentBits, Message, Events } from 'discord.js';
 import { SSJInfinity } from './study/ssj-infinity';
 import { CourseMaterialIntegration } from './study/course-integration';
+import { SeasonalManager } from './seasonal/seasonal-manager';
 
 export class SimpleGunnchAI3k {
   private client: Client;
   private ssjInfinity: SSJInfinity;
   private courseIntegration: CourseMaterialIntegration;
+  private seasonalManager: SeasonalManager;
 
   constructor() {
     this.client = new Client({
@@ -20,6 +22,7 @@ export class SimpleGunnchAI3k {
 
     this.courseIntegration = new CourseMaterialIntegration();
     this.ssjInfinity = new SSJInfinity(this.courseIntegration);
+    this.seasonalManager = new SeasonalManager(this.client);
   }
 
   async start() {
@@ -127,6 +130,28 @@ export class SimpleGunnchAI3k {
         return;
       }
       
+      // Seasonal and anniversary commands
+      if (content.includes('season') || content.includes('event') || content.includes('celebration')) {
+        const status = this.seasonalManager.getMasterStatus();
+        const features = this.seasonalManager.getMasterFeatures();
+        await message.reply(`🎭 **SEASONAL STATUS** 🎭\n\n${status}\n\n🎯 **Active Features:**\n${features.map(f => `• ${f}`).join('\n')}\n\n**I'm your seasonal study companion!** 🌟`);
+        return;
+      }
+      
+      if (content.includes('anniversary') || content.includes('gunnchos') || content.includes('llc')) {
+        const anniversaryInfo = this.seasonalManager.getMasterAnniversaryInfo();
+        await message.reply(`🎉 **gunnchos LLC-S ANNIVERSARY** 🎉\n\n${anniversaryInfo}\n\n**Celebrating innovation and academic excellence!** 🌟`);
+        return;
+      }
+      
+      if (content.includes('exam') || content.includes('midterm') || content.includes('final')) {
+        const countdown = this.seasonalManager.getMasterExamCountdown();
+        const tips = this.seasonalManager.getMasterExamTips();
+        const plan = this.seasonalManager.getMasterStudyPlan();
+        await message.reply(`📚 **EXAM SEASON STATUS** 📚\n\n${countdown}\n\n📋 **Study Plan:**\n${plan}\n\n💡 **Exam Tips:**\n${tips.map(t => `• ${t}`).join('\n')}\n\n**I'm your exam season companion!** ⚡`);
+        return;
+      }
+      
       // Default response - always helpful and encouraging
       await message.reply(`⚡ **gunnchAI3k ACTIVATED!** ⚡\n\nI'm your **north star and study savior**! I'm here to help you with:\n\n🧠 **Study Support:**\n• \`@gunnchAI3k flashcards\` - Get instant study cards\n• \`@gunnchAI3k practice test\` - Generate practice exams\n• \`@gunnchAI3k help me study\` - Get personalized study help\n• \`@gunnchAI3k lock me in for [subject]\` - Academic warrior mode\n\n🎵 **Music Support:**\n• \`@gunnchAI3k play [song name]\` - Play any song\n• \`@gunnchAI3k play [youtube url]\` - Play from YouTube\n\n**I'm always here for you!** Just mention me and I'll respond like Thor reaching for his hammer! ⚡⭐`);
       
@@ -179,9 +204,13 @@ export class SimpleGunnchAI3k {
     }
   }
 
-  // 🌟 Clever and Sweet Online Greeting System
+  // 🌟 Clever and Sweet Online Greeting System with Seasonal Features
   private async sendOnlineGreeting(): Promise<void> {
-    const greetings = [
+    // Use seasonal manager for dynamic greetings
+    const seasonalGreeting = this.seasonalManager.getMasterGreeting();
+    
+    // Fallback greetings if no seasonal events
+    const fallbackGreetings = [
       `⚡ **gunnchAI3k is ONLINE!** ⚡\n\n🌟 **Your study savior has awakened!** 🌟\n\n🧠 **Ready to help with:**\n• Study sessions and flashcards\n• Practice tests and assessments\n• Academic warrior mode\n• Music for study breaks\n• Midterm preparation\n\n💫 **Just mention me and I'll respond like Thor reaching for his hammer!** ⚡\n\n*"Every great mind started with a single question. Let's make yours the next breakthrough!"* ✨`,
       
       `🚀 **gunnchAI3k is LIVE!** 🚀\n\n🎯 **Your north star and study companion is here!** 🎯\n\n📚 **I'm ready to:**\n• Guide you through probability and robotics\n• Create personalized study materials\n• Help you ace that midterm\n• Play music when you need a break\n• Be your academic hype person\n\n⚡ **Mention me anytime - I'm always listening!** ⚡\n\n*"Success is the sum of small efforts repeated day in and day out. Let's start today!"* 💪✨`,
@@ -192,6 +221,11 @@ export class SimpleGunnchAI3k {
       
       `🌅 **gunnchAI3k has RISEN!** 🌅\n\n☀️ **Like the sun breaking through clouds, your study savior is here!** ☀️\n\n🌱 **Ready to help you grow:**\n• From confused to confident\n• From struggling to succeeding\n• From stressed to stress-free\n• From lost to laser-focused\n• From average to amazing\n\n🌞 **Mention me and let's make today your breakthrough day!** 🌞\n\n*"Every sunrise is a new beginning. Every study session is a step toward your dreams!"* 🌅✨`
     ];
+    
+    // Use seasonal greeting if available, otherwise use fallback
+    const greetings = seasonalGreeting !== '🌟 **gunnchAI3k is here!** Ready to help you study! 🌟' 
+      ? [seasonalGreeting] 
+      : fallbackGreetings;
     
     // Find all guilds the bot is in
     const guilds = this.client.guilds.cache;
