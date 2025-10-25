@@ -3,14 +3,14 @@ import { Client, GatewayIntentBits, Message, Events } from 'discord.js';
 import { SSJInfinity } from './study/ssj-infinity';
 import { CourseMaterialIntegration } from './study/course-integration';
 import { SeasonalManager } from './seasonal/seasonal-manager';
-import { MusicServiceManager } from './music/music-service-manager';
+import { YouTubeMusicManager } from './music/youtube-music-manager';
 
 export class SimpleGunnchAI3k {
   private client: Client;
   private ssjInfinity: SSJInfinity;
   private courseIntegration: CourseMaterialIntegration;
   private seasonalManager: SeasonalManager;
-  private musicServiceManager: MusicServiceManager;
+  private youtubeMusicManager: YouTubeMusicManager;
 
   constructor() {
     this.client = new Client({
@@ -25,7 +25,7 @@ export class SimpleGunnchAI3k {
     this.courseIntegration = new CourseMaterialIntegration();
     this.ssjInfinity = new SSJInfinity(this.courseIntegration);
     this.seasonalManager = new SeasonalManager(this.client);
-    this.musicServiceManager = new MusicServiceManager(this.client);
+    this.youtubeMusicManager = new YouTubeMusicManager(this.client);
   }
 
   async start() {
@@ -156,11 +156,11 @@ export class SimpleGunnchAI3k {
       }
       
       // Music service commands
-      if (content.includes('music status') || content.includes('music setup') || content.includes('apple music')) {
-        const serviceStatus = this.musicServiceManager.getServiceStatus();
-        const setupInstructions = this.musicServiceManager.getSetupInstructions();
-        const recommendedService = this.musicServiceManager.getRecommendedService();
-        await message.reply(`🎵 **MUSIC SERVICE STATUS** 🎵\n\n${serviceStatus}\n\n${recommendedService}\n\n${setupInstructions}\n\n**I'm your music service manager!** 🎶`);
+      if (content.includes('music status') || content.includes('music setup') || content.includes('youtube')) {
+        const serviceStatus = this.youtubeMusicManager.getServiceStatus();
+        const cacheStats = this.youtubeMusicManager.getCacheStats();
+        const recommendedTracks = this.youtubeMusicManager.getRecommendedTracks();
+        await message.reply(`🎵 **MUSIC SERVICE STATUS** 🎵\n\n${serviceStatus}\n\n${cacheStats}\n\n🎯 **Recommended Tracks:**\n${recommendedTracks.map(track => `• ${track.title} by ${track.artist}`).join('\n')}\n\n**I'm your YouTube music manager!** 🎶`);
         return;
       }
       
@@ -197,8 +197,9 @@ export class SimpleGunnchAI3k {
         .trim();
       
       if (!songQuery) {
-        const serviceStatus = this.musicServiceManager.getServiceStatus();
-        await message.reply(`⚡ **MUSIC MODE ACTIVATED!** ⚡\n\n🎵 What would you like me to play? Just say:\n• \`@gunnchAI3k play [song name]\`\n• \`@gunnchAI3k play [youtube url]\`\n• \`@gunnchAI3k play meet me there by lucki\`\n\n${serviceStatus}\n\n**I'm your music companion!** 🎶`);
+        const serviceStatus = this.youtubeMusicManager.getServiceStatus();
+        const recommendedTracks = this.youtubeMusicManager.getRecommendedTracks();
+        await message.reply(`⚡ **MUSIC MODE ACTIVATED!** ⚡\n\n🎵 What would you like me to play? Just say:\n• \`@gunnchAI3k play [song name]\`\n• \`@gunnchAI3k play [youtube url]\`\n• \`@gunnchAI3k play meet me there by lucki\`\n\n${serviceStatus}\n\n🎯 **Recommended Tracks:**\n${recommendedTracks.map(track => `• ${track.title} by ${track.artist}`).join('\n')}\n\n**I'm your music companion!** 🎶`);
         return;
       }
       
@@ -206,13 +207,19 @@ export class SimpleGunnchAI3k {
       const isYouTubeUrl = /https?:\/\/(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)/.test(songQuery);
       
       if (isYouTubeUrl) {
-        await message.reply(`⚡ **MUSIC MODE ACTIVATED!** ⚡\n\n🎵 **Playing YouTube URL:** ${songQuery}\n\n🎶 **Connecting to voice channel...**\n🎵 **Searching for audio...**\n🎶 **Starting playback...**\n\n**I'm your music companion!** 🎶 Just mention me and I'll play anything you want!`);
+        try {
+          const playResponse = await this.youtubeMusicManager.playYouTubeUrl(songQuery);
+          await message.reply(playResponse);
+        } catch (error) {
+          console.error('YouTube URL error:', error);
+          await message.reply(`⚡ **MUSIC MODE ACTIVATED!** ⚡\n\n🎵 **Invalid YouTube URL:** ${songQuery}\n\n💡 **Try a valid YouTube URL like:**\n• \`@gunnchAI3k play https://www.youtube.com/watch?v=VIDEO_ID\`\n• \`@gunnchAI3k play https://youtu.be/VIDEO_ID\`\n\n**I'm your music companion!** 🎶`);
+        }
         return;
       }
       
-      // Search for the track using the music service manager
+      // Search for the track using YouTube
       try {
-        const tracks = await this.musicServiceManager.searchTrack(songQuery);
+        const tracks = await this.youtubeMusicManager.searchTrack(songQuery);
         
         if (tracks.length === 0) {
           await message.reply(`⚡ **MUSIC MODE ACTIVATED!** ⚡\n\n🎵 **No results found for:** "${songQuery}"\n\n💡 **Try:**\n• \`@gunnchAI3k play meet me there by lucki\`\n• \`@gunnchAI3k play juice wrld bandit\`\n• \`@gunnchAI3k play [youtube url]\`\n\n**I'm your music companion!** 🎶`);
@@ -221,11 +228,11 @@ export class SimpleGunnchAI3k {
         
         // Play the first result
         const track = tracks[0];
-        const playResponse = await this.musicServiceManager.playTrack(track);
+        const playResponse = await this.youtubeMusicManager.playTrack(track);
         await message.reply(playResponse);
         
       } catch (error) {
-        console.error('Music search error:', error);
+        console.error('YouTube search error:', error);
         await message.reply(`⚡ **MUSIC MODE ACTIVATED!** ⚡\n\n🎵 **Search failed for:** "${songQuery}"\n\n💡 **Try:**\n• \`@gunnchAI3k play meet me there by lucki\`\n• \`@gunnchAI3k play [youtube url]\`\n\n**I'm your music companion!** 🎶`);
       }
       
