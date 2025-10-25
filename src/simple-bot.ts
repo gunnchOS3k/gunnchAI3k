@@ -3,12 +3,14 @@ import { Client, GatewayIntentBits, Message, Events } from 'discord.js';
 import { SSJInfinity } from './study/ssj-infinity';
 import { CourseMaterialIntegration } from './study/course-integration';
 import { SeasonalManager } from './seasonal/seasonal-manager';
+import { MusicServiceManager } from './music/music-service-manager';
 
 export class SimpleGunnchAI3k {
   private client: Client;
   private ssjInfinity: SSJInfinity;
   private courseIntegration: CourseMaterialIntegration;
   private seasonalManager: SeasonalManager;
+  private musicServiceManager: MusicServiceManager;
 
   constructor() {
     this.client = new Client({
@@ -23,6 +25,7 @@ export class SimpleGunnchAI3k {
     this.courseIntegration = new CourseMaterialIntegration();
     this.ssjInfinity = new SSJInfinity(this.courseIntegration);
     this.seasonalManager = new SeasonalManager(this.client);
+    this.musicServiceManager = new MusicServiceManager(this.client);
   }
 
   async start() {
@@ -152,6 +155,15 @@ export class SimpleGunnchAI3k {
         return;
       }
       
+      // Music service commands
+      if (content.includes('music status') || content.includes('music setup') || content.includes('apple music')) {
+        const serviceStatus = this.musicServiceManager.getServiceStatus();
+        const setupInstructions = this.musicServiceManager.getSetupInstructions();
+        const recommendedService = this.musicServiceManager.getRecommendedService();
+        await message.reply(`🎵 **MUSIC SERVICE STATUS** 🎵\n\n${serviceStatus}\n\n${recommendedService}\n\n${setupInstructions}\n\n**I'm your music service manager!** 🎶`);
+        return;
+      }
+      
       // Default response - always helpful and encouraging
       await message.reply(`⚡ **gunnchAI3k ACTIVATED!** ⚡\n\nI'm your **north star and study savior**! I'm here to help you with:\n\n🧠 **Study Support:**\n• \`@gunnchAI3k flashcards\` - Get instant study cards\n• \`@gunnchAI3k practice test\` - Generate practice exams\n• \`@gunnchAI3k help me study\` - Get personalized study help\n• \`@gunnchAI3k lock me in for [subject]\` - Academic warrior mode\n\n🎵 **Music Support:**\n• \`@gunnchAI3k play [song name]\` - Play any song\n• \`@gunnchAI3k play [youtube url]\` - Play from YouTube\n\n**I'm always here for you!** Just mention me and I'll respond like Thor reaching for his hammer! ⚡⭐`);
       
@@ -185,7 +197,8 @@ export class SimpleGunnchAI3k {
         .trim();
       
       if (!songQuery) {
-        await message.reply(`⚡ **MUSIC MODE ACTIVATED!** ⚡\n\n🎵 What would you like me to play? Just say:\n• \`@gunnchAI3k play [song name]\`\n• \`@gunnchAI3k play [youtube url]\`\n• \`@gunnchAI3k play meet me there by lucki\`\n\n**I'm your music companion!** 🎶`);
+        const serviceStatus = this.musicServiceManager.getServiceStatus();
+        await message.reply(`⚡ **MUSIC MODE ACTIVATED!** ⚡\n\n🎵 What would you like me to play? Just say:\n• \`@gunnchAI3k play [song name]\`\n• \`@gunnchAI3k play [youtube url]\`\n• \`@gunnchAI3k play meet me there by lucki\`\n\n${serviceStatus}\n\n**I'm your music companion!** 🎶`);
         return;
       }
       
@@ -194,8 +207,26 @@ export class SimpleGunnchAI3k {
       
       if (isYouTubeUrl) {
         await message.reply(`⚡ **MUSIC MODE ACTIVATED!** ⚡\n\n🎵 **Playing YouTube URL:** ${songQuery}\n\n🎶 **Connecting to voice channel...**\n🎵 **Searching for audio...**\n🎶 **Starting playback...**\n\n**I'm your music companion!** 🎶 Just mention me and I'll play anything you want!`);
-      } else {
-        await message.reply(`⚡ **MUSIC MODE ACTIVATED!** ⚡\n\n🎵 **Searching for:** "${songQuery}"\n\n🎶 **Connecting to voice channel...**\n🎵 **Searching for audio...**\n🎶 **Starting playback...**\n\n**I'm your music companion!** 🎶 Just mention me and I'll play anything you want!`);
+        return;
+      }
+      
+      // Search for the track using the music service manager
+      try {
+        const tracks = await this.musicServiceManager.searchTrack(songQuery);
+        
+        if (tracks.length === 0) {
+          await message.reply(`⚡ **MUSIC MODE ACTIVATED!** ⚡\n\n🎵 **No results found for:** "${songQuery}"\n\n💡 **Try:**\n• \`@gunnchAI3k play meet me there by lucki\`\n• \`@gunnchAI3k play juice wrld bandit\`\n• \`@gunnchAI3k play [youtube url]\`\n\n**I'm your music companion!** 🎶`);
+          return;
+        }
+        
+        // Play the first result
+        const track = tracks[0];
+        const playResponse = await this.musicServiceManager.playTrack(track);
+        await message.reply(playResponse);
+        
+      } catch (error) {
+        console.error('Music search error:', error);
+        await message.reply(`⚡ **MUSIC MODE ACTIVATED!** ⚡\n\n🎵 **Search failed for:** "${songQuery}"\n\n💡 **Try:**\n• \`@gunnchAI3k play meet me there by lucki\`\n• \`@gunnchAI3k play [youtube url]\`\n\n**I'm your music companion!** 🎶`);
       }
       
     } catch (error) {
