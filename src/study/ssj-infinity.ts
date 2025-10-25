@@ -70,6 +70,7 @@ export class SSJInfinity {
   private lockInBot: LockInBot;
   private jarvisOmniscient: JarvisOmniscient;
   private courseIntegration: CourseMaterialIntegration;
+  private logger: any;
   
   // Course materials storage
   private courseMaterials: Map<string, CourseMaterial[]> = new Map();
@@ -133,6 +134,7 @@ export class SSJInfinity {
     this.lockInBot = new LockInBot(client);
     this.jarvisOmniscient = new JarvisOmniscient(client);
     this.courseIntegration = new CourseMaterialIntegration();
+    this.logger = console;
     
     // Initialize course materials
     this.initializeCourseMaterials();

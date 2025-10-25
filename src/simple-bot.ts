@@ -23,7 +23,7 @@ export class SimpleGunnchAI3k {
     });
 
     this.courseIntegration = new CourseMaterialIntegration();
-    this.ssjInfinity = new SSJInfinity(this.courseIntegration);
+    this.ssjInfinity = new SSJInfinity(this.client);
     this.seasonalManager = new SeasonalManager(this.client);
     this.youtubeMusicManager = new YouTubeMusicManager(this.client);
   }
