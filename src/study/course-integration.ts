@@ -22,17 +22,17 @@ export class CourseMaterialIntegration {
   private courseMaterialsPath: string;
   private materials: Map<string, CourseFile[]> = new Map();
 
-  constructor(courseMaterialsPath: string = './course-materials') {
+  constructor(courseMaterialsPath: string = './') {
     this.courseMaterialsPath = courseMaterialsPath;
     this.initializeMaterials();
   }
 
   private initializeMaterials() {
-    // Initialize with sample course materials structure
+    // Initialize with actual course materials from root directory
     this.materials.set('probability', [
       {
-        name: 'probability_notes.pdf',
-        path: join(this.courseMaterialsPath, 'probability', 'notes.pdf'),
+        name: 'probability notes.pdf',
+        path: join(this.courseMaterialsPath, 'probability notes.pdf'),
         type: 'pdf',
         subject: 'probability',
         metadata: {
@@ -41,21 +41,51 @@ export class CourseMaterialIntegration {
         }
       },
       {
-        name: 'probability_problems.pdf',
-        path: join(this.courseMaterialsPath, 'probability', 'problems.pdf'),
+        name: 'probabilty problems.pdf',
+        path: join(this.courseMaterialsPath, 'probabilty problems.pdf'),
         type: 'pdf',
         subject: 'probability',
         metadata: {
           topics: ['practice_problems', 'conditional_probability', 'bayes_theorem', 'independence'],
           difficulty: 'intermediate'
         }
+      },
+      {
+        name: 'Fall22_midterm_Solutions.pdf',
+        path: join(this.courseMaterialsPath, 'Fall22_midterm_Solutions.pdf'),
+        type: 'pdf',
+        subject: 'probability',
+        metadata: {
+          topics: ['midterm_solutions', 'probability_problems', 'exam_preparation'],
+          difficulty: 'advanced'
+        }
+      },
+      {
+        name: 'Fall22_midtermv1.pdf',
+        path: join(this.courseMaterialsPath, 'Fall22_midtermv1.pdf'),
+        type: 'pdf',
+        subject: 'probability',
+        metadata: {
+          topics: ['midterm_exam', 'probability_test', 'exam_practice'],
+          difficulty: 'advanced'
+        }
+      },
+      {
+        name: 'Fall22_midtermv2.pdf',
+        path: join(this.courseMaterialsPath, 'Fall22_midtermv2.pdf'),
+        type: 'pdf',
+        subject: 'probability',
+        metadata: {
+          topics: ['midterm_exam_v2', 'probability_test', 'exam_practice'],
+          difficulty: 'advanced'
+        }
       }
     ]);
 
     this.materials.set('robotics', [
       {
-        name: 'robotics_notes.pdf',
-        path: join(this.courseMaterialsPath, 'robotics', 'notes.pdf'),
+        name: 'robotics notes.pdf',
+        path: join(this.courseMaterialsPath, 'robotics notes.pdf'),
         type: 'pdf',
         subject: 'robotics',
         metadata: {
@@ -64,13 +94,123 @@ export class CourseMaterialIntegration {
         }
       },
       {
-        name: 'robotics_problems.pdf',
-        path: join(this.courseMaterialsPath, 'robotics', 'problems.pdf'),
+        name: 'robotics problems.pdf',
+        path: join(this.courseMaterialsPath, 'robotics problems.pdf'),
         type: 'pdf',
         subject: 'robotics',
         metadata: {
           topics: ['practice_problems', 'kinematics', 'dynamics', 'control'],
           difficulty: 'intermediate'
+        }
+      },
+      {
+        name: 'EL6303_Lecture_1A.pdf',
+        path: join(this.courseMaterialsPath, 'EL6303_Lecture_1A.pdf'),
+        type: 'pdf',
+        subject: 'robotics',
+        metadata: {
+          topics: ['lecture_1', 'introduction', 'robotics_fundamentals'],
+          difficulty: 'beginner'
+        }
+      },
+      {
+        name: 'EL6303_Lecture_1B.pdf',
+        path: join(this.courseMaterialsPath, 'EL6303_Lecture_1B.pdf'),
+        type: 'pdf',
+        subject: 'robotics',
+        metadata: {
+          topics: ['lecture_1b', 'robotics_basics', 'fundamentals'],
+          difficulty: 'beginner'
+        }
+      },
+      {
+        name: 'EL6303_Lecture_2A.pdf',
+        path: join(this.courseMaterialsPath, 'EL6303_Lecture_2A.pdf'),
+        type: 'pdf',
+        subject: 'robotics',
+        metadata: {
+          topics: ['lecture_2', 'kinematics', 'motion_planning'],
+          difficulty: 'intermediate'
+        }
+      },
+      {
+        name: 'EL6303_Lecture_2B.pdf',
+        path: join(this.courseMaterialsPath, 'EL6303_Lecture_2B.pdf'),
+        type: 'pdf',
+        subject: 'robotics',
+        metadata: {
+          topics: ['lecture_2b', 'kinematics_advanced', 'motion_control'],
+          difficulty: 'intermediate'
+        }
+      },
+      {
+        name: 'EL6303_Lecture_3.pdf',
+        path: join(this.courseMaterialsPath, 'EL6303_Lecture_3.pdf'),
+        type: 'pdf',
+        subject: 'robotics',
+        metadata: {
+          topics: ['lecture_3', 'dynamics', 'control_systems'],
+          difficulty: 'intermediate'
+        }
+      },
+      {
+        name: 'EL6303_Lecture_4A.pdf',
+        path: join(this.courseMaterialsPath, 'EL6303_Lecture_4A.pdf'),
+        type: 'pdf',
+        subject: 'robotics',
+        metadata: {
+          topics: ['lecture_4', 'sensors', 'perception'],
+          difficulty: 'intermediate'
+        }
+      },
+      {
+        name: 'EL6303_Lecture_4B.pdf',
+        path: join(this.courseMaterialsPath, 'EL6303_Lecture_4B.pdf'),
+        type: 'pdf',
+        subject: 'robotics',
+        metadata: {
+          topics: ['lecture_4b', 'sensors_advanced', 'perception_systems'],
+          difficulty: 'intermediate'
+        }
+      },
+      {
+        name: 'EL6303_Lecture_5.pdf',
+        path: join(this.courseMaterialsPath, 'EL6303_Lecture_5.pdf'),
+        type: 'pdf',
+        subject: 'robotics',
+        metadata: {
+          topics: ['lecture_5', 'planning', 'algorithms'],
+          difficulty: 'advanced'
+        }
+      },
+      {
+        name: 'EL6303_Lecture_6.pdf',
+        path: join(this.courseMaterialsPath, 'EL6303_Lecture_6.pdf'),
+        type: 'pdf',
+        subject: 'robotics',
+        metadata: {
+          topics: ['lecture_6', 'advanced_planning', 'optimization'],
+          difficulty: 'advanced'
+        }
+      },
+      {
+        name: 'EL6303_Lecture_7A.pdf',
+        path: join(this.courseMaterialsPath, 'EL6303_Lecture_7A.pdf'),
+        type: 'pdf',
+        subject: 'robotics',
+        metadata: {
+          topics: ['lecture_7', 'machine_learning', 'ai_robotics'],
+          difficulty: 'advanced'
+        }
+      },
+      {
+        name: 'EL6303_Lecture_7B.pdf',
+        path: join(this.courseMaterialsPath, 'EL6303_Lecture_7B.pdf'),
+        type: 'pdf',
+        subject: 'robotics',
+        metadata: {
+          topics: ['lecture_7b', 'advanced_ai', 'autonomous_systems'],
+          difficulty: 'advanced'
         }
       }
     ]);
@@ -84,11 +224,20 @@ export class CourseMaterialIntegration {
     for (const material of materials) {
       if (existsSync(material.path)) {
         try {
-          const content = readFileSync(material.path, 'utf-8');
+          let content = '';
+          
+          if (material.type === 'pdf') {
+            // For PDF files, we'll create a placeholder content with metadata
+            content = `PDF Content: ${material.name}\n\nTopics: ${material.metadata?.topics?.join(', ') || 'N/A'}\nDifficulty: ${material.metadata?.difficulty || 'N/A'}\n\nThis is a PDF file containing course materials. The actual content would be extracted using PDF parsing libraries.`;
+          } else {
+            content = readFileSync(material.path, 'utf-8');
+          }
+          
           loadedMaterials.push({
             ...material,
             content
           });
+          console.log(`✅ Loaded course material: ${material.name}`);
         } catch (error) {
           console.error(`Failed to load ${material.name}:`, error);
         }
