@@ -121,3 +121,4 @@ async function testThorHammer() {
 
 // Run the test
 testThorHammer().catch(console.error);
+

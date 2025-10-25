@@ -24,15 +24,15 @@ export class AcademicCalendarManager {
   }
 
   private initializeAcademicSeasons() {
-    // Fall Semester 2024
+    // Fall Semester 2024 - MIDTERM SEASON
     this.seasons.push({
       id: 'fall-2024',
-      name: '🍂 Fall Semester 2024',
-      description: 'Autumn studies with crisp focus and warm motivation!',
+      name: '🍂 Fall Semester 2024 - MIDTERM SEASON',
+      description: 'CRITICAL MIDTERM SEASON! Time to show what you\'re made of!',
       startDate: new Date('2024-08-15'),
       endDate: new Date('2024-12-15'),
       season: 'fall',
-      intensity: 'medium',
+      intensity: 'critical',
       specialFeatures: [
         '🍂 Autumn-themed study sessions',
         '📚 Back-to-school motivation',
@@ -239,3 +239,4 @@ export class AcademicCalendarManager {
     return `📚 **${season.name} Study Plan:**\n\n${plan[intensity]}`;
   }
 }
+

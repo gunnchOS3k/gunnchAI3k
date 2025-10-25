@@ -132,8 +132,8 @@ export class AnniversaryCelebrationManager {
     const now = new Date();
     const yearsSince = now.getFullYear() - this.companyFoundedDate.getFullYear();
     
-    // Check if we're in the anniversary month (October)
-    if (now.getMonth() === 9) { // October is month 9 (0-indexed)
+    // Check if we're in the anniversary month (October) and day (23rd)
+    if (now.getMonth() === 9 && now.getDate() === 23) { // October 23rd
       this.currentAnniversary = {
         id: `anniversary-${yearsSince}`,
         name: `🎉 ${yearsSince}${this.getOrdinalSuffix(yearsSince)} Anniversary Celebration`,
@@ -236,3 +236,4 @@ export class AnniversaryCelebrationManager {
     }
   }
 }
+

@@ -37,3 +37,4 @@ else
 fi
 
 echo "🎉 Setup complete! Run 'npm run dev' to start gunnchAI3k"
+

@@ -232,3 +232,4 @@ export class SeasonalManager {
     return this.anniversaryCelebration.getAnniversaryCountdown();
   }
 }
+

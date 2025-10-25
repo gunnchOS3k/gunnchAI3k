@@ -25,29 +25,35 @@ export class SeasonalEventManager {
   }
 
   private initializeEvents() {
-    // 🎃 Halloween Study Spooktacular (October 1-31)
+    // 🎃 Halloween Midterm Spooktacular (October 1-31)
     this.events.push({
       id: 'halloween-2024',
-      name: '🎃 Halloween Study Spooktacular',
-      description: 'Spooky study sessions with ghostly motivation!',
+      name: '🎃 Halloween Midterm Spooktacular',
+      description: 'SPOOKY MIDTERM SEASON! Make your grades scream with success!',
       startDate: new Date('2024-10-01'),
       endDate: new Date('2024-10-31'),
       theme: 'Halloween',
       specialFeatures: [
-        '👻 Ghostly study reminders',
-        '🎃 Pumpkin-themed flashcards',
-        '🧛 Vampire-level focus sessions',
-        '🦇 Bat-winged practice tests'
+        '👻 Ghostly midterm study reminders',
+        '🎃 Pumpkin-themed midterm flashcards',
+        '🧛 Vampire-level focus for midterms',
+        '🦇 Bat-winged midterm practice tests',
+        '🚨 CRITICAL MIDTERM MODE ACTIVATED!',
+        '⚡ Lightning-fast midterm prep sessions'
       ],
       greetings: [
-        '🎃 **BOO!** gunnchAI3k is here to spook up your study game!',
-        '👻 **Spooky Study Time!** Let\'s make your grades scream with success!',
-        '🧛 **Vampire Mode Activated!** I\'ll suck the confusion out of your studies!'
+        '🎃 **BOO!** gunnchAI3k is here to spook up your MIDTERM game!',
+        '👻 **Spooky Midterm Time!** Let\'s make your grades scream with success!',
+        '🧛 **Vampire Midterm Mode!** I\'ll suck the confusion out of your studies!',
+        '🚨 **MIDTERM HORROR SEASON!** Your grades will be legendary!',
+        '⚡ **Lightning Midterm Prep!** Strike down those exams!'
       ],
       studyMotivation: [
-        'Don\'t let your grades be a horror story!',
-        'Turn your study sessions into a thriller!',
-        'Make your midterm performance legendary!'
+        'Don\'t let your midterms be a horror story!',
+        'Turn your study sessions into a midterm thriller!',
+        'Make your midterm performance legendary!',
+        'Your midterm success will be spooktacular!',
+        'Strike fear into those exam questions!'
       ],
       musicThemes: ['spooky', 'halloween', 'thriller', 'monster mash']
     });
@@ -241,3 +247,4 @@ export class SeasonalEventManager {
       .slice(0, 3); // Next 3 events
   }
 }
+
