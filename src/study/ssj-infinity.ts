@@ -7,6 +7,8 @@ import { EmergencyStudyBot } from './emergency-bot';
 import { LockInBot } from './lock-in';
 import { JarvisOmniscient } from './jarvis-core';
 import { CourseMaterialIntegration } from './course-integration';
+import { EnhancedCourseMaterialIntegration } from './enhanced-course-integration';
+import { UserFeedbackSystem } from './user-feedback-system';
 
 export interface CourseMaterial {
   id: string;
@@ -70,6 +72,8 @@ export class SSJInfinity {
   private lockInBot: LockInBot;
   private jarvisOmniscient: JarvisOmniscient;
   private courseIntegration: CourseMaterialIntegration;
+  private enhancedCourseIntegration: EnhancedCourseMaterialIntegration;
+  private userFeedbackSystem: UserFeedbackSystem;
   private logger: any;
   
   // Course materials storage
@@ -134,6 +138,8 @@ export class SSJInfinity {
     this.lockInBot = new LockInBot(client);
     this.jarvisOmniscient = new JarvisOmniscient(client);
     this.courseIntegration = new CourseMaterialIntegration();
+    this.enhancedCourseIntegration = new EnhancedCourseMaterialIntegration();
+    this.userFeedbackSystem = new UserFeedbackSystem();
     this.logger = console;
     
     // Initialize course materials
@@ -512,6 +518,76 @@ export class SSJInfinity {
       case 'needs_work': return '⚠️';
       case 'struggling': return '🆘';
       default: return '❓';
+    }
+  }
+
+  // Enhanced course material analysis with visual recognition
+  async analyzeCourseMaterialsWithVisualRecognition(): Promise<void> {
+    try {
+      this.logger.info('🔍 Starting enhanced course material analysis...');
+      
+      const probabilityMaterials = await this.enhancedCourseIntegration.loadCourseMaterialsWithAnalysis('probability');
+      const roboticsMaterials = await this.enhancedCourseIntegration.loadCourseMaterialsWithAnalysis('robotics');
+      
+      this.logger.info(`✅ Analyzed ${probabilityMaterials.length} probability materials`);
+      this.logger.info(`✅ Analyzed ${roboticsMaterials.length} robotics materials`);
+      
+      // Check for materials that need user input
+      const uncertainMaterials = [...probabilityMaterials, ...roboticsMaterials]
+        .filter(material => material.needsUserInput);
+      
+      if (uncertainMaterials.length > 0) {
+        this.logger.info(`🤔 Found ${uncertainMaterials.length} materials needing user classification`);
+      }
+      
+    } catch (error) {
+      this.logger.error('Error in enhanced course material analysis:', error);
+    }
+  }
+
+  // Handle user feedback for course classification
+  async handleUserFeedback(message: Message): Promise<boolean> {
+    return await this.userFeedbackSystem.processUserFeedback(message);
+  }
+
+  // Enhanced flashcard generation with visual analysis
+  async generateEnhancedFlashcards(subject: string): Promise<Flashcard[]> {
+    try {
+      const flashcards = await this.enhancedCourseIntegration.generateEnhancedFlashcards(subject);
+      return flashcards.map(flashcard => ({
+        id: flashcard.id,
+        front: flashcard.front,
+        back: flashcard.back,
+        subject: flashcard.subject,
+        topic: flashcard.topic,
+        difficulty: flashcard.difficulty || 'medium',
+        mastery: 0,
+        lastReviewed: new Date()
+      }));
+    } catch (error) {
+      this.logger.error('Error generating enhanced flashcards:', error);
+      return [];
+    }
+  }
+
+  // Enhanced practice test generation with visual analysis
+  async generateEnhancedPracticeProblems(subject: string): Promise<PracticeTest[]> {
+    try {
+      const problems = await this.enhancedCourseIntegration.generateEnhancedPracticeProblems(subject);
+      return problems.map(problem => ({
+        id: problem.id,
+        question: problem.question,
+        answer: problem.answer,
+        subject: problem.subject,
+        topic: problem.topic || 'general',
+        hints: [],
+        commonMistakes: [],
+        difficulty: problem.difficulty || 'medium',
+        points: 10
+      }));
+    } catch (error) {
+      this.logger.error('Error generating enhanced practice problems:', error);
+      return [];
     }
   }
 

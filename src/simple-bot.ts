@@ -32,6 +32,10 @@ export class SimpleGunnchAI3k {
     try {
       console.log('🚀 Starting gunnchAI3k...');
       
+      // Initialize enhanced course material analysis
+      console.log('🔍 Initializing enhanced course material analysis...');
+      await this.ssjInfinity.analyzeCourseMaterialsWithVisualRecognition();
+      
       // Setup event handlers
       this.setupEventHandlers();
       
@@ -68,6 +72,13 @@ export class SimpleGunnchAI3k {
       
       if (isMentioned) {
         console.log(`⚡ gunnchAI3k summoned by ${message.author.username}!`);
+        
+        // Check for user feedback first
+        const feedbackHandled = await this.ssjInfinity.handleUserFeedback(message);
+        if (feedbackHandled) {
+          return;
+        }
+        
         await this.handleMention(message);
       }
     });
