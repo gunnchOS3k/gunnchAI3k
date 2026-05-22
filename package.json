@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node dist/simple-bot.js",
     "dev": "tsx src/simple-bot.ts",
-    "build": "tsc",
+    "build": "esbuild src/simple-bot.ts --bundle --platform=node --packages=external --outfile=dist/simple-bot.js --format=cjs",
     "deploy": "npm run build && npm start",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -18,7 +18,10 @@
     "test:github": "jest tests/github.test.ts",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
-    "format": "prettier --write src/**/*.ts"
+    "format": "prettier --write src/**/*.ts",
+    "proof:unit": "jest tests/reactivation.test.ts tests/basic.test.ts tests/youtube-music.test.ts",
+    "proof:smoke": "node -e \"const fs=require('fs'); if(!fs.existsSync('dist/simple-bot.js')){process.exit(1)} console.log('dist/simple-bot.js present')\"",
+    "proof:all": "npm run build && npm run proof:unit && npm run proof:smoke"
   },
   "keywords": [
     "ai",

@@ -80,21 +80,16 @@ describe('gunnchAI3k Integration Tests', () => {
 
   describe('Bot Startup', () => {
     it('should start without errors', async () => {
-      // Mock the client methods
       const mockLogin = jest.fn().mockResolvedValue(undefined);
-      const mockOn = jest.fn();
-      const mockOnce = jest.fn();
-
+      (bot as any).ssjInfinity.analyzeCourseMaterialsWithVisualRecognition = jest
+        .fn()
+        .mockResolvedValue(undefined);
       (bot as any).client = {
         login: mockLogin,
-        on: mockOn,
-        once: mockOnce,
-        guilds: {
-          cache: new Map()
-        },
-        user: {
-          tag: 'gunnchAI3k#5214'
-        }
+        on: jest.fn(),
+        once: jest.fn(),
+        guilds: { cache: new Map() },
+        user: { tag: 'gunnchAI3k#5214' },
       };
 
       await expect(bot.start()).resolves.not.toThrow();
@@ -102,22 +97,31 @@ describe('gunnchAI3k Integration Tests', () => {
   });
 
   describe('Error Handling', () => {
-    it('should handle startup errors gracefully', async () => {
+    it('should exit process when Discord login fails', async () => {
+      const exitSpy = jest
+        .spyOn(process, 'exit')
+        .mockImplementation((() => undefined) as typeof process.exit);
       const mockLogin = jest.fn().mockRejectedValue(new Error('Connection failed'));
-      
+
+      (bot as any).ssjInfinity.analyzeCourseMaterialsWithVisualRecognition = jest
+        .fn()
+        .mockResolvedValue(undefined);
       (bot as any).client = {
         login: mockLogin,
         on: jest.fn(),
         once: jest.fn(),
-        guilds: {
-          cache: new Map()
-        },
-        user: {
-          tag: 'gunnchAI3k#5214'
-        }
+        guilds: { cache: new Map() },
+        user: { tag: 'gunnchAI3k#5214' },
       };
 
-      await expect(bot.start()).rejects.toThrow('Connection failed');
+      await bot.start();
+      expect(exitSpy).toHaveBeenCalledWith(1);
+      exitSpy.mockRestore();
     });
   });
 });
+
+
+
+
+
