@@ -48,9 +48,16 @@ export function validateStartupEnv(
   return { ok: false, missing: [...missing], message };
 }
 
-/** Only the literal string "true" enables startup greeting. */
+/**
+ * Startup awake message: on by default unless SEND_ONLINE_GREETING=false.
+ * Sends only to DISCORD_ANNOUNCEMENT_CHANNEL_ID (no guild-wide spam).
+ */
 export function shouldSendOnlineGreeting(env: NodeJS.ProcessEnv = process.env): boolean {
-  return env.SEND_ONLINE_GREETING?.trim() === 'true';
+  const raw = env.SEND_ONLINE_GREETING?.trim().toLowerCase();
+  if (raw === 'false' || raw === '0' || raw === 'no') {
+    return false;
+  }
+  return true;
 }
 
 export function shouldAllowAutoChannelDiscovery(

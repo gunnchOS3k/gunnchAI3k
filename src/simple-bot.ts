@@ -10,6 +10,7 @@ import {
   shouldSendOnlineGreeting,
   validateStartupEnv,
 } from './config/startup';
+import { GUNNCHAI3K_ONLINE_AWAKE_MESSAGE } from './announcements/online-awake';
 import { NYU_GRADUATION_LAUNCH_MESSAGE } from './announcements/nyu-graduation-launch';
 import {
   getMissionRoadmapResponse,
@@ -81,10 +82,10 @@ export class SimpleGunnchAI3k {
       console.log('🚀 SSJ Infinity mode activated - Doctoral intelligence with comedian empathy!');
       
       if (shouldSendOnlineGreeting()) {
-        await this.sendOnlineGreeting();
+        await this.sendOnlineAwakeMessage();
       } else {
         console.log(
-          'Online greeting skipped. Set SEND_ONLINE_GREETING=true to enable.'
+          'Online awake message skipped (SEND_ONLINE_GREETING=false).'
         );
       }
     });
@@ -304,15 +305,15 @@ export class SimpleGunnchAI3k {
   }
 
   /**
-   * Controlled startup greeting — never broadcasts to every guild by default.
+   * Controlled startup awake message — one channel only unless auto-discovery enabled.
    */
-  private async sendOnlineGreeting(): Promise<void> {
+  private async sendOnlineAwakeMessage(): Promise<void> {
     const announcementChannelId = getAnnouncementChannelId();
     const useGraduationMessage =
       process.env.STARTUP_GREETING_USE_GRAD_MESSAGE?.trim() === 'true';
     const greetingText = useGraduationMessage
       ? NYU_GRADUATION_LAUNCH_MESSAGE
-      : this.seasonalManager.getMasterGreeting();
+      : GUNNCHAI3K_ONLINE_AWAKE_MESSAGE;
 
     if (announcementChannelId) {
       try {
@@ -320,7 +321,7 @@ export class SimpleGunnchAI3k {
         if (channel?.isTextBased()) {
           await channel.send(greetingText);
           console.log(
-            `📢 Sent online greeting to announcement channel ${announcementChannelId}`
+            `📢 Sent online awake message to channel ${announcementChannelId}`
           );
           return;
         }
@@ -334,7 +335,7 @@ export class SimpleGunnchAI3k {
     }
 
     console.warn(
-      'SEND_ONLINE_GREETING=true but DISCORD_ANNOUNCEMENT_CHANNEL_ID is not set. Greeting skipped.'
+      'Awake message not sent: set DISCORD_ANNOUNCEMENT_CHANNEL_ID to your announcement channel (or ALLOW_AUTO_CHANNEL_DISCOVERY=true).'
     );
 
     if (!shouldAllowAutoChannelDiscovery()) {
@@ -358,7 +359,7 @@ export class SimpleGunnchAI3k {
 
         if (generalChannel?.isTextBased()) {
           await generalChannel.send(greetingText);
-          console.log(`📢 Sent online greeting to ${guild.name} (auto-discovery)`);
+          console.log(`📢 Sent online awake message to ${guild.name} (auto-discovery)`);
         }
       } catch (error) {
         console.error(`Failed to send greeting to guild ${guildId}:`, error);

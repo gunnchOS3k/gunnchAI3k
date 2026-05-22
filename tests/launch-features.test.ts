@@ -18,12 +18,10 @@ import {
 } from '../src/launch/graduation-admin';
 
 describe('Startup greeting controls', () => {
-  it('only enables greeting when SEND_ONLINE_GREETING is exactly true', () => {
-    expect(shouldSendOnlineGreeting({})).toBe(false);
-    expect(shouldSendOnlineGreeting({ SEND_ONLINE_GREETING: 'false' })).toBe(false);
-    expect(shouldSendOnlineGreeting({ SEND_ONLINE_GREETING: '1' })).toBe(false);
-    expect(shouldSendOnlineGreeting({ SEND_ONLINE_GREETING: 'yes' })).toBe(false);
+  it('enables awake message by default unless SEND_ONLINE_GREETING=false', () => {
+    expect(shouldSendOnlineGreeting({})).toBe(true);
     expect(shouldSendOnlineGreeting({ SEND_ONLINE_GREETING: 'true' })).toBe(true);
+    expect(shouldSendOnlineGreeting({ SEND_ONLINE_GREETING: 'false' })).toBe(false);
   });
 
   it('disables auto channel discovery by default', () => {
