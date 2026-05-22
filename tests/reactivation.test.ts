@@ -70,11 +70,12 @@ describe('Startup configuration', () => {
     expect(REQUIRED_ENV_VARS).toEqual(['DISCORD_BOT_TOKEN']);
   });
 
-  it('defaults online greeting to disabled', () => {
+  it('defaults online greeting to disabled (only literal true enables)', () => {
     expect(shouldSendOnlineGreeting({})).toBe(false);
     expect(shouldSendOnlineGreeting({ SEND_ONLINE_GREETING: 'false' })).toBe(
       false
     );
+    expect(shouldSendOnlineGreeting({ SEND_ONLINE_GREETING: '1' })).toBe(false);
     expect(shouldSendOnlineGreeting({ SEND_ONLINE_GREETING: 'true' })).toBe(
       true
     );
