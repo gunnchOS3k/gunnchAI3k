@@ -19,9 +19,11 @@
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
     "format": "prettier --write src/**/*.ts",
-    "proof:unit": "jest tests/reactivation.test.ts tests/basic.test.ts tests/youtube-music.test.ts",
+    "proof:unit": "jest tests/reactivation.test.ts tests/launch-features.test.ts tests/basic.test.ts tests/youtube-music.test.ts",
     "proof:smoke": "node -e \"const fs=require('fs'); if(!fs.existsSync('dist/simple-bot.js')){process.exit(1)} console.log('dist/simple-bot.js present')\"",
-    "proof:all": "npm run build && npm run proof:unit && npm run proof:smoke"
+    "proof:all": "npm run build && npm run proof:unit && npm run proof:smoke",
+    "announce:nyu-grad:preview": "tsx scripts/announce-nyu-grad.ts preview",
+    "announce:nyu-grad:send": "tsx scripts/announce-nyu-grad.ts send"
   },
   "keywords": [
     "ai",

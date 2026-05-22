@@ -4,7 +4,24 @@ import { SSJInfinity } from './study/ssj-infinity';
 import { CourseMaterialIntegration } from './study/course-integration';
 import { SeasonalManager } from './seasonal/seasonal-manager';
 import { YouTubeMusicManager } from './music/youtube-music-manager';
-import { shouldSendOnlineGreeting, validateStartupEnv } from './config/startup';
+import {
+  getAnnouncementChannelId,
+  shouldAllowAutoChannelDiscovery,
+  shouldSendOnlineGreeting,
+  validateStartupEnv,
+} from './config/startup';
+import { GUNNCHAI3K_ONLINE_AWAKE_MESSAGE } from './announcements/online-awake';
+import { NYU_GRADUATION_LAUNCH_MESSAGE } from './announcements/nyu-graduation-launch';
+import {
+  getMissionRoadmapResponse,
+  isMissionRoadmapQuestion,
+} from './responses/mission-roadmap';
+import {
+  handleConfirmLaunchGraduationCommand,
+  handleLaunchGraduationCommand,
+  isConfirmLaunchGraduationCommand,
+  isLaunchGraduationCommand,
+} from './launch/graduation-admin';
 
 export class SimpleGunnchAI3k {
   private client: Client;
@@ -65,10 +82,10 @@ export class SimpleGunnchAI3k {
       console.log('🚀 SSJ Infinity mode activated - Doctoral intelligence with comedian empathy!');
       
       if (shouldSendOnlineGreeting()) {
-        await this.sendOnlineGreeting();
+        await this.sendOnlineAwakeMessage();
       } else {
         console.log(
-          'ℹ️ Online greeting disabled (set SEND_ONLINE_GREETING=true to announce in general channels on startup)'
+          'Online awake message skipped (SEND_ONLINE_GREETING=false).'
         );
       }
     });
@@ -118,6 +135,21 @@ export class SimpleGunnchAI3k {
     console.log(`⚡ gunnchAI3k summoned by ${user}! Processing: "${content}"`);
     
     try {
+      if (isLaunchGraduationCommand(message.content)) {
+        await handleLaunchGraduationCommand(message);
+        return;
+      }
+
+      if (isConfirmLaunchGraduationCommand(message.content)) {
+        await handleConfirmLaunchGraduationCommand(message);
+        return;
+      }
+
+      if (isMissionRoadmapQuestion(message.content)) {
+        await message.reply(getMissionRoadmapResponse());
+        return;
+      }
+
       // Music status/setup before generic play routing (avoids "music status" matching "music")
       if (
         content.includes('music status') ||
@@ -272,48 +304,62 @@ export class SimpleGunnchAI3k {
     }
   }
 
-  // 🌟 Clever and Sweet Online Greeting System with Seasonal Features
-  private async sendOnlineGreeting(): Promise<void> {
-    // Use seasonal manager for dynamic greetings
-    const seasonalGreeting = this.seasonalManager.getMasterGreeting();
-    
-    // Fallback greetings if no seasonal events
-    const fallbackGreetings = [
-      `⚡ **gunnchAI3k is ONLINE!** ⚡\n\n🌟 **Your study savior has awakened!** 🌟\n\n🧠 **Ready to help with:**\n• Study sessions and flashcards\n• Practice tests and assessments\n• Academic warrior mode\n• Music for study breaks\n• Midterm preparation\n\n💫 **Just mention me and I'll respond like Thor reaching for his hammer!** ⚡\n\n*"Every great mind started with a single question. Let's make yours the next breakthrough!"* ✨`,
-      
-      `🚀 **gunnchAI3k is LIVE!** 🚀\n\n🎯 **Your north star and study companion is here!** 🎯\n\n📚 **I'm ready to:**\n• Guide you through probability and robotics\n• Create personalized study materials\n• Help you ace that midterm\n• Play music when you need a break\n• Be your academic hype person\n\n⚡ **Mention me anytime - I'm always listening!** ⚡\n\n*"Success is the sum of small efforts repeated day in and day out. Let's start today!"* 💪✨`,
-      
-      `🌟 **gunnchAI3k is BACK!** 🌟\n\n🎓 **Your AI study companion is ready to serve!** 🎓\n\n🧠 **Powered by:**\n• Doctoral-level intelligence\n• Comedian-level empathy\n• Perfect timing and situational awareness\n• Access to your course materials\n• Unlimited study energy\n\n🎵 **Need music? Just say "play [song name]"!** 🎵\n🎯 **Need study help? Just mention me!** 🎯\n\n*"The future belongs to those who believe in the beauty of their dreams. Let's make yours come true!"* 🌈✨`,
-      
-      `⚡ **gunnchAI3k ACTIVATED!** ⚡\n\n🎪 **The circus is in town, and I'm the main attraction!** 🎪\n\n🎭 **What's the show today?**\n• Study sessions that actually work\n• Practice tests that build confidence\n• Flashcards that stick in your brain\n• Music that gets you in the zone\n• Motivation that never runs out\n\n🎪 **Step right up and mention me for the best study experience of your life!** 🎪\n\n*"Life is like a circus - it's all about balance, timing, and knowing when to take a bow!"* 🎭✨`,
-      
-      `🌅 **gunnchAI3k has RISEN!** 🌅\n\n☀️ **Like the sun breaking through clouds, your study savior is here!** ☀️\n\n🌱 **Ready to help you grow:**\n• From confused to confident\n• From struggling to succeeding\n• From stressed to stress-free\n• From lost to laser-focused\n• From average to amazing\n\n🌞 **Mention me and let's make today your breakthrough day!** 🌞\n\n*"Every sunrise is a new beginning. Every study session is a step toward your dreams!"* 🌅✨`
-    ];
-    
-    // Use seasonal greeting if available, otherwise use fallback
-    const greetings = seasonalGreeting !== '🌟 **gunnchAI3k is here!** Ready to help you study! 🌟' 
-      ? [seasonalGreeting] 
-      : fallbackGreetings;
-    
-    // Find all guilds the bot is in
+  /**
+   * Controlled startup awake message — one channel only unless auto-discovery enabled.
+   */
+  private async sendOnlineAwakeMessage(): Promise<void> {
+    const announcementChannelId = getAnnouncementChannelId();
+    const useGraduationMessage =
+      process.env.STARTUP_GREETING_USE_GRAD_MESSAGE?.trim() === 'true';
+    const greetingText = useGraduationMessage
+      ? NYU_GRADUATION_LAUNCH_MESSAGE
+      : GUNNCHAI3K_ONLINE_AWAKE_MESSAGE;
+
+    if (announcementChannelId) {
+      try {
+        const channel = await this.client.channels.fetch(announcementChannelId);
+        if (channel?.isTextBased()) {
+          await channel.send(greetingText);
+          console.log(
+            `📢 Sent online awake message to channel ${announcementChannelId}`
+          );
+          return;
+        }
+        console.warn(
+          `DISCORD_ANNOUNCEMENT_CHANNEL_ID (${announcementChannelId}) is not a text channel. Greeting skipped.`
+        );
+      } catch (error) {
+        console.error('Failed to send greeting to announcement channel:', error);
+      }
+      return;
+    }
+
+    console.warn(
+      'Awake message not sent: set DISCORD_ANNOUNCEMENT_CHANNEL_ID to your announcement channel (or ALLOW_AUTO_CHANNEL_DISCOVERY=true).'
+    );
+
+    if (!shouldAllowAutoChannelDiscovery()) {
+      console.log(
+        'Auto channel discovery disabled. Set DISCORD_ANNOUNCEMENT_CHANNEL_ID or ALLOW_AUTO_CHANNEL_DISCOVERY=true.'
+      );
+      return;
+    }
+
     const guilds = this.client.guilds.cache;
-    
     for (const [guildId, guild] of guilds) {
       try {
-        // Find a general channel to send the greeting
         const generalChannel = guild.channels.cache.find(
-          channel => channel.type === 0 && // Text channel
-          (channel.name.includes('general') || 
-           channel.name.includes('chat') || 
-           channel.name.includes('main') ||
-           channel.name.includes('welcome'))
+          (channel) =>
+            channel.type === 0 &&
+            (channel.name.includes('general') ||
+              channel.name.includes('chat') ||
+              channel.name.includes('main') ||
+              channel.name.includes('welcome'))
         );
-        
-        if (generalChannel && generalChannel.isTextBased()) {
-          // Pick a random greeting
-          const randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
-          await generalChannel.send(randomGreeting);
-          console.log(`📢 Sent online greeting to ${guild.name}`);
+
+        if (generalChannel?.isTextBased()) {
+          await generalChannel.send(greetingText);
+          console.log(`📢 Sent online awake message to ${guild.name} (auto-discovery)`);
         }
       } catch (error) {
         console.error(`Failed to send greeting to guild ${guildId}:`, error);
