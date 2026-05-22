@@ -4,6 +4,7 @@ import { SSJInfinity } from './study/ssj-infinity';
 import { CourseMaterialIntegration } from './study/course-integration';
 import { SeasonalManager } from './seasonal/seasonal-manager';
 import { YouTubeMusicManager } from './music/youtube-music-manager';
+import { shouldSendOnlineGreeting, validateStartupEnv } from './config/startup';
 
 export class SimpleGunnchAI3k {
   private client: Client;
@@ -29,6 +30,12 @@ export class SimpleGunnchAI3k {
   }
 
   async start() {
+    const validation = validateStartupEnv();
+    if (!validation.ok) {
+      console.error(validation.message);
+      process.exit(1);
+    }
+
     try {
       console.log('🚀 Starting gunnchAI3k...');
       
@@ -57,8 +64,13 @@ export class SimpleGunnchAI3k {
       console.log('🔔 Smart notifications configured');
       console.log('🚀 SSJ Infinity mode activated - Doctoral intelligence with comedian empathy!');
       
-      // Send a clever and sweet greeting to all servers
-      await this.sendOnlineGreeting();
+      if (shouldSendOnlineGreeting()) {
+        await this.sendOnlineGreeting();
+      } else {
+        console.log(
+          'ℹ️ Online greeting disabled (set SEND_ONLINE_GREETING=true to announce in general channels on startup)'
+        );
+      }
     });
 
     // Handle @ mentions - Like Thor reaching for his hammer! ⚡
@@ -66,9 +78,11 @@ export class SimpleGunnchAI3k {
       if (message.author.bot) return;
       
       // Check if gunnchAI3k is mentioned
-      const isMentioned = message.mentions.has(this.client.user!) || 
-                         message.content.toLowerCase().includes('@gunnchai3k') ||
-                         message.content.toLowerCase().includes('@gunnchai3k');
+      const isMentioned = isBotMentioned(
+        message.content,
+        this.client.user?.id,
+        [...message.mentions.users.keys()]
+      );
       
       if (isMentioned) {
         console.log(`⚡ gunnchAI3k summoned by ${message.author.username}!`);
@@ -104,7 +118,21 @@ export class SimpleGunnchAI3k {
     console.log(`⚡ gunnchAI3k summoned by ${user}! Processing: "${content}"`);
     
     try {
-      // Check for music commands first
+      // Music status/setup before generic play routing (avoids "music status" matching "music")
+      if (
+        content.includes('music status') ||
+        content.includes('music setup') ||
+        content.includes('youtube music')
+      ) {
+        const serviceStatus = this.youtubeMusicManager.getServiceStatus();
+        const cacheStats = this.youtubeMusicManager.getCacheStats();
+        const recommendedTracks = this.youtubeMusicManager.getRecommendedTracks();
+        await message.reply(
+          `🎵 **MUSIC SERVICE STATUS** 🎵\n\n${serviceStatus}\n\n${cacheStats}\n\n🎯 **Recommended Tracks:**\n${recommendedTracks.map((track) => `• ${track.title} by ${track.artist}`).join('\n')}\n\n**I'm your YouTube music manager!** 🎶`
+        );
+        return;
+      }
+
       if (this.isMusicRelatedMessage(content)) {
         console.log('🎵 Music command detected!');
         await this.handleMusicCommand(message);
@@ -163,15 +191,6 @@ export class SimpleGunnchAI3k {
         const tips = this.seasonalManager.getMasterExamTips();
         const plan = this.seasonalManager.getMasterStudyPlan();
         await message.reply(`📚 **EXAM SEASON STATUS** 📚\n\n${countdown}\n\n📋 **Study Plan:**\n${plan}\n\n💡 **Exam Tips:**\n${tips.map(t => `• ${t}`).join('\n')}\n\n**I'm your exam season companion!** ⚡`);
-        return;
-      }
-      
-      // Music service commands
-      if (content.includes('music status') || content.includes('music setup') || content.includes('youtube')) {
-        const serviceStatus = this.youtubeMusicManager.getServiceStatus();
-        const cacheStats = this.youtubeMusicManager.getCacheStats();
-        const recommendedTracks = this.youtubeMusicManager.getRecommendedTracks();
-        await message.reply(`🎵 **MUSIC SERVICE STATUS** 🎵\n\n${serviceStatus}\n\n${cacheStats}\n\n🎯 **Recommended Tracks:**\n${recommendedTracks.map(track => `• ${track.title} by ${track.artist}`).join('\n')}\n\n**I'm your YouTube music manager!** 🎶`);
         return;
       }
       
@@ -345,6 +364,21 @@ export class SimpleGunnchAI3k {
   }
 }
 
-// Start the bot
-const bot = new SimpleGunnchAI3k();
-bot.start().catch(console.error);
+export function isBotMentioned(
+  content: string,
+  botUserId: string | undefined,
+  mentionUserIds: string[]
+): boolean {
+  if (botUserId && mentionUserIds.includes(botUserId)) {
+    return true;
+  }
+  const normalized = content.toLowerCase();
+  const aliases = ['@gunnchai3k', '@gunnchai3k', '@gunnchai3k'];
+  return aliases.some((alias) => normalized.includes(alias));
+}
+
+// Start only when executed directly (not when imported by tests)
+if (require.main === module) {
+  const bot = new SimpleGunnchAI3k();
+  bot.start().catch(console.error);
+}

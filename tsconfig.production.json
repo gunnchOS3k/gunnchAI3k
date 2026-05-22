@@ -1,0 +1,39 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmitOnError": false
+  },
+  "include": [
+    "src/simple-bot.ts",
+    "src/config/**/*.ts",
+    "src/study/ssj-infinity.ts",
+    "src/study/course-integration.ts",
+    "src/study/user-feedback-system.ts",
+    "src/study/enhanced-course-integration.ts",
+    "src/study/pdf-visual-analyzer.ts",
+    "src/seasonal/**/*.ts",
+    "src/music/youtube-music-manager.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "tests",
+    "src/index.ts",
+    "src/study/bot.ts",
+    "src/study/emergency-bot.ts",
+    "src/study/lock-in.ts",
+    "src/study/jarvis-core.ts",
+    "src/study/emergency.ts",
+    "src/study/lock-in-test.ts",
+    "src/study/exporters/**",
+    "src/study/ingest.ts",
+    "src/core/**",
+    "src/music/jockie-powers.ts",
+    "src/music/dj-playlist-manager.ts",
+    "src/music/apple-music-integration.ts",
+    "src/music/spotify-integration.ts",
+    "src/discord/**",
+    "src/multiplayer/**",
+    "src/integrations/**"
+  ]
+}

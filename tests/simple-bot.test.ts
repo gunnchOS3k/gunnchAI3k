@@ -73,7 +73,7 @@ describe('SimpleGunnchAI3k', () => {
         'play some music',
         'start a song',
         'youtube music',
-        'put on some tunes'
+        'play some song'
       ];
 
       musicMessages.forEach(message => {
@@ -97,3 +97,8 @@ describe('SimpleGunnchAI3k', () => {
     });
   });
 });
+
+
+
+
+
