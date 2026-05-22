@@ -571,19 +571,19 @@ export class SSJInfinity {
   }
 
   // Enhanced practice test generation with visual analysis
-  async generateEnhancedPracticeProblems(subject: string): Promise<PracticeTest[]> {
+  async generateEnhancedPracticeProblems(subject: string): Promise<PracticeQuestion[]> {
     try {
       const problems = await this.enhancedCourseIntegration.generateEnhancedPracticeProblems(subject);
-      return problems.map(problem => ({
+      return problems.map((problem) => ({
         id: problem.id,
         question: problem.question,
-        answer: problem.answer,
-        subject: problem.subject,
-        topic: problem.topic || 'general',
-        hints: [],
-        commonMistakes: [],
+        type: 'short_answer' as const,
+        correctAnswer: problem.answer ?? problem.correctAnswer ?? '',
+        explanation: problem.explanation ?? '',
+        hints: problem.hints ?? [],
+        commonMistakes: problem.commonMistakes ?? [],
         difficulty: problem.difficulty || 'medium',
-        points: 10
+        points: problem.points ?? 10,
       }));
     } catch (error) {
       this.logger.error('Error generating enhanced practice problems:', error);
