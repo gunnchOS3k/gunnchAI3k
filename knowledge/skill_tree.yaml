@@ -1,0 +1,289 @@
+version: '1.0'
+program: WAIKE
+domains:
+  - id: digital_confidence
+    title: "Digital Confidence and Computer Basics"
+    beginner_outcomes:
+      - Explain digital confidence and computer basics concepts in plain English
+    intermediate_outcomes:
+      - Build a lab artifact in digital confidence
+    advanced_outcomes:
+      - Contribute capstone or research tied to digital_confidence
+    labs: [guided_lab_1, portfolio_lab_2]
+    capstones: [community_capstone, industry_capstone]
+    gunnchai_modes: [beginner, apprentice, industry, research]
+    waike_instructor_notes: See programs/ and docs/04_WAIKE_LEVELS_0_TO_7.md
+    repo_links:
+      - waike-research-ops
+  - id: math_foundations
+    title: "Math Foundations for Technology"
+    beginner_outcomes:
+      - Explain math foundations for technology concepts in plain English
+    intermediate_outcomes:
+      - Build a lab artifact in math foundations
+    advanced_outcomes:
+      - Contribute capstone or research tied to math_foundations
+    labs: [guided_lab_1, portfolio_lab_2]
+    capstones: [community_capstone, industry_capstone]
+    gunnchai_modes: [beginner, apprentice, industry, research]
+    waike_instructor_notes: See programs/ and docs/04_WAIKE_LEVELS_0_TO_7.md
+    repo_links:
+      - waike-research-ops
+  - id: programming
+    title: "Programming Foundations"
+    beginner_outcomes:
+      - Explain programming foundations concepts in plain English
+    intermediate_outcomes:
+      - Build a lab artifact in programming
+    advanced_outcomes:
+      - Contribute capstone or research tied to programming
+    labs: [guided_lab_1, portfolio_lab_2]
+    capstones: [community_capstone, industry_capstone]
+    gunnchai_modes: [beginner, apprentice, industry, research]
+    waike_instructor_notes: See programs/ and docs/04_WAIKE_LEVELS_0_TO_7.md
+    repo_links:
+      - waike-research-ops
+  - id: software_engineering
+    title: "Software Engineering"
+    beginner_outcomes:
+      - Explain software engineering concepts in plain English
+    intermediate_outcomes:
+      - Build a lab artifact in software engineering
+    advanced_outcomes:
+      - Contribute capstone or research tied to software_engineering
+    labs: [guided_lab_1, portfolio_lab_2]
+    capstones: [community_capstone, industry_capstone]
+    gunnchai_modes: [beginner, apprentice, industry, research]
+    waike_instructor_notes: See programs/ and docs/04_WAIKE_LEVELS_0_TO_7.md
+    repo_links:
+      - waike-research-ops
+  - id: data_databases_viz
+    title: "Data, Databases, and Visualization"
+    beginner_outcomes:
+      - Explain data, databases, and visualization concepts in plain English
+    intermediate_outcomes:
+      - Build a lab artifact in data databases viz
+    advanced_outcomes:
+      - Contribute capstone or research tied to data_databases_viz
+    labs: [guided_lab_1, portfolio_lab_2]
+    capstones: [community_capstone, industry_capstone]
+    gunnchai_modes: [beginner, apprentice, industry, research]
+    waike_instructor_notes: See programs/ and docs/04_WAIKE_LEVELS_0_TO_7.md
+    repo_links:
+      - waike-research-ops
+  - id: it_support
+    title: "IT Support and Systems Administration"
+    beginner_outcomes:
+      - Explain it support and systems administration concepts in plain English
+    intermediate_outcomes:
+      - Build a lab artifact in it support
+    advanced_outcomes:
+      - Contribute capstone or research tied to it_support
+    labs: [guided_lab_1, portfolio_lab_2]
+    capstones: [community_capstone, industry_capstone]
+    gunnchai_modes: [beginner, apprentice, industry, research]
+    waike_instructor_notes: See programs/ and docs/04_WAIKE_LEVELS_0_TO_7.md
+    repo_links:
+      - waike-research-ops
+  - id: networking
+    title: "Networking"
+    beginner_outcomes:
+      - Explain networking concepts in plain English
+    intermediate_outcomes:
+      - Build a lab artifact in networking
+    advanced_outcomes:
+      - Contribute capstone or research tied to networking
+    labs: [guided_lab_1, portfolio_lab_2]
+    capstones: [community_capstone, industry_capstone]
+    gunnchai_modes: [beginner, apprentice, industry, research]
+    waike_instructor_notes: See programs/ and docs/04_WAIKE_LEVELS_0_TO_7.md
+    repo_links:
+      - waike-research-ops
+  - id: cybersecurity
+    title: "Cybersecurity"
+    beginner_outcomes:
+      - Explain cybersecurity concepts in plain English
+    intermediate_outcomes:
+      - Build a lab artifact in cybersecurity
+    advanced_outcomes:
+      - Contribute capstone or research tied to cybersecurity
+    labs: [guided_lab_1, portfolio_lab_2]
+    capstones: [community_capstone, industry_capstone]
+    gunnchai_modes: [beginner, apprentice, industry, research]
+    waike_instructor_notes: See programs/ and docs/04_WAIKE_LEVELS_0_TO_7.md
+    repo_links:
+      - waike-research-ops
+  - id: cloud_devops
+    title: "Cloud, DevOps, and Automation"
+    beginner_outcomes:
+      - Explain cloud, devops, and automation concepts in plain English
+    intermediate_outcomes:
+      - Build a lab artifact in cloud devops
+    advanced_outcomes:
+      - Contribute capstone or research tied to cloud_devops
+    labs: [guided_lab_1, portfolio_lab_2]
+    capstones: [community_capstone, industry_capstone]
+    gunnchai_modes: [beginner, apprentice, industry, research]
+    waike_instructor_notes: See programs/ and docs/04_WAIKE_LEVELS_0_TO_7.md
+    repo_links:
+      - waike-research-ops
+  - id: hardware_embedded
+    title: "Hardware, Embedded Systems, and IoT"
+    beginner_outcomes:
+      - Explain hardware, embedded systems, and iot concepts in plain English
+    intermediate_outcomes:
+      - Build a lab artifact in hardware embedded
+    advanced_outcomes:
+      - Contribute capstone or research tied to hardware_embedded
+    labs: [guided_lab_1, portfolio_lab_2]
+    capstones: [community_capstone, industry_capstone]
+    gunnchai_modes: [beginner, apprentice, industry, research]
+    waike_instructor_notes: See programs/ and docs/04_WAIKE_LEVELS_0_TO_7.md
+    repo_links:
+      - waike-research-ops
+  - id: architecture_vlsi
+    title: "Computer Architecture, VLSI, and SoC Thinking"
+    beginner_outcomes:
+      - Explain computer architecture, vlsi, and soc thinking concepts in plain English
+    intermediate_outcomes:
+      - Build a lab artifact in architecture vlsi
+    advanced_outcomes:
+      - Contribute capstone or research tied to architecture_vlsi
+    labs: [guided_lab_1, portfolio_lab_2]
+    capstones: [community_capstone, industry_capstone]
+    gunnchai_modes: [beginner, apprentice, industry, research]
+    waike_instructor_notes: See programs/ and docs/04_WAIKE_LEVELS_0_TO_7.md
+    repo_links:
+      - waike-research-ops
+  - id: wireless_6g
+    title: "DSP, Wireless, 5G/6G, and AI-RAN"
+    beginner_outcomes:
+      - Explain dsp, wireless, 5g/6g, and ai-ran concepts in plain English
+    intermediate_outcomes:
+      - Build a lab artifact in wireless 6g
+    advanced_outcomes:
+      - Contribute capstone or research tied to wireless_6g
+    labs: [guided_lab_1, portfolio_lab_2]
+    capstones: [community_capstone, industry_capstone]
+    gunnchai_modes: [beginner, apprentice, industry, research]
+    waike_instructor_notes: See programs/ and docs/04_WAIKE_LEVELS_0_TO_7.md
+    repo_links:
+      - waike-research-ops
+      - 7gc-digital-twin
+      - spectrumx-ai-ran-gary
+  - id: ai_ml
+    title: "AI, ML, Edge AI, and Responsible AI"
+    beginner_outcomes:
+      - Explain ai, ml, edge ai, and responsible ai concepts in plain English
+    intermediate_outcomes:
+      - Build a lab artifact in ai ml
+    advanced_outcomes:
+      - Contribute capstone or research tied to ai_ml
+    labs: [guided_lab_1, portfolio_lab_2]
+    capstones: [community_capstone, industry_capstone]
+    gunnchai_modes: [beginner, apprentice, industry, research]
+    waike_instructor_notes: See programs/ and docs/04_WAIKE_LEVELS_0_TO_7.md
+    repo_links:
+      - waike-research-ops
+  - id: robotics
+    title: "Robotics, Control, and Human-Machine Interaction"
+    beginner_outcomes:
+      - Explain robotics, control, and human-machine interaction concepts in plain English
+    intermediate_outcomes:
+      - Build a lab artifact in robotics
+    advanced_outcomes:
+      - Contribute capstone or research tied to robotics
+    labs: [guided_lab_1, portfolio_lab_2]
+    capstones: [community_capstone, industry_capstone]
+    gunnchai_modes: [beginner, apprentice, industry, research]
+    waike_instructor_notes: See programs/ and docs/04_WAIKE_LEVELS_0_TO_7.md
+    repo_links:
+      - waike-research-ops
+  - id: pm_agile_lss
+    title: "Project Management, Agile, and Lean Six Sigma"
+    beginner_outcomes:
+      - Explain project management, agile, and lean six sigma concepts in plain English
+    intermediate_outcomes:
+      - Build a lab artifact in pm agile lss
+    advanced_outcomes:
+      - Contribute capstone or research tied to pm_agile_lss
+    labs: [guided_lab_1, portfolio_lab_2]
+    capstones: [community_capstone, industry_capstone]
+    gunnchai_modes: [beginner, apprentice, industry, research]
+    waike_instructor_notes: See programs/ and docs/04_WAIKE_LEVELS_0_TO_7.md
+    repo_links:
+      - waike-research-ops
+  - id: communication_ethics
+    title: "Communication, Ethics, Leadership, and Professional Development"
+    beginner_outcomes:
+      - Explain communication, ethics, leadership, and professional development concepts in plain English
+    intermediate_outcomes:
+      - Build a lab artifact in communication ethics
+    advanced_outcomes:
+      - Contribute capstone or research tied to communication_ethics
+    labs: [guided_lab_1, portfolio_lab_2]
+    capstones: [community_capstone, industry_capstone]
+    gunnchai_modes: [beginner, apprentice, industry, research]
+    waike_instructor_notes: See programs/ and docs/04_WAIKE_LEVELS_0_TO_7.md
+    repo_links:
+      - waike-research-ops
+  - id: game_dev
+    title: "Game Development and Interactive Media"
+    beginner_outcomes:
+      - Explain game development and interactive media concepts in plain English
+    intermediate_outcomes:
+      - Build a lab artifact in game dev
+    advanced_outcomes:
+      - Contribute capstone or research tied to game_dev
+    labs: [guided_lab_1, portfolio_lab_2]
+    capstones: [community_capstone, industry_capstone]
+    gunnchai_modes: [beginner, apprentice, industry, research]
+    waike_instructor_notes: See programs/ and docs/04_WAIKE_LEVELS_0_TO_7.md
+    repo_links:
+      - waike-research-ops
+  - id: gunnchos_product
+    title: "gunnchOS Product Lab"
+    beginner_outcomes:
+      - Explain gunnchos product lab concepts in plain English
+    intermediate_outcomes:
+      - Build a lab artifact in gunnchos product
+    advanced_outcomes:
+      - Contribute capstone or research tied to gunnchos_product
+    labs: [guided_lab_1, portfolio_lab_2]
+    capstones: [community_capstone, industry_capstone]
+    gunnchai_modes: [beginner, apprentice, industry, research]
+    waike_instructor_notes: See programs/ and docs/04_WAIKE_LEVELS_0_TO_7.md
+    repo_links:
+      - waike-research-ops
+      - gunnchos-device-os
+      - gunnchos-hardware-industrial-design
+  - id: seven_gc_research
+    title: "7GC Digital Twin and Research Apprenticeship"
+    beginner_outcomes:
+      - Explain 7gc digital twin and research apprenticeship concepts in plain English
+    intermediate_outcomes:
+      - Build a lab artifact in seven gc research
+    advanced_outcomes:
+      - Contribute capstone or research tied to seven_gc_research
+    labs: [guided_lab_1, portfolio_lab_2]
+    capstones: [community_capstone, industry_capstone]
+    gunnchai_modes: [beginner, apprentice, industry, research]
+    waike_instructor_notes: See programs/ and docs/04_WAIKE_LEVELS_0_TO_7.md
+    repo_links:
+      - waike-research-ops
+      - 7gc-digital-twin
+      - spectrumx-ai-ran-gary
+  - id: entrepreneurship
+    title: "Entrepreneurship, Grants, Partnerships, and Civic Tech"
+    beginner_outcomes:
+      - Explain entrepreneurship, grants, partnerships, and civic tech concepts in plain English
+    intermediate_outcomes:
+      - Build a lab artifact in entrepreneurship
+    advanced_outcomes:
+      - Contribute capstone or research tied to entrepreneurship
+    labs: [guided_lab_1, portfolio_lab_2]
+    capstones: [community_capstone, industry_capstone]
+    gunnchai_modes: [beginner, apprentice, industry, research]
+    waike_instructor_notes: See programs/ and docs/04_WAIKE_LEVELS_0_TO_7.md
+    repo_links:
+      - waike-research-ops
