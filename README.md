@@ -290,3 +290,25 @@ With doctoral-level intelligence, comedian-level empathy, and perfect timing, gu
 **🎓 Ready to transform your academic experience?** Start with a simple mention and watch gunnchAI3k become your ultimate study companion! 🚀
 
 **💪 "The ultimate AI study companion with a heart of gold and a brain of pure genius!"** ✨
+
+---
+
+## WAIKE Tutor Engine (Phase 2)
+
+gunnchAI3k is not just a chatbot. It is the **WAIKE** teaching assistant, project mentor, study coach, lab helper, Discord learning companion, and research-apprenticeship guide for the **gunnchOS3k MLV** ecosystem.
+
+- **WAIKE repo:** [waike-research-ops](https://github.com/gunnchOS3k/waike-research-ops)
+- **Slash commands:** `/waike path|lesson|lab`, `/explain`, `/quizme`, `/portfolio`, `/mentor`, `/instructor`, `/standards`, `/integrity`, `/privacy`
+- **Persona:** gunnchAI3k speaks as the bot — **not as Edmund**. Warm, culturally aware, motivational humor with serious academic grounding.
+- **Mission:** Help learners become **better than the person who built the system**.
+
+See `docs/00_GUNNCHAI3K_TUTOR_VISION.md` and `prompts/system_prompt_gunnchai3k.md`.
+
+## Discord Privacy + Intent Strategy
+
+- **Primary:** slash commands and interactions (works without broad message logging).
+- **Secondary:** @mention natural language (existing SSJ Infinity flow preserved).
+- **Message Content Intent:** documented in `docs/16_DISCORD_INTENTS_AND_PRIVACY.md` — minimize retention; server admins can run slash-only mode.
+- **No student PII** in public repos. Academic integrity guardrails refuse active exam cheating.
+
+> **Research / education prototype** — not a certified consumer product or guaranteed employment outcome.
