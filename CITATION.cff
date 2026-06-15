@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+title: "gunnchAI3k"
+message: "If you use this software, please cite it using these metadata."
+authors:
+  - family-names: Gunn
+    given-names: Edmund
+    orcid: "https://orcid.org/0000-0000-0000-0000"
+repository-code: "https://github.com/gunnchOS3k/gunnchAI3k"
+license: MIT
+keywords:
+  - gunnchOS3k
+  - digital-equity
+  - research-prototype

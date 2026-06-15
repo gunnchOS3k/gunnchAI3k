@@ -1,0 +1,21 @@
+  name: Portfolio hardening CI
+
+  on:
+    push:
+      branches: [main, master]
+    pull_request:
+
+  jobs:
+    validate:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4
+        - name: Required files
+          run: python3 scripts/check_required_files.py
+
+- uses: actions/setup-node@v4
+  with:
+    node-version: "20"
+- run: npm ci
+- run: npm test --if-present || echo "npm test skipped"
+

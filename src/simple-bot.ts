@@ -22,7 +22,6 @@ import {
   isConfirmLaunchGraduationCommand,
   isLaunchGraduationCommand,
 } from './launch/graduation-admin';
-import { WaikeDiscordInteractionRouter } from './tutor/discordInteractionRouter';
 
 export class SimpleGunnchAI3k {
   private client: Client;
@@ -30,7 +29,6 @@ export class SimpleGunnchAI3k {
   private courseIntegration: CourseMaterialIntegration;
   private seasonalManager: SeasonalManager;
   private youtubeMusicManager: YouTubeMusicManager;
-  private waikeRouter: WaikeDiscordInteractionRouter;
 
   constructor() {
     this.client = new Client({
@@ -46,7 +44,6 @@ export class SimpleGunnchAI3k {
     this.ssjInfinity = new SSJInfinity(this.client);
     this.seasonalManager = new SeasonalManager(this.client);
     this.youtubeMusicManager = new YouTubeMusicManager(this.client);
-    this.waikeRouter = new WaikeDiscordInteractionRouter();
   }
 
   async start() {
@@ -114,15 +111,6 @@ export class SimpleGunnchAI3k {
         }
         
         await this.handleMention(message);
-      }
-    });
-
-    // WAIKE tutor slash commands (non-breaking; existing mention flow unchanged)
-    this.client.on(Events.InteractionCreate, async (interaction) => {
-      try {
-        await this.waikeRouter.handle(interaction);
-      } catch (error) {
-        console.error('WAIKE tutor interaction error:', error);
       }
     });
 
