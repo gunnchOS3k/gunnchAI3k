@@ -1,0 +1,22 @@
+{
+  "source": "examples/mock_threat_report.md",
+  "mock": true,
+  "domains": [
+    "update-check.mock-c2.example",
+    "cdn-static.mock-assets.example"
+  ],
+  "ipv4": [
+    "203.0.113.45"
+  ],
+  "sha256": [
+    "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  ],
+  "filenames": [
+    "stage.ps1"
+  ],
+  "command_snippets": [
+    "powershell.exe -NoProfile -ExecutionPolicy Bypass -File stage.ps1",
+    "powershell.exe -enc SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQAIABNAGUAdABoAG8AZAApAA=="
+  ],
+  "warning": "Mock portfolio IOCs. Requires analyst validation."
+}

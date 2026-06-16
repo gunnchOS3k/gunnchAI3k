@@ -1,0 +1,11 @@
+// Mock portfolio detection. Requires analyst validation before operational use.
+rule generated_mock_detection {
+  meta:
+    description = "Auto-generated mock detection from IOC JSON"
+    mock = true
+  events:
+    $e.metadata.event_type = "DNS_QUERY"
+    $e.network.dns.question.name = /update-check\.mock-c2\.example$/ nocase
+  condition:
+    $e
+}
