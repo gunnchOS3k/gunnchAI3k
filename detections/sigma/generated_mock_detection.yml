@@ -1,0 +1,15 @@
+title: Generated Mock Detection
+id: generated-mock-gunnchai3k
+status: experimental
+description: Mock portfolio detection. Requires analyst validation before operational use.
+logsource:
+  category: process_creation
+detection:
+  selection:
+    CommandLine|contains: 'powershell.exe -NoProfile -Exe'
+    query|endswith: 'update-check.mock-c2.example'
+  condition: selection
+tags:
+  - mock
+  - generated
+level: medium

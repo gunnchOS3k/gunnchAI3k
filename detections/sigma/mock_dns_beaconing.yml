@@ -1,0 +1,17 @@
+title: Mock DNS Beaconing to mock-c2.example
+id: mock-gunnchai3k-dns-beacon
+status: experimental
+description: Mock portfolio Sigma rule — requires analyst validation before operational use.
+logsource:
+  category: dns_query
+detection:
+  selection:
+    query|endswith: 'mock-c2.example'
+  condition: selection
+tags:
+  - mock
+  - portfolio
+  - attack.command_and_control
+falsepositives:
+  - None in mock lab
+level: medium

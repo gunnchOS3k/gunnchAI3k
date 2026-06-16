@@ -1,0 +1,12 @@
+// Mock portfolio YARA-L-style rule — requires analyst validation before operational use.
+rule mock_suspicious_powershell_bypass {
+  meta:
+    description = "Mock detection for PowerShell execution policy bypass (portfolio demo)"
+    author = "gunnchAI3k Agentic SecOps Lab"
+    mock = true
+  events:
+    $e.metadata.event_type = "PROCESS_LAUNCH"
+    $e.target.process.command_line = /powershell.exe.*ExecutionPolicy\s+Bypass/i
+  condition:
+    $e
+}

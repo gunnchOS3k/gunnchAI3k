@@ -1,0 +1,12 @@
+// Mock portfolio YARA-L-style rule — requires analyst validation before operational use.
+rule mock_dns_beaconing_pattern {
+  meta:
+    description = "Mock DNS beaconing to mock-c2.example (portfolio demo)"
+    author = "gunnchAI3k Agentic SecOps Lab"
+    mock = true
+  events:
+    $e.metadata.event_type = "DNS_QUERY"
+    $e.network.dns.question.name = /mock-c2\.example$/ nocase
+  condition:
+    $e
+}
