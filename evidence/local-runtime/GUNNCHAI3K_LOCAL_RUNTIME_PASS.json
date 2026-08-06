@@ -1,0 +1,18 @@
+{
+  "status_token": "GUNNCHAI3K_LOCAL_RUNTIME_PASS",
+  "branch": "cursor/gate-1-integrated-development-platform",
+  "base": "origin/main",
+  "runtime": "gunnchAI3k-local-runtime",
+  "runtime_version": "0.1.0-gate1",
+  "processing_mode": "local-only",
+  "provider": "fixture-backed-deterministic",
+  "is_trained_llm": false,
+  "tests": "tests/local-runtime/local-runtime.smoke.test.ts",
+  "result": "12 passed",
+  "notes": [
+    "No large models downloaded",
+    "Cloud calls rejected in local-only mode",
+    "Fixture provider never labeled as trained LLM",
+    "Gate 1 work left uncommitted per instructions"
+  ]
+}

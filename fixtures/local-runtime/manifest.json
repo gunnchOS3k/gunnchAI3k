@@ -1,0 +1,14 @@
+{
+  "pack_id": "gunnchai3k-local-runtime-fixtures-v1",
+  "approved": true,
+  "description": "Approved fixture corpus for Gate 1 local-first runtime smoke path. Not a trained LLM.",
+  "documents": [
+    "documents/tutoring-basics.md",
+    "documents/code-assistance.md",
+    "documents/device-help.md",
+    "documents/accessibility.md",
+    "documents/connectivity-diagnosis.md"
+  ],
+  "provider_label": "fixture-backed-deterministic-provider",
+  "never_label_as_trained_llm": true
+}
