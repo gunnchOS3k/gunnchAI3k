@@ -1,0 +1,56 @@
+name: Gate 1 post-merge integrity
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: gate1-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  local-runtime:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Fail on master as active base/default
+        run: |
+          set -euo pipefail
+          if grep -RInE --include='*.yml' --include='*.yaml' \
+            -e 'branches:[[:space:]]*\[[^]]*master' \
+            -e 'default[_-]branch:[[:space:]]*master' \
+            -e 'base:[[:space:]]*master' \
+            .github/workflows 2>/dev/null; then
+            echo "MAIN_BRANCH_POLICY_FAIL: active master default/base ref in workflows"
+            exit 1
+          fi
+          echo "MAIN_BRANCH_POLICY_OK"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Local-runtime tests (no-network / cloud-reject / timeout / resource)
+        run: npm run test:local-runtime
+
+      - name: Upload synthetic local-runtime evidence summary
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gate1-local-runtime-summary
+          path: |
+            evidence/local-runtime/**
+          if-no-files-found: ignore
+          retention-days: 14

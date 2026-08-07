@@ -109,3 +109,7 @@ jspm_packages/
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Gate 1 runtime evidence outputs
+gate1/evidence/out/**
+!gate1/evidence/out/**/.gitkeep
