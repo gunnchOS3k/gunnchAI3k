@@ -123,3 +123,9 @@ models/local/*.gguf.*
 # Continuance IV bench raw streams (JSON evidence kept)
 evidence/system-layer/*.out.txt
 evidence/system-layer/*.err.txt
+
+# Continuance V local product-service runtime stores
+var/gunnchai/**
+!var/gunnchai/.gitkeep
+var/gunnchai-status/**
+var/gunnchai-test/**

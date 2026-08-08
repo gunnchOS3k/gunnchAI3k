@@ -34,7 +34,12 @@
     "system-layer:status": "tsx -e \"import { getPlatformStatus } from './src/system-layer'; getPlatformStatus().then(s=>{console.log(JSON.stringify({continuation:s.continuation,realLocalInference:s.realLocalInference,realInferenceCount:s.realInferenceCount,tokens:s.tokens,gaps:s.gaps,claim:s.claim},null,2)); if(s.claim.fullPlatformDigitalComplete) process.exit(2);})\"",
     "system-layer:install-path": "bash scripts/install-llamacpp-path.sh",
     "system-layer:download-gguf": "bash scripts/download-small-gguf.sh",
-    "system-layer:bench": "bash scripts/benchmark-local-inference.sh"
+    "system-layer:bench": "bash scripts/benchmark-local-inference.sh",
+    "product-service": "tsx src/system-layer/product_service/cli.ts",
+    "product-service:health": "tsx src/system-layer/product_service/cli.ts health",
+    "product-service:serve": "tsx src/system-layer/product_service/cli.ts serve --port 8791",
+    "product-service:rag-rebuild": "tsx src/system-layer/product_service/cli.ts rag-rebuild",
+    "test:product-service": "jest tests/system-layer/product_service.test.ts tests/system-layer/rag_engine.test.ts tests/system-layer/governance_runtime.test.ts --runInBand"
   },
   "keywords": [
     "ai",

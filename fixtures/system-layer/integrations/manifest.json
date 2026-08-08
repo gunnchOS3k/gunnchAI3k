@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "1.0.0",
+  "description": "Local integration subsets for Continuance V RAG — not full upstream mirrors.",
+  "corpora": [
+    {
+      "id": "device-docs",
+      "upstream": "gunnchos-device-os/docs (subset)",
+      "path": "fixtures/system-layer/integrations/device-docs"
+    },
+    {
+      "id": "waike",
+      "upstream": "waike-research-ops + knowledge/*.yaml (subset)",
+      "path": "fixtures/system-layer/integrations/waike"
+    },
+    {
+      "id": "archive",
+      "upstream": "archive-of-life-artifact-world (fixture-scale attribution)",
+      "path": "fixtures/system-layer/integrations/archive"
+    }
+  ]
+}

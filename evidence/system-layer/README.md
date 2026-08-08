@@ -1,5 +1,10 @@
-# Wave C evidence
+# System-layer evidence
 
-Foundation eval only. DIGITALLY_VALIDATED is not claimed.
+Continuance V: product service + RAG + governance. DIGITALLY_VALIDATED / FULL_GUNNCHAI3K_PLATFORM_DIGITAL_COMPLETE are not claimed.
 
-See WAVE_C_STATUS.json and docs/system-layer/WAVE_C_CAPABILITY_MATRIX.md.
+See:
+- `CONTINUATION_V_STATUS.json`
+- `PRODUCT_SERVICE_STATUS.json`
+- `CONTINUATION_IV_STATUS.json` (compat)
+- `REAL_INFERENCE_BENCH.json`
+- `docs/system-layer/CONTINUATION_V.md`
