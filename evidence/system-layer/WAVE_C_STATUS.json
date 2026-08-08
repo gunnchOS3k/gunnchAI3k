@@ -1,0 +1,119 @@
+{
+  "wave": "C",
+  "repo": "gunnchAI3k",
+  "generatedAt": "2026-08-08T00:50:15.030Z",
+  "foundationEvalToken": "GUNNCHAI3K_SYSTEM_LAYER_FOUNDATION_EVAL_PASS",
+  "digitallyValidatedClaimed": false,
+  "digitallyValidatedReason": "DIGITALLY_VALIDATED is NOT claimed. Wave C only emits GUNNCHAI3K_SYSTEM_LAYER_FOUNDATION_EVAL_PASS when structured metrics beat/complement non-AI baselines. External digital validation remains out of scope for this foundation layer.",
+  "passedCount": 6,
+  "totalCount": 6,
+  "allPassed": true,
+  "backends": [
+    {
+      "id": "deterministic",
+      "available": true,
+      "installableWithoutAdmin": true,
+      "notes": [
+        "Always available in-process.",
+        "NOT a trained LLM. Used as CI-safe Wave C foundation."
+      ],
+      "binaryOrModule": "src/system-layer/local_inference/backends/deterministic.ts"
+    },
+    {
+      "id": "llama.cpp",
+      "available": false,
+      "installableWithoutAdmin": false,
+      "notes": [
+        "No llama.cpp binary discovered (llama-cli/llama-server).",
+        "No usable GUNNCHAI3K_LOCAL_GGUF_PATH (Wave C will not download weights).",
+        "Admin install / package purchase is out of scope (PHYSICAL freeze).",
+        "When unavailable, deterministic baseline is used."
+      ],
+      "binaryOrModule": null
+    },
+    {
+      "id": "onnxruntime",
+      "available": false,
+      "installableWithoutAdmin": false,
+      "notes": [
+        "onnxruntime-node not installed. Wave C will not force install (no admin / no purchase).",
+        "When unavailable, deterministic baseline is used."
+      ],
+      "binaryOrModule": null
+    }
+  ],
+  "results": [
+    {
+      "capability": "tutoring",
+      "purpose": "Teach a concept with steps and a check question.",
+      "nonAiBaseline": "echo-glossary",
+      "metric": "tutoring_rubric_coverage",
+      "systemScore": 3,
+      "baselineScore": 1,
+      "beatsOrComplementsBaseline": true,
+      "latencyMs": 1,
+      "memoryStubBytes": 8388608,
+      "passed": true
+    },
+    {
+      "capability": "code",
+      "purpose": "Produce a typed early-return guard with language tag.",
+      "nonAiBaseline": "regex-snippet-dump",
+      "metric": "code_structure_score",
+      "systemScore": 4,
+      "baselineScore": 1,
+      "beatsOrComplementsBaseline": true,
+      "latencyMs": 1,
+      "memoryStubBytes": 8388608,
+      "passed": true
+    },
+    {
+      "capability": "device_help",
+      "purpose": "Give profile-aware local device steps without cloud upload.",
+      "nonAiBaseline": "static-faq-line",
+      "metric": "device_profile_awareness",
+      "systemScore": 4,
+      "baselineScore": 1,
+      "beatsOrComplementsBaseline": true,
+      "latencyMs": 1,
+      "memoryStubBytes": 8388608,
+      "passed": true
+    },
+    {
+      "capability": "game_coach",
+      "purpose": "Provide state analysis plus actionable tips.",
+      "nonAiBaseline": "generic-try-harder",
+      "metric": "game_coach_actionability",
+      "systemScore": 4,
+      "baselineScore": 1,
+      "beatsOrComplementsBaseline": true,
+      "latencyMs": 1,
+      "memoryStubBytes": 8388608,
+      "passed": true
+    },
+    {
+      "capability": "network",
+      "purpose": "Local connectivity diagnosis checklist without outbound calls.",
+      "nonAiBaseline": "check-wifi-string",
+      "metric": "network_checklist_completeness",
+      "systemScore": 4,
+      "baselineScore": 1,
+      "beatsOrComplementsBaseline": true,
+      "latencyMs": 1,
+      "memoryStubBytes": 8388608,
+      "passed": true
+    },
+    {
+      "capability": "rag",
+      "purpose": "Rank local documents and attribute sources.",
+      "nonAiBaseline": "first-doc-dump",
+      "metric": "rag_source_attribution",
+      "systemScore": 5,
+      "baselineScore": 0,
+      "beatsOrComplementsBaseline": true,
+      "latencyMs": 10,
+      "memoryStubBytes": 8388608,
+      "passed": true
+    }
+  ]
+}
