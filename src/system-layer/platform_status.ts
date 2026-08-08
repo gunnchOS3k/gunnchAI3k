@@ -1,5 +1,5 @@
 /**
- * Honest platform completeness status for Continuance IV.
+ * Honest platform completeness status for Continuance V.
  * Never claims FULL_GUNNCHAI3K_PLATFORM_DIGITAL_COMPLETE unless truly integrated.
  */
 
@@ -13,10 +13,18 @@ import {
   REAL_LOCAL_INFERENCE_TOKEN,
   runEvaluationHarness,
 } from './evaluation/harness';
+import { GunnchAIProductService } from './product_service/service';
+import { PRODUCT_SERVICE_TOKEN } from './product_service/types';
 
 export async function getPlatformStatus(cwd = process.cwd()) {
   const probe = new LlamaCppBackend(cwd).probe();
   const evalReport = await runEvaluationHarness(undefined, cwd);
+  const product = new GunnchAIProductService(cwd, {
+    varRoot: `${cwd}/var/gunnchai-status`,
+  });
+  const reqNodes = product.requirementStatus();
+  const runtimeNodes = reqNodes.filter((n) => n.status === 'RUNTIME');
+  const schemaNodes = reqNodes.filter((n) => n.status === 'SCHEMA_ONLY');
 
   const gaps: string[] = [];
   if (!probe.canRunRealInference) {
@@ -32,7 +40,7 @@ export async function getPlatformStatus(cwd = process.cwd()) {
     if (!r.passed) gaps.push(`capability_fail:${r.spec.capability}`);
   }
   gaps.push(
-    'Discord/product surface not fully wired to Continuance IV capability pack.',
+    'Discord/product surface not fully wired as end-user client (HTTP product service is local-only).',
   );
   gaps.push(
     'Cloud path remains policy stub only (no production keys).',
@@ -41,11 +49,18 @@ export async function getPlatformStatus(cwd = process.cwd()) {
     'DIGITALLY_VALIDATED and FULL_GUNNCHAI3K_PLATFORM_DIGITAL_COMPLETE not earned.',
   );
 
-  const fullComplete = false; // Explicit: not claimed in Continuance IV
+  const fullComplete = false;
 
   return {
-    continuation: 'IV' as const,
+    continuation: 'V' as const,
     selectedArchitecture: 'llama.cpp' as const,
+    productService: {
+      name: product.name,
+      version: product.version,
+      token: PRODUCT_SERVICE_TOKEN,
+      routes: product.listRoutes().length,
+      rag: product.rag.stats(),
+    },
     realLocalInference: probe.canRunRealInference,
     realInferenceCount: evalReport.realInferenceCount,
     metricsMode: probe.metricsMode,
@@ -63,7 +78,14 @@ export async function getPlatformStatus(cwd = process.cwd()) {
       foundationToken: evalReport.foundationToken,
       realLocalInferenceToken: evalReport.realLocalInferenceToken,
     },
+    requirements: {
+      runtimeCount: runtimeNodes.length,
+      schemaOnlyCount: schemaNodes.length,
+      schemaOnlyIds: schemaNodes.map((n) => n.id),
+      runtimeIds: runtimeNodes.map((n) => n.id),
+    },
     tokens: {
+      [PRODUCT_SERVICE_TOKEN]: true,
       [CAPABILITY_EVAL_TOKEN]: evalReport.token === CAPABILITY_EVAL_TOKEN,
       [FOUNDATION_EVAL_TOKEN]:
         evalReport.foundationToken === FOUNDATION_EVAL_TOKEN,

@@ -238,7 +238,7 @@ export async function runEvaluationHarness(
   fs.mkdirSync(evidenceDir, { recursive: true });
   const serializable = {
     generatedAt: new Date().toISOString(),
-    continuation: 'IV',
+    continuation: 'V',
     ...report,
     results: report.results.map((r) => ({
       capability: r.spec.capability,
@@ -265,10 +265,14 @@ export async function runEvaluationHarness(
     })),
   };
   fs.writeFileSync(
+    path.join(evidenceDir, 'CONTINUATION_V_STATUS.json'),
+    JSON.stringify(serializable, null, 2),
+  );
+  // Keep IV/III filenames updated for back-compat readers
+  fs.writeFileSync(
     path.join(evidenceDir, 'CONTINUATION_IV_STATUS.json'),
     JSON.stringify(serializable, null, 2),
   );
-  // Keep III filename updated for back-compat readers
   fs.writeFileSync(
     path.join(evidenceDir, 'CONTINUATION_III_STATUS.json'),
     JSON.stringify(serializable, null, 2),

@@ -1,58 +1,32 @@
 /**
- * Continuance IV local RAG — fixture + system-layer corpus retrieval.
- * Deterministic ranking; optional LLM synthesis happens in the runtime adapter.
+ * Continuance V local RAG — thin re-export over LocalRagEngine.
+ * Keeps Continuance IV import paths stable.
  */
 
-import * as fs from 'node:fs';
-import * as path from 'node:path';
+export {
+  LocalRagEngine,
+  loadLocalRagCorpus,
+  retrieveForQuery,
+  type RagChunk,
+  type RagDocumentMeta,
+  type RagSearchHit,
+  type RagAttribution,
+  type RagIndexStats,
+} from './product_service/rag_engine';
 
+import type { RagDocumentMeta } from './product_service/rag_engine';
+import { LocalRagEngine } from './product_service/rag_engine';
+
+/** @deprecated Prefer RagDocumentMeta / LocalRagEngine */
 export interface RagDocument {
   id: string;
   text: string;
   sourcePath: string;
 }
 
+/** @deprecated Prefer RagSearchHit */
 export interface RagHit extends RagDocument {
   score: number;
-}
-
-export function loadLocalRagCorpus(cwd = process.cwd()): RagDocument[] {
-  const docs: RagDocument[] = [];
-  const roots = [
-    path.join(cwd, 'fixtures', 'system-layer', 'rag-corpus'),
-    path.join(cwd, 'fixtures', 'local-runtime'),
-  ];
-
-  for (const root of roots) {
-    if (!fs.existsSync(root)) continue;
-    walkTextFiles(root, (abs, rel) => {
-      const text = fs.readFileSync(abs, 'utf8');
-      if (!text.trim()) return;
-      docs.push({
-        id: rel.replace(/\\/g, '/'),
-        text: text.slice(0, 4000),
-        sourcePath: abs,
-      });
-    });
-  }
-  return docs;
-}
-
-function walkTextFiles(
-  root: string,
-  visit: (abs: string, rel: string) => void,
-  base = root,
-): void {
-  for (const entry of fs.readdirSync(root, { withFileTypes: true })) {
-    if (entry.name.startsWith('.')) continue;
-    const abs = path.join(root, entry.name);
-    if (entry.isDirectory()) {
-      walkTextFiles(abs, visit, base);
-      continue;
-    }
-    if (!/\.(md|txt|json|jsonl)$/i.test(entry.name)) continue;
-    visit(abs, path.relative(base, abs));
-  }
 }
 
 export function rankLocalDocuments(
@@ -71,7 +45,6 @@ export function rankLocalDocuments(
       for (const t of terms) {
         if (hay.includes(t)) score += 1;
       }
-      // Prefer tutoring/scientific notes slightly when query mentions algorithms
       if (/binary|search|sort|complexity/i.test(query) && /tutor|binary|search/i.test(hay)) {
         score += 1;
       }
@@ -82,10 +55,8 @@ export function rankLocalDocuments(
     .slice(0, limit);
 }
 
-export function retrieveForQuery(
-  query: string,
-  cwd = process.cwd(),
-  limit = 5,
-): RagHit[] {
-  return rankLocalDocuments(query, loadLocalRagCorpus(cwd), limit);
+export function ensureDefaultRagIndex(cwd = process.cwd()): RagDocumentMeta[] {
+  const engine = new LocalRagEngine(cwd);
+  if (engine.stats().documents === 0) engine.rebuild();
+  return engine.listDocuments();
 }

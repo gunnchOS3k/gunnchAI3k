@@ -1,0 +1,252 @@
+{
+  "generatedAt": "2026-08-08T20:20:36.449Z",
+  "continuation": "V",
+  "productService": {
+    "name": "gunnchAI3k-product-service",
+    "version": "0.5.0-continuation-v",
+    "token": "GUNNCHAI_PRODUCT_SERVICE_LOCAL_PASS",
+    "routes": 30,
+    "rag": {
+      "documents": 17,
+      "chunks": 37,
+      "corpora": {
+        "archive": 1,
+        "device": 1,
+        "local-runtime": 5,
+        "system": 2,
+        "waike": 8
+      },
+      "rebuiltAt": "2026-08-08T20:19:25.977Z",
+      "indexPath": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/var/gunnchai-status/rag/index.json"
+    }
+  },
+  "tokens": {
+    "GUNNCHAI_PRODUCT_SERVICE_LOCAL_PASS": true,
+    "GUNNCHAI3K_LOCAL_RUNTIME_CAPABILITY_EVAL_PASS": true,
+    "GUNNCHAI3K_SYSTEM_LAYER_FOUNDATION_EVAL_PASS": true,
+    "GUNNCHAI_REAL_LOCAL_INFERENCE_PASS": true,
+    "DIGITALLY_VALIDATED": false,
+    "FULL_GUNNCHAI3K_PLATFORM_DIGITAL_COMPLETE": false
+  },
+  "requirements": {
+    "runtimeCount": 38,
+    "schemaOnlyCount": 2,
+    "schemaOnlyIds": [
+      "FULL_GUNNCHAI3K_PLATFORM_DIGITAL_COMPLETE",
+      "DIGITALLY_VALIDATED"
+    ],
+    "runtimeIds": [
+      "AI-CORE-001",
+      "AI-CORE-002",
+      "AI-CORE-003",
+      "AI-CORE-004",
+      "AI-CORE-005",
+      "AI-CORE-006",
+      "AI-CORE-007",
+      "AI-CORE-008",
+      "AI-CORE-009",
+      "AI-CORE-010",
+      "AI-CORE-011",
+      "AI-CORE-012",
+      "AI-CORE-013",
+      "AI-CORE-014",
+      "AI-CORE-015",
+      "AI-GOV-001",
+      "AI-GOV-002",
+      "AI-GOV-003",
+      "AI-GOV-004",
+      "AI-GOV-005",
+      "AI-GOV-006",
+      "AI-GOV-007",
+      "AI-GOV-008",
+      "AI-GOV-009",
+      "AI-GOV-010",
+      "AI-GOV-011",
+      "AI-GOV-012",
+      "AI-LOCAL-001",
+      "AI-LOCAL-002",
+      "AI-LOCAL-003",
+      "AI-LOCAL-004",
+      "AI-LOCAL-005",
+      "AI-LOCAL-006",
+      "AI-LOCAL-007",
+      "AI-LOCAL-008",
+      "AI-LOCAL-009",
+      "AI-LOCAL-010",
+      "AI-LOCAL-011"
+    ]
+  },
+  "routes": [
+    {
+      "route": "tutoring",
+      "method": "GET",
+      "path": "/health"
+    },
+    {
+      "route": "tutoring",
+      "method": "POST",
+      "path": "/v1/assist/tutoring"
+    },
+    {
+      "route": "code",
+      "method": "POST",
+      "path": "/v1/assist/code"
+    },
+    {
+      "route": "device_help",
+      "method": "POST",
+      "path": "/v1/assist/device_help"
+    },
+    {
+      "route": "a11y",
+      "method": "POST",
+      "path": "/v1/assist/a11y"
+    },
+    {
+      "route": "game_coach",
+      "method": "POST",
+      "path": "/v1/assist/game_coach"
+    },
+    {
+      "route": "network",
+      "method": "POST",
+      "path": "/v1/assist/network"
+    },
+    {
+      "route": "rag",
+      "method": "POST",
+      "path": "/v1/assist/rag"
+    },
+    {
+      "route": "scientific",
+      "method": "POST",
+      "path": "/v1/assist/scientific"
+    },
+    {
+      "route": "translation",
+      "method": "POST",
+      "path": "/v1/assist/translation"
+    },
+    {
+      "route": "workflow",
+      "method": "POST",
+      "path": "/v1/assist/workflow"
+    },
+    {
+      "route": "security",
+      "method": "POST",
+      "path": "/v1/assist/security"
+    },
+    {
+      "route": "continuity",
+      "method": "POST",
+      "path": "/v1/assist/continuity"
+    },
+    {
+      "route": "content_adaptation",
+      "method": "POST",
+      "path": "/v1/assist/content_adaptation"
+    },
+    {
+      "route": "connection_path",
+      "method": "POST",
+      "path": "/v1/assist/connection_path"
+    },
+    {
+      "route": "rag",
+      "method": "POST",
+      "path": "/v1/rag/ingest"
+    },
+    {
+      "route": "rag",
+      "method": "POST",
+      "path": "/v1/rag/chunk"
+    },
+    {
+      "route": "rag",
+      "method": "POST",
+      "path": "/v1/rag/index"
+    },
+    {
+      "route": "rag",
+      "method": "POST",
+      "path": "/v1/rag/search"
+    },
+    {
+      "route": "rag",
+      "method": "POST",
+      "path": "/v1/rag/attribution"
+    },
+    {
+      "route": "rag",
+      "method": "POST",
+      "path": "/v1/rag/delete"
+    },
+    {
+      "route": "rag",
+      "method": "POST",
+      "path": "/v1/rag/rebuild"
+    },
+    {
+      "route": "continuity",
+      "method": "GET",
+      "path": "/v1/continuity/sessions"
+    },
+    {
+      "route": "continuity",
+      "method": "POST",
+      "path": "/v1/continuity/export"
+    },
+    {
+      "route": "continuity",
+      "method": "POST",
+      "path": "/v1/continuity/import"
+    },
+    {
+      "route": "workflow",
+      "method": "GET",
+      "path": "/v1/governance/status"
+    },
+    {
+      "route": "workflow",
+      "method": "POST",
+      "path": "/v1/governance/consent"
+    },
+    {
+      "route": "workflow",
+      "method": "POST",
+      "path": "/v1/governance/override"
+    },
+    {
+      "route": "workflow",
+      "method": "POST",
+      "path": "/v1/governance/rollback"
+    },
+    {
+      "route": "workflow",
+      "method": "GET",
+      "path": "/v1/governance/monitor"
+    }
+  ],
+  "remainingSchemaNodes": [
+    "FULL_GUNNCHAI3K_PLATFORM_DIGITAL_COMPLETE",
+    "DIGITALLY_VALIDATED"
+  ],
+  "claim": {
+    "fullPlatformDigitalComplete": false,
+    "reason": "FULL_GUNNCHAI3K_PLATFORM_DIGITAL_COMPLETE is NOT claimed. llama.cpp real inference=true; realInferenceCount=6; offline + hybrid local paths cover capabilities, but full digital platform integration (Discord/product surface + cloud) is incomplete."
+  },
+  "gaps": [
+    "Discord/product surface not fully wired as end-user client (HTTP product service is local-only).",
+    "Cloud path remains policy stub only (no production keys).",
+    "DIGITALLY_VALIDATED and FULL_GUNNCHAI3K_PLATFORM_DIGITAL_COMPLETE not earned."
+  ],
+  "eval": {
+    "allPassed": true,
+    "passedCount": 11,
+    "totalCount": 11,
+    "capabilityToken": "GUNNCHAI3K_LOCAL_RUNTIME_CAPABILITY_EVAL_PASS",
+    "foundationToken": "GUNNCHAI3K_SYSTEM_LAYER_FOUNDATION_EVAL_PASS",
+    "realLocalInferenceToken": "GUNNCHAI_REAL_LOCAL_INFERENCE_PASS"
+  }
+}
