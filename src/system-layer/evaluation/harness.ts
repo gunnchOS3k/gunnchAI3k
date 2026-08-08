@@ -1,7 +1,8 @@
 /**
- * Continuance III evaluation harness.
+ * Continuance IV evaluation harness.
  * Per capability records: baseline, dataset, quality metric, latency, memory,
- * failure, privacy, fallback, model version.
+ * failure, privacy, fallback, model version, mechanism, real-inference metrics.
+ * Emits GUNNCHAI_REAL_LOCAL_INFERENCE_PASS when real local inference + evals pass.
  * Does NOT emit FULL_GUNNCHAI3K_PLATFORM_DIGITAL_COMPLETE or DIGITALLY_VALIDATED.
  */
 
@@ -18,13 +19,20 @@ import {
 import { LocalInferenceRuntimeAdapter } from '../local_inference/runtime_adapter';
 import { LlamaCppBackend } from '../local_inference/backends/llamacpp';
 import { routeTask } from '../task_router';
+import { mechanismFor } from '../capability_mechanisms';
 import type { DeviceProfileId, SystemCapability } from '../model_registry';
 import { evaluateCloudDisclosure } from '../privacy_policy';
 
 export const FOUNDATION_EVAL_TOKEN = 'GUNNCHAI3K_SYSTEM_LAYER_FOUNDATION_EVAL_PASS';
 export const CAPABILITY_EVAL_TOKEN = 'GUNNCHAI3K_LOCAL_RUNTIME_CAPABILITY_EVAL_PASS';
+export const REAL_LOCAL_INFERENCE_TOKEN = 'GUNNCHAI_REAL_LOCAL_INFERENCE_PASS';
 export const DIGITALLY_VALIDATED_TOKEN = 'DIGITALLY_VALIDATED';
 export const FULL_PLATFORM_TOKEN = 'FULL_GUNNCHAI3K_PLATFORM_DIGITAL_COMPLETE';
+
+/** Measured real-inference memory budget (peak RSS). */
+const MEASURED_MEMORY_BUDGET_BYTES = 512 * 1024 * 1024;
+/** Cold-start tolerant latency for small GGUF on constrained hosts. */
+const MEASURED_LATENCY_BUDGET_MS = 60_000;
 
 export interface CapabilityEvalResult {
   spec: CapabilityEvalSpec;
@@ -43,13 +51,16 @@ export interface CapabilityEvalResult {
   modelVersion: string;
   metricsMode: 'measured' | 'placeholder_no_model';
   realInference: boolean;
+  mechanism: string;
   passed: boolean;
   sampleTextPreview: string;
+  llamaMetrics?: unknown;
 }
 
 export interface HarnessReport {
   token: string | null;
   foundationToken: string | null;
+  realLocalInferenceToken: string | null;
   digitallyValidatedClaimed: false;
   fullPlatformCompleteClaimed: false;
   digitallyValidatedReason: string;
@@ -60,6 +71,7 @@ export interface HarnessReport {
   passedCount: number;
   totalCount: number;
   allPassed: boolean;
+  realInferenceCount: number;
 }
 
 const PROBES: Record<SystemCapability, { query: string; device: DeviceProfileId }> = {
@@ -95,6 +107,7 @@ export async function runEvaluationHarness(
 
   for (const spec of CAPABILITY_SPECS) {
     const probe = PROBES[spec.capability];
+    const mech = mechanismFor(spec.capability);
     const route = routeTask({
       capability: spec.capability,
       query: probe.query,
@@ -125,9 +138,21 @@ export async function runEvaluationHarness(
       baseline,
     );
 
-    const withinLatencyBudget = inference.latencyMs <= spec.latencyBudgetMs;
-    const withinMemoryBudget =
-      inference.memoryStubBytes <= spec.memoryStubBudgetBytes;
+    const metricsMode =
+      inference.structured.metricsMode === 'measured'
+        ? 'measured'
+        : 'placeholder_no_model';
+    const realInference = inference.structured.realInference === true;
+
+    const latencyBudget = realInference
+      ? Math.max(spec.latencyBudgetMs, MEASURED_LATENCY_BUDGET_MS)
+      : spec.latencyBudgetMs;
+    const memoryBudget = realInference
+      ? Math.max(spec.memoryStubBudgetBytes, MEASURED_MEMORY_BUDGET_BYTES)
+      : spec.memoryStubBudgetBytes;
+
+    const withinLatencyBudget = inference.latencyMs <= latencyBudget;
+    const withinMemoryBudget = inference.memoryStubBytes <= memoryBudget;
 
     const failureObserved =
       inference.fallbackUsed && inference.structured.failure
@@ -135,12 +160,6 @@ export async function runEvaluationHarness(
         : metric.metricName === 'insufficient_text_only'
           ? 'text_only'
           : null;
-
-    const metricsMode =
-      inference.structured.metricsMode === 'measured'
-        ? 'measured'
-        : 'placeholder_no_model';
-    const realInference = inference.structured.realInference === true;
 
     const passed =
       metric.structuredEvaluation &&
@@ -166,8 +185,10 @@ export async function runEvaluationHarness(
       modelVersion: spec.modelVersion,
       metricsMode,
       realInference,
+      mechanism: mech.mechanism,
       passed,
       sampleTextPreview: inference.text.slice(0, 180),
+      llamaMetrics: inference.structured.llamaMetrics,
     });
   }
 
@@ -176,60 +197,81 @@ export async function runEvaluationHarness(
   const foundationPassed = results
     .filter((r) => FOUNDATION_CAPS.includes(r.spec.capability))
     .every((r) => r.passed);
+  const realInferenceCount = results.filter((r) => r.realInference).length;
+  const realPassEligible =
+    llamaProbe.canRunRealInference &&
+    realInferenceCount >= 1 &&
+    allPassed &&
+    results.some(
+      (r) =>
+        r.realInference &&
+        r.llamaMetrics &&
+        typeof r.llamaMetrics === 'object',
+    );
 
   const report: HarnessReport = {
     token: allPassed ? CAPABILITY_EVAL_TOKEN : null,
     foundationToken: foundationPassed ? FOUNDATION_EVAL_TOKEN : null,
+    realLocalInferenceToken: realPassEligible
+      ? REAL_LOCAL_INFERENCE_TOKEN
+      : null,
     digitallyValidatedClaimed: false,
     fullPlatformCompleteClaimed: false,
     digitallyValidatedReason:
       `${DIGITALLY_VALIDATED_TOKEN} is NOT claimed. ` +
-      `Structured local capability eval may emit ${CAPABILITY_EVAL_TOKEN} / ${FOUNDATION_EVAL_TOKEN} only.`,
+      `Structured local capability eval may emit ${CAPABILITY_EVAL_TOKEN} / ${FOUNDATION_EVAL_TOKEN} / ${REAL_LOCAL_INFERENCE_TOKEN} only.`,
     fullPlatformReason:
       `${FULL_PLATFORM_TOKEN} is NOT claimed. ` +
       `llama.cpp real inference=${llamaProbe.canRunRealInference}; ` +
-      `offline deterministic essentials cover capabilities, but full digital platform integration is incomplete.`,
+      `realInferenceCount=${realInferenceCount}; ` +
+      `offline + hybrid local paths cover capabilities, but full digital platform integration (Discord/product surface + cloud) is incomplete.`,
     selectedArchitecture: 'llama.cpp',
     llamaProbe,
     results,
     passedCount,
     totalCount: results.length,
     allPassed,
+    realInferenceCount,
   };
 
   const evidenceDir = path.join(cwd, 'evidence', 'system-layer');
   fs.mkdirSync(evidenceDir, { recursive: true });
+  const serializable = {
+    generatedAt: new Date().toISOString(),
+    continuation: 'IV',
+    ...report,
+    results: report.results.map((r) => ({
+      capability: r.spec.capability,
+      purpose: r.spec.purpose,
+      mechanism: r.mechanism,
+      nonAiBaseline: r.spec.nonAiBaselineName,
+      datasetId: r.spec.datasetId,
+      datasetSize: r.spec.datasetSize,
+      metric: r.metric.metricName,
+      systemScore: r.metric.systemScore,
+      baselineScore: r.metric.baselineScore,
+      beatsOrComplementsBaseline: r.metric.beatsOrComplementsBaseline,
+      latencyMs: r.latencyMs,
+      memoryStubBytes: r.memoryStubBytes,
+      failureObserved: r.failureObserved,
+      privacyClass: r.privacy.class,
+      cloudPermitted: r.privacy.cloudPermitted,
+      fallback: r.fallback.slice(0, 240),
+      modelVersion: r.modelVersion,
+      metricsMode: r.metricsMode,
+      realInference: r.realInference,
+      llamaMetrics: r.llamaMetrics ?? null,
+      passed: r.passed,
+    })),
+  };
+  fs.writeFileSync(
+    path.join(evidenceDir, 'CONTINUATION_IV_STATUS.json'),
+    JSON.stringify(serializable, null, 2),
+  );
+  // Keep III filename updated for back-compat readers
   fs.writeFileSync(
     path.join(evidenceDir, 'CONTINUATION_III_STATUS.json'),
-    JSON.stringify(
-      {
-        generatedAt: new Date().toISOString(),
-        ...report,
-        results: report.results.map((r) => ({
-          capability: r.spec.capability,
-          purpose: r.spec.purpose,
-          nonAiBaseline: r.spec.nonAiBaselineName,
-          datasetId: r.spec.datasetId,
-          datasetSize: r.spec.datasetSize,
-          metric: r.metric.metricName,
-          systemScore: r.metric.systemScore,
-          baselineScore: r.metric.baselineScore,
-          beatsOrComplementsBaseline: r.metric.beatsOrComplementsBaseline,
-          latencyMs: r.latencyMs,
-          memoryStubBytes: r.memoryStubBytes,
-          failureObserved: r.failureObserved,
-          privacyClass: r.privacy.class,
-          cloudPermitted: r.privacy.cloudPermitted,
-          fallback: r.fallback.slice(0, 240),
-          modelVersion: r.modelVersion,
-          metricsMode: r.metricsMode,
-          realInference: r.realInference,
-          passed: r.passed,
-        })),
-      },
-      null,
-      2,
-    ),
+    JSON.stringify(serializable, null, 2),
   );
 
   return report;

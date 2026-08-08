@@ -117,3 +117,9 @@ gate1/evidence/out/**
 # Local GGUF weights (Continuance III)
 models/local/*.gguf
 models/local/*.gguf.*
+*.out.txt
+*.err.txt
+
+# Continuance IV bench raw streams (JSON evidence kept)
+evidence/system-layer/*.out.txt
+evidence/system-layer/*.err.txt

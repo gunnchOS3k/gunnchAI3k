@@ -1,0 +1,17 @@
+{
+  "id": "smollm2-135m-instruct-q4_k_m",
+  "displayName": "SmolLM2-135M-Instruct",
+  "quant": "Q4_K_M",
+  "parameters": "135M",
+  "filename": "SmolLM2-135M-Instruct-Q4_K_M.gguf",
+  "bytes": 105454432,
+  "sha256": "2e8040ceae7815abe0dcb3540b9995eaa1fa0d2ca9e797d0a635ae4433c68c2d",
+  "license": "Apache-2.0",
+  "modelCard": "https://huggingface.co/HuggingFaceTB/SmolLM2-135M-Instruct",
+  "ggufSource": "https://huggingface.co/bartowski/SmolLM2-135M-Instruct-GGUF",
+  "downloadUrl": "https://huggingface.co/bartowski/SmolLM2-135M-Instruct-GGUF/resolve/main/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+  "weightsCommittedToGit": false,
+  "architecture": "llama.cpp",
+  "continuation": "IV",
+  "notes": "Small open instruct model suitable for 8GB Apple Silicon hosts. Weights must stay gitignored. Re-download via scripts/download-small-gguf.sh."
+}
