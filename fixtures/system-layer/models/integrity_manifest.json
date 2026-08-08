@@ -1,40 +1,5 @@
 {
-  "artifacts": [
-    {
-      "id": "det-tutoring-v1",
-      "artifact": "fixtures/system-layer/models/baseline-tutoring-v1.txt",
-      "sha256": "be762ade8dff2a2f128582525a22af076a0618bfa0a32d8c8c0f569a88aa6270",
-      "bytes": 52
-    },
-    {
-      "id": "det-code-v1",
-      "artifact": "fixtures/system-layer/models/baseline-code-v1.txt",
-      "sha256": "603717a06581ee5cf7627d7cb3c94bc97c4391ab6837a249641ff389421e4371",
-      "bytes": 52
-    },
-    {
-      "id": "det-device-help-v1",
-      "artifact": "fixtures/system-layer/models/baseline-device-help-v1.txt",
-      "sha256": "331905ac62d0c940d8860fba750c823d34c471470bf9dd751f2e7d73d253091e",
-      "bytes": 49
-    },
-    {
-      "id": "det-game-coach-v1",
-      "artifact": "fixtures/system-layer/models/baseline-game-coach-v1.txt",
-      "sha256": "186e935d54bb8ec907a6949b18f41d33628f45bc86bc619d1880b5667b0d4ddb",
-      "bytes": 44
-    },
-    {
-      "id": "det-network-v1",
-      "artifact": "fixtures/system-layer/models/baseline-network-v1.txt",
-      "sha256": "81f65e3fe8187f2f8b2e8993760098c1a281f57c909874b7e665d475f581a3b7",
-      "bytes": 51
-    },
-    {
-      "id": "det-rag-v1",
-      "artifact": "fixtures/system-layer/models/baseline-rag-v1.txt",
-      "sha256": "938493b4b612a52fb7ef27227fcd9ecbc6bda95848934b962ab82a404433642f",
-      "bytes": 42
-    }
-  ]
+  "note": "Hashes are computed live by ModelRegistryService.buildDefaultRegistry(); this file is documentary.",
+  "selectedArchitecture": "llama.cpp",
+  "continuation": "III"
 }

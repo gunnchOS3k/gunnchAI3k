@@ -12,7 +12,8 @@ describe('Wave C model_registry', () => {
 
   it('registers versioned models with license + integrity + device profiles', () => {
     const models = service.list();
-    expect(models.length).toBeGreaterThanOrEqual(6);
+    expect(service.registry.selectedArchitecture).toBe('llama.cpp');
+    expect(models.length).toBeGreaterThanOrEqual(11);
     for (const m of models) {
       expect(m.version).toMatch(/\d+\.\d+\.\d+/);
       expect(m.license).toBeTruthy();
@@ -35,7 +36,7 @@ describe('Wave C model_registry', () => {
     const dets = service
       .list()
       .filter((m) => m.backend === 'deterministic-baseline');
-    expect(dets.length).toBeGreaterThanOrEqual(6);
+    expect(dets.length).toBeGreaterThanOrEqual(11);
     expect(dets.every((m) => m.isTrainedLlm === false)).toBe(true);
   });
 

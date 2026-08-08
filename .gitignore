@@ -113,3 +113,7 @@ Thumbs.db
 # Gate 1 runtime evidence outputs
 gate1/evidence/out/**
 !gate1/evidence/out/**/.gitkeep
+
+# Local GGUF weights (Continuance III)
+models/local/*.gguf
+models/local/*.gguf.*

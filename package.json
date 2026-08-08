@@ -29,7 +29,10 @@
     "local-runtime:serve": "tsx src/local-runtime/cli.ts serve",
     "test:local-runtime": "jest tests/local-runtime/local-runtime.smoke.test.ts",
     "test:system-layer": "jest tests/system-layer --runInBand",
-    "system-layer:eval": "tsx -e \"import { runEvaluationHarness } from './src/system-layer'; runEvaluationHarness().then(r=>{console.log(JSON.stringify({token:r.token,allPassed:r.allPassed,passedCount:r.passedCount,totalCount:r.totalCount,digitallyValidatedClaimed:r.digitallyValidatedClaimed},null,2)); if(!r.allPassed) process.exit(1);})\""
+    "system-layer:eval": "tsx -e \"import { runEvaluationHarness } from './src/system-layer'; runEvaluationHarness().then(r=>{console.log(JSON.stringify({token:r.token,foundationToken:r.foundationToken,allPassed:r.allPassed,passedCount:r.passedCount,totalCount:r.totalCount,digitallyValidatedClaimed:r.digitallyValidatedClaimed,fullPlatformCompleteClaimed:r.fullPlatformCompleteClaimed,selectedArchitecture:r.selectedArchitecture,llamaCanRun:r.llamaProbe.canRunRealInference,metricsMode:r.llamaProbe.metricsMode},null,2)); if(!r.allPassed) process.exit(1);})\"",
+    "system-layer:probe": "tsx -e \"import { LlamaCppBackend } from './src/system-layer/local_inference/backends/llamacpp'; console.log(JSON.stringify(new LlamaCppBackend().probe(),null,2))\"",
+    "system-layer:status": "tsx -e \"import { getPlatformStatus } from './src/system-layer'; getPlatformStatus().then(s=>{console.log(JSON.stringify(s,null,2)); if(s.claim.fullPlatformDigitalComplete) process.exit(2);})\"",
+    "system-layer:install-path": "bash scripts/install-llamacpp-path.sh"
   },
   "keywords": [
     "ai",

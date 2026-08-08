@@ -1,5 +1,5 @@
 /**
- * Wave C — gunnchAI3k AI system layer foundation.
+ * Continuance III — gunnchAI3k AI system layer (local runtime + capability depth).
  */
 
 export * from './model_registry';
@@ -8,3 +8,4 @@ export * from './privacy_policy';
 export * from './device_capability';
 export * from './local_inference';
 export * from './evaluation';
+export * from './platform_status';

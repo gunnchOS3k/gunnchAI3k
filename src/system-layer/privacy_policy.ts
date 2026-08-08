@@ -1,5 +1,5 @@
 /**
- * Wave C — privacy / local-cloud disclosure policy.
+ * Privacy / local-cloud disclosure policy.
  * Explicit user-visible decisions; no silent cloud; no production keys.
  */
 
@@ -26,6 +26,9 @@ const ALWAYS_LOCAL: SystemCapability[] = [
   'device_help',
   'network',
   'game_coach',
+  'a11y',
+  'workflow',
+  'security',
 ];
 
 export function evaluateCloudDisclosure(

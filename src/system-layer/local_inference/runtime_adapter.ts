@@ -1,7 +1,7 @@
 /**
- * Local inference runtime adapter.
- * Prefers existing Gate 1 local-runtime for RAG grounding; otherwise
- * selects deterministic / optional llama.cpp / onnxruntime backends.
+ * Local inference runtime adapter — Continuance III.
+ * Selected architecture: llama.cpp. Prefers real GGUF when available;
+ * otherwise deterministic offline essentials + Gate 1 local-runtime for RAG.
  */
 
 import * as path from 'node:path';
@@ -34,9 +34,14 @@ export interface SystemInferRequest {
 }
 
 export class LocalInferenceRuntimeAdapter {
+  readonly selectedArchitecture = 'llama.cpp' as const;
   private readonly deterministic = new DeterministicBaselineBackend();
-  private readonly llama = new LlamaCppBackend();
+  private readonly llama: LlamaCppBackend;
   private readonly onnx = new OnnxRuntimeBackend();
+
+  constructor(cwd = process.cwd()) {
+    this.llama = new LlamaCppBackend(cwd);
+  }
 
   probeAll(): BackendAvailability[] {
     return [this.deterministic.probe(), this.llama.probe(), this.onnx.probe()];
@@ -45,12 +50,15 @@ export class LocalInferenceRuntimeAdapter {
   selectBackend(preferred?: PreferredBackendHint): LocalInferenceBackend {
     if (preferred === 'optional-local-model') {
       const llama = this.llama.probe();
-      if (llama.available) return this.llama;
-      const onnx = this.onnx.probe();
-      if (onnx.available) return this.onnx;
+      if (llama.canRunRealInference) return this.llama;
+      // Still route through llama backend for honest probe + placeholders
+      return this.llama;
+    }
+    if (preferred === 'deterministic-baseline') {
       return this.deterministic;
     }
-    return this.deterministic;
+    // Default product path: selected architecture is llama.cpp
+    return this.llama;
   }
 
   async infer(request: SystemInferRequest): Promise<InferenceResult> {
@@ -115,7 +123,7 @@ export class LocalInferenceRuntimeAdapter {
                   : 'document_retrieval';
 
       const response = await runtime.handle({
-        id: `wave-c-${Date.now()}`,
+        id: `cont-iii-${Date.now()}`,
         capability: mappedCapability,
         query: request.query,
       });
@@ -144,6 +152,9 @@ export class LocalInferenceRuntimeAdapter {
           localRuntimeOk: response.ok,
           localRuntimeProvider: response.provider.kind,
           localRuntimeGrounded: response.grounded,
+          selectedArchitecture: 'llama.cpp',
+          metricsMode: 'placeholder_no_model',
+          realInference: false,
         },
       };
     } finally {

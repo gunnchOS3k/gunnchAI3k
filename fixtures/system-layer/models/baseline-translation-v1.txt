@@ -1,0 +1,1 @@
+TRANSLATION offline essential: glossary en<->es/fr/de passthrough.

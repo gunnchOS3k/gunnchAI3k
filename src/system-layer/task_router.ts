@@ -1,6 +1,5 @@
 /**
- * Wave C — task router: tutoring/code/device_help/game_coach/network/RAG
- * → local vs cloud policy decisions (no production keys; no silent cloud).
+ * Task router for Continuance III capabilities → local vs cloud policy.
  */
 
 import type { DeviceProfileId, SystemCapability } from './model_registry';
@@ -21,9 +20,7 @@ export interface RouteRequest {
   query: string;
   processingMode?: ProcessingMode;
   deviceProfileId?: DeviceProfileId;
-  /** Explicit user opt-in for cloud when mode allows it. */
   userCloudConsent?: boolean;
-  /** Optional sensitivity hint (PII / student notes). */
   containsSensitiveLocalData?: boolean;
 }
 
@@ -42,7 +39,13 @@ export interface RouteDecision {
   modelIds: string[];
 }
 
-const CLOUD_ELIGIBLE: SystemCapability[] = ['code', 'tutoring', 'rag'];
+const CLOUD_ELIGIBLE: SystemCapability[] = [
+  'code',
+  'tutoring',
+  'rag',
+  'translation',
+  'scientific',
+];
 
 export function routeTask(request: RouteRequest): RouteDecision {
   const mode: ProcessingMode = request.processingMode ?? 'local-only';
@@ -76,7 +79,9 @@ export function routeTask(request: RouteRequest): RouteDecision {
       preferredBackend:
         request.capability === 'rag'
           ? 'local-runtime-fixture'
-          : 'deterministic-baseline',
+          : device.profile.preferredInference === 'optional-local-model'
+            ? 'optional-local-model'
+            : 'deterministic-baseline',
       device,
       disclosure,
       modelIds: [`det-${request.capability}-v1`],
@@ -103,8 +108,7 @@ export function routeTask(request: RouteRequest): RouteDecision {
   }
 
   const preferOptionalLocal =
-    device.profile.preferredInference === 'optional-local-model' &&
-    (request.capability === 'code' || request.capability === 'tutoring');
+    device.profile.preferredInference === 'optional-local-model';
 
   return {
     capability: request.capability,
