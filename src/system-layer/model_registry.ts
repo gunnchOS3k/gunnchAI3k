@@ -167,7 +167,7 @@ export function buildDefaultRegistry(cwd = process.cwd()): ModelRegistry {
 
   models.push({
     id: 'llamacpp-selected-runtime-v1',
-    version: '1.0.0-continuation-iii',
+    version: '1.1.0-continuation-iv',
     license: 'MIT',
     capability: 'tutoring',
     backend: 'llama.cpp',
@@ -183,9 +183,28 @@ export function buildDefaultRegistry(cwd = process.cwd()): ModelRegistry {
       'Selected architecture slot for llama.cpp GGUF when installed. README placeholder when weights absent.',
   });
 
+  const manifestPath = path.join('models', 'local', 'manifest.json');
+  const manifestAbs = path.join(cwd, manifestPath);
+  if (fs.existsSync(manifestAbs)) {
+    const { hash, bytes } = sha256File(manifestAbs);
+    models.push({
+      id: 'smollm2-135m-instruct-q4_k_m',
+      version: '0.1.0-135m-q4_k_m',
+      license: 'Apache-2.0',
+      capability: 'tutoring',
+      backend: 'llama.cpp',
+      artifactPath: manifestPath,
+      integrity: { algorithm: 'sha256', hash, bytes },
+      deviceProfiles: ALL_PROFILES,
+      isTrainedLlm: true,
+      description:
+        'SmolLM2-135M-Instruct Q4_K_M GGUF metadata (weights gitignored; see models/local/manifest.json).',
+    });
+  }
+
   return {
-    schemaVersion: '1.1.0',
-    registryVersion: 'continuation-iii-0.1.0',
+    schemaVersion: '1.2.0',
+    registryVersion: 'continuation-iv-0.1.0',
     selectedArchitecture: 'llama.cpp',
     models,
   };

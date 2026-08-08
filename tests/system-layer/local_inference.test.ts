@@ -5,7 +5,7 @@ import {
   OnnxRuntimeBackend,
 } from '../../src/system-layer/local_inference';
 
-describe('Continuance III local_inference adapter', () => {
+describe('Continuance IV local_inference adapter', () => {
   const adapter = new LocalInferenceRuntimeAdapter();
 
   it('selects llama.cpp as architecture and probes without forced installs', () => {

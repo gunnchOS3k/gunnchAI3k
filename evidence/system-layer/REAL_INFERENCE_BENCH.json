@@ -1,0 +1,41 @@
+{
+  "generatedAt": "2026-08-08T19:47:39Z",
+  "tokenTarget": "GUNNCHAI_REAL_LOCAL_INFERENCE_PASS",
+  "model": {
+    "path": "models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+    "filename": "SmolLM2-135M-Instruct-Q4_K_M.gguf",
+    "sha256": "2e8040ceae7815abe0dcb3540b9995eaa1fa0d2ca9e797d0a635ae4433c68c2d",
+    "quant": "Q4_K_M",
+    "license": "Apache-2.0",
+    "modelCard": "https://huggingface.co/HuggingFaceTB/SmolLM2-135M-Instruct"
+  },
+  "runtime": {
+    "binary": "/opt/homebrew/bin/llama-cli",
+    "version": "version: 10310 (cb26014d9) built with AppleClang 21.0.0.21000101 for Darwin arm64 ",
+    "architecture": "llama.cpp",
+    "hardwarePath": "cpu",
+    "ngl": 0,
+    "context": 512,
+    "nPredict": 64
+  },
+  "hardware": {
+    "cpu": "Apple M2",
+    "memBytes": 8589934592
+  },
+  "metrics": {
+    "latencySec": 1.25,
+    "promptTokPerSec": 410.2,
+    "generationTokPerSec": 215.6,
+    "ttftMsApprox": 98,
+    "promptTokensApprox": 40,
+    "outputTokensEst": 43,
+    "peakRssBytes": 234127360,
+    "peakRssMiB": 223.28,
+    "context": 512
+  },
+  "sampleOutput": "I'm here to help you with your programming needs. I'm capable of teaching binary search, which is a fundamental algorithm in computer science.\n\nWhat programming question would you like me to help with?",
+  "quality": {
+    "nonEmpty": true,
+    "onTopicHint": true
+  }
+}
