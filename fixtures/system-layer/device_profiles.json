@@ -1,0 +1,75 @@
+{
+  "schema_version": "1.0.0",
+  "source": "gunnchos-device-os profile ids (read-only stub; no physical claim)",
+  "profiles": [
+    {
+      "id": "student_14_5",
+      "displayName": "Student",
+      "aliases": ["Student", "Student 14.5", "Student14"],
+      "class": "laptop",
+      "ramMbHint": 8192,
+      "cpuCoresHint": 8,
+      "hasNpu": false,
+      "hasDiscreteGpu": false,
+      "batteryConstrained": true,
+      "preferredInference": "deterministic-baseline",
+      "maxLocalModelParamsB": 3,
+      "cloudAllowedByDefault": false,
+      "capabilities": {
+        "tutoring": true,
+        "code": true,
+        "device_help": true,
+        "game_coach": true,
+        "network": true,
+        "rag": true
+      },
+      "notes": "Battery-first student laptop profile. Prefer local deterministic / small models."
+    },
+    {
+      "id": "handheld_hybrid",
+      "displayName": "Handheld",
+      "aliases": ["Handheld", "Handheld Hybrid", "HandheldHybrid"],
+      "class": "handheld",
+      "ramMbHint": 4096,
+      "cpuCoresHint": 6,
+      "hasNpu": true,
+      "hasDiscreteGpu": false,
+      "batteryConstrained": true,
+      "preferredInference": "deterministic-baseline",
+      "maxLocalModelParamsB": 1,
+      "cloudAllowedByDefault": false,
+      "capabilities": {
+        "tutoring": true,
+        "code": false,
+        "device_help": true,
+        "game_coach": true,
+        "network": true,
+        "rag": true
+      },
+      "notes": "Mobile SoC / hybrid. Code assistance may fall back to cloud policy only when explicitly allowed."
+    },
+    {
+      "id": "ds_xl_coder",
+      "displayName": "DS-XL",
+      "aliases": ["DS-XL", "DSXL", "DS-XL Coder", "DSXLCoder"],
+      "class": "creator_workstation",
+      "ramMbHint": 32768,
+      "cpuCoresHint": 16,
+      "hasNpu": true,
+      "hasDiscreteGpu": true,
+      "batteryConstrained": false,
+      "preferredInference": "optional-local-model",
+      "maxLocalModelParamsB": 13,
+      "cloudAllowedByDefault": false,
+      "capabilities": {
+        "tutoring": true,
+        "code": true,
+        "device_help": true,
+        "game_coach": true,
+        "network": true,
+        "rag": true
+      },
+      "notes": "High local capacity. Optional llama.cpp/onnx when already installed; no downloads."
+    }
+  ]
+}

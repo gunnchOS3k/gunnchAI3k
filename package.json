@@ -27,7 +27,9 @@
     "local-runtime": "tsx src/local-runtime/cli.ts",
     "local-runtime:health": "tsx src/local-runtime/cli.ts health",
     "local-runtime:serve": "tsx src/local-runtime/cli.ts serve",
-    "test:local-runtime": "jest tests/local-runtime/local-runtime.smoke.test.ts"
+    "test:local-runtime": "jest tests/local-runtime/local-runtime.smoke.test.ts",
+    "test:system-layer": "jest tests/system-layer --runInBand",
+    "system-layer:eval": "tsx -e \"import { runEvaluationHarness } from './src/system-layer'; runEvaluationHarness().then(r=>{console.log(JSON.stringify({token:r.token,allPassed:r.allPassed,passedCount:r.passedCount,totalCount:r.totalCount,digitallyValidatedClaimed:r.digitallyValidatedClaimed},null,2)); if(!r.allPassed) process.exit(1);})\""
   },
   "keywords": [
     "ai",
