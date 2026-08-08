@@ -1,0 +1,3 @@
+{"id": "d1", "query": "device storage health check"}
+{"id": "d2", "query": "battery diagnostics"}
+{"id": "d3", "query": "local sensor status"}

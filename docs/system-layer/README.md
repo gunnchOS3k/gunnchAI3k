@@ -1,29 +1,26 @@
-# Wave C — gunnchAI3k AI system layer
+# gunnchAI3k AI system layer (Continuance III)
 
-Foundation for the product AI system layer. **Not** a DIGITALLY_VALIDATED claim.
+Local-runtime depth on top of Wave C foundation. **Not** a DIGITALLY_VALIDATED or FULL platform claim.
 
 ## Modules
 
 | Module | Path | Role |
 |--------|------|------|
-| Model registry | `src/system-layer/model_registry.ts` | Version, license, sha256 integrity, device profiles |
-| Task router | `src/system-layer/task_router.ts` | tutoring/code/device_help/game_coach/network/RAG → local vs cloud |
-| Local inference | `src/system-layer/local_inference/` | Adapter + deterministic CI baselines; optional llama.cpp / onnx probes |
-| Evaluation harness | `src/system-layer/evaluation/` | Purpose, non-AI baseline, metric, latency, memory stub, fallback |
-| Privacy policy | `src/system-layer/privacy_policy.ts` | Local/cloud disclosure; no silent cloud; no API keys |
-| Device capability | `src/system-layer/device_capability.ts` | Student / Handheld / DS-XL profile stub |
+| Model registry | `src/system-layer/model_registry.ts` | Version, license, sha256, device profiles, selectedArchitecture=llama.cpp |
+| Task router | `src/system-layer/task_router.ts` | 11 capabilities → local vs cloud policy |
+| Local inference | `src/system-layer/local_inference/` | Selected llama.cpp runner + deterministic essentials |
+| Evaluation harness | `src/system-layer/evaluation/` | baseline, dataset, metric, latency, memory, failure, privacy, fallback, model version |
+| Privacy policy | `src/system-layer/privacy_policy.ts` | Local/cloud disclosure |
+| Device capability | `src/system-layer/device_capability.ts` | Student / Handheld / DS-XL |
+| Platform status | `src/system-layer/platform_status.ts` | Honest gaps + tokens |
 
 ## Commands
 
 ```bash
 npm run test:system-layer
-npx tsx -e "import { runEvaluationHarness } from './src/system-layer'; const r = await runEvaluationHarness(); console.log(JSON.stringify(r,null,2))"
+npm run system-layer:probe
+npm run system-layer:eval
+npm run system-layer:status
 ```
 
-## Honesty rules
-
-- Fixture / deterministic backends are **NOT** trained LLMs.
-- llama.cpp / onnxruntime are probed only; Wave C does **not** download weights or require admin install.
-- Cloud stub acknowledges policy without inventing production keys.
-- Eval token: `GUNNCHAI3K_SYSTEM_LAYER_FOUNDATION_EVAL_PASS` (structured metrics beat non-AI baselines).
-- `DIGITALLY_VALIDATED` is **not** emitted by this layer.
+See `CONTINUATION_III.md` and `RUNTIME_ARCHITECTURE_CHOICE.md`.

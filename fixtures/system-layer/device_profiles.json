@@ -1,11 +1,15 @@
 {
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
   "source": "gunnchos-device-os profile ids (read-only stub; no physical claim)",
   "profiles": [
     {
       "id": "student_14_5",
       "displayName": "Student",
-      "aliases": ["Student", "Student 14.5", "Student14"],
+      "aliases": [
+        "Student",
+        "Student 14.5",
+        "Student14"
+      ],
       "class": "laptop",
       "ramMbHint": 8192,
       "cpuCoresHint": 8,
@@ -19,16 +23,25 @@
         "tutoring": true,
         "code": true,
         "device_help": true,
+        "a11y": true,
         "game_coach": true,
         "network": true,
-        "rag": true
+        "rag": true,
+        "scientific": true,
+        "translation": true,
+        "workflow": true,
+        "security": true
       },
-      "notes": "Battery-first student laptop profile. Prefer local deterministic / small models."
+      "notes": "Battery-first student laptop. Prefer local deterministic / small llama.cpp GGUF."
     },
     {
       "id": "handheld_hybrid",
       "displayName": "Handheld",
-      "aliases": ["Handheld", "Handheld Hybrid", "HandheldHybrid"],
+      "aliases": [
+        "Handheld",
+        "Handheld Hybrid",
+        "HandheldHybrid"
+      ],
       "class": "handheld",
       "ramMbHint": 4096,
       "cpuCoresHint": 6,
@@ -42,16 +55,26 @@
         "tutoring": true,
         "code": false,
         "device_help": true,
+        "a11y": true,
         "game_coach": true,
         "network": true,
-        "rag": true
+        "rag": true,
+        "scientific": true,
+        "translation": true,
+        "workflow": true,
+        "security": true
       },
       "notes": "Mobile SoC / hybrid. Code assistance may fall back to cloud policy only when explicitly allowed."
     },
     {
       "id": "ds_xl_coder",
       "displayName": "DS-XL",
-      "aliases": ["DS-XL", "DSXL", "DS-XL Coder", "DSXLCoder"],
+      "aliases": [
+        "DS-XL",
+        "DSXL",
+        "DS-XL Coder",
+        "DSXLCoder"
+      ],
       "class": "creator_workstation",
       "ramMbHint": 32768,
       "cpuCoresHint": 16,
@@ -65,11 +88,16 @@
         "tutoring": true,
         "code": true,
         "device_help": true,
+        "a11y": true,
         "game_coach": true,
         "network": true,
-        "rag": true
+        "rag": true,
+        "scientific": true,
+        "translation": true,
+        "workflow": true,
+        "security": true
       },
-      "notes": "High local capacity. Optional llama.cpp/onnx when already installed; no downloads."
+      "notes": "High local capacity. Prefers llama.cpp when binary+GGUF present."
     }
   ]
 }

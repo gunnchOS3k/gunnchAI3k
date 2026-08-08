@@ -1,6 +1,7 @@
 /**
- * Wave C — model registry with integrity hashes, version, license, device profiles.
- * Artifacts are deterministic baseline blobs (NOT production LLM weights).
+ * Model registry with integrity hashes, version, license, device profiles.
+ * Artifacts are deterministic baseline blobs (NOT production LLM weights)
+ * plus optional llama.cpp GGUF discovery metadata.
  */
 
 import { createHash } from 'node:crypto';
@@ -11,9 +12,28 @@ export type SystemCapability =
   | 'tutoring'
   | 'code'
   | 'device_help'
+  | 'a11y'
   | 'game_coach'
   | 'network'
-  | 'rag';
+  | 'rag'
+  | 'scientific'
+  | 'translation'
+  | 'workflow'
+  | 'security';
+
+export const ALL_SYSTEM_CAPABILITIES: SystemCapability[] = [
+  'tutoring',
+  'code',
+  'device_help',
+  'a11y',
+  'game_coach',
+  'network',
+  'rag',
+  'scientific',
+  'translation',
+  'workflow',
+  'security',
+];
 
 export type DeviceProfileId = 'student_14_5' | 'handheld_hybrid' | 'ds_xl_coder';
 
@@ -44,6 +64,7 @@ export interface ModelRegistryEntry {
 export interface ModelRegistry {
   schemaVersion: string;
   registryVersion: string;
+  selectedArchitecture: 'llama.cpp';
   models: ModelRegistryEntry[];
 }
 
@@ -51,9 +72,14 @@ const CAPABILITY_TO_ARTIFACT: Record<SystemCapability, string> = {
   tutoring: 'baseline-tutoring-v1.txt',
   code: 'baseline-code-v1.txt',
   device_help: 'baseline-device-help-v1.txt',
+  a11y: 'baseline-a11y-v1.txt',
   game_coach: 'baseline-game-coach-v1.txt',
   network: 'baseline-network-v1.txt',
   rag: 'baseline-rag-v1.txt',
+  scientific: 'baseline-scientific-v1.txt',
+  translation: 'baseline-translation-v1.txt',
+  workflow: 'baseline-workflow-v1.txt',
+  security: 'baseline-security-v1.txt',
 };
 
 const ALL_PROFILES: DeviceProfileId[] = [
@@ -109,7 +135,7 @@ export function buildDefaultRegistry(cwd = process.cwd()): ModelRegistry {
         : ALL_PROFILES;
     return {
       id: `det-${capability}-v1`,
-      version: '1.0.0',
+      version: '1.1.0',
       license: 'MIT',
       capability,
       backend: 'deterministic-baseline',
@@ -139,9 +165,28 @@ export function buildDefaultRegistry(cwd = process.cwd()): ModelRegistry {
       'Bridge entry pointing at Gate 1 local-runtime fixture corpus (NOT a trained LLM).',
   });
 
+  models.push({
+    id: 'llamacpp-selected-runtime-v1',
+    version: '1.0.0-continuation-iii',
+    license: 'MIT',
+    capability: 'tutoring',
+    backend: 'llama.cpp',
+    artifactPath: path.join('models', 'local', 'README.md'),
+    integrity: (() => {
+      const abs = path.join(cwd, 'models', 'local', 'README.md');
+      const { hash, bytes } = sha256File(abs);
+      return { algorithm: 'sha256' as const, hash, bytes };
+    })(),
+    deviceProfiles: ALL_PROFILES,
+    isTrainedLlm: true,
+    description:
+      'Selected architecture slot for llama.cpp GGUF when installed. README placeholder when weights absent.',
+  });
+
   return {
-    schemaVersion: '1.0.0',
-    registryVersion: 'wave-c-0.1.0',
+    schemaVersion: '1.1.0',
+    registryVersion: 'continuation-iii-0.1.0',
+    selectedArchitecture: 'llama.cpp',
     models,
   };
 }

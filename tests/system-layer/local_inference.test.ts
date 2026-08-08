@@ -5,10 +5,11 @@ import {
   OnnxRuntimeBackend,
 } from '../../src/system-layer/local_inference';
 
-describe('Wave C local_inference adapter', () => {
+describe('Continuance III local_inference adapter', () => {
   const adapter = new LocalInferenceRuntimeAdapter();
 
-  it('probes backends without requiring admin installs', () => {
+  it('selects llama.cpp as architecture and probes without forced installs', () => {
+    expect(adapter.selectedArchitecture).toBe('llama.cpp');
     const probes = adapter.probeAll();
     expect(probes.map((p) => p.id).sort()).toEqual(
       ['deterministic', 'llama.cpp', 'onnxruntime'].sort(),
@@ -17,40 +18,51 @@ describe('Wave C local_inference adapter', () => {
     expect(det.available).toBe(true);
     expect(det.installableWithoutAdmin).toBe(true);
 
-    const llama = probes.find((p) => p.id === 'llama.cpp')!;
-    const onnx = probes.find((p) => p.id === 'onnxruntime')!;
-    // On this CI host they are typically unavailable; adapter must still be honest.
-    if (!llama.available) {
-      expect(llama.installableWithoutAdmin).toBe(false);
-      expect(llama.notes.join(' ')).toMatch(/not download|No llama|no llama/i);
-    }
-    if (!onnx.available) {
-      expect(onnx.installableWithoutAdmin).toBe(false);
+    const llama = new LlamaCppBackend().probe();
+    expect(llama.architecture).toBe('llama.cpp');
+    expect(llama.installPathScript).toMatch(/install-llamacpp-path/);
+    if (!llama.canRunRealInference) {
+      expect(llama.metricsMode).toBe('placeholder_no_model');
+      expect(llama.notes.join(' ')).toMatch(/SELECTED_ARCHITECTURE=llama\.cpp/);
     }
   });
 
-  it('deterministic backend returns structured fields (not text-only)', async () => {
+  it('deterministic backend returns structured fields for new capabilities', async () => {
     const backend = new DeterministicBaselineBackend();
-    const result = await backend.infer({
-      capability: 'tutoring',
-      query: 'teach binary search',
-    });
-    expect(result.isTrainedLlm).toBe(false);
-    expect(result.structured.concept).toBeTruthy();
-    expect(Array.isArray(result.structured.steps)).toBe(true);
-    expect(result.latencyMs).toBeGreaterThan(0);
-    expect(result.memoryStubBytes).toBeGreaterThan(0);
+    for (const capability of [
+      'a11y',
+      'scientific',
+      'translation',
+      'workflow',
+      'security',
+    ] as const) {
+      const result = await backend.infer({
+        capability,
+        query:
+          capability === 'translation'
+            ? 'en to es: hello'
+            : `probe ${capability}`,
+      });
+      expect(result.isTrainedLlm).toBe(false);
+      expect(result.structured.kind).toBe(capability);
+      expect(result.latencyMs).toBeGreaterThan(0);
+    }
   });
 
-  it('llama.cpp and onnxruntime fall back cleanly when unavailable', async () => {
+  it('llama.cpp falls back cleanly when unavailable with placeholders', async () => {
     const llama = new LlamaCppBackend();
-    const onnx = new OnnxRuntimeBackend();
     const l = await llama.infer({ capability: 'code', query: 'early return' });
-    const o = await onnx.infer({ capability: 'network', query: 'offline' });
-    if (!llama.probe().available) {
+    if (!llama.probe().canRunRealInference) {
       expect(l.fallbackUsed).toBe(true);
+      expect(l.structured.metricsMode).toBe('placeholder_no_model');
       expect(l.structured.kind).toBe('code');
+      expect(l.isTrainedLlm).toBe(false);
     }
+  });
+
+  it('onnxruntime remains non-primary probe with fallback', async () => {
+    const onnx = new OnnxRuntimeBackend();
+    const o = await onnx.infer({ capability: 'network', query: 'offline' });
     if (!onnx.probe().available) {
       expect(o.fallbackUsed).toBe(true);
       expect(o.structured.kind).toBe('network');

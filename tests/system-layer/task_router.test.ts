@@ -1,18 +1,11 @@
 import { TaskRouter, routeTask } from '../../src/system-layer/task_router';
+import { ALL_SYSTEM_CAPABILITIES } from '../../src/system-layer/model_registry';
 
-describe('Wave C task_router', () => {
+describe('Continuance III task_router', () => {
   const router = new TaskRouter();
 
-  it('routes all six capabilities locally by default', () => {
-    const caps = [
-      'tutoring',
-      'code',
-      'device_help',
-      'game_coach',
-      'network',
-      'rag',
-    ] as const;
-    for (const capability of caps) {
+  it('routes all capabilities locally by default', () => {
+    for (const capability of ALL_SYSTEM_CAPABILITIES) {
       const decision = router.route({
         capability,
         query: `probe ${capability}`,
@@ -64,8 +57,15 @@ describe('Wave C task_router', () => {
     expect(decision.disclosure.cloudPermitted).toBe(false);
   });
 
-  it('keeps device_help/network/game_coach local-only by policy', () => {
-    for (const capability of ['device_help', 'network', 'game_coach'] as const) {
+  it('keeps local-only capabilities offline by policy', () => {
+    for (const capability of [
+      'device_help',
+      'network',
+      'game_coach',
+      'a11y',
+      'workflow',
+      'security',
+    ] as const) {
       const decision = routeTask({
         capability,
         query: 'probe',
