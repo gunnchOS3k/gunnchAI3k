@@ -1,5 +1,5 @@
 /**
- * Honest platform completeness status for Continuance V.
+ * Honest platform completeness status for Continuance VI.
  * Never claims FULL_GUNNCHAI3K_PLATFORM_DIGITAL_COMPLETE unless truly integrated.
  */
 
@@ -13,8 +13,13 @@ import {
   REAL_LOCAL_INFERENCE_TOKEN,
   runEvaluationHarness,
 } from './evaluation/harness';
+import { proveRequirements } from './os_integration/requirement_proof';
+import { OS_INTEGRATION_TOPOLOGY } from './os_integration/topology';
 import { GunnchAIProductService } from './product_service/service';
-import { PRODUCT_SERVICE_TOKEN } from './product_service/types';
+import {
+  OS_INTEGRATION_TOKEN,
+  PRODUCT_SERVICE_TOKEN,
+} from './product_service/types';
 
 export async function getPlatformStatus(cwd = process.cwd()) {
   const probe = new LlamaCppBackend(cwd).probe();
@@ -25,6 +30,8 @@ export async function getPlatformStatus(cwd = process.cwd()) {
   const reqNodes = product.requirementStatus();
   const runtimeNodes = reqNodes.filter((n) => n.status === 'RUNTIME');
   const schemaNodes = reqNodes.filter((n) => n.status === 'SCHEMA_ONLY');
+  const proof = proveRequirements(product);
+  const discovery = product.osDiscover();
 
   const gaps: string[] = [];
   if (!probe.canRunRealInference) {
@@ -39,27 +46,51 @@ export async function getPlatformStatus(cwd = process.cwd()) {
   for (const r of evalReport.results) {
     if (!r.passed) gaps.push(`capability_fail:${r.spec.capability}`);
   }
+  if (!proof.allNormativeRuntime) {
+    gaps.push(`normative_runtime_missing:${proof.missingRuntime.join(',')}`);
+  }
   gaps.push(
-    'Discord/product surface not fully wired as end-user client (HTTP product service is local-only).',
+    'Discord end-user product surface not fully wired as production client (HTTP + OS client are local digital paths).',
   );
   gaps.push(
     'Cloud path remains policy stub only (no production keys).',
+  );
+  gaps.push(
+    'QEMU guest may host-forward model runtime to host — not an on-device NPU claim.',
   );
   gaps.push(
     'DIGITALLY_VALIDATED and FULL_GUNNCHAI3K_PLATFORM_DIGITAL_COMPLETE not earned.',
   );
 
   const fullComplete = false;
+  const osIntegrationPass =
+    proof.allNormativeRuntime &&
+    discovery.cancellationSupported &&
+    discovery.timeoutSupported &&
+    discovery.modelStatus.unavailableFallback === 'deterministic-baseline';
 
   return {
-    continuation: 'V' as const,
+    continuation: 'VI' as const,
     selectedArchitecture: 'llama.cpp' as const,
+    topology: OS_INTEGRATION_TOPOLOGY,
     productService: {
       name: product.name,
       version: product.version,
       token: PRODUCT_SERVICE_TOKEN,
       routes: product.listRoutes().length,
       rag: product.rag.stats(),
+    },
+    osIntegration: {
+      token: OS_INTEGRATION_TOKEN,
+      earned: osIntegrationPass,
+      discoveryBind: discovery.bindHint,
+      topology: discovery.topology,
+    },
+    requirementProof: {
+      normativeTotal: proof.normativeTotal,
+      runtimeProven: proof.runtimeProven,
+      allNormativeRuntime: proof.allNormativeRuntime,
+      missingRuntime: proof.missingRuntime,
     },
     realLocalInference: probe.canRunRealInference,
     realInferenceCount: evalReport.realInferenceCount,
@@ -86,6 +117,7 @@ export async function getPlatformStatus(cwd = process.cwd()) {
     },
     tokens: {
       [PRODUCT_SERVICE_TOKEN]: true,
+      [OS_INTEGRATION_TOKEN]: osIntegrationPass,
       [CAPABILITY_EVAL_TOKEN]: evalReport.token === CAPABILITY_EVAL_TOKEN,
       [FOUNDATION_EVAL_TOKEN]:
         evalReport.foundationToken === FOUNDATION_EVAL_TOKEN,
@@ -97,7 +129,8 @@ export async function getPlatformStatus(cwd = process.cwd()) {
     gaps,
     claim: {
       fullPlatformDigitalComplete: false,
-      reason: evalReport.fullPlatformReason,
+      reason:
+        'FULL_GUNNCHAI3K_PLATFORM_DIGITAL_COMPLETE not earned. Continuance VI proves normative AI RUNTIME + gunnchOS ai_interface local integration (incl. QEMU host-forward topology), but Discord/cloud production paths remain incomplete.',
     },
   };
 }

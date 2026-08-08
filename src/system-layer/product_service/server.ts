@@ -1,11 +1,11 @@
 /**
- * Continuance V — local HTTP product API (127.0.0.1 only) for gunnchOS.
+ * Continuance VI — local HTTP product API (127.0.0.1 only) for gunnchOS.
  */
 
 import express, { type Express, type Request, type Response } from 'express';
 import type { GunnchAIProductService } from './service';
 import type { AssistRequest, PermissionScope, ProductRoute } from './types';
-import { PRODUCT_SERVICE_TOKEN } from './types';
+import { OS_INTEGRATION_TOKEN, PRODUCT_SERVICE_TOKEN } from './types';
 
 export interface ProductServerHandles {
   app: Express;
@@ -37,6 +37,7 @@ export async function startProductServiceServer(
       service: h.service,
       version: h.version,
       token: h.token,
+      osIntegrationToken: h.osIntegrationToken,
       realLocalInference: h.realLocalInference,
       fullPlatformDigitalComplete: false,
     });
@@ -47,6 +48,7 @@ export async function startProductServiceServer(
       routes: service.listRoutes(),
       requirements: service.requirementStatus(),
       token: PRODUCT_SERVICE_TOKEN,
+      osIntegrationToken: OS_INTEGRATION_TOKEN,
     });
   });
 
@@ -54,8 +56,29 @@ export async function startProductServiceServer(
     res.json({ nodes: service.requirementStatus() });
   });
 
+  app.get('/v1/os/discover', (_req, res) => {
+    res.json({ ok: true, ...service.osDiscover() });
+  });
+
+  app.get('/v1/os/model-status', (_req, res) => {
+    res.json({ ok: true, modelStatus: service.modelStatus() });
+  });
+
+  app.get('/v1/os/rag-status', (_req, res) => {
+    res.json({ ok: true, ragStatus: service.ragStatus() });
+  });
+
   app.post('/v1/assist', async (req, res) => {
     await handleAssist(service, req, res, req.body?.capability as ProductRoute);
+  });
+
+  app.post('/v1/assist/cancel', (req, res) => {
+    const requestId = String(req.body?.requestId ?? '');
+    if (!requestId) {
+      res.status(400).json({ ok: false, errorCode: 'REQUEST_ID_REQUIRED' });
+      return;
+    }
+    res.json(service.cancel(requestId));
   });
 
   app.post('/v1/assist/:capability', async (req, res) => {
@@ -214,10 +237,33 @@ export async function startProductServiceServer(
     }
   });
 
+  app.post('/v1/governance/model-rollback', (req, res) => {
+    try {
+      res.json({
+        ok: true,
+        state: service.governance.rollbackModel(
+          req.body?.targetVersion ? String(req.body.targetVersion) : undefined,
+        ),
+      });
+    } catch (err) {
+      res.status(400).json({
+        ok: false,
+        errorMessage: err instanceof Error ? err.message : String(err),
+      });
+    }
+  });
+
   app.get('/v1/governance/monitor', (req, res) => {
     res.json({
       ok: true,
       events: service.governance.recentEvents(Number(req.query.limit ?? 50)),
+    });
+  });
+
+  app.get('/v1/audit', (req, res) => {
+    res.json({
+      ok: true,
+      events: service.audit.recent(Number(req.query.limit ?? 50)),
     });
   });
 
@@ -263,5 +309,12 @@ async function handleAssist(
     timeoutMs: req.body?.timeoutMs,
   };
   const result = await service.assist(assistReq);
-  res.status(result.ok ? 200 : result.errorCode === 'PERMISSION_DENIED' ? 403 : 400).json(result);
+  const status = result.ok
+    ? 200
+    : result.errorCode === 'PERMISSION_DENIED'
+      ? 403
+      : result.errorCode === 'REQUEST_CANCELLED'
+        ? 499
+        : 400;
+  res.status(status).json(result);
 }

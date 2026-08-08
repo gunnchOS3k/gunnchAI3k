@@ -3,6 +3,8 @@ export * from './permissions';
 export * from './governance';
 export * from './rag_engine';
 export * from './continuity';
+export * from './audit';
+export * from './request_control';
 export * from './service';
 export * from './server';
 export * from './cli';

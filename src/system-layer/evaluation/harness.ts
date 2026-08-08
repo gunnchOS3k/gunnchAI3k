@@ -238,7 +238,7 @@ export async function runEvaluationHarness(
   fs.mkdirSync(evidenceDir, { recursive: true });
   const serializable = {
     generatedAt: new Date().toISOString(),
-    continuation: 'V',
+    continuation: 'VI',
     ...report,
     results: report.results.map((r) => ({
       capability: r.spec.capability,
@@ -264,19 +264,18 @@ export async function runEvaluationHarness(
       passed: r.passed,
     })),
   };
-  fs.writeFileSync(
-    path.join(evidenceDir, 'CONTINUATION_V_STATUS.json'),
-    JSON.stringify(serializable, null, 2),
-  );
-  // Keep IV/III filenames updated for back-compat readers
-  fs.writeFileSync(
-    path.join(evidenceDir, 'CONTINUATION_IV_STATUS.json'),
-    JSON.stringify(serializable, null, 2),
-  );
-  fs.writeFileSync(
-    path.join(evidenceDir, 'CONTINUATION_III_STATUS.json'),
-    JSON.stringify(serializable, null, 2),
-  );
+  const writeEvidence = (name: string, payload: unknown) => {
+    try {
+      fs.writeFileSync(path.join(evidenceDir, name), JSON.stringify(payload, null, 2));
+    } catch {
+      // Evidence writes are best-effort in sandboxed CI/dev environments.
+    }
+  };
+  writeEvidence('CONTINUATION_VI_STATUS.json', serializable);
+  // Keep V/IV/III filenames updated for back-compat readers
+  writeEvidence('CONTINUATION_V_STATUS.json', serializable);
+  writeEvidence('CONTINUATION_IV_STATUS.json', serializable);
+  writeEvidence('CONTINUATION_III_STATUS.json', serializable);
 
   return report;
 }

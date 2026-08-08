@@ -3,7 +3,7 @@ import * as os from 'node:os';
 import * as path from 'node:path';
 import { GovernanceRuntime } from '../../src/system-layer/product_service/governance';
 
-describe('Continuance V GovernanceRuntime', () => {
+describe('Continuance VI GovernanceRuntime', () => {
   let tmp: string;
   let gov: GovernanceRuntime;
 
@@ -34,7 +34,8 @@ describe('Continuance V GovernanceRuntime', () => {
     expect(decision.consentGranted).toBe(false);
     expect(decision.minimizationApplied).toBe(true);
     expect(decision.minimizedQuery).toContain('[redacted-email]');
-    expect(decision.minimizedQuery).not.toContain('student@example.com');    expect(decision.disclosure).toMatch(/LOCAL-ONLY/i);
+    expect(decision.minimizedQuery).not.toContain('student@example.com');
+    expect(decision.disclosure).toMatch(/LOCAL-ONLY/i);
     expect(decision.fallbackSafe).toBe(true);
     expect(decision.modelVersion).toBe('test@1');
     expect(decision.evalBaselineRef).toContain('fixtures/system-layer/eval');
@@ -55,5 +56,15 @@ describe('Continuance V GovernanceRuntime', () => {
     gov.record('test', 'monitor event', true, 'tutoring');
     expect(gov.recentEvents(5).some((e) => e.kind === 'test')).toBe(true);
     expect(fs.existsSync(path.join(tmp, 'monitor.jsonl'))).toBe(true);
+  });
+
+  it('rolls back model versions from history', () => {
+    expect(gov.getState().modelVersionHistory).toEqual(['test@1']);
+    gov.setModelVersion('test@2');
+    gov.setModelVersion('test@3');
+    expect(gov.getState().activeModelVersion).toBe('test@3');
+    gov.rollbackModel('test@1');
+    expect(gov.getState().activeModelVersion).toBe('test@1');
+    expect(gov.getState().modelVersionHistory[0]).toBe('test@1');
   });
 });

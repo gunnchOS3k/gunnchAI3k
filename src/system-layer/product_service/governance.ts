@@ -1,7 +1,7 @@
 /**
- * Continuance V — AI governance as runtime controls (not SCHEMA_ONLY).
+ * Continuance VI — AI governance as runtime controls (not SCHEMA_ONLY).
  * Covers: purpose, consent, minimization, disclosure, version, eval,
- * override, fallback, monitoring, rollback.
+ * override, fallback, monitoring, rollback, model version history.
  */
 
 import { randomUUID } from 'node:crypto';
@@ -22,6 +22,7 @@ export interface GovernanceState {
     retainRawQuery: boolean;
   };
   activeModelVersion: string;
+  modelVersionHistory: string[];
   evalBaselineRef: string;
   humanOverride: {
     active: boolean;
@@ -71,7 +72,26 @@ export interface MonitorEvent {
 }
 
 const DEFAULT_PURPOSE =
-  'Local gunnchAI product assist for tutoring, code, device, a11y, coaching, network, RAG, science, translation, workflow, security, and continuity.';
+  'Local gunnchAI product assist for tutoring, code, device, a11y, coaching, network, RAG, science, translation, workflow, security, continuity, input interpretation, and safety alerts.';
+
+export function mapProductRouteToSystemCapability(
+  capability: ProductRoute,
+): SystemCapability {
+  switch (capability) {
+    case 'continuity':
+      return 'workflow';
+    case 'content_adaptation':
+      return 'translation';
+    case 'connection_path':
+      return 'network';
+    case 'input_interpretation':
+      return 'a11y';
+    case 'safety_alert':
+      return 'security';
+    default:
+      return capability;
+  }
+}
 
 function emptyState(modelVersion: string): GovernanceState {
   return {
@@ -84,6 +104,7 @@ function emptyState(modelVersion: string): GovernanceState {
       retainRawQuery: false,
     },
     activeModelVersion: modelVersion,
+    modelVersionHistory: [modelVersion],
     evalBaselineRef: 'fixtures/system-layer/eval',
     humanOverride: { active: false, reason: null, setAt: null },
     safeFallbackEnabled: true,
@@ -118,6 +139,9 @@ export class GovernanceRuntime {
     const modelVersion = opts?.modelVersion ?? 'product-service@0.5.0';
     if (fs.existsSync(this.storePath)) {
       this.state = JSON.parse(fs.readFileSync(this.storePath, 'utf8')) as GovernanceState;
+      if (!Array.isArray(this.state.modelVersionHistory) || this.state.modelVersionHistory.length === 0) {
+        this.state.modelVersionHistory = [this.state.activeModelVersion];
+      }
     } else {
       this.state = emptyState(modelVersion);
       this.persist();
@@ -157,10 +181,46 @@ export class GovernanceRuntime {
 
   setModelVersion(version: string): GovernanceState {
     this.snapshot('pre-version');
-    this.state.activeModelVersion = version;
+    const next = version.trim();
+    if (!next) throw new Error('MODEL_VERSION_REQUIRED');
+    if (next !== this.state.activeModelVersion) {
+      this.state.modelVersionHistory = [
+        next,
+        ...this.state.modelVersionHistory.filter((v) => v !== next),
+      ].slice(0, 20);
+    }
+    this.state.activeModelVersion = next;
     this.state.updatedAt = new Date().toISOString();
     this.persist();
-    this.record('version', version, true);
+    this.record('version', next, true);
+    return this.getState();
+  }
+
+  /**
+   * Explicit model rollback: restore a prior activeModelVersion from history
+   * (or the previous entry when target omitted).
+   */
+  rollbackModel(targetVersion?: string): GovernanceState {
+    this.snapshot('pre-model-rollback');
+    const history = this.state.modelVersionHistory;
+    const previous =
+      targetVersion ??
+      history.find((v) => v !== this.state.activeModelVersion) ??
+      history[1];
+    if (!previous) {
+      throw new Error('MODEL_ROLLBACK_UNAVAILABLE: no prior model version');
+    }
+    if (!history.includes(previous) && targetVersion) {
+      throw new Error(`MODEL_ROLLBACK_UNKNOWN_VERSION:${targetVersion}`);
+    }
+    this.state.activeModelVersion = previous;
+    this.state.modelVersionHistory = [
+      previous,
+      ...history.filter((v) => v !== previous),
+    ].slice(0, 20);
+    this.state.updatedAt = new Date().toISOString();
+    this.persist();
+    this.record('model_rollback', `Restored model version ${previous}`, true);
     return this.getState();
   }
 
@@ -246,16 +306,9 @@ export class GovernanceRuntime {
       minimizationApplied = true;
     }
 
-    const mappedCapability: SystemCapability =
-      input.capability === 'continuity' ||
-      input.capability === 'content_adaptation' ||
-      input.capability === 'connection_path'
-        ? input.capability === 'connection_path'
-          ? 'network'
-          : input.capability === 'content_adaptation'
-            ? 'translation'
-            : 'workflow'
-        : input.capability;
+    const mappedCapability: SystemCapability = mapProductRouteToSystemCapability(
+      input.capability,
+    );
 
     const disclosure = evaluateCloudDisclosure({
       processingMode,
