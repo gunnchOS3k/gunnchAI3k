@@ -1,5 +1,5 @@
 /**
- * Continuance V — permission gates for product routes.
+ * Continuance VI — permission gates for product routes.
  */
 
 import type { PermissionScope, ProductRoute } from './types';
@@ -19,6 +19,8 @@ const ROUTE_REQUIRED: Record<ProductRoute, PermissionScope[]> = {
   continuity: ['assist', 'continuity:read'],
   content_adaptation: ['assist'],
   connection_path: ['assist'],
+  input_interpretation: ['assist'],
+  safety_alert: ['assist'],
 };
 
 export const DEFAULT_LOCAL_PERMISSIONS: PermissionScope[] = [
@@ -34,6 +36,8 @@ export const DEFAULT_LOCAL_PERMISSIONS: PermissionScope[] = [
   'continuity:read',
   'continuity:write',
   'monitor:read',
+  'audit:read',
+  'os:discover',
 ];
 
 export function requiredScopesForRoute(route: ProductRoute): PermissionScope[] {

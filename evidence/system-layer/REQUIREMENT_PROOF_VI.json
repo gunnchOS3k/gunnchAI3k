@@ -1,0 +1,682 @@
+{
+  "continuation": "VI",
+  "generatedAt": "2026-08-08T21:04:45.379Z",
+  "normativeTotal": 38,
+  "runtimeProven": 38,
+  "allNormativeRuntime": true,
+  "nodes": [
+    {
+      "id": "AI-CORE-001",
+      "title": "Personalized tutoring",
+      "status": "RUNTIME",
+      "route": "/v1/assist/tutoring",
+      "notes": "Product assist + eval + WAIKE surface",
+      "proof": {
+        "api": "POST /v1/assist/tutoring",
+        "testHint": "product_surfaces + product_service",
+        "evaluated": true
+      }
+    },
+    {
+      "id": "AI-CORE-002",
+      "title": "Code assistance",
+      "status": "RUNTIME",
+      "route": "/v1/assist/code",
+      "notes": "Product assist + eval + code surface",
+      "proof": {
+        "api": "POST /v1/assist/code",
+        "testHint": "product_surfaces + product_service",
+        "evaluated": true
+      }
+    },
+    {
+      "id": "AI-CORE-003",
+      "title": "Device troubleshooting",
+      "status": "RUNTIME",
+      "route": "/v1/assist/device_help",
+      "notes": "Product assist + device surface",
+      "proof": {
+        "api": "POST /v1/assist/device_help",
+        "testHint": "product_surfaces + product_service",
+        "evaluated": true
+      }
+    },
+    {
+      "id": "AI-CORE-004",
+      "title": "Accessibility assistance",
+      "status": "RUNTIME",
+      "route": "/v1/assist/a11y",
+      "notes": "Product assist + a11y surface",
+      "proof": {
+        "api": "POST /v1/assist/a11y",
+        "testHint": "product_surfaces + product_service",
+        "evaluated": true
+      }
+    },
+    {
+      "id": "AI-CORE-005",
+      "title": "Game coaching",
+      "status": "RUNTIME",
+      "route": "/v1/assist/game_coach",
+      "notes": "Product assist + eval",
+      "proof": {
+        "api": "POST /v1/assist/game_coach",
+        "testHint": "product_service + evaluation_harness",
+        "evaluated": true
+      }
+    },
+    {
+      "id": "AI-CORE-006",
+      "title": "Network optimization",
+      "status": "RUNTIME",
+      "route": "/v1/assist/network",
+      "notes": "Product assist + connectivity surface",
+      "proof": {
+        "api": "POST /v1/assist/network",
+        "testHint": "product_surfaces + product_service",
+        "evaluated": true
+      }
+    },
+    {
+      "id": "AI-CORE-007",
+      "title": "Connection-path recommendations",
+      "status": "RUNTIME",
+      "route": "/v1/assist/connection_path",
+      "notes": "Product route",
+      "proof": {
+        "api": "POST /v1/assist/connection_path",
+        "testHint": "product_service",
+        "evaluated": true
+      }
+    },
+    {
+      "id": "AI-CORE-008",
+      "title": "Local search",
+      "status": "RUNTIME",
+      "route": "/v1/rag/search",
+      "notes": "Local RAG engine",
+      "proof": {
+        "api": "POST /v1/rag/search",
+        "testHint": "rag_engine + product_service",
+        "evaluated": true
+      }
+    },
+    {
+      "id": "AI-CORE-009",
+      "title": "Knowledge retrieval",
+      "status": "RUNTIME",
+      "route": "/v1/rag/search",
+      "notes": "Local RAG + attribution",
+      "proof": {
+        "api": "POST /v1/rag/search",
+        "testHint": "rag_engine",
+        "evaluated": true
+      }
+    },
+    {
+      "id": "AI-CORE-010",
+      "title": "Scientific source attribution",
+      "status": "RUNTIME",
+      "route": "/v1/assist/scientific",
+      "notes": "Archive surface + RAG attribution",
+      "proof": {
+        "api": "POST /v1/assist/scientific",
+        "testHint": "product_surfaces + product_service",
+        "evaluated": true
+      }
+    },
+    {
+      "id": "AI-CORE-011",
+      "title": "Translation",
+      "status": "RUNTIME",
+      "route": "/v1/assist/translation",
+      "notes": "Product assist + eval",
+      "proof": {
+        "api": "POST /v1/assist/translation",
+        "testHint": "product_service + evaluation_harness",
+        "evaluated": true
+      }
+    },
+    {
+      "id": "AI-CORE-012",
+      "title": "Content adaptation",
+      "status": "RUNTIME",
+      "route": "/v1/assist/content_adaptation",
+      "notes": "Product route",
+      "proof": {
+        "api": "POST /v1/assist/content_adaptation",
+        "testHint": "product_service",
+        "evaluated": true
+      }
+    },
+    {
+      "id": "AI-CORE-013",
+      "title": "Workflow automation",
+      "status": "RUNTIME",
+      "route": "/v1/assist/workflow",
+      "notes": "Product assist + eval",
+      "proof": {
+        "api": "POST /v1/assist/workflow",
+        "testHint": "product_service + evaluation_harness",
+        "evaluated": true
+      }
+    },
+    {
+      "id": "AI-CORE-014",
+      "title": "Security anomaly explanation",
+      "status": "RUNTIME",
+      "route": "/v1/assist/security",
+      "notes": "Defensive-only assist",
+      "proof": {
+        "api": "POST /v1/assist/security",
+        "testHint": "product_service + evaluation_harness",
+        "evaluated": true
+      }
+    },
+    {
+      "id": "AI-CORE-015",
+      "title": "User-controlled cross-device continuity",
+      "status": "RUNTIME",
+      "route": "/v1/continuity/*",
+      "notes": "Local export/import",
+      "proof": {
+        "api": "POST /v1/continuity/export|import",
+        "testHint": "product_service + os_integration",
+        "evaluated": true
+      }
+    },
+    {
+      "id": "AI-GOV-001",
+      "title": "Declared purpose",
+      "status": "RUNTIME",
+      "route": "/v1/governance/purpose",
+      "notes": "GovernanceRuntime.declarePurpose",
+      "proof": {
+        "api": "POST /v1/governance/purpose",
+        "testHint": "governance_runtime",
+        "evaluated": true
+      }
+    },
+    {
+      "id": "AI-GOV-002",
+      "title": "User consent",
+      "status": "RUNTIME",
+      "route": "/v1/governance/consent",
+      "notes": "GovernanceRuntime.setConsent",
+      "proof": {
+        "api": "POST /v1/governance/consent",
+        "testHint": "governance_runtime + os_integration",
+        "evaluated": true
+      }
+    },
+    {
+      "id": "AI-GOV-003",
+      "title": "Data minimization",
+      "status": "RUNTIME",
+      "route": "/v1/governance/minimization",
+      "notes": "PII strip + max chars",
+      "proof": {
+        "api": "POST /v1/governance/minimization",
+        "testHint": "governance_runtime",
+        "evaluated": true
+      }
+    },
+    {
+      "id": "AI-GOV-004",
+      "title": "Local/cloud disclosure",
+      "status": "RUNTIME",
+      "route": "/v1/assist/*",
+      "notes": "evaluateCloudDisclosure",
+      "proof": {
+        "api": "POST /v1/assist/*",
+        "testHint": "privacy_policy + product_service",
+        "evaluated": true
+      }
+    },
+    {
+      "id": "AI-GOV-005",
+      "title": "Model and version identification",
+      "status": "RUNTIME",
+      "route": "/v1/os/model-status",
+      "notes": "Provenance + OS model status",
+      "proof": {
+        "api": "GET /v1/os/model-status",
+        "testHint": "os_integration",
+        "evaluated": true
+      }
+    },
+    {
+      "id": "AI-GOV-006",
+      "title": "Evaluation baseline",
+      "status": "RUNTIME",
+      "route": "system-layer:eval",
+      "notes": "fixtures/system-layer/eval",
+      "proof": {
+        "api": "npm run system-layer:eval",
+        "testHint": "evaluation_harness",
+        "evaluated": true
+      }
+    },
+    {
+      "id": "AI-GOV-007",
+      "title": "Failure analysis",
+      "status": "RUNTIME",
+      "route": "/v1/governance/monitor",
+      "notes": "Monitor events + fallback",
+      "proof": {
+        "api": "GET /v1/governance/monitor",
+        "testHint": "governance_runtime",
+        "evaluated": true
+      }
+    },
+    {
+      "id": "AI-GOV-008",
+      "title": "Bias and accessibility evaluation",
+      "status": "RUNTIME",
+      "route": "/v1/assist/a11y",
+      "notes": "a11y route + eval harness",
+      "proof": {
+        "api": "POST /v1/assist/a11y",
+        "testHint": "evaluation_harness",
+        "evaluated": true
+      }
+    },
+    {
+      "id": "AI-GOV-009",
+      "title": "Human override",
+      "status": "RUNTIME",
+      "route": "/v1/governance/override",
+      "notes": "GovernanceRuntime override",
+      "proof": {
+        "api": "POST /v1/governance/override",
+        "testHint": "governance_runtime",
+        "evaluated": true
+      }
+    },
+    {
+      "id": "AI-GOV-010",
+      "title": "Safe fallback",
+      "status": "RUNTIME",
+      "route": "/v1/assist/*",
+      "notes": "Deterministic + model-unavailable",
+      "proof": {
+        "api": "POST /v1/assist/*",
+        "testHint": "product_service + os_integration",
+        "evaluated": true
+      }
+    },
+    {
+      "id": "AI-GOV-011",
+      "title": "Monitoring",
+      "status": "RUNTIME",
+      "route": "/v1/governance/monitor",
+      "notes": "JSONL monitor events",
+      "proof": {
+        "api": "GET /v1/governance/monitor",
+        "testHint": "governance_runtime",
+        "evaluated": true
+      }
+    },
+    {
+      "id": "AI-GOV-012",
+      "title": "Rollback capability",
+      "status": "RUNTIME",
+      "route": "/v1/governance/model-rollback",
+      "notes": "Governance + model rollback",
+      "proof": {
+        "api": "POST /v1/governance/model-rollback",
+        "testHint": "governance_runtime + os_integration",
+        "evaluated": true
+      }
+    },
+    {
+      "id": "AI-LOCAL-001",
+      "title": "Offline tutoring packs",
+      "status": "RUNTIME",
+      "route": "/v1/assist/tutoring",
+      "notes": "local-only default",
+      "proof": {
+        "api": "POST /v1/assist/tutoring",
+        "testHint": "product_surfaces",
+        "evaluated": true
+      }
+    },
+    {
+      "id": "AI-LOCAL-002",
+      "title": "Local code assistance",
+      "status": "RUNTIME",
+      "route": "/v1/assist/code",
+      "notes": "local-only default",
+      "proof": {
+        "api": "POST /v1/assist/code",
+        "testHint": "product_surfaces",
+        "evaluated": true
+      }
+    },
+    {
+      "id": "AI-LOCAL-003",
+      "title": "Device help",
+      "status": "RUNTIME",
+      "route": "/v1/assist/device_help",
+      "notes": "local-only default",
+      "proof": {
+        "api": "POST /v1/assist/device_help",
+        "testHint": "product_surfaces",
+        "evaluated": true
+      }
+    },
+    {
+      "id": "AI-LOCAL-004",
+      "title": "Input interpretation support",
+      "status": "RUNTIME",
+      "route": "/v1/assist/input_interpretation",
+      "notes": "Dedicated input interpretation route",
+      "proof": {
+        "api": "POST /v1/assist/input_interpretation",
+        "testHint": "product_service + os_integration",
+        "evaluated": true
+      }
+    },
+    {
+      "id": "AI-LOCAL-005",
+      "title": "Basic translation",
+      "status": "RUNTIME",
+      "route": "/v1/assist/translation",
+      "notes": "local-only default",
+      "proof": {
+        "api": "POST /v1/assist/translation",
+        "testHint": "product_service",
+        "evaluated": true
+      }
+    },
+    {
+      "id": "AI-LOCAL-006",
+      "title": "Accessibility services",
+      "status": "RUNTIME",
+      "route": "/v1/assist/a11y",
+      "notes": "local-only default",
+      "proof": {
+        "api": "POST /v1/assist/a11y",
+        "testHint": "product_surfaces",
+        "evaluated": true
+      }
+    },
+    {
+      "id": "AI-LOCAL-007",
+      "title": "Local document retrieval",
+      "status": "RUNTIME",
+      "route": "/v1/rag/*",
+      "notes": "LocalRagEngine",
+      "proof": {
+        "api": "POST /v1/rag/search",
+        "testHint": "rag_engine",
+        "evaluated": true
+      }
+    },
+    {
+      "id": "AI-LOCAL-008",
+      "title": "Game AI",
+      "status": "RUNTIME",
+      "route": "/v1/assist/game_coach",
+      "notes": "local-only default",
+      "proof": {
+        "api": "POST /v1/assist/game_coach",
+        "testHint": "product_service",
+        "evaluated": true
+      }
+    },
+    {
+      "id": "AI-LOCAL-009",
+      "title": "Connectivity diagnosis",
+      "status": "RUNTIME",
+      "route": "/v1/assist/network",
+      "notes": "local-only default",
+      "proof": {
+        "api": "POST /v1/assist/network",
+        "testHint": "product_surfaces",
+        "evaluated": true
+      }
+    },
+    {
+      "id": "AI-LOCAL-010",
+      "title": "Safety-critical alerts",
+      "status": "RUNTIME",
+      "route": "/v1/assist/safety_alert",
+      "notes": "Defensive alert explanation route",
+      "proof": {
+        "api": "POST /v1/assist/safety_alert",
+        "testHint": "product_service + os_integration",
+        "evaluated": true
+      }
+    },
+    {
+      "id": "AI-LOCAL-011",
+      "title": "Cloud models not sole path",
+      "status": "RUNTIME",
+      "route": "/health",
+      "notes": "Deterministic fallback always",
+      "proof": {
+        "api": "GET /health + SAFE_FALLBACK",
+        "testHint": "product_service + os_integration",
+        "evaluated": true
+      }
+    },
+    {
+      "id": "FULL_GUNNCHAI3K_PLATFORM_DIGITAL_COMPLETE",
+      "title": "Full platform digital complete",
+      "status": "SCHEMA_ONLY",
+      "notes": "Not earned: Discord end-user surface + consented cloud production path incomplete; OS ai_interface host-forward is local digital integration only.",
+      "proof": {
+        "api": "GET /v1/os/discover",
+        "testHint": "platform_status",
+        "evaluated": false
+      }
+    },
+    {
+      "id": "DIGITALLY_VALIDATED",
+      "title": "Digitally validated platform claim",
+      "status": "SCHEMA_ONLY",
+      "notes": "Not claimed by Continuance VI (local OS integration + product service only).",
+      "proof": {
+        "api": "n/a",
+        "testHint": "platform_status",
+        "evaluated": false
+      }
+    }
+  ],
+  "missingRuntime": [],
+  "routeCoverage": [
+    {
+      "id": "AI-CORE-001",
+      "route": "/v1/assist/tutoring",
+      "hasMatchingRoute": true
+    },
+    {
+      "id": "AI-CORE-002",
+      "route": "/v1/assist/code",
+      "hasMatchingRoute": true
+    },
+    {
+      "id": "AI-CORE-003",
+      "route": "/v1/assist/device_help",
+      "hasMatchingRoute": true
+    },
+    {
+      "id": "AI-CORE-004",
+      "route": "/v1/assist/a11y",
+      "hasMatchingRoute": true
+    },
+    {
+      "id": "AI-CORE-005",
+      "route": "/v1/assist/game_coach",
+      "hasMatchingRoute": true
+    },
+    {
+      "id": "AI-CORE-006",
+      "route": "/v1/assist/network",
+      "hasMatchingRoute": true
+    },
+    {
+      "id": "AI-CORE-007",
+      "route": "/v1/assist/connection_path",
+      "hasMatchingRoute": true
+    },
+    {
+      "id": "AI-CORE-008",
+      "route": "/v1/rag/search",
+      "hasMatchingRoute": true
+    },
+    {
+      "id": "AI-CORE-009",
+      "route": "/v1/rag/search",
+      "hasMatchingRoute": true
+    },
+    {
+      "id": "AI-CORE-010",
+      "route": "/v1/assist/scientific",
+      "hasMatchingRoute": true
+    },
+    {
+      "id": "AI-CORE-011",
+      "route": "/v1/assist/translation",
+      "hasMatchingRoute": true
+    },
+    {
+      "id": "AI-CORE-012",
+      "route": "/v1/assist/content_adaptation",
+      "hasMatchingRoute": true
+    },
+    {
+      "id": "AI-CORE-013",
+      "route": "/v1/assist/workflow",
+      "hasMatchingRoute": true
+    },
+    {
+      "id": "AI-CORE-014",
+      "route": "/v1/assist/security",
+      "hasMatchingRoute": true
+    },
+    {
+      "id": "AI-CORE-015",
+      "route": "/v1/continuity/*",
+      "hasMatchingRoute": true
+    },
+    {
+      "id": "AI-GOV-001",
+      "route": "/v1/governance/purpose",
+      "hasMatchingRoute": true
+    },
+    {
+      "id": "AI-GOV-002",
+      "route": "/v1/governance/consent",
+      "hasMatchingRoute": true
+    },
+    {
+      "id": "AI-GOV-003",
+      "route": "/v1/governance/minimization",
+      "hasMatchingRoute": true
+    },
+    {
+      "id": "AI-GOV-004",
+      "route": "/v1/assist/*",
+      "hasMatchingRoute": true
+    },
+    {
+      "id": "AI-GOV-005",
+      "route": "/v1/os/model-status",
+      "hasMatchingRoute": true
+    },
+    {
+      "id": "AI-GOV-006",
+      "route": "system-layer:eval",
+      "hasMatchingRoute": true
+    },
+    {
+      "id": "AI-GOV-007",
+      "route": "/v1/governance/monitor",
+      "hasMatchingRoute": true
+    },
+    {
+      "id": "AI-GOV-008",
+      "route": "/v1/assist/a11y",
+      "hasMatchingRoute": true
+    },
+    {
+      "id": "AI-GOV-009",
+      "route": "/v1/governance/override",
+      "hasMatchingRoute": true
+    },
+    {
+      "id": "AI-GOV-010",
+      "route": "/v1/assist/*",
+      "hasMatchingRoute": true
+    },
+    {
+      "id": "AI-GOV-011",
+      "route": "/v1/governance/monitor",
+      "hasMatchingRoute": true
+    },
+    {
+      "id": "AI-GOV-012",
+      "route": "/v1/governance/model-rollback",
+      "hasMatchingRoute": true
+    },
+    {
+      "id": "AI-LOCAL-001",
+      "route": "/v1/assist/tutoring",
+      "hasMatchingRoute": true
+    },
+    {
+      "id": "AI-LOCAL-002",
+      "route": "/v1/assist/code",
+      "hasMatchingRoute": true
+    },
+    {
+      "id": "AI-LOCAL-003",
+      "route": "/v1/assist/device_help",
+      "hasMatchingRoute": true
+    },
+    {
+      "id": "AI-LOCAL-004",
+      "route": "/v1/assist/input_interpretation",
+      "hasMatchingRoute": true
+    },
+    {
+      "id": "AI-LOCAL-005",
+      "route": "/v1/assist/translation",
+      "hasMatchingRoute": true
+    },
+    {
+      "id": "AI-LOCAL-006",
+      "route": "/v1/assist/a11y",
+      "hasMatchingRoute": true
+    },
+    {
+      "id": "AI-LOCAL-007",
+      "route": "/v1/rag/*",
+      "hasMatchingRoute": true
+    },
+    {
+      "id": "AI-LOCAL-008",
+      "route": "/v1/assist/game_coach",
+      "hasMatchingRoute": true
+    },
+    {
+      "id": "AI-LOCAL-009",
+      "route": "/v1/assist/network",
+      "hasMatchingRoute": true
+    },
+    {
+      "id": "AI-LOCAL-010",
+      "route": "/v1/assist/safety_alert",
+      "hasMatchingRoute": true
+    },
+    {
+      "id": "AI-LOCAL-011",
+      "route": "/health",
+      "hasMatchingRoute": true
+    }
+  ],
+  "fullPlatformTokenEarned": false,
+  "digitallyValidatedEarned": false
+}

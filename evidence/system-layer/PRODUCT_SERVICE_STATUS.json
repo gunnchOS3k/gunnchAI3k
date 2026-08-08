@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-08-08T20:20:36.449Z",
-  "continuation": "V",
+  "generatedAt": "2026-08-08T21:04:45.379Z",
+  "continuation": "VI",
   "productService": {
     "name": "gunnchAI3k-product-service",
-    "version": "0.5.0-continuation-v",
+    "version": "0.6.0-continuation-vi",
     "token": "GUNNCHAI_PRODUCT_SERVICE_LOCAL_PASS",
-    "routes": 30,
+    "routes": 40,
     "rag": {
       "documents": 17,
       "chunks": 37,
@@ -20,8 +20,15 @@
       "indexPath": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/var/gunnchai-status/rag/index.json"
     }
   },
+  "osIntegration": {
+    "token": "GUNNCHAI_OS_INTEGRATION_LOCAL_PASS",
+    "earned": true,
+    "discoveryBind": "127.0.0.1",
+    "topology": "qemu-guest-ai_interface → host-forward → gunnchAI3k product-service (127.0.0.1)"
+  },
   "tokens": {
     "GUNNCHAI_PRODUCT_SERVICE_LOCAL_PASS": true,
+    "GUNNCHAI_OS_INTEGRATION_LOCAL_PASS": true,
     "GUNNCHAI3K_LOCAL_RUNTIME_CAPABILITY_EVAL_PASS": true,
     "GUNNCHAI3K_SYSTEM_LAYER_FOUNDATION_EVAL_PASS": true,
     "GUNNCHAI_REAL_LOCAL_INFERENCE_PASS": true,
@@ -76,177 +83,72 @@
       "AI-LOCAL-011"
     ]
   },
-  "routes": [
-    {
-      "route": "tutoring",
-      "method": "GET",
-      "path": "/health"
-    },
-    {
-      "route": "tutoring",
-      "method": "POST",
-      "path": "/v1/assist/tutoring"
-    },
-    {
-      "route": "code",
-      "method": "POST",
-      "path": "/v1/assist/code"
-    },
-    {
-      "route": "device_help",
-      "method": "POST",
-      "path": "/v1/assist/device_help"
-    },
-    {
-      "route": "a11y",
-      "method": "POST",
-      "path": "/v1/assist/a11y"
-    },
-    {
-      "route": "game_coach",
-      "method": "POST",
-      "path": "/v1/assist/game_coach"
-    },
-    {
-      "route": "network",
-      "method": "POST",
-      "path": "/v1/assist/network"
-    },
-    {
-      "route": "rag",
-      "method": "POST",
-      "path": "/v1/assist/rag"
-    },
-    {
-      "route": "scientific",
-      "method": "POST",
-      "path": "/v1/assist/scientific"
-    },
-    {
-      "route": "translation",
-      "method": "POST",
-      "path": "/v1/assist/translation"
-    },
-    {
-      "route": "workflow",
-      "method": "POST",
-      "path": "/v1/assist/workflow"
-    },
-    {
-      "route": "security",
-      "method": "POST",
-      "path": "/v1/assist/security"
-    },
-    {
-      "route": "continuity",
-      "method": "POST",
-      "path": "/v1/assist/continuity"
-    },
-    {
-      "route": "content_adaptation",
-      "method": "POST",
-      "path": "/v1/assist/content_adaptation"
-    },
-    {
-      "route": "connection_path",
-      "method": "POST",
-      "path": "/v1/assist/connection_path"
-    },
-    {
-      "route": "rag",
-      "method": "POST",
-      "path": "/v1/rag/ingest"
-    },
-    {
-      "route": "rag",
-      "method": "POST",
-      "path": "/v1/rag/chunk"
-    },
-    {
-      "route": "rag",
-      "method": "POST",
-      "path": "/v1/rag/index"
-    },
-    {
-      "route": "rag",
-      "method": "POST",
-      "path": "/v1/rag/search"
-    },
-    {
-      "route": "rag",
-      "method": "POST",
-      "path": "/v1/rag/attribution"
-    },
-    {
-      "route": "rag",
-      "method": "POST",
-      "path": "/v1/rag/delete"
-    },
-    {
-      "route": "rag",
-      "method": "POST",
-      "path": "/v1/rag/rebuild"
-    },
-    {
-      "route": "continuity",
-      "method": "GET",
-      "path": "/v1/continuity/sessions"
-    },
-    {
-      "route": "continuity",
-      "method": "POST",
-      "path": "/v1/continuity/export"
-    },
-    {
-      "route": "continuity",
-      "method": "POST",
-      "path": "/v1/continuity/import"
-    },
-    {
-      "route": "workflow",
-      "method": "GET",
-      "path": "/v1/governance/status"
-    },
-    {
-      "route": "workflow",
-      "method": "POST",
-      "path": "/v1/governance/consent"
-    },
-    {
-      "route": "workflow",
-      "method": "POST",
-      "path": "/v1/governance/override"
-    },
-    {
-      "route": "workflow",
-      "method": "POST",
-      "path": "/v1/governance/rollback"
-    },
-    {
-      "route": "workflow",
-      "method": "GET",
-      "path": "/v1/governance/monitor"
-    }
-  ],
-  "remainingSchemaNodes": [
-    "FULL_GUNNCHAI3K_PLATFORM_DIGITAL_COMPLETE",
-    "DIGITALLY_VALIDATED"
+  "requirementProof": {
+    "normativeTotal": 38,
+    "runtimeProven": 38,
+    "allNormativeRuntime": true,
+    "missingRuntime": []
+  },
+  "gaps": [
+    "Discord end-user product surface not fully wired as production client (HTTP + OS client are local digital paths).",
+    "Cloud path remains policy stub only (no production keys).",
+    "QEMU guest may host-forward model runtime to host — not an on-device NPU claim.",
+    "DIGITALLY_VALIDATED and FULL_GUNNCHAI3K_PLATFORM_DIGITAL_COMPLETE not earned."
   ],
   "claim": {
     "fullPlatformDigitalComplete": false,
-    "reason": "FULL_GUNNCHAI3K_PLATFORM_DIGITAL_COMPLETE is NOT claimed. llama.cpp real inference=true; realInferenceCount=6; offline + hybrid local paths cover capabilities, but full digital platform integration (Discord/product surface + cloud) is incomplete."
+    "reason": "FULL_GUNNCHAI3K_PLATFORM_DIGITAL_COMPLETE not earned. Continuance VI proves normative AI RUNTIME + gunnchOS ai_interface local integration (incl. QEMU host-forward topology), but Discord/cloud production paths remain incomplete."
   },
-  "gaps": [
-    "Discord/product surface not fully wired as end-user client (HTTP product service is local-only).",
-    "Cloud path remains policy stub only (no production keys).",
-    "DIGITALLY_VALIDATED and FULL_GUNNCHAI3K_PLATFORM_DIGITAL_COMPLETE not earned."
-  ],
-  "eval": {
-    "allPassed": true,
-    "passedCount": 11,
-    "totalCount": 11,
-    "capabilityToken": "GUNNCHAI3K_LOCAL_RUNTIME_CAPABILITY_EVAL_PASS",
-    "foundationToken": "GUNNCHAI3K_SYSTEM_LAYER_FOUNDATION_EVAL_PASS",
-    "realLocalInferenceToken": "GUNNCHAI_REAL_LOCAL_INFERENCE_PASS"
+  "topology": {
+    "schema": "gunnchai.os_integration.topology.v1",
+    "continuation": "VI",
+    "claimBoundary": "Documents digital integration topology only. Does not claim physical device AI acceleration, production cloud, or FULL_GUNNCHAI3K_PLATFORM_DIGITAL_COMPLETE.",
+    "planes": {
+      "guest": {
+        "role": "gunnchOS ai_interface supervised service",
+        "bind": "loopback inside guest OR host-forwarded port",
+        "responsibilities": [
+          "capability discovery",
+          "permission checks",
+          "timeout / cancel propagation",
+          "consent + privacy mode",
+          "unavailable fallback messaging"
+        ]
+      },
+      "hostForward": {
+        "role": "QEMU user-net / forward localhost:GUEST_PORT → host:HOST_PORT",
+        "defaultHostPort": 8791,
+        "note": "Guest treats 127.0.0.1:forwarded as local; model weights stay on host."
+      },
+      "hostProductService": {
+        "role": "gunnchAI3k product-service (Node)",
+        "bind": "127.0.0.1 only",
+        "endpoints": [
+          "/health",
+          "/v1/os/discover",
+          "/v1/os/model-status",
+          "/v1/os/rag-status",
+          "/v1/assist/*",
+          "/v1/rag/*",
+          "/v1/governance/*",
+          "/v1/audit",
+          "/v1/continuity/*"
+        ]
+      },
+      "hostModelRuntime": {
+        "role": "llama.cpp + GGUF (optional) with deterministic fallback",
+        "location": "host filesystem under models/local",
+        "qemuMayHostForwardModel": true,
+        "unavailableFallback": "deterministic-baseline + SAFE_FALLBACK"
+      }
+    },
+    "sequence": [
+      "gunnchOS app → ai_interface.tutor_start / assist",
+      "ai_interface HTTP client → 127.0.0.1 (possibly host-forwarded)",
+      "product-service governance + permissions + timeout/cancel",
+      "local inference (llama.cpp) OR deterministic fallback",
+      "RAG attribution / audit / continuity as requested",
+      "structured response + provenance back to guest"
+    ]
   }
 }

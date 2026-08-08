@@ -1,20 +1,23 @@
 /**
- * Continuance V — callable product service contracts for gunnchOS integration.
+ * Continuance VI — callable product service contracts for gunnchOS integration.
  */
 
 import type { ProcessingMode } from '../../local-runtime/types';
 import type { DeviceProfileId, SystemCapability } from '../model_registry';
 
 export const PRODUCT_SERVICE_NAME = 'gunnchAI3k-product-service';
-export const PRODUCT_SERVICE_VERSION = '0.5.0-continuation-v';
+export const PRODUCT_SERVICE_VERSION = '0.6.0-continuation-vi';
 export const PRODUCT_SERVICE_TOKEN = 'GUNNCHAI_PRODUCT_SERVICE_LOCAL_PASS';
+export const OS_INTEGRATION_TOKEN = 'GUNNCHAI_OS_INTEGRATION_LOCAL_PASS';
 
 /** Product routes beyond the 11 eval capabilities. */
 export type ProductRoute =
   | SystemCapability
   | 'continuity'
   | 'content_adaptation'
-  | 'connection_path';
+  | 'connection_path'
+  | 'input_interpretation'
+  | 'safety_alert';
 
 export type PermissionScope =
   | 'assist'
@@ -28,7 +31,9 @@ export type PermissionScope =
   | 'governance:rollback'
   | 'continuity:read'
   | 'continuity:write'
-  | 'monitor:read';
+  | 'monitor:read'
+  | 'audit:read'
+  | 'os:discover';
 
 export interface ProvenanceRecord {
   requestId: string;
@@ -73,6 +78,18 @@ export interface StructuredAssistPayload {
     alternatives: string[];
     rationale: string[];
   };
+  inputInterpretation?: {
+    modality: string;
+    normalizedText: string;
+    confidence: number;
+    alternatives: string[];
+  };
+  safetyAlert?: {
+    severity: 'info' | 'warning' | 'critical';
+    explanation: string;
+    recommendedActions: string[];
+    defensiveOnly: true;
+  };
   [key: string]: unknown;
 }
 
@@ -88,6 +105,7 @@ export interface AssistRequest {
   purpose?: string;
   continuitySessionId?: string;
   timeoutMs?: number;
+  signal?: AbortSignal;
 }
 
 export interface AssistResponse {
@@ -118,4 +136,47 @@ export interface RequirementNodeStatus {
   status: 'RUNTIME' | 'SCHEMA_ONLY' | 'EXTERNAL_REQUIRED' | 'PARTIAL';
   route?: string;
   notes: string;
+  proof?: {
+    api: string;
+    testHint: string;
+    evaluated: boolean;
+  };
+}
+
+export interface OsDiscoveryPayload {
+  service: string;
+  version: string;
+  token: string;
+  osIntegrationToken: string;
+  bindHint: string;
+  topology: string;
+  capabilities: Array<{ route: ProductRoute; method: string; path: string }>;
+  requirements: RequirementNodeStatus[];
+  modelStatus: LocalModelStatus;
+  ragStatus: RagSourceStatus;
+  permissions: PermissionScope[];
+  cancellationSupported: boolean;
+  timeoutSupported: boolean;
+  unavailableFallback: string;
+  fullPlatformDigitalComplete: false;
+}
+
+export interface LocalModelStatus {
+  backend: string;
+  selectedArchitecture: 'llama.cpp';
+  realLocalInference: boolean;
+  metricsMode: string;
+  activeModelVersion: string;
+  modelVersionHistory: string[];
+  unavailableFallback: 'deterministic-baseline';
+  hostForwardPossible: boolean;
+}
+
+export interface RagSourceStatus {
+  documents: number;
+  chunks: number;
+  corpora: Record<string, number>;
+  rebuiltAt: string | null;
+  attributionEnabled: true;
+  sources: Array<{ docId: string; corpus: string; title?: string; path: string }>;
 }

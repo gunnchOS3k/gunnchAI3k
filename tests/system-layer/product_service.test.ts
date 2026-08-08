@@ -6,7 +6,7 @@ import { startProductServiceServer } from '../../src/system-layer/product_servic
 import { PRODUCT_SERVICE_TOKEN } from '../../src/system-layer/product_service/types';
 import { ALL_SYSTEM_CAPABILITIES } from '../../src/system-layer/model_registry';
 
-describe('Continuance V product service', () => {
+describe('Continuance VI product service', () => {
   let tmp: string;
   let service: GunnchAIProductService;
 
@@ -22,12 +22,18 @@ describe('Continuance V product service', () => {
   it('exposes health token, routes, and requirement RUNTIME nodes', () => {
     const health = service.health();
     expect(health.token).toBe(PRODUCT_SERVICE_TOKEN);
+    expect(health.osIntegrationToken).toBe('GUNNCHAI_OS_INTEGRATION_LOCAL_PASS');
     expect(health.fullPlatformDigitalComplete).toBe(false);
     expect(health.rag.documents).toBeGreaterThan(0);
+    expect(health.cancellationSupported).toBe(true);
 
     const routes = service.listRoutes();
     expect(routes.some((r) => r.path === '/v1/rag/rebuild')).toBe(true);
     expect(routes.some((r) => r.path === '/v1/assist/continuity')).toBe(true);
+    expect(routes.some((r) => r.path === '/v1/assist/input_interpretation')).toBe(true);
+    expect(routes.some((r) => r.path === '/v1/assist/safety_alert')).toBe(true);
+    expect(routes.some((r) => r.path === '/v1/os/discover')).toBe(true);
+    expect(routes.some((r) => r.path === '/v1/governance/model-rollback')).toBe(true);
 
     const nodes = service.requirementStatus();
     const runtime = nodes.filter((n) => n.status === 'RUNTIME');
@@ -35,6 +41,10 @@ describe('Continuance V product service', () => {
     expect(nodes.find((n) => n.id === 'FULL_GUNNCHAI3K_PLATFORM_DIGITAL_COMPLETE')?.status).toBe(
       'SCHEMA_ONLY',
     );
+    expect(nodes.find((n) => n.id === 'AI-LOCAL-004')?.route).toBe(
+      '/v1/assist/input_interpretation',
+    );
+    expect(nodes.find((n) => n.id === 'AI-LOCAL-010')?.route).toBe('/v1/assist/safety_alert');
   });
 
   it('serves structured assist with provenance for every system capability route', async () => {

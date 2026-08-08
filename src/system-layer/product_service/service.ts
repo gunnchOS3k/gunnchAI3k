@@ -1,5 +1,5 @@
 /**
- * Continuance V — callable product service (gunnchOS-integrable).
+ * Continuance VI — callable product service (gunnchOS-integrable).
  */
 
 import { randomUUID } from 'node:crypto';
@@ -9,6 +9,7 @@ import { LocalInferenceRuntimeAdapter } from '../local_inference/runtime_adapter
 import { mechanismFor } from '../capability_mechanisms';
 import type { SystemCapability } from '../model_registry';
 import { ALL_SYSTEM_CAPABILITIES } from '../model_registry';
+import { AuditLog } from './audit';
 import { ContinuityStore } from './continuity';
 import { GovernanceRuntime } from './governance';
 import {
@@ -17,15 +18,25 @@ import {
   requiredScopesForRoute,
 } from './permissions';
 import { LocalRagEngine } from './rag_engine';
+import {
+  ActiveRequestRegistry,
+  RequestCancelledError,
+  RequestTimeoutError,
+  withTimeoutAndCancel,
+} from './request_control';
 import type {
   AssistRequest,
   AssistResponse,
+  LocalModelStatus,
+  OsDiscoveryPayload,
   ProductRoute,
   ProvenanceRecord,
+  RagSourceStatus,
   RequirementNodeStatus,
   StructuredAssistPayload,
 } from './types';
 import {
+  OS_INTEGRATION_TOKEN,
   PRODUCT_SERVICE_NAME,
   PRODUCT_SERVICE_TOKEN,
   PRODUCT_SERVICE_VERSION,
@@ -37,12 +48,22 @@ function isSystemCapability(route: ProductRoute): route is SystemCapability {
   return SYSTEM_ROUTES.has(route);
 }
 
+const EXTRA_PRODUCT_ROUTES: ProductRoute[] = [
+  'continuity',
+  'content_adaptation',
+  'connection_path',
+  'input_interpretation',
+  'safety_alert',
+];
+
 export class GunnchAIProductService {
   readonly name = PRODUCT_SERVICE_NAME;
   readonly version = PRODUCT_SERVICE_VERSION;
   readonly governance: GovernanceRuntime;
   readonly rag: LocalRagEngine;
   readonly continuity: ContinuityStore;
+  readonly audit: AuditLog;
+  readonly activeRequests = new ActiveRequestRegistry();
   private readonly adapter: LocalInferenceRuntimeAdapter;
   private readonly llama: LlamaCppBackend;
   private readonly cwd: string;
@@ -59,6 +80,7 @@ export class GunnchAIProductService {
       this.rag.rebuild();
     }
     this.continuity = new ContinuityStore(cwd, path.join(varRoot, 'continuity'));
+    this.audit = new AuditLog(cwd, path.join(varRoot, 'audit'));
     this.adapter = new LocalInferenceRuntimeAdapter(cwd);
     this.llama = new LlamaCppBackend(cwd);
   }
@@ -71,6 +93,7 @@ export class GunnchAIProductService {
       service: this.name,
       version: this.version,
       token: PRODUCT_SERVICE_TOKEN,
+      osIntegrationToken: OS_INTEGRATION_TOKEN,
       offline: true,
       bindHint: '127.0.0.1',
       realLocalInference: probe.canRunRealInference,
@@ -82,20 +105,22 @@ export class GunnchAIProductService {
         monitoringEvents: this.governance.getState().monitoring.eventCount,
         overrideActive: this.governance.getState().humanOverride.active,
         safeFallback: this.governance.getState().safeFallbackEnabled,
+        activeModelVersion: this.governance.getState().activeModelVersion,
       },
       capabilities: this.listRoutes(),
-      fullPlatformDigitalComplete: false,
+      cancellationSupported: true,
+      timeoutSupported: true,
+      fullPlatformDigitalComplete: false as const,
     };
   }
 
   listRoutes(): Array<{ route: ProductRoute; method: string; path: string }> {
-    const assist = (ALL_SYSTEM_CAPABILITIES as ProductRoute[]).concat([
-      'continuity',
-      'content_adaptation',
-      'connection_path',
-    ]);
+    const assist = (ALL_SYSTEM_CAPABILITIES as ProductRoute[]).concat(EXTRA_PRODUCT_ROUTES);
     return [
       { route: 'tutoring' as ProductRoute, method: 'GET', path: '/health' },
+      { route: 'workflow' as ProductRoute, method: 'GET', path: '/v1/os/discover' },
+      { route: 'workflow' as ProductRoute, method: 'GET', path: '/v1/os/model-status' },
+      { route: 'rag' as ProductRoute, method: 'GET', path: '/v1/os/rag-status' },
       ...assist.map((route) => ({
         route,
         method: 'POST',
@@ -112,74 +137,311 @@ export class GunnchAIProductService {
       { route: 'continuity', method: 'POST', path: '/v1/continuity/export' },
       { route: 'continuity', method: 'POST', path: '/v1/continuity/import' },
       { route: 'workflow', method: 'GET', path: '/v1/governance/status' },
+      { route: 'workflow', method: 'POST', path: '/v1/governance/purpose' },
       { route: 'workflow', method: 'POST', path: '/v1/governance/consent' },
+      { route: 'workflow', method: 'POST', path: '/v1/governance/minimization' },
       { route: 'workflow', method: 'POST', path: '/v1/governance/override' },
       { route: 'workflow', method: 'POST', path: '/v1/governance/rollback' },
+      { route: 'workflow', method: 'POST', path: '/v1/governance/model-rollback' },
       { route: 'workflow', method: 'GET', path: '/v1/governance/monitor' },
+      { route: 'workflow', method: 'GET', path: '/v1/audit' },
+      { route: 'workflow', method: 'POST', path: '/v1/assist/cancel' },
     ];
   }
 
+  modelStatus(): LocalModelStatus {
+    const probe = this.llama.probe();
+    const state = this.governance.getState();
+    return {
+      backend: probe.canRunRealInference ? 'llama.cpp' : 'deterministic-baseline',
+      selectedArchitecture: 'llama.cpp',
+      realLocalInference: probe.canRunRealInference,
+      metricsMode: probe.metricsMode,
+      activeModelVersion: state.activeModelVersion,
+      modelVersionHistory: state.modelVersionHistory,
+      unavailableFallback: 'deterministic-baseline',
+      hostForwardPossible: true,
+    };
+  }
+
+  ragStatus(): RagSourceStatus {
+    const stats = this.rag.stats();
+    return {
+      documents: stats.documents,
+      chunks: stats.chunks,
+      corpora: stats.corpora,
+      rebuiltAt: stats.rebuiltAt ?? null,
+      attributionEnabled: true,
+      sources: this.rag.listDocuments().map((d) => ({
+        docId: d.docId,
+        corpus: d.corpus,
+        title: d.title,
+        path: d.sourcePath,
+      })),
+    };
+  }
+
+  osDiscover(): OsDiscoveryPayload {
+    return {
+      service: this.name,
+      version: this.version,
+      token: PRODUCT_SERVICE_TOKEN,
+      osIntegrationToken: OS_INTEGRATION_TOKEN,
+      bindHint: '127.0.0.1',
+      topology: 'qemu-guest-ai_interface → host-forward → gunnchAI3k product-service (127.0.0.1)',
+      capabilities: this.listRoutes(),
+      requirements: this.requirementStatus(),
+      modelStatus: this.modelStatus(),
+      ragStatus: this.ragStatus(),
+      permissions: DEFAULT_LOCAL_PERMISSIONS,
+      cancellationSupported: true,
+      timeoutSupported: true,
+      unavailableFallback: 'deterministic-baseline + SAFE_FALLBACK',
+      fullPlatformDigitalComplete: false,
+    };
+  }
+
   requirementStatus(): RequirementNodeStatus[] {
-    const runtime = (id: string, title: string, route: string, notes: string): RequirementNodeStatus => ({
+    const runtime = (
+      id: string,
+      title: string,
+      route: string,
+      notes: string,
+      proof: RequirementNodeStatus['proof'],
+    ): RequirementNodeStatus => ({
       id,
       title,
       status: 'RUNTIME',
       route,
       notes,
+      proof,
     });
     return [
-      runtime('AI-CORE-001', 'Personalized tutoring', '/v1/assist/tutoring', 'Product assist + eval'),
-      runtime('AI-CORE-002', 'Code assistance', '/v1/assist/code', 'Product assist + eval'),
-      runtime('AI-CORE-003', 'Device troubleshooting', '/v1/assist/device_help', 'Product assist + eval'),
-      runtime('AI-CORE-004', 'Accessibility assistance', '/v1/assist/a11y', 'Product assist + eval'),
-      runtime('AI-CORE-005', 'Game coaching', '/v1/assist/game_coach', 'Product assist + eval'),
-      runtime('AI-CORE-006', 'Network optimization', '/v1/assist/network', 'Product assist + eval'),
-      runtime('AI-CORE-007', 'Connection-path recommendations', '/v1/assist/connection_path', 'Product route'),
-      runtime('AI-CORE-008', 'Local search', '/v1/rag/search', 'Local RAG engine'),
-      runtime('AI-CORE-009', 'Knowledge retrieval', '/v1/rag/search', 'Local RAG + attribution'),
-      runtime('AI-CORE-010', 'Scientific source attribution', '/v1/assist/scientific', 'Assist + RAG attribution'),
-      runtime('AI-CORE-011', 'Translation', '/v1/assist/translation', 'Product assist + eval'),
-      runtime('AI-CORE-012', 'Content adaptation', '/v1/assist/content_adaptation', 'Product route'),
-      runtime('AI-CORE-013', 'Workflow automation', '/v1/assist/workflow', 'Product assist + eval'),
-      runtime('AI-CORE-014', 'Security anomaly explanation', '/v1/assist/security', 'Defensive-only assist'),
-      runtime('AI-CORE-015', 'User-controlled cross-device continuity', '/v1/continuity/*', 'Local export/import'),
-      runtime('AI-GOV-001', 'Declared purpose', '/v1/governance/*', 'GovernanceRuntime.declarePurpose'),
-      runtime('AI-GOV-002', 'User consent', '/v1/governance/consent', 'GovernanceRuntime.setConsent'),
-      runtime('AI-GOV-003', 'Data minimization', '/v1/governance/*', 'PII strip + max chars'),
-      runtime('AI-GOV-004', 'Local/cloud disclosure', '/v1/assist/*', 'evaluateCloudDisclosure'),
-      runtime('AI-GOV-005', 'Model and version identification', '/health', 'Provenance + /version'),
-      runtime('AI-GOV-006', 'Evaluation baseline', 'system-layer:eval', 'fixtures/system-layer/eval'),
-      runtime('AI-GOV-007', 'Failure analysis', '/v1/governance/monitor', 'Monitor events + fallback'),
-      runtime('AI-GOV-008', 'Bias and accessibility evaluation', '/v1/assist/a11y', 'a11y route + eval harness'),
-      runtime('AI-GOV-009', 'Human override', '/v1/governance/override', 'GovernanceRuntime override'),
-      runtime('AI-GOV-010', 'Safe fallback', '/v1/assist/*', 'Deterministic + model-unavailable'),
-      runtime('AI-GOV-011', 'Monitoring', '/v1/governance/monitor', 'JSONL monitor events'),
-      runtime('AI-GOV-012', 'Rollback capability', '/v1/governance/rollback', 'Governance snapshots'),
-      runtime('AI-LOCAL-001', 'Offline tutoring packs', '/v1/assist/tutoring', 'local-only default'),
-      runtime('AI-LOCAL-002', 'Local code assistance', '/v1/assist/code', 'local-only default'),
-      runtime('AI-LOCAL-003', 'Device help', '/v1/assist/device_help', 'local-only default'),
-      runtime('AI-LOCAL-004', 'Input interpretation support', '/v1/assist/a11y', 'a11y structured output'),
-      runtime('AI-LOCAL-005', 'Basic translation', '/v1/assist/translation', 'local-only default'),
-      runtime('AI-LOCAL-006', 'Accessibility services', '/v1/assist/a11y', 'local-only default'),
-      runtime('AI-LOCAL-007', 'Local document retrieval', '/v1/rag/*', 'LocalRagEngine'),
-      runtime('AI-LOCAL-008', 'Game AI', '/v1/assist/game_coach', 'local-only default'),
-      runtime('AI-LOCAL-009', 'Connectivity diagnosis', '/v1/assist/network', 'local-only default'),
-      runtime('AI-LOCAL-010', 'Safety-critical alerts', '/v1/assist/security', 'defensive explanations'),
-      runtime('AI-LOCAL-011', 'Cloud models not sole path', '/health', 'Deterministic fallback always'),
+      runtime('AI-CORE-001', 'Personalized tutoring', '/v1/assist/tutoring', 'Product assist + eval + WAIKE surface', {
+        api: 'POST /v1/assist/tutoring',
+        testHint: 'product_surfaces + product_service',
+        evaluated: true,
+      }),
+      runtime('AI-CORE-002', 'Code assistance', '/v1/assist/code', 'Product assist + eval + code surface', {
+        api: 'POST /v1/assist/code',
+        testHint: 'product_surfaces + product_service',
+        evaluated: true,
+      }),
+      runtime('AI-CORE-003', 'Device troubleshooting', '/v1/assist/device_help', 'Product assist + device surface', {
+        api: 'POST /v1/assist/device_help',
+        testHint: 'product_surfaces + product_service',
+        evaluated: true,
+      }),
+      runtime('AI-CORE-004', 'Accessibility assistance', '/v1/assist/a11y', 'Product assist + a11y surface', {
+        api: 'POST /v1/assist/a11y',
+        testHint: 'product_surfaces + product_service',
+        evaluated: true,
+      }),
+      runtime('AI-CORE-005', 'Game coaching', '/v1/assist/game_coach', 'Product assist + eval', {
+        api: 'POST /v1/assist/game_coach',
+        testHint: 'product_service + evaluation_harness',
+        evaluated: true,
+      }),
+      runtime('AI-CORE-006', 'Network optimization', '/v1/assist/network', 'Product assist + connectivity surface', {
+        api: 'POST /v1/assist/network',
+        testHint: 'product_surfaces + product_service',
+        evaluated: true,
+      }),
+      runtime('AI-CORE-007', 'Connection-path recommendations', '/v1/assist/connection_path', 'Product route', {
+        api: 'POST /v1/assist/connection_path',
+        testHint: 'product_service',
+        evaluated: true,
+      }),
+      runtime('AI-CORE-008', 'Local search', '/v1/rag/search', 'Local RAG engine', {
+        api: 'POST /v1/rag/search',
+        testHint: 'rag_engine + product_service',
+        evaluated: true,
+      }),
+      runtime('AI-CORE-009', 'Knowledge retrieval', '/v1/rag/search', 'Local RAG + attribution', {
+        api: 'POST /v1/rag/search',
+        testHint: 'rag_engine',
+        evaluated: true,
+      }),
+      runtime('AI-CORE-010', 'Scientific source attribution', '/v1/assist/scientific', 'Archive surface + RAG attribution', {
+        api: 'POST /v1/assist/scientific',
+        testHint: 'product_surfaces + product_service',
+        evaluated: true,
+      }),
+      runtime('AI-CORE-011', 'Translation', '/v1/assist/translation', 'Product assist + eval', {
+        api: 'POST /v1/assist/translation',
+        testHint: 'product_service + evaluation_harness',
+        evaluated: true,
+      }),
+      runtime('AI-CORE-012', 'Content adaptation', '/v1/assist/content_adaptation', 'Product route', {
+        api: 'POST /v1/assist/content_adaptation',
+        testHint: 'product_service',
+        evaluated: true,
+      }),
+      runtime('AI-CORE-013', 'Workflow automation', '/v1/assist/workflow', 'Product assist + eval', {
+        api: 'POST /v1/assist/workflow',
+        testHint: 'product_service + evaluation_harness',
+        evaluated: true,
+      }),
+      runtime('AI-CORE-014', 'Security anomaly explanation', '/v1/assist/security', 'Defensive-only assist', {
+        api: 'POST /v1/assist/security',
+        testHint: 'product_service + evaluation_harness',
+        evaluated: true,
+      }),
+      runtime('AI-CORE-015', 'User-controlled cross-device continuity', '/v1/continuity/*', 'Local export/import', {
+        api: 'POST /v1/continuity/export|import',
+        testHint: 'product_service + os_integration',
+        evaluated: true,
+      }),
+      runtime('AI-GOV-001', 'Declared purpose', '/v1/governance/purpose', 'GovernanceRuntime.declarePurpose', {
+        api: 'POST /v1/governance/purpose',
+        testHint: 'governance_runtime',
+        evaluated: true,
+      }),
+      runtime('AI-GOV-002', 'User consent', '/v1/governance/consent', 'GovernanceRuntime.setConsent', {
+        api: 'POST /v1/governance/consent',
+        testHint: 'governance_runtime + os_integration',
+        evaluated: true,
+      }),
+      runtime('AI-GOV-003', 'Data minimization', '/v1/governance/minimization', 'PII strip + max chars', {
+        api: 'POST /v1/governance/minimization',
+        testHint: 'governance_runtime',
+        evaluated: true,
+      }),
+      runtime('AI-GOV-004', 'Local/cloud disclosure', '/v1/assist/*', 'evaluateCloudDisclosure', {
+        api: 'POST /v1/assist/*',
+        testHint: 'privacy_policy + product_service',
+        evaluated: true,
+      }),
+      runtime('AI-GOV-005', 'Model and version identification', '/v1/os/model-status', 'Provenance + OS model status', {
+        api: 'GET /v1/os/model-status',
+        testHint: 'os_integration',
+        evaluated: true,
+      }),
+      runtime('AI-GOV-006', 'Evaluation baseline', 'system-layer:eval', 'fixtures/system-layer/eval', {
+        api: 'npm run system-layer:eval',
+        testHint: 'evaluation_harness',
+        evaluated: true,
+      }),
+      runtime('AI-GOV-007', 'Failure analysis', '/v1/governance/monitor', 'Monitor events + fallback', {
+        api: 'GET /v1/governance/monitor',
+        testHint: 'governance_runtime',
+        evaluated: true,
+      }),
+      runtime('AI-GOV-008', 'Bias and accessibility evaluation', '/v1/assist/a11y', 'a11y route + eval harness', {
+        api: 'POST /v1/assist/a11y',
+        testHint: 'evaluation_harness',
+        evaluated: true,
+      }),
+      runtime('AI-GOV-009', 'Human override', '/v1/governance/override', 'GovernanceRuntime override', {
+        api: 'POST /v1/governance/override',
+        testHint: 'governance_runtime',
+        evaluated: true,
+      }),
+      runtime('AI-GOV-010', 'Safe fallback', '/v1/assist/*', 'Deterministic + model-unavailable', {
+        api: 'POST /v1/assist/*',
+        testHint: 'product_service + os_integration',
+        evaluated: true,
+      }),
+      runtime('AI-GOV-011', 'Monitoring', '/v1/governance/monitor', 'JSONL monitor events', {
+        api: 'GET /v1/governance/monitor',
+        testHint: 'governance_runtime',
+        evaluated: true,
+      }),
+      runtime('AI-GOV-012', 'Rollback capability', '/v1/governance/model-rollback', 'Governance + model rollback', {
+        api: 'POST /v1/governance/model-rollback',
+        testHint: 'governance_runtime + os_integration',
+        evaluated: true,
+      }),
+      runtime('AI-LOCAL-001', 'Offline tutoring packs', '/v1/assist/tutoring', 'local-only default', {
+        api: 'POST /v1/assist/tutoring',
+        testHint: 'product_surfaces',
+        evaluated: true,
+      }),
+      runtime('AI-LOCAL-002', 'Local code assistance', '/v1/assist/code', 'local-only default', {
+        api: 'POST /v1/assist/code',
+        testHint: 'product_surfaces',
+        evaluated: true,
+      }),
+      runtime('AI-LOCAL-003', 'Device help', '/v1/assist/device_help', 'local-only default', {
+        api: 'POST /v1/assist/device_help',
+        testHint: 'product_surfaces',
+        evaluated: true,
+      }),
+      runtime('AI-LOCAL-004', 'Input interpretation support', '/v1/assist/input_interpretation', 'Dedicated input interpretation route', {
+        api: 'POST /v1/assist/input_interpretation',
+        testHint: 'product_service + os_integration',
+        evaluated: true,
+      }),
+      runtime('AI-LOCAL-005', 'Basic translation', '/v1/assist/translation', 'local-only default', {
+        api: 'POST /v1/assist/translation',
+        testHint: 'product_service',
+        evaluated: true,
+      }),
+      runtime('AI-LOCAL-006', 'Accessibility services', '/v1/assist/a11y', 'local-only default', {
+        api: 'POST /v1/assist/a11y',
+        testHint: 'product_surfaces',
+        evaluated: true,
+      }),
+      runtime('AI-LOCAL-007', 'Local document retrieval', '/v1/rag/*', 'LocalRagEngine', {
+        api: 'POST /v1/rag/search',
+        testHint: 'rag_engine',
+        evaluated: true,
+      }),
+      runtime('AI-LOCAL-008', 'Game AI', '/v1/assist/game_coach', 'local-only default', {
+        api: 'POST /v1/assist/game_coach',
+        testHint: 'product_service',
+        evaluated: true,
+      }),
+      runtime('AI-LOCAL-009', 'Connectivity diagnosis', '/v1/assist/network', 'local-only default', {
+        api: 'POST /v1/assist/network',
+        testHint: 'product_surfaces',
+        evaluated: true,
+      }),
+      runtime('AI-LOCAL-010', 'Safety-critical alerts', '/v1/assist/safety_alert', 'Defensive alert explanation route', {
+        api: 'POST /v1/assist/safety_alert',
+        testHint: 'product_service + os_integration',
+        evaluated: true,
+      }),
+      runtime('AI-LOCAL-011', 'Cloud models not sole path', '/health', 'Deterministic fallback always', {
+        api: 'GET /health + SAFE_FALLBACK',
+        testHint: 'product_service + os_integration',
+        evaluated: true,
+      }),
       {
         id: 'FULL_GUNNCHAI3K_PLATFORM_DIGITAL_COMPLETE',
         title: 'Full platform digital complete',
         status: 'SCHEMA_ONLY',
         notes:
-          'Not earned: Discord/product surface + consented cloud production path incomplete.',
+          'Not earned: Discord end-user surface + consented cloud production path incomplete; OS ai_interface host-forward is local digital integration only.',
+        proof: {
+          api: 'GET /v1/os/discover',
+          testHint: 'platform_status',
+          evaluated: false,
+        },
       },
       {
         id: 'DIGITALLY_VALIDATED',
         title: 'Digitally validated platform claim',
         status: 'SCHEMA_ONLY',
-        notes: 'Not claimed by Continuance V product service.',
+        notes: 'Not claimed by Continuance VI (local OS integration + product service only).',
+        proof: {
+          api: 'n/a',
+          testHint: 'platform_status',
+          evaluated: false,
+        },
       },
     ];
+  }
+
+  cancel(requestId: string): { ok: boolean; requestId: string } {
+    const ok = this.activeRequests.cancel(requestId);
+    this.audit.record({
+      action: 'cancel',
+      requestId,
+      ok,
+      detail: ok ? 'cancelled' : 'not-active',
+    });
+    return { ok, requestId };
   }
 
   async assist(req: AssistRequest): Promise<AssistResponse> {
@@ -196,6 +458,13 @@ export class GunnchAIProductService {
         false,
         req.capability,
       );
+      this.audit.record({
+        action: 'permission_denied',
+        capability: req.capability,
+        requestId,
+        ok: false,
+        detail: `missing=${perm.missing.join(',')}`,
+      });
       return this.errorResponse(
         requestId,
         req.capability,
@@ -220,6 +489,13 @@ export class GunnchAIProductService {
         false,
         req.capability,
       );
+      this.audit.record({
+        action: 'blocked',
+        capability: req.capability,
+        requestId,
+        ok: false,
+        detail: decision.blockReason ?? 'blocked',
+      });
       return this.errorResponse(
         requestId,
         req.capability,
@@ -229,94 +505,187 @@ export class GunnchAIProductService {
       );
     }
 
+    const signal = this.activeRequests.register(requestId, req.signal);
     try {
-      let structured: StructuredAssistPayload;
-      let text: string;
-      let provenanceBase: Omit<ProvenanceRecord, 'requestId' | 'generatedAt'>;
-
-      if (req.capability === 'continuity') {
-        const result = this.handleContinuity(req, decision.minimizedQuery);
-        structured = result.structured;
-        text = result.text;
-        provenanceBase = result.provenance;
-      } else if (req.capability === 'connection_path') {
-        const result = this.handleConnectionPath(decision.minimizedQuery);
-        structured = result.structured;
-        text = result.text;
-        provenanceBase = result.provenance;
-      } else if (req.capability === 'content_adaptation') {
-        const result = await this.handleContentAdaptation(decision.minimizedQuery, req);
-        structured = result.structured;
-        text = result.text;
-        provenanceBase = result.provenance;
-      } else if (req.capability === 'rag' || req.capability === 'scientific') {
-        const result = await this.handleRagBacked(req.capability, decision.minimizedQuery, req);
-        structured = result.structured;
-        text = result.text;
-        provenanceBase = result.provenance;
-      } else {
-        const result = await this.handleSystemCapability(
-          req.capability,
-          decision.minimizedQuery,
-          req,
-        );
-        structured = result.structured;
-        text = result.text;
-        provenanceBase = result.provenance;
-      }
-
-      if (req.continuitySessionId || req.capability === 'continuity') {
-        const sid =
-          req.continuitySessionId ||
-          structured.continuity?.sessionId ||
-          this.continuity.create(req.deviceProfileId).sessionId;
-        this.continuity.appendTurn(sid, {
-          capability: req.capability,
-          queryPreview: decision.minimizedQuery,
-          summary: structured.summary,
-        });
-      }
-
-      const provenance: ProvenanceRecord = {
-        ...provenanceBase,
+      const result = await withTimeoutAndCancel(
         requestId,
-        generatedAt: new Date().toISOString(),
-      };
-
-      this.governance.record(
-        'assist',
-        `${req.capability} ok fallback=${provenance.fallbackUsed}`,
-        true,
-        req.capability,
+        signal,
+        req.timeoutMs,
+        () => this.executeAssist(req, requestId, decision),
       );
-
-      return {
-        ok: true,
-        requestId,
+      this.audit.record({
+        action: 'assist',
         capability: req.capability,
-        text,
-        structured,
-        provenance,
-        governance: {
-          purposeDeclared: decision.purposeDeclared,
-          purpose: decision.purpose,
-          consentGranted: decision.consentGranted,
-          minimizationApplied: decision.minimizationApplied,
-          disclosure: decision.disclosure,
-          modelVersion: decision.modelVersion,
-          humanOverrideActive: decision.humanOverrideActive,
-          fallbackSafe: decision.fallbackSafe,
-          evalBaselineRef: decision.evalBaselineRef,
-        },
-      };
+        requestId,
+        ok: result.ok,
+        detail: `${req.capability} fallback=${result.provenance.fallbackUsed}`,
+        sourceAttribution: result.provenance.sources.map((s) => s.id),
+      });
+      return result;
     } catch (err) {
+      if (err instanceof RequestCancelledError) {
+        this.governance.record('cancelled', err.message, false, req.capability);
+        this.audit.record({
+          action: 'cancelled',
+          capability: req.capability,
+          requestId,
+          ok: false,
+          detail: err.message,
+        });
+        return this.errorResponse(
+          requestId,
+          req.capability,
+          'REQUEST_CANCELLED',
+          err.message,
+          decision,
+        );
+      }
+      if (err instanceof RequestTimeoutError) {
+        this.governance.record('timeout', err.message, false, req.capability);
+        this.audit.record({
+          action: 'timeout',
+          capability: req.capability,
+          requestId,
+          ok: false,
+          detail: err.message,
+        });
+        if (decision.fallbackSafe) {
+          return this.safeFallback(
+            requestId,
+            req.capability,
+            decision.minimizedQuery,
+            decision,
+            err.message,
+          );
+        }
+        return this.errorResponse(
+          requestId,
+          req.capability,
+          'REQUEST_TIMEOUT',
+          err.message,
+          decision,
+        );
+      }
       const message = err instanceof Error ? err.message : String(err);
       this.governance.record('assist_error', message, false, req.capability);
+      this.audit.record({
+        action: 'assist_error',
+        capability: req.capability,
+        requestId,
+        ok: false,
+        detail: message,
+      });
       if (decision.fallbackSafe) {
-        return this.safeFallback(requestId, req.capability, decision.minimizedQuery, decision, message);
+        return this.safeFallback(
+          requestId,
+          req.capability,
+          decision.minimizedQuery,
+          decision,
+          message,
+        );
       }
       return this.errorResponse(requestId, req.capability, 'ASSIST_FAILED', message, decision);
+    } finally {
+      this.activeRequests.release(requestId);
     }
+  }
+
+  private async executeAssist(
+    req: AssistRequest,
+    requestId: string,
+    decision: ReturnType<GovernanceRuntime['decide']>,
+  ): Promise<AssistResponse> {
+    let structured: StructuredAssistPayload;
+    let text: string;
+    let provenanceBase: Omit<ProvenanceRecord, 'requestId' | 'generatedAt'>;
+
+    if (req.capability === 'continuity') {
+      const result = this.handleContinuity(req, decision.minimizedQuery);
+      structured = result.structured;
+      text = result.text;
+      provenanceBase = result.provenance;
+    } else if (req.capability === 'connection_path') {
+      const result = this.handleConnectionPath(decision.minimizedQuery);
+      structured = result.structured;
+      text = result.text;
+      provenanceBase = result.provenance;
+    } else if (req.capability === 'content_adaptation') {
+      const result = await this.handleContentAdaptation(decision.minimizedQuery, req);
+      structured = result.structured;
+      text = result.text;
+      provenanceBase = result.provenance;
+    } else if (req.capability === 'input_interpretation') {
+      const result = this.handleInputInterpretation(decision.minimizedQuery);
+      structured = result.structured;
+      text = result.text;
+      provenanceBase = result.provenance;
+    } else if (req.capability === 'safety_alert') {
+      const result = this.handleSafetyAlert(decision.minimizedQuery);
+      structured = result.structured;
+      text = result.text;
+      provenanceBase = result.provenance;
+    } else if (req.capability === 'rag' || req.capability === 'scientific') {
+      const result = await this.handleRagBacked(req.capability, decision.minimizedQuery, req);
+      structured = result.structured;
+      text = result.text;
+      provenanceBase = result.provenance;
+    } else if (isSystemCapability(req.capability)) {
+      const result = await this.handleSystemCapability(
+        req.capability,
+        decision.minimizedQuery,
+        req,
+      );
+      structured = result.structured;
+      text = result.text;
+      provenanceBase = result.provenance;
+    } else {
+      throw new Error(`UNKNOWN_CAPABILITY:${req.capability}`);
+    }
+
+    if (req.continuitySessionId || req.capability === 'continuity') {
+      const sid =
+        req.continuitySessionId ||
+        structured.continuity?.sessionId ||
+        this.continuity.create(req.deviceProfileId).sessionId;
+      this.continuity.appendTurn(sid, {
+        capability: req.capability,
+        queryPreview: decision.minimizedQuery,
+        summary: structured.summary,
+      });
+    }
+
+    const provenance: ProvenanceRecord = {
+      ...provenanceBase,
+      requestId,
+      generatedAt: new Date().toISOString(),
+    };
+
+    this.governance.record(
+      'assist',
+      `${req.capability} ok fallback=${provenance.fallbackUsed}`,
+      true,
+      req.capability,
+    );
+
+    return {
+      ok: true,
+      requestId,
+      capability: req.capability,
+      text,
+      structured,
+      provenance,
+      governance: {
+        purposeDeclared: decision.purposeDeclared,
+        purpose: decision.purpose,
+        consentGranted: decision.consentGranted,
+        minimizationApplied: decision.minimizationApplied,
+        disclosure: decision.disclosure,
+        modelVersion: decision.modelVersion,
+        humanOverrideActive: decision.humanOverrideActive,
+        fallbackSafe: decision.fallbackSafe,
+        evalBaselineRef: decision.evalBaselineRef,
+      },
+    };
   }
 
   private async handleSystemCapability(
@@ -390,12 +759,7 @@ export class GunnchAIProductService {
       claims,
       ...(inference.structured as Record<string, unknown>),
     };
-    const text = [
-      inference.text,
-      '',
-      '### Attribution',
-      ...attr.attributionLines,
-    ].join('\n');
+    const text = [inference.text, '', '### Attribution', ...attr.attributionLines].join('\n');
     return {
       text,
       structured,
@@ -510,6 +874,77 @@ export class GunnchAIProductService {
         sources: inference.sources.map((s) => ({ id: s })),
         grounded: inference.grounded,
       },
+    };
+  }
+
+  private handleInputInterpretation(query: string) {
+    const modality = /switch|scan/i.test(query)
+      ? 'switch-access'
+      : /voice|speech|asr/i.test(query)
+        ? 'speech'
+        : /handwrit|stylus|ink/i.test(query)
+          ? 'handwriting'
+          : /controller|dpad|gamepad/i.test(query)
+            ? 'controller'
+            : 'text';
+    const normalized = query
+      .replace(/\s+/g, ' ')
+      .replace(/[^\w\s:.,?!'"/-]/g, '')
+      .trim()
+      .slice(0, 500);
+    const structured: StructuredAssistPayload = {
+      kind: 'input_interpretation',
+      summary: `Interpreted ${modality} input for local assist.`,
+      inputInterpretation: {
+        modality,
+        normalizedText: normalized || '(empty)',
+        confidence: normalized ? 0.82 : 0.2,
+        alternatives: modality === 'text' ? [] : [normalized, `clarify:${modality}`],
+      },
+      steps: [
+        'Capture local input without cloud upload.',
+        'Normalize tokens / remove noise.',
+        'Offer clarification alternatives when confidence is low.',
+      ],
+    };
+    return {
+      text: `Input interpretation (${modality}): ${structured.inputInterpretation!.normalizedText}`,
+      structured,
+      provenance: this.localProv('input_interpretation', 'deterministic-a11y-input'),
+    };
+  }
+
+  private handleSafetyAlert(query: string) {
+    const critical = /overheat|thermal|smoke|fire|battery.?swelling/i.test(query);
+    const warning = /low.?battery|disk.?full|offline|unreachable|auth.?fail/i.test(query);
+    const severity = critical ? 'critical' : warning ? 'warning' : 'info';
+    const explanation = critical
+      ? 'Safety-critical local alert: stop intensive workloads, cool device, and seek human verification before continuing.'
+      : warning
+        ? 'Local warning alert: explain the condition defensively and recommend safe recovery steps. Do not provide exploit instructions.'
+        : 'Informational local alert explanation with defensive guidance only.';
+    const structured: StructuredAssistPayload = {
+      kind: 'safety_alert',
+      summary: `Safety alert explanation (${severity}).`,
+      safetyAlert: {
+        severity,
+        explanation,
+        recommendedActions: critical
+          ? ['power down if safe', 'disconnect charger if overheating', 'notify a trusted adult/operator']
+          : warning
+            ? ['switch to offline-local assist', 'free local storage / reconnect Wi-Fi', 'retry after cooldown']
+            : ['acknowledge alert', 'continue with local-only processing'],
+        defensiveOnly: true,
+      },
+      securityAdvice: [
+        'Defensive explanation only — no exploit or bypass guidance.',
+        'Cloud is never required for basic safety messaging.',
+      ],
+    };
+    return {
+      text: `${structured.safetyAlert!.explanation}\nActions: ${structured.safetyAlert!.recommendedActions.join('; ')}`,
+      structured,
+      provenance: this.localProv('safety_alert', 'deterministic-security'),
     };
   }
 

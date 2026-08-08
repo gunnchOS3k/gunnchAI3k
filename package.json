@@ -39,7 +39,8 @@
     "product-service:health": "tsx src/system-layer/product_service/cli.ts health",
     "product-service:serve": "tsx src/system-layer/product_service/cli.ts serve --port 8791",
     "product-service:rag-rebuild": "tsx src/system-layer/product_service/cli.ts rag-rebuild",
-    "test:product-service": "jest tests/system-layer/product_service.test.ts tests/system-layer/rag_engine.test.ts tests/system-layer/governance_runtime.test.ts --runInBand"
+    "test:product-service": "jest tests/system-layer/product_service.test.ts tests/system-layer/rag_engine.test.ts tests/system-layer/governance_runtime.test.ts --runInBand",
+    "test:os-integration": "jest tests/system-layer/os_integration.test.ts tests/system-layer/product_surfaces.test.ts tests/system-layer/platform_status.test.ts --runInBand"
   },
   "keywords": [
     "ai",

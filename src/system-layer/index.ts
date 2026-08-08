@@ -1,5 +1,5 @@
 /**
- * Continuance V — gunnchAI3k AI system layer (product service + RAG + governance).
+ * Continuance VI — gunnchAI3k AI system layer (product service + OS integration).
  */
 
 export * from './model_registry';
@@ -12,3 +12,4 @@ export * from './local_inference';
 export * from './evaluation';
 export * from './platform_status';
 export * from './product_service';
+export * from './os_integration';
