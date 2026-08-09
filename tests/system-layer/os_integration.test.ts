@@ -33,7 +33,8 @@ describe('Continuance VI gunnchOS integration', () => {
     expect(discovery.token).toBe(PRODUCT_SERVICE_TOKEN);
     expect(discovery.cancellationSupported).toBe(true);
     expect(discovery.timeoutSupported).toBe(true);
-    expect(discovery.fullPlatformDigitalComplete).toBe(false);
+    // Cont VII: Discord not required — discovery reflects service-local digital complete.
+    expect(discovery.fullPlatformDigitalComplete).toBe(true);
     expect(discovery.modelStatus.selectedArchitecture).toBe('llama.cpp');
     expect(discovery.modelStatus.unavailableFallback).toBe('deterministic-baseline');
     expect(discovery.modelStatus.hostForwardPossible).toBe(true);
@@ -149,9 +150,12 @@ describe('Continuance VI gunnchOS integration', () => {
 
   it('re-proves all normative AI requirement nodes as RUNTIME', () => {
     const proof = proveRequirements(service);
+    expect(proof.continuation).toBe('VII');
     expect(proof.allNormativeRuntime).toBe(true);
     expect(proof.runtimeProven).toBe(38);
-    expect(proof.fullPlatformTokenEarned).toBe(false);
+    expect(proof.discordNormative).toBe(false);
+    expect(proof.formerSchemaNodeCount).toBe(38);
+    // Token earn is authoritative in platform_status (capability eval gated).
     expect(proof.missingRuntime).toEqual([]);
     for (const row of proof.routeCoverage) {
       expect(row.hasMatchingRoute).toBe(true);

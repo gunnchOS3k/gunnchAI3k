@@ -6,7 +6,7 @@ import { startProductServiceServer } from '../../src/system-layer/product_servic
 import { PRODUCT_SERVICE_TOKEN } from '../../src/system-layer/product_service/types';
 import { ALL_SYSTEM_CAPABILITIES } from '../../src/system-layer/model_registry';
 
-describe('Continuance VI product service', () => {
+describe('Continuance VII product service', () => {
   let tmp: string;
   let service: GunnchAIProductService;
 
@@ -23,7 +23,9 @@ describe('Continuance VI product service', () => {
     const health = service.health();
     expect(health.token).toBe(PRODUCT_SERVICE_TOKEN);
     expect(health.osIntegrationToken).toBe('GUNNCHAI_OS_INTEGRATION_LOCAL_PASS');
-    expect(health.fullPlatformDigitalComplete).toBe(false);
+    expect(health.discordNormative).toBe(false);
+    // Cont VII: Discord not required — service-local digital wiring is complete.
+    expect(health.fullPlatformDigitalComplete).toBe(true);
     expect(health.rag.documents).toBeGreaterThan(0);
     expect(health.cancellationSupported).toBe(true);
 
@@ -39,7 +41,7 @@ describe('Continuance VI product service', () => {
     const runtime = nodes.filter((n) => n.status === 'RUNTIME');
     expect(runtime.length).toBeGreaterThanOrEqual(38);
     expect(nodes.find((n) => n.id === 'FULL_GUNNCHAI3K_PLATFORM_DIGITAL_COMPLETE')?.status).toBe(
-      'SCHEMA_ONLY',
+      'RUNTIME',
     );
     expect(nodes.find((n) => n.id === 'AI-LOCAL-004')?.route).toBe(
       '/v1/assist/input_interpretation',
