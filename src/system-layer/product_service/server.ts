@@ -39,7 +39,8 @@ export async function startProductServiceServer(
       token: h.token,
       osIntegrationToken: h.osIntegrationToken,
       realLocalInference: h.realLocalInference,
-      fullPlatformDigitalComplete: false,
+      fullPlatformDigitalComplete: h.fullPlatformDigitalComplete,
+      discordNormative: false,
     });
   });
 

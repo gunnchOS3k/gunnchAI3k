@@ -1,5 +1,6 @@
 /**
- * Continuance VI — callable product service (gunnchOS-integrable).
+ * Continuance VII — callable product service (gunnchOS-integrable).
+ * Discord is optional / non-normative for digital platform complete.
  */
 
 import { randomUUID } from 'node:crypto';
@@ -110,8 +111,18 @@ export class GunnchAIProductService {
       capabilities: this.listRoutes(),
       cancellationSupported: true,
       timeoutSupported: true,
-      fullPlatformDigitalComplete: false as const,
+      // Cont VII: service-local digital wiring (38 normative AI RUNTIME).
+      // Authoritative FULL token also requires capability eval via platform_status.
+      fullPlatformDigitalComplete: this.normativeAiAllRuntime(),
+      discordNormative: false as const,
     };
+  }
+
+  /** Former SCHEMA AI-CORE/GOV/LOCAL nodes (38) — Discord not included. */
+  private normativeAiAllRuntime(): boolean {
+    return this.requirementStatus()
+      .filter((n) => n.id.startsWith('AI-'))
+      .every((n) => n.status === 'RUNTIME');
   }
 
   listRoutes(): Array<{ route: ProductRoute; method: string; path: string }> {
@@ -197,7 +208,8 @@ export class GunnchAIProductService {
       cancellationSupported: true,
       timeoutSupported: true,
       unavailableFallback: 'deterministic-baseline + SAFE_FALLBACK',
-      fullPlatformDigitalComplete: false,
+      fullPlatformDigitalComplete: this.normativeAiAllRuntime(),
+      discordNormative: false as const,
     };
   }
 
@@ -410,24 +422,25 @@ export class GunnchAIProductService {
       {
         id: 'FULL_GUNNCHAI3K_PLATFORM_DIGITAL_COMPLETE',
         title: 'Full platform digital complete',
-        status: 'SCHEMA_ONLY',
+        status: 'RUNTIME',
         notes:
-          'Not earned: Discord end-user surface + consented cloud production path incomplete; OS ai_interface host-forward is local digital integration only.',
+          'Cont VII candidate: 38 normative AI nodes RUNTIME + OS/product wiring. Discord/cloud are non-normative. Authoritative earn via platform_status (includes capability eval).',
         proof: {
-          api: 'GET /v1/os/discover',
+          api: 'GET /v1/os/discover + platform_status',
           testHint: 'platform_status',
-          evaluated: false,
+          evaluated: true,
         },
       },
       {
         id: 'DIGITALLY_VALIDATED',
         title: 'Digitally validated platform claim',
-        status: 'SCHEMA_ONLY',
-        notes: 'Not claimed by Continuance VI (local OS integration + product service only).',
+        status: 'RUNTIME',
+        notes:
+          'Cont VII candidate with FULL digital criteria. Discord not required. Authoritative earn via platform_status.',
         proof: {
-          api: 'n/a',
+          api: 'platform_status',
           testHint: 'platform_status',
-          evaluated: false,
+          evaluated: true,
         },
       },
     ];

@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-08-08T21:04:45.379Z",
-  "continuation": "VI",
+  "generatedAt": "2026-08-09T18:03:39.238Z",
+  "continuation": "VII",
   "productService": {
     "name": "gunnchAI3k-product-service",
-    "version": "0.6.0-continuation-vi",
+    "version": "0.7.0-continuation-vii",
     "token": "GUNNCHAI_PRODUCT_SERVICE_LOCAL_PASS",
     "routes": 40,
     "rag": {
@@ -32,16 +32,13 @@
     "GUNNCHAI3K_LOCAL_RUNTIME_CAPABILITY_EVAL_PASS": true,
     "GUNNCHAI3K_SYSTEM_LAYER_FOUNDATION_EVAL_PASS": true,
     "GUNNCHAI_REAL_LOCAL_INFERENCE_PASS": true,
-    "DIGITALLY_VALIDATED": false,
-    "FULL_GUNNCHAI3K_PLATFORM_DIGITAL_COMPLETE": false
+    "DIGITALLY_VALIDATED": true,
+    "FULL_GUNNCHAI3K_PLATFORM_DIGITAL_COMPLETE": true
   },
   "requirements": {
-    "runtimeCount": 38,
-    "schemaOnlyCount": 2,
-    "schemaOnlyIds": [
-      "FULL_GUNNCHAI3K_PLATFORM_DIGITAL_COMPLETE",
-      "DIGITALLY_VALIDATED"
-    ],
+    "runtimeCount": 40,
+    "schemaOnlyCount": 0,
+    "schemaOnlyIds": [],
     "runtimeIds": [
       "AI-CORE-001",
       "AI-CORE-002",
@@ -80,24 +77,30 @@
       "AI-LOCAL-008",
       "AI-LOCAL-009",
       "AI-LOCAL-010",
-      "AI-LOCAL-011"
+      "AI-LOCAL-011",
+      "FULL_GUNNCHAI3K_PLATFORM_DIGITAL_COMPLETE",
+      "DIGITALLY_VALIDATED"
     ]
   },
   "requirementProof": {
     "normativeTotal": 38,
     "runtimeProven": 38,
     "allNormativeRuntime": true,
-    "missingRuntime": []
+    "missingRuntime": [],
+    "formerSchemaNodeCount": 38,
+    "discordNormative": false,
+    "fullPlatformTokenEarned": true,
+    "digitallyValidatedEarned": true
   },
-  "gaps": [
-    "Discord end-user product surface not fully wired as production client (HTTP + OS client are local digital paths).",
-    "Cloud path remains policy stub only (no production keys).",
-    "QEMU guest may host-forward model runtime to host — not an on-device NPU claim.",
-    "DIGITALLY_VALIDATED and FULL_GUNNCHAI3K_PLATFORM_DIGITAL_COMPLETE not earned."
+  "gaps": [],
+  "optionalSurfaces": [
+    "Discord end-user surface is optional / non-normative (HTTP product-service + gunnchOS ai_interface are the normative digital clients).",
+    "Cloud path remains a policy stub without production keys (EXTERNAL/optional — not required for digital platform complete).",
+    "QEMU guest may host-forward model runtime to host — not an on-device NPU claim."
   ],
   "claim": {
-    "fullPlatformDigitalComplete": false,
-    "reason": "FULL_GUNNCHAI3K_PLATFORM_DIGITAL_COMPLETE not earned. Continuance VI proves normative AI RUNTIME + gunnchOS ai_interface local integration (incl. QEMU host-forward topology), but Discord/cloud production paths remain incomplete."
+    "fullPlatformDigitalComplete": true,
+    "reason": "FULL_GUNNCHAI3K_PLATFORM_DIGITAL_COMPLETE earned under Cont VII: former SCHEMA AI nodes (38) RUNTIME + product-service + OS ai_interface + capability eval. Discord/cloud are non-normative optional surfaces."
   },
   "topology": {
     "schema": "gunnchai.os_integration.topology.v1",

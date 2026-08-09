@@ -47,7 +47,7 @@ const NORMATIVE_IDS = [
 ] as const;
 
 export interface RequirementProofReport {
-  continuation: 'VI';
+  continuation: 'VII';
   generatedAt: string;
   normativeTotal: number;
   runtimeProven: number;
@@ -55,8 +55,11 @@ export interface RequirementProofReport {
   nodes: RequirementNodeStatus[];
   missingRuntime: string[];
   routeCoverage: Array<{ id: string; route?: string; hasMatchingRoute: boolean }>;
-  fullPlatformTokenEarned: false;
-  digitallyValidatedEarned: false;
+  /** Cont VII: set by platform_status after digital criteria (Discord not required). */
+  fullPlatformTokenEarned: boolean;
+  digitallyValidatedEarned: boolean;
+  discordNormative: false;
+  formerSchemaNodeCount: number;
 }
 
 export function proveRequirements(service: GunnchAIProductService): RequirementProofReport {
@@ -94,7 +97,7 @@ export function proveRequirements(service: GunnchAIProductService): RequirementP
   const runtimeProven = NORMATIVE_IDS.length - missingRuntime.length;
 
   return {
-    continuation: 'VI',
+    continuation: 'VII',
     generatedAt: new Date().toISOString(),
     normativeTotal: NORMATIVE_IDS.length,
     runtimeProven,
@@ -102,8 +105,11 @@ export function proveRequirements(service: GunnchAIProductService): RequirementP
     nodes,
     missingRuntime,
     routeCoverage,
+    // Token earn is decided by platform_status (Discord not normative).
     fullPlatformTokenEarned: false,
     digitallyValidatedEarned: false,
+    discordNormative: false,
+    formerSchemaNodeCount: NORMATIVE_IDS.length,
   };
 }
 

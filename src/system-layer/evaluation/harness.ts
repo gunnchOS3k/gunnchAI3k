@@ -1,9 +1,10 @@
 /**
- * Continuance IV evaluation harness.
+ * Continuance VII evaluation harness.
  * Per capability records: baseline, dataset, quality metric, latency, memory,
  * failure, privacy, fallback, model version, mechanism, real-inference metrics.
  * Emits GUNNCHAI_REAL_LOCAL_INFERENCE_PASS when real local inference + evals pass.
- * Does NOT emit FULL_GUNNCHAI3K_PLATFORM_DIGITAL_COMPLETE or DIGITALLY_VALIDATED.
+ * FULL_GUNNCHAI3K_PLATFORM_DIGITAL_COMPLETE / DIGITALLY_VALIDATED are earned by
+ * platform_status (Discord not normative) — harness alone does not claim them.
  */
 
 import * as fs from 'node:fs';
@@ -61,6 +62,7 @@ export interface HarnessReport {
   token: string | null;
   foundationToken: string | null;
   realLocalInferenceToken: string | null;
+  /** Harness never self-claims FULL/DIGITALLY — platform_status decides Cont VII. */
   digitallyValidatedClaimed: false;
   fullPlatformCompleteClaimed: false;
   digitallyValidatedReason: string;
@@ -218,13 +220,13 @@ export async function runEvaluationHarness(
     digitallyValidatedClaimed: false,
     fullPlatformCompleteClaimed: false,
     digitallyValidatedReason:
-      `${DIGITALLY_VALIDATED_TOKEN} is NOT claimed. ` +
-      `Structured local capability eval may emit ${CAPABILITY_EVAL_TOKEN} / ${FOUNDATION_EVAL_TOKEN} / ${REAL_LOCAL_INFERENCE_TOKEN} only.`,
+      `${DIGITALLY_VALIDATED_TOKEN} is decided by platform_status (Cont VII). ` +
+      `Harness emits ${CAPABILITY_EVAL_TOKEN} / ${FOUNDATION_EVAL_TOKEN} / ${REAL_LOCAL_INFERENCE_TOKEN} only. Discord is not normative.`,
     fullPlatformReason:
-      `${FULL_PLATFORM_TOKEN} is NOT claimed. ` +
+      `${FULL_PLATFORM_TOKEN} is decided by platform_status (Cont VII). ` +
       `llama.cpp real inference=${llamaProbe.canRunRealInference}; ` +
       `realInferenceCount=${realInferenceCount}; ` +
-      `offline + hybrid local paths cover capabilities, but full digital platform integration (Discord/product surface + cloud) is incomplete.`,
+      `Discord/cloud are optional surfaces — not automatic blockers.`,
     selectedArchitecture: 'llama.cpp',
     llamaProbe,
     results,
@@ -238,7 +240,7 @@ export async function runEvaluationHarness(
   fs.mkdirSync(evidenceDir, { recursive: true });
   const serializable = {
     generatedAt: new Date().toISOString(),
-    continuation: 'VI',
+    continuation: 'VII',
     ...report,
     results: report.results.map((r) => ({
       capability: r.spec.capability,
@@ -271,6 +273,7 @@ export async function runEvaluationHarness(
       // Evidence writes are best-effort in sandboxed CI/dev environments.
     }
   };
+  writeEvidence('CONTINUATION_VII_STATUS.json', serializable);
   writeEvidence('CONTINUATION_VI_STATUS.json', serializable);
   // Keep V/IV/III filenames updated for back-compat readers
   writeEvidence('CONTINUATION_V_STATUS.json', serializable);

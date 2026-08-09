@@ -6,7 +6,7 @@ import type { ProcessingMode } from '../../local-runtime/types';
 import type { DeviceProfileId, SystemCapability } from '../model_registry';
 
 export const PRODUCT_SERVICE_NAME = 'gunnchAI3k-product-service';
-export const PRODUCT_SERVICE_VERSION = '0.6.0-continuation-vi';
+export const PRODUCT_SERVICE_VERSION = '0.7.0-continuation-vii';
 export const PRODUCT_SERVICE_TOKEN = 'GUNNCHAI_PRODUCT_SERVICE_LOCAL_PASS';
 export const OS_INTEGRATION_TOKEN = 'GUNNCHAI_OS_INTEGRATION_LOCAL_PASS';
 
@@ -158,7 +158,8 @@ export interface OsDiscoveryPayload {
   cancellationSupported: boolean;
   timeoutSupported: boolean;
   unavailableFallback: string;
-  fullPlatformDigitalComplete: false;
+  fullPlatformDigitalComplete: boolean;
+  discordNormative?: false;
 }
 
 export interface LocalModelStatus {
