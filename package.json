@@ -42,7 +42,9 @@
     "test:product-service": "jest tests/system-layer/product_service.test.ts tests/system-layer/rag_engine.test.ts tests/system-layer/governance_runtime.test.ts --runInBand",
     "test:os-integration": "jest tests/system-layer/os_integration.test.ts tests/system-layer/product_surfaces.test.ts tests/system-layer/platform_status.test.ts --runInBand",
     "test:stage2": "jest tests/stage2 --runInBand",
-    "prove:stage2": "python3 scripts/prove_stage2_ai.py"
+    "prove:stage2": "python3 scripts/prove_stage2_ai.py",
+    "test:phase_xiv": "jest tests/phase_xiv --runInBand",
+    "prove:phase_xiv": "python3 scripts/prove_phase_xiv_ai.py"
   },
   "keywords": [
     "ai",

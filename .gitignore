@@ -137,3 +137,21 @@ artifacts/stage2/eval/results/**
 !artifacts/stage2/AI_PROVE_REPORT.json
 artifacts/stage2/eval/results/**
 !artifacts/stage2/eval/results/.gitkeep
+
+# Phase XIV runtime outputs (keep prove/reproof/corpus)
+artifacts/phase_xiv/lab_report/**
+artifacts/phase_xiv/coding_agent/**
+artifacts/phase_xiv/agent_audit/**
+!artifacts/phase_xiv/agent_audit/.gitkeep
+artifacts/phase_xiv/eval/**
+!artifacts/phase_xiv/eval/.gitkeep
+artifacts/phase_xiv/competitive/agent_scratch/**
+artifacts/phase_xiv/competitive/memory/**
+artifacts/phase_xiv/competitive/MANIFEST_*.json
+!artifacts/phase_xiv/competitive/corpus.json
+!artifacts/phase_xiv/STAGE2_REPROOF.json
+!artifacts/phase_xiv/AI_PROVE_REPORT.json
+!artifacts/phase_xiv/README.md
+models/**/*.gguf
+models/**/*.bin
+*.gguf
