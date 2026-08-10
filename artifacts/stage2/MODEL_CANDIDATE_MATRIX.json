@@ -49,7 +49,7 @@
       "runtime": "llama.cpp (GGUF, download-on-demand)",
       "location": "local",
       "optional": false,
-      "notes": "Deeper reasoning / longer context when RAM and power allow.",
+      "notes": "Candidate Local Pro tier for deeper tasks when RAM/power allow. Weights not committed (fixture hash only) — not a measured absolute quality claim.",
       "artifactRef": "fixtures/stage2/models/local-pro-qwen2-1_5b.ref",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "isNanoFallbackOnly": false

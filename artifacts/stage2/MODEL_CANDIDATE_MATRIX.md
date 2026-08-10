@@ -9,7 +9,7 @@
 |---|---|---|---|---:|---:|---|---|
 | nano-smollm-135m | NANO_LOCAL | 135M | Apache-2.0 | 2048 | 256 | llama.cpp / fixture-deterministic | Nano/fallback only. Useful for always-on OS/device stubs; not the daily intelligence tier. |
 | local-fast-smollm-360m | LOCAL_FAST | 360M | Apache-2.0 | 4096 | 768 | llama.cpp (GGUF, download-on-demand) | Common daily tasks. Weights not committed; registry entry only. |
-| local-pro-qwen2-1_5b | LOCAL_PRO | 1.5B | Apache-2.0 | 8192 | 2048 | llama.cpp (GGUF, download-on-demand) | Deeper reasoning / longer context when RAM and power allow. |
+| local-pro-qwen2-1_5b | LOCAL_PRO | 1.5B | Apache-2.0 | 8192 | 2048 | llama.cpp (GGUF, download-on-demand) | Candidate Local Pro tier for deeper tasks when RAM/power allow. Weights not committed (fixture hash only) — not a measured absolute quality claim. |
 | embed-minilm-l6 | EMBEDDING | 22M | Apache-2.0 | 512 | 128 | onnxruntime / deterministic-fixture | Local embeddings for RAG and memory search. |
 | rerank-tiny-cross | RERANKER | fixture | MIT | 512 | 96 | deterministic-fixture | Reranking fixture for research/RAG pipelines. |
 | vision-optional-stub | VISION | optional | MIT | 1024 | 512 | optional-local / deny-by-default | Optional Stage 2 hook; not required for fleet pass. |

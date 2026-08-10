@@ -1,0 +1,57 @@
+{
+  "schema": "gunnchai.phase_xv.model_quality_honesty_audit.v1",
+  "generated_at": "2026-08-10T13:12:21.633531+00:00",
+  "accepted_main_sha": "4f441eaca40de00a6402de9ce43c4f192ed19a2f",
+  "branch": "phase-xv/competitive-audit",
+  "scope": "local_tiers_only",
+  "local_tiers_audited": [
+    "NANO_LOCAL",
+    "LOCAL_FAST",
+    "LOCAL_PRO"
+  ],
+  "MODEL_QUALITY_gate_status": "DIGITALLY_VALIDATED",
+  "MODEL_QUALITY_honest_scope": "DIGITALLY_VALIDATED means local-tier multi-model fleet + routing digital reference only; not competitive superiority; not measured absolute quality vs cloud frontier models; weights may be registry/fixture only.",
+  "competitor_scoring_policy": "EXTERNAL_PENDING / null without real API credentials \u2014 never fabricate",
+  "findings": [
+    {
+      "severity": "info",
+      "issue": "NANO_LOCAL correctly marked nano/fallback-only"
+    },
+    {
+      "severity": "info",
+      "issue": "BETTER_THAN_* and GUNNCHAI_FRONTIER_PRODUCT_PARITY remain false"
+    },
+    {
+      "severity": "info",
+      "issue": "competitor scores null / EXTERNAL_PENDING"
+    },
+    {
+      "severity": "info",
+      "issue": "MODEL_BENCHMARK_BASELINE is local_digital_reference only"
+    },
+    {
+      "severity": "info",
+      "issue": "LOCAL_PRO notes honesty fix applied (candidate/registry only)"
+    },
+    {
+      "severity": "info",
+      "issue": "LOCAL_FAST notes: Common daily tasks. Weights not committed; registry entry only."
+    }
+  ],
+  "overclaimed_before_fix": true,
+  "overclaimed_after_fix": false,
+  "fix_applied": true,
+  "fixes": [
+    "src/stage2/fleet/registry.ts \u2014 LOCAL_PRO notes no longer imply measured deeper-reasoning quality with fixture weights"
+  ],
+  "tokens": {
+    "GUNNCHAI_FRONTIER_PRODUCT_PARITY": false,
+    "BETTER_THAN_CHATGPT": false,
+    "BETTER_THAN_CLAUDE": false,
+    "BETTER_THAN_GEMINI": false,
+    "BETTER_THAN_COPILOT": false,
+    "BETTER_THAN_PERPLEXITY": false
+  },
+  "phase_xiv_reprove_ok": true,
+  "draft_pr_required": true
+}
