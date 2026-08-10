@@ -1,0 +1,90 @@
+{
+  "schema": "gunnchai.stage2.ai_prove_report.v1",
+  "generated_at": "2026-08-10T01:24:46.729624+00:00",
+  "physical_execution_freeze": true,
+  "auto_merge_request": null,
+  "tokens": {
+    "GUNNCHAI_FRONTIER_PRODUCT_PARITY": false,
+    "BETTER_THAN_CHATGPT": false,
+    "BETTER_THAN_CLAUDE": false,
+    "BETTER_THAN_GEMINI": false,
+    "BETTER_THAN_COPILOT": false,
+    "BETTER_THAN_PERPLEXITY": false,
+    "AI_MULTI_MODEL_FLEET_REAL": true,
+    "AI_ROUTER_DIGITAL_PASS": true,
+    "AI_MEMORY_DIGITAL_PASS": true,
+    "AI_PROJECTS_DIGITAL_PASS": true,
+    "AI_RESEARCH_CITATION_DIGITAL_PASS": true,
+    "AI_OS_INTEGRATION_SMOKE_PASS": true,
+    "AI_EVAL_HARNESS_FOUNDATION_PASS": true
+  },
+  "gates_digitally_validated": [
+    "DEEP_RESEARCH",
+    "EVALUATION",
+    "MEMORY",
+    "MODEL_QUALITY",
+    "MODEL_ROUTING",
+    "OS_NATIVE_AI",
+    "PROJECTS",
+    "WEB_SEARCH"
+  ],
+  "jobs": {
+    "frontier-ai-models": {
+      "ok": true,
+      "returncode": 0,
+      "stdout_tail": "",
+      "stderr_tail": "npm warn Unknown env config \"devdir\". This will stop working in the next major version of npm.\nts-jest[config] (WARN) \n    The \"ts-jest\" config option \"isolatedModules\" is deprecated and will be removed in v30.0.0. Please use \"isolatedModules: true\" in /Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/tsconfig.json instead, see https://www.typescriptlang.org/tsconfig/#isolatedModules\n  \nPASS tests/stage2/fleet.test.ts\n  stage2 fleet\n    \u2713 covers all required roles and marks 135M as nano-only (1 ms)\n    \u2713 writes dated MODEL_CANDIDATE_MATRIX json+md (1 ms)\n    \u2713 routes by task/privacy/ram and builds fallback chain (1 ms)\n    \u2713 writes benchmark baseline across required lanes (3 ms)\n\nTest Suites: 1 passed, 1 total\nTests:       4 passed, 4 total\nSnapshots:   0 total\nTime:        0.237 s, estimated 1 s\nRan all test suites matching /tests\\/stage2\\/fleet.test.ts/i.\n"
+    },
+    "ai-router": {
+      "ok": true,
+      "returncode": 0,
+      "stdout_tail": "",
+      "stderr_tail": "npm warn Unknown env config \"devdir\". This will stop working in the next major version of npm.\nts-jest[config] (WARN) \n    The \"ts-jest\" config option \"isolatedModules\" is deprecated and will be removed in v30.0.0. Please use \"isolatedModules: true\" in /Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/tsconfig.json instead, see https://www.typescriptlang.org/tsconfig/#isolatedModules\n  \nPASS tests/stage2/router_failures.test.ts\n  stage2 router failure modes\n    \u2713 handles unavailable (2 ms)\n    \u2713 handles ram\n    \u2713 handles offline (2 ms)\n    \u2713 handles cloud_denied\n    \u2713 handles cloud_timeout (1 ms)\n    \u2713 handles context_too_large\n    \u2713 handles crash\n    \u2713 handles low_battery\n    \u2713 handles thermal\n    \u2713 denies cloud when sensitive privacy\n\nTest Suites: 1 passed, 1 total\nTests:       10 passed, 10 total\nSnapshots:   0 total\nTime:        0.212 s, estimated 1 s\nRan all test suites matching /tests\\/stage2\\/router_failures.test.ts/i.\n"
+    },
+    "ai-memory": {
+      "ok": true,
+      "returncode": 0,
+      "stdout_tail": "",
+      "stderr_tail": "npm warn Unknown env config \"devdir\". This will stop working in the next major version of npm.\nts-jest[config] (WARN) \n    The \"ts-jest\" config option \"isolatedModules\" is deprecated and will be removed in v30.0.0. Please use \"isolatedModules: true\" in /Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/tsconfig.json instead, see https://www.typescriptlang.org/tsconfig/#isolatedModules\n  \nPASS tests/stage2/memory.test.ts\n  stage2 gunnchMemory controls\n    \u2713 encrypts round-trip (41 ms)\n    \u2713 supports domains and full control surface (137 ms)\n    \u2713 resolves dark\u2192light preference contradiction (36 ms)\n    \u2713 persists under artifacts/stage2/memory style path (12 ms)\n\nPASS tests/stage2/memory_privacy.test.ts\n  stage2 memory privacy\n    \u2713 blocks cross-user and cross-project leakage (47 ms)\n    \u2713 deleted memories do not reappear via default import (24 ms)\n    \u2713 rejects cloud sync without permission (23 ms)\n\nTest Suites: 2 passed, 2 total\nTests:       7 passed, 7 total\nSnapshots:   0 total\nTime:        0.552 s, estimated 1 s\nRan all test suites matching /tests\\/stage2\\/memory.test.ts|tests\\/stage2\\/memory_privacy.test.ts/i.\n"
+    },
+    "ai-projects": {
+      "ok": true,
+      "returncode": 0,
+      "stdout_tail": "",
+      "stderr_tail": "npm warn Unknown env config \"devdir\". This will stop working in the next major version of npm.\nts-jest[config] (WARN) \n    The \"ts-jest\" config option \"isolatedModules\" is deprecated and will be removed in v30.0.0. Please use \"isolatedModules: true\" in /Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/tsconfig.json instead, see https://www.typescriptlang.org/tsconfig/#isolatedModules\n  \nPASS tests/stage2/projects.test.ts\n  stage2 projects\n    \u2713 Wireless Lab E2E create\u2192files\u2192ask\u2192task\u2192decision\u2192restart\u2192reopen (3 ms)\n    \u2713 isolates two projects with no leakage (1 ms)\n\nTest Suites: 1 passed, 1 total\nTests:       2 passed, 2 total\nSnapshots:   0 total\nTime:        0.217 s, estimated 1 s\nRan all test suites matching /tests\\/stage2\\/projects.test.ts/i.\n"
+    },
+    "ai-citation-integrity": {
+      "ok": true,
+      "returncode": 0,
+      "stdout_tail": "",
+      "stderr_tail": "npm warn Unknown env config \"devdir\". This will stop working in the next major version of npm.\nts-jest[config] (WARN) \n    The \"ts-jest\" config option \"isolatedModules\" is deprecated and will be removed in v30.0.0. Please use \"isolatedModules: true\" in /Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/tsconfig.json instead, see https://www.typescriptlang.org/tsconfig/#isolatedModules\n  \nPASS tests/stage2/citation_integrity.test.ts\n  stage2 citation integrity\n    \u2713 fails fabricated citations against controlled local sources (3 ms)\n\nPASS tests/stage2/research.test.ts\n  stage2 research foundation\n    \u2713 offline local-only marks web unavailable (2 ms)\n\nTest Suites: 2 passed, 2 total\nTests:       2 passed, 2 total\nSnapshots:   0 total\nTime:        0.224 s, estimated 1 s\nRan all test suites matching /tests\\/stage2\\/research.test.ts|tests\\/stage2\\/citation_integrity.test.ts/i.\n"
+    },
+    "ai-os-integration": {
+      "ok": true,
+      "returncode": 0,
+      "stdout_tail": "",
+      "stderr_tail": "npm warn Unknown env config \"devdir\". This will stop working in the next major version of npm.\nts-jest[config] (WARN) \n    The \"ts-jest\" config option \"isolatedModules\" is deprecated and will be removed in v30.0.0. Please use \"isolatedModules: true\" in /Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/tsconfig.json instead, see https://www.typescriptlang.org/tsconfig/#isolatedModules\n  \nPASS tests/stage2/os_integration.test.ts\n  stage2 os integration smoke\n    \u2713 capability API routes via router with shared user_id (5 ms)\n    \u2713 permission broker denies network search without grant (4 ms)\n    \u2713 resource-aware routing uses simulated OS telemetry\n    \u2713 HTTP adapter smoke for device-os callers (9 ms)\n    \u2713 sync interface stays local-default without fake cloud claim\n\nPASS tests/stage2/eval_harness.test.ts\n  stage2 eval harness\n    \u2713 has \u226550 tasks across required domains (1 ms)\n    \u2713 runs result store with latency/cost/human_score fields (5 ms)\n\nTest Suites: 2 passed, 2 total\nTests:       7 passed, 7 total\nSnapshots:   0 total\nTime:        0.248 s, estimated 1 s\nRan all test suites matching /tests\\/stage2\\/os_integration.test.ts|tests\\/stage2\\/eval_harness.test.ts/i.\n"
+    }
+  },
+  "artifacts": {
+    "MODEL_CANDIDATE_MATRIX.json": true,
+    "MODEL_CANDIDATE_MATRIX.md": true,
+    "MODEL_BENCHMARK_BASELINE.json": true,
+    "eval/corpus.json": true,
+    "eval/schema.json": true,
+    "OS_CALLER_CONTRACT.md": true
+  },
+  "notes": [
+    "Stage 2 foundations only. Full frontier product parity remains false."
+  ],
+  "gate_status": {
+    "DEEP_RESEARCH": "DIGITALLY_VALIDATED",
+    "EVALUATION": "DIGITALLY_VALIDATED",
+    "MEMORY": "DIGITALLY_VALIDATED",
+    "MODEL_QUALITY": "DIGITALLY_VALIDATED",
+    "MODEL_ROUTING": "DIGITALLY_VALIDATED",
+    "OS_NATIVE_AI": "DIGITALLY_VALIDATED",
+    "PROJECTS": "DIGITALLY_VALIDATED",
+    "WEB_SEARCH": "DIGITALLY_VALIDATED"
+  }
+}

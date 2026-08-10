@@ -129,3 +129,11 @@ var/gunnchai/**
 !var/gunnchai/.gitkeep
 var/gunnchai-status/**
 var/gunnchai-test/**
+# Stage 2 runtime memory blobs
+artifacts/stage2/memory/**/*.bin
+artifacts/stage2/memory/**/*.enc
+!artifacts/stage2/memory/.gitkeep
+artifacts/stage2/eval/results/**
+!artifacts/stage2/AI_PROVE_REPORT.json
+artifacts/stage2/eval/results/**
+!artifacts/stage2/eval/results/.gitkeep

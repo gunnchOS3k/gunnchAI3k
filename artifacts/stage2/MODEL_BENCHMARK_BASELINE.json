@@ -1,0 +1,87 @@
+{
+  "schema": "gunnchai.stage2.model_benchmark_baseline.v1",
+  "dated": "2026-08-09",
+  "mode": "local_digital_reference",
+  "rows": [
+    {
+      "task": "tutoring",
+      "selectedModelId": "local-fast-smollm-360m",
+      "selectedRole": "LOCAL_FAST",
+      "location": "local",
+      "ok": true,
+      "latencyMsEstimate": 120,
+      "costUnitsEstimate": 0,
+      "notes": "Local digital reference only — not a competitive superiority claim."
+    },
+    {
+      "task": "code",
+      "selectedModelId": "local-pro-qwen2-1_5b",
+      "selectedRole": "LOCAL_PRO",
+      "location": "local",
+      "ok": true,
+      "latencyMsEstimate": 350,
+      "costUnitsEstimate": 0,
+      "notes": "Local digital reference only — not a competitive superiority claim."
+    },
+    {
+      "task": "device",
+      "selectedModelId": "nano-smollm-135m",
+      "selectedRole": "NANO_LOCAL",
+      "location": "local",
+      "ok": true,
+      "latencyMsEstimate": 40,
+      "costUnitsEstimate": 0,
+      "notes": "Local digital reference only — not a competitive superiority claim."
+    },
+    {
+      "task": "research",
+      "selectedModelId": "local-pro-qwen2-1_5b",
+      "selectedRole": "LOCAL_PRO",
+      "location": "local",
+      "ok": true,
+      "latencyMsEstimate": 350,
+      "costUnitsEstimate": 0,
+      "notes": "Local digital reference only — not a competitive superiority claim."
+    },
+    {
+      "task": "network",
+      "selectedModelId": "nano-smollm-135m",
+      "selectedRole": "NANO_LOCAL",
+      "location": "local",
+      "ok": true,
+      "latencyMsEstimate": 40,
+      "costUnitsEstimate": 0,
+      "notes": "Local digital reference only — not a competitive superiority claim."
+    },
+    {
+      "task": "archive",
+      "selectedModelId": "local-pro-qwen2-1_5b",
+      "selectedRole": "LOCAL_PRO",
+      "location": "local",
+      "ok": true,
+      "latencyMsEstimate": 350,
+      "costUnitsEstimate": 0,
+      "notes": "Local digital reference only — not a competitive superiority claim."
+    },
+    {
+      "task": "summarize",
+      "selectedModelId": "local-fast-smollm-360m",
+      "selectedRole": "LOCAL_FAST",
+      "location": "local",
+      "ok": true,
+      "latencyMsEstimate": 120,
+      "costUnitsEstimate": 0,
+      "notes": "Local digital reference only — not a competitive superiority claim."
+    },
+    {
+      "task": "translate",
+      "selectedModelId": "local-fast-smollm-360m",
+      "selectedRole": "LOCAL_FAST",
+      "location": "local",
+      "ok": true,
+      "latencyMsEstimate": 120,
+      "costUnitsEstimate": 0,
+      "notes": "Local digital reference only — not a competitive superiority claim."
+    }
+  ]
+}

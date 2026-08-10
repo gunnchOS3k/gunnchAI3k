@@ -1,0 +1,103 @@
+name: Stage 2 Frontier AI foundations
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main, 'phase-xiii/**']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: stage2-frontier-ai-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  frontier-ai-models:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - name: Fleet + matrix + benchmark
+        run: npx jest tests/stage2/fleet.test.ts --runInBand
+
+  ai-router:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - name: Router failure modes
+        run: npx jest tests/stage2/router_failures.test.ts --runInBand
+
+  ai-memory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - name: Memory controls + privacy
+        run: npx jest tests/stage2/memory.test.ts tests/stage2/memory_privacy.test.ts --runInBand
+
+  ai-projects:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - name: Projects E2E + isolation
+        run: npx jest tests/stage2/projects.test.ts --runInBand
+
+  ai-citation-integrity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - name: Research + citation integrity
+        run: npx jest tests/stage2/research.test.ts tests/stage2/citation_integrity.test.ts --runInBand
+
+  ai-os-integration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - name: OS capability smoke + eval foundation
+        run: npx jest tests/stage2/os_integration.test.ts tests/stage2/eval_harness.test.ts --runInBand
+      - name: Prove Stage 2 AI
+        run: python3 scripts/prove_stage2_ai.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: stage2-ai-prove-report
+          path: artifacts/stage2/AI_PROVE_REPORT.json
+          if-no-files-found: ignore
+          retention-days: 14

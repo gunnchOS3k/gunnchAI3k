@@ -1,0 +1,20 @@
+{
+  "schema": "gunnchai.stage2.eval_task.v1",
+  "fields": {
+    "id": "string",
+    "domain": "string",
+    "prompt": "string",
+    "expected_capability": "string",
+    "privacy_class": "string",
+    "offline_ok": "boolean",
+    "result": {
+      "ok": "boolean",
+      "latency_ms": "number",
+      "cost_units": "number",
+      "model_id": "string|null",
+      "human_score": "number|null",
+      "notes": "string"
+    }
+  },
+  "note": "Do NOT invent competitor superiority scores."
+}
