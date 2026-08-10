@@ -67,7 +67,8 @@ export function buildModelCandidateMatrix(): {
       runtime: 'llama.cpp (GGUF, download-on-demand)',
       location: 'local',
       optional: false,
-      notes: 'Deeper reasoning / longer context when RAM and power allow.',
+      notes:
+        'Candidate Local Pro tier for deeper tasks when RAM/power allow. Weights not committed (fixture hash only) — not a measured absolute quality claim.',
       artifactRef: 'fixtures/stage2/models/local-pro-qwen2-1_5b.ref',
       sha256: FIXTURE_HASH,
       isNanoFallbackOnly: false,
