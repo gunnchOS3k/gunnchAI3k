@@ -1,0 +1,407 @@
+{
+  "schema": "gunnchai.stage2.eval_corpus.v1",
+  "dated": "2026-08-09",
+  "count": 50,
+  "tasks": [
+    {
+      "id": "TASK-001",
+      "domain": "education",
+      "prompt": "education task 1: resolve a realistic local digital scenario",
+      "expected_capability": "tutor",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-002",
+      "domain": "education",
+      "prompt": "education task 2: resolve a realistic local digital scenario",
+      "expected_capability": "tutor",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-003",
+      "domain": "education",
+      "prompt": "education task 3: resolve a realistic local digital scenario",
+      "expected_capability": "tutor",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-004",
+      "domain": "education",
+      "prompt": "education task 4: resolve a realistic local digital scenario",
+      "expected_capability": "tutor",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-005",
+      "domain": "education",
+      "prompt": "education task 5: resolve a realistic local digital scenario",
+      "expected_capability": "tutor",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-006",
+      "domain": "education",
+      "prompt": "education task 6: resolve a realistic local digital scenario",
+      "expected_capability": "tutor",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-007",
+      "domain": "education",
+      "prompt": "education task 7: resolve a realistic local digital scenario",
+      "expected_capability": "tutor",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-008",
+      "domain": "education",
+      "prompt": "education task 8: resolve a realistic local digital scenario",
+      "expected_capability": "tutor",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-009",
+      "domain": "coding",
+      "prompt": "coding task 1: resolve a realistic local digital scenario",
+      "expected_capability": "code",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-010",
+      "domain": "coding",
+      "prompt": "coding task 2: resolve a realistic local digital scenario",
+      "expected_capability": "code",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-011",
+      "domain": "coding",
+      "prompt": "coding task 3: resolve a realistic local digital scenario",
+      "expected_capability": "code",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-012",
+      "domain": "coding",
+      "prompt": "coding task 4: resolve a realistic local digital scenario",
+      "expected_capability": "code",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-013",
+      "domain": "coding",
+      "prompt": "coding task 5: resolve a realistic local digital scenario",
+      "expected_capability": "code",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-014",
+      "domain": "coding",
+      "prompt": "coding task 6: resolve a realistic local digital scenario",
+      "expected_capability": "code",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-015",
+      "domain": "coding",
+      "prompt": "coding task 7: resolve a realistic local digital scenario",
+      "expected_capability": "code",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-016",
+      "domain": "coding",
+      "prompt": "coding task 8: resolve a realistic local digital scenario",
+      "expected_capability": "code",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-017",
+      "domain": "research",
+      "prompt": "research task 1: resolve a realistic local digital scenario",
+      "expected_capability": "search",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-018",
+      "domain": "research",
+      "prompt": "research task 2: resolve a realistic local digital scenario",
+      "expected_capability": "search",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-019",
+      "domain": "research",
+      "prompt": "research task 3: resolve a realistic local digital scenario",
+      "expected_capability": "search",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-020",
+      "domain": "research",
+      "prompt": "research task 4: resolve a realistic local digital scenario",
+      "expected_capability": "search",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-021",
+      "domain": "research",
+      "prompt": "research task 5: resolve a realistic local digital scenario",
+      "expected_capability": "search",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-022",
+      "domain": "research",
+      "prompt": "research task 6: resolve a realistic local digital scenario",
+      "expected_capability": "search",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-023",
+      "domain": "research",
+      "prompt": "research task 7: resolve a realistic local digital scenario",
+      "expected_capability": "search",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-024",
+      "domain": "office",
+      "prompt": "office task 1: resolve a realistic local digital scenario",
+      "expected_capability": "summarize",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-025",
+      "domain": "office",
+      "prompt": "office task 2: resolve a realistic local digital scenario",
+      "expected_capability": "summarize",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-026",
+      "domain": "office",
+      "prompt": "office task 3: resolve a realistic local digital scenario",
+      "expected_capability": "summarize",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-027",
+      "domain": "office",
+      "prompt": "office task 4: resolve a realistic local digital scenario",
+      "expected_capability": "summarize",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-028",
+      "domain": "office",
+      "prompt": "office task 5: resolve a realistic local digital scenario",
+      "expected_capability": "summarize",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-029",
+      "domain": "office",
+      "prompt": "office task 6: resolve a realistic local digital scenario",
+      "expected_capability": "summarize",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-030",
+      "domain": "device",
+      "prompt": "device task 1: resolve a realistic local digital scenario",
+      "expected_capability": "diagnose",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-031",
+      "domain": "device",
+      "prompt": "device task 2: resolve a realistic local digital scenario",
+      "expected_capability": "diagnose",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-032",
+      "domain": "device",
+      "prompt": "device task 3: resolve a realistic local digital scenario",
+      "expected_capability": "diagnose",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-033",
+      "domain": "device",
+      "prompt": "device task 4: resolve a realistic local digital scenario",
+      "expected_capability": "diagnose",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-034",
+      "domain": "device",
+      "prompt": "device task 5: resolve a realistic local digital scenario",
+      "expected_capability": "diagnose",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-035",
+      "domain": "device",
+      "prompt": "device task 6: resolve a realistic local digital scenario",
+      "expected_capability": "diagnose",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-036",
+      "domain": "network",
+      "prompt": "network task 1: resolve a realistic local digital scenario",
+      "expected_capability": "diagnose",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-037",
+      "domain": "network",
+      "prompt": "network task 2: resolve a realistic local digital scenario",
+      "expected_capability": "diagnose",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-038",
+      "domain": "network",
+      "prompt": "network task 3: resolve a realistic local digital scenario",
+      "expected_capability": "diagnose",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-039",
+      "domain": "network",
+      "prompt": "network task 4: resolve a realistic local digital scenario",
+      "expected_capability": "diagnose",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-040",
+      "domain": "network",
+      "prompt": "network task 5: resolve a realistic local digital scenario",
+      "expected_capability": "diagnose",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-041",
+      "domain": "archive",
+      "prompt": "archive task 1: resolve a realistic local digital scenario",
+      "expected_capability": "reason",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-042",
+      "domain": "archive",
+      "prompt": "archive task 2: resolve a realistic local digital scenario",
+      "expected_capability": "reason",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-043",
+      "domain": "archive",
+      "prompt": "archive task 3: resolve a realistic local digital scenario",
+      "expected_capability": "reason",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-044",
+      "domain": "archive",
+      "prompt": "archive task 4: resolve a realistic local digital scenario",
+      "expected_capability": "reason",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-045",
+      "domain": "archive",
+      "prompt": "archive task 5: resolve a realistic local digital scenario",
+      "expected_capability": "reason",
+      "privacy_class": "personal",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-046",
+      "domain": "privacy",
+      "prompt": "privacy task 1: resolve a realistic local digital scenario",
+      "expected_capability": "classify",
+      "privacy_class": "sensitive",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-047",
+      "domain": "privacy",
+      "prompt": "privacy task 2: resolve a realistic local digital scenario",
+      "expected_capability": "classify",
+      "privacy_class": "sensitive",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-048",
+      "domain": "privacy",
+      "prompt": "privacy task 3: resolve a realistic local digital scenario",
+      "expected_capability": "classify",
+      "privacy_class": "sensitive",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-049",
+      "domain": "privacy",
+      "prompt": "privacy task 4: resolve a realistic local digital scenario",
+      "expected_capability": "classify",
+      "privacy_class": "sensitive",
+      "offline_ok": true
+    },
+    {
+      "id": "TASK-050",
+      "domain": "privacy",
+      "prompt": "privacy task 5: resolve a realistic local digital scenario",
+      "expected_capability": "classify",
+      "privacy_class": "sensitive",
+      "offline_ok": true
+    }
+  ]
+}

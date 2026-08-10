@@ -312,3 +312,17 @@ See `docs/00_GUNNCHAI3K_TUTOR_VISION.md` and `prompts/system_prompt_gunnchai3k.m
 - **No student PII** in public repos. Academic integrity guardrails refuse active exam cheating.
 
 > **Research / education prototype** — not a certified consumer product or guaranteed employment outcome.
+
+## Phase XIII Stage 2 AI foundations
+
+Local multi-model fleet, router, gunnchMemory, Projects, research/citation, and OS capability adapters live under `src/stage2/`.
+
+```bash
+npm run test:stage2
+npm run prove:stage2
+```
+
+Device-os callers: see `artifacts/stage2/OS_CALLER_CONTRACT.md`.
+HTTP adapter: `POST /v1/capability/{summarize|translate|tutor|code|search|reason|diagnose|classify}`.
+
+Doctrine: DRAFT only; `GUNNCHAI_FRONTIER_PRODUCT_PARITY=false`.
