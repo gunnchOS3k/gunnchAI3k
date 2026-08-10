@@ -1,0 +1,62 @@
+{
+  "schema": "gunnchai.phase_xiv.stage2_reproof.v1",
+  "generated_at": "2026-08-10T01:51:32.062186+00:00",
+  "accepted_main_sha": "8b0fc38cdfec4d93176bd9a2a6f9078646f315f4",
+  "stage2_pr": 28,
+  "branch": "phase-xiv/ai-frontier-convergence",
+  "physical_execution_freeze": true,
+  "auto_merge_request": null,
+  "reproof": {
+    "tests": {
+      "command": "npm run test:stage2",
+      "ok": true,
+      "suites": 9,
+      "tests": 32
+    },
+    "prove": {
+      "command": "python3 scripts/prove_stage2_ai.py",
+      "ok": true,
+      "report": "artifacts/stage2/AI_PROVE_REPORT.json"
+    }
+  },
+  "tokens": {
+    "GUNNCHAI_FRONTIER_PRODUCT_PARITY": false,
+    "BETTER_THAN_CHATGPT": false,
+    "BETTER_THAN_CLAUDE": false,
+    "BETTER_THAN_GEMINI": false,
+    "BETTER_THAN_COPILOT": false,
+    "BETTER_THAN_PERPLEXITY": false,
+    "AI_MULTI_MODEL_FLEET_REAL": true,
+    "AI_ROUTER_DIGITAL_PASS": true,
+    "AI_MEMORY_DIGITAL_PASS": true,
+    "AI_PROJECTS_DIGITAL_PASS": true,
+    "AI_RESEARCH_CITATION_DIGITAL_PASS": true,
+    "AI_OS_INTEGRATION_SMOKE_PASS": true,
+    "AI_EVAL_HARNESS_FOUNDATION_PASS": true
+  },
+  "gates_digitally_validated": [
+    "DEEP_RESEARCH",
+    "EVALUATION",
+    "MEMORY",
+    "MODEL_QUALITY",
+    "MODEL_ROUTING",
+    "OS_NATIVE_AI",
+    "PROJECTS",
+    "WEB_SEARCH"
+  ],
+  "gate_status": {
+    "DEEP_RESEARCH": "DIGITALLY_VALIDATED",
+    "EVALUATION": "DIGITALLY_VALIDATED",
+    "MEMORY": "DIGITALLY_VALIDATED",
+    "MODEL_QUALITY": "DIGITALLY_VALIDATED",
+    "MODEL_ROUTING": "DIGITALLY_VALIDATED",
+    "OS_NATIVE_AI": "DIGITALLY_VALIDATED",
+    "PROJECTS": "DIGITALLY_VALIDATED",
+    "WEB_SEARCH": "DIGITALLY_VALIDATED"
+  },
+  "regressions": [],
+  "notes": [
+    "Stage 2 re-proven on accepted main before Phase XIV implementation.",
+    "GUNNCHAI_FRONTIER_PRODUCT_PARITY remains false."
+  ]
+}

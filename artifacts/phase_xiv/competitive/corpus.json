@@ -1,0 +1,2566 @@
+{
+  "schema": "gunnchai.phase_xiv.competitive_corpus.v1",
+  "dated": "2026-08-10",
+  "count": 150,
+  "competitor_scoring_policy": "Do not fabricate competitor scores. Leave null / EXTERNAL_PENDING without real API access.",
+  "tokens": {
+    "GUNNCHAI_FRONTIER_PRODUCT_PARITY": false,
+    "BETTER_THAN_CHATGPT": false,
+    "BETTER_THAN_CLAUDE": false,
+    "BETTER_THAN_GEMINI": false,
+    "BETTER_THAN_COPILOT": false,
+    "BETTER_THAN_PERPLEXITY": false
+  },
+  "tasks": [
+    {
+      "id": "P14-001",
+      "domain": "education",
+      "prompt": "Explain Rayleigh fading vs Rician for a midterm review.",
+      "expected_capability": "tutor",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-002",
+      "domain": "education",
+      "prompt": "Derive BER for BPSK in AWGN step by step.",
+      "expected_capability": "tutor",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-003",
+      "domain": "education",
+      "prompt": "Tutor a student through OFDM cyclic prefix intuition.",
+      "expected_capability": "tutor",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-004",
+      "domain": "education",
+      "prompt": "Create a 10-minute quiz on Maxwell equations for EL6303.",
+      "expected_capability": "tutor",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-005",
+      "domain": "education",
+      "prompt": "Help debug a mistaken antenna gain conversion (dBi vs linear).",
+      "expected_capability": "tutor",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-006",
+      "domain": "education",
+      "prompt": "Summarize lecture notes on MIMO capacity without inventing citations.",
+      "expected_capability": "tutor",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-007",
+      "domain": "education",
+      "prompt": "Coach a study plan for wireless midterm with weak spots in DSP.",
+      "expected_capability": "tutor",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-008",
+      "domain": "education",
+      "prompt": "Walk through SNR vs SINR with a concrete numerical example.",
+      "expected_capability": "tutor",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-009",
+      "domain": "education",
+      "prompt": "Explain convolution in discrete time for a confused student.",
+      "expected_capability": "tutor",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-010",
+      "domain": "education",
+      "prompt": "Generate practice problems on Fourier transforms with solutions outlines.",
+      "expected_capability": "tutor",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-011",
+      "domain": "education",
+      "prompt": "Clarify difference between power spectral density and autocorrelation.",
+      "expected_capability": "tutor",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-012",
+      "domain": "education",
+      "prompt": "Help rewrite a lab abstract to be precise and citation-safe.",
+      "expected_capability": "tutor",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-013",
+      "domain": "education",
+      "prompt": "Diagnose common mistakes in matched filter homework.",
+      "expected_capability": "tutor",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-014",
+      "domain": "education",
+      "prompt": "Create flashcards for cellular handoff concepts.",
+      "expected_capability": "tutor",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-015",
+      "domain": "education",
+      "prompt": "Explain Doppler shift with a pedestrian walking scenario.",
+      "expected_capability": "tutor",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-016",
+      "domain": "coding",
+      "prompt": "Inspect a TypeScript router and propose a safer fallback chain.",
+      "expected_capability": "code",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-017",
+      "domain": "coding",
+      "prompt": "Write a unit test for approval-gated submit actions.",
+      "expected_capability": "code",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-018",
+      "domain": "coding",
+      "prompt": "Fix a flaky jest timeout in an agent interrupt/resume test.",
+      "expected_capability": "code",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-019",
+      "domain": "coding",
+      "prompt": "Refactor a file tool to enforce sandbox path allowlists.",
+      "expected_capability": "code",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-020",
+      "domain": "coding",
+      "prompt": "Add structured logging to a sandboxed shell executor.",
+      "expected_capability": "code",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-021",
+      "domain": "coding",
+      "prompt": "Implement idempotent resume for a task graph node.",
+      "expected_capability": "code",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-022",
+      "domain": "coding",
+      "prompt": "Diagnose a race in concurrent tool audit writers.",
+      "expected_capability": "code",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-023",
+      "domain": "coding",
+      "prompt": "Package a small CLI that runs local prove scripts.",
+      "expected_capability": "code",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-024",
+      "domain": "coding",
+      "prompt": "Convert a markdown report generator into DOCX+PDF outputs.",
+      "expected_capability": "code",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-025",
+      "domain": "coding",
+      "prompt": "Add schema validation for MCP tool discovery responses.",
+      "expected_capability": "code",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-026",
+      "domain": "coding",
+      "prompt": "Write a coding-agent workflow that stops before git merge.",
+      "expected_capability": "code",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-027",
+      "domain": "coding",
+      "prompt": "Harden path traversal checks in artifact targeted edit.",
+      "expected_capability": "code",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-028",
+      "domain": "coding",
+      "prompt": "Create a typed event bus for barge-in voice interrupts.",
+      "expected_capability": "code",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-029",
+      "domain": "coding",
+      "prompt": "Optimize retrieval chunking for long-context project memory.",
+      "expected_capability": "code",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-030",
+      "domain": "coding",
+      "prompt": "Add rollback snapshots for sandboxed file mutations.",
+      "expected_capability": "code",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-031",
+      "domain": "research",
+      "prompt": "Local-only research: summarize fixtures on RF measurement methodology.",
+      "expected_capability": "research",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-032",
+      "domain": "research",
+      "prompt": "Check citation integrity against a controlled local corpus.",
+      "expected_capability": "research",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-033",
+      "domain": "research",
+      "prompt": "Compare two lab notes on path loss without fabricating papers.",
+      "expected_capability": "research",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-034",
+      "domain": "research",
+      "prompt": "Extract claims from a local JSON research fixture with provenance.",
+      "expected_capability": "research",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-035",
+      "domain": "research",
+      "prompt": "Build a bibliography stub from local sources only.",
+      "expected_capability": "research",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-036",
+      "domain": "research",
+      "prompt": "Flag unsupported million-token context claims in a draft.",
+      "expected_capability": "research",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-037",
+      "domain": "research",
+      "prompt": "Summarize competitive gap register items relevant to agents.",
+      "expected_capability": "research",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-038",
+      "domain": "research",
+      "prompt": "Produce a research brief on MCP connector permission models.",
+      "expected_capability": "research",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-039",
+      "domain": "research",
+      "prompt": "Map Stage 2 gates to Phase XIV remaining work.",
+      "expected_capability": "research",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-040",
+      "domain": "research",
+      "prompt": "Find contradictions between local-first policy and a cloud-only draft.",
+      "expected_capability": "research",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-041",
+      "domain": "research",
+      "prompt": "Assemble related work notes for computer-use safety.",
+      "expected_capability": "research",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-042",
+      "domain": "research",
+      "prompt": "Verify offline research marks web unavailable correctly.",
+      "expected_capability": "research",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-043",
+      "domain": "research",
+      "prompt": "Create a deep-research outline with required citation checks.",
+      "expected_capability": "research",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-044",
+      "domain": "research",
+      "prompt": "Rank local snippets by relevance to antenna calibration.",
+      "expected_capability": "research",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-045",
+      "domain": "research",
+      "prompt": "Draft an honest evaluation note leaving competitor scores null.",
+      "expected_capability": "research",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-046",
+      "domain": "office",
+      "prompt": "Draft a weekly status memo from local project task JSON.",
+      "expected_capability": "summarize",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-047",
+      "domain": "office",
+      "prompt": "Turn measurement notes into a one-page executive summary.",
+      "expected_capability": "summarize",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-048",
+      "domain": "office",
+      "prompt": "Create an agenda for a lab sync with clear owners.",
+      "expected_capability": "summarize",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-049",
+      "domain": "office",
+      "prompt": "Edit only slide 4 title in a presentation artifact.",
+      "expected_capability": "summarize",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-050",
+      "domain": "office",
+      "prompt": "Generate an XLSX of lab measurements with units.",
+      "expected_capability": "summarize",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-051",
+      "domain": "office",
+      "prompt": "Produce a PDF cover page for a lab report package.",
+      "expected_capability": "summarize",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-052",
+      "domain": "office",
+      "prompt": "Summarize open approvals awaiting user decision.",
+      "expected_capability": "summarize",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-053",
+      "domain": "office",
+      "prompt": "Convert meeting bullets into actionable tasks with due dates.",
+      "expected_capability": "summarize",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-054",
+      "domain": "office",
+      "prompt": "Rewrite a dense paragraph for clarity without changing claims.",
+      "expected_capability": "summarize",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-055",
+      "domain": "office",
+      "prompt": "Build a DOCX appendix listing artifact versions.",
+      "expected_capability": "summarize",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-056",
+      "domain": "office",
+      "prompt": "Create a CSV export of scheduled proactive tasks.",
+      "expected_capability": "summarize",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-057",
+      "domain": "office",
+      "prompt": "Assemble a PPTX outline for Phase XIV demo (no parity claims).",
+      "expected_capability": "summarize",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-058",
+      "domain": "office",
+      "prompt": "Generate an SVG diagram of agent approval flow.",
+      "expected_capability": "summarize",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-059",
+      "domain": "office",
+      "prompt": "Produce a notebook cell that plots SNR vs distance.",
+      "expected_capability": "summarize",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-060",
+      "domain": "office",
+      "prompt": "Package a mini website index for local lab artifacts.",
+      "expected_capability": "summarize",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-061",
+      "domain": "device",
+      "prompt": "Interpret a battery thermal critical telemetry sample.",
+      "expected_capability": "device",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-062",
+      "domain": "device",
+      "prompt": "Recommend offline mode when bearer degrades before class.",
+      "expected_capability": "device",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-063",
+      "domain": "device",
+      "prompt": "Explain Ring low-battery policy-controlled assistance.",
+      "expected_capability": "device",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-064",
+      "domain": "device",
+      "prompt": "Diagnose storage pressure affecting local model loads.",
+      "expected_capability": "device",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-065",
+      "domain": "device",
+      "prompt": "Map device profile Student vs Handheld for AI continuity.",
+      "expected_capability": "device",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-066",
+      "domain": "device",
+      "prompt": "Propose safe defaults for mic/camera session scoping.",
+      "expected_capability": "device",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-067",
+      "domain": "device",
+      "prompt": "Check permission broker denies screen without grant.",
+      "expected_capability": "device",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-068",
+      "domain": "device",
+      "prompt": "Simulate docked mode continuity hook without cloud sync.",
+      "expected_capability": "device",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-069",
+      "domain": "device",
+      "prompt": "Detect update-pending event and prepare offline materials.",
+      "expected_capability": "device",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-070",
+      "domain": "device",
+      "prompt": "Troubleshoot NPU unavailable fallback to CPU local fast.",
+      "expected_capability": "device",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-071",
+      "domain": "device",
+      "prompt": "Validate device-local privacy blocks cloud escalation.",
+      "expected_capability": "device",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-072",
+      "domain": "device",
+      "prompt": "Summarize hardware inventory fields for diagnostics UI.",
+      "expected_capability": "device",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-073",
+      "domain": "device",
+      "prompt": "Advise on power-save routing preference changes.",
+      "expected_capability": "device",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-074",
+      "domain": "device",
+      "prompt": "Explain indicator-visible camera access requirements.",
+      "expected_capability": "device",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-075",
+      "domain": "device",
+      "prompt": "Plan recovery steps after a sandboxed install denial.",
+      "expected_capability": "device",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-076",
+      "domain": "networking",
+      "prompt": "Diagnose degraded Wi-Fi before a scheduled class download.",
+      "expected_capability": "network",
+      "privacy_class": "public",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-077",
+      "domain": "networking",
+      "prompt": "Recommend local inference when offline flag is set.",
+      "expected_capability": "network",
+      "privacy_class": "public",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-078",
+      "domain": "networking",
+      "prompt": "Explain bearer switch impact on cloud consent policy.",
+      "expected_capability": "network",
+      "privacy_class": "public",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-079",
+      "domain": "networking",
+      "prompt": "Parse a local traceroute-like fixture for latency spikes.",
+      "expected_capability": "network",
+      "privacy_class": "public",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-080",
+      "domain": "networking",
+      "prompt": "Suggest prefetch of allowed offline tutoring materials.",
+      "expected_capability": "network",
+      "privacy_class": "public",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-081",
+      "domain": "networking",
+      "prompt": "Classify a network event as event-aware assistance candidate.",
+      "expected_capability": "network",
+      "privacy_class": "public",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-082",
+      "domain": "networking",
+      "prompt": "Draft a troubleshooting checklist for captive portal cases.",
+      "expected_capability": "network",
+      "privacy_class": "public",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-083",
+      "domain": "networking",
+      "prompt": "Map connectivity state to router offline decisions.",
+      "expected_capability": "network",
+      "privacy_class": "public",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-084",
+      "domain": "networking",
+      "prompt": "Identify when scheduled sync must remain local_only.",
+      "expected_capability": "network",
+      "privacy_class": "public",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-085",
+      "domain": "networking",
+      "prompt": "Create a short user-facing explanation of offline research limits.",
+      "expected_capability": "network",
+      "privacy_class": "public",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-086",
+      "domain": "networking",
+      "prompt": "Simulate packet loss impact on voice barge-in latency.",
+      "expected_capability": "network",
+      "privacy_class": "public",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-087",
+      "domain": "networking",
+      "prompt": "Recommend reconnect strategy without claiming OS parity.",
+      "expected_capability": "network",
+      "privacy_class": "public",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-088",
+      "domain": "networking",
+      "prompt": "Audit connector network permission revocation path.",
+      "expected_capability": "network",
+      "privacy_class": "public",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-089",
+      "domain": "networking",
+      "prompt": "Plan hybrid eval run that stays local when network denied.",
+      "expected_capability": "network",
+      "privacy_class": "public",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-090",
+      "domain": "networking",
+      "prompt": "Document honest EXTERNAL_PENDING for cloud competitor APIs.",
+      "expected_capability": "network",
+      "privacy_class": "public",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-091",
+      "domain": "games",
+      "prompt": "Coach fair-play boundaries for in-game help overlays.",
+      "expected_capability": "tutor",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-092",
+      "domain": "games",
+      "prompt": "Explain a combo timing concept without botting advice.",
+      "expected_capability": "tutor",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-093",
+      "domain": "games",
+      "prompt": "Summarize practice drills for reaction training.",
+      "expected_capability": "tutor",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-094",
+      "domain": "games",
+      "prompt": "Help configure accessibility for competitive HUD density.",
+      "expected_capability": "tutor",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-095",
+      "domain": "games",
+      "prompt": "Create a post-match review template from local stats JSON.",
+      "expected_capability": "tutor",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-096",
+      "domain": "games",
+      "prompt": "Suggest warm-up routine before a ranked session.",
+      "expected_capability": "tutor",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-097",
+      "domain": "games",
+      "prompt": "Diagnose input lag symptoms vs network lag in a fixture.",
+      "expected_capability": "tutor",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-098",
+      "domain": "games",
+      "prompt": "Build a Game Coach skill prompt with safety constraints.",
+      "expected_capability": "tutor",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-099",
+      "domain": "games",
+      "prompt": "Translate coach notes into short voice TTS lines.",
+      "expected_capability": "tutor",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-100",
+      "domain": "games",
+      "prompt": "Plan a Beat Link Host skill checklist for a local set.",
+      "expected_capability": "tutor",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-101",
+      "domain": "games",
+      "prompt": "Review anime coach scenario for spoiler-safe summaries.",
+      "expected_capability": "tutor",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-102",
+      "domain": "games",
+      "prompt": "Create pedestrian coach tips for spatial awareness drills.",
+      "expected_capability": "tutor",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-103",
+      "domain": "games",
+      "prompt": "Generate a SVG court diagram for a strategy note.",
+      "expected_capability": "tutor",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-104",
+      "domain": "games",
+      "prompt": "Scope AI assistance to shared team project without personal memory leak.",
+      "expected_capability": "tutor",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-105",
+      "domain": "games",
+      "prompt": "Stop before any purchase of in-game items without approval.",
+      "expected_capability": "tutor",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-106",
+      "domain": "security",
+      "prompt": "Review approval gates covering send/submit/delete/install/purchase.",
+      "expected_capability": "diagnose",
+      "privacy_class": "device-local",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-107",
+      "domain": "security",
+      "prompt": "Ensure RFQ and NDA actions require explicit approval.",
+      "expected_capability": "diagnose",
+      "privacy_class": "device-local",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-108",
+      "domain": "security",
+      "prompt": "Audit trail must record denied merge/deploy attempts.",
+      "expected_capability": "diagnose",
+      "privacy_class": "device-local",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-109",
+      "domain": "security",
+      "prompt": "Sandbox network policy blocks unexpected egress.",
+      "expected_capability": "diagnose",
+      "privacy_class": "device-local",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-110",
+      "domain": "security",
+      "prompt": "Validate interrupt/resume does not skip approval nodes.",
+      "expected_capability": "diagnose",
+      "privacy_class": "device-local",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-111",
+      "domain": "security",
+      "prompt": "Check collaboration workspace isolates personal memory.",
+      "expected_capability": "diagnose",
+      "privacy_class": "device-local",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-112",
+      "domain": "security",
+      "prompt": "Revoke MCP connector auth and confirm tool unavailable.",
+      "expected_capability": "diagnose",
+      "privacy_class": "device-local",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-113",
+      "domain": "security",
+      "prompt": "Prevent path escape outside sandbox root.",
+      "expected_capability": "diagnose",
+      "privacy_class": "device-local",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-114",
+      "domain": "security",
+      "prompt": "Confirm high-impact voice intents prepare but do not execute.",
+      "expected_capability": "diagnose",
+      "privacy_class": "device-local",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-115",
+      "domain": "security",
+      "prompt": "Test rollback restores files after failed coding-agent edit.",
+      "expected_capability": "diagnose",
+      "privacy_class": "device-local",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-116",
+      "domain": "security",
+      "prompt": "Enforce resource limits on sandboxed Python execution.",
+      "expected_capability": "diagnose",
+      "privacy_class": "device-local",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-117",
+      "domain": "security",
+      "prompt": "Ensure cross-device sync defaults sensitive context off.",
+      "expected_capability": "diagnose",
+      "privacy_class": "device-local",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-118",
+      "domain": "security",
+      "prompt": "Flag fabricated competitor superiority claims in reports.",
+      "expected_capability": "diagnose",
+      "privacy_class": "device-local",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-119",
+      "domain": "security",
+      "prompt": "Verify GUNNCHAI_FRONTIER_PRODUCT_PARITY stays false in prove.",
+      "expected_capability": "diagnose",
+      "privacy_class": "device-local",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-120",
+      "domain": "security",
+      "prompt": "Validate scheduled tasks cannot auto-submit assignments.",
+      "expected_capability": "diagnose",
+      "privacy_class": "device-local",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-121",
+      "domain": "multimodal",
+      "prompt": "Describe a lab bench screenshot with granted screen permission.",
+      "expected_capability": "vision",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-122",
+      "domain": "multimodal",
+      "prompt": "Read an error dialog image and propose next debug step.",
+      "expected_capability": "vision",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-123",
+      "domain": "multimodal",
+      "prompt": "Parse a chart PNG of SNR measurements into numeric summary.",
+      "expected_capability": "vision",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-124",
+      "domain": "multimodal",
+      "prompt": "Identify whiteboard equation regions with permissioned vision.",
+      "expected_capability": "vision",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-125",
+      "domain": "multimodal",
+      "prompt": "Explain a circuit board photo at a high level.",
+      "expected_capability": "vision",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-126",
+      "domain": "multimodal",
+      "prompt": "OCR a homework snippet and refuse auto-submit.",
+      "expected_capability": "vision",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-127",
+      "domain": "multimodal",
+      "prompt": "Classify gameplay HUD elements without cheating advice.",
+      "expected_capability": "vision",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-128",
+      "domain": "multimodal",
+      "prompt": "Map network topology diagram nodes from an SVG.",
+      "expected_capability": "vision",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-129",
+      "domain": "multimodal",
+      "prompt": "Detect compiler error text in a screenshot fixture.",
+      "expected_capability": "vision",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-130",
+      "domain": "multimodal",
+      "prompt": "Summarize Device Manager diagnostics panel content.",
+      "expected_capability": "vision",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-131",
+      "domain": "multimodal",
+      "prompt": "Refuse camera context when permission revoked.",
+      "expected_capability": "vision",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-132",
+      "domain": "multimodal",
+      "prompt": "Combine screen awareness with local project memory.",
+      "expected_capability": "vision",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-133",
+      "domain": "multimodal",
+      "prompt": "Annotate a plot image with axis/unit notes.",
+      "expected_capability": "vision",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-134",
+      "domain": "multimodal",
+      "prompt": "Extract table cells from a document scan stub.",
+      "expected_capability": "vision",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-135",
+      "domain": "multimodal",
+      "prompt": "Gate vision tools behind PermissionBroker grants.",
+      "expected_capability": "vision",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-136",
+      "domain": "voice",
+      "prompt": "Transcribe a short local ASR fixture without cloud.",
+      "expected_capability": "speech",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-137",
+      "domain": "voice",
+      "prompt": "Synthesize TTS for a lab reminder with barge-in support.",
+      "expected_capability": "speech",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-138",
+      "domain": "voice",
+      "prompt": "Handle interruption mid-utterance and resume planner.",
+      "expected_capability": "speech",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-139",
+      "domain": "voice",
+      "prompt": "Prepare a send-message intent from voice but await approval.",
+      "expected_capability": "speech",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-140",
+      "domain": "voice",
+      "prompt": "Run noise-suppression stub before ASR decode.",
+      "expected_capability": "speech",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-141",
+      "domain": "voice",
+      "prompt": "Expose local wake-word option without claiming product parity.",
+      "expected_capability": "speech",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-142",
+      "domain": "voice",
+      "prompt": "Measure round-trip latency fields in voice session log.",
+      "expected_capability": "speech",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-143",
+      "domain": "voice",
+      "prompt": "Map Ring gesture interrupt to voice barge-in event.",
+      "expected_capability": "speech",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-144",
+      "domain": "voice",
+      "prompt": "Refuse privileged install when spoken without approval.",
+      "expected_capability": "speech",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-145",
+      "domain": "voice",
+      "prompt": "Stream partial ASR tokens into task planner.",
+      "expected_capability": "speech",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-146",
+      "domain": "voice",
+      "prompt": "Keep full-duplex session state interruptible.",
+      "expected_capability": "speech",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-147",
+      "domain": "voice",
+      "prompt": "Fall back to text mode when mic permission denied.",
+      "expected_capability": "speech",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-148",
+      "domain": "voice",
+      "prompt": "Log voice action safety decisions in audit trail.",
+      "expected_capability": "speech",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-149",
+      "domain": "voice",
+      "prompt": "Use open-runtime markers for local ASR/TTS backends.",
+      "expected_capability": "speech",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    },
+    {
+      "id": "P14-150",
+      "domain": "voice",
+      "prompt": "Stop voice workflow before external publication.",
+      "expected_capability": "speech",
+      "privacy_class": "personal",
+      "offline_ok": true,
+      "competitor_scores": {
+        "chatgpt": null,
+        "claude": null,
+        "gemini": null,
+        "copilot": null,
+        "perplexity": null
+      },
+      "competitor_status": "EXTERNAL_PENDING",
+      "notes": "Honest harness \u2014 competitor scores null without real API access."
+    }
+  ]
+}

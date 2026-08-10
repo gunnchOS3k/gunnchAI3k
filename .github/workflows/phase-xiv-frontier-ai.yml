@@ -1,0 +1,202 @@
+name: Phase XIV Frontier AI (DRAFT)
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main, 'phase-xiv/**']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: phase-xiv-frontier-ai-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  stage2-reproof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - name: Stage 2 tests
+        run: npm run test:stage2
+      - name: Stage 2 prove
+        run: python3 scripts/prove_stage2_ai.py
+      - name: Require STAGE2_REPROOF artifact
+        run: test -f artifacts/phase_xiv/STAGE2_REPROOF.json
+
+  agents:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - run: npx jest tests/phase_xiv/agent_runtime.test.ts --runInBand
+
+  long-context:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - run: npx jest tests/phase_xiv/long_context.test.ts --runInBand
+
+  multimodal:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - run: npx jest tests/phase_xiv/multimodal_voice.test.ts --runInBand -t "gates vision"
+
+  voice:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - run: npx jest tests/phase_xiv/multimodal_voice.test.ts --runInBand -t "ASR/TTS"
+
+  computer-use:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - run: npx jest tests/phase_xiv/computer_use.test.ts --runInBand
+
+  mcp:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - run: npx jest tests/phase_xiv/mcp_skills.test.ts --runInBand -t "connectors"
+
+  skills:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - run: npx jest tests/phase_xiv/mcp_skills.test.ts --runInBand -t "gunnchSkills"
+
+  artifacts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - run: npx jest tests/phase_xiv/artifacts_scheduled.test.ts --runInBand -t "creates docx"
+
+  scheduled:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - run: npx jest tests/phase_xiv/artifacts_scheduled.test.ts --runInBand -t "scheduled tasks"
+
+  collab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - run: npx jest tests/phase_xiv/collab_continuity.test.ts --runInBand
+
+  competitive-ai:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - name: Honest competitive harness
+        run: npx jest tests/phase_xiv/competitive.test.ts --runInBand
+
+  prove:
+    needs:
+      - stage2-reproof
+      - agents
+      - long-context
+      - multimodal
+      - voice
+      - computer-use
+      - mcp
+      - skills
+      - artifacts
+      - scheduled
+      - collab
+      - competitive-ai
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - name: Prove Phase XIV AI (DRAFT)
+        run: python3 scripts/prove_phase_xiv_ai.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: phase-xiv-ai-prove-report
+          path: |
+            artifacts/phase_xiv/AI_PROVE_REPORT.json
+            artifacts/phase_xiv/STAGE2_REPROOF.json
+            artifacts/phase_xiv/competitive/MANIFEST_LATEST.json
+          if-no-files-found: ignore
+          retention-days: 14
