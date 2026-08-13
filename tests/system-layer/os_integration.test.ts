@@ -38,6 +38,8 @@ describe('Continuance VI gunnchOS integration', () => {
     expect(discovery.modelStatus.selectedArchitecture).toBe('llama.cpp');
     expect(discovery.modelStatus.unavailableFallback).toBe('deterministic-baseline');
     expect(discovery.modelStatus.hostForwardPossible).toBe(true);
+    expect(discovery.modelStatus.nanoFallbackOnly).toBe(true);
+    expect(discovery.modelStatus.nanoLabel).toMatch(/Nano fallback only/i);
     expect(discovery.ragStatus.attributionEnabled).toBe(true);
     expect(discovery.ragStatus.documents).toBeGreaterThan(0);
     expect(discovery.permissions).toEqual(

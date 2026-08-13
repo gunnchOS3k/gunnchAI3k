@@ -171,6 +171,9 @@ export interface LocalModelStatus {
   modelVersionHistory: string[];
   unavailableFallback: 'deterministic-baseline';
   hostForwardPossible: boolean;
+  /** Present llama.cpp GGUF is Nano fallback only (135M / 512-ctx). */
+  nanoFallbackOnly: true;
+  nanoLabel: string;
 }
 
 export interface RagSourceStatus {

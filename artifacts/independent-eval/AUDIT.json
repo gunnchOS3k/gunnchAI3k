@@ -1,0 +1,50 @@
+{
+  "ownerRepo": "gunnchAI3k",
+  "doctrine": "135M Q4_K_M 512-ctx is Nano/fallback only. Independent evals score product mechanisms, not SmolLM2-as-final-intelligence.",
+  "real": [
+    "Model registry with sha256 integrity, license, version, device profiles",
+    "Stage-2 router: Nano vs Local Fast vs Local Pro vs optional cloud (consent-gated)",
+    "Deterministic in-process backends for tutoring/code/device/a11y/translation/…",
+    "Local RAG ingest → chunk → index → search → attribution → delete → rebuild",
+    "Encrypted gunnchMemory (AES-256-GCM) with owner/project isolation",
+    "OS PermissionBroker + product-service route scopes (tool calls gated)",
+    "Agent sandbox path-escape deny + network deny-by-default",
+    "Local-only network guard (no production cloud keys)",
+    "Governance snapshot/rollback + request timeout/cancel + audit log",
+    "llama.cpp selected architecture with measured metrics when GGUF+binary present"
+  ],
+  "nanoFallback": [
+    "SmolLM2-135M-Instruct Q4_K_M 512-ctx is Nano/fallback only — not daily intelligence",
+    "Fleet nano candidate nano-smollm-135m isNanoFallbackOnly=true",
+    "System-layer entry smollm2-135m-instruct-q4_k_m isNanoFallbackOnly=true",
+    "Real llama.cpp inference is available but remains Nano-tier (ctx=512)"
+  ],
+  "registryOnlyNotWeights": [
+    "local-fast-smollm-360m: registry + fixture hash only (weights not committed)",
+    "local-pro-qwen2-1_5b: registry + fixture hash only (weights not committed)",
+    "embed-minilm-l6 / rerank-tiny-cross: fixture or candidate, not measured embedding quality claims",
+    "frontier-cloud-optional: consent-gated stub; no production keys"
+  ],
+  "open": [
+    "LOCAL_FAST / LOCAL_PRO GGUF download-on-demand is not a measured product tier yet",
+    "gunnchos-device-os gunnchai_tutor remains a first-party packaging stub (source_tree null / SDK lab app)",
+    "device-os phase_xiv local_ai still prefers SmolLM2 when llama is enabled (owner follow-up on device-os)",
+    "Visual OS companion vs generic chatbot: VISUAL UNAVAILABLE in this STREAM",
+    "On-device NPU / physical power: not claimed (HOST_OBSERVED latency only)",
+    "Model image OTA integrity/update/rollback on device: governance rollback is in-process, not shipping OTA",
+    "GUNNCHAI_FRONTIER_PRODUCT_PARITY remains false",
+    "GUNNCHAI_APP_PRODUCT_COMPLETE remains false"
+  ],
+  "llama": {
+    "canRunRealInference": true,
+    "ggufPath": "models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+    "metricsMode": "measured",
+    "contextSize": 512,
+    "labeledNanoFallbackOnly": true
+  },
+  "localFastWeightsPresent": false,
+  "localProWeightsPresent": false,
+  "appProductCompleteEarned": false,
+  "frontierParityEarned": false,
+  "appProductCompleteReason": "Local Fast and Local Pro weights are registry/fixture entries, not measured daily intelligence. SmolLM2-135M-Instruct Q4_K_M 512-ctx is Nano fallback only. No visual OS-companion proof in this STREAM (VISUAL UNAVAILABLE). GUNNCHAI_FRONTIER_PRODUCT_PARITY remains false. gunnchai_tutor on device-os remains a packaging stub / OS API companion, not a finished app product."
+}

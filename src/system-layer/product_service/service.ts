@@ -172,6 +172,9 @@ export class GunnchAIProductService {
       modelVersionHistory: state.modelVersionHistory,
       unavailableFallback: 'deterministic-baseline',
       hostForwardPossible: true,
+      nanoFallbackOnly: true,
+      nanoLabel:
+        'SmolLM2-135M-Instruct Q4_K_M 512-ctx is Nano fallback only — not Local Fast/Pro and not app-product-complete intelligence.',
     };
   }
 
