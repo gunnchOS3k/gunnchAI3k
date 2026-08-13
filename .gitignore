@@ -162,3 +162,4 @@ artifacts/independent-eval/scratch/**
 !artifacts/independent-eval/INDEPENDENT_EVAL_RESULT.json
 !artifacts/independent-eval/EXPERIENCE_REVIEW.json
 !artifacts/independent-eval/AUDIT.json
+!artifacts/independent-eval/VP_GUNNCHAI_32_INDEPENDENT_RESULT.json
