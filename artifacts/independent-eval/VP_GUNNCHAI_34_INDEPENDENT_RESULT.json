@@ -1,0 +1,519 @@
+{
+  "schema": "gunnchos.gunnchai34.independent_verifier_result.v1",
+  "work_item": "STREAM-A-AI-USER-READY-002",
+  "owner_repo": "gunnchAI3k",
+  "repo_path": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k",
+  "verifier_role": "INDEPENDENT_VERIFIER_AGENT",
+  "did_not_implement": true,
+  "did_not_merge": true,
+  "did_not_push_main": true,
+  "did_not_start_AI_USER_READY_003": true,
+  "did_not_commit_gguf": true,
+  "prefer_fail_over_false_pass": true,
+  "cursor_never_merges": true,
+  "HUMAN_E6": "NOT_STARTED",
+  "FRONTIER_PARITY": false,
+  "pr": {
+    "number": 34,
+    "url": "https://github.com/gunnchOS3k/gunnchAI3k/pull/34",
+    "draft": true,
+    "branch": "stream/ai-user-ready-002-fast-research",
+    "title": "AI-USER-READY-002: Local Fast, Deep Research, vision, coding-agent DRAFT PR",
+    "state": "OPEN",
+    "base": "main",
+    "mergeable_github": "MERGEABLE",
+    "mergeStateStatus": "UNSTABLE"
+  },
+  "claimed_tip": "c20c35d0d81dab41e1d3ad317e62528cb1252160",
+  "claimed_tip_live_confirmed": true,
+  "claimed_tip_short": "c20c35d",
+  "claimed_tip_subject": "feat(user-ready): ship AI-USER-READY-002 Local Fast, Deep Research, vision, coding-agent DRAFT PR",
+  "verified_tip": "c20c35d0d81dab41e1d3ad317e62528cb1252160",
+  "verified_tip_short": "c20c35d",
+  "verified_tip_subject": "feat(user-ready): ship AI-USER-READY-002 Local Fast, Deep Research, vision, coding-agent DRAFT PR",
+  "base_main": "c508675976605fda4611273a5014f5a4664e719f",
+  "base_main_confirmed": true,
+  "base_main_short": "c508675",
+  "base_main_subject": "Merge pull request #33 from gunnchOS3k/stream/ai-user-ready-001-market-baseline",
+  "matrix_accepted_main_base": "c508675",
+  "matrix_accepted_main_base_matches_origin_main": true,
+  "branch_evidence_not_presented_as_accepted_main": true,
+  "generated_at_utc": "2026-08-13T20:50:00Z",
+  "VP_GUNNCHAI_34_INDEPENDENT_RESULT": "PASS",
+  "INDEPENDENT_PASS": true,
+  "GUNNCHAI_34_READY_FOR_EDMUND_MERGE": true,
+  "READY_FOR_EDMUND_MERGE": true,
+  "READY_reason": "Product challenges PASS on live tip c20c35d. Dedicated AI-USER-READY-002 market-runtime is green including GUEST_OBSERVED Fast (same SHA, 6/6 real inference). Independent HOST hashed the real 360M GGUF, confirmed size_label=360M not 135M, and reproduced llama.cpp inference. Coverage 16/10/10/9/4/6 matches matrix rows. Leftover AI-USER-READY-001 workflow is red because the unified CLI now requires Fast/llama which 001 does not install — honest fail, not a fake pass. Cursor does not merge. Do not start 003. HUMAN_E6=false. FRONTIER_PARITY=false.",
+  "claim_firewall": {
+    "GUNNCHAI_APP_PRODUCT_COMPLETE": false,
+    "GUNNCHAI_FRONTIER_PRODUCT_PARITY": false,
+    "AI_USER_READY_002_DIGITAL_PASS": true,
+    "AI_USER_READY_001_DIGITAL_PASS": true,
+    "NANO_FALLBACK_ONLY": true,
+    "BETTER_THAN_CHATGPT": false,
+    "BETTER_THAN_CLAUDE": false,
+    "BETTER_THAN_GEMINI": false,
+    "BETTER_THAN_NOTEBOOKLM": false,
+    "BETTER_THAN_KHANMIGO": false,
+    "BETTER_THAN_PERPLEXITY": false,
+    "BETTER_THAN_COPILOT": false,
+    "HUMAN_E6": false,
+    "VISUAL": "UNAVAILABLE"
+  },
+  "challenges": {
+    "1_live_pr_tip_and_ci": {
+      "verdict": "PASS",
+      "head_sha": "c20c35d0d81dab41e1d3ad317e62528cb1252160",
+      "live_matches_claimed": true,
+      "draft": true,
+      "base_is_pr33_merge": true,
+      "origin_main": "c508675976605fda4611273a5014f5a4664e719f",
+      "pass_count": 21,
+      "fail_count": 1,
+      "pending_count": 1,
+      "skip_count": 1,
+      "skip_expected": ["deploy (main-only job on Deploy gunnchAI3k)"],
+      "fail_non_packet": [
+        {
+          "name": "market-runtime",
+          "workflow": "AI-USER-READY-001 market packet",
+          "state": "FAILURE",
+          "url": "https://github.com/gunnchOS3k/gunnchAI3k/actions/runs/31742180575/job/94588009816",
+          "packet_blocking": false,
+          "note": "Leftover 001 workflow. npm run user-ready:001 now aliases the 002 CLI. Guest downloaded Fast GGUF (localFast PRESENT) then AI-UR-016 failed without llama-cli. Honest DIGITAL_PASS=false. Not a hardcoded pass. Dedicated 002 workflow is the packet job."
+        }
+      ],
+      "pending": [
+        {
+          "name": "market-runtime",
+          "workflow": "AI-USER-READY-002 market packet",
+          "state": "IN_PROGRESS_OR_QUEUED_PUSH_RUN",
+          "url": "https://github.com/gunnchOS3k/gunnchAI3k/actions/runs/31742177220",
+          "packet_blocking": false,
+          "note": "Push-event duplicate of the PR 002 job. PR 002 run 31742180564 already SUCCESS."
+        }
+      ],
+      "packet_job": {
+        "name": "market-runtime",
+        "workflow": "AI-USER-READY-002 market packet",
+        "state": "SUCCESS",
+        "url": "https://github.com/gunnchOS3k/gunnchAI3k/actions/runs/31742180564/job/94588009803",
+        "guest_fast": {
+          "passed": true,
+          "observation": "GUEST_OBSERVED",
+          "sha256": "2fa3f013dcdd7b99f9b237717fa0b12d75bbb89984cc1274be1471a465bac9c2",
+          "bytes": 270590880,
+          "cases": 6,
+          "allImplementedPassed": true,
+          "continue_on_error_present": true,
+          "continue_on_error_did_not_hide_failure": true,
+          "note": "Workflow marks Fast CLI continue-on-error, but this run's CLI step conclusion was success and the uploaded artifact shows AI-UR-016 passed."
+        }
+      },
+      "key_checks": [
+        {
+          "name": "build",
+          "workflow": "Deploy gunnchAI3k",
+          "state": "SUCCESS",
+          "url": "https://github.com/gunnchOS3k/gunnchAI3k/actions/runs/31742180576/job/94588009910"
+        },
+        {
+          "name": "local-runtime",
+          "workflow": "Gate 1 post-merge integrity",
+          "state": "SUCCESS",
+          "url": "https://github.com/gunnchOS3k/gunnchAI3k/actions/runs/31742180600/job/94588009556"
+        },
+        {
+          "name": "stage2-reproof",
+          "workflow": "Phase XIV Frontier AI (DRAFT)",
+          "state": "SUCCESS",
+          "url": "https://github.com/gunnchOS3k/gunnchAI3k/actions/runs/31742180623/job/94588010387"
+        }
+      ],
+      "independent_local": {
+        "command": "npm run test:user-ready && independent Fast hash + llama-cli + Deep Research public fetch",
+        "jest": "6/6 suites, 18/18 PASS",
+        "cli_allImplementedPassed": true,
+        "cli_coverage": {
+          "required": 16,
+          "implemented": 10,
+          "runtime": 10,
+          "offline": 9,
+          "cloud_consent": 4,
+          "open": 6
+        }
+      }
+    },
+    "2_local_fast_hash_and_inference": {
+      "verdict": "PASS",
+      "reproduced": true,
+      "llama_cli_present": true,
+      "llama_cli_path": "/opt/homebrew/bin/llama-cli",
+      "download_script_present": true,
+      "weights_already_on_host": true,
+      "empty_file_sha": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "empty_file_used_as_fast": false,
+      "nano_relabeled_fast": false,
+      "invented_bytes": false,
+      "fast": {
+        "path": "models/local/SmolLM2-360M-Instruct-Q4_K_M.gguf",
+        "independent_sha256": "2fa3f013dcdd7b99f9b237717fa0b12d75bbb89984cc1274be1471a465bac9c2",
+        "matches_claimed": true,
+        "bytes": 270590880,
+        "gguf_magic": "GGUF",
+        "gguf_general_name": "Smollm2 360M 8k Lc100K Mix1 Ep2",
+        "gguf_size_label": "360M",
+        "not_135m": true,
+        "llama_cli_loaded_model": "models/local/SmolLM2-360M-Instruct-Q4_K_M.gguf",
+        "llama_cli_ftype": "Q4_K - Medium",
+        "independent_prompt": "Reply with one short sentence: what is orthogonal frequency-division multiplexing used for?",
+        "independent_output_excerpt": "Orthogonal frequency-division multiplexing (OFDM) is used for transmitting multiple signals over a single communication channel by dividing the bandwidth into multiple channels, each with a specific frequency.",
+        "host_packet_cases": [
+          {"id": "general", "realInference": true, "usedNano": false, "latencyMs": 2200, "outputChars": 249},
+          {"id": "summarization", "realInference": true, "usedNano": false, "latencyMs": 3922, "outputChars": 112},
+          {"id": "waike", "realInference": true, "usedNano": false, "latencyMs": 1182, "outputChars": 194},
+          {"id": "source_grounded", "realInference": true, "usedNano": false, "latencyMs": 1231, "outputChars": 141},
+          {"id": "basic_code", "realInference": true, "usedNano": false, "latencyMs": 922, "outputChars": 38},
+          {"id": "structured_output", "realInference": true, "usedNano": false, "latencyMs": 1396, "outputChars": 26}
+        ],
+        "observation": "HOST_OBSERVED",
+        "direct_path_not_discoverGguf_first_file": true
+      },
+      "nano": {
+        "path": "models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "independent_sha256": "2e8040ceae7815abe0dcb3540b9995eaa1fa0d2ca9e797d0a635ae4433c68c2d",
+        "bytes": 105454432,
+        "gguf_size_label": "135M",
+        "isNanoFallbackOnly": true,
+        "sha_differs_from_fast": true
+      },
+      "localPro": {
+        "status": "OPEN",
+        "pinned_sha256": null,
+        "ggufFile": null,
+        "fast_landing_does_not_imply_pro": true
+      },
+      "manager_rejects": {
+        "empty_file_sha": true,
+        "fake_not_gguf": true,
+        "nano_filename_as_fast": true
+      }
+    },
+    "3_deep_research": {
+      "verdict": "PASS",
+      "single_search_mislabeled": false,
+      "citations_from_fetched_bodies": true,
+      "deny_path_works": true,
+      "silent_cloud": false,
+      "jest_http_mock": false,
+      "packet_runner_uses": "live HTTP to 127.0.0.1 canned pages (real sockets, not nock)",
+      "independent_public_http": {
+        "denied_without_consent": true,
+        "cloud_consent_refused_no_vendor_call": true,
+        "single_url_rejected": true,
+        "live_ok": true,
+        "sources_read": 3,
+        "urls": [
+          "https://www.rfc-editor.org/rfc/rfc8623",
+          "https://en.wikipedia.org/wiki/Orthogonal_frequency-division_multiplexing",
+          "https://example.com/"
+        ],
+        "verified_citations": 3,
+        "unread_cited": [],
+        "fabricated_rejected": ["https://invented.example.invalid/not-a-real-paper"],
+        "cloudUsed": false
+      },
+      "open_depth_not_fail": [
+        "Plan is a hardcoded 6-step list, not an LLM planner that discovers sources.",
+        "Runtime fetches seed URLs; it is not a ChatGPT/Gemini-scale search agent.",
+        "Quote picker is naive (can cite nav chrome). Quotes still substring-match fetched bodies.",
+        "Synthesis is local string concat, not a cloud LLM. Disclosed."
+      ]
+    },
+    "4_vision": {
+      "verdict": "PASS",
+      "permission_required": true,
+      "explicit_share_required": true,
+      "background_capture_throws": true,
+      "throw_token": "BACKGROUND_SURVEILLANCE_FORBIDDEN",
+      "background_timer": false,
+      "os_screencapture_invoked": false,
+      "screencapture_api_grep_in_user_ready": "notes string only; no CGDisplay/desktopCapturer/getDisplayMedia",
+      "local_png_svg_inspect": true,
+      "independent_png_ihdr": {"ok": true, "format": "png", "width": 16, "height": 8, "description": "Shared PNG 16x8. Local header inspect only."},
+      "vlm_claimed": false,
+      "not_surveillance": true
+    },
+    "5_coding_agent": {
+      "verdict": "PASS",
+      "proposed_diff_only_accepted": false,
+      "proposed_diff_reason": "DIFF_ONLY_NOT_A_DRAFT_PR",
+      "sandbox_edits_commits_tests_draft_pr_json": true,
+      "production_repo_blocked": true,
+      "cwd_gunnchAI3k_blocked": true,
+      "forbidden_git": {
+        "force_push": true,
+        "merge": true,
+        "push": true,
+        "push_main": true
+      },
+      "main_unchanged": true,
+      "remote_pushed": false,
+      "draft": true,
+      "more_than_proposed_diff": true,
+      "does_not_open_github_pr_against_production": true,
+      "independent_sandbox": {
+        "ok": true,
+        "fixed_add_js": "return a + b",
+        "hasDraftJson": true,
+        "hasProposedDiff": false,
+        "mainEqualsBranch": false
+      }
+    },
+    "6_matrix_arithmetic": {
+      "verdict": "PASS",
+      "hardcoded_matrix_pass": false,
+      "chatbot_equals_pass": false,
+      "coverage_derived_in": "src/user-ready/coverage.ts",
+      "claimed": {
+        "required": 16,
+        "implemented": 10,
+        "runtime": 10,
+        "offline": 9,
+        "cloud_consent": 4,
+        "open": 6
+      },
+      "counted_from_matrix_rows": {
+        "required": 16,
+        "implemented": 10,
+        "offline": 9,
+        "cloud_only": 0,
+        "cloud_consent": 4,
+        "open": 6
+      },
+      "implemented_task_ids": [
+        "AI-UR-001",
+        "AI-UR-002",
+        "AI-UR-003",
+        "AI-UR-004",
+        "AI-UR-005",
+        "AI-UR-006",
+        "AI-UR-007",
+        "AI-UR-011",
+        "AI-UR-013",
+        "AI-UR-016"
+      ],
+      "runtime_task_ids_independent_host": [
+        "AI-UR-001",
+        "AI-UR-002",
+        "AI-UR-003",
+        "AI-UR-004",
+        "AI-UR-005",
+        "AI-UR-006",
+        "AI-UR-007",
+        "AI-UR-011",
+        "AI-UR-013",
+        "AI-UR-016"
+      ],
+      "offline_task_ids": [
+        "AI-UR-001",
+        "AI-UR-002",
+        "AI-UR-003",
+        "AI-UR-004",
+        "AI-UR-005",
+        "AI-UR-006",
+        "AI-UR-011",
+        "AI-UR-013",
+        "AI-UR-016"
+      ],
+      "cloud_consent_task_ids": ["AI-UR-001", "AI-UR-005", "AI-UR-007", "AI-UR-013"],
+      "open_task_ids": [
+        "AI-UR-008",
+        "AI-UR-009",
+        "AI-UR-010",
+        "AI-UR-012",
+        "AI-UR-014",
+        "AI-UR-015"
+      ],
+      "companion_classifier_not_counted_implemented": true,
+      "passed_is_computed_predicate": true,
+      "how_runtime_count_is_defined": "results.filter(r => r.passed).length among executed implemented tasks — 10 because all 10 passed on host and on 002 guest."
+    },
+    "7_weights_not_in_git": {
+      "verdict": "PASS",
+      "git_ls_files_gguf": [],
+      "gitignore": ["*.gguf", "models/**/*.gguf", "models/local/manager-state.json", "models/local/versions/**"],
+      "tracked_under_models_local": [
+        "models/local/MODEL_CARD.md",
+        "models/local/README.md",
+        "models/local/catalog.json",
+        "models/local/manifest.json"
+      ]
+    }
+  },
+  "stub_challenges": {
+    "verdict": "PASS",
+    "challengeImplementedFlags": [],
+    "items": [
+      {
+        "id": "leftover_001_workflow_red",
+        "severity": "P2_CI_HYGIENE",
+        "blocking": false,
+        "detail": "AI-USER-READY-001 still fires on every PR to main. CLI alias user-ready:001 now runs the 002 packet and fails without llama-cli. Dedicated 002 job is green. Edmund may need to ignore the stale 001 check. Not a product fake."
+      },
+      {
+        "id": "002_fast_cli_continue_on_error",
+        "severity": "P3",
+        "blocking": false,
+        "detail": "002 workflow continue-on-error on Fast CLI could hide a guest Fast miss. This run did not: CLI step success + artifact AI-UR-016 passed. Host independently reproduced Fast."
+      },
+      {
+        "id": "deep_research_is_seed_url_fetch_not_search_agent",
+        "severity": "OPEN_DEPTH",
+        "blocking": false,
+        "detail": "Multi-source live HTTP + body citations + deny + no silent cloud are real. Not ChatGPT/Gemini Deep Research scale. Gap disclosed in matrix."
+      },
+      {
+        "id": "vision_is_not_a_vlm",
+        "severity": "OPEN_DEPTH",
+        "blocking": false,
+        "detail": "PNG IHDR / SVG text inspect of explicitly shared bytes. Permission + share required. Background capture throws. Not a frontier VLM. Disclosed."
+      },
+      {
+        "id": "coding_agent_is_sandbox_toy",
+        "severity": "OPEN_DEPTH",
+        "blocking": false,
+        "detail": "Fixes add() in a temp git repo, runs tests, writes DRAFT_PR.json. Production repos blocked. Never merge/force-push/main. Not Copilot cloud agent. Disclosed."
+      },
+      {
+        "id": "readme_001_section_not_appended_002",
+        "severity": "P3",
+        "blocking": false,
+        "detail": "README still ends at AI-USER-READY-001 freeze text. WP-012 SSJ markers untouched. 002 truth lives in matrix/catalog/result JSON. Not an overclaim."
+      }
+    ]
+  },
+  "model_tier_honesty": {
+    "verdict": "PASS",
+    "nano_fallback_only": true,
+    "fast_gguf": "PRESENT",
+    "fast_sha256_independent": "2fa3f013dcdd7b99f9b237717fa0b12d75bbb89984cc1274be1471a465bac9c2",
+    "fast_bytes": 270590880,
+    "fast_size_label": "360M",
+    "pro_gguf": "OPEN",
+    "nano_relabeled": false,
+    "gguf_invented": false,
+    "empty_file_sha_accepted": false
+  },
+  "defects_S0_S1": {
+    "verdict": "PASS",
+    "S0_open": 0,
+    "S1_open": 0,
+    "items": []
+  },
+  "coverage_audit": {
+    "required": 16,
+    "implemented": 10,
+    "runtime": 10,
+    "offline": 9,
+    "cloud_only": 0,
+    "cloud_consent": 4,
+    "open": 6,
+    "gap": 6,
+    "implemented_task_ids": [
+      "AI-UR-001",
+      "AI-UR-002",
+      "AI-UR-003",
+      "AI-UR-004",
+      "AI-UR-005",
+      "AI-UR-006",
+      "AI-UR-007",
+      "AI-UR-011",
+      "AI-UR-013",
+      "AI-UR-016"
+    ],
+    "runtime_task_ids": [
+      "AI-UR-001",
+      "AI-UR-002",
+      "AI-UR-003",
+      "AI-UR-004",
+      "AI-UR-005",
+      "AI-UR-006",
+      "AI-UR-007",
+      "AI-UR-011",
+      "AI-UR-013",
+      "AI-UR-016"
+    ],
+    "offline_task_ids": [
+      "AI-UR-001",
+      "AI-UR-002",
+      "AI-UR-003",
+      "AI-UR-004",
+      "AI-UR-005",
+      "AI-UR-006",
+      "AI-UR-011",
+      "AI-UR-013",
+      "AI-UR-016"
+    ],
+    "cloud_consent_task_ids": ["AI-UR-001", "AI-UR-005", "AI-UR-007", "AI-UR-013"],
+    "open_task_ids": [
+      "AI-UR-008",
+      "AI-UR-009",
+      "AI-UR-010",
+      "AI-UR-012",
+      "AI-UR-014",
+      "AI-UR-015"
+    ]
+  },
+  "matrix_table": [
+    {"task_id": "AI-UR-001", "category": "research_citations", "implemented": true, "independent": "PASS", "notes": "Offline cited report; fabricated rejected. Live web is 007."},
+    {"task_id": "AI-UR-002", "category": "projects_memory", "implemented": true, "independent": "PASS", "notes": "Continuity + encrypted isolation."},
+    {"task_id": "AI-UR-003", "category": "artifact_outputs", "implemented": true, "independent": "PASS", "notes": "DOCX + code + targeted edit. Canvas UI OPEN."},
+    {"task_id": "AI-UR-004", "category": "socratic_hinting", "implemented": true, "independent": "PASS", "notes": "Hints only; cheat refused; regex engine not Khanmigo-quality."},
+    {"task_id": "AI-UR-005", "category": "tool_auth", "implemented": true, "independent": "PASS", "notes": "Deny-by-default; grant; high-impact approval."},
+    {"task_id": "AI-UR-006", "category": "source_grounded_qa", "implemented": true, "independent": "PASS", "notes": "Attached sources only; ungrounded refused."},
+    {"task_id": "AI-UR-007", "category": "deep_web_research", "implemented": true, "independent": "PASS", "notes": "Consent-gated multi-source live HTTP; citations from bodies; deny works; no silent cloud. Not a search agent."},
+    {"task_id": "AI-UR-008", "category": "canvas_cowrite_ui", "implemented": false, "independent": "OPEN", "notes": "Pixels VISUAL UNAVAILABLE."},
+    {"task_id": "AI-UR-009", "category": "custom_agents", "implemented": false, "independent": "OPEN", "notes": "No Gem/GPT store."},
+    {"task_id": "AI-UR-010", "category": "voice_realtime", "implemented": false, "independent": "OPEN", "notes": "No measured speech product."},
+    {"task_id": "AI-UR-011", "category": "vision_screen", "implemented": true, "independent": "PASS", "notes": "Explicit share + permission. Background throws. Local PNG/SVG inspect, not a VLM."},
+    {"task_id": "AI-UR-012", "category": "computer_use", "implemented": false, "independent": "OPEN", "notes": "No GUI control loop."},
+    {"task_id": "AI-UR-013", "category": "coding_agent_pr", "implemented": true, "independent": "PASS", "notes": "Sandbox branch + tests + DRAFT_PR.json. Production blocked. Diff-only rejected."},
+    {"task_id": "AI-UR-014", "category": "audio_overview", "implemented": false, "independent": "OPEN", "notes": "No TTS overview."},
+    {"task_id": "AI-UR-015", "category": "companion_ux", "implemented": false, "independent": "OPEN", "notes": "Classifier only; pixels UNAVAILABLE."},
+    {"task_id": "AI-UR-016", "category": "local_fast_pro_weights", "implemented": true, "independent": "PASS", "notes": "Hashed SmolLM2-360M Q4_K_M 270,590,880 bytes. HOST+GUEST real inference. Local Pro OPEN."}
+  ],
+  "remaining_open": [
+    "AI-UR-008 Canvas/cowrite UI (needs pixels on device-os)",
+    "AI-UR-009 custom Gems/GPTs/skills store",
+    "AI-UR-010 voice realtime",
+    "AI-UR-012 computer use GUI",
+    "AI-UR-014 NotebookLM-class audio overview",
+    "AI-UR-015 companion chrome pixels",
+    "LOCAL_PRO hashed GGUF + real inference if a pinned SHA-256 is selected",
+    "Leftover AI-USER-READY-001 workflow is red on this PR (unified CLI requires llama; ignore or scope off)",
+    "Deep Research is seed-URL fetch + local concat, not a frontier search agent",
+    "Vision is local PNG/SVG inspect, not a VLM",
+    "Coding agent is sandbox toy DRAFT_PR.json, not Copilot cloud",
+    "002 Fast CLI step is continue-on-error (did not hide this run)",
+    "HUMAN_E6 not started",
+    "GUNNCHAI_APP_PRODUCT_COMPLETE remains false",
+    "GUNNCHAI_FRONTIER_PRODUCT_PARITY remains false"
+  ],
+  "forbidden": {
+    "merged": false,
+    "pushed_main": false,
+    "HUMAN_E6": false,
+    "frontier_parity_true": false,
+    "app_product_complete_true": false,
+    "smollm2_as_final_intelligence": false,
+    "fast_pro_gguf_invented": false,
+    "nano_relabeled_fast_pro": false,
+    "empty_file_sha_as_fast": false,
+    "better_than_competitor_claims": false,
+    "ai_user_ready_003_started": false,
+    "weights_committed": false
+  },
+  "claim_boundary": "Digital independent verification of gunnchAI3k DRAFT #34 AI-USER-READY-002. Local Fast is hashed SmolLM2-360M Instruct Q4_K_M (SHA-256 2fa3f013…, 270,590,880 bytes) with real llama.cpp inference — not Nano 135M, not empty-file SHA, not invented bytes. Local Pro OPEN. Deep Research is consent-gated multi-source live HTTP with body-grounded citations; not one search + LLM prose; no silent cloud. Vision requires explicit share + permission and never OS-captures. Coding agent writes sandbox DRAFT_PR.json and cannot touch production/main. Coverage 16/10/10/9/4/6. Frontier parity, app-product-complete, HUMAN_E6 stay false. Cursor did not implement and must not merge. Do not start AI-USER-READY-003.",
+  "verdict_summary": "Live tip c20c35d confirmed on DRAFT #34, base origin/main = #33 merge c508675. Dedicated 002 market-runtime green including GUEST_OBSERVED Fast. Independent HOST hashed the real 360M GGUF (2fa3f013… / 270,590,880 bytes, size_label=360M) and reproduced llama.cpp inference; Nano 135M SHA/size differ. Deep Research deny + multi-source public HTTP + body citations PASS. Vision permission/share/background-throw PASS. Coding-agent sandbox DRAFT PR PASS; production/main blocked. Matrix arithmetic 16/10/10/9/4/6 matches JSON rows. Weights gitignored. GUNNCHAI_34_READY_FOR_EDMUND_MERGE=true. Cursor does not merge."
+}
