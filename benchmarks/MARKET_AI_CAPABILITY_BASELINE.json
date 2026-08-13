@@ -1,6 +1,6 @@
 {
   "schema": "gunnchai.market_ai_capability_baseline.v1",
-  "packet": "AI-USER-READY-001",
+  "packet": "AI-USER-READY-002",
   "researched_at": "2026-08-13",
   "doctrine": "Executable tasks from official product surfaces, not slogans. No BETTER_THAN_* scores. No frontier quality claim. SmolLM2-135M Q4_K_M 512-ctx is Nano fallback only.",
   "tokens": {
@@ -15,7 +15,7 @@
     "BETTER_THAN_PERPLEXITY": false,
     "BETTER_THAN_COPILOT": false
   },
-  "research_method": "Official help centers, product docs, and vendor blogs fetched 2026-08-13. Third-party roundups used only as pointers; capability classes below are grounded in vendor pages.",
+  "research_method": "Official help centers, product docs, and vendor blogs refreshed 2026-08-13 for AI-USER-READY-002 (ChatGPT Deep Research + Scheduled Tasks, Gemini Deep Research, Gemini Notebook/NotebookLM, Khanmigo, Copilot cloud agent). Third-party roundups used only as pointers; capability classes below are grounded in vendor pages.",
   "products": [
     {
       "id": "chatgpt",
@@ -33,6 +33,18 @@
         {
           "title": "Memory in ChatGPT",
           "url": "https://help.openai.com/en/articles/8590148-memory-in-chatgpt-remembering-what-you-chat-about"
+        },
+        {
+          "title": "Deep research in ChatGPT",
+          "url": "https://help.openai.com/en/articles/10500283-deep-research"
+        },
+        {
+          "title": "Scheduled Tasks in ChatGPT",
+          "url": "https://help.openai.com/en/articles/10291617-scheduled-tasks-in-chatgpt"
+        },
+        {
+          "title": "Research with ChatGPT (Academy)",
+          "url": "https://openai.com/academy/search-and-deep-research/"
         }
       ],
       "capability_classes": [
@@ -48,7 +60,13 @@
         },
         {
           "id": "chatgpt.deep_research",
-          "executable_task": "Run a multi-step research agent that reads many sources and returns a cited structured report.",
+          "executable_task": "Plan-gated multi-step research agent: review/edit a research plan, then search/read many sources (web, uploads, connected apps read-only) and return a documented cited report. Distinct from a single web search.",
+          "not_a_slogan": true,
+          "plan_gated": true
+        },
+        {
+          "id": "chatgpt.scheduled_tasks",
+          "executable_task": "Create one-off or recurring scheduled tasks from a Scheduled page (reminders, recurring work, monitoring for meaningful updates). Plan-gated; not Codex.",
           "not_a_slogan": true,
           "plan_gated": true
         },
@@ -173,7 +191,7 @@
       "capability_classes": [
         {
           "id": "gemini.deep_research",
-          "executable_task": "Autonomously browse many websites (and optionally Gmail/Drive/Chat) and produce a multi-page cited report.",
+          "executable_task": "Turn a prompt into a multi-point research plan the user can refine, autonomously search/browse many websites (and optionally Gmail/Drive/Chat), reason iteratively, and produce a multi-page cited report.",
           "not_a_slogan": true
         },
         {
@@ -325,7 +343,7 @@
         },
         {
           "title": "About Copilot coding / cloud agent",
-          "url": "https://docs.github.com/copilot/concepts/agents/cloud-agent/about-cloud-agent"
+          "url": "https://docs.github.com/en/copilot/concepts/agents/coding-agent/about-coding-agent"
         },
         {
           "title": "What's new with GitHub Copilot coding agent",
@@ -355,7 +373,7 @@
         },
         {
           "id": "copilot.cloud_coding_agent",
-          "executable_task": "Research a repo, plan, change a branch in a GitHub Actions environment, and open a draft pull request.",
+          "executable_task": "Research a repository, create a plan, make code changes on a branch in a GitHub Actions environment, run tests/linters, and open a pull request when ready. Distinct from IDE agent mode. Human review still required before merge.",
           "not_a_slogan": true
         },
         {
@@ -380,6 +398,7 @@
     "vision_screen_understanding",
     "computer_use_gui",
     "coding_agent_to_pr",
-    "account_wide_memory_controls"
+    "account_wide_memory_controls",
+    "scheduled_tasks"
   ]
 }

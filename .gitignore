@@ -165,7 +165,14 @@ artifacts/independent-eval/scratch/**
 !artifacts/independent-eval/VP_GUNNCHAI_32_INDEPENDENT_RESULT.json
 !artifacts/independent-eval/VP_GUNNCHAI_33_INDEPENDENT_RESULT.json
 
-# AI-USER-READY-001
+# AI-USER-READY
 artifacts/user-ready/scratch/**
 !artifacts/user-ready/.gitkeep
 !artifacts/user-ready/AI_USER_READY_001_RESULT.json
+!artifacts/user-ready/AI_USER_READY_002_RESULT.json
+models/local/*.partial
+models/local/quarantine/**
+models/local/versions/**
+models/local/manager-state.json
+.llama-cpp/
+.llama-cpp-src/

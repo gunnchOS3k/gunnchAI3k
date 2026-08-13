@@ -48,7 +48,9 @@
     "independent-eval": "tsx src/independent-eval/cli.ts",
     "test:independent-eval": "jest tests/independent-eval --runInBand",
     "user-ready:001": "tsx src/user-ready/cli.ts",
-    "test:user-ready": "jest tests/user-ready --runInBand"
+    "user-ready:002": "tsx src/user-ready/cli.ts",
+    "user-ready:fast-download": "GUNNCHAI_FAST_NETWORK_CONSENT=1 tsx -e \"import { ModelDownloadManager } from './src/user-ready/model_manager'; const m=new ModelDownloadManager(); m.ensure('local-fast-smollm2-360m',{networkConsent:true}).then(r=>{console.log(JSON.stringify(r,null,2)); if(!r.ok) process.exit(1);})\"",
+    "test:user-ready": "jest tests/user-ready --runInBand --forceExit"
   },
   "keywords": [
     "ai",

@@ -15,7 +15,7 @@ import {
   buildUserReadyTokens,
 } from '../../src/user-ready/tokens';
 
-describe('AI-USER-READY-001 market packet', () => {
+describe('AI-USER-READY-002 market packet', () => {
   it('keeps product-complete, frontier-parity, and HUMAN_E6 false', () => {
     const tokens = buildUserReadyTokens(true);
     expect(tokens[APP_PRODUCT_COMPLETE_TOKEN]).toBe(false);
@@ -58,17 +58,21 @@ describe('AI-USER-READY-001 market packet', () => {
     expect(challengeImplementedFlags(matrix.tasks)).toEqual([]);
   });
 
-  it('labels Fast/Pro weights ABSENT without inventing GGUFs; Nano is fallback only', () => {
+  it('labels Nano as fallback only; Fast never uses 135M; Pro stays OPEN without pinned SHA', () => {
     const tiers = inspectModelTiers();
     expect(tiers.nano.isNanoFallbackOnly).toBe(true);
     expect(tiers.nano.weightsStatus).toBe('NANO_FALLBACK_ONLY');
     expect(tiers.localFast.license).toMatch(/Apache/i);
     expect(tiers.localPro.license).toMatch(/Apache/i);
-    if (!tiers.localFast.ggufFile) {
+    expect(tiers.localFast.isNanoFallbackOnly).toBe(false);
+    if (tiers.localFast.weightsStatus === 'PRESENT') {
+      expect(tiers.localFast.ggufFile).toMatch(/360/i);
+      expect(tiers.localFast.ggufFile).not.toMatch(/135/i);
+    } else {
       expect(tiers.localFast.weightsStatus).toBe('ABSENT');
     }
     if (!tiers.localPro.ggufFile) {
-      expect(tiers.localPro.weightsStatus).toBe('ABSENT');
+      expect(tiers.localPro.weightsStatus).toMatch(/OPEN|ABSENT/);
     }
   });
 
@@ -94,24 +98,38 @@ describe('AI-USER-READY-001 market packet', () => {
   });
 
   it('runs the implemented market-task subset with real runtime', async () => {
-    const report = await runUserReadyPacket(process.cwd());
+    const report = await runUserReadyPacket(process.cwd(), {
+      fastNetworkConsent: process.env.GUNNCHAI_FAST_NETWORK_CONSENT === '1',
+    });
+    expect(report.packet).toBe('AI-USER-READY-002');
     expect(report.tokens[APP_PRODUCT_COMPLETE_TOKEN]).toBe(false);
     expect(report.tokens[FRONTIER_PARITY_TOKEN]).toBe(false);
     expect(report.tokens[HUMAN_E6_TOKEN]).toBe(false);
     expect(report.pixels).toBe(VISUAL_UNAVAILABLE);
     expect(report.stubChallengeFailures).toEqual([]);
-    const failed = report.results.filter((r) => !r.passed).map((r) => r.task_id);
-    expect(failed).toEqual([]);
-    expect(report.allImplementedPassed).toBe(true);
-    expect(report.tokens[USER_READY_PACKET_TOKEN]).toBe(true);
+    const requiredPass = report.results.filter((r) =>
+      ['AI-UR-001', 'AI-UR-002', 'AI-UR-003', 'AI-UR-004', 'AI-UR-005', 'AI-UR-006', 'AI-UR-007', 'AI-UR-011', 'AI-UR-013'].includes(
+        r.task_id,
+      ),
+    );
+    expect(requiredPass.every((r) => r.passed)).toBe(true);
     expect(report.coverage.required).toBe(16);
-    expect(report.coverage.implemented).toBe(6);
-    expect(report.coverage.runtime).toBe(6);
-    expect(report.coverage.offline).toBe(6);
-    expect(report.coverage.gap).toBe(10);
-    expect(report.coverage.cloud_only).toBeGreaterThanOrEqual(1);
+    expect(report.coverage.implemented).toBe(10);
+    expect(report.coverage.offline).toBe(9);
+    expect(report.coverage.gap).toBe(6);
+    expect(report.coverage.open_ids).toEqual(
+      expect.arrayContaining(['AI-UR-008', 'AI-UR-009', 'AI-UR-010', 'AI-UR-012', 'AI-UR-014', 'AI-UR-015']),
+    );
+    const fast = report.results.find((r) => r.task_id === 'AI-UR-016');
+    if (fast?.passed) {
+      expect(report.allImplementedPassed).toBe(true);
+      expect(report.tokens[USER_READY_PACKET_TOKEN]).toBe(true);
+      expect(report.coverage.runtime).toBe(10);
+    } else {
+      expect(fast?.notes).toMatch(/FAST_WEIGHTS_UNAVAILABLE|LLAMA_CLI_ABSENT|OFFLINE/);
+    }
     expect(
-      fs.existsSync(path.join(process.cwd(), 'artifacts', 'user-ready', 'AI_USER_READY_001_RESULT.json')),
+      fs.existsSync(path.join(process.cwd(), 'artifacts', 'user-ready', 'AI_USER_READY_002_RESULT.json')),
     ).toBe(true);
-  }, 30_000);
+  }, 360_000);
 });

@@ -2,7 +2,7 @@ import { APP_PRODUCT_COMPLETE_TOKEN, FRONTIER_PARITY_TOKEN, HUMAN_E6_TOKEN, USER
 import { runUserReadyPacket } from './runtime';
 
 async function main(): Promise<void> {
-  const report = await runUserReadyPacket(process.cwd());
+  const report = await runUserReadyPacket(process.cwd(), { fastNetworkConsent: true });
   const summary = {
     packet: report.packet,
     allImplementedPassed: report.allImplementedPassed,
@@ -14,6 +14,7 @@ async function main(): Promise<void> {
       localFast: report.modelTiers.localFast.weightsStatus,
       localPro: report.modelTiers.localPro.weightsStatus,
     },
+    observation: report.results.find((r) => r.task_id === 'AI-UR-016')?.evidence.observation,
     failed: report.results.filter((r) => !r.passed).map((r) => r.task_id),
     stubChallengeFailures: report.stubChallengeFailures,
     next_packet: report.next_packet,

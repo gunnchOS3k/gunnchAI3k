@@ -1,8 +1,8 @@
 {
   "schema": "gunnchai.market_task_matrix.v1",
-  "packet": "AI-USER-READY-001",
+  "packet": "AI-USER-READY-002",
   "dated": "2026-08-13",
-  "accepted_main_base": "c483a45",
+  "accepted_main_base": "c508675",
   "doctrine": "Map market executable classes onto gunnchAI3k. implemented=true only when a real runtime test exists. SmolLM2-135M Q4_K_M 512-ctx is Nano fallback only. HUMAN_E6=false. GUNNCHAI_APP_PRODUCT_COMPLETE=false. GUNNCHAI_FRONTIER_PRODUCT_PARITY=false.",
   "device_profiles": ["student_14_5", "handheld_hybrid", "ds_xl_coder"],
   "model_tier_truth": {
@@ -21,18 +21,19 @@
       "candidate": "HuggingFaceTB/SmolLM2-360M-Instruct",
       "license": "Apache-2.0",
       "ggufSource": "https://huggingface.co/bartowski/SmolLM2-360M-Instruct-GGUF",
-      "weightsStatus": "ABSENT",
-      "wired": "registry_candidate_only",
-      "notes": "License-compatible Fast candidate selected without inventing GGUF bytes. Weights not on disk → OPEN."
+      "sha256": "2fa3f013dcdd7b99f9b237717fa0b12d75bbb89984cc1274be1471a465bac9c2",
+      "weightsStatus": "DOWNLOAD_ON_DEMAND",
+      "wired": "model_manager + llama.cpp explicit 360M path",
+      "notes": "Hashed SmolLM2-360M Q4_K_M Fast. Nano 135M is never accepted as Fast. Not a frontier quality claim."
     },
     "LOCAL_PRO": {
       "id": "local-pro-qwen2-1_5b",
       "candidate": "Qwen/Qwen2-1.5B-Instruct",
       "license": "Apache-2.0",
-      "ggufSource": "registry/fixture only until a hashed GGUF is present",
-      "weightsStatus": "ABSENT",
-      "wired": "registry_candidate_only",
-      "notes": "License-compatible Pro candidate. No GGUF file in models/local → OPEN. Not a quality claim."
+      "ggufSource": "no pinned hashed GGUF this packet",
+      "weightsStatus": "OPEN",
+      "wired": "catalog candidate only",
+      "notes": "License-compatible Pro candidate. No pinned SHA-256 GGUF → OPEN. Fast landing does not imply Pro."
     },
     "OPTIONAL_FRONTIER_CLOUD": {
       "weightsStatus": "N/A",
@@ -166,13 +167,13 @@
       ],
       "local_required": false,
       "cloud_optional": true,
-      "implemented": false,
-      "actual_runtime_test": null,
-      "quality_metric": "multi_source_web_report_with_live_urls",
-      "privacy_requirement": "explicit network + cloud consent; disclose data leaves device",
+      "implemented": true,
+      "actual_runtime_test": "tests/user-ready/deep_research.test.ts",
+      "quality_metric": "plan_plus_multi_source_fetch_plus_verified_citations_plus_contradictions",
+      "privacy_requirement": "explicit network + cloud consent; disclose data leaves device; no silent cloud",
       "device_profiles": ["student_14_5", "ds_xl_coder"],
-      "evidence": null,
-      "gap": "No live iterative web-research agent this packet. Offline cited local research is AI-UR-001."
+      "evidence": "src/user-ready/deep_research.ts consent-gated live HTTP fetch, local synthesis, unread/fabricated URLs rejected",
+      "gap": "Not ChatGPT/Gemini-scale hundreds of sites or Workspace connectors. Cloud LLM synthesis remains unused by design."
     },
     {
       "task_id": "AI-UR-008",
@@ -222,13 +223,13 @@
       "market_examples": ["claude.computer_use", "khanmigo.socratic_tutor"],
       "local_required": true,
       "cloud_optional": false,
-      "implemented": false,
-      "actual_runtime_test": null,
-      "quality_metric": "screen_region_description",
-      "privacy_requirement": "screen permission; no silent capture",
+      "implemented": true,
+      "actual_runtime_test": "tests/user-ready/vision_screen.test.ts",
+      "quality_metric": "explicit_share_plus_permission_plus_local_description",
+      "privacy_requirement": "screen/file permission; explicit share; no silent or background capture",
       "device_profiles": ["handheld_hybrid", "ds_xl_coder"],
-      "evidence": null,
-      "gap": "No pixels. VISUAL UNAVAILABLE. Computer-use/vision stay OPEN."
+      "evidence": "src/user-ready/vision_screen.ts local PNG/SVG inspect of user-shared bytes. OS screencapture is never invoked.",
+      "gap": "Not a frontier VLM. Companion chrome pixels still VISUAL UNAVAILABLE. Computer-use GUI is AI-UR-012."
     },
     {
       "task_id": "AI-UR-012",
@@ -255,13 +256,13 @@
       ],
       "local_required": true,
       "cloud_optional": true,
-      "implemented": false,
-      "actual_runtime_test": null,
+      "implemented": true,
+      "actual_runtime_test": "tests/user-ready/coding_agent_pr.test.ts",
       "quality_metric": "branch_plus_tests_plus_draft_pr",
-      "privacy_requirement": "repo-scoped; no silent push",
+      "privacy_requirement": "sandbox repo only; never merge; never force-push; never push main; production repos blocked",
       "device_profiles": ["ds_xl_coder"],
-      "evidence": null,
-      "gap": "No GitHub coding-agent-to-PR loop in gunnchAI3k. Deterministic code assist already exists separately."
+      "evidence": "src/user-ready/coding_agent_pr.ts dedicated sandbox: edit, test, commit on branch, DRAFT_PR.json. Proposed-diff-only is rejected.",
+      "gap": "Does not open GitHub PRs against production repos. Cloud Copilot agent environment is not claimed."
     },
     {
       "task_id": "AI-UR-014",
@@ -297,25 +298,22 @@
       "market_examples": [],
       "local_required": true,
       "cloud_optional": false,
-      "implemented": false,
-      "actual_runtime_test": null,
-      "quality_metric": "gguf_present_and_hashed",
-      "privacy_requirement": "weights stay local; never committed",
+      "implemented": true,
+      "actual_runtime_test": "tests/user-ready/local_fast.test.ts",
+      "quality_metric": "hashed_fast_gguf_plus_real_inference_plus_real_output",
+      "privacy_requirement": "weights stay local; never committed; download requires network consent",
       "device_profiles": ["student_14_5", "handheld_hybrid", "ds_xl_coder"],
-      "evidence": "License-compatible candidates wired in registry; GGUF bytes absent",
-      "gap": "LOCAL_FAST and LOCAL_PRO weights OPEN. Do not claim Fast/Pro quality."
+      "evidence": "src/user-ready/model_manager.ts + local_fast_runtime.ts. SmolLM2-360M Q4_K_M SHA-256 pinned. Nano cannot be relabeled Fast. Local Pro remains OPEN.",
+      "gap": "LOCAL_PRO still OPEN (no pinned hashed GGUF). Fast is not a frontier quality claim."
     }
   ],
   "next_packet": [
-    "AI-UR-007 live web Deep Research with consent-gated fetch",
     "AI-UR-008 Canvas/cowrite UI (needs pixels on device-os)",
     "AI-UR-009 custom Gems/GPTs/skills store",
     "AI-UR-010 voice realtime",
-    "AI-UR-011 vision/screen",
     "AI-UR-012 computer use GUI",
-    "AI-UR-013 Copilot-class coding agent → draft PR",
     "AI-UR-014 NotebookLM-class audio overview",
     "AI-UR-015 companion chrome pixels",
-    "AI-UR-016 download-on-demand Local Fast/Pro GGUFs with real SHA256"
+    "LOCAL_PRO hashed GGUF + real inference if a pinned SHA-256 is selected"
   ]
 }
