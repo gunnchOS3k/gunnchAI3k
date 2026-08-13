@@ -163,6 +163,7 @@ artifacts/independent-eval/scratch/**
 !artifacts/independent-eval/EXPERIENCE_REVIEW.json
 !artifacts/independent-eval/AUDIT.json
 !artifacts/independent-eval/VP_GUNNCHAI_32_INDEPENDENT_RESULT.json
+!artifacts/independent-eval/VP_GUNNCHAI_33_INDEPENDENT_RESULT.json
 
 # AI-USER-READY-001
 artifacts/user-ready/scratch/**

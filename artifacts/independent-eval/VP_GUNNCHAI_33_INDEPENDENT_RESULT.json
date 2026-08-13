@@ -1,0 +1,477 @@
+{
+  "schema": "gunnchos.gunnchai33.independent_verifier_result.v1",
+  "work_item": "STREAM-A-AI-USER-READY-001",
+  "owner_repo": "gunnchAI3k",
+  "repo_path": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k",
+  "verifier_role": "INDEPENDENT_VERIFIER_AGENT",
+  "did_not_implement": true,
+  "did_not_merge": true,
+  "did_not_push_main": true,
+  "did_not_start_WP001": true,
+  "did_not_download_or_invent_gguf": true,
+  "prefer_fail_over_false_pass": true,
+  "cursor_never_merges": true,
+  "HUMAN_E6": "NOT_STARTED",
+  "pr": {
+    "number": 33,
+    "url": "https://github.com/gunnchOS3k/gunnchAI3k/pull/33",
+    "draft": true,
+    "branch": "stream/ai-user-ready-001-market-baseline",
+    "title": "AI-USER-READY-001: market capability baseline and highest-gap runtime",
+    "state": "OPEN",
+    "base": "main",
+    "mergeable_github": "MERGEABLE"
+  },
+  "claimed_tip": "8903ff978224a6f99625d508bcb4914a62bac6eb",
+  "claimed_tip_live_confirmed": true,
+  "claimed_tip_short": "8903ff9",
+  "claimed_tip_subject": "feat(user-ready): ship AI-USER-READY-001 market baseline and highest-gap runtime",
+  "verified_tip": "8903ff978224a6f99625d508bcb4914a62bac6eb",
+  "verified_tip_short": "8903ff9",
+  "verified_tip_subject": "feat(user-ready): ship AI-USER-READY-001 market baseline and highest-gap runtime",
+  "base_main": "c483a45197cbe3bd4a3d68d06c91fd86494c2992",
+  "base_main_confirmed": true,
+  "base_main_short": "c483a45",
+  "base_main_subject": "Merge pull request #32 from gunnchOS3k/stream/gunnchai-independent-eval-runtime",
+  "matrix_accepted_main_base": "c483a45",
+  "matrix_accepted_main_base_matches_origin_main": true,
+  "branch_evidence_not_presented_as_accepted_main": true,
+  "generated_at_utc": "2026-08-13T19:00:00Z",
+  "VP_GUNNCHAI_33_INDEPENDENT_RESULT": "PASS",
+  "INDEPENDENT_PASS": true,
+  "GUNNCHAI_33_READY_FOR_EDMUND_MERGE": true,
+  "READY_FOR_EDMUND_MERGE": true,
+  "READY_reason": "Packet challenges PASS on live tip 8903ff9. Coverage arithmetic 16/6/6/6/1/10 matches matrix rows. Six implemented tasks execute real stage2/phase_xiv/rag paths (no jest HTTP mock). Tokens stay false. Fast/Pro GGUF ABSENT. Dedicated market-runtime CI green. Cursor does not merge. One pre-existing Phase XIV 'scheduled' job was still in_progress (npm ci) at stamp time — not a packet fail.",
+  "claim_firewall": {
+    "GUNNCHAI_APP_PRODUCT_COMPLETE": false,
+    "GUNNCHAI_FRONTIER_PRODUCT_PARITY": false,
+    "AI_USER_READY_001_DIGITAL_PASS": true,
+    "NANO_FALLBACK_ONLY": true,
+    "BETTER_THAN_CHATGPT": false,
+    "BETTER_THAN_CLAUDE": false,
+    "BETTER_THAN_GEMINI": false,
+    "BETTER_THAN_NOTEBOOKLM": false,
+    "BETTER_THAN_KHANMIGO": false,
+    "BETTER_THAN_PERPLEXITY": false,
+    "BETTER_THAN_COPILOT": false,
+    "HUMAN_E6": false,
+    "VISUAL": "UNAVAILABLE"
+  },
+  "challenges": {
+    "1_live_pr_tip_and_ci": {
+      "verdict": "PASS",
+      "head_sha": "8903ff978224a6f99625d508bcb4914a62bac6eb",
+      "live_matches_claimed": true,
+      "draft": true,
+      "pass_count": 21,
+      "fail_count": 0,
+      "pending_count": 1,
+      "skip_count": 1,
+      "skip_expected": ["deploy (main-only job on Deploy gunnchAI3k)"],
+      "pending": [
+        {
+          "name": "scheduled",
+          "workflow": "Phase XIV Frontier AI (DRAFT)",
+          "state": "IN_PROGRESS",
+          "stuck_on": "npm ci",
+          "url": "https://github.com/gunnchOS3k/gunnchAI3k/actions/runs/31732742295/job/94556897276",
+          "packet_blocking": false,
+          "note": "Pre-existing Phase XIV scheduled-tasks job. Not the AI-USER-READY-001 workflow. No failure observed."
+        }
+      ],
+      "packet_job": {
+        "name": "market-runtime",
+        "workflow": "AI-USER-READY-001 market packet",
+        "state": "SUCCESS",
+        "runs": [
+          "https://github.com/gunnchOS3k/gunnchAI3k/actions/runs/31732739074/job/94556885331",
+          "https://github.com/gunnchOS3k/gunnchAI3k/actions/runs/31732742205/job/94556896531"
+        ]
+      },
+      "key_checks": [
+        {
+          "name": "build",
+          "workflow": "Deploy gunnchAI3k",
+          "state": "SUCCESS",
+          "url": "https://github.com/gunnchOS3k/gunnchAI3k/actions/runs/31732742292/job/94556896913"
+        },
+        {
+          "name": "local-runtime",
+          "workflow": "Gate 1 post-merge integrity",
+          "state": "SUCCESS",
+          "url": "https://github.com/gunnchOS3k/gunnchAI3k/actions/runs/31732742230/job/94556896555"
+        },
+        {
+          "name": "stage2-reproof",
+          "workflow": "Phase XIV Frontier AI (DRAFT)",
+          "state": "SUCCESS",
+          "url": "https://github.com/gunnchOS3k/gunnchAI3k/actions/runs/31732742295/job/94556897281"
+        }
+      ],
+      "independent_local": {
+        "command": "npm run test:user-ready && npm run user-ready:001",
+        "jest": "6/6 PASS",
+        "cli_allImplementedPassed": true,
+        "cli_coverage": {
+          "required": 16,
+          "implemented": 6,
+          "runtime": 6,
+          "offline": 6,
+          "cloud_only": 1,
+          "gap": 10
+        }
+      }
+    },
+    "2_market_json_sourced_not_slogans": {
+      "verdict": "PASS",
+      "files": [
+        "benchmarks/MARKET_AI_CAPABILITY_BASELINE.json",
+        "benchmarks/GUNNCHAI_MARKET_TASK_MATRIX.json"
+      ],
+      "baseline_schema": "gunnchai.market_ai_capability_baseline.v1",
+      "matrix_schema": "gunnchai.market_task_matrix.v1",
+      "products": [
+        "chatgpt",
+        "claude",
+        "gemini",
+        "notebooklm",
+        "khanmigo",
+        "perplexity",
+        "github_copilot"
+      ],
+      "vendor_source_count": 21,
+      "independent_source_fetches": [
+        {
+          "url": "https://support.anthropic.com/en/articles/9517075-what-are-projects",
+          "ok": true,
+          "grounds": "Claude projects: isolated workspace, uploads, project instructions, paid RAG ~10x — matches claude.projects"
+        },
+        {
+          "url": "https://www.khanmigo.ai/learners",
+          "ok": true,
+          "grounds": "Khanmigo 'never giving you the answer' / Socratic tutor — matches khanmigo.socratic_tutor"
+        },
+        {
+          "url": "https://gemini.google/ag/overview/deep-research/?hl=en",
+          "ok": true,
+          "grounds": "Gemini Deep Research multi-step web agent — matches gemini.deep_research; correctly left OPEN as AI-UR-007"
+        },
+        {
+          "url": "https://blog.google/innovation-and-ai/products/gemini-notebook/notebooklm-gemini-notebook/",
+          "ok": true,
+          "grounds": "NotebookLM renamed Gemini Notebook (2026-07-16); source-grounded product still exists — not a slogan"
+        },
+        {
+          "url": "https://docs.github.com/en/copilot/how-tos/chat-with-copilot/chat-in-ide",
+          "ok": true,
+          "grounds": "Copilot IDE chat/ask/plan/agent classes exist — coding-agent-to-PR left OPEN as AI-UR-013"
+        },
+        {
+          "url": "https://help.openai.com/en/articles/8590148-memory-in-chatgpt-remembering-what-you-chat-about",
+          "ok": "js_walled",
+          "grounds": "Official OpenAI help URL; Cloudflare/JS interstitial. Not treated as slogan; not counted as live-page proof."
+        },
+        {
+          "url": "https://www.perplexity.ai/help-center/en/articles/10738684-what-is-deep-research",
+          "ok": "js_walled",
+          "grounds": "Official Perplexity help URL; Cloudflare interstitial. Live Deep Research remains OPEN (AI-UR-007)."
+        }
+      ],
+      "implemented_flags_match_code": true,
+      "json_only_pass": false,
+      "note": "implemented=true only on AI-UR-001..006 which have src/user-ready/* wrappers + tests/user-ready/market_runtime.test.ts. AI-UR-015 companion classifier exists but implemented=false (pixels UNAVAILABLE). No chatbot=pass overclaim."
+    },
+    "3_six_implemented_runtimes_are_real_paths": {
+      "verdict": "PASS",
+      "hardcoded_pass": false,
+      "jest_http_mock": false,
+      "how_pass_is_computed": "src/user-ready/runtime.ts predicates over live product APIs; passed is not a literal true.",
+      "tasks": [
+        {
+          "task_id": "AI-UR-001",
+          "category": "research_citations",
+          "path": "CitedResearchRuntime → stage2 ResearchEngine + LocalCorpusSearchProvider",
+          "real": true,
+          "stub_or_http_mock_only": false,
+          "notes": "Seeds in-memory OFDM corpus then searches/synthesizes/rejects fabricated-web-999. web_unavailable hardcoded true (honest offline). Live web Deep Research OPEN."
+        },
+        {
+          "task_id": "AI-UR-002",
+          "category": "projects_memory",
+          "path": "ProjectMemoryRuntime → ProjectStore + GunnchMemoryStore (AES-256-GCM)",
+          "real": true,
+          "stub_or_http_mock_only": false,
+          "notes": "askAi is local-context concatenation (not LLM). Continuity + cross-project isolation predicates execute real store methods. Isolation is asserted, not canned PASS."
+        },
+        {
+          "task_id": "AI-UR-003",
+          "category": "artifact_outputs",
+          "path": "ArtifactAssist → phase_xiv ArtifactCreator.createDocx (docx Packer) + createCode + targetedEdit",
+          "real": true,
+          "stub_or_http_mock_only": false,
+          "notes": "Writes real DOCX bytes and an editable sidecar; targeted edit versions the sidecar. Canvas UI correctly OPEN."
+        },
+        {
+          "task_id": "AI-UR-004",
+          "category": "socratic_hinting",
+          "path": "socraticTurn + tutor academicIntegrityPolicy",
+          "real": true,
+          "stub_or_http_mock_only": false,
+          "notes": "Keyword/regex engine, not an LLM. Independent probe: withheld THE_QUADRATIC_FORMULA_IS_NEG_B never leaked on 'what is the quadratic formula' / 'solve this for me' / 'hint please'. Cheat 'give me the current exam answer key' refused."
+        },
+        {
+          "task_id": "AI-UR-005",
+          "category": "tool_auth",
+          "path": "ToolAuthSession → PermissionBroker + ApprovalGate.isHighImpact",
+          "real": true,
+          "stub_or_http_mock_only": false,
+          "notes": "PermissionBroker source is labeled 'stubs for OS-native surfaces' (in-memory grant map). Authorization predicates are real: deny-by-default all six tools, grant then allow, deploy → approval_required. invoke() does not execute network/cloud. Gap disclosed (OS chrome / live MCP OPEN)."
+        },
+        {
+          "task_id": "AI-UR-006",
+          "category": "source_grounded_qa",
+          "path": "SourceGroundedNotebook → LocalRagEngine.ingestText/attribution",
+          "real": true,
+          "stub_or_http_mock_only": false,
+          "notes": "Grounded hit cites attached source; ungrounded zzqxv token refused. No invented citation."
+        }
+      ]
+    },
+    "4_socratic_toolauth_no_silent_cloud": {
+      "verdict": "PASS",
+      "socratic_dumps_answers": false,
+      "socratic_revealedAnswer_type_is_literal_false": true,
+      "socratic_leak_check_throws": true,
+      "tool_auth_deny_by_default": true,
+      "independent_deny_all_tools_before_grant": true,
+      "silent_cloud_fake": false,
+      "user_ready_src_has_fetch_or_http": false,
+      "research_web_unavailable": true,
+      "OPTIONAL_FRONTIER_CLOUD_productionKeys": false
+    },
+    "5_model_tier_honesty": {
+      "verdict": "PASS",
+      "nano": {
+        "id": "smollm2-135m-instruct-q4_k_m",
+        "quant": "Q4_K_M",
+        "contextTokens": 512,
+        "isNanoFallbackOnly": true,
+        "weightsStatus": "NANO_FALLBACK_ONLY",
+        "host_gguf": "models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "gitignored": true,
+        "relabeled_fast_or_pro": false
+      },
+      "localFast": {
+        "candidate": "HuggingFaceTB/SmolLM2-360M-Instruct",
+        "license": "Apache-2.0",
+        "weightsStatus": "ABSENT",
+        "ggufFile": null,
+        "invented_bytes": false,
+        "registry_only": true,
+        "fixture_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "fixture_sha256_is_empty_blob": true
+      },
+      "localPro": {
+        "candidate": "Qwen/Qwen2-1.5B-Instruct",
+        "license": "Apache-2.0",
+        "weightsStatus": "ABSENT",
+        "ggufFile": null,
+        "invented_bytes": false,
+        "registry_only": true
+      },
+      "host_ggufs": ["SmolLM2-135M-Instruct-Q4_K_M.gguf"],
+      "tokens_type_forces_complete_parity_human_false": true,
+      "runner_throws_if_complete_or_parity_or_human_true": true
+    },
+    "6_coverage_arithmetic": {
+      "verdict": "PASS",
+      "claimed": {
+        "required": 16,
+        "implemented": 6,
+        "runtime": 6,
+        "offline": 6,
+        "cloud_only": 1,
+        "gap": 10
+      },
+      "counted_from_matrix_rows": {
+        "required": 16,
+        "implemented": 6,
+        "offline": 6,
+        "cloud_only": 1,
+        "gap": 10
+      },
+      "implemented_task_ids": [
+        "AI-UR-001",
+        "AI-UR-002",
+        "AI-UR-003",
+        "AI-UR-004",
+        "AI-UR-005",
+        "AI-UR-006"
+      ],
+      "runtime_task_ids": [
+        "AI-UR-001",
+        "AI-UR-002",
+        "AI-UR-003",
+        "AI-UR-004",
+        "AI-UR-005",
+        "AI-UR-006"
+      ],
+      "offline_task_ids": [
+        "AI-UR-001",
+        "AI-UR-002",
+        "AI-UR-003",
+        "AI-UR-004",
+        "AI-UR-005",
+        "AI-UR-006"
+      ],
+      "cloud_only_task_ids": ["AI-UR-007"],
+      "gap_task_ids": [
+        "AI-UR-007",
+        "AI-UR-008",
+        "AI-UR-009",
+        "AI-UR-010",
+        "AI-UR-011",
+        "AI-UR-012",
+        "AI-UR-013",
+        "AI-UR-014",
+        "AI-UR-015",
+        "AI-UR-016"
+      ],
+      "overclaim_chatbot_equals_pass": false,
+      "companion_classifier_not_counted_implemented": true,
+      "coverage_ts_filename": {
+        "matrix_claims": "src/user-ready/coverage.ts",
+        "exists": false,
+        "actual": "coverageFrom() in src/user-ready/runtime.ts",
+        "severity": "P3_doc_mismatch_not_fake_pass"
+      },
+      "runtime_count_definition": "results.filter(r => r.passed).length among the six executed implemented tasks — matches claimed runtime=6 because all six passed. Not an independent seventh counter."
+    },
+    "7_device_os_110_nano_path": {
+      "verdict": "PASS",
+      "device_os_110": {
+        "state": "MERGED",
+        "url": "https://github.com/gunnchOS3k/gunnchos-device-os/pull/110",
+        "doctrine": "SmolLM2-135M Instruct Q4_K_M 512-ctx is Nano/fallback only. Not Fast/Pro."
+      },
+      "this_pr_touches_device_os": false,
+      "nano_duplicated_dishonestly": false,
+      "nano_broken": false,
+      "alignment": "gunnchAI3k model_tiers + registry notes restated the same Nano-fallback doctrine and kept Fast/Pro ABSENT. No second llama Nano path invented. No Nano GGUF relabeled Fast/Pro."
+    },
+    "8_profile_readme_freeze": {
+      "verdict": "PASS",
+      "wp012_claim_boundary_rewritten": false,
+      "readme_diff": "append-only AI-USER-READY-001 section at EOF (+11 lines). Frozen WP-012 claim-boundary / HISTORICAL SSJ markers untouched.",
+      "models_local_readme": "two honesty lines added; download script / Nano metadata unchanged.",
+      "device_profile_readmes_touched": false,
+      "no_complete_or_parity_or_human_claim_added": true
+    }
+  },
+  "stub_challenges": {
+    "verdict": "PASS",
+    "challengeImplementedFlags": [],
+    "items": [
+      {
+        "id": "permission_broker_in_memory",
+        "severity": "OPEN_DEPTH",
+        "blocking": false,
+        "detail": "src/stage2/os/permissions.ts is labeled 'Permission broker stubs for OS-native surfaces'. Tool-auth wraps it. Deny/grant/approval predicates are real; tools are not executed. Matrix gap already says OS chrome / live MCP OPEN."
+      },
+      {
+        "id": "socratic_is_regex_not_llm",
+        "severity": "OPEN_DEPTH",
+        "blocking": false,
+        "detail": "Executable hint engine as claimed; not Khanmigo-quality LLM tutoring. Direct-answer dump blocked. Live Khan Academy problem context OPEN (AI-UR-004 gap)."
+      },
+      {
+        "id": "projects_askAi_is_context_concat",
+        "severity": "OPEN_DEPTH",
+        "blocking": false,
+        "detail": "Not an LLM project copilot. Continuity + encrypted memory isolation are the tested product. Account-wide memory UI OPEN."
+      },
+      {
+        "id": "coverage_ts_missing",
+        "severity": "P3",
+        "blocking": false,
+        "detail": "Matrix coverage_note points at src/user-ready/coverage.ts which does not exist. Counts are derived in runtime.ts. Not JSON-hand-edited PASS."
+      },
+      {
+        "id": "citation_verified_ratio_formula",
+        "severity": "P3",
+        "blocking": false,
+        "detail": "runOffline uses verified/max(verified,1) which collapses to 1.0 whenever any citation verifies. Pass predicate uses citations.some(verified) + fabricated reject, not this ratio."
+      }
+    ]
+  },
+  "model_tier_honesty": {
+    "verdict": "PASS",
+    "nano_fallback_only": true,
+    "fast_gguf": "ABSENT",
+    "pro_gguf": "ABSENT",
+    "nano_relabeled": false,
+    "gguf_invented": false
+  },
+  "defects_S0_S1": {
+    "verdict": "PASS",
+    "S0_open": 0,
+    "S1_open": 0,
+    "items": []
+  },
+  "coverage_audit": {
+    "required": 16,
+    "implemented": 6,
+    "runtime": 6,
+    "offline": 6,
+    "cloud_only": 1,
+    "gap": 10,
+    "implemented_task_ids": ["AI-UR-001", "AI-UR-002", "AI-UR-003", "AI-UR-004", "AI-UR-005", "AI-UR-006"],
+    "runtime_task_ids": ["AI-UR-001", "AI-UR-002", "AI-UR-003", "AI-UR-004", "AI-UR-005", "AI-UR-006"],
+    "offline_task_ids": ["AI-UR-001", "AI-UR-002", "AI-UR-003", "AI-UR-004", "AI-UR-005", "AI-UR-006"],
+    "cloud_only_task_ids": ["AI-UR-007"],
+    "gap_task_ids": [
+      "AI-UR-007",
+      "AI-UR-008",
+      "AI-UR-009",
+      "AI-UR-010",
+      "AI-UR-011",
+      "AI-UR-012",
+      "AI-UR-013",
+      "AI-UR-014",
+      "AI-UR-015",
+      "AI-UR-016"
+    ]
+  },
+  "remaining_open": [
+    "AI-UR-007 live consent-gated Deep Research (multi-step web, live URLs)",
+    "AI-UR-008 Canvas / cowrite UI (pixels)",
+    "AI-UR-009 custom Gems / GPTs / skills store",
+    "AI-UR-010 voice realtime",
+    "AI-UR-011 vision / screen understanding",
+    "AI-UR-012 computer-use GUI loop",
+    "AI-UR-013 Copilot-class coding agent → draft PR",
+    "AI-UR-014 NotebookLM-class audio overview",
+    "AI-UR-015 companion chrome pixel proof (classifier only; VISUAL UNAVAILABLE)",
+    "AI-UR-016 download-on-demand Local Fast/Pro GGUFs with real SHA256",
+    "Socratic engine is keyword/regex, not LLM-quality Khanmigo",
+    "Tool-auth does not execute tools; PermissionBroker is in-memory OS stub",
+    "Phase XIV 'scheduled' CI job still in_progress at stamp time (npm ci; non-packet)",
+    "HUMAN_E6 not started",
+    "GUNNCHAI_APP_PRODUCT_COMPLETE remains false",
+    "GUNNCHAI_FRONTIER_PRODUCT_PARITY remains false"
+  ],
+  "forbidden": {
+    "merged": false,
+    "pushed_main": false,
+    "HUMAN_E6": false,
+    "frontier_parity_true": false,
+    "app_product_complete_true": false,
+    "smollm2_as_final_intelligence": false,
+    "fast_pro_gguf_invented": false,
+    "nano_relabeled_fast_pro": false,
+    "better_than_competitor_claims": false,
+    "wp001_started": false
+  },
+  "claim_boundary": "Digital independent verification of gunnchAI3k DRAFT #33 AI-USER-READY-001. Official-capability baseline + finite 16-row matrix. Highest-gap local subset (6) has real runtime tests. SmolLM2-135M Instruct Q4_K_M 512-ctx is Nano fallback only. Fast/Pro GGUF ABSENT/OPEN. Frontier parity, app-product-complete, HUMAN_E6 stay false. Pixels VISUAL UNAVAILABLE. Cursor did not implement and must not merge.",
+  "verdict_summary": "Live tip 8903ff9 confirmed on DRAFT #33. Coverage 16/6/6/6/1/10 matches matrix rows (implemented AI-UR-001..006; gap AI-UR-007..016; cloud-only AI-UR-007). Six runtimes execute real engines, not fixtures/HTTP mocks/hardcoded PASS. Socratic does not dump answers; tool-auth deny-by-default; no silent cloud. Nano not relabeled Fast/Pro; no invented GGUF. device-os #110 Nano doctrine intact. PROFILE/WP-012 README freeze honored (append-only). GUNNCHAI_33_READY_FOR_EDMUND_MERGE=true. Cursor does not merge."
+}
