@@ -46,7 +46,9 @@
     "test:phase_xiv": "jest tests/phase_xiv --runInBand",
     "prove:phase_xiv": "python3 scripts/prove_phase_xiv_ai.py",
     "independent-eval": "tsx src/independent-eval/cli.ts",
-    "test:independent-eval": "jest tests/independent-eval --runInBand"
+    "test:independent-eval": "jest tests/independent-eval --runInBand",
+    "user-ready:001": "tsx src/user-ready/cli.ts",
+    "test:user-ready": "jest tests/user-ready --runInBand"
   },
   "keywords": [
     "ai",

@@ -1,0 +1,321 @@
+{
+  "schema": "gunnchai.market_task_matrix.v1",
+  "packet": "AI-USER-READY-001",
+  "dated": "2026-08-13",
+  "accepted_main_base": "c483a45",
+  "doctrine": "Map market executable classes onto gunnchAI3k. implemented=true only when a real runtime test exists. SmolLM2-135M Q4_K_M 512-ctx is Nano fallback only. HUMAN_E6=false. GUNNCHAI_APP_PRODUCT_COMPLETE=false. GUNNCHAI_FRONTIER_PRODUCT_PARITY=false.",
+  "device_profiles": ["student_14_5", "handheld_hybrid", "ds_xl_coder"],
+  "model_tier_truth": {
+    "NANO_LOCAL": {
+      "id": "smollm2-135m-instruct-q4_k_m",
+      "display": "SmolLM2-135M-Instruct",
+      "quant": "Q4_K_M",
+      "contextTokens": 512,
+      "license": "Apache-2.0",
+      "isNanoFallbackOnly": true,
+      "weightsStatus": "PRESENT_OR_DOWNLOADABLE",
+      "notes": "Nano fallback only. Not daily intelligence."
+    },
+    "LOCAL_FAST": {
+      "id": "local-fast-smollm2-360m",
+      "candidate": "HuggingFaceTB/SmolLM2-360M-Instruct",
+      "license": "Apache-2.0",
+      "ggufSource": "https://huggingface.co/bartowski/SmolLM2-360M-Instruct-GGUF",
+      "weightsStatus": "ABSENT",
+      "wired": "registry_candidate_only",
+      "notes": "License-compatible Fast candidate selected without inventing GGUF bytes. Weights not on disk → OPEN."
+    },
+    "LOCAL_PRO": {
+      "id": "local-pro-qwen2-1_5b",
+      "candidate": "Qwen/Qwen2-1.5B-Instruct",
+      "license": "Apache-2.0",
+      "ggufSource": "registry/fixture only until a hashed GGUF is present",
+      "weightsStatus": "ABSENT",
+      "wired": "registry_candidate_only",
+      "notes": "License-compatible Pro candidate. No GGUF file in models/local → OPEN. Not a quality claim."
+    },
+    "OPTIONAL_FRONTIER_CLOUD": {
+      "weightsStatus": "N/A",
+      "consent": "explicit_only",
+      "productionKeys": false
+    }
+  },
+  "coverage_note": "Counts are derived at runtime by src/user-ready/coverage.ts from this file plus runtime results. Do not hand-edit counts here.",
+  "tasks": [
+    {
+      "task_id": "AI-UR-001",
+      "category": "research_citations",
+      "market_examples": [
+        "chatgpt.web_search_citations",
+        "chatgpt.deep_research",
+        "claude.citations",
+        "perplexity.cited_search",
+        "perplexity.research_mode",
+        "gemini.deep_research"
+      ],
+      "local_required": true,
+      "cloud_optional": true,
+      "implemented": true,
+      "actual_runtime_test": "tests/user-ready/market_runtime.test.ts",
+      "quality_metric": "citation_verified_ratio; fabricated_citations_rejected",
+      "privacy_requirement": "local corpus default; web marked unavailable offline; no silent cloud",
+      "device_profiles": ["student_14_5", "handheld_hybrid", "ds_xl_coder"],
+      "evidence": "src/user-ready/research_citations.ts wrapping stage2 ResearchEngine; offline cited report with quote verification",
+      "gap": "Live multi-step web Deep Research (ChatGPT/Gemini/Perplexity agent loop) remains OPEN — local corpus only this packet."
+    },
+    {
+      "task_id": "AI-UR-002",
+      "category": "projects_memory",
+      "market_examples": [
+        "chatgpt.projects",
+        "chatgpt.memory",
+        "claude.projects",
+        "claude.memory",
+        "perplexity.projects"
+      ],
+      "local_required": true,
+      "cloud_optional": false,
+      "implemented": true,
+      "actual_runtime_test": "tests/user-ready/market_runtime.test.ts",
+      "quality_metric": "project_restart_continuity; cross_project_leak_count==0; memory_owner_isolation",
+      "privacy_requirement": "encrypted local memory; project-scoped; no cloud sync without consent",
+      "device_profiles": ["student_14_5", "handheld_hybrid", "ds_xl_coder"],
+      "evidence": "src/user-ready/projects_memory.ts combining ProjectStore + GunnchMemoryStore",
+      "gap": "Account-wide editable memory UI and team project sharing are OPEN."
+    },
+    {
+      "task_id": "AI-UR-003",
+      "category": "artifact_outputs",
+      "market_examples": [
+        "claude.artifacts",
+        "chatgpt.canvas",
+        "gemini.canvas",
+        "perplexity.deliverables"
+      ],
+      "local_required": true,
+      "cloud_optional": false,
+      "implemented": true,
+      "actual_runtime_test": "tests/user-ready/market_runtime.test.ts",
+      "quality_metric": "artifact_files_exist; targeted_edit_version_increment",
+      "privacy_requirement": "write only inside session sandbox; no network publish",
+      "device_profiles": ["student_14_5", "ds_xl_coder"],
+      "evidence": "src/user-ready/artifacts.ts wrapping phase_xiv ArtifactCreator",
+      "gap": "Interactive Canvas/cowrite UI and published artifact URLs are OPEN. VISUAL UNAVAILABLE."
+    },
+    {
+      "task_id": "AI-UR-004",
+      "category": "socratic_hinting",
+      "market_examples": [
+        "khanmigo.socratic_tutor",
+        "khanmigo.curriculum_grounding",
+        "khanmigo.writing_coding_feedback"
+      ],
+      "local_required": true,
+      "cloud_optional": false,
+      "implemented": true,
+      "actual_runtime_test": "tests/user-ready/market_runtime.test.ts",
+      "quality_metric": "direct_answer_leak_count==0; hint_or_question_present; cheat_refused",
+      "privacy_requirement": "local-only tutoring; no upload of student work",
+      "device_profiles": ["student_14_5", "handheld_hybrid"],
+      "evidence": "src/user-ready/socratic.ts executable hint engine (not a one-line prompt stub)",
+      "gap": "Live Khan Academy problem-context integration and teacher dashboard are OPEN."
+    },
+    {
+      "task_id": "AI-UR-005",
+      "category": "tool_auth",
+      "market_examples": [
+        "claude.mcp_tools",
+        "chatgpt.agent_mode",
+        "copilot.agent_mode"
+      ],
+      "local_required": true,
+      "cloud_optional": true,
+      "implemented": true,
+      "actual_runtime_test": "tests/user-ready/market_runtime.test.ts",
+      "quality_metric": "denied_by_default; grant_then_allow; high_impact_requires_approval",
+      "privacy_requirement": "network/cloud/shell/file_write denied until explicit grant; audit log",
+      "device_profiles": ["student_14_5", "handheld_hybrid", "ds_xl_coder"],
+      "evidence": "src/user-ready/tool_auth.ts session over PermissionBroker + ApprovalGate",
+      "gap": "Interactive per-tool OS permission chrome and live MCP OAuth are OPEN."
+    },
+    {
+      "task_id": "AI-UR-006",
+      "category": "source_grounded_qa",
+      "market_examples": [
+        "notebooklm.source_grounded_qa",
+        "claude.citations",
+        "chatgpt.file_upload"
+      ],
+      "local_required": true,
+      "cloud_optional": false,
+      "implemented": true,
+      "actual_runtime_test": "tests/user-ready/market_runtime.test.ts",
+      "quality_metric": "ungrounded_query_refused; grounded_hit_cites_source",
+      "privacy_requirement": "answers only from attached local sources; sources never leave device",
+      "device_profiles": ["student_14_5", "handheld_hybrid", "ds_xl_coder"],
+      "evidence": "src/user-ready/source_grounded.ts notebook-style Q&A over attached corpus",
+      "gap": "Audio Overviews and YouTube/Drive import are OPEN."
+    },
+    {
+      "task_id": "AI-UR-007",
+      "category": "deep_web_research",
+      "market_examples": [
+        "chatgpt.deep_research",
+        "gemini.deep_research",
+        "perplexity.research_mode"
+      ],
+      "local_required": false,
+      "cloud_optional": true,
+      "implemented": false,
+      "actual_runtime_test": null,
+      "quality_metric": "multi_source_web_report_with_live_urls",
+      "privacy_requirement": "explicit network + cloud consent; disclose data leaves device",
+      "device_profiles": ["student_14_5", "ds_xl_coder"],
+      "evidence": null,
+      "gap": "No live iterative web-research agent this packet. Offline cited local research is AI-UR-001."
+    },
+    {
+      "task_id": "AI-UR-008",
+      "category": "canvas_cowrite_ui",
+      "market_examples": ["chatgpt.canvas", "gemini.canvas", "claude.artifacts"],
+      "local_required": true,
+      "cloud_optional": false,
+      "implemented": false,
+      "actual_runtime_test": null,
+      "quality_metric": "side_panel_edit_loop",
+      "privacy_requirement": "local documents",
+      "device_profiles": ["student_14_5", "ds_xl_coder"],
+      "evidence": null,
+      "gap": "No pixel Canvas/cowrite UI. VISUAL UNAVAILABLE. File artifacts are AI-UR-003."
+    },
+    {
+      "task_id": "AI-UR-009",
+      "category": "custom_agents",
+      "market_examples": ["chatgpt.custom_gpts", "gemini.gems", "claude.mcp_tools"],
+      "local_required": true,
+      "cloud_optional": true,
+      "implemented": false,
+      "actual_runtime_test": null,
+      "quality_metric": "named_agent_with_tools_and_files",
+      "privacy_requirement": "per-agent tool consent",
+      "device_profiles": ["ds_xl_coder"],
+      "evidence": null,
+      "gap": "phase_xiv skills registry is not a user-ready Gem/GPT store. Next packet."
+    },
+    {
+      "task_id": "AI-UR-010",
+      "category": "voice_realtime",
+      "market_examples": ["chatgpt.conversation", "gemini.canvas"],
+      "local_required": true,
+      "cloud_optional": true,
+      "implemented": false,
+      "actual_runtime_test": null,
+      "quality_metric": "speech_roundtrip_latency",
+      "privacy_requirement": "mic permission; local-first",
+      "device_profiles": ["handheld_hybrid"],
+      "evidence": null,
+      "gap": "phase_xiv voice/realtime remains a digital stub, not a measured speech product."
+    },
+    {
+      "task_id": "AI-UR-011",
+      "category": "vision_screen",
+      "market_examples": ["claude.computer_use", "khanmigo.socratic_tutor"],
+      "local_required": true,
+      "cloud_optional": false,
+      "implemented": false,
+      "actual_runtime_test": null,
+      "quality_metric": "screen_region_description",
+      "privacy_requirement": "screen permission; no silent capture",
+      "device_profiles": ["handheld_hybrid", "ds_xl_coder"],
+      "evidence": null,
+      "gap": "No pixels. VISUAL UNAVAILABLE. Computer-use/vision stay OPEN."
+    },
+    {
+      "task_id": "AI-UR-012",
+      "category": "computer_use",
+      "market_examples": ["claude.computer_use", "copilot.agent_mode"],
+      "local_required": true,
+      "cloud_optional": false,
+      "implemented": false,
+      "actual_runtime_test": null,
+      "quality_metric": "screenshot_click_type_loop",
+      "privacy_requirement": "explicit desktop control grant",
+      "device_profiles": ["ds_xl_coder"],
+      "evidence": null,
+      "gap": "phase_xiv computer_use runtime is not a GUI control product. Next packet."
+    },
+    {
+      "task_id": "AI-UR-013",
+      "category": "coding_agent_pr",
+      "market_examples": [
+        "copilot.cloud_coding_agent",
+        "copilot.agent_mode",
+        "copilot.code_review",
+        "copilot.plan_mode"
+      ],
+      "local_required": true,
+      "cloud_optional": true,
+      "implemented": false,
+      "actual_runtime_test": null,
+      "quality_metric": "branch_plus_tests_plus_draft_pr",
+      "privacy_requirement": "repo-scoped; no silent push",
+      "device_profiles": ["ds_xl_coder"],
+      "evidence": null,
+      "gap": "No GitHub coding-agent-to-PR loop in gunnchAI3k. Deterministic code assist already exists separately."
+    },
+    {
+      "task_id": "AI-UR-014",
+      "category": "audio_overview",
+      "market_examples": ["notebooklm.audio_overview", "gemini.canvas"],
+      "local_required": true,
+      "cloud_optional": true,
+      "implemented": false,
+      "actual_runtime_test": null,
+      "quality_metric": "audio_file_from_sources",
+      "privacy_requirement": "local sources",
+      "device_profiles": ["student_14_5", "handheld_hybrid"],
+      "evidence": null,
+      "gap": "No TTS audio-overview pipeline this packet."
+    },
+    {
+      "task_id": "AI-UR-015",
+      "category": "companion_ux",
+      "market_examples": ["khanmigo.curriculum_grounding", "chatgpt.projects"],
+      "local_required": true,
+      "cloud_optional": false,
+      "implemented": false,
+      "actual_runtime_test": null,
+      "quality_metric": "pixel_proof_of_companion_chrome",
+      "privacy_requirement": "OS-integrated; not a generic web chatbot shell",
+      "device_profiles": ["student_14_5", "handheld_hybrid", "ds_xl_coder"],
+      "evidence": "Heuristic classifier exists (src/user-ready/companion.ts) but pixels=VISUAL UNAVAILABLE",
+      "gap": "Digital companion vs chatbot heuristic is implemented as a classifier only. App chrome OPEN."
+    },
+    {
+      "task_id": "AI-UR-016",
+      "category": "local_fast_pro_weights",
+      "market_examples": [],
+      "local_required": true,
+      "cloud_optional": false,
+      "implemented": false,
+      "actual_runtime_test": null,
+      "quality_metric": "gguf_present_and_hashed",
+      "privacy_requirement": "weights stay local; never committed",
+      "device_profiles": ["student_14_5", "handheld_hybrid", "ds_xl_coder"],
+      "evidence": "License-compatible candidates wired in registry; GGUF bytes absent",
+      "gap": "LOCAL_FAST and LOCAL_PRO weights OPEN. Do not claim Fast/Pro quality."
+    }
+  ],
+  "next_packet": [
+    "AI-UR-007 live web Deep Research with consent-gated fetch",
+    "AI-UR-008 Canvas/cowrite UI (needs pixels on device-os)",
+    "AI-UR-009 custom Gems/GPTs/skills store",
+    "AI-UR-010 voice realtime",
+    "AI-UR-011 vision/screen",
+    "AI-UR-012 computer use GUI",
+    "AI-UR-013 Copilot-class coding agent → draft PR",
+    "AI-UR-014 NotebookLM-class audio overview",
+    "AI-UR-015 companion chrome pixels",
+    "AI-UR-016 download-on-demand Local Fast/Pro GGUFs with real SHA256"
+  ]
+}
