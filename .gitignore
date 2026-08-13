@@ -155,3 +155,10 @@ artifacts/phase_xiv/competitive/MANIFEST_*.json
 models/**/*.gguf
 models/**/*.bin
 *.gguf
+
+# Independent eval scratch (committed result JSON is kept)
+artifacts/independent-eval/scratch/**
+!artifacts/independent-eval/.gitkeep
+!artifacts/independent-eval/INDEPENDENT_EVAL_RESULT.json
+!artifacts/independent-eval/EXPERIENCE_REVIEW.json
+!artifacts/independent-eval/AUDIT.json

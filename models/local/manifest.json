@@ -13,5 +13,8 @@
   "weightsCommittedToGit": false,
   "architecture": "llama.cpp",
   "continuation": "IV",
-  "notes": "Small open instruct model suitable for 8GB Apple Silicon hosts. Weights must stay gitignored. Re-download via scripts/download-small-gguf.sh."
+  "role": "NANO_LOCAL",
+  "isNanoFallbackOnly": true,
+  "contextTokens": 512,
+  "notes": "Nano/fallback only. SmolLM2-135M-Instruct Q4_K_M with llama.cpp 512-ctx. Not Local Fast, not Local Pro, not GUNNCHAI_APP_PRODUCT_COMPLETE intelligence. Weights must stay gitignored. Re-download via scripts/download-small-gguf.sh."
 }

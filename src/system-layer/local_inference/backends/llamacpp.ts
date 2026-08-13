@@ -18,6 +18,7 @@ import type {
 import { DeterministicBaselineBackend } from './deterministic';
 
 const DEFAULT_N_PREDICT = 64;
+/** Nano-fallback context only. Not a Local Fast/Pro window. */
 const DEFAULT_CTX = 512;
 /** Absolute floor for tiny GGUF hosts (MiB). */
 const ABS_MIN_FREE_RAM_MB = 256;

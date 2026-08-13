@@ -59,6 +59,10 @@ export interface ModelRegistryEntry {
   deviceProfiles: DeviceProfileId[];
   isTrainedLlm: boolean;
   description: string;
+  /** 135M-class llama.cpp GGUF is Nano/fallback only — never daily intelligence. */
+  isNanoFallbackOnly?: boolean;
+  contextTokens?: number;
+  quant?: string;
 }
 
 export interface ModelRegistry {
@@ -197,8 +201,11 @@ export function buildDefaultRegistry(cwd = process.cwd()): ModelRegistry {
       integrity: { algorithm: 'sha256', hash, bytes },
       deviceProfiles: ALL_PROFILES,
       isTrainedLlm: true,
+      isNanoFallbackOnly: true,
+      contextTokens: 512,
+      quant: 'Q4_K_M',
       description:
-        'SmolLM2-135M-Instruct Q4_K_M GGUF metadata (weights gitignored; see models/local/manifest.json).',
+        'Nano/fallback only: SmolLM2-135M-Instruct Q4_K_M GGUF at 512-ctx. Not Local Fast, not Local Pro, not product-complete intelligence. Weights gitignored; see models/local/manifest.json.',
     });
   }
 

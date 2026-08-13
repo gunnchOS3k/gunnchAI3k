@@ -44,7 +44,9 @@
     "test:stage2": "jest tests/stage2 --runInBand",
     "prove:stage2": "python3 scripts/prove_stage2_ai.py",
     "test:phase_xiv": "jest tests/phase_xiv --runInBand",
-    "prove:phase_xiv": "python3 scripts/prove_phase_xiv_ai.py"
+    "prove:phase_xiv": "python3 scripts/prove_phase_xiv_ai.py",
+    "independent-eval": "tsx src/independent-eval/cli.ts",
+    "test:independent-eval": "jest tests/independent-eval --runInBand"
   },
   "keywords": [
     "ai",
