@@ -1,5 +1,6 @@
 /**
- * Independent self-challenge: implemented tasks must not be slogan stubs.
+ * Independent self-challenge: COMPLETE tasks must not be slogan stubs.
+ * PARTIAL may list a runtime test without claiming implemented=true.
  */
 
 const STUB_MARKERS = [
@@ -21,15 +22,37 @@ export function assertNotStub(label: string, value: unknown): void {
 }
 
 export function challengeImplementedFlags(
-  tasks: Array<{ task_id: string; implemented: boolean; actual_runtime_test: string | null }>,
+  tasks: Array<{
+    task_id: string;
+    implemented: boolean;
+    actual_runtime_test: string | null;
+    coverage_status?: 'COMPLETE' | 'PARTIAL' | 'OPEN';
+  }>,
 ): string[] {
   const failures: string[] = [];
   for (const t of tasks) {
-    if (t.implemented && !t.actual_runtime_test) {
-      failures.push(`${t.task_id}: implemented=true but actual_runtime_test is null`);
-    }
-    if (!t.implemented && t.actual_runtime_test) {
-      failures.push(`${t.task_id}: implemented=false but a runtime test path is listed`);
+    const status = t.coverage_status ?? (t.implemented ? 'COMPLETE' : 'OPEN');
+    if (status === 'COMPLETE') {
+      if (!t.implemented) {
+        failures.push(`${t.task_id}: COMPLETE but implemented=false`);
+      }
+      if (!t.actual_runtime_test) {
+        failures.push(`${t.task_id}: COMPLETE but actual_runtime_test is null`);
+      }
+    } else if (status === 'PARTIAL') {
+      if (t.implemented) {
+        failures.push(`${t.task_id}: PARTIAL must not set implemented=true (that means COMPLETE)`);
+      }
+      if (!t.actual_runtime_test) {
+        failures.push(`${t.task_id}: PARTIAL but actual_runtime_test is null`);
+      }
+    } else {
+      if (t.implemented) {
+        failures.push(`${t.task_id}: OPEN but implemented=true`);
+      }
+      if (t.actual_runtime_test) {
+        failures.push(`${t.task_id}: OPEN but a runtime test path is listed`);
+      }
     }
   }
   return failures;

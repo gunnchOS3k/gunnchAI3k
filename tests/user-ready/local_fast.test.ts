@@ -39,8 +39,14 @@ describe('AI-UR-016 Local Fast runtime', () => {
       return;
     }
     expect(report.ok).toBe(true);
-    expect(report.cases).toHaveLength(6);
-    for (const c of report.cases) {
+    const core = report.cases.filter((c) =>
+      ['general', 'summarization', 'waike', 'source_grounded', 'basic_code', 'structured_output'].includes(
+        c.id,
+      ),
+    );
+    expect(core).toHaveLength(6);
+    expect(report.cases.length).toBeGreaterThanOrEqual(6);
+    for (const c of core) {
       expect(c.usedNano).toBe(false);
       expect(c.realInference).toBe(true);
       expect(c.output.trim().length).toBeGreaterThan(4);

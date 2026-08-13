@@ -1,6 +1,8 @@
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 
+export type CoverageStatus = 'COMPLETE' | 'PARTIAL' | 'OPEN';
+
 export interface MarketTask {
   task_id: string;
   category: string;
@@ -8,6 +10,7 @@ export interface MarketTask {
   local_required: boolean;
   cloud_optional: boolean;
   implemented: boolean;
+  coverage_status: CoverageStatus;
   actual_runtime_test: string | null;
   quality_metric: string;
   privacy_requirement: string;

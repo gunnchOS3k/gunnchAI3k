@@ -4,7 +4,7 @@ on:
   pull_request:
     branches: [main]
   push:
-    branches: [main, 'stream/ai-user-ready-001-market-baseline']
+    branches: [main, 'stream/ai-user-ready-001-market-baseline', 'stream/ai-user-ready-002-fast-research']
   workflow_dispatch:
 
 permissions:
@@ -25,10 +25,14 @@ jobs:
           node-version: "20"
           cache: npm
       - run: npm ci
-      - name: User-ready market runtime
+      - name: User-ready unit tests (no Fast download required)
         run: npm run test:user-ready
-      - name: CLI packet
+        env:
+          GUNNCHAI_SKIP_FAST_DOWNLOAD: "1"
+      - name: CLI packet 001 (baseline; no Fast/llama required)
         run: npm run user-ready:001
+        env:
+          GUNNCHAI_SKIP_FAST_DOWNLOAD: "1"
       - uses: actions/upload-artifact@v4
         if: always()
         with:

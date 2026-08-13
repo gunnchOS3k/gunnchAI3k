@@ -17,7 +17,7 @@ concurrency:
 jobs:
   market-runtime:
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -29,25 +29,23 @@ jobs:
         run: npm run test:user-ready
         env:
           GUNNCHAI_SKIP_FAST_DOWNLOAD: "1"
-      - name: CLI packet with Fast download + llama.cpp if available
-        continue-on-error: true
-        env:
-          GUNNCHAI_FAST_NETWORK_CONSENT: "1"
+      - name: Provision llama.cpp (required for Local Fast)
         run: |
           set -euo pipefail
-          if ! command -v llama-cli >/dev/null 2>&1; then
-            echo "llama-cli missing on guest — attempting a shallow llama.cpp build"
-            git clone --depth 1 https://github.com/ggml-org/llama.cpp .llama-cpp-src || true
-            if [ -d .llama-cpp-src ]; then
-              cmake -S .llama-cpp-src -B .llama-cpp-src/build -DGGML_NATIVE=OFF || true
-              cmake --build .llama-cpp-src/build --target llama-cli -j 2 || true
-              if [ -x .llama-cpp-src/build/bin/llama-cli ]; then
-                echo "$PWD/.llama-cpp-src/build/bin" >> "$GITHUB_PATH"
-                export PATH="$PWD/.llama-cpp-src/build/bin:$PATH"
-              fi
-            fi
+          if command -v llama-cli >/dev/null 2>&1; then
+            echo "llama-cli already on PATH: $(command -v llama-cli)"
+            exit 0
           fi
-          npm run user-ready:002
+          git clone --depth 1 https://github.com/ggml-org/llama.cpp .llama-cpp-src
+          cmake -S .llama-cpp-src -B .llama-cpp-src/build -DGGML_NATIVE=OFF
+          cmake --build .llama-cpp-src/build --target llama-cli -j "$(nproc)"
+          echo "$PWD/.llama-cpp-src/build/bin" >> "$GITHUB_PATH"
+          test -x .llama-cpp-src/build/bin/llama-cli
+          .llama-cpp-src/build/bin/llama-cli --version || true
+      - name: CLI packet 002 with Fast download + llama.cpp
+        env:
+          GUNNCHAI_FAST_NETWORK_CONSENT: "1"
+        run: npm run user-ready:002
       - uses: actions/upload-artifact@v4
         if: always()
         with:

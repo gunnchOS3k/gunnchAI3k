@@ -47,8 +47,8 @@
     "prove:phase_xiv": "python3 scripts/prove_phase_xiv_ai.py",
     "independent-eval": "tsx src/independent-eval/cli.ts",
     "test:independent-eval": "jest tests/independent-eval --runInBand",
-    "user-ready:001": "tsx src/user-ready/cli.ts",
-    "user-ready:002": "tsx src/user-ready/cli.ts",
+    "user-ready:001": "tsx src/user-ready/cli.ts --packet=001",
+    "user-ready:002": "tsx src/user-ready/cli.ts --packet=002",
     "user-ready:fast-download": "GUNNCHAI_FAST_NETWORK_CONSENT=1 tsx -e \"import { ModelDownloadManager } from './src/user-ready/model_manager'; const m=new ModelDownloadManager(); m.ensure('local-fast-smollm2-360m',{networkConsent:true}).then(r=>{console.log(JSON.stringify(r,null,2)); if(!r.ok) process.exit(1);})\"",
     "test:user-ready": "jest tests/user-ready --runInBand --forceExit"
   },
@@ -71,7 +71,7 @@
     "@discordjs/voice": "^0.19.0",
     "@tensorflow/tfjs-node": "^4.15.0",
     "@types/node-cron": "^3.0.11",
-    "axios": "^1.6.2",
+    "axios": "^1.13.5",
     "cheerio": "^1.0.0-rc.12",
     "compromise": "^14.10.0",
     "cron": "^3.1.6",
@@ -121,7 +121,7 @@
     "typescript": "^5.3.0"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=20"
   },
   "repository": {
     "type": "git",
@@ -130,5 +130,10 @@
   "bugs": {
     "url": "https://github.com/gunnchOS3k/gunnchAI3k/issues"
   },
-  "homepage": "https://github.com/gunnchOS3k/gunnchAI3k#readme"
+  "homepage": "https://github.com/gunnchOS3k/gunnchAI3k#readme",
+  "overrides": {
+    "fast-xml-parser": "5.10.1",
+    "tar": "7.5.22",
+    "@xmldom/xmldom": "^0.9.8"
+  }
 }

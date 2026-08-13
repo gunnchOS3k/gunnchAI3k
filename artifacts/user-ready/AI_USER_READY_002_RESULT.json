@@ -1,7 +1,7 @@
 {
   "schema": "gunnchai.user_ready_002.v1",
   "packet": "AI-USER-READY-002",
-  "generatedAt": "2026-08-13T20:40:42.171Z",
+  "generatedAt": "2026-08-13T21:59:32.488Z",
   "tokens": {
     "GUNNCHAI_APP_PRODUCT_COMPLETE": false,
     "GUNNCHAI_FRONTIER_PRODUCT_PARITY": false,
@@ -59,13 +59,15 @@
   },
   "coverage": {
     "required": 16,
-    "implemented": 10,
+    "implemented": 7,
     "runtime": 10,
-    "offline": 9,
+    "offline": 7,
     "cloud_only": 0,
     "cloud_consent": 4,
     "open": 6,
-    "gap": 6,
+    "gap": 9,
+    "complete": 7,
+    "partial": 3,
     "implemented_ids": [
       "AI-UR-001",
       "AI-UR-002",
@@ -73,9 +75,6 @@
       "AI-UR-004",
       "AI-UR-005",
       "AI-UR-006",
-      "AI-UR-007",
-      "AI-UR-011",
-      "AI-UR-013",
       "AI-UR-016"
     ],
     "runtime_ids": [
@@ -97,8 +96,6 @@
       "AI-UR-004",
       "AI-UR-005",
       "AI-UR-006",
-      "AI-UR-011",
-      "AI-UR-013",
       "AI-UR-016"
     ],
     "cloud_consent_ids": [
@@ -114,6 +111,20 @@
       "AI-UR-012",
       "AI-UR-014",
       "AI-UR-015"
+    ],
+    "complete_ids": [
+      "AI-UR-001",
+      "AI-UR-002",
+      "AI-UR-003",
+      "AI-UR-004",
+      "AI-UR-005",
+      "AI-UR-006",
+      "AI-UR-016"
+    ],
+    "partial_ids": [
+      "AI-UR-007",
+      "AI-UR-011",
+      "AI-UR-013"
     ]
   },
   "results": [
@@ -155,7 +166,7 @@
       "cloud_only": false,
       "notes": "DOCX + code artifacts with targeted edit versions. Canvas UI OPEN.",
       "evidence": {
-        "docx": "/var/folders/dp/z5frf3m511jcdpdf8v878v8h0000gn/T/gunnchai-ur001-D3N1TD/artifacts/lab_report.docx",
+        "docx": "/var/folders/dp/z5frf3m511jcdpdf8v878v8h0000gn/T/gunnchai-ur001-jAF0Aq/artifacts/lab_report.docx",
         "versions": 2,
         "codeExists": true
       }
@@ -205,15 +216,30 @@
       "passed": true,
       "local": false,
       "cloud_only": false,
-      "notes": "Consent-gated live multi-source Deep Research with verified citations and contradiction representation.",
+      "notes": "Deep Research COMPLETE: decompose→discover→fetch→follow-up→evidence graph; consent-gated; no silent cloud.",
       "evidence": {
-        "sourcesRead": 3,
-        "citations": 3,
-        "contradictions": 2,
+        "sourcesRead": 5,
+        "citations": 5,
+        "contradictions": 6,
         "fabricatedRejected": [
           "https://invented.example.invalid/not-a-real-paper"
         ],
-        "deniedWithoutConsent": true
+        "deniedWithoutConsent": true,
+        "searchTerms": [
+          "what",
+          "waike",
+          "orange",
+          "dock",
+          "token",
+          "versus",
+          "ofdm"
+        ],
+        "followUps": [
+          "what versus"
+        ],
+        "evidenceGraph": 5,
+        "discoveredNotOnlySeed": true,
+        "completeness": "COMPLETE"
       }
     },
     {
@@ -222,11 +248,15 @@
       "passed": true,
       "local": true,
       "cloud_only": false,
-      "notes": "Explicit share + permission. No background capture. Local SVG/PNG inspect, not a VLM claim.",
+      "notes": "Explicit share + permission + pixel/UI understanding (WAIKE next action, compiler, office summary, control-by-role). No background capture. Not a frontier VLM.",
       "evidence": {
         "deniedNoShare": "EXPLICIT_SHARE_REQUIRED",
         "deniedNoPerm": "denied",
-        "description": "Shared SVG. Visible text: compiler error TS2345",
+        "waike": "WAIKE screen: Click the button \"Start\" in region r1. Visible: WAIKE tutor | Next lesson: OFDM cyclic prefix | Start",
+        "compiler": "Compiler diagnostic: compiler error TS2345",
+        "office": "Document/office summary: Quarterly OFDM lab summary · Cyclic prefix absorbs delay spread",
+        "control": "Control role=button name=\"Save draft\" at (10,50)",
+        "pixelUnderstanding": true,
         "backgroundForbidden": true
       }
     },
@@ -236,13 +266,16 @@
       "passed": true,
       "local": true,
       "cloud_only": false,
-      "notes": "Sandbox branch + tests + DRAFT PR artifact. No merge, no force-push, no push main, no production remote.",
+      "notes": "Sandbox branch + tests + DRAFT_PR.json. Live GitHub DRAFT PR not opened this run → PARTIAL.",
       "evidence": {
-        "branch": "agent/ai-ur-013-fix-add",
-        "commit": "8240d6f09eab9adf4d4ee575b2a84366d485e721",
+        "branch": "agent/ai-ur-013-fix-add-mss29cpf",
+        "commit": "b3f08669653829fff88b99601ec7574a99246715",
         "tests_passed": true,
         "mainUnchanged": true,
-        "diffOnlyRejected": true
+        "diffOnlyRejected": true,
+        "pr_url": null,
+        "completeness": "PARTIAL",
+        "remote_pushed": false
       }
     },
     {
@@ -251,7 +284,7 @@
       "passed": true,
       "local": true,
       "cloud_only": false,
-      "notes": "LOCAL_FAST direct llama.cpp on 360M Q4_K_M ctx=2048 (HOST_OBSERVED). Nano not used.",
+      "notes": "LOCAL_FAST direct llama.cpp on 360M Q4_K_M ctx=2048 (HOST_OBSERVED). Nano not used. Quality extras recorded separately.",
       "evidence": {
         "sha256": "2fa3f013dcdd7b99f9b237717fa0b12d75bbb89984cc1274be1471a465bac9c2",
         "bytes": 270590880,
@@ -261,43 +294,64 @@
             "id": "general",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 1599,
-            "outputChars": 241
+            "latencyMs": 1062,
+            "outputChars": 189
           },
           {
             "id": "summarization",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 2171,
+            "latencyMs": 1035,
             "outputChars": 112
           },
           {
             "id": "waike",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 751,
-            "outputChars": 166
+            "latencyMs": 705,
+            "outputChars": 146
           },
           {
             "id": "source_grounded",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 854,
-            "outputChars": 141
+            "latencyMs": 1026,
+            "outputChars": 229
           },
           {
             "id": "basic_code",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 842,
-            "outputChars": 40
+            "latencyMs": 608,
+            "outputChars": 38
           },
           {
             "id": "structured_output",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 848,
+            "latencyMs": 841,
             "outputChars": 26
+          },
+          {
+            "id": "hallucination_resistance",
+            "realInference": true,
+            "usedNano": false,
+            "latencyMs": 938,
+            "outputChars": 272
+          },
+          {
+            "id": "refusal_permission",
+            "realInference": true,
+            "usedNano": false,
+            "latencyMs": 825,
+            "outputChars": 182
+          },
+          {
+            "id": "context_retention",
+            "realInference": true,
+            "usedNano": false,
+            "latencyMs": 702,
+            "outputChars": 159
           }
         ],
         "localPro": "OPEN"

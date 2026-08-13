@@ -285,11 +285,30 @@ export async function runUserReadyPacket(
         title: 'Source C',
         body: 'Orthogonal subcarriers resist multipath. Cyclic prefix absorbs delay spread in OFDM systems.',
       },
+      '/d': {
+        title: 'Discovered D',
+        body: 'Follow-up evidence: WAIKE dock token is chrome fidelity, not a radio air interface. OFDM evidence continues.',
+      },
+      '/e': {
+        title: 'Discovered E',
+        body: 'Contradiction note: some blogs incorrectly call the orange dock an OFDM waveform parameter. That claim is not true.',
+      },
     };
     const server = await listenPages(pages);
     try {
-      const urls = [`http://127.0.0.1:${server.port}/a`, `http://127.0.0.1:${server.port}/b`, `http://127.0.0.1:${server.port}/c`];
-      const dr = new DeepResearchRuntime('u-research');
+      const urls = [
+        `http://127.0.0.1:${server.port}/a`,
+        `http://127.0.0.1:${server.port}/b`,
+        `http://127.0.0.1:${server.port}/c`,
+      ];
+      const dr = new DeepResearchRuntime('u-research', {
+        sessionsDir: path.join(scratch, 'deep-research-sessions'),
+        discoverImpl: async (terms) =>
+          terms.slice(0, 3).map((t, i) => ({
+            url: `http://127.0.0.1:${server.port}/${['d', 'e', 'c'][i % 3]}`,
+            title: `Discovered:${t}`,
+          })),
+      });
       const denied = await dr.run({
         question: 'What is the WAIKE orange dock token versus OFDM?',
         seedUrls: urls,
@@ -312,7 +331,11 @@ export async function runUserReadyPacket(
         unread.length === 0 &&
         live.fabricatedRejected.includes('https://invented.example.invalid/not-a-real-paper') &&
         live.cloudUsed === false &&
-        live.silentCloud === false;
+        live.silentCloud === false &&
+        live.plan.searchTerms.length >= 1 &&
+        live.followUps.length >= 1 &&
+        live.evidenceGraph.length >= 1 &&
+        live.discoveredNotOnlySeed === true;
       assertNotStub('deep_research.answer', live.answer);
       deepResearchEvidence = {
         sourcesRead: live.sourcesRead,
@@ -320,6 +343,11 @@ export async function runUserReadyPacket(
         contradictions: live.contradictions.length,
         fabricatedRejected: live.fabricatedRejected,
         deniedWithoutConsent: denied.ok === false,
+        searchTerms: live.plan.searchTerms,
+        followUps: live.followUps,
+        evidenceGraph: live.evidenceGraph.length,
+        discoveredNotOnlySeed: live.discoveredNotOnlySeed,
+        completeness: live.completeness,
       };
       results.push({
         task_id: 'AI-UR-007',
@@ -328,7 +356,7 @@ export async function runUserReadyPacket(
         local: false,
         cloud_only: false,
         notes: passed
-          ? 'Consent-gated live multi-source Deep Research with verified citations and contradiction representation.'
+          ? `Deep Research ${live.completeness}: decompose→discover→fetch→follow-up→evidence graph; consent-gated; no silent cloud.`
           : live.notes,
         evidence: deepResearchEvidence,
       });
@@ -338,6 +366,7 @@ export async function runUserReadyPacket(
   }
 
   {
+    const { createVisionPngFixture } = await import('./vision_canvas');
     const vs = new VisionScreenRuntime();
     const noShare = vs.inspect('u1', null);
     const noPerm = vs.inspect('u1', {
@@ -348,14 +377,77 @@ export async function runUserReadyPacket(
     });
     vs.grant('u1', 'screen');
     vs.grant('u1', 'file');
-    const svg = vs.inspect('u1', {
-      kind: 'screen',
-      title: 'Shared editor region',
-      buffer: Buffer.from(
-        '<svg width="64" height="32"><text x="2" y="16">compiler error TS2345</text></svg>',
-      ),
-      claimedAt: new Date().toISOString(),
-    });
+    const waike = vs.inspect(
+      'u1',
+      {
+        kind: 'screen',
+        title: 'WAIKE lesson',
+        buffer: Buffer.from(
+          JSON.stringify({
+            vision_fixture: true,
+            width: 320,
+            height: 200,
+            texts: ['WAIKE tutor', 'Next lesson: OFDM cyclic prefix', 'Start'],
+            objects: ['lesson_card'],
+            controls: [
+              { role: 'button', name: 'Start', x: 200, y: 160, w: 80, h: 28 },
+              { role: 'textbox', name: 'Prompt', x: 20, y: 40, w: 280, h: 40 },
+            ],
+            scene: 'WAIKE tutoring screen',
+          }),
+        ),
+        claimedAt: new Date().toISOString(),
+        redactions: [{ x: 0, y: 0, w: 40, h: 12, reason: 'student_name' }],
+      },
+      { type: 'waike_next_action' },
+    );
+    const compiler = vs.inspect(
+      'u1',
+      {
+        kind: 'image',
+        title: 'Compiler',
+        buffer: Buffer.from(
+          '<svg width="240" height="60"><text x="4" y="24">compiler error TS2345</text></svg>',
+        ),
+        claimedAt: new Date().toISOString(),
+      },
+      { type: 'compiler_error' },
+    );
+    const office = vs.inspect(
+      'u1',
+      {
+        kind: 'image',
+        title: 'Doc',
+        buffer: createVisionPngFixture({
+          width: 200,
+          height: 120,
+          texts: ['Quarterly OFDM lab summary', 'Cyclic prefix absorbs delay spread'],
+          objects: ['document'],
+          controls: [{ role: 'button', name: 'Export', x: 140, y: 90, w: 50, h: 20 }],
+        }),
+        claimedAt: new Date().toISOString(),
+      },
+      { type: 'office_summary' },
+    );
+    const control = vs.inspect(
+      'u1',
+      {
+        kind: 'screen',
+        title: 'UI',
+        buffer: Buffer.from(
+          JSON.stringify({
+            vision_fixture: true,
+            width: 100,
+            height: 80,
+            texts: ['Save draft'],
+            objects: ['toolbar'],
+            controls: [{ role: 'button', name: 'Save draft', x: 10, y: 50, w: 70, h: 20 }],
+          }),
+        ),
+        claimedAt: new Date().toISOString(),
+      },
+      { type: 'identify_control', role: 'button' },
+    );
     let backgroundForbidden = false;
     try {
       vs.startBackgroundCapture();
@@ -365,24 +457,37 @@ export async function runUserReadyPacket(
     const passed =
       noShare.ok === false &&
       noPerm.permission === 'denied' &&
-      svg.ok &&
-      svg.permission === 'granted' &&
-      /TS2345/.test(svg.description) &&
-      svg.backgroundCapture === false &&
+      waike.ok &&
+      waike.pixelUnderstanding &&
+      /Start|Click/i.test(waike.description) &&
+      waike.redacted === true &&
+      compiler.ok &&
+      /TS2345/.test(compiler.description) &&
+      office.ok &&
+      office.observations?.summary &&
+      control.ok &&
+      /button/i.test(control.description) &&
+      waike.backgroundCapture === false &&
       backgroundForbidden &&
       !vs.hasBackgroundTimer();
-    assertNotStub('vision.description', svg.description);
+    assertNotStub('vision.description', waike.description);
     results.push({
       task_id: 'AI-UR-011',
       category: 'vision_screen',
       passed,
       local: true,
       cloud_only: false,
-      notes: 'Explicit share + permission. No background capture. Local SVG/PNG inspect, not a VLM claim.',
+      notes: passed
+        ? 'Explicit share + permission + pixel/UI understanding (WAIKE next action, compiler, office summary, control-by-role). No background capture. Not a frontier VLM.'
+        : 'Vision PARTIAL/fail: need pixel understanding beyond IHDR.',
       evidence: {
         deniedNoShare: noShare.notes,
         deniedNoPerm: noPerm.permission,
-        description: svg.description,
+        waike: waike.description,
+        compiler: compiler.description,
+        office: office.observations?.summary,
+        control: control.description,
+        pixelUnderstanding: waike.pixelUnderstanding,
         backgroundForbidden,
       },
     });
@@ -392,7 +497,14 @@ export async function runUserReadyPacket(
     const sandbox = seedSandboxRepo(path.join(scratch, 'coding-agent-sandbox'));
     fs.mkdirSync(path.join(scratch, 'diff-only'), { recursive: true });
     const diffOnly = proposedDiffOnly(path.join(scratch, 'diff-only'));
-    const agent = runCodingAgentDraftPr(sandbox);
+    const openLive =
+      process.env.GUNNCHAI_AI_UR_013_LIVE_PR === '1' &&
+      Boolean(process.env.GUNNCHAI_AI_UR_013_REMOTE);
+    const agent = runCodingAgentDraftPr(sandbox, {
+      openGithubDraftPr: openLive,
+      remoteUrl: openLive ? process.env.GUNNCHAI_AI_UR_013_REMOTE : undefined,
+      githubRepo: 'gunnchOS3k/gunnchai-ai-ur-013-sandbox',
+    });
     const passed =
       agent.ok &&
       agent.mainUnchanged &&
@@ -416,6 +528,9 @@ export async function runUserReadyPacket(
         tests_passed: agent.draftPr?.tests_passed,
         mainUnchanged: agent.mainUnchanged,
         diffOnlyRejected: diffOnly.ok === false,
+        pr_url: agent.draftPr?.pr_url ?? null,
+        completeness: agent.completeness,
+        remote_pushed: agent.draftPr?.remote_pushed ?? false,
       },
     });
   }
@@ -425,11 +540,16 @@ export async function runUserReadyPacket(
       networkConsent: opts?.fastNetworkConsent ?? process.env.GUNNCHAI_FAST_NETWORK_CONSENT === '1',
       offline: process.env.GUNNCHAI_SKIP_FAST_DOWNLOAD === '1',
     });
+    const core = fast.cases.filter((c) =>
+      ['general', 'summarization', 'waike', 'source_grounded', 'basic_code', 'structured_output'].includes(
+        c.id,
+      ),
+    );
     const passed =
       fast.ok &&
       fast.sha256 !== null &&
-      fast.cases.length === 6 &&
-      fast.cases.every((c) => c.realInference && !c.usedNano && c.output.trim().length > 4);
+      core.length === 6 &&
+      core.every((c) => c.realInference && !c.usedNano && c.output.trim().length > 4);
     if (passed) assertNotStub('fast.general', fast.cases[0]?.output);
     results.push({
       task_id: 'AI-UR-016',
@@ -490,11 +610,20 @@ export async function runUserReadyPacket(
     }),
   );
 
-  const implementedIds = new Set(matrix.tasks.filter((t) => t.implemented).map((t) => t.task_id));
-  const implementedResults = results.filter((r) => implementedIds.has(r.task_id));
+  const completeIds = new Set(
+    matrix.tasks
+      .filter((t) => (t.coverage_status ?? (t.implemented ? 'COMPLETE' : 'OPEN')) === 'COMPLETE')
+      .map((t) => t.task_id),
+  );
+  const completeResults = results.filter((r) => completeIds.has(r.task_id));
   const allImplementedPassed =
-    implementedResults.every((r) => r.passed) && stubChallengeFailures.length === 0;
-  const tokens = buildUserReadyTokens(allImplementedPassed);
+    completeResults.length === completeIds.size &&
+    completeResults.every((r) => r.passed) &&
+    stubChallengeFailures.length === 0;
+  const tokens = buildUserReadyTokens({
+    packet001: true,
+    packet002: allImplementedPassed,
+  });
   if (tokens[APP_PRODUCT_COMPLETE_TOKEN] !== false) {
     throw new Error('TOKEN_VIOLATION:GUNNCHAI_APP_PRODUCT_COMPLETE');
   }
