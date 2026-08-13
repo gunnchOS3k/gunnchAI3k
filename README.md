@@ -347,3 +347,14 @@ Device-os callers: see `artifacts/stage2/OS_CALLER_CONTRACT.md`.
 HTTP adapter: `POST /v1/capability/{summarize|translate|tutor|code|search|reason|diagnose|classify}`.
 
 Doctrine: DRAFT only; `GUNNCHAI_FRONTIER_PRODUCT_PARITY=false`.
+
+## AI-USER-READY-001 (market task packet)
+
+Official-capability baseline and executable task matrix: `benchmarks/MARKET_AI_CAPABILITY_BASELINE.json`, `benchmarks/GUNNCHAI_MARKET_TASK_MATRIX.json`.
+
+```bash
+npm run test:user-ready
+npm run user-ready:001
+```
+
+This packet does **not** claim Fast/Pro weights, frontier parity, app-product-complete, or HUMAN_E6. SmolLM2-135M Q4_K_M 512-ctx is Nano fallback only. Pixels: VISUAL UNAVAILABLE. Remaining OPEN: `benchmarks/NEXT_PACKET_OPEN.md`.

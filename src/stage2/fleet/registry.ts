@@ -50,7 +50,8 @@ export function buildModelCandidateMatrix(): {
       runtime: 'llama.cpp (GGUF, download-on-demand)',
       location: 'local',
       optional: false,
-      notes: 'Common daily tasks. Weights not committed; registry entry only.',
+      notes:
+        'License-compatible LOCAL_FAST candidate: HuggingFaceTB/SmolLM2-360M-Instruct (Apache-2.0). GGUF bytes are not in-repo. weightsStatus=ABSENT until a real hashed file exists — OPEN, not a Fast quality claim.',
       artifactRef: 'fixtures/stage2/models/local-fast-smollm-360m.ref',
       sha256: FIXTURE_HASH,
       isNanoFallbackOnly: false,
@@ -68,7 +69,7 @@ export function buildModelCandidateMatrix(): {
       location: 'local',
       optional: false,
       notes:
-        'Candidate Local Pro tier for deeper tasks when RAM/power allow. Weights not committed (fixture hash only) — not a measured absolute quality claim.',
+        'License-compatible LOCAL_PRO candidate: Qwen/Qwen2-1.5B-Instruct (Apache-2.0). GGUF bytes are not in-repo. weightsStatus=ABSENT — OPEN. Not a measured Pro quality claim.',
       artifactRef: 'fixtures/stage2/models/local-pro-qwen2-1_5b.ref',
       sha256: FIXTURE_HASH,
       isNanoFallbackOnly: false,

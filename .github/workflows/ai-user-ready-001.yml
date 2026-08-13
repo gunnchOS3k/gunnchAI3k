@@ -1,0 +1,38 @@
+name: AI-USER-READY-001 market packet
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main, 'stream/ai-user-ready-001-market-baseline']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ai-user-ready-001-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  market-runtime:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - name: User-ready market runtime
+        run: npm run test:user-ready
+      - name: CLI packet
+        run: npm run user-ready:001
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ai-user-ready-001-result
+          path: artifacts/user-ready/AI_USER_READY_001_RESULT.json
+          if-no-files-found: error
+          retention-days: 14

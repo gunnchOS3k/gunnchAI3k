@@ -1,0 +1,159 @@
+{
+  "schema": "gunnchai.user_ready_001.v1",
+  "packet": "AI-USER-READY-001",
+  "generatedAt": "2026-08-13T18:48:53.572Z",
+  "tokens": {
+    "GUNNCHAI_APP_PRODUCT_COMPLETE": false,
+    "GUNNCHAI_FRONTIER_PRODUCT_PARITY": false,
+    "HUMAN_E6": false,
+    "AI_USER_READY_001_DIGITAL_PASS": true,
+    "NANO_FALLBACK_ONLY": true,
+    "BETTER_THAN_CHATGPT": false,
+    "BETTER_THAN_CLAUDE": false,
+    "BETTER_THAN_GEMINI": false,
+    "BETTER_THAN_NOTEBOOKLM": false,
+    "BETTER_THAN_KHANMIGO": false,
+    "BETTER_THAN_PERPLEXITY": false,
+    "BETTER_THAN_COPILOT": false
+  },
+  "pixels": "VISUAL UNAVAILABLE",
+  "modelTiers": {
+    "nano": {
+      "role": "NANO_LOCAL",
+      "id": "smollm2-135m-instruct-q4_k_m",
+      "candidate": "HuggingFaceTB/SmolLM2-135M-Instruct",
+      "license": "Apache-2.0",
+      "ggufFile": "SmolLM2-135M-Instruct-Q4_K_M.gguf",
+      "weightsStatus": "NANO_FALLBACK_ONLY",
+      "isNanoFallbackOnly": true,
+      "notes": "SmolLM2-135M Instruct Q4_K_M 512-ctx is Nano fallback only. Not Fast/Pro."
+    },
+    "localFast": {
+      "role": "LOCAL_FAST",
+      "id": "local-fast-smollm2-360m",
+      "candidate": "HuggingFaceTB/SmolLM2-360M-Instruct",
+      "license": "Apache-2.0",
+      "ggufFile": null,
+      "weightsStatus": "ABSENT",
+      "isNanoFallbackOnly": false,
+      "notes": "Apache-2.0 Fast candidate selected in registry. GGUF bytes absent — OPEN. No invented files."
+    },
+    "localPro": {
+      "role": "LOCAL_PRO",
+      "id": "local-pro-qwen2-1_5b",
+      "candidate": "Qwen/Qwen2-1.5B-Instruct",
+      "license": "Apache-2.0",
+      "ggufFile": null,
+      "weightsStatus": "ABSENT",
+      "isNanoFallbackOnly": false,
+      "notes": "Apache-2.0 Pro candidate selected in registry. GGUF bytes absent — OPEN. No invented files."
+    },
+    "allOpenExceptNano": true
+  },
+  "coverage": {
+    "required": 16,
+    "implemented": 6,
+    "runtime": 6,
+    "offline": 6,
+    "cloud_only": 1,
+    "gap": 10
+  },
+  "results": [
+    {
+      "task_id": "AI-UR-001",
+      "category": "research_citations",
+      "passed": true,
+      "local": true,
+      "cloud_only": false,
+      "notes": "Offline cited report; fabricated source rejected. Live web Deep Research OPEN.",
+      "evidence": {
+        "citationCount": 1,
+        "fabricatedRejected": [
+          "fabricated-web-999"
+        ],
+        "web_unavailable": true
+      }
+    },
+    {
+      "task_id": "AI-UR-002",
+      "category": "projects_memory",
+      "passed": true,
+      "local": true,
+      "cloud_only": false,
+      "notes": "Project restart continuity + encrypted memory isolation.",
+      "evidence": {
+        "remembered": [
+          "Started project Wireless Lab",
+          "Prefer 15 kHz subcarrier spacing"
+        ],
+        "isolated": true
+      }
+    },
+    {
+      "task_id": "AI-UR-003",
+      "category": "artifact_outputs",
+      "passed": true,
+      "local": true,
+      "cloud_only": false,
+      "notes": "DOCX + code artifacts with targeted edit versions. Canvas UI OPEN.",
+      "evidence": {
+        "docx": "/var/folders/dp/z5frf3m511jcdpdf8v878v8h0000gn/T/gunnchai-ur001-Z35Dpq/artifacts/lab_report.docx",
+        "versions": 2,
+        "codeExists": true
+      }
+    },
+    {
+      "task_id": "AI-UR-004",
+      "category": "socratic_hinting",
+      "passed": true,
+      "local": true,
+      "cloud_only": false,
+      "notes": "Hints/questions only; cheat refused; withheld answer never leaked.",
+      "evidence": {
+        "hintMode": "hint",
+        "refused": true,
+        "leaked": false
+      }
+    },
+    {
+      "task_id": "AI-UR-005",
+      "category": "tool_auth",
+      "passed": true,
+      "local": true,
+      "cloud_only": false,
+      "notes": "Deny-by-default; grant then allow; high-impact needs approval.",
+      "evidence": {
+        "denied": "denied",
+        "allowed": "allowed",
+        "high": "approval_required",
+        "audit": 4
+      }
+    },
+    {
+      "task_id": "AI-UR-006",
+      "category": "source_grounded_qa",
+      "passed": true,
+      "local": true,
+      "cloud_only": false,
+      "notes": "Notebook-style Q&A from attached sources only; ungrounded refused.",
+      "evidence": {
+        "grounded": true,
+        "refused": true
+      }
+    }
+  ],
+  "stubChallengeFailures": [],
+  "next_packet": [
+    "AI-UR-007 live web Deep Research with consent-gated fetch",
+    "AI-UR-008 Canvas/cowrite UI (needs pixels on device-os)",
+    "AI-UR-009 custom Gems/GPTs/skills store",
+    "AI-UR-010 voice realtime",
+    "AI-UR-011 vision/screen",
+    "AI-UR-012 computer use GUI",
+    "AI-UR-013 Copilot-class coding agent → draft PR",
+    "AI-UR-014 NotebookLM-class audio overview",
+    "AI-UR-015 companion chrome pixels",
+    "AI-UR-016 download-on-demand Local Fast/Pro GGUFs with real SHA256"
+  ],
+  "allImplementedPassed": true
+}

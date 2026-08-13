@@ -1,0 +1,385 @@
+{
+  "schema": "gunnchai.market_ai_capability_baseline.v1",
+  "packet": "AI-USER-READY-001",
+  "researched_at": "2026-08-13",
+  "doctrine": "Executable tasks from official product surfaces, not slogans. No BETTER_THAN_* scores. No frontier quality claim. SmolLM2-135M Q4_K_M 512-ctx is Nano fallback only.",
+  "tokens": {
+    "HUMAN_E6": false,
+    "GUNNCHAI_APP_PRODUCT_COMPLETE": false,
+    "GUNNCHAI_FRONTIER_PRODUCT_PARITY": false,
+    "BETTER_THAN_CHATGPT": false,
+    "BETTER_THAN_CLAUDE": false,
+    "BETTER_THAN_GEMINI": false,
+    "BETTER_THAN_NOTEBOOKLM": false,
+    "BETTER_THAN_KHANMIGO": false,
+    "BETTER_THAN_PERPLEXITY": false,
+    "BETTER_THAN_COPILOT": false
+  },
+  "research_method": "Official help centers, product docs, and vendor blogs fetched 2026-08-13. Third-party roundups used only as pointers; capability classes below are grounded in vendor pages.",
+  "products": [
+    {
+      "id": "chatgpt",
+      "vendor": "OpenAI",
+      "product": "ChatGPT",
+      "sources": [
+        {
+          "title": "ChatGPT Capabilities Overview",
+          "url": "https://help.openai.com/en/articles/9260256-chatgpt-capabilities-overview"
+        },
+        {
+          "title": "Projects in ChatGPT",
+          "url": "https://help.openai.com/en/articles/10169521-projects-in-chatgpt"
+        },
+        {
+          "title": "Memory in ChatGPT",
+          "url": "https://help.openai.com/en/articles/8590148-memory-in-chatgpt-remembering-what-you-chat-about"
+        }
+      ],
+      "capability_classes": [
+        {
+          "id": "chatgpt.conversation",
+          "executable_task": "Follow multi-turn natural-language instructions and keep in-thread context.",
+          "not_a_slogan": true
+        },
+        {
+          "id": "chatgpt.web_search_citations",
+          "executable_task": "Browse the live web and attach citation footnotes to claims when browsing is active.",
+          "not_a_slogan": true
+        },
+        {
+          "id": "chatgpt.deep_research",
+          "executable_task": "Run a multi-step research agent that reads many sources and returns a cited structured report.",
+          "not_a_slogan": true,
+          "plan_gated": true
+        },
+        {
+          "id": "chatgpt.projects",
+          "executable_task": "Group chats, uploaded files, and custom instructions into a workspace with project-scoped memory.",
+          "not_a_slogan": true
+        },
+        {
+          "id": "chatgpt.memory",
+          "executable_task": "Save, show, edit, or delete remembered facts used to personalize later chats; user can disable memory.",
+          "not_a_slogan": true,
+          "note": "Official help: memory is not currently available in custom GPTs."
+        },
+        {
+          "id": "chatgpt.canvas",
+          "executable_task": "Open a side workspace to co-write or edit documents/code with inline markup.",
+          "not_a_slogan": true
+        },
+        {
+          "id": "chatgpt.custom_gpts",
+          "executable_task": "Configure a named assistant with instructions, knowledge files, and selected tools/API actions.",
+          "not_a_slogan": true
+        },
+        {
+          "id": "chatgpt.file_upload",
+          "executable_task": "Upload PDFs, spreadsheets, docs, or images into a project or chat for grounded answers.",
+          "not_a_slogan": true
+        },
+        {
+          "id": "chatgpt.agent_mode",
+          "executable_task": "Paid plans may run agent mode that takes multi-step tool actions (plan-dependent).",
+          "not_a_slogan": true,
+          "plan_gated": true
+        }
+      ]
+    },
+    {
+      "id": "claude",
+      "vendor": "Anthropic",
+      "product": "Claude",
+      "sources": [
+        {
+          "title": "What are projects?",
+          "url": "https://support.anthropic.com/en/articles/9517075-what-are-projects"
+        },
+        {
+          "title": "What are artifacts and how do I use them?",
+          "url": "https://support.claude.com/en/articles/9487310-what-are-artifacts-and-how-do-i-use-them"
+        },
+        {
+          "title": "Computer use tool",
+          "url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool"
+        },
+        {
+          "title": "Citations / Memory in Claude platform overview",
+          "url": "https://platform.claude.com/docs/en/build-with-claude/overview"
+        }
+      ],
+      "capability_classes": [
+        {
+          "id": "claude.projects",
+          "executable_task": "Create an isolated workspace with chat history, uploaded knowledge, and project instructions; paid plans RAG-scale knowledge ~10x.",
+          "not_a_slogan": true
+        },
+        {
+          "id": "claude.artifacts",
+          "executable_task": "Emit a standalone editable artifact (doc, code, HTML, SVG, React) in a side window; version, download, targeted edit.",
+          "not_a_slogan": true
+        },
+        {
+          "id": "claude.citations",
+          "executable_task": "Ground responses in source documents with sentence-level citations.",
+          "not_a_slogan": true
+        },
+        {
+          "id": "claude.memory",
+          "executable_task": "Store and retrieve information across conversations (account memory and/or /memory files).",
+          "not_a_slogan": true
+        },
+        {
+          "id": "claude.computer_use",
+          "executable_task": "Take screenshots and issue mouse/keyboard commands against a desktop (API computer-use tool; beta).",
+          "not_a_slogan": true
+        },
+        {
+          "id": "claude.web_search",
+          "executable_task": "Search the web and attach source attribution to answers.",
+          "not_a_slogan": true
+        },
+        {
+          "id": "claude.code_execution_files",
+          "executable_task": "Execute code and create files; artifacts now require this capability setting.",
+          "not_a_slogan": true
+        },
+        {
+          "id": "claude.mcp_tools",
+          "executable_task": "Connect artifacts/sessions to MCP servers; user must approve tool access.",
+          "not_a_slogan": true,
+          "plan_gated": true
+        }
+      ]
+    },
+    {
+      "id": "gemini",
+      "vendor": "Google",
+      "product": "Gemini Apps",
+      "sources": [
+        {
+          "title": "Gemini Deep Research",
+          "url": "https://gemini.google/ag/overview/deep-research/?hl=en"
+        },
+        {
+          "title": "Gemini Canvas",
+          "url": "https://gemini.google/overview/canvas/"
+        },
+        {
+          "title": "Gemini Apps release notes",
+          "url": "https://gemini.google/re/release-notes/?hl=en-GB"
+        }
+      ],
+      "capability_classes": [
+        {
+          "id": "gemini.deep_research",
+          "executable_task": "Autonomously browse many websites (and optionally Gmail/Drive/Chat) and produce a multi-page cited report.",
+          "not_a_slogan": true
+        },
+        {
+          "id": "gemini.canvas",
+          "executable_task": "Turn a prompt or research report into a webpage, infographic, quiz, app/game prototype, or audio overview in Canvas.",
+          "not_a_slogan": true
+        },
+        {
+          "id": "gemini.gems",
+          "executable_task": "Create a custom Gem with standing instructions and optional linked notebooks/knowledge.",
+          "not_a_slogan": true
+        },
+        {
+          "id": "gemini.file_context",
+          "executable_task": "Upload files into chat or Deep Research (large context on paid plans, up to ~1M tokens advertised).",
+          "not_a_slogan": true,
+          "plan_gated": true
+        }
+      ]
+    },
+    {
+      "id": "notebooklm",
+      "vendor": "Google",
+      "product": "Gemini Notebook (formerly NotebookLM)",
+      "sources": [
+        {
+          "title": "NotebookLM is now Gemini Notebook",
+          "url": "https://blog.google/innovation-and-ai/products/gemini-notebook/notebooklm-gemini-notebook/"
+        },
+        {
+          "title": "Gemini Notebook product page",
+          "url": "https://workspace.google.com/products/gemini-notebook/"
+        }
+      ],
+      "capability_classes": [
+        {
+          "id": "notebooklm.source_grounded_qa",
+          "executable_task": "Answer questions using only uploaded sources (Docs, Slides, PDF, URL, YouTube, audio) with citations back to those sources.",
+          "not_a_slogan": true
+        },
+        {
+          "id": "notebooklm.audio_overview",
+          "executable_task": "Generate an Audio Overview from notebook sources.",
+          "not_a_slogan": true
+        },
+        {
+          "id": "notebooklm.code_computer",
+          "executable_task": "Paid/rolling-out: execute code in a secure cloud computer grounded in notebook sources.",
+          "not_a_slogan": true,
+          "plan_gated": true
+        },
+        {
+          "id": "notebooklm.privacy",
+          "executable_task": "Keep uploaded sources private unless the notebook is shared; vendor states sources are not used for model training.",
+          "not_a_slogan": true
+        }
+      ]
+    },
+    {
+      "id": "khanmigo",
+      "vendor": "Khan Academy",
+      "product": "Khanmigo",
+      "sources": [
+        {
+          "title": "Khanmigo for learners",
+          "url": "https://www.khanmigo.ai/learners"
+        },
+        {
+          "title": "Sal Khan: Khanmigo's First Chapter",
+          "url": "https://blog.khanacademy.org/khanmigos-first-chapter-changed-how-i-think-about-ai-a-note-from-sal-khan/"
+        }
+      ],
+      "capability_classes": [
+        {
+          "id": "khanmigo.socratic_tutor",
+          "executable_task": "Guide a learner with questions and hints without giving the direct answer; stay on the current Khan Academy problem.",
+          "not_a_slogan": true
+        },
+        {
+          "id": "khanmigo.curriculum_grounding",
+          "executable_task": "See the specific practice problem the student is on and discuss that item (not a generic chatbot).",
+          "not_a_slogan": true
+        },
+        {
+          "id": "khanmigo.writing_coding_feedback",
+          "executable_task": "Give guided writing prompts and real-time coding feedback without dumping a finished solution.",
+          "not_a_slogan": true
+        },
+        {
+          "id": "khanmigo.teacher_assist",
+          "executable_task": "Draft lesson plans, rubrics, and progress notes for educators (separate teacher surface).",
+          "not_a_slogan": true
+        }
+      ]
+    },
+    {
+      "id": "perplexity",
+      "vendor": "Perplexity",
+      "product": "Perplexity (Search / Research / Computer Projects)",
+      "sources": [
+        {
+          "title": "Deep Research, Now in Computer",
+          "url": "https://www.perplexity.ai/hub/products/deep-research"
+        },
+        {
+          "title": "What is Research mode?",
+          "url": "https://www.perplexity.ai/help-center/en/articles/10738684-what-is-deep-research"
+        },
+        {
+          "title": "What are Projects? (formerly Spaces)",
+          "url": "https://www.perplexity.ai/help-center/en/articles/10352961-what-are-spaces"
+        },
+        {
+          "title": "Spaces are now Projects",
+          "url": "https://www.perplexity.ai/hub/blog/spaces-are-now-projects"
+        }
+      ],
+      "capability_classes": [
+        {
+          "id": "perplexity.cited_search",
+          "executable_task": "Answer a query with inline numbered citations that link to live source URLs.",
+          "not_a_slogan": true
+        },
+        {
+          "id": "perplexity.research_mode",
+          "executable_task": "Plan, run dozens of searches, read many sources, and synthesize a comprehensive cited report (typically minutes).",
+          "not_a_slogan": true
+        },
+        {
+          "id": "perplexity.projects",
+          "executable_task": "Keep long-running work in a Project with files, instructions, project-scoped memory, and connectors.",
+          "not_a_slogan": true
+        },
+        {
+          "id": "perplexity.deliverables",
+          "executable_task": "Turn research into a report, PDF, deck, spreadsheet, or dashboard inside Computer.",
+          "not_a_slogan": true
+        }
+      ]
+    },
+    {
+      "id": "github_copilot",
+      "vendor": "GitHub",
+      "product": "GitHub Copilot",
+      "sources": [
+        {
+          "title": "Chat in the IDE",
+          "url": "https://docs.github.com/en/copilot/how-tos/chat-with-copilot/chat-in-ide"
+        },
+        {
+          "title": "About Copilot coding / cloud agent",
+          "url": "https://docs.github.com/copilot/concepts/agents/cloud-agent/about-cloud-agent"
+        },
+        {
+          "title": "What's new with GitHub Copilot coding agent",
+          "url": "https://github.blog/ai-and-ml/github-copilot/whats-new-with-github-copilot-coding-agent/"
+        }
+      ],
+      "capability_classes": [
+        {
+          "id": "copilot.inline_completions",
+          "executable_task": "Propose next-token / next-hunk code completions in the editor from local file context.",
+          "not_a_slogan": true
+        },
+        {
+          "id": "copilot.ask_mode",
+          "executable_task": "Answer coding questions in-IDE without autonomously editing the workspace.",
+          "not_a_slogan": true
+        },
+        {
+          "id": "copilot.plan_mode",
+          "executable_task": "Produce a structured implementation plan for review before edits.",
+          "not_a_slogan": true
+        },
+        {
+          "id": "copilot.agent_mode",
+          "executable_task": "Autonomously edit files, run terminal commands, and iterate on errors until the task completes (user can review).",
+          "not_a_slogan": true
+        },
+        {
+          "id": "copilot.cloud_coding_agent",
+          "executable_task": "Research a repo, plan, change a branch in a GitHub Actions environment, and open a draft pull request.",
+          "not_a_slogan": true
+        },
+        {
+          "id": "copilot.code_review",
+          "executable_task": "Run AI code review on a pull request and optionally apply suggested fixes.",
+          "not_a_slogan": true
+        }
+      ]
+    }
+  ],
+  "cross_product_executable_classes": [
+    "cited_research_report",
+    "project_workspace_with_files_and_memory",
+    "standalone_artifact_outputs",
+    "socratic_tutoring_without_answer_dump",
+    "tool_use_with_explicit_authorization",
+    "source_grounded_qa",
+    "deep_web_research_agent",
+    "canvas_cowrite_ui",
+    "custom_agent_configuration",
+    "voice_realtime",
+    "vision_screen_understanding",
+    "computer_use_gui",
+    "coding_agent_to_pr",
+    "account_wide_memory_controls"
+  ]
+}
