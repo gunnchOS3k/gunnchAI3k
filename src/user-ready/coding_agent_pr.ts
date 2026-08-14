@@ -115,6 +115,47 @@ function git(cwd: string, args: string[], opts?: { allowPush?: boolean }): strin
   return execFileSync('git', args, { cwd, encoding: 'utf8' }).trim();
 }
 
+export function cloneAllowlistedSandbox(remoteUrl: string, root?: string): string {
+  if (!isAllowlistedSandboxRemote(remoteUrl)) {
+    throw new Error(`SANDBOX_REMOTE_NOT_ALLOWLISTED:${remoteUrl}`);
+  }
+  const dir = root ?? fs.mkdtempSync(path.join(os.tmpdir(), 'gunnchai-ai-ur-013-clone-'));
+  if (fs.existsSync(path.join(dir, '.git'))) {
+    // Reuse existing checkout: fetch + reset to origin/main (never force-push).
+    execFileSync('git', ['remote', 'set-url', 'origin', remoteUrl], { cwd: dir, encoding: 'utf8' });
+    execFileSync('git', ['fetch', 'origin', 'main'], { cwd: dir, encoding: 'utf8' });
+    execFileSync('git', ['checkout', '-B', 'main', 'origin/main'], { cwd: dir, encoding: 'utf8' });
+  } else {
+    fs.mkdirSync(dir, { recursive: true });
+    execFileSync('git', ['clone', remoteUrl, dir], { encoding: 'utf8' });
+  }
+  execFileSync('git', ['config', 'user.email', 'sandbox@gunnchai.local'], { cwd: dir });
+  execFileSync('git', ['config', 'user.name', 'AI-UR-013 Sandbox'], { cwd: dir });
+  // Ensure seed is broken for the agent task.
+  const target = path.join(dir, 'src', 'add.js');
+  if (!fs.existsSync(target) || !fs.readFileSync(target, 'utf8').includes('return a - b')) {
+    fs.mkdirSync(path.join(dir, 'src'), { recursive: true });
+    fs.mkdirSync(path.join(dir, 'test'), { recursive: true });
+    fs.writeFileSync(
+      target,
+      'function add(a, b) {\n  return a - b;\n}\nmodule.exports = { add };\n',
+    );
+    if (!fs.existsSync(path.join(dir, 'test', 'add.test.js'))) {
+      fs.writeFileSync(
+        path.join(dir, 'test', 'add.test.js'),
+        `const assert = require('node:assert/strict');
+const { add } = require('../src/add.js');
+assert.equal(add(2, 3), 5);
+console.log('ok');
+`,
+      );
+    }
+    execFileSync('git', ['add', '-A'], { cwd: dir, encoding: 'utf8' });
+    // Commit on a prep branch only if main already fixed — keep main as remote truth.
+  }
+  return dir;
+}
+
 export function seedSandboxRepo(root?: string): string {
   const dir = root ?? fs.mkdtempSync(path.join(os.tmpdir(), 'gunnchai-ai-ur-013-'));
   fs.mkdirSync(path.join(dir, 'src'), { recursive: true });
@@ -197,17 +238,24 @@ export function runCodingAgentDraftPr(
   const task = opts?.task ?? 'fix add() so add(2,3)===5';
   audit.push(`plan:${planTask(task).join('>')}`);
 
-  const mainBefore = git(sandbox, ['rev-parse', 'main']);
+  // When opening a live PR, work from the allowlisted remote history (not an unrelated local seed).
+  let workdir = sandbox;
+  if (opts?.openGithubDraftPr && opts.remoteUrl) {
+    workdir = cloneAllowlistedSandbox(opts.remoteUrl, path.join(sandbox, 'clone'));
+    audit.push(`clone:${opts.remoteUrl}`);
+  }
+
+  const mainBefore = git(workdir, ['rev-parse', 'main']);
   const branch = `agent/ai-ur-013-fix-add-${Date.now().toString(36)}`;
-  git(sandbox, ['checkout', '-b', branch]);
+  git(workdir, ['checkout', '-b', branch]);
   audit.push(`branch:${branch}`);
 
-  const target = path.join(sandbox, 'src', 'add.js');
+  const target = path.join(workdir, 'src', 'add.js');
   const before = fs.readFileSync(target, 'utf8');
   if (!before.includes('return a - b')) {
     return {
       ok: false,
-      sandbox,
+      sandbox: workdir,
       branch,
       mainUnchanged: true,
       draftPr: null,
@@ -218,19 +266,18 @@ export function runCodingAgentDraftPr(
   fs.writeFileSync(target, 'function add(a, b) {\n  return a + b;\n}\nmodule.exports = { add };\n');
   audit.push('edit:src/add.js');
 
-  let tests = runSandboxTests(sandbox);
+  let tests = runSandboxTests(workdir);
   if (!tests.passed) {
-    // One repair attempt
     fs.writeFileSync(target, 'function add(a, b) {\n  return Number(a) + Number(b);\n}\nmodule.exports = { add };\n');
     audit.push('repair:src/add.js');
-    tests = runSandboxTests(sandbox);
+    tests = runSandboxTests(workdir);
   }
   if (!tests.passed) {
     return {
       ok: false,
-      sandbox,
+      sandbox: workdir,
       branch,
-      mainUnchanged: git(sandbox, ['rev-parse', 'main']) === mainBefore,
+      mainUnchanged: git(workdir, ['rev-parse', 'main']) === mainBefore,
       draftPr: null,
       notes: `TESTS_FAILED:${tests.output}`,
       completeness: 'PARTIAL',
@@ -238,14 +285,14 @@ export function runCodingAgentDraftPr(
   }
   audit.push('tests:passed');
 
-  git(sandbox, ['add', 'src/add.js']);
-  git(sandbox, ['commit', '-m', 'fix: add() should add, not subtract']);
-  const head = git(sandbox, ['rev-parse', 'HEAD']);
+  git(workdir, ['add', 'src/add.js']);
+  git(workdir, ['commit', '-m', 'fix: add() should add, not subtract']);
+  const head = git(workdir, ['rev-parse', 'HEAD']);
   audit.push(`commit:${head.slice(0, 12)}`);
 
-  git(sandbox, ['checkout', 'main']);
-  const mainAfter = git(sandbox, ['rev-parse', 'main']);
-  git(sandbox, ['checkout', branch]);
+  git(workdir, ['checkout', 'main']);
+  const mainAfter = git(workdir, ['rev-parse', 'main']);
+  git(workdir, ['checkout', branch]);
 
   let remotePushed = false;
   let prUrl: string | null = null;
@@ -259,15 +306,15 @@ export function runCodingAgentDraftPr(
     }
     try {
       execFileSync('git', ['remote', 'remove', 'sandbox'], {
-        cwd: sandbox,
+        cwd: workdir,
         encoding: 'utf8',
         stdio: 'ignore',
       });
     } catch {
       /* no prior remote */
     }
-    execFileSync('git', ['remote', 'add', 'sandbox', remoteUrl], { cwd: sandbox, encoding: 'utf8' });
-    git(sandbox, ['push', '-u', 'sandbox', `HEAD:${branch}`], { allowPush: true });
+    execFileSync('git', ['remote', 'add', 'sandbox', remoteUrl], { cwd: workdir, encoding: 'utf8' });
+    git(workdir, ['push', '-u', 'sandbox', `HEAD:${branch}`], { allowPush: true });
     remotePushed = true;
     audit.push(`push:sandbox:${branch}`);
   }
@@ -342,9 +389,9 @@ export function runCodingAgentDraftPr(
     pr_number: prNumber,
     audit,
   };
-  fs.writeFileSync(path.join(sandbox, 'DRAFT_PR.json'), JSON.stringify(record, null, 2) + '\n');
+  fs.writeFileSync(path.join(workdir, 'DRAFT_PR.json'), JSON.stringify(record, null, 2) + '\n');
   fs.writeFileSync(
-    path.join(sandbox, 'DRAFT_PR.md'),
+    path.join(workdir, 'DRAFT_PR.md'),
     `# ${record.title}\n\nDRAFT: true\nMERGE: false\nPR: ${prUrl ?? '(local)'}\n\n${record.body}\n`,
   );
 
@@ -357,9 +404,9 @@ export function runCodingAgentDraftPr(
       record.push_main === false &&
       record.tests_passed &&
       mainAfter === mainBefore &&
-      fs.existsSync(path.join(sandbox, 'DRAFT_PR.json')) &&
-      !fs.existsSync(path.join(sandbox, 'PROPOSED.diff')),
-    sandbox,
+      fs.existsSync(path.join(workdir, 'DRAFT_PR.json')) &&
+      !fs.existsSync(path.join(workdir, 'PROPOSED.diff')),
+    sandbox: workdir,
     branch,
     mainUnchanged: mainAfter === mainBefore,
     draftPr: record,

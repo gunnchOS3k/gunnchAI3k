@@ -3,30 +3,33 @@ import {
   FRONTIER_PARITY_TOKEN,
   HUMAN_E6_TOKEN,
   USER_READY_001_TOKEN,
+  USER_READY_003_TOKEN,
   USER_READY_PACKET_TOKEN,
 } from './tokens';
 import { runUserReady001Packet } from './runtime_001';
 import { runUserReadyPacket } from './runtime';
+import { runUserReady003Packet } from './runtime_003';
 
-export type PacketId = '001' | '002';
+export type PacketId = '001' | '002' | '003';
 
 export function resolvePacket(argv = process.argv.slice(2)): PacketId {
   const flag = argv.find((a) => a.startsWith('--packet='));
   if (flag) {
     const v = flag.split('=')[1];
-    if (v === '001' || v === '002') return v;
+    if (v === '001' || v === '002' || v === '003') return v;
   }
   const idx = argv.indexOf('--packet');
-  if (idx >= 0 && (argv[idx + 1] === '001' || argv[idx + 1] === '002')) {
+  if (idx >= 0 && (argv[idx + 1] === '001' || argv[idx + 1] === '002' || argv[idx + 1] === '003')) {
     return argv[idx + 1] as PacketId;
   }
   if (process.env.GUNNCHAI_USER_READY_PACKET === '001') return '001';
   if (process.env.GUNNCHAI_USER_READY_PACKET === '002') return '002';
-  // npm script name hint
+  if (process.env.GUNNCHAI_USER_READY_PACKET === '003') return '003';
   const script = process.env.npm_lifecycle_event || '';
   if (script.includes('001')) return '001';
+  if (script.includes('003')) return '003';
   if (script.includes('002')) return '002';
-  return '002';
+  return '003';
 }
 
 async function main(): Promise<void> {
@@ -54,6 +57,38 @@ async function main(): Promise<void> {
     if (report.tokens[FRONTIER_PARITY_TOKEN] !== false) process.exit(2);
     if (report.tokens[HUMAN_E6_TOKEN] !== false) process.exit(2);
     if (!report.allImplementedPassed || report.tokens[USER_READY_001_TOKEN] !== true) {
+      process.exit(1);
+    }
+    return;
+  }
+
+  if (packet === '003') {
+    const report = await runUserReady003Packet(process.cwd(), {
+      fastNetworkConsent: true,
+      proNetworkConsent: process.env.GUNNCHAI_PRO_NETWORK_CONSENT !== '0',
+    });
+    const summary = {
+      packet: report.packet,
+      allImplementedPassed: report.allImplementedPassed,
+      coverage: report.coverage,
+      tokens: report.tokens,
+      localPro: report.localPro,
+      p1: {
+        research: report.p1.research.completeness,
+        vision: (report.p1.vision as { waike?: { completeness?: string } }).waike?.completeness,
+        coding: report.p1.coding.pr_url,
+        voice: report.p1.voice.status,
+      },
+      eval_summary: report.eval_summary,
+      remaining_open: report.remaining_open,
+      failed: report.results.filter((r) => !r.passed).map((r) => r.task_id),
+      stubChallengeFailures: report.stubChallengeFailures,
+    };
+    console.log(JSON.stringify(summary, null, 2));
+    if (report.tokens[APP_PRODUCT_COMPLETE_TOKEN] !== false) process.exit(2);
+    if (report.tokens[FRONTIER_PARITY_TOKEN] !== false) process.exit(2);
+    if (report.tokens[HUMAN_E6_TOKEN] !== false) process.exit(2);
+    if (!report.allImplementedPassed || report.tokens[USER_READY_003_TOKEN] !== true) {
       process.exit(1);
     }
     return;

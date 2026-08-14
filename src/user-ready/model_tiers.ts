@@ -30,7 +30,7 @@ export function inspectModelTiers(cwd = process.cwd()): {
   const mgr = new ModelDownloadManager(cwd);
   const nanoEntry = mgr.get('smollm2-135m-instruct-q4_k_m');
   const fastEntry = mgr.get('local-fast-smollm2-360m');
-  const proEntry = mgr.get('local-pro-qwen2-1_5b');
+  const proEntry = mgr.get('local-pro-qwen2_5-1_5b') ?? mgr.get('local-pro-qwen2-1_5b');
 
   const nanoPath = nanoEntry ? mgr.installedPath(nanoEntry) : null;
   const fastPath = fastEntry ? mgr.installedPath(fastEntry) : null;
@@ -75,8 +75,8 @@ export function inspectModelTiers(cwd = process.cwd()): {
 
   const localPro: TierTruth = {
     role: 'LOCAL_PRO',
-    id: 'local-pro-qwen2-1_5b',
-    candidate: 'Qwen/Qwen2-1.5B-Instruct',
+    id: proEntry?.id ?? 'local-pro-qwen2_5-1_5b',
+    candidate: 'Qwen/Qwen2.5-1.5B-Instruct',
     license: 'Apache-2.0',
     ggufFile: proVerify?.ok && proPath ? path.basename(proPath) : null,
     sha256: proVerify?.ok ? proVerify.sha256 : null,
@@ -84,8 +84,8 @@ export function inspectModelTiers(cwd = process.cwd()): {
     weightsStatus: proVerify?.ok ? 'PRESENT' : 'OPEN',
     isNanoFallbackOnly: false,
     notes: proVerify?.ok
-      ? 'Hashed Local Pro GGUF present. Not a frontier quality claim.'
-      : 'Local Pro OPEN: no pinned hashed GGUF this packet. Fast landing does not imply Pro.',
+      ? 'Hashed Local Pro GGUF present (Qwen2.5-1.5B Q4_K_M). Not a frontier quality claim.'
+      : 'Local Pro OPEN until hashed GGUF verifies. Fast landing does not imply Pro.',
   };
 
   return {

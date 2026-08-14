@@ -85,3 +85,25 @@ export function challengeUserReady002(input: Challenge002Input): string[] {
   if (input.matrixHasHardcodedPass) failures.push('HARDCODED_MATRIX_PASS');
   return failures;
 }
+
+export interface Challenge003Input {
+  syntheticDiscoveryCited: boolean;
+  ocrOnlyClaimedComplete: boolean;
+  draftPrJsonWithoutLiveUrl: boolean;
+  fakeLocalPro: boolean;
+  silentCloud: boolean;
+  unreadCitations: boolean;
+  unsafeTools: boolean;
+}
+
+export function challengeUserReady003(input: Challenge003Input): string[] {
+  const failures: string[] = [];
+  if (input.syntheticDiscoveryCited) failures.push('SYNTHETIC_SEARCH_AS_DEEP_RESEARCH');
+  if (input.ocrOnlyClaimedComplete) failures.push('OCR_AS_VLM');
+  if (input.draftPrJsonWithoutLiveUrl) failures.push('DRAFT_PR_JSON_NOT_LIVE');
+  if (input.fakeLocalPro) failures.push('FAKE_LOCAL_PRO');
+  if (input.silentCloud) failures.push('SILENT_CLOUD');
+  if (input.unreadCitations) failures.push('UNREAD_CITATIONS');
+  if (input.unsafeTools) failures.push('UNSAFE_TOOLS');
+  return failures;
+}

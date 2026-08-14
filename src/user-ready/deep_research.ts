@@ -61,6 +61,14 @@ export interface AuditEvent {
   detail?: Record<string, unknown>;
 }
 
+export interface ClaimSourceEdge {
+  claim_id: string;
+  claim: string;
+  source_id: string;
+  url: string;
+  quote: string;
+}
+
 export interface DeepResearchReport {
   question: string;
   plan: ResearchPlan;
@@ -70,8 +78,11 @@ export interface DeepResearchReport {
   sourcesFetched: number;
   sourcesRead: number;
   discoveredNotOnlySeed: boolean;
+  /** live_web = real search endpoints; synthetic = local toy URLs (PARTIAL). */
+  discoveryMode: 'live_web' | 'synthetic' | 'injected' | 'none';
   followUps: string[];
   evidenceGraph: EvidenceNode[];
+  claimSourceGraph: ClaimSourceEdge[];
   citations: ResearchCitation[];
   unreadCited: string[];
   fabricatedRejected: string[];
@@ -97,6 +108,7 @@ export class DeepResearchRuntime {
   readonly broker: PermissionBroker;
   private fetchImpl: FetchFn;
   private discoverImpl: DiscoverFn;
+  private discoveryMode: DeepResearchReport['discoveryMode'];
   private sessionsDir: string;
   private cancelled = false;
   private audit: AuditEvent[] = [];
@@ -107,12 +119,23 @@ export class DeepResearchRuntime {
       fetchImpl?: FetchFn;
       discoverImpl?: DiscoverFn;
       sessionsDir?: string;
+      /** Force synthetic discovery (tests only). */
+      allowSyntheticDiscovery?: boolean;
     },
   ) {
     this.auth = new ToolAuthSession(userId);
     this.broker = this.auth.broker;
     this.fetchImpl = opts?.fetchImpl ?? defaultFetch;
-    this.discoverImpl = opts?.discoverImpl ?? defaultDiscover;
+    if (opts?.discoverImpl) {
+      this.discoverImpl = opts.discoverImpl;
+      this.discoveryMode = 'injected';
+    } else if (opts?.allowSyntheticDiscovery) {
+      this.discoverImpl = syntheticDiscover;
+      this.discoveryMode = 'synthetic';
+    } else {
+      this.discoverImpl = liveWebDiscover;
+      this.discoveryMode = 'live_web';
+    }
     this.sessionsDir = opts?.sessionsDir ?? path.join(os.tmpdir(), 'gunnchai-deep-research');
     fs.mkdirSync(this.sessionsDir, { recursive: true });
   }
@@ -196,6 +219,7 @@ export class DeepResearchRuntime {
         this.audit,
         sessionPath,
         resumed,
+        this.discoveryMode,
       );
     }
     if (!opts.consent.network || !opts.consent.discloseDataLeavesDevice) {
@@ -207,6 +231,7 @@ export class DeepResearchRuntime {
         this.audit,
         sessionPath,
         resumed,
+        this.discoveryMode,
       );
     }
     const gate = this.auth.invoke('network', 'fetch');
@@ -219,15 +244,42 @@ export class DeepResearchRuntime {
         this.audit,
         sessionPath,
         resumed,
+        this.discoveryMode,
       );
     }
 
     const seed = [...new Set((opts.seedUrls ?? []).filter(Boolean))];
-    const discovered = await this.discoverImpl(plan.searchTerms);
+    let discovered: Array<{ url: string; title: string }> = [];
+    try {
+      discovered = await this.discoverImpl(plan.searchTerms);
+    } catch (err) {
+      this.log('discovery_failed', {
+        error: err instanceof Error ? err.message : String(err),
+        mode: this.discoveryMode,
+      });
+      if (this.discoveryMode === 'live_web') {
+        return fail(
+          opts.question,
+          plan,
+          opts.consent,
+          `LIVE_DISCOVERY_FAILED:${err instanceof Error ? err.message : String(err)}`,
+          this.audit,
+          sessionPath,
+          resumed,
+          'none',
+        );
+      }
+    }
+    // Reject synthetic-only discovery.gunnchai.local URLs as COMPLETE-path evidence.
+    const syntheticHits = discovered.filter((d) => /discovery\.gunnchai\.local/i.test(d.url));
+    if (syntheticHits.length > 0 && syntheticHits.length === discovered.length) {
+      this.discoveryMode = 'synthetic';
+    }
     this.log('discovery', {
       terms: plan.searchTerms,
       discovered: discovered.map((d) => d.url),
       seedCount: seed.length,
+      mode: this.discoveryMode,
     });
 
     const rankedCandidates = rankCandidates(seed, discovered, plan.searchTerms);
@@ -240,6 +292,7 @@ export class DeepResearchRuntime {
         this.audit,
         sessionPath,
         resumed,
+        this.discoveryMode,
       );
     }
 
@@ -312,6 +365,7 @@ export class DeepResearchRuntime {
         resumed,
         this.audit,
         sessionPath,
+        this.discoveryMode,
         opts.fakeUrl,
       );
       fs.writeFileSync(sessionPath, JSON.stringify(partial, null, 2));
@@ -329,6 +383,7 @@ export class DeepResearchRuntime {
       resumed,
       this.audit,
       sessionPath,
+      this.discoveryMode,
       opts.fakeUrl,
     );
     fs.writeFileSync(sessionPath, JSON.stringify({ ...report, cloudUsed }, null, 2));
@@ -347,6 +402,7 @@ function assemble(
   resumed: boolean,
   audit: AuditEvent[],
   sessionPath: string,
+  discoveryMode: DeepResearchReport['discoveryMode'],
   fakeUrl?: string,
 ): DeepResearchReport {
   const readSources = sources.filter((s) => s.fetched && s.read);
@@ -380,9 +436,38 @@ function assemble(
       quote: c.quote,
     }));
 
+  const claimSourceGraph: ClaimSourceEdge[] = evidenceGraph.flatMap((e) =>
+    e.source_ids.map((sid) => {
+      const src = sources.find((s) => s.id === sid);
+      const cit = citations.find((c) => c.source_id === sid);
+      return {
+        claim_id: e.id,
+        claim: e.claim,
+        source_id: sid,
+        url: src?.url ?? cit?.url ?? '',
+        quote: e.quote,
+      };
+    }),
+  );
+
   const contradictions = findContradictions(readSources);
-  const answer = synthesize(question, plan, readSources, citations, contradictions, followUps, evidenceGraph);
+  const answer = synthesize(
+    question,
+    plan,
+    readSources,
+    citations,
+    contradictions,
+    followUps,
+    evidenceGraph,
+    claimSourceGraph,
+    discoveryMode,
+  );
   const discoveredNotOnlySeed = sources.some((s) => s.discovery !== 'seed');
+  const liveDiscovery =
+    discoveryMode === 'live_web' ||
+    (discoveryMode === 'injected' &&
+      sources.some((s) => s.discovery !== 'seed' && !/discovery\.gunnchai\.local/i.test(s.url)));
+  const noSyntheticCited = citations.every((c) => !/discovery\.gunnchai\.local/i.test(c.url));
   const ok =
     !cancelled &&
     plan.approved &&
@@ -395,12 +480,14 @@ function assemble(
     !answer.includes('http://invented') &&
     followUps.length >= 1 &&
     evidenceGraph.length >= 1 &&
-    discoveredNotOnlySeed;
+    claimSourceGraph.length >= 1 &&
+    discoveredNotOnlySeed &&
+    liveDiscovery &&
+    noSyntheticCited;
 
-  // Completeness: FULL deep-research bar requires discovery + follow-up + evidence graph.
-  // If seed-only multi-fetch works but discovery/follow-up did not, stay PARTIAL.
+  // COMPLETE requires live/injected non-synthetic discovery + follow-up + claim-source graph.
   const completeness: 'COMPLETE' | 'PARTIAL' =
-    ok && discoveredNotOnlySeed && followUps.length >= 1 ? 'COMPLETE' : 'PARTIAL';
+    ok && liveDiscovery && discoveryMode !== 'synthetic' ? 'COMPLETE' : 'PARTIAL';
 
   return {
     question,
@@ -411,8 +498,10 @@ function assemble(
     sourcesFetched: sources.filter((s) => s.fetched).length,
     sourcesRead: readSources.length,
     discoveredNotOnlySeed,
+    discoveryMode,
     followUps,
     evidenceGraph,
+    claimSourceGraph,
     citations,
     unreadCited,
     fabricatedRejected,
@@ -425,9 +514,9 @@ function assemble(
     ok,
     completeness,
     notes: ok
-      ? `Deep Research COMPLETE path: decompose→discover→rank→fetch→follow-up→evidence graph (${readSources.length} read). Local synthesis. No cloud LLM.`
+      ? `Deep Research COMPLETE: live discovery (${discoveryMode})→rank→fetch→follow-up→claim-source graph (${readSources.length} read). Local synthesis. No cloud LLM.`
       : completeness === 'PARTIAL'
-        ? 'DEEP_RESEARCH_PARTIAL: multi-source fetch/cite may work, but discovery/follow-up/evidence-graph bar not fully met.'
+        ? 'DEEP_RESEARCH_PARTIAL: need real search discovery (not synthetic seed-only), follow-up, claim-source graph, verified citations from read bodies.'
         : 'DEEP_RESEARCH_INCOMPLETE',
   };
 }
@@ -440,6 +529,7 @@ function fail(
   audit: AuditEvent[],
   sessionPath: string,
   resumed: boolean,
+  discoveryMode: DeepResearchReport['discoveryMode'] = 'none',
 ): DeepResearchReport {
   return {
     question,
@@ -450,8 +540,10 @@ function fail(
     sourcesFetched: 0,
     sourcesRead: 0,
     discoveredNotOnlySeed: false,
+    discoveryMode,
     followUps: [],
     evidenceGraph: [],
+    claimSourceGraph: [],
     citations: [],
     unreadCited: [],
     fabricatedRejected: [],
@@ -561,10 +653,13 @@ function synthesize(
   contradictions: Array<{ topic: string; a: string; b: string }>,
   followUps: string[],
   evidenceGraph: EvidenceNode[],
+  claimSourceGraph: ClaimSourceEdge[],
+  discoveryMode: DeepResearchReport['discoveryMode'],
 ): string {
   return [
     `Deep Research report: ${question}`,
     '',
+    `Discovery mode: ${discoveryMode}`,
     `Search terms: ${plan.searchTerms.join(', ')}`,
     `Sub-queries: ${plan.subqueries.join(' | ')}`,
     `Follow-ups: ${followUps.join(' | ') || '(none)'}`,
@@ -574,6 +669,9 @@ function synthesize(
     '',
     'Evidence graph:',
     ...evidenceGraph.map((e) => `- ${e.id}: ${e.claim} ← ${e.source_ids.join(',')}`),
+    '',
+    'Claim→source graph:',
+    ...claimSourceGraph.map((e) => `- ${e.claim_id} → ${e.source_id} (${e.url}) "${e.quote.slice(0, 80)}"`),
     '',
     'Citations:',
     ...citations.map((c) => `[${c.index}] ${c.url} — "${c.quote}" (verified=${c.verified})`),
@@ -586,14 +684,106 @@ function synthesize(
   ].join('\n');
 }
 
-async function defaultDiscover(terms: string[]): Promise<Array<{ url: string; title: string }>> {
-  // Deterministic local discovery index keyed by search terms — not a hardcoded single seed list.
-  // When network discovery is unavailable, term-derived synthetic URLs still prove query→search coupling.
+/** Toy synthetic discovery — PARTIAL only; never COMPLETE. */
+async function syntheticDiscover(terms: string[]): Promise<Array<{ url: string; title: string }>> {
   const host = 'https://discovery.gunnchai.local';
   return terms.slice(0, 4).map((t, i) => ({
     url: `${host}/q/${encodeURIComponent(t)}?i=${i}`,
     title: `Discovery hit for ${t}`,
   }));
+}
+
+/**
+ * Real search/discovery: Wikipedia OpenSearch + DuckDuckGo HTML results.
+ * Not seed-URL concat. Not synthetic discovery.gunnchai.local.
+ */
+async function liveWebDiscover(terms: string[]): Promise<Array<{ url: string; title: string }>> {
+  const out: Array<{ url: string; title: string }> = [];
+  const seen = new Set<string>();
+  const push = (url: string, title: string) => {
+    if (!url || seen.has(url)) return;
+    if (/discovery\.gunnchai\.local/i.test(url)) return;
+    seen.add(url);
+    out.push({ url, title: title || url });
+  };
+
+  for (const term of terms.slice(0, 4)) {
+    try {
+      const wikiUrl =
+        'https://en.wikipedia.org/w/api.php?action=opensearch&limit=3&namespace=0&format=json&search=' +
+        encodeURIComponent(term);
+      const wikiBody = await fetchText(wikiUrl);
+      const parsed = JSON.parse(wikiBody) as [string, string[], string[], string[]];
+      const titles = parsed[1] ?? [];
+      const links = parsed[3] ?? [];
+      for (let i = 0; i < links.length; i++) {
+        push(links[i], titles[i] || `Wikipedia:${term}`);
+      }
+    } catch {
+      /* try next provider */
+    }
+  }
+
+  const query = terms.slice(0, 5).join(' ');
+  try {
+    const ddg = `https://html.duckduckgo.com/html/?q=${encodeURIComponent(query)}`;
+    const html = await fetchText(ddg);
+    const re = /uddg=([^&"]+)/g;
+    let m: RegExpExecArray | null;
+    let n = 0;
+    while ((m = re.exec(html)) && n < 6) {
+      try {
+        const url = decodeURIComponent(m[1]);
+        if (/^https?:\/\//i.test(url) && !/duckduckgo\.com/i.test(url)) {
+          push(url, `DDG:${query}`);
+          n++;
+        }
+      } catch {
+        /* skip bad encoding */
+      }
+    }
+    // Alternate DDG result pattern
+    const re2 = /class="result__a"[^>]*href="(https?:\/\/[^"]+)"/g;
+    while ((m = re2.exec(html)) && n < 8) {
+      push(m[1], `DDG:${query}`);
+      n++;
+    }
+  } catch {
+    /* Wikipedia may already have filled candidates */
+  }
+
+  if (out.length < 2) {
+    throw new Error(`LIVE_DISCOVERY_TOO_FEW:${out.length}`);
+  }
+  return out.slice(0, 8);
+}
+
+async function fetchText(url: string): Promise<string> {
+  const u = new URL(url);
+  const lib = await import(u.protocol === 'http:' ? 'node:http' : 'node:https');
+  return new Promise((resolve, reject) => {
+    const req = (lib as typeof http).get(
+      url,
+      { headers: { 'User-Agent': 'gunnchAI3k-deep-research/003', Accept: 'application/json,text/html' } },
+      (res) => {
+        if (res.statusCode && res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
+          fetchText(new URL(res.headers.location, url).toString()).then(resolve, reject);
+          res.resume();
+          return;
+        }
+        if (!res.statusCode || res.statusCode >= 400) {
+          reject(new Error(`HTTP_${res.statusCode}`));
+          res.resume();
+          return;
+        }
+        const chunks: Buffer[] = [];
+        res.on('data', (c) => chunks.push(Buffer.from(c)));
+        res.on('end', () => resolve(Buffer.concat(chunks).toString('utf8').slice(0, 200_000)));
+      },
+    );
+    req.setTimeout(20_000, () => req.destroy(new Error('FETCH_TIMEOUT')));
+    req.on('error', reject);
+  });
 }
 
 async function defaultFetch(url: string): Promise<{ title: string; body: string }> {
@@ -608,41 +798,16 @@ async function defaultFetch(url: string): Promise<{ title: string; body: string 
   if (u.protocol !== 'http:' && u.protocol !== 'https:') {
     throw new Error('UNSUPPORTED_URL');
   }
-  const lib = await import(u.protocol === 'http:' ? 'node:http' : 'node:https');
-  return new Promise((resolve, reject) => {
-    const req = (lib as typeof http).get(
-      url,
-      { headers: { 'User-Agent': 'gunnchAI3k-deep-research/002r' } },
-      (res) => {
-        if (res.statusCode && res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
-          defaultFetch(new URL(res.headers.location, url).toString()).then(resolve, reject);
-          res.resume();
-          return;
-        }
-        if (!res.statusCode || res.statusCode >= 400) {
-          reject(new Error(`HTTP_${res.statusCode}`));
-          res.resume();
-          return;
-        }
-        const chunks: Buffer[] = [];
-        res.on('data', (c) => chunks.push(Buffer.from(c)));
-        res.on('end', () => {
-          const html = Buffer.concat(chunks).toString('utf8').slice(0, 80_000);
-          const title = /<title[^>]*>([^<]+)<\/title>/i.exec(html)?.[1]?.trim() || u.hostname;
-          const body = html
-            .replace(/<script[\s\S]*?<\/script>/gi, ' ')
-            .replace(/<style[\s\S]*?<\/style>/gi, ' ')
-            .replace(/<[^>]+>/g, ' ')
-            .replace(/\s+/g, ' ')
-            .trim()
-            .slice(0, 12_000);
-          resolve({ title, body });
-        });
-      },
-    );
-    req.setTimeout(20_000, () => req.destroy(new Error('FETCH_TIMEOUT')));
-    req.on('error', reject);
-  });
+  const html = await fetchText(url);
+  const title = /<title[^>]*>([^<]+)<\/title>/i.exec(html)?.[1]?.trim() || u.hostname;
+  const body = html
+    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, 12_000);
+  return { title, body };
 }
 
-export { MIN_SOURCES, MIN_PLAN_STEPS };
+export { MIN_SOURCES, MIN_PLAN_STEPS, liveWebDiscover, syntheticDiscover };

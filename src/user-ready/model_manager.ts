@@ -14,6 +14,8 @@ export const EMPTY_SHA256 =
   'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855';
 export const NANO_SHA256 =
   '2e8040ceae7815abe0dcb3540b9995eaa1fa0d2ca9e797d0a635ae4433c68c2d';
+export const PRO_SHA256 =
+  '1adf0b11065d8ad2e8123ea110d1ec956dab4ab038eab665614adba04b6c3370';
 export const FAST_SHA256 =
   '2fa3f013dcdd7b99f9b237717fa0b12d75bbb89984cc1274be1471a465bac9c2';
 const GGUF_MAGIC = Buffer.from('GGUF');

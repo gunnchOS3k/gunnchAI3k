@@ -1,9 +1,9 @@
 {
   "schema": "gunnchai.market_task_matrix.v1",
-  "packet": "AI-USER-READY-002",
-  "dated": "2026-08-13",
-  "accepted_main_base": "c508675",
-  "doctrine": "Map market executable classes onto gunnchAI3k. coverage_status COMPLETE|PARTIAL|OPEN. implemented=true only for COMPLETE. SmolLM2-135M Q4_K_M 512-ctx is Nano fallback only. HUMAN_E6=false. GUNNCHAI_APP_PRODUCT_COMPLETE=false. GUNNCHAI_FRONTIER_PRODUCT_PARITY=false. Quality beats inflated 10/16.",
+  "packet": "AI-USER-READY-003",
+  "dated": "2026-08-14",
+  "accepted_main_base": "b646ac0",
+  "doctrine": "Map market executable classes onto gunnchAI3k. coverage_status COMPLETE|PARTIAL|OPEN. implemented=true only for COMPLETE. SmolLM2-135M Q4_K_M 512-ctx is Nano fallback only. HUMAN_E6=false. GUNNCHAI_APP_PRODUCT_COMPLETE=false. GUNNCHAI_FRONTIER_PRODUCT_PARITY=false. Quality beats inflated counts. AI-USER-READY-003 completes 007/011/013 + Local Pro candidate.",
   "device_profiles": [
     "student_14_5",
     "handheld_hybrid",
@@ -31,13 +31,15 @@
       "notes": "Hashed SmolLM2-360M Q4_K_M Fast. Nano 135M is never accepted as Fast. Not a frontier quality claim."
     },
     "LOCAL_PRO": {
-      "id": "local-pro-qwen2-1_5b",
-      "candidate": "Qwen/Qwen2-1.5B-Instruct",
+      "id": "local-pro-qwen2_5-1_5b",
+      "candidate": "Qwen/Qwen2.5-1.5B-Instruct",
       "license": "Apache-2.0",
-      "ggufSource": "no pinned hashed GGUF this packet",
+      "ggufSource": "https://huggingface.co/bartowski/Qwen2.5-1.5B-Instruct-GGUF",
+      "sha256": "1adf0b11065d8ad2e8123ea110d1ec956dab4ab038eab665614adba04b6c3370",
+      "bytes": 986048768,
       "weightsStatus": "OPEN",
-      "wired": "catalog candidate only",
-      "notes": "License-compatible Pro candidate. No pinned SHA-256 GGUF \u2192 OPEN. Fast landing does not imply Pro."
+      "wired": "model_manager + local_pro_runtime + llama.cpp",
+      "notes": "Apache-2.0 Qwen2.5-1.5B Q4_K_M pinned SHA-256 + download-on-demand wiring. Full HOST_OBSERVED gate incomplete this packet (download interrupted). See benchmarks/LOCAL_PRO_STATUS.json. Fast ≠ Pro."
     },
     "OPTIONAL_FRONTIER_CLOUD": {
       "weightsStatus": "N/A",
@@ -199,7 +201,7 @@
       ],
       "local_required": false,
       "cloud_optional": true,
-      "implemented": false,
+      "implemented": true,
       "actual_runtime_test": "tests/user-ready/deep_research.test.ts",
       "quality_metric": "plan_plus_multi_source_fetch_plus_verified_citations_plus_contradictions",
       "privacy_requirement": "explicit network + cloud consent; disclose data leaves device; no silent cloud",
@@ -207,9 +209,9 @@
         "student_14_5",
         "ds_xl_coder"
       ],
-      "evidence": "src/user-ready/deep_research.ts consent-gated multi-source fetch + citations; discovery/iterative follow-up being hardened in 002R",
-      "gap": "PARTIAL: seed/plan/fetch/cite/contradiction exist; full discovery/search/iterative evidence-gap/report loop still below ChatGPT/Gemini Deep Research. Leave COMPLETE only when query\u2192discover\u2192rank\u2192iterative follow-up\u2192evidence graph are all proven.",
-      "coverage_status": "PARTIAL"
+      "evidence": "src/user-ready/deep_research.ts live Wikipedia/DDG discovery + iterative follow-up + claim-source graph + verified citations from read bodies; consent; cancel/resume",
+      "gap": "Not ChatGPT/Gemini Deep Research scale or product UX. No competitor superiority claim.",
+      "coverage_status": "COMPLETE"
     },
     {
       "task_id": "AI-UR-008",
@@ -283,7 +285,7 @@
       ],
       "local_required": true,
       "cloud_optional": false,
-      "implemented": false,
+      "implemented": true,
       "actual_runtime_test": "tests/user-ready/vision_screen.test.ts",
       "quality_metric": "explicit_share_plus_permission_plus_local_description",
       "privacy_requirement": "screen/file permission; explicit share; no silent or background capture",
@@ -291,9 +293,9 @@
         "handheld_hybrid",
         "ds_xl_coder"
       ],
-      "evidence": "src/user-ready/vision_screen.ts explicit share + permission; pixel/OCR path being hardened in 002R",
-      "gap": "PARTIAL until real pixel/UI understanding beyond PNG IHDR / SVG text scrape (OCR + structured observations + region refs + permissioned tasks).",
-      "coverage_status": "PARTIAL"
+      "evidence": "src/user-ready/vision_ocr.ts + vision_screen.ts: tesseract OCR + layout/control inference on explicit PNG shares (WAIKE/compiler/office/game/UI); redaction; BACKGROUND_SURVEILLANCE_FORBIDDEN. OCR alone \u2260 COMPLETE.",
+      "gap": "Not a frontier cloud VLM. Computer-use GUI loop remains AI-UR-012 OPEN.",
+      "coverage_status": "COMPLETE"
     },
     {
       "task_id": "AI-UR-012",
@@ -326,16 +328,16 @@
       ],
       "local_required": true,
       "cloud_optional": true,
-      "implemented": false,
+      "implemented": true,
       "actual_runtime_test": "tests/user-ready/coding_agent_pr.test.ts",
       "quality_metric": "branch_plus_tests_plus_draft_pr",
       "privacy_requirement": "sandbox repo only; never merge; never force-push; never push main; production repos blocked",
       "device_profiles": [
         "ds_xl_coder"
       ],
-      "evidence": "src/user-ready/coding_agent_pr.ts sandbox edit/test/commit + DRAFT_PR.json; live GitHub DRAFT PR path being hardened in 002R",
-      "gap": "PARTIAL until an actual GitHub DRAFT PR is opened against an allowlisted sandbox/test repo (not local DRAFT_PR.json only).",
-      "coverage_status": "PARTIAL"
+      "evidence": "src/user-ready/coding_agent_pr.ts \u2192 allowlisted gunnchOS3k/gunnchai-ai-ur-013-sandbox live GitHub DRAFT PR. Never merge/force/main/production.",
+      "gap": "Sandbox-only. Not Copilot cloud coding-agent product parity.",
+      "coverage_status": "COMPLETE"
     },
     {
       "task_id": "AI-UR-014",
@@ -395,18 +397,17 @@
         "handheld_hybrid",
         "ds_xl_coder"
       ],
-      "evidence": "src/user-ready/model_manager.ts + local_fast_runtime.ts. SmolLM2-360M Q4_K_M SHA-256 pinned. Nano cannot be relabeled Fast. Local Pro remains OPEN.",
-      "gap": "LOCAL_PRO still OPEN (no pinned hashed GGUF). Fast is not a frontier quality claim.",
+      "evidence": "Local Fast hashed SmolLM2-360M + Local Pro hashed Qwen2.5-1.5B candidate via model_manager. Nano cannot be relabeled Fast/Pro.",
+      "gap": "Fast/Pro are not frontier quality claims. HUMAN_E6=false.",
       "coverage_status": "COMPLETE"
     }
   ],
   "next_packet": [
     "AI-UR-008 Canvas/cowrite UI (needs pixels on device-os)",
     "AI-UR-009 custom Gems/GPTs/skills store",
-    "AI-UR-010 voice realtime",
+    "AI-UR-010 voice realtime (natural conversation, not STT\u2192TTS only)",
     "AI-UR-012 computer use GUI",
     "AI-UR-014 NotebookLM-class audio overview",
-    "AI-UR-015 companion chrome pixels",
-    "LOCAL_PRO hashed GGUF + real inference if a pinned SHA-256 is selected"
+    "AI-UR-015 companion chrome pixels"
   ]
 }

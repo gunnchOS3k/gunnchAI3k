@@ -366,7 +366,6 @@ export async function runUserReadyPacket(
   }
 
   {
-    const { createVisionPngFixture } = await import('./vision_canvas');
     const vs = new VisionScreenRuntime();
     const noShare = vs.inspect('u1', null);
     const noPerm = vs.inspect('u1', {
@@ -377,25 +376,13 @@ export async function runUserReadyPacket(
     });
     vs.grant('u1', 'screen');
     vs.grant('u1', 'file');
+    const fix = (name: string) => path.join(cwd, 'fixtures', 'user-ready', name);
     const waike = vs.inspect(
       'u1',
       {
         kind: 'screen',
         title: 'WAIKE lesson',
-        buffer: Buffer.from(
-          JSON.stringify({
-            vision_fixture: true,
-            width: 320,
-            height: 200,
-            texts: ['WAIKE tutor', 'Next lesson: OFDM cyclic prefix', 'Start'],
-            objects: ['lesson_card'],
-            controls: [
-              { role: 'button', name: 'Start', x: 200, y: 160, w: 80, h: 28 },
-              { role: 'textbox', name: 'Prompt', x: 20, y: 40, w: 280, h: 40 },
-            ],
-            scene: 'WAIKE tutoring screen',
-          }),
-        ),
+        filePath: fix('waike_tutor.png'),
         claimedAt: new Date().toISOString(),
         redactions: [{ x: 0, y: 0, w: 40, h: 12, reason: 'student_name' }],
       },
@@ -406,9 +393,7 @@ export async function runUserReadyPacket(
       {
         kind: 'image',
         title: 'Compiler',
-        buffer: Buffer.from(
-          '<svg width="240" height="60"><text x="4" y="24">compiler error TS2345</text></svg>',
-        ),
+        filePath: fix('compiler_error.png'),
         claimedAt: new Date().toISOString(),
       },
       { type: 'compiler_error' },
@@ -418,13 +403,7 @@ export async function runUserReadyPacket(
       {
         kind: 'image',
         title: 'Doc',
-        buffer: createVisionPngFixture({
-          width: 200,
-          height: 120,
-          texts: ['Quarterly OFDM lab summary', 'Cyclic prefix absorbs delay spread'],
-          objects: ['document'],
-          controls: [{ role: 'button', name: 'Export', x: 140, y: 90, w: 50, h: 20 }],
-        }),
+        filePath: fix('office_doc.png'),
         claimedAt: new Date().toISOString(),
       },
       { type: 'office_summary' },
@@ -434,16 +413,7 @@ export async function runUserReadyPacket(
       {
         kind: 'screen',
         title: 'UI',
-        buffer: Buffer.from(
-          JSON.stringify({
-            vision_fixture: true,
-            width: 100,
-            height: 80,
-            texts: ['Save draft'],
-            objects: ['toolbar'],
-            controls: [{ role: 'button', name: 'Save draft', x: 10, y: 50, w: 70, h: 20 }],
-          }),
-        ),
+        filePath: fix('ui_toolbar.png'),
         claimedAt: new Date().toISOString(),
       },
       { type: 'identify_control', role: 'button' },
@@ -459,6 +429,9 @@ export async function runUserReadyPacket(
       noPerm.permission === 'denied' &&
       waike.ok &&
       waike.pixelUnderstanding &&
+      waike.ocrUsed &&
+      waike.beyondOcrOnly &&
+      waike.stack === 'ocr_layout_vlm' &&
       /Start|Click/i.test(waike.description) &&
       waike.redacted === true &&
       compiler.ok &&
@@ -478,8 +451,8 @@ export async function runUserReadyPacket(
       local: true,
       cloud_only: false,
       notes: passed
-        ? 'Explicit share + permission + pixel/UI understanding (WAIKE next action, compiler, office summary, control-by-role). No background capture. Not a frontier VLM.'
-        : 'Vision PARTIAL/fail: need pixel understanding beyond IHDR.',
+        ? 'Explicit share + permission + OCR+layout stack (WAIKE/compiler/office/UI). No background capture. Not a frontier VLM.'
+        : 'Vision PARTIAL/fail: need OCR+layout beyond IHDR/fixture-only.',
       evidence: {
         deniedNoShare: noShare.notes,
         deniedNoPerm: noPerm.permission,
@@ -488,6 +461,9 @@ export async function runUserReadyPacket(
         office: office.observations?.summary,
         control: control.description,
         pixelUnderstanding: waike.pixelUnderstanding,
+        ocrUsed: waike.ocrUsed,
+        stack: waike.stack,
+        completeness: waike.completeness,
         backgroundForbidden,
       },
     });

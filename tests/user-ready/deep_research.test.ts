@@ -95,9 +95,23 @@ describe('AI-UR-007 consent-gated Deep Research', () => {
       expect(report.contradictions.length).toBeGreaterThanOrEqual(1);
       expect(report.cloudUsed).toBe(false);
       expect(report.plan.steps.length).toBeGreaterThanOrEqual(4);
+      expect(report.claimSourceGraph.length).toBeGreaterThanOrEqual(1);
+      expect(report.discoveryMode).toBe('injected');
+      expect(report.completeness).toBe('COMPLETE');
       expect(report.answer).toMatch(/Citations:/);
     } finally {
       await server.close();
     }
+  });
+
+  it('marks synthetic discovery.gunnchai.local as PARTIAL not COMPLETE', async () => {
+    const dr = new DeepResearchRuntime('u1', { allowSyntheticDiscovery: true });
+    dr.grantNetwork();
+    const report = await dr.run({
+      question: 'OFDM cyclic prefix multipath',
+      consent: { network: true, cloud: false, discloseDataLeavesDevice: true },
+    });
+    expect(report.discoveryMode).toBe('synthetic');
+    expect(report.completeness).toBe('PARTIAL');
   });
 });
