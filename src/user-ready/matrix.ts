@@ -23,6 +23,7 @@ export interface MarketTaskMatrix {
   schema: string;
   packet: string;
   dated: string;
+  accepted_main_base?: string;
   tasks: MarketTask[];
   next_packet: string[];
   model_tier_truth: Record<string, unknown>;

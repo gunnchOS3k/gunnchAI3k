@@ -8,6 +8,7 @@ export const FRONTIER_PARITY_TOKEN = 'GUNNCHAI_FRONTIER_PRODUCT_PARITY';
 export const HUMAN_E6_TOKEN = 'HUMAN_E6';
 export const USER_READY_PACKET_TOKEN = 'AI_USER_READY_002_DIGITAL_PASS';
 export const USER_READY_001_TOKEN = 'AI_USER_READY_001_DIGITAL_PASS';
+export const USER_READY_003_TOKEN = 'AI_USER_READY_003_DIGITAL_PASS';
 export const NANO_FALLBACK_LABEL = 'NANO_FALLBACK_ONLY';
 export const VISUAL_UNAVAILABLE = 'VISUAL UNAVAILABLE';
 
@@ -17,6 +18,7 @@ export interface UserReadyTokens {
   [HUMAN_E6_TOKEN]: false;
   [USER_READY_PACKET_TOKEN]: boolean;
   [USER_READY_001_TOKEN]: boolean;
+  [USER_READY_003_TOKEN]: boolean;
   [NANO_FALLBACK_LABEL]: true;
   BETTER_THAN_CHATGPT: false;
   BETTER_THAN_CLAUDE: false;
@@ -30,6 +32,7 @@ export interface UserReadyTokens {
 export function buildUserReadyTokens(opts: {
   packet001: boolean;
   packet002: boolean;
+  packet003?: boolean;
 }): UserReadyTokens {
   return {
     [APP_PRODUCT_COMPLETE_TOKEN]: false,
@@ -37,6 +40,7 @@ export function buildUserReadyTokens(opts: {
     [HUMAN_E6_TOKEN]: false,
     [USER_READY_PACKET_TOKEN]: opts.packet002,
     [USER_READY_001_TOKEN]: opts.packet001,
+    [USER_READY_003_TOKEN]: Boolean(opts.packet003),
     [NANO_FALLBACK_LABEL]: true,
     BETTER_THAN_CHATGPT: false,
     BETTER_THAN_CLAUDE: false,

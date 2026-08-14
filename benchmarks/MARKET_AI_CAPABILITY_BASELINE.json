@@ -1,7 +1,7 @@
 {
   "schema": "gunnchai.market_ai_capability_baseline.v1",
-  "packet": "AI-USER-READY-002",
-  "researched_at": "2026-08-13",
+  "packet": "AI-USER-READY-003",
+  "researched_at": "2026-08-14",
   "doctrine": "Executable tasks from official product surfaces, not slogans. No BETTER_THAN_* scores. No frontier quality claim. SmolLM2-135M Q4_K_M 512-ctx is Nano fallback only.",
   "tokens": {
     "HUMAN_E6": false,
@@ -15,7 +15,7 @@
     "BETTER_THAN_PERPLEXITY": false,
     "BETTER_THAN_COPILOT": false
   },
-  "research_method": "Official help centers, product docs, and vendor blogs refreshed 2026-08-13 for AI-USER-READY-002 (ChatGPT Deep Research + Scheduled Tasks, Gemini Deep Research, Gemini Notebook/NotebookLM, Khanmigo, Copilot cloud agent). Third-party roundups used only as pointers; capability classes below are grounded in vendor pages.",
+  "research_method": "Official help centers, product docs, and vendor blogs refreshed 2026-08-13 for AI-USER-READY-002 (ChatGPT Deep Research + Scheduled Tasks, Gemini Deep Research, Gemini Notebook/NotebookLM, Khanmigo, Copilot cloud agent). Third-party roundups used only as pointers; capability classes below are grounded in vendor pages. | packet_003 behavior refresh (no superiority claims). | packet_003 behavior refresh (no superiority claims).",
   "products": [
     {
       "id": "chatgpt",

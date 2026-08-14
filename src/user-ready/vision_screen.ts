@@ -1,13 +1,15 @@
 /**
  * Explicit-share vision/screen. Permission required. No background surveillance.
- * Pixel understanding via local OCR (tesseract) + structured UI observations.
- * Does not invoke OS capture. Cloud VLM is opt-in with disclosure only.
+ * Stack: local OCR (tesseract) + layout/control heuristics — PARTIAL only.
+ * Real multimodal VLM (weights/provider + semantic non-text) is required for COMPLETE.
+ * Tasks: WAIKE / compiler / office / game / UI. Cloud VLM opt-in only (unused here).
  */
 
 import * as fs from 'node:fs';
 import * as path from 'node:path';
-import { createCanvas } from './vision_canvas';
 import { PermissionBroker } from '../stage2/os/permissions';
+import { createCanvas } from './vision_canvas';
+import { inferLayoutFromOcr, ocrBuffer, resolveTesseract, type LayoutInference } from './vision_ocr';
 
 export type ShareKind = 'image' | 'screen';
 
@@ -50,8 +52,15 @@ export interface VisionScreenResult {
   regions: RegionRef[];
   redacted: boolean;
   pixelUnderstanding: boolean;
+  /** OCR ran on raster pixels (not fixture JSON alone). */
+  ocrUsed: boolean;
+  /** Structured layout beyond raw OCR dump. */
+  beyondOcrOnly: boolean;
+  stack: 'ocr_layout_heuristics' | 'ocr_only' | 'fixture_structured' | 'unavailable' | null;
   backgroundCapture: false;
   cloudVlmUsed: false;
+  /** OCR+heuristics never elevate to COMPLETE (no neural VLM). */
+  completeness: 'COMPLETE' | 'PARTIAL';
   notes: string;
 }
 
@@ -59,6 +68,7 @@ export type VisionTask =
   | { type: 'waike_next_action' }
   | { type: 'compiler_error' }
   | { type: 'office_summary' }
+  | { type: 'game_hud' }
   | { type: 'identify_control'; role: string };
 
 export class VisionScreenRuntime {
@@ -108,8 +118,12 @@ export class VisionScreenRuntime {
         regions: [],
         redacted: false,
         pixelUnderstanding: false,
+        ocrUsed: false,
+        beyondOcrOnly: false,
+        stack: 'unavailable',
         backgroundCapture: false,
         cloudVlmUsed: false,
+        completeness: 'PARTIAL',
         notes: 'SHARE_EMPTY',
       };
     }
@@ -129,8 +143,12 @@ export class VisionScreenRuntime {
       regions: parsed.regions,
       redacted: Boolean(share.redactions?.length),
       pixelUnderstanding: parsed.pixelUnderstanding,
+      ocrUsed: parsed.ocrUsed,
+      beyondOcrOnly: parsed.beyondOcrOnly,
+      stack: parsed.stack,
       backgroundCapture: false,
       cloudVlmUsed: false,
+      completeness: parsed.completeness,
       notes: parsed.notes,
     };
   }
@@ -141,6 +159,10 @@ export class VisionScreenRuntime {
 
   hasBackgroundTimer(): boolean {
     return this.captureTimer !== null;
+  }
+
+  tesseractAvailable(): boolean {
+    return Boolean(resolveTesseract());
   }
 }
 
@@ -158,8 +180,12 @@ function denied(notes: string): VisionScreenResult {
     regions: [],
     redacted: false,
     pixelUnderstanding: false,
+    ocrUsed: false,
+    beyondOcrOnly: false,
+    stack: null,
     backgroundCapture: false,
     cloudVlmUsed: false,
+    completeness: 'PARTIAL',
     notes,
   };
 }
@@ -185,45 +211,92 @@ function parseLocalImage(
   observations: StructuredObservation | null;
   regions: RegionRef[];
   pixelUnderstanding: boolean;
+  ocrUsed: boolean;
+  beyondOcrOnly: boolean;
+  stack: VisionScreenResult['stack'];
+  completeness: 'COMPLETE' | 'PARTIAL';
   notes: string;
 } {
   const labels: string[] = ['local_shared_bytes', 'no_background_surveillance'];
   if (redactions?.length) labels.push('redacted_regions');
 
-  // Raster PNG with optional embedded vision fixture JSON in tEXt / sidecar.
+  // Prefer real raster OCR path for PNG.
   if (buf.length >= 8 && buf[0] === 0x89 && buf.toString('ascii', 1, 4) === 'PNG') {
     const width = buf.readUInt32BE(16);
     const height = buf.readUInt32BE(20);
     labels.push('png');
-    const fixture = extractFixture(buf) ?? inferFromPixels(buf, width, height);
-    if (fixture) {
-      const applied = applyTask(fixture, task);
+
+    const ocr = ocrBuffer(buf, '.png');
+    if (ocr.ok) {
+      labels.push('ocr_tesseract');
+      const layout = inferLayoutFromOcr(ocr, width, height);
+      // Optional fixture merge for richer controls when OCR button boxes are weak.
+      const fixture = extractFixture(buf);
+      const merged = mergeFixtureLayout(layout, fixture);
+      const applied = applyTask(merged, task);
+      // OCR + keyword/box layout heuristics are PARTIAL only — not a multimodal VLM.
+      const partialOk =
+        merged.stack === 'ocr_layout_heuristics' &&
+        merged.beyondOcrOnly &&
+        applied.observations.ui_controls.length + applied.regions.length > 0;
       return {
         ok: true,
         format: 'png',
         width,
         height,
-        labels: [...labels, 'pixel_understanding', ...applied.labels],
+        labels: [...labels, 'pixel_understanding', merged.stack, ...applied.labels],
         description: applied.description,
         observations: applied.observations,
         regions: applied.regions,
         pixelUnderstanding: true,
-        notes:
-          'LOCAL_PIXEL_UNDERSTANDING: structured observations from shared PNG pixels/fixture. Not OS capture. Cloud VLM unused.',
+        ocrUsed: true,
+        beyondOcrOnly: merged.beyondOcrOnly,
+        stack: merged.stack,
+        completeness: 'PARTIAL',
+        notes: partialOk
+          ? 'OCR+LAYOUT_HEURISTICS_PARTIAL: tesseract OCR + keyword/box layout. Not a neural VLM. Semantic non-text understanding absent → AI-UR-011 stays PARTIAL.'
+          : 'OCR_PARTIAL: OCR ran but layout/task structure thin. OCR alone ≠ vision COMPLETE.',
       };
     }
-    // IHDR-only is not enough for AI-UR-011 COMPLETE.
+
+    // Fixture-structured fallback (PARTIAL — not VLM/OCR stack COMPLETE).
+    const fixture = extractFixture(buf) ?? inferFromPixels(buf, width, height);
+    if (fixture) {
+      const applied = applyTask(fixtureToLayout(fixture), task);
+      return {
+        ok: true,
+        format: 'png',
+        width,
+        height,
+        labels: [...labels, 'pixel_understanding', 'fixture_structured', ...applied.labels],
+        description: applied.description,
+        observations: applied.observations,
+        regions: applied.regions,
+        pixelUnderstanding: true,
+        ocrUsed: false,
+        beyondOcrOnly: true,
+        stack: 'fixture_structured',
+        completeness: 'PARTIAL',
+        notes:
+          'FIXTURE_STRUCTURED_PARTIAL: embedded fixture without OCR. AI-UR-011 COMPLETE requires real multimodal VLM (not OCR/fixture heuristics).',
+      };
+    }
+
     return {
       ok: false,
       format: 'png',
       width,
       height,
-      labels: [...labels, 'ihdr_only'],
-      description: `Shared PNG ${width}x${height}. IHDR-only is insufficient for vision COMPLETE.`,
+      labels: [...labels, 'ihdr_only', ocr.notes],
+      description: `Shared PNG ${width}x${height}. IHDR-only / OCR-failed is insufficient for vision COMPLETE.`,
       observations: null,
       regions: [],
       pixelUnderstanding: false,
-      notes: 'IHDR_ONLY_PARTIAL',
+      ocrUsed: false,
+      beyondOcrOnly: false,
+      stack: 'unavailable',
+      completeness: 'PARTIAL',
+      notes: ocr.notes === 'TESSERACT_ABSENT' ? 'TESSERACT_ABSENT' : 'IHDR_ONLY_PARTIAL',
     };
   }
 
@@ -233,21 +306,23 @@ function parseLocalImage(
       tryParseJsonFixture(asText) ??
       (/<svg[\s>]/i.test(asText) ? svgToFixture(asText) : null);
     if (fixture) {
-      const applied = applyTask(fixture, task);
-      const w = fixture.width;
-      const h = fixture.height;
+      const applied = applyTask(fixtureToLayout(fixture), task);
       return {
         ok: true,
         format: fixture.format,
-        width: w,
-        height: h,
-        labels: [...labels, fixture.format, 'pixel_understanding', ...applied.labels],
+        width: fixture.width,
+        height: fixture.height,
+        labels: [...labels, fixture.format, 'pixel_understanding', 'fixture_structured', ...applied.labels],
         description: applied.description,
         observations: applied.observations,
         regions: applied.regions,
         pixelUnderstanding: true,
+        ocrUsed: false,
+        beyondOcrOnly: true,
+        stack: 'fixture_structured',
+        completeness: 'PARTIAL',
         notes:
-          'LOCAL_PIXEL_UNDERSTANDING: structured observations from shared SVG/JSON screen fixture. Not a frontier VLM.',
+          'FIXTURE_STRUCTURED_PARTIAL: SVG/JSON share without raster OCR. Prefer PNG+tesseract for COMPLETE.',
       };
     }
   }
@@ -264,6 +339,10 @@ function parseLocalImage(
     observations: null,
     regions: [],
     pixelUnderstanding: false,
+    ocrUsed: false,
+    beyondOcrOnly: false,
+    stack: 'unavailable',
+    completeness: 'PARTIAL',
     notes: 'NO_PIXEL_UNDERSTANDING',
   };
 }
@@ -276,6 +355,38 @@ interface VisionFixture {
   objects: string[];
   controls: Array<{ role: string; name: string; x: number; y: number; w: number; h: number }>;
   scene?: string;
+}
+
+function fixtureToLayout(fixture: VisionFixture): LayoutInference {
+  return {
+    texts: fixture.texts,
+    objects: fixture.objects,
+    controls: fixture.controls,
+    scene: fixture.scene || fixture.texts.join(' | '),
+    beyondOcrOnly: true,
+    stack: 'ocr_layout_heuristics', // structural only; callers mark stack as fixture_structured
+  };
+}
+
+function mergeFixtureLayout(layout: LayoutInference, fixture: VisionFixture | null): LayoutInference {
+  if (!fixture) return layout;
+  const controls = [...layout.controls];
+  for (const c of fixture.controls) {
+    if (!controls.some((x) => x.name.toLowerCase() === c.name.toLowerCase())) {
+      controls.push(c);
+    }
+  }
+  const texts = [...new Set([...layout.texts, ...fixture.texts])];
+  const objects = [...new Set([...layout.objects, ...fixture.objects])];
+  const beyond = layout.beyondOcrOnly || controls.length > 0 || objects.length > 0;
+  return {
+    texts,
+    objects,
+    controls,
+    scene: layout.scene || fixture.scene || texts.slice(0, 3).join(' | '),
+    beyondOcrOnly: beyond,
+    stack: beyond ? 'ocr_layout_heuristics' : 'ocr_only',
+  };
 }
 
 function tryParseJsonFixture(text: string): VisionFixture | null {
@@ -297,7 +408,6 @@ function tryParseJsonFixture(text: string): VisionFixture | null {
 }
 
 function extractFixture(buf: Buffer): VisionFixture | null {
-  // Look for an embedded JSON marker written by createVisionPngFixture.
   const marker = Buffer.from('GUNNCHAI_VISION_FIXTURE:');
   const idx = buf.indexOf(marker);
   if (idx < 0) return null;
@@ -312,7 +422,6 @@ function extractFixture(buf: Buffer): VisionFixture | null {
 }
 
 function inferFromPixels(buf: Buffer, width: number, height: number): VisionFixture | null {
-  // Without a fixture, IHDR dimensions alone are not pixel understanding.
   void buf;
   void width;
   void height;
@@ -324,8 +433,9 @@ function svgToFixture(svg: string): VisionFixture {
   const w = Number(/width=["'](\d+)/i.exec(svg)?.[1] ?? 64);
   const h = Number(/height=["'](\d+)/i.exec(svg)?.[1] ?? 32);
   const controls: VisionFixture['controls'] = [];
-  if (/button|submit|next/i.test(svg)) {
-    controls.push({ role: 'button', name: 'Next', x: 4, y: h - 18, w: 48, h: 14 });
+  if (/button|submit|next|start|save|fire|pause|export/i.test(svg)) {
+    const name = />(Start|Next|Save|Fire|Pause|Export)[^<]*/i.exec(svg)?.[1] || 'Next';
+    controls.push({ role: 'button', name, x: 4, y: h - 18, w: 48, h: 14 });
   }
   if (/TS\d{4}|error/i.test(svg)) {
     controls.push({ role: 'textbox', name: 'Problems', x: 2, y: 2, w: w - 4, h: 16 });
@@ -335,14 +445,18 @@ function svgToFixture(svg: string): VisionFixture {
     width: w,
     height: h,
     texts: textBits,
-    objects: textBits.some((t) => /error|TS\d+/i.test(t)) ? ['compiler_diagnostic'] : ['ui_text'],
+    objects: textBits.some((t) => /error|TS\d+/i.test(t))
+      ? ['compiler_diagnostic']
+      : textBits.some((t) => /score|hp/i.test(t))
+        ? ['game_hud']
+        : ['ui_text'],
     controls,
     scene: textBits.join(' '),
   };
 }
 
 function applyTask(
-  fixture: VisionFixture,
+  layout: LayoutInference,
   task?: VisionTask,
 ): {
   description: string;
@@ -350,7 +464,7 @@ function applyTask(
   regions: RegionRef[];
   labels: string[];
 } {
-  const regions: RegionRef[] = fixture.controls.map((c, i) => ({
+  const regions: RegionRef[] = layout.controls.map((c, i) => ({
     id: `r${i + 1}`,
     x: c.x,
     y: c.y,
@@ -359,9 +473,9 @@ function applyTask(
     label: `${c.role}:${c.name}`,
   }));
   const observations: StructuredObservation = {
-    texts: fixture.texts,
-    objects: fixture.objects,
-    ui_controls: fixture.controls.map((c, i) => ({
+    texts: layout.texts,
+    objects: layout.objects,
+    ui_controls: layout.controls.map((c, i) => ({
       role: c.role,
       name: c.name,
       region: regions[i],
@@ -370,9 +484,9 @@ function applyTask(
   const labels: string[] = [];
 
   if (!task) {
-    observations.summary = fixture.scene || fixture.texts.slice(0, 3).join(' | ');
+    observations.summary = layout.scene || layout.texts.slice(0, 3).join(' | ');
     return {
-      description: `Shared ${fixture.format} ${fixture.width}x${fixture.height}. Texts: ${fixture.texts.join(' | ')}`,
+      description: `Shared screen. Texts: ${layout.texts.join(' | ')}`,
       observations,
       regions,
       labels,
@@ -380,20 +494,20 @@ function applyTask(
   }
 
   if (task.type === 'waike_next_action') {
-    const next = fixture.controls.find((c) => /next|continue|start/i.test(c.name));
+    const next = layout.controls.find((c) => /next|continue|start/i.test(c.name));
     observations.next_action = next
-      ? `Click the ${next.role} "${next.name}" in region r${fixture.controls.indexOf(next) + 1}`
+      ? `Click the ${next.role} "${next.name}" in region r${layout.controls.indexOf(next) + 1}`
       : 'Read the on-screen tutoring prompt, then choose the primary CTA';
     labels.push('waike_next_action');
     return {
-      description: `WAIKE screen: ${observations.next_action}. Visible: ${fixture.texts.join(' | ')}`,
+      description: `WAIKE screen: ${observations.next_action}. Visible: ${layout.texts.join(' | ')}`,
       observations,
       regions,
       labels,
     };
   }
   if (task.type === 'compiler_error') {
-    const err = fixture.texts.find((t) => /TS\d{4}|error/i.test(t)) || fixture.texts[0] || '';
+    const err = layout.texts.find((t) => /TS\d{4}|error/i.test(t)) || layout.texts[0] || '';
     observations.summary = `Compiler diagnostic: ${err}`;
     labels.push('compiler_error');
     return {
@@ -404,7 +518,7 @@ function applyTask(
     };
   }
   if (task.type === 'office_summary') {
-    observations.summary = `Document/office summary: ${fixture.texts.slice(0, 4).join(' · ')}`;
+    observations.summary = `Document/office summary: ${layout.texts.slice(0, 4).join(' · ')}`;
     labels.push('office_summary');
     return {
       description: observations.summary,
@@ -413,8 +527,24 @@ function applyTask(
       labels,
     };
   }
+  if (task.type === 'game_hud') {
+    const score = layout.texts.find((t) => /score/i.test(t));
+    const hp = layout.texts.find((t) => /\bhp\b/i.test(t));
+    const fire = layout.controls.find((c) => /fire/i.test(c.name));
+    observations.summary = `Game HUD: ${[score, hp].filter(Boolean).join(' · ')}`;
+    observations.next_action = fire
+      ? `Tap Fire control at (${fire.x},${fire.y})`
+      : 'Locate primary action on the HUD';
+    labels.push('game_hud');
+    return {
+      description: `${observations.summary}. ${observations.next_action}`,
+      observations,
+      regions,
+      labels,
+    };
+  }
   if (task.type === 'identify_control') {
-    const hit = fixture.controls.find((c) => c.role === task.role) || fixture.controls[0];
+    const hit = layout.controls.find((c) => c.role === task.role) || layout.controls[0];
     observations.summary = hit
       ? `Control role=${hit.role} name="${hit.name}" at (${hit.x},${hit.y})`
       : `No control with role=${task.role}`;
@@ -427,7 +557,7 @@ function applyTask(
     };
   }
   return {
-    description: fixture.scene || fixture.texts.join(' | '),
+    description: layout.scene || layout.texts.join(' | '),
     observations,
     regions,
     labels,

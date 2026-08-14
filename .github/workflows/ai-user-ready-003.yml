@@ -1,43 +1,43 @@
-name: AI-USER-READY-002 market packet
+name: AI-USER-READY-003 market packet
 
 on:
   pull_request:
     branches: [main]
   push:
-    branches:
-      - main
-      - 'stream/ai-user-ready-002-fast-research'
-      - 'stream/ai-user-ready-003-research-vision-coding'
+    branches: [main, 'stream/ai-user-ready-003-research-vision-coding']
   workflow_dispatch:
 
 permissions:
   contents: read
+  pull-requests: write
 
 concurrency:
-  group: ai-user-ready-002-${{ github.workflow }}-${{ github.ref }}
+  group: ai-user-ready-003-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   market-runtime:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: npm
-      - name: Install tesseract OCR (required by shared user-ready vision tests / AI-UR-011)
+      - name: Install tesseract OCR
         run: |
           sudo apt-get update
           sudo apt-get install -y tesseract-ocr
           tesseract --version
       - run: npm ci
-      - name: User-ready unit tests (no Fast download required)
+      - name: User-ready unit tests
         run: npm run test:user-ready
         env:
           GUNNCHAI_SKIP_FAST_DOWNLOAD: "1"
-      - name: Provision llama.cpp (required for Local Fast)
+          GUNNCHAI_SKIP_PRO_DOWNLOAD: "1"
+          GUNNCHAI_AI_UR_013_LIVE_PR: "0"
+      - name: Provision llama.cpp
         run: |
           set -euo pipefail
           if command -v llama-cli >/dev/null 2>&1; then
@@ -49,15 +49,24 @@ jobs:
           cmake --build .llama-cpp-src/build --target llama-cli -j "$(nproc)"
           echo "$PWD/.llama-cpp-src/build/bin" >> "$GITHUB_PATH"
           test -x .llama-cpp-src/build/bin/llama-cli
-          .llama-cpp-src/build/bin/llama-cli --version || true
-      - name: CLI packet 002 with Fast download + llama.cpp
+      - name: CLI packet 003 (CI digital coding gate + recorded live DRAFT PR evidence)
         env:
           GUNNCHAI_FAST_NETWORK_CONSENT: "1"
-        run: npm run user-ready:002
+          # Pro stays OPEN; skip multi-GB download in CI.
+          GUNNCHAI_PRO_NETWORK_CONSENT: "0"
+          GUNNCHAI_SKIP_PRO_DOWNLOAD: "1"
+          # Do not open a new sandbox PR from Actions (no cross-repo write). Digital
+          # acceptance uses local allowlist/sandbox gates + host-recorded live DRAFT PR.
+          GUNNCHAI_AI_UR_013_LIVE_PR: "0"
+        run: npm run user-ready:003
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: ai-user-ready-002-result
-          path: artifacts/user-ready/AI_USER_READY_002_RESULT.json
+          name: ai-user-ready-003-result
+          path: |
+            artifacts/user-ready/AI_USER_READY_003_RESULT.json
+            artifacts/user-ready/AI_UR_013_LIVE_DRAFT_PR.json
+            benchmarks/LOCAL_PRO_STATUS.json
+            benchmarks/LOCAL_FAST_QUALITY_GATE.json
           if-no-files-found: error
           retention-days: 14

@@ -1,14 +1,15 @@
 {
-  "schema": "gunnchai.user_ready_002.v1",
-  "packet": "AI-USER-READY-002",
-  "generatedAt": "2026-08-14T23:02:45.922Z",
+  "schema": "gunnchai.user_ready_003.v1",
+  "packet": "AI-USER-READY-003",
+  "generatedAt": "2026-08-14T23:03:05.580Z",
+  "accepted_main_base": "b646ac0",
   "tokens": {
     "GUNNCHAI_APP_PRODUCT_COMPLETE": false,
     "GUNNCHAI_FRONTIER_PRODUCT_PARITY": false,
     "HUMAN_E6": false,
     "AI_USER_READY_002_DIGITAL_PASS": true,
     "AI_USER_READY_001_DIGITAL_PASS": true,
-    "AI_USER_READY_003_DIGITAL_PASS": false,
+    "AI_USER_READY_003_DIGITAL_PASS": true,
     "NANO_FALLBACK_ONLY": true,
     "BETTER_THAN_CHATGPT": false,
     "BETTER_THAN_CLAUDE": false,
@@ -58,6 +59,12 @@
     },
     "allOpenExceptNano": false
   },
+  "localPro": {
+    "status": "OPEN",
+    "sha256": null,
+    "notes": "LOCAL_PRO_UNAVAILABLE:OFFLINE_AND_ABSENT",
+    "observation": null
+  },
   "coverage": {
     "required": 16,
     "implemented": 9,
@@ -87,10 +94,10 @@
       "AI-UR-004",
       "AI-UR-005",
       "AI-UR-006",
+      "AI-UR-016",
       "AI-UR-007",
       "AI-UR-011",
-      "AI-UR-013",
-      "AI-UR-016"
+      "AI-UR-013"
     ],
     "offline_ids": [
       "AI-UR-001",
@@ -215,78 +222,6 @@
       }
     },
     {
-      "task_id": "AI-UR-007",
-      "category": "deep_web_research",
-      "passed": true,
-      "local": false,
-      "cloud_only": false,
-      "notes": "Deep Research COMPLETE: decompose→discover→fetch→follow-up→evidence graph; consent-gated; no silent cloud.",
-      "evidence": {
-        "sourcesRead": 5,
-        "citations": 5,
-        "contradictions": 6,
-        "fabricatedRejected": [
-          "https://invented.example.invalid/not-a-real-paper"
-        ],
-        "deniedWithoutConsent": true,
-        "searchTerms": [
-          "what",
-          "waike",
-          "orange",
-          "dock",
-          "token",
-          "versus",
-          "ofdm"
-        ],
-        "followUps": [
-          "what versus"
-        ],
-        "evidenceGraph": 5,
-        "discoveredNotOnlySeed": true,
-        "completeness": "COMPLETE"
-      }
-    },
-    {
-      "task_id": "AI-UR-011",
-      "category": "vision_screen",
-      "passed": true,
-      "local": true,
-      "cloud_only": false,
-      "notes": "PARTIAL: explicit share + permission + OCR+layout heuristics (WAIKE/compiler/office/UI). No background capture. Not a neural VLM.",
-      "evidence": {
-        "deniedNoShare": "EXPLICIT_SHARE_REQUIRED",
-        "deniedNoPerm": "denied",
-        "waike": "WAIKE screen: Click the button \"Next\" in region r1. Visible: WAIKE tutor Next lesson: OFDM cyclic prefix",
-        "compiler": "Compiler diagnostic: compiler error TS2345 Argument of type string",
-        "office": "Document/office summary: Lab report abstract OFDM cyclic prefix absorbs delay spread",
-        "control": "Control role=button name=\"Save\" at (17,20)",
-        "pixelUnderstanding": true,
-        "ocrUsed": true,
-        "stack": "ocr_layout_heuristics",
-        "completeness": "PARTIAL",
-        "neuralVlm": false,
-        "backgroundForbidden": true
-      }
-    },
-    {
-      "task_id": "AI-UR-013",
-      "category": "coding_agent_pr",
-      "passed": true,
-      "local": true,
-      "cloud_only": false,
-      "notes": "Sandbox branch + tests + DRAFT_PR.json. Live GitHub DRAFT PR not opened this run → PARTIAL.",
-      "evidence": {
-        "branch": "agent/ai-ur-013-fix-add-mstjyhbz",
-        "commit": "2e3f5e59b68122baeccede911ce37cda7169fa36",
-        "tests_passed": true,
-        "mainUnchanged": true,
-        "diffOnlyRejected": true,
-        "pr_url": null,
-        "completeness": "PARTIAL",
-        "remote_pushed": false
-      }
-    },
-    {
       "task_id": "AI-UR-016",
       "category": "local_fast_pro_weights",
       "passed": true,
@@ -364,8 +299,132 @@
         ],
         "localPro": "OPEN"
       }
+    },
+    {
+      "task_id": "AI-UR-007",
+      "category": "deep_web_research",
+      "passed": true,
+      "local": false,
+      "cloud_only": false,
+      "notes": "Deep Research COMPLETE: live discovery (live_web)→rank→fetch→follow-up→claim-source graph (8 read). Local synthesis. No cloud LLM.",
+      "evidence": {
+        "discoveryMode": "live_web",
+        "sourcesRead": 8,
+        "citations": 8,
+        "claimSourceGraph": 8,
+        "followUps": [
+          "what_evidence contradiction"
+        ],
+        "fabricatedRejected": [
+          "https://invented.example.invalid/not-a-real-paper"
+        ],
+        "cancelled": true,
+        "completeness": "COMPLETE"
+      }
+    },
+    {
+      "task_id": "AI-UR-011",
+      "category": "vision_screen",
+      "passed": true,
+      "local": true,
+      "cloud_only": false,
+      "notes": "PARTIAL: OCR+layout heuristics on explicit shares (WAIKE/compiler/office/game/UI). Redaction. No background surveillance. Not a neural VLM → not COMPLETE.",
+      "evidence": {
+        "tesseract": true,
+        "neuralVlm": false,
+        "waike": {
+          "stack": "ocr_layout_heuristics",
+          "ocrUsed": true,
+          "beyondOcrOnly": true,
+          "completeness": "PARTIAL",
+          "description": "WAIKE screen: Click the button \"Next\" in region r1. Visible: WAIKE tutor Next lesson: OFDM cyclic prefix"
+        },
+        "compiler": "Compiler diagnostic: compiler error TS2345 Argument of type string",
+        "office": "Document/office summary: Lab report abstract OFDM cyclic prefix absorbs delay spread",
+        "game": "Game HUD: Score 1200 HP 80 Fire · Score 1200 HP 80 Fire. Tap Fire control at (17,76)",
+        "ui": "Control role=button name=\"Save\" at (17,20)",
+        "backgroundForbidden": true
+      }
+    },
+    {
+      "task_id": "AI-UR-013",
+      "category": "coding_agent_pr",
+      "passed": true,
+      "local": true,
+      "cloud_only": false,
+      "notes": "CI digital gate PASS: local allowlist/sandbox DRAFT semantics + recorded live sandbox DRAFT PR https://github.com/gunnchOS3k/gunnchai-ai-ur-013-sandbox/pull/2 (RECORDED_LIVE_PR_ARTIFACT_OK_GH_UNAVAILABLE). Live open this run optional supplemental.",
+      "evidence": {
+        "mode": "ci_digital_gate_plus_recorded_live_pr",
+        "branch": "agent/ai-ur-013-fix-add-mstjz3go",
+        "commit": "0d71a201a8a07f24de8763db12e05f6df28c3bf6",
+        "pr_url": "https://github.com/gunnchOS3k/gunnchai-ai-ur-013-sandbox/pull/2",
+        "pr_number": 2,
+        "remote_pushed": false,
+        "completeness": "COMPLETE",
+        "mainUnchanged": true,
+        "diffOnlyRejected": true,
+        "recorded_live_pr": {
+          "ok": true,
+          "pr_url": "https://github.com/gunnchOS3k/gunnchai-ai-ur-013-sandbox/pull/2",
+          "gh_confirmed": false,
+          "notes": "RECORDED_LIVE_PR_ARTIFACT_OK_GH_UNAVAILABLE"
+        }
+      }
     }
   ],
+  "p1": {
+    "research": {
+      "discoveryMode": "live_web",
+      "sourcesRead": 8,
+      "citations": 8,
+      "claimSourceGraph": 8,
+      "followUps": [
+        "what_evidence contradiction"
+      ],
+      "fabricatedRejected": [
+        "https://invented.example.invalid/not-a-real-paper"
+      ],
+      "cancelled": true,
+      "completeness": "COMPLETE"
+    },
+    "vision": {
+      "tesseract": true,
+      "neuralVlm": false,
+      "waike": {
+        "stack": "ocr_layout_heuristics",
+        "ocrUsed": true,
+        "beyondOcrOnly": true,
+        "completeness": "PARTIAL",
+        "description": "WAIKE screen: Click the button \"Next\" in region r1. Visible: WAIKE tutor Next lesson: OFDM cyclic prefix"
+      },
+      "compiler": "Compiler diagnostic: compiler error TS2345 Argument of type string",
+      "office": "Document/office summary: Lab report abstract OFDM cyclic prefix absorbs delay spread",
+      "game": "Game HUD: Score 1200 HP 80 Fire · Score 1200 HP 80 Fire. Tap Fire control at (17,76)",
+      "ui": "Control role=button name=\"Save\" at (17,20)",
+      "backgroundForbidden": true
+    },
+    "coding": {
+      "mode": "ci_digital_gate_plus_recorded_live_pr",
+      "branch": "agent/ai-ur-013-fix-add-mstjz3go",
+      "commit": "0d71a201a8a07f24de8763db12e05f6df28c3bf6",
+      "pr_url": "https://github.com/gunnchOS3k/gunnchai-ai-ur-013-sandbox/pull/2",
+      "pr_number": 2,
+      "remote_pushed": false,
+      "completeness": "COMPLETE",
+      "mainUnchanged": true,
+      "diffOnlyRejected": true,
+      "recorded_live_pr": {
+        "ok": true,
+        "pr_url": "https://github.com/gunnchOS3k/gunnchai-ai-ur-013-sandbox/pull/2",
+        "gh_confirmed": false,
+        "notes": "RECORDED_LIVE_PR_ARTIFACT_OK_GH_UNAVAILABLE"
+      }
+    },
+    "voice": {
+      "status": "HELD_FOR_AI_004",
+      "notes": "AI-UR-010 realtime voice held — capacity after P1 reserved for AI-004."
+    }
+  },
   "stubChallengeFailures": [],
   "next_packet": [
     "AI-UR-011 neural VLM for vision COMPLETE (OCR heuristics remain PARTIAL)",
@@ -377,5 +436,51 @@
     "AI-UR-015 companion chrome pixels",
     "LOCAL_PRO hashed HOST_OBSERVED quality gate"
   ],
-  "allImplementedPassed": true
+  "remaining_open": [
+    "AI-UR-008 canvas_cowrite_ui",
+    "AI-UR-009 custom_agents",
+    "AI-UR-010 voice_realtime",
+    "AI-UR-012 computer_use",
+    "AI-UR-014 audio_overview",
+    "AI-UR-015 companion_ux",
+    "LOCAL_PRO hashed inference (still OPEN/ABSENT)"
+  ],
+  "allImplementedPassed": true,
+  "eval_summary": {
+    "research_complete": true,
+    "vision_partial": true,
+    "vision_neural_vlm": false,
+    "coding_live_draft_pr": true,
+    "local_fast": true,
+    "local_pro": false,
+    "coverage": {
+      "complete": 9,
+      "partial": 1,
+      "open": 6,
+      "complete_ids": [
+        "AI-UR-001",
+        "AI-UR-002",
+        "AI-UR-003",
+        "AI-UR-004",
+        "AI-UR-005",
+        "AI-UR-006",
+        "AI-UR-007",
+        "AI-UR-013",
+        "AI-UR-016"
+      ],
+      "partial_ids": [
+        "AI-UR-011"
+      ],
+      "open_ids": [
+        "AI-UR-008",
+        "AI-UR-009",
+        "AI-UR-010",
+        "AI-UR-012",
+        "AI-UR-014",
+        "AI-UR-015"
+      ]
+    },
+    "HUMAN_E6": false,
+    "FRONTIER_PARITY": false
+  }
 }

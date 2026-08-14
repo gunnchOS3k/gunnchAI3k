@@ -1,13 +1,12 @@
-# AI-USER-READY next packet (OPEN)
+# AI-USER-READY next packet (OPEN) — after 003 truth remediation
 
-This packet (AI-USER-READY-001) implemented the highest-gap **digitally executable** subset vs accepted main:
+AI-USER-READY-003 status (truth > count):
 
-- cited local research (not live web Deep Research)
-- projects + encrypted memory continuity
-- artifact file outputs (not Canvas UI)
-- Socratic hinting without answer dump
-- tool-auth deny-by-default
-- source-grounded notebook Q&A
+- AI-UR-007 live Deep Research — **COMPLETE** (real search discovery, follow-up, claim-source graph)
+- AI-UR-011 OCR + layout heuristics — **PARTIAL** (not a neural VLM; semantic non-text still OPEN)
+- AI-UR-013 allowlisted sandbox → actual GitHub DRAFT PR — **COMPLETE**
+- Local Pro hashed Qwen2.5-1.5B candidate — **OPEN** (HOST_OBSERVED gate incomplete)
+- Matrix: **9 COMPLETE / 1 PARTIAL / 6 OPEN**
 
 Keep false:
 
@@ -15,21 +14,17 @@ Keep false:
 - `GUNNCHAI_APP_PRODUCT_COMPLETE`
 - `GUNNCHAI_FRONTIER_PRODUCT_PARITY`
 
-SmolLM2-135M Q4_K_M 512-ctx remains **Nano fallback only**. Local Fast/Pro GGUF bytes are **ABSENT / OPEN**.
-
-## Remaining OPEN
+## Remaining OPEN / PARTIAL carry (AI-004+)
 
 | ID | Gap |
 |---|---|
-| AI-UR-007 | Live consent-gated Deep Research (multi-step web, live URLs) |
+| AI-UR-011 | PARTIAL → COMPLETE needs real multimodal VLM (weights/provider), not OCR keywords |
 | AI-UR-008 | Canvas / cowrite UI (pixels) |
 | AI-UR-009 | Custom Gems / GPTs / skills store |
-| AI-UR-010 | Voice realtime |
-| AI-UR-011 | Vision / screen understanding |
+| AI-UR-010 | Voice realtime (natural conversation, not STT→TTS only) |
 | AI-UR-012 | Computer-use GUI loop |
-| AI-UR-013 | Copilot-class coding agent → draft PR |
 | AI-UR-014 | NotebookLM-class audio overview |
 | AI-UR-015 | Companion chrome pixel proof |
-| AI-UR-016 | Download-on-demand Local Fast/Pro GGUFs with real SHA256 |
+| Local Pro | Hashed bytes + HOST_OBSERVED inference + quality |
 
-Do not mega-PR the rest of the AI charter into this branch.
+Do not mega-PR the rest of the AI charter into this branch. Do not start AI-004 from this remediation.

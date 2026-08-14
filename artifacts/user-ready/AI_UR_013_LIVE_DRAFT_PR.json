@@ -1,0 +1,15 @@
+{
+  "schema": "gunnchai.ai_ur_013_live_draft_pr.v1",
+  "packet": "AI-USER-READY-003",
+  "sandbox_repo": "gunnchOS3k/gunnchai-ai-ur-013-sandbox",
+  "pr_url": "https://github.com/gunnchOS3k/gunnchai-ai-ur-013-sandbox/pull/2",
+  "pr_number": 2,
+  "prior_draft_prs": [
+    "https://github.com/gunnchOS3k/gunnchai-ai-ur-013-sandbox/pull/1"
+  ],
+  "isDraft": true,
+  "merge": false,
+  "force_push": false,
+  "push_main": false,
+  "notes": "Live GitHub DRAFT PR opened by coding agent against allowlisted sandbox only. Never merge/force/main/production."
+}
