@@ -1,12 +1,12 @@
 {
-  "schema": "gunnchai.user_ready_001.v1",
-  "packet": "AI-USER-READY-001",
-  "generatedAt": "2026-08-13T21:59:23.449Z",
+  "schema": "gunnchai.user_ready_002.v1",
+  "packet": "AI-USER-READY-002",
+  "generatedAt": "2026-08-13T21:59:32.488Z",
   "tokens": {
     "GUNNCHAI_APP_PRODUCT_COMPLETE": false,
     "GUNNCHAI_FRONTIER_PRODUCT_PARITY": false,
     "HUMAN_E6": false,
-    "AI_USER_READY_002_DIGITAL_PASS": false,
+    "AI_USER_READY_002_DIGITAL_PASS": true,
     "AI_USER_READY_001_DIGITAL_PASS": true,
     "NANO_FALLBACK_ONLY": true,
     "BETTER_THAN_CHATGPT": false,
@@ -60,7 +60,7 @@
   "coverage": {
     "required": 16,
     "implemented": 7,
-    "runtime": 6,
+    "runtime": 10,
     "offline": 7,
     "cloud_only": 0,
     "cloud_consent": 4,
@@ -83,7 +83,11 @@
       "AI-UR-003",
       "AI-UR-004",
       "AI-UR-005",
-      "AI-UR-006"
+      "AI-UR-006",
+      "AI-UR-007",
+      "AI-UR-011",
+      "AI-UR-013",
+      "AI-UR-016"
     ],
     "offline_ids": [
       "AI-UR-001",
@@ -162,7 +166,7 @@
       "cloud_only": false,
       "notes": "DOCX + code artifacts with targeted edit versions. Canvas UI OPEN.",
       "evidence": {
-        "docx": "/var/folders/dp/z5frf3m511jcdpdf8v878v8h0000gn/T/gunnchai-ur001-k6B7eC/artifacts/lab_report.docx",
+        "docx": "/var/folders/dp/z5frf3m511jcdpdf8v878v8h0000gn/T/gunnchai-ur001-jAF0Aq/artifacts/lab_report.docx",
         "versions": 2,
         "codeExists": true
       }
@@ -205,6 +209,153 @@
         "grounded": true,
         "refused": true
       }
+    },
+    {
+      "task_id": "AI-UR-007",
+      "category": "deep_web_research",
+      "passed": true,
+      "local": false,
+      "cloud_only": false,
+      "notes": "Deep Research COMPLETE: decompose→discover→fetch→follow-up→evidence graph; consent-gated; no silent cloud.",
+      "evidence": {
+        "sourcesRead": 5,
+        "citations": 5,
+        "contradictions": 6,
+        "fabricatedRejected": [
+          "https://invented.example.invalid/not-a-real-paper"
+        ],
+        "deniedWithoutConsent": true,
+        "searchTerms": [
+          "what",
+          "waike",
+          "orange",
+          "dock",
+          "token",
+          "versus",
+          "ofdm"
+        ],
+        "followUps": [
+          "what versus"
+        ],
+        "evidenceGraph": 5,
+        "discoveredNotOnlySeed": true,
+        "completeness": "COMPLETE"
+      }
+    },
+    {
+      "task_id": "AI-UR-011",
+      "category": "vision_screen",
+      "passed": true,
+      "local": true,
+      "cloud_only": false,
+      "notes": "Explicit share + permission + pixel/UI understanding (WAIKE next action, compiler, office summary, control-by-role). No background capture. Not a frontier VLM.",
+      "evidence": {
+        "deniedNoShare": "EXPLICIT_SHARE_REQUIRED",
+        "deniedNoPerm": "denied",
+        "waike": "WAIKE screen: Click the button \"Start\" in region r1. Visible: WAIKE tutor | Next lesson: OFDM cyclic prefix | Start",
+        "compiler": "Compiler diagnostic: compiler error TS2345",
+        "office": "Document/office summary: Quarterly OFDM lab summary · Cyclic prefix absorbs delay spread",
+        "control": "Control role=button name=\"Save draft\" at (10,50)",
+        "pixelUnderstanding": true,
+        "backgroundForbidden": true
+      }
+    },
+    {
+      "task_id": "AI-UR-013",
+      "category": "coding_agent_pr",
+      "passed": true,
+      "local": true,
+      "cloud_only": false,
+      "notes": "Sandbox branch + tests + DRAFT_PR.json. Live GitHub DRAFT PR not opened this run → PARTIAL.",
+      "evidence": {
+        "branch": "agent/ai-ur-013-fix-add-mss29cpf",
+        "commit": "b3f08669653829fff88b99601ec7574a99246715",
+        "tests_passed": true,
+        "mainUnchanged": true,
+        "diffOnlyRejected": true,
+        "pr_url": null,
+        "completeness": "PARTIAL",
+        "remote_pushed": false
+      }
+    },
+    {
+      "task_id": "AI-UR-016",
+      "category": "local_fast_pro_weights",
+      "passed": true,
+      "local": true,
+      "cloud_only": false,
+      "notes": "LOCAL_FAST direct llama.cpp on 360M Q4_K_M ctx=2048 (HOST_OBSERVED). Nano not used. Quality extras recorded separately.",
+      "evidence": {
+        "sha256": "2fa3f013dcdd7b99f9b237717fa0b12d75bbb89984cc1274be1471a465bac9c2",
+        "bytes": 270590880,
+        "observation": "HOST_OBSERVED",
+        "cases": [
+          {
+            "id": "general",
+            "realInference": true,
+            "usedNano": false,
+            "latencyMs": 1062,
+            "outputChars": 189
+          },
+          {
+            "id": "summarization",
+            "realInference": true,
+            "usedNano": false,
+            "latencyMs": 1035,
+            "outputChars": 112
+          },
+          {
+            "id": "waike",
+            "realInference": true,
+            "usedNano": false,
+            "latencyMs": 705,
+            "outputChars": 146
+          },
+          {
+            "id": "source_grounded",
+            "realInference": true,
+            "usedNano": false,
+            "latencyMs": 1026,
+            "outputChars": 229
+          },
+          {
+            "id": "basic_code",
+            "realInference": true,
+            "usedNano": false,
+            "latencyMs": 608,
+            "outputChars": 38
+          },
+          {
+            "id": "structured_output",
+            "realInference": true,
+            "usedNano": false,
+            "latencyMs": 841,
+            "outputChars": 26
+          },
+          {
+            "id": "hallucination_resistance",
+            "realInference": true,
+            "usedNano": false,
+            "latencyMs": 938,
+            "outputChars": 272
+          },
+          {
+            "id": "refusal_permission",
+            "realInference": true,
+            "usedNano": false,
+            "latencyMs": 825,
+            "outputChars": 182
+          },
+          {
+            "id": "context_retention",
+            "realInference": true,
+            "usedNano": false,
+            "latencyMs": 702,
+            "outputChars": 159
+          }
+        ],
+        "localPro": "OPEN"
+      }
     }
   ],
   "stubChallengeFailures": [],
@@ -217,6 +368,5 @@
     "AI-UR-015 companion chrome pixels",
     "LOCAL_PRO hashed GGUF + real inference if a pinned SHA-256 is selected"
   ],
-  "allImplementedPassed": true,
-  "notes": "Packet 001 evaluates AI-UR-001..006 only. Local Fast / Deep Research / vision / coding-agent belong to 002."
+  "allImplementedPassed": true
 }

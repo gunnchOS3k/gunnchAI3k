@@ -1,0 +1,59 @@
+{
+  "schema": "gunnchai.local_model_catalog.v1",
+  "packet": "AI-USER-READY-002",
+  "notes": "Metadata only. GGUF bytes are gitignored. SmolLM2-135M is Nano fallback only — never Fast/Pro.",
+  "models": [
+    {
+      "id": "smollm2-135m-instruct-q4_k_m",
+      "role": "NANO_LOCAL",
+      "displayName": "SmolLM2-135M-Instruct",
+      "version": "0.1.0-135m-q4_k_m",
+      "license": "Apache-2.0",
+      "source": "https://huggingface.co/HuggingFaceTB/SmolLM2-135M-Instruct",
+      "ggufSource": "https://huggingface.co/bartowski/SmolLM2-135M-Instruct-GGUF",
+      "downloadUrl": "https://huggingface.co/bartowski/SmolLM2-135M-Instruct-GGUF/resolve/main/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+      "filename": "SmolLM2-135M-Instruct-Q4_K_M.gguf",
+      "sha256": "2e8040ceae7815abe0dcb3540b9995eaa1fa0d2ca9e797d0a635ae4433c68c2d",
+      "bytes": 105454432,
+      "quant": "Q4_K_M",
+      "contextTokens": 512,
+      "isNanoFallbackOnly": true,
+      "minBytes": 50000000
+    },
+    {
+      "id": "local-fast-smollm2-360m",
+      "role": "LOCAL_FAST",
+      "displayName": "SmolLM2-360M-Instruct",
+      "version": "0.1.0-360m-q4_k_m",
+      "license": "Apache-2.0",
+      "source": "https://huggingface.co/HuggingFaceTB/SmolLM2-360M-Instruct",
+      "ggufSource": "https://huggingface.co/bartowski/SmolLM2-360M-Instruct-GGUF",
+      "downloadUrl": "https://huggingface.co/bartowski/SmolLM2-360M-Instruct-GGUF/resolve/main/SmolLM2-360M-Instruct-Q4_K_M.gguf",
+      "filename": "SmolLM2-360M-Instruct-Q4_K_M.gguf",
+      "sha256": "2fa3f013dcdd7b99f9b237717fa0b12d75bbb89984cc1274be1471a465bac9c2",
+      "bytes": 270590880,
+      "quant": "Q4_K_M",
+      "contextTokens": 2048,
+      "isNanoFallbackOnly": false,
+      "minBytes": 200000000
+    },
+    {
+      "id": "local-pro-qwen2-1_5b",
+      "role": "LOCAL_PRO",
+      "displayName": "Qwen2-1.5B-Instruct",
+      "version": "0.1.0-candidate",
+      "license": "Apache-2.0",
+      "source": "https://huggingface.co/Qwen/Qwen2-1.5B-Instruct",
+      "ggufSource": null,
+      "downloadUrl": null,
+      "filename": null,
+      "sha256": null,
+      "bytes": null,
+      "quant": "Q4_K_M",
+      "contextTokens": 4096,
+      "isNanoFallbackOnly": false,
+      "minBytes": 800000000,
+      "notes": "Apache-2.0 Pro candidate. No pinned hashed GGUF this packet — OPEN. Will not download without a SHA-256."
+    }
+  ]
+}

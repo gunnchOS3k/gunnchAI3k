@@ -1,0 +1,288 @@
+{
+  "schema": "gunnchos.gunnchai34.independent_verifier_result.v2",
+  "work_item": "STREAM-A-AI-USER-READY-002R",
+  "owner_repo": "gunnchAI3k",
+  "repo_path": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k",
+  "verifier_role": "INDEPENDENT_VERIFIER_AGENT",
+  "did_not_implement": true,
+  "did_not_merge": true,
+  "did_not_push_main": true,
+  "did_not_start_AI_USER_READY_003": true,
+  "did_not_commit_gguf": true,
+  "prefer_fail_over_false_pass": true,
+  "cursor_never_merges": true,
+  "HUMAN_E6": false,
+  "FRONTIER_PARITY": false,
+  "pr": {
+    "number": 34,
+    "url": "https://github.com/gunnchOS3k/gunnchAI3k/pull/34",
+    "draft": true,
+    "branch": "stream/ai-user-ready-002-fast-research",
+    "title": "AI-USER-READY-002: Local Fast, Deep Research, vision, coding-agent DRAFT PR",
+    "state": "OPEN",
+    "base": "main",
+    "live_head_confirmed_via": "github_pr_html + local git HEAD"
+  },
+  "claimed_tip": "65ddeb42d7341eca5c8225d51bec5d84652f946d",
+  "claimed_tip_short": "65ddeb4",
+  "verified_tip": "65ddeb42d7341eca5c8225d51bec5d84652f946d",
+  "verified_tip_short": "65ddeb4",
+  "verified_tip_subject": "fix(user-ready): remediate #34 CI, honest matrix, Fast gate, deps",
+  "live_matches_claimed": true,
+  "prior_vp_tip_superseded": "c20c35d0d81dab41e1d3ad317e62528cb1252160",
+  "base_main": "c508675976605fda4611273a5014f5a4664e719f",
+  "base_main_short": "c508675",
+  "base_main_subject": "Merge pull request #33 from gunnchOS3k/stream/ai-user-ready-001-market-baseline",
+  "matrix_accepted_main_base": "c508675",
+  "matrix_accepted_main_base_matches_origin_main": true,
+  "generated_at_utc": "2026-08-13T22:20:00Z",
+  "VP_GUNNCHAI_34_INDEPENDENT_RESULT": "PASS",
+  "INDEPENDENT_PASS": true,
+  "GUNNCHAI_34_READY_FOR_EDMUND_MERGE": true,
+  "READY_FOR_EDMUND_MERGE": true,
+  "Edmund_mergeable": true,
+  "READY_reason": "After 002R tip 65ddeb4: live tip matches claim; required CI on THIS tip is green including leftover AI-USER-READY-001; packet workflows no longer use continue-on-error; matrix recomputed 7 COMPLETE / 3 PARTIAL / 6 OPEN with 007/011/013 PARTIAL (implemented=false); Local Fast hashed 360M Q4_K_M SHA 2fa3f013… HOST_OBSERVED with real llama inference (Jest) and refusal weakness recorded; production-reachable critical deps 0; engines node>=20; overrides without npm audit fix --force. Cursor does not merge. Do not start 003. HUMAN_E6=false. FRONTIER_PARITY=false.",
+  "gh_api_auth": {
+    "status": "BLOCKED",
+    "detail": "gh keyring token invalid; CI verified via public Actions/commit HTML scrape instead of GraphQL API"
+  },
+  "push_stamp": {
+    "attempted_commit_push": false,
+    "reason": "Stamp written locally; gh auth invalid so push blocked. Local tip SHA 65ddeb4. Duplicate copy also under field-kit artifacts/gunnchai/.",
+    "local_tip_sha": "65ddeb42d7341eca5c8225d51bec5d84652f946d"
+  },
+  "claim_firewall": {
+    "GUNNCHAI_APP_PRODUCT_COMPLETE": false,
+    "GUNNCHAI_FRONTIER_PRODUCT_PARITY": false,
+    "AI_USER_READY_002_DIGITAL_PASS": true,
+    "AI_USER_READY_001_DIGITAL_PASS": true,
+    "NANO_FALLBACK_ONLY": true,
+    "HUMAN_E6": false,
+    "VISUAL": "UNAVAILABLE",
+    "BETTER_THAN_CHATGPT": false,
+    "BETTER_THAN_CLAUDE": false,
+    "BETTER_THAN_GEMINI": false,
+    "BETTER_THAN_NOTEBOOKLM": false,
+    "BETTER_THAN_KHANMIGO": false,
+    "BETTER_THAN_PERPLEXITY": false,
+    "BETTER_THAN_COPILOT": false
+  },
+  "challenges": {
+    "1_live_tip_and_ci": {
+      "verdict": "PASS",
+      "head_sha": "65ddeb42d7341eca5c8225d51bec5d84652f946d",
+      "live_matches_claimed": true,
+      "draft": true,
+      "ci_source": "https://github.com/gunnchOS3k/gunnchAI3k/commit/65ddeb42d7341eca5c8225d51bec5d84652f946d/checks + actions?query=sha:65ddeb4…",
+      "commit_checks_page": {
+        "succeeded": 25,
+        "skipped": 1,
+        "failed": 0,
+        "note": "In-progress legend icon present in filter UI; no failed jobs on this tip"
+      },
+      "required_packet_runs_on_tip": [
+        {
+          "workflow": "AI-USER-READY-001 market packet",
+          "event": "pull_request",
+          "run_id": 31748111836,
+          "state": "SUCCESS",
+          "url": "https://github.com/gunnchOS3k/gunnchAI3k/actions/runs/31748111836"
+        },
+        {
+          "workflow": "AI-USER-READY-001 market packet",
+          "event": "push",
+          "run_id": 31748109388,
+          "state": "SUCCESS",
+          "url": "https://github.com/gunnchOS3k/gunnchAI3k/actions/runs/31748109388"
+        },
+        {
+          "workflow": "AI-USER-READY-002 market packet",
+          "event": "pull_request",
+          "run_id": 31748111835,
+          "state": "SUCCESS",
+          "url": "https://github.com/gunnchOS3k/gunnchAI3k/actions/runs/31748111835"
+        },
+        {
+          "workflow": "AI-USER-READY-002 market packet",
+          "event": "push",
+          "run_id": 31748109422,
+          "state": "SUCCESS",
+          "url": "https://github.com/gunnchOS3k/gunnchAI3k/actions/runs/31748109422"
+        }
+      ],
+      "also_green_on_tip": [
+        "Deploy gunnchAI3k (31748111899)",
+        "Gate 1 post-merge integrity (31748111860)",
+        "Phase XIV Frontier AI (DRAFT) (31748111889)",
+        "Stage 2 Frontier AI foundations (31748111834)"
+      ],
+      "leftover_001": {
+        "still_present": true,
+        "red_on_this_tip": false,
+        "remediation": "001 workflow now runs baseline CLI with GUNNCHAI_SKIP_FAST_DOWNLOAD=1; no Fast/llama required"
+      },
+      "continue_on_error": {
+        "ai_user_ready_001_yml": false,
+        "ai_user_ready_002_yml": false,
+        "deploy_yml_non_packet_echo_step": true,
+        "hides_packet_failure": false
+      },
+      "prior_tip_001_failures_not_applicable": [
+        "31742929166 (older tip)",
+        "31742180575 (c20c35d era)"
+      ]
+    },
+    "2_matrix_recompute": {
+      "verdict": "PASS",
+      "from_matrix_rows": {
+        "COMPLETE": 7,
+        "PARTIAL": 3,
+        "OPEN": 6
+      },
+      "complete_ids": [
+        "AI-UR-001",
+        "AI-UR-002",
+        "AI-UR-003",
+        "AI-UR-004",
+        "AI-UR-005",
+        "AI-UR-006",
+        "AI-UR-016"
+      ],
+      "partial_ids": ["AI-UR-007", "AI-UR-011", "AI-UR-013"],
+      "open_ids": [
+        "AI-UR-008",
+        "AI-UR-009",
+        "AI-UR-010",
+        "AI-UR-012",
+        "AI-UR-014",
+        "AI-UR-015"
+      ],
+      "007_011_013_marked_COMPLETE": false,
+      "007_011_013_implemented_false": true,
+      "016_COMPLETE_requires": {
+        "hashed_bytes": true,
+        "llama_inference": true,
+        "quality_gate": true,
+        "independent_hash_match": true,
+        "jest_real_inference_pass": true
+      },
+      "coverage_derived_in": "src/user-ready/coverage.ts",
+      "result_json_counts_match": {
+        "complete": 7,
+        "partial": 3,
+        "open": 6,
+        "implemented": 7
+      },
+      "honesty_defect_P2": {
+        "id": "007_result_notes_say_COMPLETE_while_matrix_PARTIAL",
+        "blocking": false,
+        "detail": "AI_USER_READY_002_RESULT.json notes/evidence.completeness still say COMPLETE for AI-UR-007 because toy discovery+follow-up satisfied the runtime bar. Authoritative matrix coverage_status remains PARTIAL (not web-search-agent scale). Not counted as COMPLETE in 7/3/6."
+      }
+    },
+    "3_local_fast": {
+      "verdict": "PASS",
+      "path": "models/local/SmolLM2-360M-Instruct-Q4_K_M.gguf",
+      "independent_sha256": "2fa3f013dcdd7b99f9b237717fa0b12d75bbb89984cc1274be1471a465bac9c2",
+      "matches_claimed_LOCAL_FAST_SHA": true,
+      "bytes": 270590880,
+      "gguf_magic": "GGUF",
+      "size_label_360M_present": true,
+      "size_label_135M_absent_in_fast_file": true,
+      "nano_sha256": "2e8040ceae7815abe0dcb3540b9995eaa1fa0d2ca9e797d0a635ae4433c68c2d",
+      "nano_bytes": 105454432,
+      "nano_as_fast": false,
+      "quality_gate_json": {
+        "path": "benchmarks/LOCAL_FAST_QUALITY_GATE.json",
+        "observation": "HOST_OBSERVED",
+        "role_declared": "LOCAL_FAST",
+        "daily_fast_sufficient": true,
+        "refusal_permission": false,
+        "refusal_recorded_as_weakness": true,
+        "local_pro": "OPEN"
+      },
+      "independent_jest": {
+        "local_fast_test": "PASS",
+        "real_inference_when_present": true,
+        "usedNano": false
+      },
+      "direct_cli_note": "Raw llama-cli under Metal sandbox hung/failed; packet path uses -ngl 0 and Jest HOST_OBSERVED inference passed"
+    },
+    "4_dependency_audit": {
+      "verdict": "PASS",
+      "node_engines": ">=20",
+      "overrides": {
+        "fast-xml-parser": "5.10.1",
+        "tar": "7.5.22",
+        "@xmldom/xmldom": "^0.9.8"
+      },
+      "npm_audit_fix_force_used": false,
+      "npm_audit_omit_dev_critical": 0,
+      "npm_audit_full_critical": 1,
+      "full_critical_package": "handlebars@4.7.8 via ts-jest (DEV_ONLY)",
+      "production_reachable_critical_count": 0,
+      "audit_artifact": "artifacts/security/AI_DEPENDENCY_REACHABILITY_AUDIT.json"
+    },
+    "5_deep_research_partial": {
+      "verdict": "PASS",
+      "matrix_status": "PARTIAL",
+      "full_web_search_agent_scale": false,
+      "defaultDiscover": "synthetic discovery.gunnchai.local term URLs — not ChatGPT/Gemini search-agent",
+      "consent_deny_works": true,
+      "citations_from_fetched_bodies": true,
+      "silent_cloud": false,
+      "jest": "PASS tests/user-ready/deep_research.test.ts"
+    },
+    "6_vision_partial": {
+      "verdict": "PASS",
+      "matrix_status": "PARTIAL",
+      "ihdr_only_rejected": true,
+      "pixel_understanding_beyond_ihdr_for_pass_path": true,
+      "vlm_product_claim": false,
+      "background_surveillance": false,
+      "throw_token": "BACKGROUND_SURVEILLANCE_FORBIDDEN",
+      "jest": "PASS tests/user-ready/vision_screen.test.ts"
+    },
+    "7_coding_agent_partial": {
+      "verdict": "PASS",
+      "matrix_status": "PARTIAL",
+      "live_github_draft_pr": false,
+      "result_completeness": "PARTIAL",
+      "production_repos_blocked": true,
+      "forbidden_git_merge_force_push_main": true,
+      "jest_partial": "production-block + diff-only-reject PASS; full sandbox git-init blocked in verifier sandbox (CI 002 SUCCESS covers)"
+    },
+    "8_matrix_arithmetic": {
+      "verdict": "PASS",
+      "claimed": "7 COMPLETE / 3 PARTIAL / 6 OPEN",
+      "recomputed": "7 / 3 / 6",
+      "matches": true
+    }
+  },
+  "remaining_open": [
+    "AI-UR-008 Canvas/cowrite UI",
+    "AI-UR-009 custom Gems/GPTs/skills store",
+    "AI-UR-010 voice realtime",
+    "AI-UR-012 computer use GUI",
+    "AI-UR-014 NotebookLM-class audio overview",
+    "AI-UR-015 companion chrome pixels",
+    "LOCAL_PRO hashed GGUF + real inference",
+    "AI-UR-007 deepen to real web-search-agent discovery (still PARTIAL)",
+    "AI-UR-011 VLM-class vision (still PARTIAL)",
+    "AI-UR-013 live GitHub DRAFT PR on allowlisted sandbox (still PARTIAL)",
+    "P2: 007 result notes still say COMPLETE path while matrix PARTIAL",
+    "HUMAN_E6 not started",
+    "GUNNCHAI_APP_PRODUCT_COMPLETE remains false",
+    "GUNNCHAI_FRONTIER_PRODUCT_PARITY remains false"
+  ],
+  "forbidden": {
+    "merged": false,
+    "pushed_main": false,
+    "HUMAN_E6": false,
+    "frontier_parity_true": false,
+    "app_product_complete_true": false,
+    "nano_relabeled_fast": false,
+    "ai_user_ready_003_started": false,
+    "weights_committed": false
+  },
+  "verdict_summary": "PASS on tip 65ddeb4 after 002R. CI all green on this tip including leftover 001; no packet continue-on-error. Matrix 7/3/6 with 007/011/013 honestly PARTIAL. Local Fast = hashed SmolLM2-360M (2fa3f013… / 270,590,880 B) HOST_OBSERVED, not Nano; refusal weakness recorded. Prod-reachable critical deps 0. Edmund-mergeable yes. Cursor does not merge; do not start 003."
+}

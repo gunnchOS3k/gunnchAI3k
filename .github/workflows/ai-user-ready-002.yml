@@ -1,0 +1,55 @@
+name: AI-USER-READY-002 market packet
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main, 'stream/ai-user-ready-002-fast-research']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ai-user-ready-002-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  market-runtime:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - name: User-ready unit tests (no Fast download required)
+        run: npm run test:user-ready
+        env:
+          GUNNCHAI_SKIP_FAST_DOWNLOAD: "1"
+      - name: Provision llama.cpp (required for Local Fast)
+        run: |
+          set -euo pipefail
+          if command -v llama-cli >/dev/null 2>&1; then
+            echo "llama-cli already on PATH: $(command -v llama-cli)"
+            exit 0
+          fi
+          git clone --depth 1 https://github.com/ggml-org/llama.cpp .llama-cpp-src
+          cmake -S .llama-cpp-src -B .llama-cpp-src/build -DGGML_NATIVE=OFF
+          cmake --build .llama-cpp-src/build --target llama-cli -j "$(nproc)"
+          echo "$PWD/.llama-cpp-src/build/bin" >> "$GITHUB_PATH"
+          test -x .llama-cpp-src/build/bin/llama-cli
+          .llama-cpp-src/build/bin/llama-cli --version || true
+      - name: CLI packet 002 with Fast download + llama.cpp
+        env:
+          GUNNCHAI_FAST_NETWORK_CONSENT: "1"
+        run: npm run user-ready:002
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ai-user-ready-002-result
+          path: artifacts/user-ready/AI_USER_READY_002_RESULT.json
+          if-no-files-found: error
+          retention-days: 14

@@ -1,0 +1,371 @@
+/**
+ * Coding agent → actual GitHub DRAFT PR in an allowlisted sandbox/test repo only.
+ * Never merge, never force-push, never push main, never touch production repos.
+ */
+
+import { execFileSync, spawnSync } from 'node:child_process';
+import * as fs from 'node:fs';
+import * as os from 'node:os';
+import * as path from 'node:path';
+
+export const PRODUCTION_REPO_NAMES = [
+  'gunnchAI3k',
+  'gunnchos-device-os',
+  'gunnchos-7gc-ai-ran-field-kit',
+  'waike-research-ops',
+  'archive-of-life-artifact-world',
+  'beatlink-party',
+  'pedestrian-pursuit',
+  'anime-aggressors',
+];
+
+/** Only these remotes may receive a coding-agent push / DRAFT PR. */
+export const ALLOWLISTED_SANDBOX_REPOS = [
+  'gunnchOS3k/gunnchai-ai-ur-013-sandbox',
+  'gunnchai-ai-ur-013-sandbox',
+];
+
+export interface DraftPrRecord {
+  draft: true;
+  merge: false;
+  force_push: false;
+  push_main: false;
+  base: string;
+  head: string;
+  title: string;
+  body: string;
+  tests_passed: boolean;
+  test_output: string;
+  edited_files: string[];
+  commit: string;
+  remote_pushed: boolean;
+  pr_url: string | null;
+  pr_number: number | null;
+  audit: string[];
+}
+
+export interface CodingAgentResult {
+  ok: boolean;
+  sandbox: string;
+  branch: string;
+  mainUnchanged: boolean;
+  draftPr: DraftPrRecord | null;
+  notes: string;
+  completeness: 'COMPLETE' | 'PARTIAL';
+}
+
+const FORBIDDEN_GIT = [
+  /\bmerge\b/i,
+  /--force/,
+  /-f\b/,
+  /push\s+.*\bmain\b/,
+  /push\s+.*\bmaster\b/,
+];
+
+export function isProductionRepo(cwd: string): boolean {
+  const base = path.basename(path.resolve(cwd));
+  if (PRODUCTION_REPO_NAMES.includes(base)) return true;
+  try {
+    const remote = execFileSync('git', ['remote', 'get-url', 'origin'], {
+      cwd,
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+    }).trim();
+    return PRODUCTION_REPO_NAMES.some((n) => remote.includes(`/${n}`) || remote.endsWith(`:${n}`));
+  } catch {
+    return false;
+  }
+}
+
+export function isAllowlistedSandboxRemote(remoteUrl: string): boolean {
+  return ALLOWLISTED_SANDBOX_REPOS.some(
+    (n) => remoteUrl.includes(n) || remoteUrl.endsWith(`:${n}.git`) || remoteUrl.endsWith(`/${n}.git`),
+  );
+}
+
+export function assertSandboxRepo(cwd: string): void {
+  if (isProductionRepo(cwd)) {
+    throw new Error(`PRODUCTION_REPO_BLOCKED:${path.basename(cwd)}`);
+  }
+}
+
+export function assertSafeGitArgs(args: string[], opts?: { allowPush?: boolean }): void {
+  const joined = args.join(' ');
+  for (const re of FORBIDDEN_GIT) {
+    if (re.test(joined)) {
+      throw new Error(`FORBIDDEN_GIT:${joined}`);
+    }
+  }
+  if (args[0] === 'push' && !opts?.allowPush) {
+    throw new Error('FORBIDDEN_GIT:push');
+  }
+  if (args[0] === 'merge') {
+    throw new Error('FORBIDDEN_GIT:merge');
+  }
+  if (args[0] === 'push' && opts?.allowPush) {
+    // Only allow push of non-main branch refs.
+    if (args.some((a) => a === 'main' || a === 'master' || a.endsWith(':main') || a.endsWith(':master'))) {
+      throw new Error('FORBIDDEN_GIT:push_main');
+    }
+  }
+}
+
+function git(cwd: string, args: string[], opts?: { allowPush?: boolean }): string {
+  assertSafeGitArgs(args, opts);
+  return execFileSync('git', args, { cwd, encoding: 'utf8' }).trim();
+}
+
+export function seedSandboxRepo(root?: string): string {
+  const dir = root ?? fs.mkdtempSync(path.join(os.tmpdir(), 'gunnchai-ai-ur-013-'));
+  fs.mkdirSync(path.join(dir, 'src'), { recursive: true });
+  fs.mkdirSync(path.join(dir, 'test'), { recursive: true });
+  fs.writeFileSync(
+    path.join(dir, 'package.json'),
+    JSON.stringify({ name: 'gunnchai-sandbox-ai-ur-013', private: true, type: 'commonjs' }, null, 2) +
+      '\n',
+  );
+  fs.writeFileSync(
+    path.join(dir, 'src', 'add.js'),
+    'function add(a, b) {\n  return a - b;\n}\nmodule.exports = { add };\n',
+  );
+  fs.writeFileSync(
+    path.join(dir, 'test', 'add.test.js'),
+    `const assert = require('node:assert/strict');
+const { add } = require('../src/add.js');
+assert.equal(add(2, 3), 5);
+console.log('ok');
+`,
+  );
+  fs.writeFileSync(path.join(dir, 'README.md'), '# gunnchai AI-UR-013 sandbox\nAllowlisted test repo only.\n');
+  execFileSync('git', ['init', '-b', 'main'], { cwd: dir, encoding: 'utf8' });
+  execFileSync('git', ['config', 'user.email', 'sandbox@gunnchai.local'], { cwd: dir });
+  execFileSync('git', ['config', 'user.name', 'AI-UR-013 Sandbox'], { cwd: dir });
+  execFileSync('git', ['add', '-A'], { cwd: dir });
+  execFileSync('git', ['commit', '-m', 'seed: broken add() for coding-agent sandbox'], {
+    cwd: dir,
+    encoding: 'utf8',
+  });
+  return dir;
+}
+
+export function runSandboxTests(cwd: string): { passed: boolean; output: string } {
+  try {
+    const output = execFileSync(process.execPath, ['test/add.test.js'], {
+      cwd,
+      encoding: 'utf8',
+    });
+    return { passed: true, output };
+  } catch (err) {
+    const output =
+      err instanceof Error && 'stdout' in err ? String((err as { stdout: string }).stdout) : String(err);
+    return { passed: false, output };
+  }
+}
+
+/**
+ * A proposed-diff-only agent is NOT acceptance. Kept so the self-challenge can fail it.
+ */
+export function proposedDiffOnly(cwd: string): { ok: false; reason: string; diff: string } {
+  const diff = `--- a/src/add.js\n+++ b/src/add.js\n-  return a - b;\n+  return a + b;\n`;
+  fs.writeFileSync(path.join(cwd, 'PROPOSED.diff'), diff);
+  return { ok: false, reason: 'DIFF_ONLY_NOT_A_DRAFT_PR', diff };
+}
+
+function planTask(task: string): string[] {
+  return [
+    `Understand task: ${task}`,
+    'Clone/worktree sandbox (never production)',
+    'Edit source to satisfy failing tests',
+    'Run tests; repair if needed',
+    'Commit on agent branch',
+    'Push allowlisted sandbox remote only',
+    'Open GitHub DRAFT PR; verify main unchanged',
+  ];
+}
+
+export function runCodingAgentDraftPr(
+  sandbox: string,
+  opts?: {
+    task?: string;
+    remoteUrl?: string;
+    openGithubDraftPr?: boolean;
+    githubRepo?: string;
+  },
+): CodingAgentResult {
+  assertSandboxRepo(sandbox);
+  const audit: string[] = [];
+  const task = opts?.task ?? 'fix add() so add(2,3)===5';
+  audit.push(`plan:${planTask(task).join('>')}`);
+
+  const mainBefore = git(sandbox, ['rev-parse', 'main']);
+  const branch = `agent/ai-ur-013-fix-add-${Date.now().toString(36)}`;
+  git(sandbox, ['checkout', '-b', branch]);
+  audit.push(`branch:${branch}`);
+
+  const target = path.join(sandbox, 'src', 'add.js');
+  const before = fs.readFileSync(target, 'utf8');
+  if (!before.includes('return a - b')) {
+    return {
+      ok: false,
+      sandbox,
+      branch,
+      mainUnchanged: true,
+      draftPr: null,
+      notes: 'UNEXPECTED_SEED',
+      completeness: 'PARTIAL',
+    };
+  }
+  fs.writeFileSync(target, 'function add(a, b) {\n  return a + b;\n}\nmodule.exports = { add };\n');
+  audit.push('edit:src/add.js');
+
+  let tests = runSandboxTests(sandbox);
+  if (!tests.passed) {
+    // One repair attempt
+    fs.writeFileSync(target, 'function add(a, b) {\n  return Number(a) + Number(b);\n}\nmodule.exports = { add };\n');
+    audit.push('repair:src/add.js');
+    tests = runSandboxTests(sandbox);
+  }
+  if (!tests.passed) {
+    return {
+      ok: false,
+      sandbox,
+      branch,
+      mainUnchanged: git(sandbox, ['rev-parse', 'main']) === mainBefore,
+      draftPr: null,
+      notes: `TESTS_FAILED:${tests.output}`,
+      completeness: 'PARTIAL',
+    };
+  }
+  audit.push('tests:passed');
+
+  git(sandbox, ['add', 'src/add.js']);
+  git(sandbox, ['commit', '-m', 'fix: add() should add, not subtract']);
+  const head = git(sandbox, ['rev-parse', 'HEAD']);
+  audit.push(`commit:${head.slice(0, 12)}`);
+
+  git(sandbox, ['checkout', 'main']);
+  const mainAfter = git(sandbox, ['rev-parse', 'main']);
+  git(sandbox, ['checkout', branch]);
+
+  let remotePushed = false;
+  let prUrl: string | null = null;
+  let prNumber: number | null = null;
+
+  const remoteUrl = opts?.remoteUrl;
+  const openGh = opts?.openGithubDraftPr === true;
+  if (remoteUrl) {
+    if (!isAllowlistedSandboxRemote(remoteUrl)) {
+      throw new Error(`SANDBOX_REMOTE_NOT_ALLOWLISTED:${remoteUrl}`);
+    }
+    try {
+      execFileSync('git', ['remote', 'remove', 'sandbox'], {
+        cwd: sandbox,
+        encoding: 'utf8',
+        stdio: 'ignore',
+      });
+    } catch {
+      /* no prior remote */
+    }
+    execFileSync('git', ['remote', 'add', 'sandbox', remoteUrl], { cwd: sandbox, encoding: 'utf8' });
+    git(sandbox, ['push', '-u', 'sandbox', `HEAD:${branch}`], { allowPush: true });
+    remotePushed = true;
+    audit.push(`push:sandbox:${branch}`);
+  }
+
+  if (openGh && remotePushed) {
+    const repo = opts?.githubRepo ?? 'gunnchOS3k/gunnchai-ai-ur-013-sandbox';
+    if (!ALLOWLISTED_SANDBOX_REPOS.some((n) => repo === n || repo.endsWith(`/${n}`) || n.endsWith(repo))) {
+      throw new Error(`SANDBOX_REPO_NOT_ALLOWLISTED:${repo}`);
+    }
+    const body = [
+      '## Summary',
+      '- Allowlisted sandbox coding agent fixed `src/add.js` so `add(2,3)===5`.',
+      '- Tests were run in the sandbox and passed.',
+      '- DRAFT only. Merge forbidden. Force-push forbidden. Production repos untouched.',
+      '',
+      '## Test plan',
+      '- [x] `node test/add.test.js`',
+    ].join('\n');
+    const pr = spawnSync(
+      'gh',
+      [
+        'pr',
+        'create',
+        '--repo',
+        repo,
+        '--draft',
+        '--base',
+        'main',
+        '--head',
+        branch,
+        '--title',
+        'fix: add() returns the sum (AI-UR-013 sandbox)',
+        '--body',
+        body,
+      ],
+      { encoding: 'utf8' },
+    );
+    if (pr.status === 0) {
+      prUrl = (pr.stdout || '').trim().split('\n').filter(Boolean).pop() || null;
+      const m = prUrl?.match(/\/pull\/(\d+)/);
+      prNumber = m ? Number(m[1]) : null;
+      audit.push(`draft_pr:${prUrl}`);
+    } else {
+      audit.push(`draft_pr_failed:${pr.stderr || pr.stdout}`);
+    }
+  }
+
+  const record: DraftPrRecord = {
+    draft: true,
+    merge: false,
+    force_push: false,
+    push_main: false,
+    base: 'main',
+    head: branch,
+    title: 'fix: add() returns the sum',
+    body: [
+      '## Summary',
+      '- Sandbox-only coding agent changed `src/add.js` so `add(2,3)===5`.',
+      '- Tests were run in the sandbox and passed.',
+      '- This is a DRAFT PR record. Merge is forbidden. Force-push is forbidden. Push to main is forbidden.',
+      prUrl ? `- Live DRAFT PR: ${prUrl}` : '- Live GitHub DRAFT PR: not opened this run (local artifact only).',
+      '',
+      '## Test plan',
+      '- [x] `node test/add.test.js` in the sandbox',
+    ].join('\n'),
+    tests_passed: true,
+    test_output: tests.output,
+    edited_files: ['src/add.js'],
+    commit: head,
+    remote_pushed: remotePushed,
+    pr_url: prUrl,
+    pr_number: prNumber,
+    audit,
+  };
+  fs.writeFileSync(path.join(sandbox, 'DRAFT_PR.json'), JSON.stringify(record, null, 2) + '\n');
+  fs.writeFileSync(
+    path.join(sandbox, 'DRAFT_PR.md'),
+    `# ${record.title}\n\nDRAFT: true\nMERGE: false\nPR: ${prUrl ?? '(local)'}\n\n${record.body}\n`,
+  );
+
+  const liveComplete = Boolean(prUrl) && remotePushed && mainAfter === mainBefore;
+  return {
+    ok:
+      record.draft === true &&
+      record.merge === false &&
+      record.force_push === false &&
+      record.push_main === false &&
+      record.tests_passed &&
+      mainAfter === mainBefore &&
+      fs.existsSync(path.join(sandbox, 'DRAFT_PR.json')) &&
+      !fs.existsSync(path.join(sandbox, 'PROPOSED.diff')),
+    sandbox,
+    branch,
+    mainUnchanged: mainAfter === mainBefore,
+    draftPr: record,
+    notes: liveComplete
+      ? `Sandbox branch + tests + live GitHub DRAFT PR ${prUrl}. No merge/force-push/main. Production blocked.`
+      : 'Sandbox branch + tests + DRAFT_PR.json. Live GitHub DRAFT PR not opened this run → PARTIAL.',
+    completeness: liveComplete ? 'COMPLETE' : 'PARTIAL',
+  };
+}

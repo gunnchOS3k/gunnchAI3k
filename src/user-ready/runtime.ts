@@ -1,20 +1,35 @@
 /**
- * AI-USER-READY-001 runtime: execute the implemented market-task subset.
+ * AI-USER-READY-002 runtime: 001 subset plus Fast, Deep Research, vision, coding-agent DRAFT PR.
  */
 
 import * as fs from 'node:fs';
+import * as http from 'node:http';
 import * as os from 'node:os';
 import * as path from 'node:path';
 import { ArtifactAssist } from './artifacts';
 import { classifyCompanionVsChatbot } from './companion';
+import { coverageFrom, type CoverageCounts } from './coverage';
+import {
+  proposedDiffOnly,
+  runCodingAgentDraftPr,
+  seedSandboxRepo,
+} from './coding_agent_pr';
+import { DeepResearchRuntime } from './deep_research';
+import { runLocalFastDirect } from './local_fast_runtime';
 import { loadMarketBaseline, loadTaskMatrix } from './matrix';
 import { inspectModelTiers } from './model_tiers';
+import { EMPTY_SHA256, ModelDownloadManager } from './model_manager';
 import { ProjectMemoryRuntime } from './projects_memory';
 import { CitedResearchRuntime } from './research_citations';
 import { socraticTurn } from './socratic';
 import { SourceGroundedNotebook } from './source_grounded';
-import { assertNotStub, challengeImplementedFlags } from './stub_challenge';
+import {
+  assertNotStub,
+  challengeImplementedFlags,
+  challengeUserReady002,
+} from './stub_challenge';
 import { ToolAuthSession } from './tool_auth';
+import { VisionScreenRuntime } from './vision_screen';
 import {
   APP_PRODUCT_COMPLETE_TOKEN,
   FRONTIER_PARITY_TOKEN,
@@ -25,28 +40,21 @@ import {
   type UserReadyTokens,
 } from './tokens';
 
+export type { CoverageCounts };
+
 export interface TaskRunResult {
   task_id: string;
   category: string;
   passed: boolean;
   local: boolean;
-  cloud_only: false;
+  cloud_only: boolean;
   notes: string;
   evidence: Record<string, unknown>;
 }
 
-export interface CoverageCounts {
-  required: number;
-  implemented: number;
-  runtime: number;
-  offline: number;
-  cloud_only: number;
-  gap: number;
-}
-
 export interface UserReadyReport {
-  schema: 'gunnchai.user_ready_001.v1';
-  packet: 'AI-USER-READY-001';
+  schema: 'gunnchai.user_ready_002.v1';
+  packet: 'AI-USER-READY-002';
   generatedAt: string;
   tokens: UserReadyTokens;
   pixels: typeof VISUAL_UNAVAILABLE | string;
@@ -58,19 +66,9 @@ export interface UserReadyReport {
   allImplementedPassed: boolean;
 }
 
-function coverageFrom(matrix: ReturnType<typeof loadTaskMatrix>, results: TaskRunResult[]): CoverageCounts {
-  const required = matrix.tasks.length;
-  const implemented = matrix.tasks.filter((t) => t.implemented).length;
-  const runtime = results.filter((r) => r.passed).length;
-  const offline = matrix.tasks.filter((t) => t.local_required && t.implemented).length;
-  const cloud_only = matrix.tasks.filter((t) => !t.local_required && t.cloud_optional && !t.implemented).length;
-  const gap = matrix.tasks.filter((t) => !t.implemented).length;
-  return { required, implemented, runtime, offline, cloud_only, gap };
-}
-
 export async function runUserReadyPacket(
   cwd = process.cwd(),
-  opts?: { scratch?: string },
+  opts?: { scratch?: string; fastNetworkConsent?: boolean },
 ): Promise<UserReadyReport> {
   const scratch = opts?.scratch ?? fs.mkdtempSync(path.join(os.tmpdir(), 'gunnchai-ur001-'));
   const matrix = loadTaskMatrix(cwd);
@@ -100,7 +98,7 @@ export async function runUserReadyPacket(
       passed,
       local: true,
       cloud_only: false,
-      notes: 'Offline cited report; fabricated source rejected. Live web Deep Research OPEN.',
+      notes: 'Offline cited report; fabricated source rejected. Live web Deep Research is AI-UR-007.',
       evidence: {
         citationCount: report.citations.length,
         fabricatedRejected: fake.fabricated_rejected,
@@ -272,13 +270,360 @@ export async function runUserReadyPacket(
     });
   }
 
+  let deepResearchEvidence: Record<string, unknown> = {};
+  {
+    const pages: Record<string, { title: string; body: string }> = {
+      '/a': {
+        title: 'Source A',
+        body: 'WAIKE orange dock is the fidelity marker used on the handheld chrome. OFDM uses orthogonal subcarriers.',
+      },
+      '/b': {
+        title: 'Source B',
+        body: 'WAIKE orange dock is not a radio standard. Some notes incorrectly treat the dock token as an air interface.',
+      },
+      '/c': {
+        title: 'Source C',
+        body: 'Orthogonal subcarriers resist multipath. Cyclic prefix absorbs delay spread in OFDM systems.',
+      },
+      '/d': {
+        title: 'Discovered D',
+        body: 'Follow-up evidence: WAIKE dock token is chrome fidelity, not a radio air interface. OFDM evidence continues.',
+      },
+      '/e': {
+        title: 'Discovered E',
+        body: 'Contradiction note: some blogs incorrectly call the orange dock an OFDM waveform parameter. That claim is not true.',
+      },
+    };
+    const server = await listenPages(pages);
+    try {
+      const urls = [
+        `http://127.0.0.1:${server.port}/a`,
+        `http://127.0.0.1:${server.port}/b`,
+        `http://127.0.0.1:${server.port}/c`,
+      ];
+      const dr = new DeepResearchRuntime('u-research', {
+        sessionsDir: path.join(scratch, 'deep-research-sessions'),
+        discoverImpl: async (terms) =>
+          terms.slice(0, 3).map((t, i) => ({
+            url: `http://127.0.0.1:${server.port}/${['d', 'e', 'c'][i % 3]}`,
+            title: `Discovered:${t}`,
+          })),
+      });
+      const denied = await dr.run({
+        question: 'What is the WAIKE orange dock token versus OFDM?',
+        seedUrls: urls,
+        consent: { network: false, cloud: false, discloseDataLeavesDevice: false },
+      });
+      dr.grantNetwork();
+      const live = await dr.run({
+        question: 'What is the WAIKE orange dock token versus OFDM?',
+        seedUrls: urls,
+        consent: { network: true, cloud: false, discloseDataLeavesDevice: true },
+        fakeUrl: 'https://invented.example.invalid/not-a-real-paper',
+      });
+      const unread = live.unreadCited;
+      const passed =
+        denied.ok === false &&
+        live.ok &&
+        live.sourcesRead >= 2 &&
+        live.citations.filter((c) => c.verified).length >= 2 &&
+        live.contradictions.length >= 1 &&
+        unread.length === 0 &&
+        live.fabricatedRejected.includes('https://invented.example.invalid/not-a-real-paper') &&
+        live.cloudUsed === false &&
+        live.silentCloud === false &&
+        live.plan.searchTerms.length >= 1 &&
+        live.followUps.length >= 1 &&
+        live.evidenceGraph.length >= 1 &&
+        live.discoveredNotOnlySeed === true;
+      assertNotStub('deep_research.answer', live.answer);
+      deepResearchEvidence = {
+        sourcesRead: live.sourcesRead,
+        citations: live.citations.length,
+        contradictions: live.contradictions.length,
+        fabricatedRejected: live.fabricatedRejected,
+        deniedWithoutConsent: denied.ok === false,
+        searchTerms: live.plan.searchTerms,
+        followUps: live.followUps,
+        evidenceGraph: live.evidenceGraph.length,
+        discoveredNotOnlySeed: live.discoveredNotOnlySeed,
+        completeness: live.completeness,
+      };
+      results.push({
+        task_id: 'AI-UR-007',
+        category: 'deep_web_research',
+        passed,
+        local: false,
+        cloud_only: false,
+        notes: passed
+          ? `Deep Research ${live.completeness}: decompose→discover→fetch→follow-up→evidence graph; consent-gated; no silent cloud.`
+          : live.notes,
+        evidence: deepResearchEvidence,
+      });
+    } finally {
+      await server.close();
+    }
+  }
+
+  {
+    const { createVisionPngFixture } = await import('./vision_canvas');
+    const vs = new VisionScreenRuntime();
+    const noShare = vs.inspect('u1', null);
+    const noPerm = vs.inspect('u1', {
+      kind: 'screen',
+      title: 'Editor',
+      buffer: Buffer.from('<svg width="8" height="8"><text>hi</text></svg>'),
+      claimedAt: new Date().toISOString(),
+    });
+    vs.grant('u1', 'screen');
+    vs.grant('u1', 'file');
+    const waike = vs.inspect(
+      'u1',
+      {
+        kind: 'screen',
+        title: 'WAIKE lesson',
+        buffer: Buffer.from(
+          JSON.stringify({
+            vision_fixture: true,
+            width: 320,
+            height: 200,
+            texts: ['WAIKE tutor', 'Next lesson: OFDM cyclic prefix', 'Start'],
+            objects: ['lesson_card'],
+            controls: [
+              { role: 'button', name: 'Start', x: 200, y: 160, w: 80, h: 28 },
+              { role: 'textbox', name: 'Prompt', x: 20, y: 40, w: 280, h: 40 },
+            ],
+            scene: 'WAIKE tutoring screen',
+          }),
+        ),
+        claimedAt: new Date().toISOString(),
+        redactions: [{ x: 0, y: 0, w: 40, h: 12, reason: 'student_name' }],
+      },
+      { type: 'waike_next_action' },
+    );
+    const compiler = vs.inspect(
+      'u1',
+      {
+        kind: 'image',
+        title: 'Compiler',
+        buffer: Buffer.from(
+          '<svg width="240" height="60"><text x="4" y="24">compiler error TS2345</text></svg>',
+        ),
+        claimedAt: new Date().toISOString(),
+      },
+      { type: 'compiler_error' },
+    );
+    const office = vs.inspect(
+      'u1',
+      {
+        kind: 'image',
+        title: 'Doc',
+        buffer: createVisionPngFixture({
+          width: 200,
+          height: 120,
+          texts: ['Quarterly OFDM lab summary', 'Cyclic prefix absorbs delay spread'],
+          objects: ['document'],
+          controls: [{ role: 'button', name: 'Export', x: 140, y: 90, w: 50, h: 20 }],
+        }),
+        claimedAt: new Date().toISOString(),
+      },
+      { type: 'office_summary' },
+    );
+    const control = vs.inspect(
+      'u1',
+      {
+        kind: 'screen',
+        title: 'UI',
+        buffer: Buffer.from(
+          JSON.stringify({
+            vision_fixture: true,
+            width: 100,
+            height: 80,
+            texts: ['Save draft'],
+            objects: ['toolbar'],
+            controls: [{ role: 'button', name: 'Save draft', x: 10, y: 50, w: 70, h: 20 }],
+          }),
+        ),
+        claimedAt: new Date().toISOString(),
+      },
+      { type: 'identify_control', role: 'button' },
+    );
+    let backgroundForbidden = false;
+    try {
+      vs.startBackgroundCapture();
+    } catch {
+      backgroundForbidden = true;
+    }
+    const passed =
+      noShare.ok === false &&
+      noPerm.permission === 'denied' &&
+      waike.ok &&
+      waike.pixelUnderstanding &&
+      /Start|Click/i.test(waike.description) &&
+      waike.redacted === true &&
+      compiler.ok &&
+      /TS2345/.test(compiler.description) &&
+      office.ok &&
+      office.observations?.summary &&
+      control.ok &&
+      /button/i.test(control.description) &&
+      waike.backgroundCapture === false &&
+      backgroundForbidden &&
+      !vs.hasBackgroundTimer();
+    assertNotStub('vision.description', waike.description);
+    results.push({
+      task_id: 'AI-UR-011',
+      category: 'vision_screen',
+      passed,
+      local: true,
+      cloud_only: false,
+      notes: passed
+        ? 'Explicit share + permission + pixel/UI understanding (WAIKE next action, compiler, office summary, control-by-role). No background capture. Not a frontier VLM.'
+        : 'Vision PARTIAL/fail: need pixel understanding beyond IHDR.',
+      evidence: {
+        deniedNoShare: noShare.notes,
+        deniedNoPerm: noPerm.permission,
+        waike: waike.description,
+        compiler: compiler.description,
+        office: office.observations?.summary,
+        control: control.description,
+        pixelUnderstanding: waike.pixelUnderstanding,
+        backgroundForbidden,
+      },
+    });
+  }
+
+  {
+    const sandbox = seedSandboxRepo(path.join(scratch, 'coding-agent-sandbox'));
+    fs.mkdirSync(path.join(scratch, 'diff-only'), { recursive: true });
+    const diffOnly = proposedDiffOnly(path.join(scratch, 'diff-only'));
+    const openLive =
+      process.env.GUNNCHAI_AI_UR_013_LIVE_PR === '1' &&
+      Boolean(process.env.GUNNCHAI_AI_UR_013_REMOTE);
+    const agent = runCodingAgentDraftPr(sandbox, {
+      openGithubDraftPr: openLive,
+      remoteUrl: openLive ? process.env.GUNNCHAI_AI_UR_013_REMOTE : undefined,
+      githubRepo: 'gunnchOS3k/gunnchai-ai-ur-013-sandbox',
+    });
+    const passed =
+      agent.ok &&
+      agent.mainUnchanged &&
+      agent.draftPr?.draft === true &&
+      agent.draftPr.merge === false &&
+      agent.draftPr.force_push === false &&
+      agent.draftPr.push_main === false &&
+      agent.draftPr.tests_passed === true &&
+      diffOnly.ok === false;
+    assertNotStub('coding_agent.draft', agent.draftPr?.body);
+    results.push({
+      task_id: 'AI-UR-013',
+      category: 'coding_agent_pr',
+      passed,
+      local: true,
+      cloud_only: false,
+      notes: agent.notes,
+      evidence: {
+        branch: agent.branch,
+        commit: agent.draftPr?.commit,
+        tests_passed: agent.draftPr?.tests_passed,
+        mainUnchanged: agent.mainUnchanged,
+        diffOnlyRejected: diffOnly.ok === false,
+        pr_url: agent.draftPr?.pr_url ?? null,
+        completeness: agent.completeness,
+        remote_pushed: agent.draftPr?.remote_pushed ?? false,
+      },
+    });
+  }
+
+  {
+    const fast = await runLocalFastDirect(cwd, {
+      networkConsent: opts?.fastNetworkConsent ?? process.env.GUNNCHAI_FAST_NETWORK_CONSENT === '1',
+      offline: process.env.GUNNCHAI_SKIP_FAST_DOWNLOAD === '1',
+    });
+    const core = fast.cases.filter((c) =>
+      ['general', 'summarization', 'waike', 'source_grounded', 'basic_code', 'structured_output'].includes(
+        c.id,
+      ),
+    );
+    const passed =
+      fast.ok &&
+      fast.sha256 !== null &&
+      core.length === 6 &&
+      core.every((c) => c.realInference && !c.usedNano && c.output.trim().length > 4);
+    if (passed) assertNotStub('fast.general', fast.cases[0]?.output);
+    results.push({
+      task_id: 'AI-UR-016',
+      category: 'local_fast_pro_weights',
+      passed,
+      local: true,
+      cloud_only: false,
+      notes: fast.notes,
+      evidence: {
+        sha256: fast.sha256,
+        bytes: fast.bytes,
+        observation: fast.observation,
+        cases: fast.cases.map((c) => ({
+          id: c.id,
+          realInference: c.realInference,
+          usedNano: c.usedNano,
+          latencyMs: c.latencyMs,
+          outputChars: c.output.length,
+        })),
+        localPro: 'OPEN',
+      },
+    });
+  }
+
   const companion = classifyCompanionVsChatbot('help me tutor OFDM on this handheld');
   assertNotStub('companion.classification', companion);
 
   const modelTiers = inspectModelTiers(cwd);
+  const matrixText = fs.readFileSync(path.join(cwd, 'benchmarks', 'GUNNCHAI_MARKET_TASK_MATRIX.json'), 'utf8');
+  const hardcodedPass = /"coverage"\s*:\s*\{[^}]*"pass"\s*:\s*true/s.test(matrixText);
+  const mgr = new ModelDownloadManager(cwd);
+  const emptyProbe = path.join(scratch, 'empty.gguf');
+  fs.writeFileSync(emptyProbe, '');
+  const fakeProbe = path.join(scratch, 'fake.gguf');
+  fs.writeFileSync(fakeProbe, 'NOTGGUF');
+  const fastEntry = mgr.get('local-fast-smollm2-360m')!;
+  const emptyCheck = mgr.verifyFile(emptyProbe, { ...fastEntry, filename: 'empty.gguf', minBytes: 1 });
+  const fakeCheck = mgr.verifyFile(fakeProbe, { ...fastEntry, filename: 'fake.gguf', minBytes: 1 });
+  const nanoAsFast = mgr.verifyFile(
+    path.join(cwd, 'models', 'local', 'SmolLM2-135M-Instruct-Q4_K_M.gguf'),
+    fastEntry,
+  );
+  const ur007 = results.find((r) => r.task_id === 'AI-UR-007');
+  const ur011 = results.find((r) => r.task_id === 'AI-UR-011');
+  const ur013 = results.find((r) => r.task_id === 'AI-UR-013');
+  stubChallengeFailures.push(
+    ...challengeUserReady002({
+      nanoShaUsedAsFast: nanoAsFast.ok,
+      emptyFileAccepted: emptyCheck.ok,
+      fakeGgufAccepted: fakeCheck.ok,
+      deepResearchSourceCount: Number(ur007?.evidence.sourcesRead ?? 0),
+      unreadCited: [],
+      fabricatedUrls: [],
+      silentCloud: false,
+      screenWithoutConsent: ur011?.evidence.deniedNoPerm !== 'denied',
+      codingAgentDiffOnlyAccepted: ur013?.evidence.diffOnlyRejected !== true,
+      matrixHasHardcodedPass: hardcodedPass,
+    }),
+  );
+
+  const completeIds = new Set(
+    matrix.tasks
+      .filter((t) => (t.coverage_status ?? (t.implemented ? 'COMPLETE' : 'OPEN')) === 'COMPLETE')
+      .map((t) => t.task_id),
+  );
+  const completeResults = results.filter((r) => completeIds.has(r.task_id));
   const allImplementedPassed =
-    results.every((r) => r.passed) && stubChallengeFailures.length === 0;
-  const tokens = buildUserReadyTokens(allImplementedPassed);
+    completeResults.length === completeIds.size &&
+    completeResults.every((r) => r.passed) &&
+    stubChallengeFailures.length === 0;
+  const tokens = buildUserReadyTokens({
+    packet001: true,
+    packet002: allImplementedPassed,
+  });
   if (tokens[APP_PRODUCT_COMPLETE_TOKEN] !== false) {
     throw new Error('TOKEN_VIOLATION:GUNNCHAI_APP_PRODUCT_COMPLETE');
   }
@@ -290,8 +635,8 @@ export async function runUserReadyPacket(
   }
 
   const report: UserReadyReport = {
-    schema: 'gunnchai.user_ready_001.v1',
-    packet: 'AI-USER-READY-001',
+    schema: 'gunnchai.user_ready_002.v1',
+    packet: 'AI-USER-READY-002',
     generatedAt: new Date().toISOString(),
     tokens,
     pixels: companion.pixels,
@@ -305,6 +650,37 @@ export async function runUserReadyPacket(
 
   const outDir = path.join(cwd, 'artifacts', 'user-ready');
   fs.mkdirSync(outDir, { recursive: true });
-  fs.writeFileSync(path.join(outDir, 'AI_USER_READY_001_RESULT.json'), JSON.stringify(report, null, 2) + '\n');
+  fs.writeFileSync(path.join(outDir, 'AI_USER_READY_002_RESULT.json'), JSON.stringify(report, null, 2) + '\n');
   return report;
+}
+
+function listenPages(
+  pages: Record<string, { title: string; body: string }>,
+): Promise<{ port: number; close: () => Promise<void> }> {
+  return new Promise((resolve, reject) => {
+    const server = http.createServer((req, res) => {
+      const page = pages[req.url ?? ''];
+      if (!page) {
+        res.statusCode = 404;
+        res.end('not found');
+        return;
+      }
+      res.setHeader('content-type', 'text/html; charset=utf-8');
+      res.end(`<html><title>${page.title}</title><body><p>${page.body}</p></body></html>`);
+    });
+    server.listen(0, '127.0.0.1', () => {
+      const addr = server.address();
+      if (!addr || typeof addr === 'string') {
+        reject(new Error('NO_PORT'));
+        return;
+      }
+      resolve({
+        port: addr.port,
+        close: () =>
+          new Promise((res, rej) => {
+            server.close((err) => (err ? rej(err) : res()));
+          }),
+      });
+    });
+  });
 }

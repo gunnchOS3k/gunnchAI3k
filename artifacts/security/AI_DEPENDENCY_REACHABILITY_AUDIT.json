@@ -1,0 +1,1252 @@
+{
+  "schema": "gunnchai.ai_dependency_reachability_audit.v1",
+  "generatedAt": "2026-08-13T21:58:20.416Z",
+  "remediation_applied": {
+    "overrides": {
+      "fast-xml-parser": "5.10.1",
+      "tar": "7.5.22",
+      "@xmldom/xmldom": "^0.9.8"
+    },
+    "direct": {
+      "axios": "^1.13.5"
+    },
+    "note": "No npm audit fix --force"
+  },
+  "node_engines": {
+    "node": ">=20"
+  },
+  "node_runtime": "v24.9.0",
+  "npm_audit_omit_dev_summary": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 8,
+      "moderate": 35,
+      "high": 22,
+      "critical": 0,
+      "total": 65
+    },
+    "dependencies": {
+      "prod": 844,
+      "dev": 307,
+      "optional": 96,
+      "peer": 54,
+      "peerOptional": 0,
+      "total": 1272
+    }
+  },
+  "npm_audit_full_summary": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 8,
+      "moderate": 35,
+      "high": 30,
+      "critical": 1,
+      "total": 74
+    },
+    "dependencies": {
+      "prod": 844,
+      "dev": 307,
+      "optional": 96,
+      "peer": 54,
+      "peerOptional": 0,
+      "total": 1272
+    }
+  },
+  "production_reachable_critical_count": 0,
+  "blocker": false,
+  "findings": [
+    {
+      "package": "@babel/core",
+      "version": "<=7.29.0",
+      "path": [
+        "node_modules/@babel/core"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "@babel/core",
+      "exploit_preconditions": "@babel/core: Arbitrary File Read via sourceMappingURL Comment",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "low",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "@discordjs/rest",
+      "version": "0.5.0-dev.1650197025-b94a876 - 2.6.0 || 3.0.0-core-gateway-rl.1762368996-5fa92a1ea - 3.0.0-dev.1744071169-d93a52c1d",
+      "path": [
+        "node_modules/@discordjs/rest"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "@discordjs/rest",
+      "exploit_preconditions": "see npm advisory",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "moderate",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "@jimp/core",
+      "version": "0.16.3-canary.993.1592.0 - 1.6.0",
+      "path": [
+        "node_modules/@jimp/core"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "@jimp/core",
+      "exploit_preconditions": "see npm advisory",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "moderate",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "@jimp/diff",
+      "version": "<=1.6.0",
+      "path": [
+        "node_modules/@jimp/diff"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "@jimp/diff",
+      "exploit_preconditions": "see npm advisory",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "moderate",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "@jimp/js-bmp",
+      "version": "<=1.6.0",
+      "path": [
+        "node_modules/@jimp/js-bmp"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "@jimp/js-bmp",
+      "exploit_preconditions": "see npm advisory",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "moderate",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "@jimp/js-gif",
+      "version": "<=1.6.0",
+      "path": [
+        "node_modules/@jimp/js-gif"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "@jimp/js-gif",
+      "exploit_preconditions": "see npm advisory",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "moderate",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "@jimp/js-jpeg",
+      "version": "<=1.6.0",
+      "path": [
+        "node_modules/@jimp/js-jpeg"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "@jimp/js-jpeg",
+      "exploit_preconditions": "see npm advisory",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "moderate",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "@jimp/js-png",
+      "version": "<=1.6.0",
+      "path": [
+        "node_modules/@jimp/js-png"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "@jimp/js-png",
+      "exploit_preconditions": "see npm advisory",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "moderate",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "@jimp/js-tiff",
+      "version": "<=1.6.0",
+      "path": [
+        "node_modules/@jimp/js-tiff"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "@jimp/js-tiff",
+      "exploit_preconditions": "see npm advisory",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "moderate",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "@jimp/plugin-blur",
+      "version": "1.1.2 - 1.6.0",
+      "path": [
+        "node_modules/@jimp/plugin-blur"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "@jimp/plugin-blur",
+      "exploit_preconditions": "see npm advisory",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "moderate",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "@jimp/plugin-color",
+      "version": "1.0.2--canary.4e85de0.0 - 1.6.0",
+      "path": [
+        "node_modules/@jimp/plugin-color"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "@jimp/plugin-color",
+      "exploit_preconditions": "see npm advisory",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "moderate",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "@jimp/plugin-contain",
+      "version": "1.0.2--canary.4e85de0.0 - 1.6.0",
+      "path": [
+        "node_modules/@jimp/plugin-contain"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "@jimp/plugin-contain",
+      "exploit_preconditions": "see npm advisory",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "moderate",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "@jimp/plugin-cover",
+      "version": "1.0.2--canary.4e85de0.0 - 1.6.0",
+      "path": [
+        "node_modules/@jimp/plugin-cover"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "@jimp/plugin-cover",
+      "exploit_preconditions": "see npm advisory",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "moderate",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "@jimp/plugin-crop",
+      "version": "1.0.2--canary.4e85de0.0 - 1.6.0",
+      "path": [
+        "node_modules/@jimp/plugin-crop"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "@jimp/plugin-crop",
+      "exploit_preconditions": "see npm advisory",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "moderate",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "@jimp/plugin-hash",
+      "version": "<=1.6.0",
+      "path": [
+        "node_modules/@jimp/plugin-hash"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "@jimp/plugin-hash",
+      "exploit_preconditions": "see npm advisory",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "moderate",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "@jimp/plugin-print",
+      "version": "1.0.2--canary.4e85de0.0 - 1.6.0",
+      "path": [
+        "node_modules/@jimp/plugin-print"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "@jimp/plugin-print",
+      "exploit_preconditions": "see npm advisory",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "moderate",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "@jimp/plugin-resize",
+      "version": "1.0.2--canary.4e85de0.0 - 1.6.0",
+      "path": [
+        "node_modules/@jimp/plugin-resize"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "@jimp/plugin-resize",
+      "exploit_preconditions": "see npm advisory",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "moderate",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "@jimp/plugin-rotate",
+      "version": "<=0.3.6-alpha.6 || 1.0.2--canary.4e85de0.0 - 1.6.0",
+      "path": [
+        "node_modules/@jimp/plugin-rotate"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "@jimp/plugin-rotate",
+      "exploit_preconditions": "see npm advisory",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "moderate",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "@jimp/plugin-threshold",
+      "version": "1.0.2--canary.4e85de0.0 - 1.6.0",
+      "path": [
+        "node_modules/@jimp/plugin-threshold"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "@jimp/plugin-threshold",
+      "exploit_preconditions": "see npm advisory",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "moderate",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "@smithy/config-resolver",
+      "version": "<4.4.0",
+      "path": [
+        "node_modules/@smithy/config-resolver"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "@smithy/config-resolver",
+      "exploit_preconditions": "AWS SDK for JavaScript v3 adopted defense in depth enhancement for region parameter value",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "low",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "@tensorflow/tfjs-node",
+      "version": ">=0.1.12",
+      "path": [
+        "node_modules/@tensorflow/tfjs-node"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "@tensorflow/tfjs-node",
+      "exploit_preconditions": "see npm advisory",
+      "fixed_version": "0.1.11",
+      "breaking": true,
+      "remediation": "Update within non-force range if available",
+      "severity": "high",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "@tootallnate/once",
+      "version": "<2.0.1",
+      "path": [
+        "node_modules/@tootallnate/once"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "@tootallnate/once",
+      "exploit_preconditions": "@tootallnate/once vulnerable to Incorrect Control Flow Scoping",
+      "fixed_version": "6.0.1",
+      "breaking": true,
+      "remediation": "Update within non-force range if available",
+      "severity": "low",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "adm-zip",
+      "version": "<0.6.0",
+      "path": [
+        "node_modules/adm-zip"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "adm-zip",
+      "exploit_preconditions": "adm-zip: Crafted ZIP file triggers 4GB memory allocation",
+      "fixed_version": "0.1.11",
+      "breaking": true,
+      "remediation": "Update within non-force range if available",
+      "severity": "high",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "ajv",
+      "version": "<6.14.0 || >=7.0.0-alpha.0 <8.18.0",
+      "path": [
+        "node_modules/ajv",
+        "node_modules/ajv-formats/node_modules/ajv",
+        "node_modules/terser-webpack-plugin/node_modules/ajv",
+        "node_modules/webpack/node_modules/ajv"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "ajv",
+      "exploit_preconditions": "ajv has ReDoS when using `$data` option",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "moderate",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "body-parser",
+      "version": "<=1.20.5 || 2.0.0-beta.1 - 2.0.2",
+      "path": [
+        "node_modules/body-parser"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "body-parser",
+      "exploit_preconditions": "body-parser vulnerable to denial of service when invalid limit value silently disables size enforcement",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "moderate",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "brace-expansion",
+      "version": "<=1.1.17 || 2.0.0 - 2.1.3",
+      "path": [
+        "node_modules/brace-expansion",
+        "node_modules/editorconfig/node_modules/brace-expansion",
+        "node_modules/js-beautify/node_modules/brace-expansion"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "brace-expansion",
+      "exploit_preconditions": "brace-expansion: Zero-step sequence causes process hang and memory exhaustion",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "high",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "css-loader",
+      "version": "0.15.0 - 4.3.0",
+      "path": [
+        "node_modules/css-loader"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "css-loader",
+      "exploit_preconditions": "see npm advisory",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "moderate",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "discord.js",
+      "version": "14.0.0-dev.1640779371.9cdc448 - 14.25.1 || 15.0.0-core-gateway-rl.1762368996-5fa92a1ea - 15.0.0-dev.1744071174-d93a52c1d",
+      "path": [
+        "node_modules/discord.js"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "discord.js",
+      "exploit_preconditions": "see npm advisory",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "moderate",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "editorconfig",
+      "version": "1.0.3 - 1.0.4 || 2.0.0",
+      "path": [
+        "node_modules/editorconfig"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "editorconfig",
+      "exploit_preconditions": "see npm advisory",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "high",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "express",
+      "version": "4.0.0-rc1 - 4.22.1 || 5.0.0-alpha.1 - 5.0.1",
+      "path": [
+        "node_modules/express"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "express",
+      "exploit_preconditions": "see npm advisory",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "high",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "fast-uri",
+      "version": "3.0.0 - 3.1.4",
+      "path": [
+        "node_modules/fast-uri"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "fast-uri",
+      "exploit_preconditions": "fast-uri vulnerable to host confusion via literal backslash authority delimiter",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "high",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "file-type",
+      "version": "13.0.0 - 21.3.0",
+      "path": [
+        "node_modules/file-type"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "file-type",
+      "exploit_preconditions": "file-type affected by infinite loop in ASF parser on malformed input with zero-size sub-header",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "moderate",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "glob",
+      "version": "10.2.0 - 10.4.5",
+      "path": [
+        "node_modules/js-beautify/node_modules/glob"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "glob",
+      "exploit_preconditions": "glob CLI: Command injection via -c/--cmd executes matches with shell:true",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "high",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "http-proxy-agent",
+      "version": "4.0.1",
+      "path": [
+        "node_modules/http-proxy-agent"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "http-proxy-agent",
+      "exploit_preconditions": "see npm advisory",
+      "fixed_version": "6.0.1",
+      "breaking": true,
+      "remediation": "Update within non-force range if available",
+      "severity": "low",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "icss-utils",
+      "version": "<=4.1.1",
+      "path": [
+        "node_modules/icss-utils"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "icss-utils",
+      "exploit_preconditions": "see npm advisory",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "moderate",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "image-size",
+      "version": "*",
+      "path": [
+        "node_modules/image-size"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "image-size",
+      "exploit_preconditions": "image-size: ICNS parser allows denial of service through an infinite loop",
+      "fixed_version": "1.1.5",
+      "breaking": true,
+      "remediation": "Update within non-force range if available",
+      "severity": "high",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "ip-address",
+      "version": "<=10.3.0",
+      "path": [
+        "node_modules/ip-address"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "ip-address",
+      "exploit_preconditions": "ip-address has XSS in Address6 HTML-emitting methods",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "high",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "jimp",
+      "version": "1.0.2--canary.4e85de0.0 - 1.6.0",
+      "path": [
+        "node_modules/jimp"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "jimp",
+      "exploit_preconditions": "see npm advisory",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "moderate",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "js-cookie",
+      "version": "<=3.0.5",
+      "path": [
+        "node_modules/js-cookie"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "js-cookie",
+      "exploit_preconditions": "JavaScript Cookie: Per-instance prototype hijack in assign() enables cookie-attribute injection",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "high",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "jszip",
+      "version": "<=3.7.1",
+      "path": [
+        "node_modules/pptx-parser/node_modules/jszip"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "jszip",
+      "exploit_preconditions": "jszip Vulnerable to Prototype Pollution",
+      "fixed_version": null,
+      "breaking": false,
+      "remediation": "Tracked; no blind npm audit fix --force",
+      "severity": "moderate",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "lodash",
+      "version": "<=4.17.23",
+      "path": [
+        "node_modules/lodash"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "lodash",
+      "exploit_preconditions": "lodash vulnerable to Code Injection via `_.template` imports key names",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "high",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "make-fetch-happen",
+      "version": "8.0.2 - 9.1.0",
+      "path": [
+        "node_modules/make-fetch-happen"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "make-fetch-happen",
+      "exploit_preconditions": "see npm advisory",
+      "fixed_version": "6.0.1",
+      "breaking": true,
+      "remediation": "Update within non-force range if available",
+      "severity": "low",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "minimatch",
+      "version": "<=3.1.3 || 9.0.0 - 9.0.6",
+      "path": [
+        "node_modules/editorconfig/node_modules/minimatch",
+        "node_modules/js-beautify/node_modules/minimatch",
+        "node_modules/minimatch"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "minimatch",
+      "exploit_preconditions": "minimatch has a ReDoS via repeated wildcards with non-matching literal in pattern",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "high",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "mongoose",
+      "version": "8.0.0 - 8.24.0",
+      "path": [
+        "node_modules/mongoose"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "mongoose",
+      "exploit_preconditions": "Mongoose's Improper Sanitization of $nor in sanitizeFilter May Allow NoSQL Injection",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "high",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "nanoid",
+      "version": "4.0.0 - 5.1.15",
+      "path": [
+        "node_modules/nanoid"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "nanoid",
+      "exploit_preconditions": "nanoid: non-secure generators can loop indefinitely with negative size",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "high",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "natural",
+      "version": "6.11.0 - 8.1.0",
+      "path": [
+        "node_modules/natural"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "natural",
+      "exploit_preconditions": "see npm advisory",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "moderate",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "node-gyp",
+      "version": "8.0.0 - 8.4.1",
+      "path": [
+        "node_modules/node-gyp"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "node-gyp",
+      "exploit_preconditions": "see npm advisory",
+      "fixed_version": "6.0.1",
+      "breaking": true,
+      "remediation": "Update within non-force range if available",
+      "severity": "low",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "path-to-regexp",
+      "version": "<0.1.13",
+      "path": [
+        "node_modules/path-to-regexp"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "path-to-regexp",
+      "exploit_preconditions": "path-to-regexp vulnerable to Regular Expression Denial of Service via multiple route parameters",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "high",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "postcss",
+      "version": "<=8.5.22",
+      "path": [
+        "node_modules/postcss"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "postcss",
+      "exploit_preconditions": "PostCSS line return parsing error",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "high",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "postcss-modules-extract-imports",
+      "version": "<=2.0.0",
+      "path": [
+        "node_modules/postcss-modules-extract-imports"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "postcss-modules-extract-imports",
+      "exploit_preconditions": "see npm advisory",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "moderate",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "postcss-modules-local-by-default",
+      "version": "<=4.0.0-rc.4",
+      "path": [
+        "node_modules/postcss-modules-local-by-default"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "postcss-modules-local-by-default",
+      "exploit_preconditions": "see npm advisory",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "moderate",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "postcss-modules-scope",
+      "version": "<=2.2.0",
+      "path": [
+        "node_modules/postcss-modules-scope"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "postcss-modules-scope",
+      "exploit_preconditions": "see npm advisory",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "moderate",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "postcss-modules-values",
+      "version": "<=4.0.0-rc.5",
+      "path": [
+        "node_modules/postcss-modules-values"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "postcss-modules-values",
+      "exploit_preconditions": "see npm advisory",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "moderate",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "pptx-parser",
+      "version": "*",
+      "path": [
+        "node_modules/pptx-parser"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "pptx-parser",
+      "exploit_preconditions": "see npm advisory",
+      "fixed_version": null,
+      "breaking": false,
+      "remediation": "Tracked; no blind npm audit fix --force",
+      "severity": "moderate",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "pptxgenjs",
+      "version": "1.1.5-1 || >=1.1.6",
+      "path": [
+        "node_modules/pptxgenjs"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "pptxgenjs",
+      "exploit_preconditions": "see npm advisory",
+      "fixed_version": "1.1.5",
+      "breaking": true,
+      "remediation": "Update within non-force range if available",
+      "severity": "high",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "qs",
+      "version": "<=6.15.1",
+      "path": [
+        "node_modules/qs"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "qs",
+      "exploit_preconditions": "qs's arrayLimit bypass in comma parsing allows denial of service",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "moderate",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "serialize-javascript",
+      "version": "<=7.0.4",
+      "path": [
+        "node_modules/serialize-javascript"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "serialize-javascript",
+      "exploit_preconditions": "Serialize JavaScript is Vulnerable to RCE via RegExp.flags and Date.prototype.toISOString()",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "high",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "sharp",
+      "version": "<0.35.0",
+      "path": [
+        "node_modules/sharp"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "sharp",
+      "exploit_preconditions": "sharp inherited vulnerabilities in libvips: CVE-2026-33327, CVE-2026-33328, CVE-2026-35590, CVE-2026-35591",
+      "fixed_version": "0.35.3",
+      "breaking": true,
+      "remediation": "Update within non-force range if available",
+      "severity": "high",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "sqlite3",
+      "version": "5.0.3 - 5.1.7",
+      "path": [
+        "node_modules/sqlite3"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "sqlite3",
+      "exploit_preconditions": "see npm advisory",
+      "fixed_version": "6.0.1",
+      "breaking": true,
+      "remediation": "Update within non-force range if available",
+      "severity": "low",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "terser-webpack-plugin",
+      "version": "4.2.1 - 5.3.16",
+      "path": [
+        "node_modules/terser-webpack-plugin"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "terser-webpack-plugin",
+      "exploit_preconditions": "see npm advisory",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "moderate",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "underscore",
+      "version": "<=1.13.7",
+      "path": [
+        "node_modules/underscore"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "underscore",
+      "exploit_preconditions": "Underscore has unlimited recursion in _.flatten and _.isEqual, potential for DoS attack",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "high",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "undici",
+      "version": "<=6.27.0 || 7.0.0 - 7.28.0",
+      "path": [
+        "node_modules/cheerio/node_modules/undici",
+        "node_modules/undici"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "undici",
+      "exploit_preconditions": "Undici has an unbounded decompression chain in HTTP responses on Node.js Fetch API via Content-Encoding leads to resource exhaustion",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "high",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "uuid",
+      "version": "<11.1.1",
+      "path": [
+        "node_modules/uuid"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "uuid",
+      "exploit_preconditions": "uuid: Missing buffer bounds check in v3/v5/v6 when buf is provided",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "moderate",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "webpack",
+      "version": "5.49.0 - 5.104.0",
+      "path": [
+        "node_modules/webpack"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "webpack",
+      "exploit_preconditions": "webpack buildHttp: allowedUris allow-list bypass via URL userinfo (@) leading to build-time SSRF behavior",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "low",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "ws",
+      "version": "8.0.0 - 8.20.1",
+      "path": [
+        "node_modules/ws"
+      ],
+      "dev_only": false,
+      "production_reachable": true,
+      "affected_runtime": "ws",
+      "exploit_preconditions": "ws: Uninitialized memory disclosure",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Update within non-force range if available",
+      "severity": "high",
+      "status": "TRACKED_NONCRITICAL"
+    },
+    {
+      "package": "@typescript-eslint/eslint-plugin",
+      "version": "6.16.0 - 7.5.0",
+      "path": [
+        "node_modules/@typescript-eslint/eslint-plugin"
+      ],
+      "dev_only": true,
+      "production_reachable": false,
+      "affected_runtime": null,
+      "exploit_preconditions": "devDependency only",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Dev-only",
+      "severity": "high",
+      "status": "DEV_ONLY"
+    },
+    {
+      "package": "@typescript-eslint/parser",
+      "version": "6.16.0 - 7.5.0",
+      "path": [
+        "node_modules/@typescript-eslint/parser"
+      ],
+      "dev_only": true,
+      "production_reachable": false,
+      "affected_runtime": null,
+      "exploit_preconditions": "devDependency only",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Dev-only",
+      "severity": "high",
+      "status": "DEV_ONLY"
+    },
+    {
+      "package": "@typescript-eslint/type-utils",
+      "version": "6.16.0 - 7.5.0",
+      "path": [
+        "node_modules/@typescript-eslint/type-utils"
+      ],
+      "dev_only": true,
+      "production_reachable": false,
+      "affected_runtime": null,
+      "exploit_preconditions": "devDependency only",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Dev-only",
+      "severity": "high",
+      "status": "DEV_ONLY"
+    },
+    {
+      "package": "@typescript-eslint/typescript-estree",
+      "version": "6.16.0 - 7.5.0",
+      "path": [
+        "node_modules/@typescript-eslint/typescript-estree"
+      ],
+      "dev_only": true,
+      "production_reachable": false,
+      "affected_runtime": null,
+      "exploit_preconditions": "devDependency only",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Dev-only",
+      "severity": "high",
+      "status": "DEV_ONLY"
+    },
+    {
+      "package": "@typescript-eslint/utils",
+      "version": "6.16.0 - 7.5.0",
+      "path": [
+        "node_modules/@typescript-eslint/utils"
+      ],
+      "dev_only": true,
+      "production_reachable": false,
+      "affected_runtime": null,
+      "exploit_preconditions": "devDependency only",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Dev-only",
+      "severity": "high",
+      "status": "DEV_ONLY"
+    },
+    {
+      "package": "flatted",
+      "version": "<=3.4.1",
+      "path": [
+        "node_modules/flatted"
+      ],
+      "dev_only": true,
+      "production_reachable": false,
+      "affected_runtime": null,
+      "exploit_preconditions": "devDependency only",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Dev-only",
+      "severity": "high",
+      "status": "DEV_ONLY"
+    },
+    {
+      "package": "handlebars",
+      "version": "4.0.0 - 4.7.8",
+      "path": [
+        "node_modules/handlebars"
+      ],
+      "dev_only": true,
+      "production_reachable": false,
+      "affected_runtime": null,
+      "exploit_preconditions": "devDependency only",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Dev-only",
+      "severity": "critical",
+      "status": "DEV_ONLY"
+    },
+    {
+      "package": "js-yaml",
+      "version": "<=3.15.0 || 4.0.0 - 4.3.0",
+      "path": [
+        "node_modules/@istanbuljs/load-nyc-config/node_modules/js-yaml",
+        "node_modules/js-yaml"
+      ],
+      "dev_only": true,
+      "production_reachable": false,
+      "affected_runtime": null,
+      "exploit_preconditions": "devDependency only",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Dev-only",
+      "severity": "high",
+      "status": "DEV_ONLY"
+    },
+    {
+      "package": "picomatch",
+      "version": "<=2.3.1",
+      "path": [
+        "node_modules/picomatch"
+      ],
+      "dev_only": true,
+      "production_reachable": false,
+      "affected_runtime": null,
+      "exploit_preconditions": "devDependency only",
+      "fixed_version": true,
+      "breaking": false,
+      "remediation": "Dev-only",
+      "severity": "high",
+      "status": "DEV_ONLY"
+    }
+  ]
+}
