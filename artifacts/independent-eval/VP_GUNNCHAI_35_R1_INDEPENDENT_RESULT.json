@@ -1,0 +1,156 @@
+{
+  "schema": "gunnchos.gunnchai35.independent_verifier_result.v1",
+  "work_item": "STREAM-C-AI-USER-READY-003-R1",
+  "owner_repo": "gunnchAI3k",
+  "repo_path": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k",
+  "verifier_role": "INDEPENDENT_VERIFIER_AGENT",
+  "did_not_implement": true,
+  "did_not_merge": true,
+  "did_not_push_main": true,
+  "did_not_start_AI_004": true,
+  "did_not_commit_gguf": true,
+  "prefer_fail_over_false_pass": true,
+  "cursor_never_merges": true,
+  "HUMAN_E6": false,
+  "FRONTIER_PARITY": false,
+  "prior_fail_vp": {
+    "file": "artifacts/independent-eval/VP_GUNNCHAI_35_INDEPENDENT_RESULT.json",
+    "verdict": "FAIL",
+    "tip": "06e99d84b70694bae0f7175fdfb82fda3d83bfb8",
+    "retained": true,
+    "is_ancestor_of_current_tip": true
+  },
+  "pr": {
+    "number": 35,
+    "url": "https://github.com/gunnchOS3k/gunnchAI3k/pull/35",
+    "draft": true,
+    "branch": "stream/ai-user-ready-003-research-vision-coding",
+    "state": "OPEN",
+    "base": "main",
+    "mergeable": "MERGEABLE"
+  },
+  "claimed_tip": "89998c206b9126d349c5693392aa27493602cc69",
+  "claimed_tip_short": "89998c2",
+  "verified_tip": "89998c206b9126d349c5693392aa27493602cc69",
+  "verified_tip_short": "89998c2",
+  "verified_tip_subject": "fix(user-ready): green tip CI for #35 without weakening gates",
+  "live_matches_claimed": true,
+  "base_main": "b646ac050cceff297fdf1a25ac270bd7f44636f3",
+  "base_main_short": "b646ac0",
+  "base_is_pr_34_on_main": true,
+  "generated_at_utc": "2026-08-14T22:36:53Z",
+  "VP_GUNNCHAI_35_R1_INDEPENDENT_RESULT": "PASS",
+  "INDEPENDENT_PASS": true,
+  "GUNNCHAI_35_READY_FOR_EDMUND_MERGE": true,
+  "READY_FOR_EDMUND_MERGE": true,
+  "Edmund_mergeable": true,
+  "READY_reason": "After tip 89998c2 CI remediation: live tip matches; prior FAIL tip 06e99d8 retained as ancestor; required market-runtime 001/002/003 + Deploy build all SUCCESS on THIS tip. Tesseract provisioned on 001/002/Deploy; vision tests retained. AI-UR-013 LIVE_PR=0 uses digital gate + recorded allowlisted sandbox DRAFT PR evidence (rejects JSON-only); independent gh api confirms sandbox PR #2 still draft. Matrix 10/0/6; Local Pro OPEN; 007/011 COMPLETE honestly. No continue-on-error on market packets. Cursor does not merge. Do not start AI-004. HUMAN_E6=false. FRONTIER_PARITY=false.",
+  "ci": {
+    "tip_sha": "89998c206b9126d349c5693392aa27493602cc69",
+    "overall": "GREEN",
+    "required": [
+      {
+        "workflow": "AI-USER-READY-001 market packet",
+        "push": "https://github.com/gunnchOS3k/gunnchAI3k/actions/runs/31846654978",
+        "pull_request": "https://github.com/gunnchOS3k/gunnchAI3k/actions/runs/31846657946",
+        "conclusion": "success"
+      },
+      {
+        "workflow": "AI-USER-READY-002 market packet",
+        "push": "https://github.com/gunnchOS3k/gunnchAI3k/actions/runs/31846654974",
+        "pull_request": "https://github.com/gunnchOS3k/gunnchAI3k/actions/runs/31846658080",
+        "conclusion": "success"
+      },
+      {
+        "workflow": "AI-USER-READY-003 market packet",
+        "push": "https://github.com/gunnchOS3k/gunnchAI3k/actions/runs/31846654973",
+        "pull_request": "https://github.com/gunnchOS3k/gunnchAI3k/actions/runs/31846657850",
+        "conclusion": "success"
+      },
+      {
+        "workflow": "Deploy gunnchAI3k / build",
+        "pull_request": "https://github.com/gunnchOS3k/gunnchAI3k/actions/runs/31846657985",
+        "conclusion": "success"
+      }
+    ],
+    "market_packet_continue_on_error": false,
+    "deploy_job_continue_on_error_note": "Only leftover main-only deploy echo step; not on build/tests or market packets"
+  },
+  "matrix": {
+    "COMPLETE": 10,
+    "PARTIAL": 0,
+    "OPEN": 6,
+    "complete_ids": [
+      "AI-UR-001",
+      "AI-UR-002",
+      "AI-UR-003",
+      "AI-UR-004",
+      "AI-UR-005",
+      "AI-UR-006",
+      "AI-UR-007",
+      "AI-UR-011",
+      "AI-UR-013",
+      "AI-UR-016"
+    ],
+    "open_ids": [
+      "AI-UR-008",
+      "AI-UR-009",
+      "AI-UR-010",
+      "AI-UR-012",
+      "AI-UR-014",
+      "AI-UR-015"
+    ],
+    "arithmetic_matches_claim": true
+  },
+  "verdicts": {
+    "AI-UR-007": {
+      "verdict": "COMPLETE",
+      "honest": true,
+      "note": "live_web path + synthetic PARTIAL gate retained; tests PASS"
+    },
+    "AI-UR-011": {
+      "verdict": "COMPLETE",
+      "honest": true,
+      "tesseract_in_001_002_deploy": true,
+      "vision_tests_deleted": false,
+      "ocr_alone_overclaim": false
+    },
+    "AI-UR-013": {
+      "verdict": "COMPLETE",
+      "ci_path": "ci_digital_gate_plus_recorded_live_pr",
+      "json_only_rejected": true,
+      "recorded_evidence": "artifacts/user-ready/AI_UR_013_LIVE_DRAFT_PR.json \u2192 https://github.com/gunnchOS3k/gunnchai-ai-ur-013-sandbox/pull/2",
+      "sandbox_pr_independent_confirm": {
+        "draft": true,
+        "state": "open",
+        "merged": false,
+        "head_sha": "070970b3e834ed90e6ff5758d59304e53e5ae99b"
+      },
+      "production_blocked": true,
+      "caveat": "verifyRecordedLiveDraftPr requests invalid gh field 'merged' so gh_confirmed often false; artifact allowlist+URL gate still required and PR independently confirmed via gh api"
+    },
+    "Local_Pro": {
+      "verdict": "OPEN",
+      "pinned_sha_present": true,
+      "fast_relabeled": false
+    }
+  },
+  "remaining_open": [
+    "AI-UR-008 canvas_cowrite_ui",
+    "AI-UR-009 custom_agents",
+    "AI-UR-010 voice_realtime",
+    "AI-UR-012 computer_use",
+    "AI-UR-014 audio_overview",
+    "AI-UR-015 companion_ux",
+    "LOCAL_PRO hashed HOST_OBSERVED quality gate"
+  ],
+  "local_rechecks": {
+    "jest_007_011_013": "PASS 12/12",
+    "ci_digital_gate": "PASS with recorded sandbox DRAFT PR #2; rejects missing recorded evidence"
+  },
+  "push_stamp": {
+    "attempted_commit_push": true,
+    "reason": "Independent R1 PASS stamp commit+push to DRAFT #35 branch only; product tip 89998c2 unchanged in content; prior FAIL VP retained; no merge; no AI-004.",
+    "stamp_at_utc": "2026-08-14T22:37:48Z"
+  }
+}
