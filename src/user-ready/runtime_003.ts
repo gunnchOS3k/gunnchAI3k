@@ -8,9 +8,11 @@ import * as os from 'node:os';
 import * as path from 'node:path';
 import { coverageFrom, type CoverageCounts } from './coverage';
 import {
+  evaluateCodingAgentCiDigitalGate,
   proposedDiffOnly,
   runCodingAgentDraftPr,
   seedSandboxRepo,
+  verifyRecordedLiveDraftPr,
 } from './coding_agent_pr';
 import { DeepResearchRuntime } from './deep_research';
 import { runLocalFastDirect } from './local_fast_runtime';
@@ -268,40 +270,64 @@ export async function runUserReady003Packet(
     evidence: visionEvidence,
   });
 
-  // --- AI-UR-013 live GitHub DRAFT PR ---
+  // --- AI-UR-013 coding agent (live DRAFT PR or CI digital gate + recorded live evidence) ---
   const sandbox = seedSandboxRepo(path.join(scratch, 'coding-agent-sandbox'));
   fs.mkdirSync(path.join(scratch, 'diff-only'), { recursive: true });
   const diffOnly = proposedDiffOnly(path.join(scratch, 'diff-only'));
   const remote =
     process.env.GUNNCHAI_AI_UR_013_REMOTE ||
     'https://github.com/gunnchOS3k/gunnchai-ai-ur-013-sandbox.git';
-  const openLive = process.env.GUNNCHAI_AI_UR_013_LIVE_PR !== '0';
+  // LIVE_PR=1 opens a new sandbox DRAFT PR this run. LIVE_PR=0 uses CI digital gate:
+  // local allowlist/sandbox semantics + host-recorded live DRAFT PR evidence (not JSON-only).
+  const openLive = process.env.GUNNCHAI_AI_UR_013_LIVE_PR === '1';
   const agent = runCodingAgentDraftPr(sandbox, {
     openGithubDraftPr: openLive,
     remoteUrl: openLive ? remote : undefined,
     githubRepo: 'gunnchOS3k/gunnchai-ai-ur-013-sandbox',
   });
-  const codingPassed =
-    agent.ok &&
-    agent.completeness === 'COMPLETE' &&
-    Boolean(agent.draftPr?.pr_url) &&
-    agent.draftPr?.remote_pushed === true &&
-    agent.mainUnchanged &&
-    agent.draftPr?.draft === true &&
-    agent.draftPr.merge === false &&
-    agent.draftPr.force_push === false &&
-    agent.draftPr.push_main === false &&
-    diffOnly.ok === false;
+  const recorded = verifyRecordedLiveDraftPr(cwd);
+  let codingPassed = false;
+  let codingNotes = agent.notes;
+  let codingCompleteness: 'COMPLETE' | 'PARTIAL' = agent.completeness;
+  if (openLive) {
+    codingPassed =
+      agent.ok &&
+      agent.completeness === 'COMPLETE' &&
+      Boolean(agent.draftPr?.pr_url) &&
+      agent.draftPr?.remote_pushed === true &&
+      agent.mainUnchanged &&
+      agent.draftPr?.draft === true &&
+      agent.draftPr.merge === false &&
+      agent.draftPr.force_push === false &&
+      agent.draftPr.push_main === false &&
+      diffOnly.ok === false;
+  } else {
+    const gate = evaluateCodingAgentCiDigitalGate({
+      agent,
+      diffOnlyRejected: diffOnly.ok === false,
+      recorded,
+    });
+    codingPassed = gate.passed;
+    codingNotes = gate.notes;
+    codingCompleteness = gate.completeness;
+  }
   assertNotStub('coding_agent.draft', agent.draftPr?.body);
   const codingEvidence = {
+    mode: openLive ? 'live_pr_this_run' : 'ci_digital_gate_plus_recorded_live_pr',
     branch: agent.branch,
     commit: agent.draftPr?.commit,
-    pr_url: agent.draftPr?.pr_url,
-    pr_number: agent.draftPr?.pr_number,
+    pr_url: agent.draftPr?.pr_url ?? recorded.pr_url,
+    pr_number: agent.draftPr?.pr_number ?? recorded.pr_number,
     remote_pushed: agent.draftPr?.remote_pushed,
-    completeness: agent.completeness,
+    completeness: codingCompleteness,
     mainUnchanged: agent.mainUnchanged,
     diffOnlyRejected: true,
+    recorded_live_pr: {
+      ok: recorded.ok,
+      pr_url: recorded.pr_url,
+      gh_confirmed: recorded.gh_confirmed,
+      notes: recorded.notes,
+    },
   };
   results.push({
     task_id: 'AI-UR-013',
@@ -309,7 +335,7 @@ export async function runUserReady003Packet(
     passed: codingPassed,
     local: true,
     cloud_only: false,
-    notes: agent.notes,
+    notes: codingNotes,
     evidence: codingEvidence,
   });
 
@@ -331,7 +357,9 @@ export async function runUserReady003Packet(
       ),
       ocrOnlyClaimedComplete: waike.stack === 'ocr_only' && waike.completeness === 'COMPLETE',
       draftPrJsonWithoutLiveUrl:
-        Boolean(agent.draftPr) && !agent.draftPr?.pr_url && agent.completeness === 'COMPLETE',
+        codingCompleteness === 'COMPLETE' &&
+        !agent.draftPr?.pr_url &&
+        !recorded.ok,
       fakeLocalPro:
         modelTiers.localPro.weightsStatus === 'PRESENT' &&
         (!pro.sha256 || pro.sha256 !== '1adf0b11065d8ad2e8123ea110d1ec956dab4ab038eab665614adba04b6c3370'),

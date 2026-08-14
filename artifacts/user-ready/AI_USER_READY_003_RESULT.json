@@ -1,7 +1,7 @@
 {
   "schema": "gunnchai.user_ready_003.v1",
   "packet": "AI-USER-READY-003",
-  "generatedAt": "2026-08-14T22:13:42.049Z",
+  "generatedAt": "2026-08-14T22:26:37.230Z",
   "accepted_main_base": "b646ac0",
   "tokens": {
     "GUNNCHAI_APP_PRODUCT_COMPLETE": false,
@@ -178,7 +178,7 @@
       "cloud_only": false,
       "notes": "DOCX + code artifacts with targeted edit versions. Canvas UI OPEN.",
       "evidence": {
-        "docx": "/var/folders/dp/z5frf3m511jcdpdf8v878v8h0000gn/T/gunnchai-ur003-EVr24h/base/artifacts/lab_report.docx",
+        "docx": "/var/folders/dp/z5frf3m511jcdpdf8v878v8h0000gn/T/gunnchai-ur003-OTmcX8/base/artifacts/lab_report.docx",
         "versions": 2,
         "codeExists": true
       }
@@ -238,63 +238,63 @@
             "id": "general",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 1758,
-            "outputChars": 254
+            "latencyMs": 1447,
+            "outputChars": 209
           },
           {
             "id": "summarization",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 994,
+            "latencyMs": 656,
             "outputChars": 112
           },
           {
             "id": "waike",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 1058,
-            "outputChars": 212
+            "latencyMs": 976,
+            "outputChars": 175
           },
           {
             "id": "source_grounded",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 843,
+            "latencyMs": 869,
             "outputChars": 229
           },
           {
             "id": "basic_code",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 867,
-            "outputChars": 38
+            "latencyMs": 889,
+            "outputChars": 40
           },
           {
             "id": "structured_output",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 888,
+            "latencyMs": 935,
             "outputChars": 26
           },
           {
             "id": "hallucination_resistance",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 1039,
-            "outputChars": 272
+            "latencyMs": 1307,
+            "outputChars": 385
           },
           {
             "id": "refusal_permission",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 1166,
-            "outputChars": 217
+            "latencyMs": 1070,
+            "outputChars": 224
           },
           {
             "id": "context_retention",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 784,
+            "latencyMs": 714,
             "outputChars": 159
           }
         ],
@@ -352,16 +352,23 @@
       "passed": true,
       "local": true,
       "cloud_only": false,
-      "notes": "Sandbox branch + tests + live GitHub DRAFT PR https://github.com/gunnchOS3k/gunnchai-ai-ur-013-sandbox/pull/2. No merge/force-push/main. Production blocked.",
+      "notes": "CI digital gate PASS: local allowlist/sandbox DRAFT semantics + recorded live sandbox DRAFT PR https://github.com/gunnchOS3k/gunnchai-ai-ur-013-sandbox/pull/2 (RECORDED_LIVE_PR_ARTIFACT_OK_GH_UNAVAILABLE). Live open this run optional supplemental.",
       "evidence": {
-        "branch": "agent/ai-ur-013-fix-add-msti7h4n",
-        "commit": "070970b3e834ed90e6ff5758d59304e53e5ae99b",
+        "mode": "ci_digital_gate_plus_recorded_live_pr",
+        "branch": "agent/ai-ur-013-fix-add-mstio6rb",
+        "commit": "de72e5ebae2a882898f835229beb4a1de61c458a",
         "pr_url": "https://github.com/gunnchOS3k/gunnchai-ai-ur-013-sandbox/pull/2",
         "pr_number": 2,
-        "remote_pushed": true,
+        "remote_pushed": false,
         "completeness": "COMPLETE",
         "mainUnchanged": true,
-        "diffOnlyRejected": true
+        "diffOnlyRejected": true,
+        "recorded_live_pr": {
+          "ok": true,
+          "pr_url": "https://github.com/gunnchOS3k/gunnchai-ai-ur-013-sandbox/pull/2",
+          "gh_confirmed": false,
+          "notes": "RECORDED_LIVE_PR_ARTIFACT_OK_GH_UNAVAILABLE"
+        }
       }
     }
   ],
@@ -396,14 +403,21 @@
       "backgroundForbidden": true
     },
     "coding": {
-      "branch": "agent/ai-ur-013-fix-add-msti7h4n",
-      "commit": "070970b3e834ed90e6ff5758d59304e53e5ae99b",
+      "mode": "ci_digital_gate_plus_recorded_live_pr",
+      "branch": "agent/ai-ur-013-fix-add-mstio6rb",
+      "commit": "de72e5ebae2a882898f835229beb4a1de61c458a",
       "pr_url": "https://github.com/gunnchOS3k/gunnchai-ai-ur-013-sandbox/pull/2",
       "pr_number": 2,
-      "remote_pushed": true,
+      "remote_pushed": false,
       "completeness": "COMPLETE",
       "mainUnchanged": true,
-      "diffOnlyRejected": true
+      "diffOnlyRejected": true,
+      "recorded_live_pr": {
+        "ok": true,
+        "pr_url": "https://github.com/gunnchOS3k/gunnchai-ai-ur-013-sandbox/pull/2",
+        "gh_confirmed": false,
+        "notes": "RECORDED_LIVE_PR_ARTIFACT_OK_GH_UNAVAILABLE"
+      }
     },
     "voice": {
       "status": "HELD_FOR_AI_004",

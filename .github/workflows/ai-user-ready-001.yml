@@ -4,7 +4,11 @@ on:
   pull_request:
     branches: [main]
   push:
-    branches: [main, 'stream/ai-user-ready-001-market-baseline', 'stream/ai-user-ready-002-fast-research']
+    branches:
+      - main
+      - 'stream/ai-user-ready-001-market-baseline'
+      - 'stream/ai-user-ready-002-fast-research'
+      - 'stream/ai-user-ready-003-research-vision-coding'
   workflow_dispatch:
 
 permissions:
@@ -24,6 +28,11 @@ jobs:
         with:
           node-version: "20"
           cache: npm
+      - name: Install tesseract OCR (required by shared user-ready vision tests)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y tesseract-ocr
+          tesseract --version
       - run: npm ci
       - name: User-ready unit tests (no Fast download required)
         run: npm run test:user-ready

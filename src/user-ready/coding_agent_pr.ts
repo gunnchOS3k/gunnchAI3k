@@ -212,6 +212,194 @@ export function proposedDiffOnly(cwd: string): { ok: false; reason: string; diff
   return { ok: false, reason: 'DIFF_ONLY_NOT_A_DRAFT_PR', diff };
 }
 
+export interface RecordedLiveDraftPrEvidence {
+  schema?: string;
+  sandbox_repo?: string;
+  pr_url?: string;
+  pr_number?: number;
+  isDraft?: boolean;
+  merge?: boolean;
+  force_push?: boolean;
+  push_main?: boolean;
+}
+
+export interface RecordedLiveDraftPrCheck {
+  ok: boolean;
+  path: string;
+  pr_url: string | null;
+  pr_number: number | null;
+  gh_confirmed: boolean;
+  notes: string;
+}
+
+/**
+ * CI-safe gate: verify host-recorded allowlisted sandbox DRAFT PR evidence.
+ * DRAFT_PR.json alone is NOT enough. Recorded evidence must cite a real sandbox DRAFT PR URL.
+ */
+export function verifyRecordedLiveDraftPr(cwd = process.cwd()): RecordedLiveDraftPrCheck {
+  const evidencePath = path.join(cwd, 'artifacts', 'user-ready', 'AI_UR_013_LIVE_DRAFT_PR.json');
+  if (!fs.existsSync(evidencePath)) {
+    return {
+      ok: false,
+      path: evidencePath,
+      pr_url: null,
+      pr_number: null,
+      gh_confirmed: false,
+      notes: 'RECORDED_LIVE_PR_ABSENT',
+    };
+  }
+  let raw: RecordedLiveDraftPrEvidence;
+  try {
+    raw = JSON.parse(fs.readFileSync(evidencePath, 'utf8')) as RecordedLiveDraftPrEvidence;
+  } catch {
+    return {
+      ok: false,
+      path: evidencePath,
+      pr_url: null,
+      pr_number: null,
+      gh_confirmed: false,
+      notes: 'RECORDED_LIVE_PR_INVALID_JSON',
+    };
+  }
+  const prUrl = typeof raw.pr_url === 'string' ? raw.pr_url.trim() : '';
+  const repo = String(raw.sandbox_repo || '');
+  if (!prUrl || !/^https:\/\/github\.com\/[^/]+\/[^/]+\/pull\/\d+\/?$/.test(prUrl)) {
+    return {
+      ok: false,
+      path: evidencePath,
+      pr_url: prUrl || null,
+      pr_number: null,
+      gh_confirmed: false,
+      notes: 'RECORDED_LIVE_PR_BAD_URL',
+    };
+  }
+  if (!ALLOWLISTED_SANDBOX_REPOS.some((n) => repo === n || repo.endsWith(`/${n}`) || n.endsWith(repo))) {
+    return {
+      ok: false,
+      path: evidencePath,
+      pr_url: prUrl,
+      pr_number: raw.pr_number ?? null,
+      gh_confirmed: false,
+      notes: 'RECORDED_LIVE_PR_NOT_ALLOWLISTED',
+    };
+  }
+  if (!prUrl.includes('gunnchai-ai-ur-013-sandbox')) {
+    return {
+      ok: false,
+      path: evidencePath,
+      pr_url: prUrl,
+      pr_number: raw.pr_number ?? null,
+      gh_confirmed: false,
+      notes: 'RECORDED_LIVE_PR_URL_NOT_SANDBOX',
+    };
+  }
+  if (raw.isDraft !== true || raw.merge === true || raw.force_push === true || raw.push_main === true) {
+    return {
+      ok: false,
+      path: evidencePath,
+      pr_url: prUrl,
+      pr_number: raw.pr_number ?? null,
+      gh_confirmed: false,
+      notes: 'RECORDED_LIVE_PR_UNSAFE_FLAGS',
+    };
+  }
+
+  let ghConfirmed = false;
+  const pr = spawnSync(
+    'gh',
+    ['pr', 'view', prUrl, '--json', 'isDraft,state,merged,baseRefName,url'],
+    { encoding: 'utf8' },
+  );
+  if (pr.status === 0) {
+    try {
+      const live = JSON.parse(pr.stdout || '{}') as {
+        isDraft?: boolean;
+        state?: string;
+        merged?: boolean;
+        baseRefName?: string;
+      };
+      if (live.isDraft === true && live.merged !== true && live.state !== 'MERGED') {
+        ghConfirmed = true;
+      } else {
+        return {
+          ok: false,
+          path: evidencePath,
+          pr_url: prUrl,
+          pr_number: raw.pr_number ?? null,
+          gh_confirmed: false,
+          notes: `RECORDED_LIVE_PR_GH_NOT_DRAFT:${JSON.stringify(live)}`,
+        };
+      }
+    } catch {
+      /* fall through to artifact-only acceptance when gh JSON parse fails */
+    }
+  }
+
+  return {
+    ok: true,
+    path: evidencePath,
+    pr_url: prUrl,
+    pr_number: raw.pr_number ?? null,
+    gh_confirmed: ghConfirmed,
+    notes: ghConfirmed
+      ? 'RECORDED_LIVE_PR_VERIFIED_VIA_GH'
+      : 'RECORDED_LIVE_PR_ARTIFACT_OK_GH_UNAVAILABLE',
+  };
+}
+
+/**
+ * CI digital acceptance for AI-UR-013 when LIVE_PR=0:
+ * local allowlisted sandbox edit/test/commit + DRAFT semantics + recorded live DRAFT PR evidence.
+ * Still rejects production push, merge/force/main, and DRAFT_PR.json-only without recorded live URL.
+ */
+export function evaluateCodingAgentCiDigitalGate(opts: {
+  agent: CodingAgentResult;
+  diffOnlyRejected: boolean;
+  recorded: RecordedLiveDraftPrCheck;
+}): { passed: boolean; notes: string; completeness: 'COMPLETE' | 'PARTIAL' } {
+  const a = opts.agent;
+  const localOk =
+    a.ok &&
+    a.mainUnchanged &&
+    a.draftPr?.draft === true &&
+    a.draftPr.merge === false &&
+    a.draftPr.force_push === false &&
+    a.draftPr.push_main === false &&
+    a.draftPr.tests_passed === true &&
+    a.draftPr.remote_pushed === false &&
+    opts.diffOnlyRejected &&
+    !fs.existsSync(path.join(a.sandbox, 'PROPOSED.diff'));
+  // JSON-only without recorded live URL must fail.
+  const jsonOnly =
+    Boolean(a.draftPr) && !a.draftPr?.pr_url && !opts.recorded.ok;
+  if (jsonOnly) {
+    return {
+      passed: false,
+      completeness: 'PARTIAL',
+      notes: 'CI_GATE_REJECTED_DRAFT_PR_JSON_ONLY',
+    };
+  }
+  if (!localOk) {
+    return {
+      passed: false,
+      completeness: 'PARTIAL',
+      notes: `CI_GATE_LOCAL_SANDBOX_FAIL:${a.notes}`,
+    };
+  }
+  if (!opts.recorded.ok) {
+    return {
+      passed: false,
+      completeness: 'PARTIAL',
+      notes: `CI_GATE_RECORDED_LIVE_PR_FAIL:${opts.recorded.notes}`,
+    };
+  }
+  return {
+    passed: true,
+    completeness: 'COMPLETE',
+    notes: `CI digital gate PASS: local allowlist/sandbox DRAFT semantics + recorded live sandbox DRAFT PR ${opts.recorded.pr_url} (${opts.recorded.notes}). Live open this run optional supplemental.`,
+  };
+}
+
 function planTask(task: string): string[] {
   return [
     `Understand task: ${task}`,

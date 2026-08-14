@@ -49,10 +49,14 @@ jobs:
           cmake --build .llama-cpp-src/build --target llama-cli -j "$(nproc)"
           echo "$PWD/.llama-cpp-src/build/bin" >> "$GITHUB_PATH"
           test -x .llama-cpp-src/build/bin/llama-cli
-      - name: CLI packet 003 (Fast + Pro download, live research/vision; coding DRAFT PR when token allows)
+      - name: CLI packet 003 (CI digital coding gate + recorded live DRAFT PR evidence)
         env:
           GUNNCHAI_FAST_NETWORK_CONSENT: "1"
-          GUNNCHAI_PRO_NETWORK_CONSENT: "1"
+          # Pro stays OPEN; skip multi-GB download in CI.
+          GUNNCHAI_PRO_NETWORK_CONSENT: "0"
+          GUNNCHAI_SKIP_PRO_DOWNLOAD: "1"
+          # Do not open a new sandbox PR from Actions (no cross-repo write). Digital
+          # acceptance uses local allowlist/sandbox gates + host-recorded live DRAFT PR.
           GUNNCHAI_AI_UR_013_LIVE_PR: "0"
         run: npm run user-ready:003
       - uses: actions/upload-artifact@v4
@@ -61,7 +65,8 @@ jobs:
           name: ai-user-ready-003-result
           path: |
             artifacts/user-ready/AI_USER_READY_003_RESULT.json
-            benchmarks/LOCAL_PRO_QUALITY_GATE.json
+            artifacts/user-ready/AI_UR_013_LIVE_DRAFT_PR.json
+            benchmarks/LOCAL_PRO_STATUS.json
             benchmarks/LOCAL_FAST_QUALITY_GATE.json
           if-no-files-found: error
           retention-days: 14

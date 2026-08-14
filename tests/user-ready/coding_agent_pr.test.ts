@@ -3,10 +3,12 @@ import * as os from 'node:os';
 import * as path from 'node:path';
 import {
   assertSafeGitArgs,
+  evaluateCodingAgentCiDigitalGate,
   isProductionRepo,
   proposedDiffOnly,
   runCodingAgentDraftPr,
   seedSandboxRepo,
+  verifyRecordedLiveDraftPr,
 } from '../../src/user-ready/coding_agent_pr';
 
 describe('AI-UR-013 coding agent DRAFT PR', () => {
@@ -37,5 +39,35 @@ describe('AI-UR-013 coding agent DRAFT PR', () => {
     expect(fs.existsSync(path.join(sandbox, 'DRAFT_PR.json'))).toBe(true);
     const fixed = fs.readFileSync(path.join(sandbox, 'src', 'add.js'), 'utf8');
     expect(fixed).toContain('return a + b');
+  });
+
+  it('CI digital gate requires recorded live DRAFT PR; rejects JSON-only', () => {
+    const sandbox = seedSandboxRepo();
+    const agent = runCodingAgentDraftPr(sandbox);
+    const missing = evaluateCodingAgentCiDigitalGate({
+      agent,
+      diffOnlyRejected: true,
+      recorded: {
+        ok: false,
+        path: 'missing.json',
+        pr_url: null,
+        pr_number: null,
+        gh_confirmed: false,
+        notes: 'RECORDED_LIVE_PR_ABSENT',
+      },
+    });
+    expect(missing.passed).toBe(false);
+    expect(missing.notes).toMatch(/DRAFT_PR_JSON_ONLY|RECORDED_LIVE_PR/);
+
+    const recorded = verifyRecordedLiveDraftPr(process.cwd());
+    expect(recorded.ok).toBe(true);
+    expect(recorded.pr_url).toMatch(/gunnchai-ai-ur-013-sandbox\/pull\/\d+/);
+    const gate = evaluateCodingAgentCiDigitalGate({
+      agent,
+      diffOnlyRejected: true,
+      recorded,
+    });
+    expect(gate.passed).toBe(true);
+    expect(gate.completeness).toBe('COMPLETE');
   });
 });
