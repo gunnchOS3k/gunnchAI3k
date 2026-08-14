@@ -74,12 +74,12 @@ describe('AI-USER-READY tokens + matrix honesty', () => {
         'AI-UR-005',
         'AI-UR-006',
         'AI-UR-007',
-        'AI-UR-011',
         'AI-UR-013',
         'AI-UR-016',
       ]),
     );
-    expect(partial).toEqual([]);
+    expect(complete).not.toContain('AI-UR-011');
+    expect(partial).toEqual(['AI-UR-011']);
     expect(open).toEqual(
       expect.arrayContaining(['AI-UR-008', 'AI-UR-009', 'AI-UR-010', 'AI-UR-012', 'AI-UR-014', 'AI-UR-015']),
     );
@@ -147,7 +147,7 @@ describe('AI-USER-READY-001 packet CLI runtime', () => {
 });
 
 describe('AI-USER-READY-002 market packet', () => {
-  it('runs COMPLETE runtimes including 007/011/013; digital pass only requires COMPLETE', async () => {
+  it('runs COMPLETE runtimes; 011 stays PARTIAL (OCR heuristics ≠ VLM); digital pass only requires COMPLETE', async () => {
     const report = await runUserReadyPacket(process.cwd(), {
       fastNetworkConsent: process.env.GUNNCHAI_FAST_NETWORK_CONSENT === '1',
     });
@@ -158,10 +158,11 @@ describe('AI-USER-READY-002 market packet', () => {
     expect(report.pixels).toBe(VISUAL_UNAVAILABLE);
     expect(report.stubChallengeFailures).toEqual([]);
     expect(report.coverage.required).toBe(16);
-    expect(report.coverage.complete).toBe(10);
-    expect(report.coverage.partial).toBe(0);
+    expect(report.coverage.complete).toBe(9);
+    expect(report.coverage.partial).toBe(1);
     expect(report.coverage.open).toBe(6);
-    expect(report.coverage.implemented).toBe(10);
+    expect(report.coverage.implemented).toBe(9);
+    expect(report.coverage.partial_ids).toEqual(['AI-UR-011']);
     expect(report.coverage.open_ids).toEqual(
       expect.arrayContaining(['AI-UR-008', 'AI-UR-009', 'AI-UR-010', 'AI-UR-012', 'AI-UR-014', 'AI-UR-015']),
     );
@@ -169,11 +170,16 @@ describe('AI-USER-READY-002 market packet', () => {
       ['AI-UR-001', 'AI-UR-002', 'AI-UR-003', 'AI-UR-004', 'AI-UR-005', 'AI-UR-006'].includes(r.task_id),
     );
     expect(completePass.every((r) => r.passed)).toBe(true);
-    for (const id of ['AI-UR-007', 'AI-UR-011', 'AI-UR-013']) {
+    for (const id of ['AI-UR-007', 'AI-UR-013']) {
       const row = report.results.find((r) => r.task_id === id);
       expect(row).toBeTruthy();
       expect(row!.passed).toBe(true);
     }
+    const vision = report.results.find((r) => r.task_id === 'AI-UR-011');
+    expect(vision).toBeTruthy();
+    expect(vision!.passed).toBe(true);
+    expect(String(vision!.evidence.stack)).toBe('ocr_layout_heuristics');
+    expect(String(vision!.evidence.completeness)).toBe('PARTIAL');
     const fast = report.results.find((r) => r.task_id === 'AI-UR-016');
     if (fast?.passed) {
       expect(report.allImplementedPassed).toBe(true);

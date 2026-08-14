@@ -88,7 +88,8 @@ export function challengeUserReady002(input: Challenge002Input): string[] {
 
 export interface Challenge003Input {
   syntheticDiscoveryCited: boolean;
-  ocrOnlyClaimedComplete: boolean;
+  /** OCR-only OR OCR+layout heuristics claimed as vision COMPLETE (no neural VLM). */
+  ocrHeuristicClaimedComplete: boolean;
   draftPrJsonWithoutLiveUrl: boolean;
   fakeLocalPro: boolean;
   silentCloud: boolean;
@@ -99,7 +100,7 @@ export interface Challenge003Input {
 export function challengeUserReady003(input: Challenge003Input): string[] {
   const failures: string[] = [];
   if (input.syntheticDiscoveryCited) failures.push('SYNTHETIC_SEARCH_AS_DEEP_RESEARCH');
-  if (input.ocrOnlyClaimedComplete) failures.push('OCR_AS_VLM');
+  if (input.ocrHeuristicClaimedComplete) failures.push('OCR_HEURISTICS_AS_VLM_COMPLETE');
   if (input.draftPrJsonWithoutLiveUrl) failures.push('DRAFT_PR_JSON_NOT_LIVE');
   if (input.fakeLocalPro) failures.push('FAKE_LOCAL_PRO');
   if (input.silentCloud) failures.push('SILENT_CLOUD');

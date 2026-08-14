@@ -1,6 +1,7 @@
 /**
- * AI-USER-READY-003 runtime: complete Deep Research, Vision OCR+layout, coding-agent live DRAFT PR,
- * Local Pro candidate. Holds 008/009/010/012/014/015 for AI-004.
+ * AI-USER-READY-003 runtime: Deep Research COMPLETE, Vision OCR+heuristics PARTIAL,
+ * coding-agent live DRAFT PR COMPLETE, Local Pro candidate OPEN.
+ * Holds 008/009/010/012/014/015 for AI-004.
  */
 
 import * as fs from 'node:fs';
@@ -166,7 +167,7 @@ export async function runUserReady003Packet(
     evidence: researchEvidence,
   });
 
-  // --- AI-UR-011 OCR + layout VLM stack ---
+  // --- AI-UR-011 OCR + layout heuristics (PARTIAL — not neural VLM) ---
   const vs = new VisionScreenRuntime();
   const noShare = vs.inspect('u1', null);
   vs.grant('u1', 'screen');
@@ -224,14 +225,15 @@ export async function runUserReady003Packet(
   } catch {
     backgroundForbidden = true;
   }
-  const visionPassed =
+  // PARTIAL gate: real OCR+layout heuristics on explicit shares. Never COMPLETE without neural VLM.
+  const visionPartialPassed =
     noShare.ok === false &&
     vs.tesseractAvailable() &&
     waike.ok &&
     waike.ocrUsed &&
     waike.beyondOcrOnly &&
-    waike.stack === 'ocr_layout_vlm' &&
-    waike.completeness === 'COMPLETE' &&
+    waike.stack === 'ocr_layout_heuristics' &&
+    waike.completeness === 'PARTIAL' &&
     /Start|Click/i.test(waike.description) &&
     waike.redacted &&
     compiler.ok &&
@@ -245,6 +247,7 @@ export async function runUserReady003Packet(
   assertNotStub('vision.description', waike.description);
   const visionEvidence = {
     tesseract: vs.tesseractAvailable(),
+    neuralVlm: false,
     waike: {
       stack: waike.stack,
       ocrUsed: waike.ocrUsed,
@@ -261,11 +264,11 @@ export async function runUserReady003Packet(
   results.push({
     task_id: 'AI-UR-011',
     category: 'vision_screen',
-    passed: visionPassed,
+    passed: visionPartialPassed,
     local: true,
     cloud_only: false,
-    notes: visionPassed
-      ? 'OCR+layout VLM stack on explicit shares (WAIKE/compiler/office/game/UI). Redaction. No background surveillance. Not cloud VLM.'
+    notes: visionPartialPassed
+      ? 'PARTIAL: OCR+layout heuristics on explicit shares (WAIKE/compiler/office/game/UI). Redaction. No background surveillance. Not a neural VLM → not COMPLETE.'
       : waike.notes || 'VISION_INCOMPLETE',
     evidence: visionEvidence,
   });
@@ -355,7 +358,11 @@ export async function runUserReady003Packet(
       syntheticDiscoveryCited: liveResearch.citations.some((c) =>
         /discovery\.gunnchai\.local/i.test(c.url),
       ),
-      ocrOnlyClaimedComplete: waike.stack === 'ocr_only' && waike.completeness === 'COMPLETE',
+      ocrHeuristicClaimedComplete:
+        (waike.stack === 'ocr_only' ||
+          waike.stack === 'ocr_layout_heuristics' ||
+          waike.stack === 'fixture_structured') &&
+        waike.completeness === 'COMPLETE',
       draftPrJsonWithoutLiveUrl:
         codingCompleteness === 'COMPLETE' &&
         !agent.draftPr?.pr_url &&
@@ -426,7 +433,8 @@ export async function runUserReady003Packet(
     allImplementedPassed,
     eval_summary: {
       research_complete: researchPassed,
-      vision_complete: visionPassed,
+      vision_partial: visionPartialPassed,
+      vision_neural_vlm: false,
       coding_live_draft_pr: codingPassed,
       local_fast: results.find((r) => r.task_id === 'AI-UR-016')?.passed ?? false,
       local_pro: pro.ok,

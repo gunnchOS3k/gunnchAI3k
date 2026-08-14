@@ -1,7 +1,8 @@
 /**
- * Local vision stack: OCR (tesseract) + layout/control inference.
- * OCR alone is insufficient for AI-UR-011 COMPLETE — structured regions + task reasoning required.
- * No cloud VLM. No background capture.
+ * Local vision stack: OCR (tesseract) + layout/control heuristics (keyword/regex/boxes).
+ * This is NOT a multimodal VLM. AI-UR-011 COMPLETE requires real vision weights/provider
+ * with semantic non-text understanding. OCR+heuristics max out at PARTIAL.
+ * No cloud VLM by default. No background capture.
  */
 
 import { execFileSync, spawnSync } from 'node:child_process';
@@ -40,9 +41,10 @@ export interface LayoutInference {
   objects: string[];
   controls: LayoutControl[];
   scene: string;
-  /** True only when OCR produced text AND layout inferred structure beyond a raw dump. */
+  /** True when OCR produced text AND layout heuristics inferred structure beyond a raw dump. */
   beyondOcrOnly: boolean;
-  stack: 'ocr_layout_vlm' | 'ocr_only' | 'unavailable';
+  /** Honest stack id — never claim neural VLM for OCR+keyword/layout heuristics. */
+  stack: 'ocr_layout_heuristics' | 'ocr_only' | 'unavailable';
 }
 
 function which(bin: string): string | null {
@@ -199,6 +201,6 @@ export function inferLayoutFromOcr(ocr: OcrResult, width: number, height: number
     controls: uniq,
     scene: texts.slice(0, 3).join(' | '),
     beyondOcrOnly,
-    stack: beyondOcrOnly ? 'ocr_layout_vlm' : 'ocr_only',
+    stack: beyondOcrOnly ? 'ocr_layout_heuristics' : 'ocr_only',
   };
 }

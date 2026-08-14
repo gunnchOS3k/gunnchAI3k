@@ -431,7 +431,8 @@ export async function runUserReadyPacket(
       waike.pixelUnderstanding &&
       waike.ocrUsed &&
       waike.beyondOcrOnly &&
-      waike.stack === 'ocr_layout_vlm' &&
+      waike.stack === 'ocr_layout_heuristics' &&
+      waike.completeness === 'PARTIAL' &&
       /Start|Click/i.test(waike.description) &&
       waike.redacted === true &&
       compiler.ok &&
@@ -451,7 +452,7 @@ export async function runUserReadyPacket(
       local: true,
       cloud_only: false,
       notes: passed
-        ? 'Explicit share + permission + OCR+layout stack (WAIKE/compiler/office/UI). No background capture. Not a frontier VLM.'
+        ? 'PARTIAL: explicit share + permission + OCR+layout heuristics (WAIKE/compiler/office/UI). No background capture. Not a neural VLM.'
         : 'Vision PARTIAL/fail: need OCR+layout beyond IHDR/fixture-only.',
       evidence: {
         deniedNoShare: noShare.notes,
@@ -464,6 +465,7 @@ export async function runUserReadyPacket(
         ocrUsed: waike.ocrUsed,
         stack: waike.stack,
         completeness: waike.completeness,
+        neuralVlm: false,
         backgroundForbidden,
       },
     });

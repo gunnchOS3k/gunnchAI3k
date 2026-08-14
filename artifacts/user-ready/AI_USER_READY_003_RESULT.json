@@ -1,7 +1,7 @@
 {
   "schema": "gunnchai.user_ready_003.v1",
   "packet": "AI-USER-READY-003",
-  "generatedAt": "2026-08-14T22:26:37.230Z",
+  "generatedAt": "2026-08-14T23:03:05.580Z",
   "accepted_main_base": "b646ac0",
   "tokens": {
     "GUNNCHAI_APP_PRODUCT_COMPLETE": false,
@@ -67,15 +67,15 @@
   },
   "coverage": {
     "required": 16,
-    "implemented": 10,
+    "implemented": 9,
     "runtime": 10,
-    "offline": 9,
+    "offline": 8,
     "cloud_only": 0,
     "cloud_consent": 4,
     "open": 6,
-    "gap": 6,
-    "complete": 10,
-    "partial": 0,
+    "gap": 7,
+    "complete": 9,
+    "partial": 1,
     "implemented_ids": [
       "AI-UR-001",
       "AI-UR-002",
@@ -84,7 +84,6 @@
       "AI-UR-005",
       "AI-UR-006",
       "AI-UR-007",
-      "AI-UR-011",
       "AI-UR-013",
       "AI-UR-016"
     ],
@@ -107,7 +106,6 @@
       "AI-UR-004",
       "AI-UR-005",
       "AI-UR-006",
-      "AI-UR-011",
       "AI-UR-013",
       "AI-UR-016"
     ],
@@ -133,11 +131,12 @@
       "AI-UR-005",
       "AI-UR-006",
       "AI-UR-007",
-      "AI-UR-011",
       "AI-UR-013",
       "AI-UR-016"
     ],
-    "partial_ids": []
+    "partial_ids": [
+      "AI-UR-011"
+    ]
   },
   "results": [
     {
@@ -178,7 +177,7 @@
       "cloud_only": false,
       "notes": "DOCX + code artifacts with targeted edit versions. Canvas UI OPEN.",
       "evidence": {
-        "docx": "/var/folders/dp/z5frf3m511jcdpdf8v878v8h0000gn/T/gunnchai-ur003-OTmcX8/base/artifacts/lab_report.docx",
+        "docx": "/var/folders/dp/z5frf3m511jcdpdf8v878v8h0000gn/T/gunnchai-ur003-4Fpe31/base/artifacts/lab_report.docx",
         "versions": 2,
         "codeExists": true
       }
@@ -238,63 +237,63 @@
             "id": "general",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 1447,
-            "outputChars": 209
+            "latencyMs": 1498,
+            "outputChars": 241
           },
           {
             "id": "summarization",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 656,
-            "outputChars": 112
+            "latencyMs": 914,
+            "outputChars": 90
           },
           {
             "id": "waike",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 976,
-            "outputChars": 175
+            "latencyMs": 721,
+            "outputChars": 139
           },
           {
             "id": "source_grounded",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 869,
+            "latencyMs": 1084,
             "outputChars": 229
           },
           {
             "id": "basic_code",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 889,
+            "latencyMs": 836,
             "outputChars": 40
           },
           {
             "id": "structured_output",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 935,
+            "latencyMs": 836,
             "outputChars": 26
           },
           {
             "id": "hallucination_resistance",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 1307,
-            "outputChars": 385
+            "latencyMs": 1084,
+            "outputChars": 272
           },
           {
             "id": "refusal_permission",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 1070,
-            "outputChars": 224
+            "latencyMs": 1131,
+            "outputChars": 221
           },
           {
             "id": "context_retention",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 714,
+            "latencyMs": 927,
             "outputChars": 159
           }
         ],
@@ -329,14 +328,15 @@
       "passed": true,
       "local": true,
       "cloud_only": false,
-      "notes": "OCR+layout VLM stack on explicit shares (WAIKE/compiler/office/game/UI). Redaction. No background surveillance. Not cloud VLM.",
+      "notes": "PARTIAL: OCR+layout heuristics on explicit shares (WAIKE/compiler/office/game/UI). Redaction. No background surveillance. Not a neural VLM → not COMPLETE.",
       "evidence": {
         "tesseract": true,
+        "neuralVlm": false,
         "waike": {
-          "stack": "ocr_layout_vlm",
+          "stack": "ocr_layout_heuristics",
           "ocrUsed": true,
           "beyondOcrOnly": true,
-          "completeness": "COMPLETE",
+          "completeness": "PARTIAL",
           "description": "WAIKE screen: Click the button \"Next\" in region r1. Visible: WAIKE tutor Next lesson: OFDM cyclic prefix"
         },
         "compiler": "Compiler diagnostic: compiler error TS2345 Argument of type string",
@@ -355,8 +355,8 @@
       "notes": "CI digital gate PASS: local allowlist/sandbox DRAFT semantics + recorded live sandbox DRAFT PR https://github.com/gunnchOS3k/gunnchai-ai-ur-013-sandbox/pull/2 (RECORDED_LIVE_PR_ARTIFACT_OK_GH_UNAVAILABLE). Live open this run optional supplemental.",
       "evidence": {
         "mode": "ci_digital_gate_plus_recorded_live_pr",
-        "branch": "agent/ai-ur-013-fix-add-mstio6rb",
-        "commit": "de72e5ebae2a882898f835229beb4a1de61c458a",
+        "branch": "agent/ai-ur-013-fix-add-mstjz3go",
+        "commit": "0d71a201a8a07f24de8763db12e05f6df28c3bf6",
         "pr_url": "https://github.com/gunnchOS3k/gunnchai-ai-ur-013-sandbox/pull/2",
         "pr_number": 2,
         "remote_pushed": false,
@@ -389,11 +389,12 @@
     },
     "vision": {
       "tesseract": true,
+      "neuralVlm": false,
       "waike": {
-        "stack": "ocr_layout_vlm",
+        "stack": "ocr_layout_heuristics",
         "ocrUsed": true,
         "beyondOcrOnly": true,
-        "completeness": "COMPLETE",
+        "completeness": "PARTIAL",
         "description": "WAIKE screen: Click the button \"Next\" in region r1. Visible: WAIKE tutor Next lesson: OFDM cyclic prefix"
       },
       "compiler": "Compiler diagnostic: compiler error TS2345 Argument of type string",
@@ -404,8 +405,8 @@
     },
     "coding": {
       "mode": "ci_digital_gate_plus_recorded_live_pr",
-      "branch": "agent/ai-ur-013-fix-add-mstio6rb",
-      "commit": "de72e5ebae2a882898f835229beb4a1de61c458a",
+      "branch": "agent/ai-ur-013-fix-add-mstjz3go",
+      "commit": "0d71a201a8a07f24de8763db12e05f6df28c3bf6",
       "pr_url": "https://github.com/gunnchOS3k/gunnchai-ai-ur-013-sandbox/pull/2",
       "pr_number": 2,
       "remote_pushed": false,
@@ -426,12 +427,14 @@
   },
   "stubChallengeFailures": [],
   "next_packet": [
+    "AI-UR-011 neural VLM for vision COMPLETE (OCR heuristics remain PARTIAL)",
     "AI-UR-008 Canvas/cowrite UI (needs pixels on device-os)",
     "AI-UR-009 custom Gems/GPTs/skills store",
     "AI-UR-010 voice realtime (natural conversation, not STT→TTS only)",
     "AI-UR-012 computer use GUI",
     "AI-UR-014 NotebookLM-class audio overview",
-    "AI-UR-015 companion chrome pixels"
+    "AI-UR-015 companion chrome pixels",
+    "LOCAL_PRO hashed HOST_OBSERVED quality gate"
   ],
   "remaining_open": [
     "AI-UR-008 canvas_cowrite_ui",
@@ -445,13 +448,14 @@
   "allImplementedPassed": true,
   "eval_summary": {
     "research_complete": true,
-    "vision_complete": true,
+    "vision_partial": true,
+    "vision_neural_vlm": false,
     "coding_live_draft_pr": true,
     "local_fast": true,
     "local_pro": false,
     "coverage": {
-      "complete": 10,
-      "partial": 0,
+      "complete": 9,
+      "partial": 1,
       "open": 6,
       "complete_ids": [
         "AI-UR-001",
@@ -461,11 +465,12 @@
         "AI-UR-005",
         "AI-UR-006",
         "AI-UR-007",
-        "AI-UR-011",
         "AI-UR-013",
         "AI-UR-016"
       ],
-      "partial_ids": [],
+      "partial_ids": [
+        "AI-UR-011"
+      ],
       "open_ids": [
         "AI-UR-008",
         "AI-UR-009",

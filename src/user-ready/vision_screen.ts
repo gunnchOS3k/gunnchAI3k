@@ -1,6 +1,7 @@
 /**
  * Explicit-share vision/screen. Permission required. No background surveillance.
- * Stack: local OCR (tesseract) + layout/control inference (OCR alone ≠ COMPLETE).
+ * Stack: local OCR (tesseract) + layout/control heuristics — PARTIAL only.
+ * Real multimodal VLM (weights/provider + semantic non-text) is required for COMPLETE.
  * Tasks: WAIKE / compiler / office / game / UI. Cloud VLM opt-in only (unused here).
  */
 
@@ -55,9 +56,10 @@ export interface VisionScreenResult {
   ocrUsed: boolean;
   /** Structured layout beyond raw OCR dump. */
   beyondOcrOnly: boolean;
-  stack: 'ocr_layout_vlm' | 'ocr_only' | 'fixture_structured' | 'unavailable' | null;
+  stack: 'ocr_layout_heuristics' | 'ocr_only' | 'fixture_structured' | 'unavailable' | null;
   backgroundCapture: false;
   cloudVlmUsed: false;
+  /** OCR+heuristics never elevate to COMPLETE (no neural VLM). */
   completeness: 'COMPLETE' | 'PARTIAL';
   notes: string;
 }
@@ -232,8 +234,9 @@ function parseLocalImage(
       const fixture = extractFixture(buf);
       const merged = mergeFixtureLayout(layout, fixture);
       const applied = applyTask(merged, task);
-      const complete =
-        merged.stack === 'ocr_layout_vlm' &&
+      // OCR + keyword/box layout heuristics are PARTIAL only — not a multimodal VLM.
+      const partialOk =
+        merged.stack === 'ocr_layout_heuristics' &&
         merged.beyondOcrOnly &&
         applied.observations.ui_controls.length + applied.regions.length > 0;
       return {
@@ -249,10 +252,10 @@ function parseLocalImage(
         ocrUsed: true,
         beyondOcrOnly: merged.beyondOcrOnly,
         stack: merged.stack,
-        completeness: complete ? 'COMPLETE' : 'PARTIAL',
-        notes: complete
-          ? 'OCR+LAYOUT_VLM: tesseract OCR + structured regions/controls + task reasoning. Not cloud VLM. Not OCR-only.'
-          : 'OCR_PARTIAL: OCR ran but layout/task structure below COMPLETE bar (OCR alone ≠ vision).',
+        completeness: 'PARTIAL',
+        notes: partialOk
+          ? 'OCR+LAYOUT_HEURISTICS_PARTIAL: tesseract OCR + keyword/box layout. Not a neural VLM. Semantic non-text understanding absent → AI-UR-011 stays PARTIAL.'
+          : 'OCR_PARTIAL: OCR ran but layout/task structure thin. OCR alone ≠ vision COMPLETE.',
       };
     }
 
@@ -275,7 +278,7 @@ function parseLocalImage(
         stack: 'fixture_structured',
         completeness: 'PARTIAL',
         notes:
-          'FIXTURE_STRUCTURED_PARTIAL: embedded fixture without OCR. AI-UR-011 COMPLETE requires OCR+layout stack.',
+          'FIXTURE_STRUCTURED_PARTIAL: embedded fixture without OCR. AI-UR-011 COMPLETE requires real multimodal VLM (not OCR/fixture heuristics).',
       };
     }
 
@@ -361,7 +364,7 @@ function fixtureToLayout(fixture: VisionFixture): LayoutInference {
     controls: fixture.controls,
     scene: fixture.scene || fixture.texts.join(' | '),
     beyondOcrOnly: true,
-    stack: 'ocr_layout_vlm', // structural only; callers mark stack as fixture_structured
+    stack: 'ocr_layout_heuristics', // structural only; callers mark stack as fixture_structured
   };
 }
 
@@ -382,7 +385,7 @@ function mergeFixtureLayout(layout: LayoutInference, fixture: VisionFixture | nu
     controls,
     scene: layout.scene || fixture.scene || texts.slice(0, 3).join(' | '),
     beyondOcrOnly: beyond,
-    stack: beyond ? 'ocr_layout_vlm' : 'ocr_only',
+    stack: beyond ? 'ocr_layout_heuristics' : 'ocr_only',
   };
 }
 

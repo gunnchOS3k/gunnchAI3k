@@ -19,7 +19,7 @@ describe('AI-UR-011 vision/screen explicit share', () => {
     expect(vs.hasBackgroundTimer()).toBe(false);
   });
 
-  it('OCR+layout stack on real PNG fixtures: WAIKE, compiler, office, game, UI', () => {
+  it('OCR+layout heuristics on real PNG fixtures stay PARTIAL (not neural VLM COMPLETE)', () => {
     const vs = new VisionScreenRuntime();
     expect(vs.tesseractAvailable()).toBe(true);
     vs.grant('u1', 'screen');
@@ -39,8 +39,8 @@ describe('AI-UR-011 vision/screen explicit share', () => {
     expect(waike.ok).toBe(true);
     expect(waike.ocrUsed).toBe(true);
     expect(waike.beyondOcrOnly).toBe(true);
-    expect(waike.stack).toBe('ocr_layout_vlm');
-    expect(waike.completeness).toBe('COMPLETE');
+    expect(waike.stack).toBe('ocr_layout_heuristics');
+    expect(waike.completeness).toBe('PARTIAL');
     expect(waike.redacted).toBe(true);
     expect(waike.description).toMatch(/Start|Click/i);
 
@@ -55,6 +55,7 @@ describe('AI-UR-011 vision/screen explicit share', () => {
     );
     expect(compiler.ok).toBe(true);
     expect(compiler.ocrUsed).toBe(true);
+    expect(compiler.completeness).toBe('PARTIAL');
     expect(compiler.description).toMatch(/TS2345/);
 
     const office = vs.inspect(

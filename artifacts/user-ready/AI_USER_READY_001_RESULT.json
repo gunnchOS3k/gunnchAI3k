@@ -1,7 +1,7 @@
 {
   "schema": "gunnchai.user_ready_001.v1",
   "packet": "AI-USER-READY-001",
-  "generatedAt": "2026-08-14T21:32:24.532Z",
+  "generatedAt": "2026-08-14T23:02:07.528Z",
   "tokens": {
     "GUNNCHAI_APP_PRODUCT_COMPLETE": false,
     "GUNNCHAI_FRONTIER_PRODUCT_PARITY": false,
@@ -60,15 +60,15 @@
   },
   "coverage": {
     "required": 16,
-    "implemented": 10,
+    "implemented": 9,
     "runtime": 6,
-    "offline": 9,
+    "offline": 8,
     "cloud_only": 0,
     "cloud_consent": 4,
     "open": 6,
-    "gap": 6,
-    "complete": 10,
-    "partial": 0,
+    "gap": 7,
+    "complete": 9,
+    "partial": 1,
     "implemented_ids": [
       "AI-UR-001",
       "AI-UR-002",
@@ -77,7 +77,6 @@
       "AI-UR-005",
       "AI-UR-006",
       "AI-UR-007",
-      "AI-UR-011",
       "AI-UR-013",
       "AI-UR-016"
     ],
@@ -96,7 +95,6 @@
       "AI-UR-004",
       "AI-UR-005",
       "AI-UR-006",
-      "AI-UR-011",
       "AI-UR-013",
       "AI-UR-016"
     ],
@@ -122,11 +120,12 @@
       "AI-UR-005",
       "AI-UR-006",
       "AI-UR-007",
-      "AI-UR-011",
       "AI-UR-013",
       "AI-UR-016"
     ],
-    "partial_ids": []
+    "partial_ids": [
+      "AI-UR-011"
+    ]
   },
   "results": [
     {
@@ -167,7 +166,7 @@
       "cloud_only": false,
       "notes": "DOCX + code artifacts with targeted edit versions. Canvas UI OPEN.",
       "evidence": {
-        "docx": "/var/folders/dp/z5frf3m511jcdpdf8v878v8h0000gn/T/gunnchai-ur001-g4ERr4/artifacts/lab_report.docx",
+        "docx": "/var/folders/dp/z5frf3m511jcdpdf8v878v8h0000gn/T/gunnchai-ur001-TnAgsd/artifacts/lab_report.docx",
         "versions": 2,
         "codeExists": true
       }
@@ -214,12 +213,14 @@
   ],
   "stubChallengeFailures": [],
   "next_packet": [
+    "AI-UR-011 neural VLM for vision COMPLETE (OCR heuristics remain PARTIAL)",
     "AI-UR-008 Canvas/cowrite UI (needs pixels on device-os)",
     "AI-UR-009 custom Gems/GPTs/skills store",
     "AI-UR-010 voice realtime (natural conversation, not STT→TTS only)",
     "AI-UR-012 computer use GUI",
     "AI-UR-014 NotebookLM-class audio overview",
-    "AI-UR-015 companion chrome pixels"
+    "AI-UR-015 companion chrome pixels",
+    "LOCAL_PRO hashed HOST_OBSERVED quality gate"
   ],
   "allImplementedPassed": true,
   "notes": "Packet 001 evaluates AI-UR-001..006 only. Local Fast / Deep Research / vision / coding-agent belong to 002."

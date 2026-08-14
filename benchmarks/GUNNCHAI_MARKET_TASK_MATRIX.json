@@ -3,7 +3,7 @@
   "packet": "AI-USER-READY-003",
   "dated": "2026-08-14",
   "accepted_main_base": "b646ac0",
-  "doctrine": "Map market executable classes onto gunnchAI3k. coverage_status COMPLETE|PARTIAL|OPEN. implemented=true only for COMPLETE. SmolLM2-135M Q4_K_M 512-ctx is Nano fallback only. HUMAN_E6=false. GUNNCHAI_APP_PRODUCT_COMPLETE=false. GUNNCHAI_FRONTIER_PRODUCT_PARITY=false. Quality beats inflated counts. AI-USER-READY-003 completes 007/011/013 + Local Pro candidate.",
+  "doctrine": "Map market executable classes onto gunnchAI3k. coverage_status COMPLETE|PARTIAL|OPEN. implemented=true only for COMPLETE. SmolLM2-135M Q4_K_M 512-ctx is Nano fallback only. HUMAN_E6=false. GUNNCHAI_APP_PRODUCT_COMPLETE=false. GUNNCHAI_FRONTIER_PRODUCT_PARITY=false. Quality beats inflated counts. AI-USER-READY-003: 007/013 COMPLETE; 011 OCR+heuristics PARTIAL (neural VLM required for COMPLETE); Local Pro candidate OPEN.",
   "device_profiles": [
     "student_14_5",
     "handheld_hybrid",
@@ -285,7 +285,7 @@
       ],
       "local_required": true,
       "cloud_optional": false,
-      "implemented": true,
+      "implemented": false,
       "actual_runtime_test": "tests/user-ready/vision_screen.test.ts",
       "quality_metric": "explicit_share_plus_permission_plus_local_description",
       "privacy_requirement": "screen/file permission; explicit share; no silent or background capture",
@@ -293,9 +293,9 @@
         "handheld_hybrid",
         "ds_xl_coder"
       ],
-      "evidence": "src/user-ready/vision_ocr.ts + vision_screen.ts: tesseract OCR + layout/control inference on explicit PNG shares (WAIKE/compiler/office/game/UI); redaction; BACKGROUND_SURVEILLANCE_FORBIDDEN. OCR alone \u2260 COMPLETE.",
-      "gap": "Not a frontier cloud VLM. Computer-use GUI loop remains AI-UR-012 OPEN.",
-      "coverage_status": "COMPLETE"
+      "evidence": "src/user-ready/vision_ocr.ts + vision_screen.ts: tesseract OCR + keyword/box layout heuristics on explicit PNG shares (WAIKE/compiler/office/game/UI); redaction; BACKGROUND_SURVEILLANCE_FORBIDDEN. Stack id=ocr_layout_heuristics. Not a neural VLM.",
+      "gap": "PARTIAL: OCR+layout heuristics \u2260 general Vision. COMPLETE requires real multimodal VLM (local weights or consenting cloud provider) with semantic non-text understanding on arbitrary rasters (icon-only toolbar, diagram/photo, game visual state without OCR text). Computer-use GUI loop remains AI-UR-012 OPEN.",
+      "coverage_status": "PARTIAL"
     },
     {
       "task_id": "AI-UR-012",
@@ -403,11 +403,13 @@
     }
   ],
   "next_packet": [
+    "AI-UR-011 neural VLM for vision COMPLETE (OCR heuristics remain PARTIAL)",
     "AI-UR-008 Canvas/cowrite UI (needs pixels on device-os)",
     "AI-UR-009 custom Gems/GPTs/skills store",
     "AI-UR-010 voice realtime (natural conversation, not STT\u2192TTS only)",
     "AI-UR-012 computer use GUI",
     "AI-UR-014 NotebookLM-class audio overview",
-    "AI-UR-015 companion chrome pixels"
+    "AI-UR-015 companion chrome pixels",
+    "LOCAL_PRO hashed HOST_OBSERVED quality gate"
   ]
 }
