@@ -1,0 +1,196 @@
+{
+  "schema": "gunnchos.gunnchai35.independent_verifier_result.v1",
+  "work_item": "STREAM-C-AI-USER-READY-003-R3-INDEPENDENT-REVERIFY",
+  "owner_repo": "gunnchAI3k",
+  "repo_path": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k",
+  "verifier_role": "INDEPENDENT_VERIFIER_AGENT",
+  "did_not_implement": true,
+  "did_not_merge": true,
+  "did_not_push_main": true,
+  "did_not_start_AI_004": true,
+  "did_not_commit_gguf": true,
+  "prefer_fail_over_false_pass": true,
+  "cursor_never_merges": true,
+  "HUMAN_E6": false,
+  "FRONTIER_PARITY": false,
+  "rubber_stamp_rejected": {
+    "file": "artifacts/independent-eval/VP_GUNNCHAI_35_R2_INDEPENDENT_RESULT.json",
+    "reason": "R2 admits did_not_implement=false (implementer self-challenged after Option B). This R3 re-verifies independently and does not inherit R2 READY.",
+    "r2_tip_claimed": "f047e4cea80b6d7b323cb718e1c7a9bb355167b7",
+    "r2_verdict_ignored": true
+  },
+  "prior_rounds": {
+    "FAIL": "artifacts/independent-eval/VP_GUNNCHAI_35_INDEPENDENT_RESULT.json",
+    "R1": "artifacts/independent-eval/VP_GUNNCHAI_35_R1_INDEPENDENT_RESULT.json",
+    "R2_implementer": "artifacts/independent-eval/VP_GUNNCHAI_35_R2_INDEPENDENT_RESULT.json"
+  },
+  "resolution_observed": "B",
+  "resolution_note": "Option B truth remediation present on tip: AI-UR-011 demoted to PARTIAL (ocr_layout_heuristics); matrix 9/1/6; OCR≠VLM stub enforced.",
+  "pr": {
+    "number": 35,
+    "url": "https://github.com/gunnchOS3k/gunnchAI3k/pull/35",
+    "draft": true,
+    "branch": "stream/ai-user-ready-003-research-vision-coding",
+    "state": "OPEN",
+    "base": "main",
+    "baseRefOid": "b646ac050cceff297fdf1a25ac270bd7f44636f3",
+    "mergeable": "MERGEABLE",
+    "title": "AI-USER-READY-003: Deep Research + coding DRAFT PR; vision OCR PARTIAL"
+  },
+  "claimed_tip": "3177deec9653dd63d5fe46de8d29524ab4a516de",
+  "claimed_tip_short": "3177dee",
+  "verified_tip": "3177deec9653dd63d5fe46de8d29524ab4a516de",
+  "verified_tip_short": "3177dee",
+  "verified_tip_subject": "verify(user-ready): independent R2 PASS — AI-UR-011 PARTIAL truth on #35",
+  "remediation_tip_ancestor": "f047e4cea80b6d7b323cb718e1c7a9bb355167b7",
+  "live_matches_claimed": true,
+  "base_main": "b646ac050cceff297fdf1a25ac270bd7f44636f3",
+  "base_main_short": "b646ac0",
+  "generated_at_utc": "2026-08-14T23:27:57Z",
+  "VP_GUNNCHAI_35_R3_INDEPENDENT_RESULT": "PASS",
+  "INDEPENDENT_PASS": true,
+  "GUNNCHAI_35_READY_FOR_EDMUND_MERGE": true,
+  "READY_FOR_EDMUND_MERGE": true,
+  "Edmund_mergeable": true,
+  "READY_reason": "Independent R3 re-verify (not R2 rubber-stamp) on tip 3177dee: required CI SUCCESS on THIS tip (001/002/003 market-runtime push+PR + Deploy build). Matrix recomputed from benchmarks/GUNNCHAI_MARKET_TASK_MATRIX.json = 9 COMPLETE / 1 PARTIAL / 6 OPEN; AI-UR-011 PARTIAL implemented=false stack=ocr_layout_heuristics; stub rejects OCR_HEURISTICS_AS_VLM_COMPLETE; chatbot≠pass (AI-UR-015 companion_ux OPEN). AI-UR-007 COMPLETE live_web (sourcesRead=8). AI-UR-013 COMPLETE via CI digital gate + sandbox DRAFT PR #2 independently confirmed isDraft=true mergedAt=null production blocked. Local Pro OPEN (HOST_OBSERVED incomplete). HUMAN_E6=false. FRONTIER_PARITY=false. Cursor does not merge. Do not start AI-004.",
+  "ci": {
+    "tip_sha": "3177deec9653dd63d5fe46de8d29524ab4a516de",
+    "overall": "GREEN",
+    "required": [
+      {
+        "workflow": "AI-USER-READY-001 market packet",
+        "push": "https://github.com/gunnchOS3k/gunnchAI3k/actions/runs/31849642597",
+        "pull_request": "https://github.com/gunnchOS3k/gunnchAI3k/actions/runs/31849645650",
+        "conclusion": "success",
+        "head_sha": "3177deec9653dd63d5fe46de8d29524ab4a516de"
+      },
+      {
+        "workflow": "AI-USER-READY-002 market packet",
+        "push": "https://github.com/gunnchOS3k/gunnchAI3k/actions/runs/31849642605",
+        "pull_request": "https://github.com/gunnchOS3k/gunnchAI3k/actions/runs/31849645604",
+        "conclusion": "success",
+        "head_sha": "3177deec9653dd63d5fe46de8d29524ab4a516de"
+      },
+      {
+        "workflow": "AI-USER-READY-003 market packet",
+        "push": "https://github.com/gunnchOS3k/gunnchAI3k/actions/runs/31849642479",
+        "pull_request": "https://github.com/gunnchOS3k/gunnchAI3k/actions/runs/31849645632",
+        "conclusion": "success",
+        "head_sha": "3177deec9653dd63d5fe46de8d29524ab4a516de"
+      },
+      {
+        "workflow": "Deploy gunnchAI3k / build",
+        "pull_request": "https://github.com/gunnchOS3k/gunnchAI3k/actions/runs/31849645655",
+        "conclusion": "success",
+        "head_sha": "3177deec9653dd63d5fe46de8d29524ab4a516de"
+      }
+    ],
+    "checks_fail_count": 0,
+    "market_packet_continue_on_error": false,
+    "deploy_skipped_ok": true
+  },
+  "matrix": {
+    "source": "benchmarks/GUNNCHAI_MARKET_TASK_MATRIX.json",
+    "recomputed": true,
+    "COMPLETE": 9,
+    "PARTIAL": 1,
+    "OPEN": 6,
+    "complete_ids": [
+      "AI-UR-001",
+      "AI-UR-002",
+      "AI-UR-003",
+      "AI-UR-004",
+      "AI-UR-005",
+      "AI-UR-006",
+      "AI-UR-007",
+      "AI-UR-013",
+      "AI-UR-016"
+    ],
+    "partial_ids": ["AI-UR-011"],
+    "open_ids": [
+      "AI-UR-008",
+      "AI-UR-009",
+      "AI-UR-010",
+      "AI-UR-012",
+      "AI-UR-014",
+      "AI-UR-015"
+    ],
+    "artifact_003_agrees": true,
+    "rejects_10_0_6": true
+  },
+  "task_verdicts": {
+    "AI-UR-007": {
+      "verdict": "COMPLETE",
+      "discoveryMode": "live_web",
+      "sourcesRead": 8,
+      "synthetic_only": false,
+      "note": "Packet 003 evidence discoveryMode=live_web; synthetic discovery.gunnchai.local remains PARTIAL-only / stub SYNTHETIC_SEARCH_AS_DEEP_RESEARCH"
+    },
+    "AI-UR-011": {
+      "verdict": "PARTIAL",
+      "implemented": false,
+      "stack": "ocr_layout_heuristics",
+      "neuralVlm": false,
+      "completeness": "PARTIAL",
+      "architecture": "tesseract OCR + keyword/box layout heuristics on explicit shares; redaction; BACKGROUND_SURVEILLANCE_FORBIDDEN",
+      "ocr_as_vlm_complete": false,
+      "stub_rejects": "OCR_HEURISTICS_AS_VLM_COMPLETE",
+      "chatbot_equals_pass": false,
+      "note": "Not COMPLETE; AI-UR-015 companion_ux remains OPEN (classifier≠chrome)"
+    },
+    "AI-UR-013": {
+      "verdict": "COMPLETE",
+      "mode": "ci_digital_gate_plus_recorded_live_pr",
+      "sandbox_pr": "https://github.com/gunnchOS3k/gunnchai-ai-ur-013-sandbox/pull/2",
+      "independent_gh": {
+        "isDraft": true,
+        "state": "OPEN",
+        "mergedAt": null
+      },
+      "production_blocked": true,
+      "note": "Allowlisted sandbox only; merge/force/main/production forbidden in coding_agent_pr.ts"
+    },
+    "LOCAL_PRO": {
+      "verdict": "OPEN",
+      "status_file": "benchmarks/LOCAL_PRO_STATUS.json",
+      "weightsStatus": "OPEN",
+      "host_observed": false,
+      "fake_complete": false,
+      "note": "Pinned Qwen2.5-1.5B Q4_K_M SHA wiring present; download incomplete; Fast≠Pro"
+    }
+  },
+  "challenges": {
+    "1_live_tip_and_ci": "PASS — tip 3177dee matches PR head + origin branch; required market 001/002/003 + Deploy build SUCCESS on THIS tip",
+    "2_matrix_9_1_6": "PASS — recomputed 9/1/6; 011 not COMPLETE; chatbot≠pass",
+    "3_011_ocr_heuristics_partial": "PASS — stack=ocr_layout_heuristics; matrix+artifact PARTIAL; stub OCR_HEURISTICS_AS_VLM_COMPLETE; vision_* completeness never COMPLETE",
+    "4_007_live_discovery": "PASS — discoveryMode=live_web sourcesRead=8 COMPLETE",
+    "5_013_sandbox_draft_pr2": "PASS — gh confirms draft=true state=OPEN mergedAt=null; production blocked",
+    "6_local_pro_open": "PASS — LOCAL_PRO_STATUS OPEN; artifact localPro.status OPEN; no fake COMPLETE",
+    "7_pr_body_matrix_evidence": "PASS — PR summary/title/matrix/011 PARTIAL/Pro OPEN/013 sandbox agree with artifacts; note: test-plan checklist still cites ancestor tip f047e4c (non-blocking; live tip CI green on 3177dee)"
+  },
+  "claim_firewall": {
+    "GUNNCHAI_APP_PRODUCT_COMPLETE": false,
+    "GUNNCHAI_FRONTIER_PRODUCT_PARITY": false,
+    "HUMAN_E6": false,
+    "AI_USER_READY_003_DIGITAL_PASS": true,
+    "BETTER_THAN_CHATGPT": false,
+    "BETTER_THAN_CLAUDE": false,
+    "BETTER_THAN_GEMINI": false,
+    "BETTER_THAN_NOTEBOOKLM": false,
+    "BETTER_THAN_KHANMIGO": false,
+    "BETTER_THAN_PERPLEXITY": false,
+    "BETTER_THAN_COPILOT": false
+  },
+  "held_for_AI_004": [
+    "AI-UR-008",
+    "AI-UR-009",
+    "AI-UR-010",
+    "AI-UR-012",
+    "AI-UR-014",
+    "AI-UR-015",
+    "AI-UR-011 neural VLM for vision COMPLETE (OCR heuristics remain PARTIAL)",
+    "LOCAL_PRO hashed HOST_OBSERVED quality gate"
+  ],
+  "do_not_start_AI_004": true,
+  "cursor_merge": false
+}
