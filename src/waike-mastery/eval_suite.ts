@@ -1,5 +1,6 @@
 /**
- * AI_WAIKE_MASTERY_EVAL suite — aggregate WAIKE_AI_DIGITAL_MASTERY_PASS only if all children pass.
+ * AI_WAIKE_MASTERY_EVAL suite — publish scores; mastery PASS only under policy.
+ * Infra smoke is separate from WAIKE_AI_DIGITAL_MASTERY_PASS.
  */
 import { spawnSync } from 'node:child_process';
 import * as fs from 'node:fs';
@@ -9,7 +10,13 @@ import { discoverCoursesFromContract, resolveWaikeRoot } from './contract';
 import { diagnose, runRemediationLoop } from './diagnosis';
 import { proposeGradeAssist, runEducatorCopilot } from './educator';
 import { assertModePermission, createModeSession, MODE_PERMISSIONS } from './modes';
-import { buildMasteryTokens, MASTERY_PASS_TOKEN } from './tokens';
+import {
+  assertNoFalseMasteryPass,
+  buildMasteryTokens,
+  INFRA_SMOKE_TOKEN,
+  MASTERY_OVERALL_MIN,
+  MASTERY_PASS_TOKEN,
+} from './tokens';
 
 export interface MasteryEvalReport {
   suite: 'AI_WAIKE_MASTERY_EVAL';
@@ -30,6 +37,7 @@ export interface MasteryEvalReport {
   tokens: ReturnType<typeof buildMasteryTokens>;
   open: string[];
   WAIKE_AI_DIGITAL_MASTERY_PASS: boolean;
+  AI_WAIKE_MASTERY_INFRA_SMOKE_PASS: boolean;
 }
 
 function loadWaikeEval(waikeRoot: string | null): Record<string, unknown> | null {
@@ -40,13 +48,12 @@ function loadWaikeEval(waikeRoot: string | null): Record<string, unknown> | null
 }
 
 function ensureWaikeArtifacts(waikeRoot: string): Record<string, unknown> | null {
-  const existing = loadWaikeEval(waikeRoot);
-  if (existing) return existing;
   const script = path.join(waikeRoot, 'scripts', 'emit_waike_mastery.py');
-  if (!fs.existsSync(script)) return null;
-  const r = spawnSync('python3', [script], { cwd: waikeRoot, encoding: 'utf8', timeout: 120_000 });
-  if (r.status !== 0) {
-    return { emit_failed: true, stderr: r.stderr, stdout: r.stdout };
+  if (!fs.existsSync(script)) return loadWaikeEval(waikeRoot);
+  // Always re-emit so gunnchAI tip tracks honest waike scores/tokens
+  const r = spawnSync('python3', [script], { cwd: waikeRoot, encoding: 'utf8', timeout: 180_000 });
+  if (r.status !== 0 && r.status !== 2) {
+    return { emit_failed: true, status: r.status, stderr: r.stderr, stdout: r.stdout };
   }
   return loadWaikeEval(waikeRoot);
 }
@@ -59,7 +66,6 @@ export async function runMasteryEvalSuite(cwd = process.cwd()): Promise<MasteryE
 
   const waikeEval = waikeRoot ? ensureWaikeArtifacts(waikeRoot) : null;
 
-  // Mode separation
   let modePass = true;
   let modeDetail = 'ok';
   try {
@@ -102,15 +108,26 @@ export async function runMasteryEvalSuite(cwd = process.cwd()): Promise<MasteryE
 
   const masteryScores = (waikeEval?.mastery_scores as Record<string, unknown>) || null;
   const toolUse = (waikeEval?.tool_use as Record<string, unknown>) || null;
-  const waikeChildren = (waikeEval?.children as Record<string, { pass: boolean }>) || null;
+  const overallScore =
+    typeof masteryScores?.overall === 'number' ? (masteryScores.overall as number) : null;
 
-  const children: MasteryEvalReport['children'] = {
+  const waikeTokens = (waikeEval?.tokens as Record<string, unknown>) || {};
+  const waikeMasteryPass = waikeTokens.WAIKE_AI_DIGITAL_MASTERY_PASS === true;
+  const waikeInfra =
+    waikeTokens.AI_WAIKE_MASTERY_INFRA_SMOKE_PASS === true ||
+    waikeEval?.AI_WAIKE_MASTERY_INFRA_SMOKE_PASS === true;
+  const usedKeys = waikeTokens.USED_INSTRUCTOR_KEYS_IN_BENCHMARK_SOLVE === true;
+
+  const infraChildren: MasteryEvalReport['children'] = {
     MODE_SEPARATION: { pass: modePass, detail: modeDetail },
     LEARNING_CONTRACT_DISCOVERY: {
       pass: discovered.course_count >= 9 && discovered.hardcoded_course_names === false,
       detail: `courses=${discovered.course_count}`,
     },
-    KEY_LEAK_CANARY: { pass: canary.pass, detail: canary.detail },
+    KEY_LEAK_CANARY: {
+      pass: canary.pass && canary.canaryTextUsed && canary.solverDiscoveryRefused,
+      detail: canary.detail,
+    },
     DIAGNOSIS_REMEDIATION: {
       pass:
         openLoop.finalEvidenceState !== 'CERTAINLY_FILLED' &&
@@ -124,23 +141,36 @@ export async function runMasteryEvalSuite(cwd = process.cwd()): Promise<MasteryE
         gradeProp.published === false,
       detail: 'HITL grading assist',
     },
-    WAIKE_CORPUS_EVAL: {
-      pass: Boolean(waikeEval && waikeEval.WAIKE_AI_DIGITAL_MASTERY_PASS === true),
-      detail: waikeEval
-        ? `waike_pass=${waikeEval.WAIKE_AI_DIGITAL_MASTERY_PASS}`
-        : 'waike artifacts missing',
+    WAIKE_INFRA_SMOKE: {
+      pass: Boolean(waikeEval && waikeInfra),
+      detail: waikeEval ? `waike_infra=${waikeInfra}` : 'waike artifacts missing',
+    },
+    WAIKE_MASTERY_HONESTLY_FALSE_OR_EARNED: {
+      pass:
+        waikeMasteryPass === false ||
+        (overallScore != null && overallScore >= MASTERY_OVERALL_MIN),
+      detail: `waike_mastery_pass=${waikeMasteryPass} overall=${overallScore}`,
+    },
+    TOOL_USE_NOT_OVERCLAIMED: {
+      pass:
+        !toolUse ||
+        toolUse.coverage_status === 'PARTIAL' ||
+        toolUse.mastery_complete === false,
+      detail: `status=${toolUse?.coverage_status}`,
     },
   };
 
-  // If waike children present, require their passes too for aggregate
-  if (waikeChildren) {
-    for (const [k, v] of Object.entries(waikeChildren)) {
-      children[`WAIKE_${k}`] = { pass: Boolean(v.pass) };
-    }
-  }
+  const infraSmoke = Object.values(infraChildren).every((c) => c.pass);
 
-  const allPass = Object.values(children).every((c) => c.pass);
-  const tokens = buildMasteryTokens(allPass);
+  // Mastery PASS only if waike policy earned it — never from infra alone / 0.55 bar
+  const masteryPass = waikeMasteryPass === true;
+  assertNoFalseMasteryPass(overallScore, masteryPass);
+
+  const tokens = buildMasteryTokens({
+    masteryPass,
+    infraSmoke,
+    usedInstructorKeysDuringSolve: usedKeys,
+  });
 
   const report: MasteryEvalReport = {
     suite: 'AI_WAIKE_MASTERY_EVAL',
@@ -149,7 +179,7 @@ export async function runMasteryEvalSuite(cwd = process.cwd()): Promise<MasteryE
       course_ids: discovered.courses.map((c) => c.course_id),
       waike_root: waikeRoot,
     },
-    children,
+    children: infraChildren,
     mastery_scores: masteryScores,
     tool_use: toolUse,
     canary,
@@ -160,12 +190,13 @@ export async function runMasteryEvalSuite(cwd = process.cwd()): Promise<MasteryE
     educator_mode: educator,
     tokens,
     open: [
-      'REAL_STUDENT / REAL_TEACHER / HUMAN_E6 / ACCREDITED remain false without evidence.',
-      'Standalone AI-004 (#36) and WAIKE-004 (#46) are not this stream’s primary deliverable.',
-      'Product-Use device-os #116 is out of scope — do not collide.',
-      'MCQ mastery uses curriculum-overlap digital solver — not a claim of human exam proctoring.',
+      'WAIKE_AI_DIGITAL_MASTERY_PASS demoted — scores published without false PASS.',
+      'AI_WAIKE_MASTERY_EVAL tracks mastery (false until earned); INFRA_SMOKE is separate.',
+      'Tool-use PARTIAL fixtures ≠ COMPLETE. REAL_*/HUMAN_E6/ACCREDITED remain false.',
+      'device-os #116 untouched.',
     ],
     WAIKE_AI_DIGITAL_MASTERY_PASS: tokens[MASTERY_PASS_TOKEN],
+    AI_WAIKE_MASTERY_INFRA_SMOKE_PASS: tokens[INFRA_SMOKE_TOKEN],
   };
 
   const outDir = path.join(cwd, 'artifacts', 'waike-mastery');

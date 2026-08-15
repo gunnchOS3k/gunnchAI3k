@@ -26,7 +26,7 @@
     },
     "KEY_LEAK_CANARY": {
       "pass": true,
-      "detail": "no-leak"
+      "detail": "no-leak-refused-feed"
     },
     "DIAGNOSIS_REMEDIATION": {
       "pass": true,
@@ -36,39 +36,17 @@
       "pass": true,
       "detail": "HITL grading assist"
     },
-    "WAIKE_CORPUS_EVAL": {
+    "WAIKE_INFRA_SMOKE": {
       "pass": true,
-      "detail": "waike_pass=true"
+      "detail": "waike_infra=true"
     },
-    "WAIKE_MODE_CONTRACT_PERMISSIONS": {
-      "pass": true
+    "WAIKE_MASTERY_HONESTLY_FALSE_OR_EARNED": {
+      "pass": true,
+      "detail": "waike_mastery_pass=false overall=0.6442307692307693"
     },
-    "WAIKE_LEARNING_CONTRACT_DISCOVERY": {
-      "pass": true
-    },
-    "WAIKE_ASSESSABLE_REGISTRY": {
-      "pass": true
-    },
-    "WAIKE_KEY_LEAK_CANARY": {
-      "pass": true
-    },
-    "WAIKE_TOOL_USE_LABS": {
-      "pass": true
-    },
-    "WAIKE_MASTERY_BENCHMARK_ISOLATED": {
-      "pass": true
-    },
-    "WAIKE_ISOMORPHIC_VARIANTS": {
-      "pass": true
-    },
-    "WAIKE_DIAGNOSIS_REMEDIATION": {
-      "pass": true
-    },
-    "WAIKE_EDUCATOR_COPILOT": {
-      "pass": true
-    },
-    "WAIKE_CURRICULUM_AUDIT_ENGINE": {
-      "pass": true
+    "TOOL_USE_NOT_OVERCLAIMED": {
+      "pass": true,
+      "detail": "status=PARTIAL"
     }
   },
   "mastery_scores": {
@@ -147,12 +125,22 @@
     },
     "items_attempted": 936,
     "items_correct": 603,
-    "solver": "curriculum_overlap_v1"
+    "solver": "curriculum_overlap_v1",
+    "transfer": {
+      "items": 60,
+      "correct": 46,
+      "score": 0.7666666666666667,
+      "method": "isomorphic_choice_permutation"
+    },
+    "published_without_false_pass": true
   },
   "tool_use": {
     "attempted": 10,
     "passed": 10,
     "pass_rate": 1,
+    "coverage_status": "PARTIAL",
+    "claim": "TOOL_USE_GRADER_CHECKED_FIXTURES",
+    "mastery_complete": false,
     "labs": [
       {
         "lab_id": "lab_os_users",
@@ -198,10 +186,13 @@
   },
   "canary": {
     "pass": true,
+    "canaryTextUsed": true,
+    "feedAttempted": true,
+    "solverDiscoveryRefused": true,
     "leakedToMasteryMode": false,
     "permissionBlocked": true,
     "registryClean": true,
-    "detail": "no-leak"
+    "detail": "no-leak-refused-feed"
   },
   "diagnosis_remediation": {
     "open_loop_final": "PRACTICE_IN_PROGRESS",
@@ -229,8 +220,9 @@
     "publishWithoutHumanBlocked": true
   },
   "tokens": {
-    "WAIKE_AI_DIGITAL_MASTERY_PASS": true,
-    "AI_WAIKE_MASTERY_EVAL": true,
+    "WAIKE_AI_DIGITAL_MASTERY_PASS": false,
+    "AI_WAIKE_MASTERY_EVAL": false,
+    "AI_WAIKE_MASTERY_INFRA_SMOKE_PASS": true,
     "REAL_STUDENT": false,
     "REAL_TEACHER": false,
     "HUMAN_E6": false,
@@ -241,10 +233,11 @@
     "GUNNCHAI_FRONTIER_PRODUCT_PARITY": false
   },
   "open": [
-    "REAL_STUDENT / REAL_TEACHER / HUMAN_E6 / ACCREDITED remain false without evidence.",
-    "Standalone AI-004 (#36) and WAIKE-004 (#46) are not this stream’s primary deliverable.",
-    "Product-Use device-os #116 is out of scope — do not collide.",
-    "MCQ mastery uses curriculum-overlap digital solver — not a claim of human exam proctoring."
+    "WAIKE_AI_DIGITAL_MASTERY_PASS demoted — scores published without false PASS.",
+    "AI_WAIKE_MASTERY_EVAL tracks mastery (false until earned); INFRA_SMOKE is separate.",
+    "Tool-use PARTIAL fixtures ≠ COMPLETE. REAL_*/HUMAN_E6/ACCREDITED remain false.",
+    "device-os #116 untouched."
   ],
-  "WAIKE_AI_DIGITAL_MASTERY_PASS": true
+  "WAIKE_AI_DIGITAL_MASTERY_PASS": false,
+  "AI_WAIKE_MASTERY_INFRA_SMOKE_PASS": true
 }
