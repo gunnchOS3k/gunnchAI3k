@@ -1,0 +1,19 @@
+name: ai-waike-mastery
+on:
+  pull_request:
+    paths:
+      - 'src/waike-mastery/**'
+      - 'tests/waike-mastery/**'
+      - '.github/workflows/ai-waike-mastery.yml'
+  workflow_dispatch:
+jobs:
+  mastery-unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - run: npm ci
+      - run: npm run test:waike-mastery

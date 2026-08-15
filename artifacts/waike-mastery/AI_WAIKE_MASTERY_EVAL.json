@@ -1,0 +1,243 @@
+{
+  "suite": "AI_WAIKE_MASTERY_EVAL",
+  "corpus": {
+    "discoverable_courses": 9,
+    "course_ids": [
+      "AI_ML_EDGE",
+      "CLOUD_DEVOPS",
+      "COMPUTER_NETWORKING",
+      "CYBERSECURITY",
+      "DATA_VIZ_BI",
+      "GENERAL_IT",
+      "HARDWARE_ENGINEERING",
+      "PM_AGILE_LSS",
+      "SOFTWARE_BUILDER"
+    ],
+    "waike_root": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/waike-research-ops"
+  },
+  "children": {
+    "MODE_SEPARATION": {
+      "pass": true,
+      "detail": "ok"
+    },
+    "LEARNING_CONTRACT_DISCOVERY": {
+      "pass": true,
+      "detail": "courses=9"
+    },
+    "KEY_LEAK_CANARY": {
+      "pass": true,
+      "detail": "no-leak-refused-feed"
+    },
+    "DIAGNOSIS_REMEDIATION": {
+      "pass": true,
+      "detail": "PRACTICE_IN_PROGRESS->CERTAINLY_FILLED"
+    },
+    "EDUCATOR_COPILOT": {
+      "pass": true,
+      "detail": "HITL grading assist"
+    },
+    "WAIKE_INFRA_SMOKE": {
+      "pass": true,
+      "detail": "waike_infra=true"
+    },
+    "WAIKE_MASTERY_HONESTLY_FALSE_OR_EARNED": {
+      "pass": true,
+      "detail": "waike_mastery_pass=false overall=0.6442307692307693"
+    },
+    "TOOL_USE_NOT_OVERCLAIMED": {
+      "pass": true,
+      "detail": "status=PARTIAL"
+    }
+  },
+  "mastery_scores": {
+    "overall": 0.6442307692307693,
+    "per_course": {
+      "AI_ML_EDGE": {
+        "correct": 64,
+        "total": 104,
+        "score": 0.6153846153846154
+      },
+      "CLOUD_DEVOPS": {
+        "correct": 80,
+        "total": 104,
+        "score": 0.7692307692307693
+      },
+      "COMPUTER_NETWORKING": {
+        "correct": 55,
+        "total": 104,
+        "score": 0.5288461538461539
+      },
+      "CYBERSECURITY": {
+        "correct": 73,
+        "total": 104,
+        "score": 0.7019230769230769
+      },
+      "DATA_VIZ_BI": {
+        "correct": 62,
+        "total": 104,
+        "score": 0.5961538461538461
+      },
+      "GENERAL_IT": {
+        "correct": 69,
+        "total": 104,
+        "score": 0.6634615384615384
+      },
+      "HARDWARE_ENGINEERING": {
+        "correct": 68,
+        "total": 104,
+        "score": 0.6538461538461539
+      },
+      "PM_AGILE_LSS": {
+        "correct": 64,
+        "total": 104,
+        "score": 0.6153846153846154
+      },
+      "SOFTWARE_BUILDER": {
+        "correct": 68,
+        "total": 104,
+        "score": 0.6538461538461539
+      }
+    },
+    "per_assessment_sample": {
+      "AI_ML_EDGE:AI_ML_EDGE-q01": 0.8333333333333334,
+      "AI_ML_EDGE:AI_ML_EDGE-q02": 0.8333333333333334,
+      "AI_ML_EDGE:AI_ML_EDGE-q03": 0.5,
+      "AI_ML_EDGE:AI_ML_EDGE-q04": 0.16666666666666666,
+      "AI_ML_EDGE:AI_ML_EDGE-q05": 0.6666666666666666,
+      "AI_ML_EDGE:AI_ML_EDGE-q06": 0.6666666666666666,
+      "AI_ML_EDGE:AI_ML_EDGE-q07": 0.8333333333333334,
+      "AI_ML_EDGE:AI_ML_EDGE-q08": 0.8333333333333334,
+      "AI_ML_EDGE:AI_ML_EDGE-q09": 0.5,
+      "AI_ML_EDGE:AI_ML_EDGE-q10": 0.6666666666666666,
+      "AI_ML_EDGE:AI_ML_EDGE-mid": 0.5,
+      "AI_ML_EDGE:AI_ML_EDGE-final": 0.625
+    },
+    "per_domain": {
+      "AI_ML_EDGE.knowledge": 0.6354166666666666,
+      "CLOUD_DEVOPS.knowledge": 0.7680555555555556,
+      "COMPUTER_NETWORKING.knowledge": 0.5284722222222221,
+      "CYBERSECURITY.knowledge": 0.6909722222222223,
+      "DATA_VIZ_BI.knowledge": 0.6180555555555556,
+      "GENERAL_IT.knowledge": 0.6354166666666666,
+      "HARDWARE_ENGINEERING.knowledge": 0.6298611111111111,
+      "PM_AGILE_LSS.knowledge": 0.5958333333333334,
+      "SOFTWARE_BUILDER.knowledge": 0.6833333333333335
+    },
+    "items_attempted": 936,
+    "items_correct": 603,
+    "solver": "curriculum_overlap_v1",
+    "transfer": {
+      "items": 60,
+      "correct": 46,
+      "score": 0.7666666666666667,
+      "method": "isomorphic_choice_permutation"
+    },
+    "published_without_false_pass": true
+  },
+  "tool_use": {
+    "attempted": 10,
+    "passed": 10,
+    "pass_rate": 1,
+    "coverage_status": "PARTIAL",
+    "claim": "TOOL_USE_GRADER_CHECKED_FIXTURES",
+    "mastery_complete": false,
+    "labs": [
+      {
+        "lab_id": "lab_os_users",
+        "ok": true
+      },
+      {
+        "lab_id": "lab_services",
+        "ok": true
+      },
+      {
+        "lab_id": "lab_storage",
+        "ok": true
+      },
+      {
+        "lab_id": "lab_cidr_math",
+        "ok": true
+      },
+      {
+        "lab_id": "lab_datapath",
+        "ok": true
+      },
+      {
+        "lab_id": "lab_git_conflict",
+        "ok": true
+      },
+      {
+        "lab_id": "lab_authz",
+        "ok": true
+      },
+      {
+        "lab_id": "lab_rest_api",
+        "ok": true
+      },
+      {
+        "lab_id": "lab_db_migration",
+        "ok": true
+      },
+      {
+        "lab_id": "lab_frontend_ui",
+        "ok": true
+      }
+    ]
+  },
+  "canary": {
+    "pass": true,
+    "canaryTextUsed": true,
+    "feedAttempted": true,
+    "solverDiscoveryRefused": true,
+    "leakedToMasteryMode": false,
+    "permissionBlocked": true,
+    "registryClean": true,
+    "detail": "no-leak-refused-feed"
+  },
+  "diagnosis_remediation": {
+    "open_loop_final": "PRACTICE_IN_PROGRESS",
+    "closed_loop_final": "CERTAINLY_FILLED"
+  },
+  "educator_mode": {
+    "mode": "EDUCATOR_COPILOT",
+    "courseId": "AI_ML_EDGE",
+    "intent": "grading_assist",
+    "actions": [
+      "Propose rubric scores",
+      "Require human confirm before publish"
+    ],
+    "permissions": {
+      "mayReadStudentMaterials": true,
+      "mayReadInstructorKeys": true,
+      "maySelfGrade": false,
+      "mayPublishGradesWithoutHuman": false,
+      "hitlGradingRequired": true,
+      "mayDiscloseFinalAnswersToLearner": false,
+      "gradingAgent": "hitl"
+    },
+    "hitlGradingRequired": true,
+    "autoPublishGrades": false,
+    "publishWithoutHumanBlocked": true
+  },
+  "tokens": {
+    "WAIKE_AI_DIGITAL_MASTERY_PASS": false,
+    "AI_WAIKE_MASTERY_EVAL": false,
+    "AI_WAIKE_MASTERY_INFRA_SMOKE_PASS": true,
+    "REAL_STUDENT": false,
+    "REAL_TEACHER": false,
+    "HUMAN_E6": false,
+    "ACCREDITED": false,
+    "USED_INSTRUCTOR_KEYS_IN_BENCHMARK_SOLVE": false,
+    "SELF_GRADED": false,
+    "GUNNCHAI_APP_PRODUCT_COMPLETE": false,
+    "GUNNCHAI_FRONTIER_PRODUCT_PARITY": false
+  },
+  "open": [
+    "WAIKE_AI_DIGITAL_MASTERY_PASS demoted — scores published without false PASS.",
+    "AI_WAIKE_MASTERY_EVAL tracks mastery (false until earned); INFRA_SMOKE is separate.",
+    "Tool-use PARTIAL fixtures ≠ COMPLETE. REAL_*/HUMAN_E6/ACCREDITED remain false.",
+    "device-os #116 untouched."
+  ],
+  "WAIKE_AI_DIGITAL_MASTERY_PASS": false,
+  "AI_WAIKE_MASTERY_INFRA_SMOKE_PASS": true
+}
