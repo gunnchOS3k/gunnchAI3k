@@ -1,0 +1,71 @@
+name: AI-USER-READY-004 market packet
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main, 'stream/ai-user-ready-004']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: ai-user-ready-004-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  market-runtime:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - name: Install tesseract OCR
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y tesseract-ocr
+          tesseract --version
+      - run: npm ci
+      - name: User-ready unit tests
+        run: npm run test:user-ready
+        env:
+          GUNNCHAI_SKIP_FAST_DOWNLOAD: "1"
+          GUNNCHAI_SKIP_PRO_DOWNLOAD: "1"
+          GUNNCHAI_AI_UR_013_LIVE_PR: "0"
+      - name: Provision llama.cpp
+        run: |
+          set -euo pipefail
+          if command -v llama-cli >/dev/null 2>&1; then
+            echo "llama-cli already on PATH: $(command -v llama-cli)"
+            exit 0
+          fi
+          git clone --depth 1 https://github.com/ggml-org/llama.cpp .llama-cpp-src
+          cmake -S .llama-cpp-src -B .llama-cpp-src/build -DGGML_NATIVE=OFF
+          cmake --build .llama-cpp-src/build --target llama-cli -j "$(nproc)"
+          echo "$PWD/.llama-cpp-src/build/bin" >> "$GITHUB_PATH"
+          test -x .llama-cpp-src/build/bin/llama-cli
+      - name: CLI packet 004 (no Pro download; synthetic voice PARTIAL)
+        env:
+          GUNNCHAI_FAST_NETWORK_CONSENT: "1"
+          GUNNCHAI_PRO_NETWORK_CONSENT: "0"
+          GUNNCHAI_SKIP_PRO_DOWNLOAD: "1"
+          GUNNCHAI_AI_UR_013_LIVE_PR: "0"
+        run: npm run user-ready:004
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ai-user-ready-004-result
+          path: |
+            artifacts/user-ready/AI_USER_READY_004_RESULT.json
+            artifacts/user-ready/AI_USER_READY_003_RESULT.json
+            artifacts/user-ready/AI_UR_013_LIVE_DRAFT_PR.json
+            benchmarks/LOCAL_PRO_STATUS.json
+            benchmarks/LOCAL_FAST_QUALITY_GATE.json
+            benchmarks/GUNNCHAI_MARKET_TASK_MATRIX.json
+          if-no-files-found: error
+          retention-days: 14

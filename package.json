@@ -50,6 +50,7 @@
     "user-ready:001": "tsx src/user-ready/cli.ts --packet=001",
     "user-ready:002": "tsx src/user-ready/cli.ts --packet=002",
     "user-ready:003": "tsx src/user-ready/cli.ts --packet=003",
+    "user-ready:004": "tsx src/user-ready/cli.ts --packet=004",
     "user-ready:fast-download": "GUNNCHAI_FAST_NETWORK_CONSENT=1 tsx -e \"import { ModelDownloadManager } from './src/user-ready/model_manager'; const m=new ModelDownloadManager(); m.ensure('local-fast-smollm2-360m',{networkConsent:true}).then(r=>{console.log(JSON.stringify(r,null,2)); if(!r.ok) process.exit(1);})\"",
     "test:user-ready": "jest tests/user-ready --runInBand --forceExit",
     "waike-mastery": "tsx src/waike-mastery/cli.ts",

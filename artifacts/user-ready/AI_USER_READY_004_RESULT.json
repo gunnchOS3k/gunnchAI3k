@@ -1,7 +1,7 @@
 {
-  "schema": "gunnchai.user_ready_003.v1",
-  "packet": "AI-USER-READY-003",
-  "generatedAt": "2026-08-15T16:51:28.265Z",
+  "schema": "gunnchai.user_ready_004.v1",
+  "packet": "AI-USER-READY-004",
+  "generatedAt": "2026-08-15T16:51:28.515Z",
   "accepted_main_base": "da733a9",
   "tokens": {
     "GUNNCHAI_APP_PRODUCT_COMPLETE": false,
@@ -10,7 +10,7 @@
     "AI_USER_READY_002_DIGITAL_PASS": true,
     "AI_USER_READY_001_DIGITAL_PASS": true,
     "AI_USER_READY_003_DIGITAL_PASS": true,
-    "AI_USER_READY_004_DIGITAL_PASS": false,
+    "AI_USER_READY_004_DIGITAL_PASS": true,
     "NANO_FALLBACK_ONLY": true,
     "BETTER_THAN_CHATGPT": false,
     "BETTER_THAN_CLAUDE": false,
@@ -61,15 +61,16 @@
     "allOpenExceptNano": false
   },
   "localPro": {
-    "status": "OPEN",
+    "status": "LOCAL_PRO_RESOURCE_PENDING",
     "sha256": null,
-    "notes": "LOCAL_PRO_UNAVAILABLE:OFFLINE_AND_ABSENT",
-    "observation": null
+    "notes": "LOCAL_PRO_RESOURCE_PENDING: weights absent and/or host memory/disk unsafe for ~1GB download+inference while Product-Use may be active. No fake HOST_OBSERVED.",
+    "observation": null,
+    "resourceSafe": false
   },
   "coverage": {
     "required": 16,
     "implemented": 14,
-    "runtime": 10,
+    "runtime": 16,
     "offline": 13,
     "cloud_only": 0,
     "cloud_consent": 7,
@@ -103,7 +104,13 @@
       "AI-UR-016",
       "AI-UR-007",
       "AI-UR-011",
-      "AI-UR-013"
+      "AI-UR-013",
+      "AI-UR-008",
+      "AI-UR-009",
+      "AI-UR-010",
+      "AI-UR-012",
+      "AI-UR-014",
+      "AI-UR-015"
     ],
     "offline_ids": [
       "AI-UR-001",
@@ -383,22 +390,204 @@
           "notes": "RECORDED_LIVE_PR_ARTIFACT_OK_GH_UNAVAILABLE"
         }
       }
+    },
+    {
+      "task_id": "AI-UR-008",
+      "category": "canvas_cowrite_ui",
+      "passed": true,
+      "local": true,
+      "cloud_only": false,
+      "notes": "Cowrite workspace: create/edit/persist/reopen + provenance; version conflict + silent overwrite blocked. Offline disk.",
+      "evidence": {
+        "id": "doc_0f8295fd0766",
+        "version": 2,
+        "provenanceOps": [
+          "create",
+          "reopen",
+          "edit",
+          "reopen",
+          "reject_overwrite",
+          "reopen"
+        ],
+        "conflictRejected": true,
+        "silentOverwriteBlocked": true
+      }
+    },
+    {
+      "task_id": "AI-UR-009",
+      "category": "custom_agents",
+      "passed": true,
+      "local": true,
+      "cloud_only": false,
+      "notes": "Custom agents: manifest install, consent, fail-closed invoke, audit. Unrestricted shell/network rejected.",
+      "evidence": {
+        "unrestrictedRejected": true,
+        "shellWithoutAllowlistRejected": true,
+        "installed": [
+          "tutor-lab"
+        ],
+        "failClosed": true,
+        "consentedInvoke": true,
+        "auditEvents": [
+          "deny",
+          "deny",
+          "install",
+          "deny",
+          "consent",
+          "invoke"
+        ]
+      }
+    },
+    {
+      "task_id": "AI-UR-010",
+      "category": "voice_realtime",
+      "passed": true,
+      "local": true,
+      "cloud_only": false,
+      "notes": "PARTIAL: mic→STT→turn→streaming TTS with barge-in/mute/privacy. Synthetic adapters only — not COMPLETE.",
+      "evidence": {
+        "mode": "SYNTHETIC",
+        "completeness": "PARTIAL",
+        "micDeniedFirst": true,
+        "chunks": 3,
+        "bargeIn": true,
+        "muted": true,
+        "privacyLocalOnly": true
+      }
+    },
+    {
+      "task_id": "AI-UR-012",
+      "category": "computer_use",
+      "passed": true,
+      "local": true,
+      "cloud_only": false,
+      "notes": "Computer use: allowlisted lab env only; permission; audit; cancel. Production/finance/medical/surveillance blocked.",
+      "evidence": {
+        "productionBlocked": true,
+        "medicalBlocked": true,
+        "outsideAllowlistBlocked": true,
+        "permissionGated": true,
+        "allowlistedOk": true,
+        "cancelled": true,
+        "audit": 9
+      }
+    },
+    {
+      "task_id": "AI-UR-014",
+      "category": "audio_overview",
+      "passed": true,
+      "local": true,
+      "cloud_only": false,
+      "notes": "Audio overview: grounded outline→script→WAV TTS; ungrounded claims rejected; sources cited.",
+      "evidence": {
+        "outlineSections": 2,
+        "scriptLines": 3,
+        "citationsOk": true,
+        "rejectedClaims": [
+          "Unicorns invented OFDM in 1999 on Mars"
+        ],
+        "audioPath": "/var/folders/dp/z5frf3m511jcdpdf8v878v8h0000gn/T/gunnchai-ur004-4CnhJp/audio/overview_1786812688276.wav",
+        "bytes": 36224
+      }
+    },
+    {
+      "task_id": "AI-UR-015",
+      "category": "companion_ux",
+      "passed": true,
+      "local": true,
+      "cloud_only": false,
+      "notes": "Companion digital surfaces for conversation/workspace/skills/memory/voice/computer-use/privacy/offline. HUMAN polish not validated.",
+      "evidence": {
+        "surfaceIds": [
+          "conversation",
+          "workspace",
+          "skills",
+          "memory",
+          "voice",
+          "computer_use_consent",
+          "privacy",
+          "offline"
+        ],
+        "htmlPath": "/var/folders/dp/z5frf3m511jcdpdf8v878v8h0000gn/T/gunnchai-ur004-4CnhJp/companion/companion_chrome.html",
+        "pixels": "VISUAL UNAVAILABLE",
+        "humanPolishValidated": false
+      }
     }
   ],
   "p1": {
-    "research": {
-      "discoveryMode": "live_web",
-      "sourcesRead": 8,
-      "citations": 8,
-      "claimSourceGraph": 8,
-      "followUps": [
-        "what_evidence contradiction"
+    "cowrite": {
+      "id": "doc_0f8295fd0766",
+      "version": 2,
+      "provenanceOps": [
+        "create",
+        "reopen",
+        "edit",
+        "reopen",
+        "reject_overwrite",
+        "reopen"
       ],
-      "fabricatedRejected": [
-        "https://invented.example.invalid/not-a-real-paper"
+      "conflictRejected": true,
+      "silentOverwriteBlocked": true
+    },
+    "agents": {
+      "unrestrictedRejected": true,
+      "shellWithoutAllowlistRejected": true,
+      "installed": [
+        "tutor-lab"
       ],
+      "failClosed": true,
+      "consentedInvoke": true,
+      "auditEvents": [
+        "deny",
+        "deny",
+        "install",
+        "deny",
+        "consent",
+        "invoke"
+      ]
+    },
+    "voice": {
+      "mode": "SYNTHETIC",
+      "completeness": "PARTIAL",
+      "micDeniedFirst": true,
+      "chunks": 3,
+      "bargeIn": true,
+      "muted": true,
+      "privacyLocalOnly": true
+    },
+    "computer_use": {
+      "productionBlocked": true,
+      "medicalBlocked": true,
+      "outsideAllowlistBlocked": true,
+      "permissionGated": true,
+      "allowlistedOk": true,
       "cancelled": true,
-      "completeness": "COMPLETE"
+      "audit": 9
+    },
+    "audio_overview": {
+      "outlineSections": 2,
+      "scriptLines": 3,
+      "citationsOk": true,
+      "rejectedClaims": [
+        "Unicorns invented OFDM in 1999 on Mars"
+      ],
+      "audioPath": "/var/folders/dp/z5frf3m511jcdpdf8v878v8h0000gn/T/gunnchai-ur004-4CnhJp/audio/overview_1786812688276.wav",
+      "bytes": 36224
+    },
+    "companion": {
+      "surfaceIds": [
+        "conversation",
+        "workspace",
+        "skills",
+        "memory",
+        "voice",
+        "computer_use_consent",
+        "privacy",
+        "offline"
+      ],
+      "htmlPath": "/var/folders/dp/z5frf3m511jcdpdf8v878v8h0000gn/T/gunnchai-ur004-4CnhJp/companion/companion_chrome.html",
+      "pixels": "VISUAL UNAVAILABLE",
+      "humanPolishValidated": false
     },
     "vision": {
       "tesseract": true,
@@ -416,26 +605,9 @@
       "ui": "Control role=button name=\"Save\" at (17,20)",
       "backgroundForbidden": true
     },
-    "coding": {
-      "mode": "ci_digital_gate_plus_recorded_live_pr",
-      "branch": "agent/ai-ur-013-fix-add-msum51dp",
-      "commit": "357d2efc1ce404ad6e4025b4cc9ccaffece58e37",
-      "pr_url": "https://github.com/gunnchOS3k/gunnchai-ai-ur-013-sandbox/pull/2",
-      "pr_number": 2,
-      "remote_pushed": false,
-      "completeness": "COMPLETE",
-      "mainUnchanged": true,
-      "diffOnlyRejected": true,
-      "recorded_live_pr": {
-        "ok": true,
-        "pr_url": "https://github.com/gunnchOS3k/gunnchai-ai-ur-013-sandbox/pull/2",
-        "gh_confirmed": false,
-        "notes": "RECORDED_LIVE_PR_ARTIFACT_OK_GH_UNAVAILABLE"
-      }
-    },
-    "voice": {
-      "status": "HELD_FOR_AI_004",
-      "notes": "AI-UR-010 realtime voice held — capacity after P1 reserved for AI-004."
+    "local_pro": {
+      "status": "LOCAL_PRO_RESOURCE_PENDING",
+      "notes": "LOCAL_PRO_RESOURCE_PENDING: weights absent and/or host memory/disk unsafe for ~1GB download+inference while Product-Use may be active. No fake HOST_OBSERVED."
     }
   },
   "stubChallengeFailures": [],
@@ -447,16 +619,24 @@
     "device-os pixel proof for companion/cowrite chrome"
   ],
   "remaining_open": [
-    "LOCAL_PRO hashed inference (still OPEN/ABSENT)"
+    "LOCAL_PRO LOCAL_PRO_RESOURCE_PENDING"
+  ],
+  "remaining_partial": [
+    "AI-UR-010 voice_realtime",
+    "AI-UR-011 vision_screen"
   ],
   "allImplementedPassed": true,
   "eval_summary": {
-    "research_complete": true,
+    "cowrite_complete": true,
+    "agents_complete": true,
+    "voice_partial": true,
+    "computer_use_complete": true,
+    "audio_overview_complete": true,
+    "companion_complete": true,
     "vision_partial": true,
     "vision_neural_vlm": false,
-    "coding_live_draft_pr": true,
     "local_fast": true,
-    "local_pro": false,
+    "local_pro": "LOCAL_PRO_RESOURCE_PENDING",
     "coverage": {
       "complete": 14,
       "partial": 2,
@@ -484,6 +664,13 @@
       "open_ids": []
     },
     "HUMAN_E6": false,
-    "FRONTIER_PARITY": false
-  }
+    "FRONTIER_PARITY": false,
+    "AI_USER_READY_004_DIGITAL_PASS": true
+  },
+  "deferred_heavy_work": [
+    "LOCAL_PRO ~1GB GGUF download + HOST_OBSERVED quality gate (LOCAL_PRO_RESOURCE_PENDING)",
+    "AI-UR-010 real LOCAL/PROVIDER STT+TTS (synthetic stays PARTIAL)",
+    "AI-UR-011 neural VLM weights/provider for vision COMPLETE",
+    "HUMAN_E6 companion polish validation"
+  ]
 }

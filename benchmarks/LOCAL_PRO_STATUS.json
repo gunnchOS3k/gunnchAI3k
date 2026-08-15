@@ -1,23 +1,16 @@
 {
   "schema": "gunnchai.local_pro_status.v1",
-  "packet": "AI-USER-READY-003",
-  "status": "OPEN",
+  "packet": "AI-USER-READY-004",
+  "status": "LOCAL_PRO_RESOURCE_PENDING",
   "candidate": "Qwen/Qwen2.5-1.5B-Instruct",
   "license": "Apache-2.0",
-  "ggufSource": "https://huggingface.co/bartowski/Qwen2.5-1.5B-Instruct-GGUF",
-  "downloadUrl": "https://huggingface.co/bartowski/Qwen2.5-1.5B-Instruct-GGUF/resolve/main/Qwen2.5-1.5B-Instruct-Q4_K_M.gguf",
-  "filename": "Qwen2.5-1.5B-Instruct-Q4_K_M.gguf",
   "pinned_sha256": "1adf0b11065d8ad2e8123ea110d1ec956dab4ab038eab665614adba04b6c3370",
   "expected_bytes": 986048768,
-  "wired": "model_manager + local_pro_runtime + llama.cpp",
-  "download_attempt": {
-    "network_consent": true,
-    "partial_bytes_observed": 297824650,
-    "partial_magic": "GGUF",
-    "result": "INCOMPLETE_HTTP2_CANCEL",
-    "host_observed_inference": false
-  },
-  "notes": "License-compatible Pro candidate is pinned with SHA-256 and download-on-demand wiring. Full bytes + HOST_OBSERVED quality gate not completed this packet due to interrupted download. Fast landing does not imply Pro. Not a frontier quality claim.",
+  "freeMemBytes": 150339584,
+  "freeDiskBytes": 75609477120,
+  "resourceSafe": false,
+  "host_observed_inference": false,
+  "notes": "LOCAL_PRO_RESOURCE_PENDING: weights absent and/or host memory/disk unsafe for ~1GB download+inference while Product-Use may be active. No fake HOST_OBSERVED.",
   "HUMAN_E6": false,
   "FRONTIER_PARITY": false
 }

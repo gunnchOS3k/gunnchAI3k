@@ -42,6 +42,20 @@ import {
 
 export type { CoverageCounts };
 
+/** Tasks packet 002 evaluates; living matrix may mark later IDs COMPLETE without this packet running them. */
+export const PACKET_002_TASK_IDS = [
+  'AI-UR-001',
+  'AI-UR-002',
+  'AI-UR-003',
+  'AI-UR-004',
+  'AI-UR-005',
+  'AI-UR-006',
+  'AI-UR-007',
+  'AI-UR-011',
+  'AI-UR-013',
+  'AI-UR-016',
+] as const;
+
 export interface TaskRunResult {
   task_id: string;
   category: string;
@@ -588,9 +602,14 @@ export async function runUserReadyPacket(
     }),
   );
 
+  const packetScope = new Set<string>(PACKET_002_TASK_IDS);
   const completeIds = new Set(
     matrix.tasks
-      .filter((t) => (t.coverage_status ?? (t.implemented ? 'COMPLETE' : 'OPEN')) === 'COMPLETE')
+      .filter(
+        (t) =>
+          packetScope.has(t.task_id) &&
+          (t.coverage_status ?? (t.implemented ? 'COMPLETE' : 'OPEN')) === 'COMPLETE',
+      )
       .map((t) => t.task_id),
   );
   const completeResults = results.filter((r) => completeIds.has(r.task_id));

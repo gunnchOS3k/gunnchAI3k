@@ -1,9 +1,9 @@
 {
   "schema": "gunnchai.market_task_matrix.v1",
-  "packet": "AI-USER-READY-003",
-  "dated": "2026-08-14",
-  "accepted_main_base": "b646ac0",
-  "doctrine": "Map market executable classes onto gunnchAI3k. coverage_status COMPLETE|PARTIAL|OPEN. implemented=true only for COMPLETE. SmolLM2-135M Q4_K_M 512-ctx is Nano fallback only. HUMAN_E6=false. GUNNCHAI_APP_PRODUCT_COMPLETE=false. GUNNCHAI_FRONTIER_PRODUCT_PARITY=false. Quality beats inflated counts. AI-USER-READY-003: 007/013 COMPLETE; 011 OCR+heuristics PARTIAL (neural VLM required for COMPLETE); Local Pro candidate OPEN.",
+  "packet": "AI-USER-READY-004",
+  "dated": "2026-08-15",
+  "accepted_main_base": "da733a9",
+  "doctrine": "Map market executable classes onto gunnchAI3k. coverage_status COMPLETE|PARTIAL|OPEN. implemented=true only for COMPLETE. SmolLM2-135M Q4_K_M 512-ctx is Nano fallback only. HUMAN_E6=false. GUNNCHAI_APP_PRODUCT_COMPLETE=false. GUNNCHAI_FRONTIER_PRODUCT_PARITY=false. Quality beats inflated counts. AI-USER-READY-004: 008/009/012/014/015 COMPLETE; 010 synthetic voice PARTIAL; 011 OCR heuristics PARTIAL (neural VLM required for COMPLETE); Local Pro LOCAL_PRO_RESOURCE_PENDING when unsafe.",
   "device_profiles": [
     "student_14_5",
     "handheld_hybrid",
@@ -37,9 +37,9 @@
       "ggufSource": "https://huggingface.co/bartowski/Qwen2.5-1.5B-Instruct-GGUF",
       "sha256": "1adf0b11065d8ad2e8123ea110d1ec956dab4ab038eab665614adba04b6c3370",
       "bytes": 986048768,
-      "weightsStatus": "OPEN",
-      "wired": "model_manager + local_pro_runtime + llama.cpp",
-      "notes": "Apache-2.0 Qwen2.5-1.5B Q4_K_M pinned SHA-256 + download-on-demand wiring. Full HOST_OBSERVED gate incomplete this packet (download interrupted). See benchmarks/LOCAL_PRO_STATUS.json. Fast ≠ Pro."
+      "weightsStatus": "LOCAL_PRO_RESOURCE_PENDING",
+      "wired": "model_manager + local_pro_runtime + local_pro_audit + llama.cpp",
+      "notes": "Apache-2.0 Qwen2.5-1.5B Q4_K_M pinned SHA-256. AI-004 re-audit: weights absent + host resources unsafe for ~1GB download while Product-Use may be active → LOCAL_PRO_RESOURCE_PENDING. No fake HOST_OBSERVED. Fast ≠ Pro."
     },
     "OPTIONAL_FRONTIER_CLOUD": {
       "weightsStatus": "N/A",
@@ -72,7 +72,7 @@
         "ds_xl_coder"
       ],
       "evidence": "src/user-ready/research_citations.ts wrapping stage2 ResearchEngine; offline cited report with quote verification",
-      "gap": "Live multi-step web Deep Research (ChatGPT/Gemini/Perplexity agent loop) remains OPEN \u2014 local corpus only this packet.",
+      "gap": "Live multi-step web Deep Research closed via AI-UR-007.",
       "coverage_status": "COMPLETE"
     },
     {
@@ -97,7 +97,7 @@
         "ds_xl_coder"
       ],
       "evidence": "src/user-ready/projects_memory.ts combining ProjectStore + GunnchMemoryStore",
-      "gap": "Account-wide editable memory UI and team project sharing are OPEN.",
+      "gap": "Account-wide editable memory UI and team project sharing remain thin.",
       "coverage_status": "COMPLETE"
     },
     {
@@ -120,7 +120,7 @@
         "ds_xl_coder"
       ],
       "evidence": "src/user-ready/artifacts.ts wrapping phase_xiv ArtifactCreator",
-      "gap": "Interactive Canvas/cowrite UI and published artifact URLs are OPEN. VISUAL UNAVAILABLE.",
+      "gap": "Interactive Canvas/cowrite closed via AI-UR-008 digital workspace (device-os pixels still separate).",
       "coverage_status": "COMPLETE"
     },
     {
@@ -188,7 +188,7 @@
         "ds_xl_coder"
       ],
       "evidence": "src/user-ready/source_grounded.ts notebook-style Q&A over attached corpus",
-      "gap": "Audio Overviews and YouTube/Drive import are OPEN.",
+      "gap": "Audio Overviews closed via AI-UR-014.",
       "coverage_status": "COMPLETE"
     },
     {
@@ -223,17 +223,17 @@
       ],
       "local_required": true,
       "cloud_optional": false,
-      "implemented": false,
-      "actual_runtime_test": null,
-      "quality_metric": "side_panel_edit_loop",
-      "privacy_requirement": "local documents",
+      "implemented": true,
+      "actual_runtime_test": "tests/user-ready/ai004_surfaces.test.ts",
+      "quality_metric": "create_edit_persist_reopen_provenance; no_silent_overwrite",
+      "privacy_requirement": "local documents; offline core",
       "device_profiles": [
         "student_14_5",
         "ds_xl_coder"
       ],
-      "evidence": null,
-      "gap": "No pixel Canvas/cowrite UI. VISUAL UNAVAILABLE. File artifacts are AI-UR-003.",
-      "coverage_status": "OPEN"
+      "evidence": "src/user-ready/cowrite_workspace.ts: versioned create/edit/persist/reopen with provenance; VERSION_CONFLICT + SILENT_OVERWRITE_FORBIDDEN",
+      "gap": "Device-os pixel chrome remains separate; digital workspace COMPLETE this packet.",
+      "coverage_status": "COMPLETE"
     },
     {
       "task_id": "AI-UR-009",
@@ -245,16 +245,16 @@
       ],
       "local_required": true,
       "cloud_optional": true,
-      "implemented": false,
-      "actual_runtime_test": null,
-      "quality_metric": "named_agent_with_tools_and_files",
-      "privacy_requirement": "per-agent tool consent",
+      "implemented": true,
+      "actual_runtime_test": "tests/user-ready/ai004_surfaces.test.ts",
+      "quality_metric": "manifest_permissions_fail_closed_audit_consent",
+      "privacy_requirement": "per-agent tool consent; no unrestricted shell/network",
       "device_profiles": [
         "ds_xl_coder"
       ],
-      "evidence": null,
-      "gap": "phase_xiv skills registry is not a user-ready Gem/GPT store. Next packet.",
-      "coverage_status": "OPEN"
+      "evidence": "src/user-ready/custom_agents.ts: manifest install, consent, fail-closed invoke, audit; unrestricted/shell-without-allowlist rejected",
+      "gap": "Not a public Gem store marketplace UX.",
+      "coverage_status": "COMPLETE"
     },
     {
       "task_id": "AI-UR-010",
@@ -266,15 +266,15 @@
       "local_required": true,
       "cloud_optional": true,
       "implemented": false,
-      "actual_runtime_test": null,
-      "quality_metric": "speech_roundtrip_latency",
-      "privacy_requirement": "mic permission; local-first",
+      "actual_runtime_test": "tests/user-ready/ai004_surfaces.test.ts",
+      "quality_metric": "mic_stt_turn_streaming_tts_barge_in_mute_privacy",
+      "privacy_requirement": "mic permission; local-first; PROVIDER needs disclosure",
       "device_profiles": [
         "handheld_hybrid"
       ],
-      "evidence": null,
-      "gap": "phase_xiv voice/realtime remains a digital stub, not a measured speech product.",
-      "coverage_status": "OPEN"
+      "evidence": "src/user-ready/voice_realtime.ts: mic→STT→turn→streaming TTS; barge-in/mute; LOCAL|PROVIDER|SYNTHETIC. Packet runs SYNTHETIC adapters.",
+      "gap": "PARTIAL: synthetic-only STT/TTS cannot earn COMPLETE. Need real LOCAL or consented PROVIDER speech backends.",
+      "coverage_status": "PARTIAL"
     },
     {
       "task_id": "AI-UR-011",
@@ -294,7 +294,7 @@
         "ds_xl_coder"
       ],
       "evidence": "src/user-ready/vision_ocr.ts + vision_screen.ts: tesseract OCR + keyword/box layout heuristics on explicit PNG shares (WAIKE/compiler/office/game/UI); redaction; BACKGROUND_SURVEILLANCE_FORBIDDEN. Stack id=ocr_layout_heuristics. Not a neural VLM.",
-      "gap": "PARTIAL: OCR+layout heuristics \u2260 general Vision. COMPLETE requires real multimodal VLM (local weights or consenting cloud provider) with semantic non-text understanding on arbitrary rasters (icon-only toolbar, diagram/photo, game visual state without OCR text). Computer-use GUI loop remains AI-UR-012 OPEN.",
+      "gap": "PARTIAL: OCR+layout heuristics ≠ general Vision. COMPLETE requires real multimodal VLM (local weights or consenting cloud provider) with semantic non-text understanding on arbitrary rasters.",
       "coverage_status": "PARTIAL"
     },
     {
@@ -306,16 +306,16 @@
       ],
       "local_required": true,
       "cloud_optional": false,
-      "implemented": false,
-      "actual_runtime_test": null,
-      "quality_metric": "screenshot_click_type_loop",
-      "privacy_requirement": "explicit desktop control grant",
+      "implemented": true,
+      "actual_runtime_test": "tests/user-ready/ai004_surfaces.test.ts",
+      "quality_metric": "allowlisted_lab_env_permission_audit_cancel",
+      "privacy_requirement": "explicit desktop control grant; no surveillance/production finance/medical",
       "device_profiles": [
         "ds_xl_coder"
       ],
-      "evidence": null,
-      "gap": "phase_xiv computer_use runtime is not a GUI control product. Next packet.",
-      "coverage_status": "OPEN"
+      "evidence": "src/user-ready/computer_use_safe.ts: allowlisted lab envs only; permission; audit; cancel; production/finance/medical/surveillance blocked",
+      "gap": "Lab allowlist only — not production desktop agent product.",
+      "coverage_status": "COMPLETE"
     },
     {
       "task_id": "AI-UR-013",
@@ -335,7 +335,7 @@
       "device_profiles": [
         "ds_xl_coder"
       ],
-      "evidence": "src/user-ready/coding_agent_pr.ts \u2192 allowlisted gunnchOS3k/gunnchai-ai-ur-013-sandbox live GitHub DRAFT PR. Never merge/force/main/production.",
+      "evidence": "src/user-ready/coding_agent_pr.ts → allowlisted gunnchOS3k/gunnchai-ai-ur-013-sandbox live GitHub DRAFT PR. Never merge/force/main/production.",
       "gap": "Sandbox-only. Not Copilot cloud coding-agent product parity.",
       "coverage_status": "COMPLETE"
     },
@@ -348,17 +348,17 @@
       ],
       "local_required": true,
       "cloud_optional": true,
-      "implemented": false,
-      "actual_runtime_test": null,
-      "quality_metric": "audio_file_from_sources",
+      "implemented": true,
+      "actual_runtime_test": "tests/user-ready/ai004_surfaces.test.ts",
+      "quality_metric": "grounded_outline_script_tts_with_citations",
       "privacy_requirement": "local sources",
       "device_profiles": [
         "student_14_5",
         "handheld_hybrid"
       ],
-      "evidence": null,
-      "gap": "No TTS audio-overview pipeline this packet.",
-      "coverage_status": "OPEN"
+      "evidence": "src/user-ready/audio_overview.ts: grounded outline→cited script→real WAV; ungrounded claims rejected",
+      "gap": "Not NotebookLM studio polish or multi-host natural voices.",
+      "coverage_status": "COMPLETE"
     },
     {
       "task_id": "AI-UR-015",
@@ -369,18 +369,18 @@
       ],
       "local_required": true,
       "cloud_optional": false,
-      "implemented": false,
-      "actual_runtime_test": null,
-      "quality_metric": "pixel_proof_of_companion_chrome",
-      "privacy_requirement": "OS-integrated; not a generic web chatbot shell",
+      "implemented": true,
+      "actual_runtime_test": "tests/user-ready/ai004_surfaces.test.ts",
+      "quality_metric": "usable_surfaces_conversation_workspace_skills_memory_voice_consent_privacy_offline",
+      "privacy_requirement": "OS-integrated companion surfaces; HUMAN_E6 false without human polish",
       "device_profiles": [
         "student_14_5",
         "handheld_hybrid",
         "ds_xl_coder"
       ],
-      "evidence": "Heuristic classifier exists (src/user-ready/companion.ts) but pixels=VISUAL UNAVAILABLE",
-      "gap": "Digital companion vs chatbot heuristic is implemented as a classifier only. App chrome OPEN.",
-      "coverage_status": "OPEN"
+      "evidence": "src/user-ready/companion_ui.ts renders digital companion chrome HTML for required surfaces; pixels=VISUAL UNAVAILABLE; humanPolishValidated=false",
+      "gap": "HUMAN polish / HUMAN_E6 not validated. Device-os screenshot proof still separate.",
+      "coverage_status": "COMPLETE"
     },
     {
       "task_id": "AI-UR-016",
@@ -397,19 +397,16 @@
         "handheld_hybrid",
         "ds_xl_coder"
       ],
-      "evidence": "Local Fast hashed SmolLM2-360M + Local Pro hashed Qwen2.5-1.5B candidate via model_manager. Nano cannot be relabeled Fast/Pro.",
-      "gap": "Fast/Pro are not frontier quality claims. HUMAN_E6=false.",
+      "evidence": "Local Fast hashed SmolLM2-360M + Local Pro hashed Qwen2.5-1.5B candidate via model_manager/local_pro_audit. Nano cannot be relabeled Fast/Pro.",
+      "gap": "Local Pro HOST_OBSERVED deferred (LOCAL_PRO_RESOURCE_PENDING). Fast/Pro are not frontier quality claims. HUMAN_E6=false.",
       "coverage_status": "COMPLETE"
     }
   ],
   "next_packet": [
+    "AI-UR-010 real LOCAL/PROVIDER STT+TTS for voice COMPLETE",
     "AI-UR-011 neural VLM for vision COMPLETE (OCR heuristics remain PARTIAL)",
-    "AI-UR-008 Canvas/cowrite UI (needs pixels on device-os)",
-    "AI-UR-009 custom Gems/GPTs/skills store",
-    "AI-UR-010 voice realtime (natural conversation, not STT\u2192TTS only)",
-    "AI-UR-012 computer use GUI",
-    "AI-UR-014 NotebookLM-class audio overview",
-    "AI-UR-015 companion chrome pixels",
-    "LOCAL_PRO hashed HOST_OBSERVED quality gate"
+    "LOCAL_PRO hashed HOST_OBSERVED when resources safe",
+    "HUMAN_E6 companion polish validation",
+    "device-os pixel proof for companion/cowrite chrome"
   ]
 }

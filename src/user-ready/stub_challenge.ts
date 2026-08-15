@@ -108,3 +108,27 @@ export function challengeUserReady003(input: Challenge003Input): string[] {
   if (input.unsafeTools) failures.push('UNSAFE_TOOLS');
   return failures;
 }
+
+export interface Challenge004Input {
+  silentCowriteOverwrite: boolean;
+  unrestrictedAgentInstalled: boolean;
+  syntheticVoiceClaimedComplete: boolean;
+  ocrHeuristicClaimedComplete: boolean;
+  computerUseOutsideAllowlist: boolean;
+  audioOverviewHallucinated: boolean;
+  humanPolishWithoutHuman: boolean;
+  fakeLocalProHostObserved: boolean;
+}
+
+export function challengeUserReady004(input: Challenge004Input): string[] {
+  const failures: string[] = [];
+  if (input.silentCowriteOverwrite) failures.push('SILENT_COWRITE_OVERWRITE');
+  if (input.unrestrictedAgentInstalled) failures.push('UNRESTRICTED_AGENT');
+  if (input.syntheticVoiceClaimedComplete) failures.push('SYNTHETIC_VOICE_AS_COMPLETE');
+  if (input.ocrHeuristicClaimedComplete) failures.push('OCR_HEURISTICS_AS_VLM_COMPLETE');
+  if (input.computerUseOutsideAllowlist) failures.push('COMPUTER_USE_OUTSIDE_ALLOWLIST');
+  if (input.audioOverviewHallucinated) failures.push('AUDIO_OVERVIEW_HALLUCINATION');
+  if (input.humanPolishWithoutHuman) failures.push('HUMAN_POLISH_WITHOUT_HUMAN');
+  if (input.fakeLocalProHostObserved) failures.push('FAKE_LOCAL_PRO_HOST_OBSERVED');
+  return failures;
+}
