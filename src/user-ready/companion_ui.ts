@@ -153,6 +153,6 @@ export function renderCompanionChrome(outDir: string): CompanionChromeReport {
     pixels: VISUAL_UNAVAILABLE,
     humanPolishValidated: false,
     notes:
-      'Digital companion surfaces rendered. HUMAN_E6 remains false — no human polish validation this packet.',
+      'PARTIAL: static HTML companion surface catalog. No button→backend wiring. HUMAN_E6 remains false.',
   };
 }

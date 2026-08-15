@@ -12,32 +12,83 @@ import { CustomAgentStore } from '../../src/user-ready/custom_agents';
 import { CowriteWorkspace } from '../../src/user-ready/cowrite_workspace';
 import { auditLocalPro } from '../../src/user-ready/local_pro_audit';
 import { loadTaskMatrix } from '../../src/user-ready/matrix';
-import { challengeImplementedFlags, challengeUserReady004 } from '../../src/user-ready/stub_challenge';
+import { challengeImplementedFlags, challengeMatrixInflation, challengeUserReady004 } from '../../src/user-ready/stub_challenge';
 import { VISUAL_UNAVAILABLE } from '../../src/user-ready/tokens';
 import { RealtimeVoiceProduct } from '../../src/user-ready/voice_realtime';
 
 describe('AI-USER-READY-004 surfaces', () => {
-  it('matrix is 14 COMPLETE / 2 PARTIAL / 0 OPEN with honest flags', () => {
+  it('matrix is 10 COMPLETE / 6 PARTIAL / 0 OPEN after honesty demotions', () => {
     const matrix = loadTaskMatrix();
     expect(matrix.packet).toBe('AI-USER-READY-004');
     expect(challengeImplementedFlags(matrix.tasks)).toEqual([]);
     const complete = matrix.tasks.filter((t) => t.coverage_status === 'COMPLETE').map((t) => t.task_id);
     const partial = matrix.tasks.filter((t) => t.coverage_status === 'PARTIAL').map((t) => t.task_id);
     const open = matrix.tasks.filter((t) => t.coverage_status === 'OPEN').map((t) => t.task_id);
-    expect(complete.length).toBe(14);
-    expect(partial.sort()).toEqual(['AI-UR-010', 'AI-UR-011']);
+    expect(complete.length).toBe(10);
+    expect(partial.sort()).toEqual([
+      'AI-UR-009',
+      'AI-UR-010',
+      'AI-UR-011',
+      'AI-UR-012',
+      'AI-UR-014',
+      'AI-UR-015',
+    ]);
     expect(open).toEqual([]);
     expect(complete).toEqual(
       expect.arrayContaining([
+        'AI-UR-001',
+        'AI-UR-002',
+        'AI-UR-003',
+        'AI-UR-004',
+        'AI-UR-005',
+        'AI-UR-006',
+        'AI-UR-007',
         'AI-UR-008',
-        'AI-UR-009',
-        'AI-UR-012',
-        'AI-UR-014',
-        'AI-UR-015',
+        'AI-UR-013',
+        'AI-UR-016',
       ]),
     );
-    expect(complete).not.toContain('AI-UR-010');
-    expect(complete).not.toContain('AI-UR-011');
+    expect(complete).not.toContain('AI-UR-009');
+    expect(complete).not.toContain('AI-UR-012');
+    expect(complete).not.toContain('AI-UR-014');
+    expect(complete).not.toContain('AI-UR-015');
+  });
+
+  it('author bar rejects inflated COMPLETE for template/mock/sine/static stacks', () => {
+    const inflated = [
+      { task_id: 'AI-UR-009', coverage_status: 'COMPLETE' },
+      { task_id: 'AI-UR-012', coverage_status: 'COMPLETE' },
+      { task_id: 'AI-UR-014', coverage_status: 'COMPLETE' },
+      { task_id: 'AI-UR-015', coverage_status: 'COMPLETE' },
+    ];
+    expect(
+      challengeMatrixInflation(inflated, {
+        agentsRealToolExecution: false,
+        computerUseRealOsAutomation: false,
+        audioRealTtsSpeech: false,
+        companionButtonBackendWired: false,
+        voiceRealSpeechBackends: false,
+        visionNeuralVlm: false,
+      }),
+    ).toEqual(
+      expect.arrayContaining([
+        'MATRIX_INFLATION:AI-UR-009_TEMPLATE_INVOKE',
+        'MATRIX_INFLATION:AI-UR-012_A11Y_MOCK',
+        'MATRIX_INFLATION:AI-UR-014_SINE_WAV',
+        'MATRIX_INFLATION:AI-UR-015_STATIC_HTML',
+      ]),
+    );
+    const honest = loadTaskMatrix().tasks;
+    expect(
+      challengeMatrixInflation(honest, {
+        agentsRealToolExecution: false,
+        computerUseRealOsAutomation: false,
+        audioRealTtsSpeech: false,
+        companionButtonBackendWired: false,
+        voiceRealSpeechBackends: false,
+        visionNeuralVlm: false,
+      }),
+    ).toEqual([]);
   });
 
   it('cowrite create/edit/persist/reopen with provenance; rejects silent overwrite', () => {
@@ -174,6 +225,10 @@ describe('AI-USER-READY-004 surfaces', () => {
         audioOverviewHallucinated: false,
         humanPolishWithoutHuman: false,
         fakeLocalProHostObserved: false,
+        agentsTemplateClaimedComplete: false,
+        computerUseMockClaimedComplete: false,
+        audioSineWavClaimedComplete: false,
+        companionStaticHtmlClaimedComplete: false,
       }),
     ).toEqual([]);
   });

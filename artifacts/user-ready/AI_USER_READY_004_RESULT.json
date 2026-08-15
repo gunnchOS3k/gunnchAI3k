@@ -1,7 +1,7 @@
 {
   "schema": "gunnchai.user_ready_004.v1",
   "packet": "AI-USER-READY-004",
-  "generatedAt": "2026-08-15T16:51:28.515Z",
+  "generatedAt": "2026-08-15T16:57:48.923Z",
   "accepted_main_base": "da733a9",
   "tokens": {
     "GUNNCHAI_APP_PRODUCT_COMPLETE": false,
@@ -69,15 +69,15 @@
   },
   "coverage": {
     "required": 16,
-    "implemented": 14,
+    "implemented": 10,
     "runtime": 16,
-    "offline": 13,
+    "offline": 9,
     "cloud_only": 0,
     "cloud_consent": 7,
     "open": 0,
-    "gap": 2,
-    "complete": 14,
-    "partial": 2,
+    "gap": 6,
+    "complete": 10,
+    "partial": 6,
     "implemented_ids": [
       "AI-UR-001",
       "AI-UR-002",
@@ -87,11 +87,7 @@
       "AI-UR-006",
       "AI-UR-007",
       "AI-UR-008",
-      "AI-UR-009",
-      "AI-UR-012",
       "AI-UR-013",
-      "AI-UR-014",
-      "AI-UR-015",
       "AI-UR-016"
     ],
     "runtime_ids": [
@@ -120,11 +116,7 @@
       "AI-UR-005",
       "AI-UR-006",
       "AI-UR-008",
-      "AI-UR-009",
-      "AI-UR-012",
       "AI-UR-013",
-      "AI-UR-014",
-      "AI-UR-015",
       "AI-UR-016"
     ],
     "cloud_consent_ids": [
@@ -146,16 +138,16 @@
       "AI-UR-006",
       "AI-UR-007",
       "AI-UR-008",
-      "AI-UR-009",
-      "AI-UR-012",
       "AI-UR-013",
-      "AI-UR-014",
-      "AI-UR-015",
       "AI-UR-016"
     ],
     "partial_ids": [
+      "AI-UR-009",
       "AI-UR-010",
-      "AI-UR-011"
+      "AI-UR-011",
+      "AI-UR-012",
+      "AI-UR-014",
+      "AI-UR-015"
     ]
   },
   "results": [
@@ -197,7 +189,7 @@
       "cloud_only": false,
       "notes": "DOCX + code artifacts with targeted edit versions. Canvas UI OPEN.",
       "evidence": {
-        "docx": "/var/folders/dp/z5frf3m511jcdpdf8v878v8h0000gn/T/gunnchai-ur004-4CnhJp/base003/base/artifacts/lab_report.docx",
+        "docx": "/var/folders/dp/z5frf3m511jcdpdf8v878v8h0000gn/T/gunnchai-ur004-keZmf5/base003/base/artifacts/lab_report.docx",
         "versions": 2,
         "codeExists": true
       }
@@ -257,63 +249,63 @@
             "id": "general",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 1129,
-            "outputChars": 234
+            "latencyMs": 1107,
+            "outputChars": 251
           },
           {
             "id": "summarization",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 923,
+            "latencyMs": 700,
             "outputChars": 112
           },
           {
             "id": "waike",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 764,
-            "outputChars": 149
+            "latencyMs": 814,
+            "outputChars": 194
           },
           {
             "id": "source_grounded",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 1354,
-            "outputChars": 257
+            "latencyMs": 863,
+            "outputChars": 229
           },
           {
             "id": "basic_code",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 937,
-            "outputChars": 38
+            "latencyMs": 899,
+            "outputChars": 40
           },
           {
             "id": "structured_output",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 973,
-            "outputChars": 26
+            "latencyMs": 1002,
+            "outputChars": 30
           },
           {
             "id": "hallucination_resistance",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 1209,
-            "outputChars": 272
+            "latencyMs": 1451,
+            "outputChars": 373
           },
           {
             "id": "refusal_permission",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 1657,
-            "outputChars": 228
+            "latencyMs": 1106,
+            "outputChars": 198
           },
           {
             "id": "context_retention",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 989,
+            "latencyMs": 762,
             "outputChars": 159
           }
         ],
@@ -375,8 +367,8 @@
       "notes": "CI digital gate PASS: local allowlist/sandbox DRAFT semantics + recorded live sandbox DRAFT PR https://github.com/gunnchOS3k/gunnchai-ai-ur-013-sandbox/pull/2 (RECORDED_LIVE_PR_ARTIFACT_OK_GH_UNAVAILABLE). Live open this run optional supplemental.",
       "evidence": {
         "mode": "ci_digital_gate_plus_recorded_live_pr",
-        "branch": "agent/ai-ur-013-fix-add-msum51dp",
-        "commit": "357d2efc1ce404ad6e4025b4cc9ccaffece58e37",
+        "branch": "agent/ai-ur-013-fix-add-msumd6vq",
+        "commit": "6bbf8d15016dad175930b08c5a99397df3483f4c",
         "pr_url": "https://github.com/gunnchOS3k/gunnchai-ai-ur-013-sandbox/pull/2",
         "pr_number": 2,
         "remote_pushed": false,
@@ -399,7 +391,7 @@
       "cloud_only": false,
       "notes": "Cowrite workspace: create/edit/persist/reopen + provenance; version conflict + silent overwrite blocked. Offline disk.",
       "evidence": {
-        "id": "doc_0f8295fd0766",
+        "id": "doc_e31c3935a908",
         "version": 2,
         "provenanceOps": [
           "create",
@@ -419,7 +411,7 @@
       "passed": true,
       "local": true,
       "cloud_only": false,
-      "notes": "Custom agents: manifest install, consent, fail-closed invoke, audit. Unrestricted shell/network rejected.",
+      "notes": "PARTIAL: manifest/consent/fail-closed/audit work, but invoke is string-template — not real allowlisted tool execution.",
       "evidence": {
         "unrestrictedRejected": true,
         "shellWithoutAllowlistRejected": true,
@@ -435,7 +427,10 @@
           "deny",
           "consent",
           "invoke"
-        ]
+        ],
+        "realToolExecution": false,
+        "stack": "string_template_invoke",
+        "completeness": "PARTIAL"
       }
     },
     {
@@ -461,7 +456,7 @@
       "passed": true,
       "local": true,
       "cloud_only": false,
-      "notes": "Computer use: allowlisted lab env only; permission; audit; cancel. Production/finance/medical/surveillance blocked.",
+      "notes": "PARTIAL: allowlist/permission/audit/cancel gates work, but action loop is in-memory a11y mock — not real OS/desktop automation.",
       "evidence": {
         "productionBlocked": true,
         "medicalBlocked": true,
@@ -469,7 +464,10 @@
         "permissionGated": true,
         "allowlistedOk": true,
         "cancelled": true,
-        "audit": 9
+        "audit": 9,
+        "realOsAutomation": false,
+        "stack": "in_memory_a11y_mock",
+        "completeness": "PARTIAL"
       }
     },
     {
@@ -478,7 +476,7 @@
       "passed": true,
       "local": true,
       "cloud_only": false,
-      "notes": "Audio overview: grounded outline→script→WAV TTS; ungrounded claims rejected; sources cited.",
+      "notes": "PARTIAL: grounded outline→cited script + ungrounded rejection; audio is hash→sine WAV placeholder — not real TTS speech.",
       "evidence": {
         "outlineSections": 2,
         "scriptLines": 3,
@@ -486,8 +484,11 @@
         "rejectedClaims": [
           "Unicorns invented OFDM in 1999 on Mars"
         ],
-        "audioPath": "/var/folders/dp/z5frf3m511jcdpdf8v878v8h0000gn/T/gunnchai-ur004-4CnhJp/audio/overview_1786812688276.wav",
-        "bytes": 36224
+        "audioPath": "/var/folders/dp/z5frf3m511jcdpdf8v878v8h0000gn/T/gunnchai-ur004-keZmf5/audio/overview_1786813068664.wav",
+        "bytes": 36224,
+        "realTtsSpeech": false,
+        "stack": "hash_sine_wav_placeholder",
+        "completeness": "PARTIAL"
       }
     },
     {
@@ -496,7 +497,7 @@
       "passed": true,
       "local": true,
       "cloud_only": false,
-      "notes": "Companion digital surfaces for conversation/workspace/skills/memory/voice/computer-use/privacy/offline. HUMAN polish not validated.",
+      "notes": "PARTIAL: static HTML surface catalog for companion areas exists; no button→backend wiring. HUMAN polish not validated.",
       "evidence": {
         "surfaceIds": [
           "conversation",
@@ -508,15 +509,18 @@
           "privacy",
           "offline"
         ],
-        "htmlPath": "/var/folders/dp/z5frf3m511jcdpdf8v878v8h0000gn/T/gunnchai-ur004-4CnhJp/companion/companion_chrome.html",
+        "htmlPath": "/var/folders/dp/z5frf3m511jcdpdf8v878v8h0000gn/T/gunnchai-ur004-keZmf5/companion/companion_chrome.html",
         "pixels": "VISUAL UNAVAILABLE",
-        "humanPolishValidated": false
+        "humanPolishValidated": false,
+        "buttonBackendWired": false,
+        "stack": "static_html_surface_catalog",
+        "completeness": "PARTIAL"
       }
     }
   ],
   "p1": {
     "cowrite": {
-      "id": "doc_0f8295fd0766",
+      "id": "doc_e31c3935a908",
       "version": 2,
       "provenanceOps": [
         "create",
@@ -544,7 +548,10 @@
         "deny",
         "consent",
         "invoke"
-      ]
+      ],
+      "realToolExecution": false,
+      "stack": "string_template_invoke",
+      "completeness": "PARTIAL"
     },
     "voice": {
       "mode": "SYNTHETIC",
@@ -562,7 +569,10 @@
       "permissionGated": true,
       "allowlistedOk": true,
       "cancelled": true,
-      "audit": 9
+      "audit": 9,
+      "realOsAutomation": false,
+      "stack": "in_memory_a11y_mock",
+      "completeness": "PARTIAL"
     },
     "audio_overview": {
       "outlineSections": 2,
@@ -571,8 +581,11 @@
       "rejectedClaims": [
         "Unicorns invented OFDM in 1999 on Mars"
       ],
-      "audioPath": "/var/folders/dp/z5frf3m511jcdpdf8v878v8h0000gn/T/gunnchai-ur004-4CnhJp/audio/overview_1786812688276.wav",
-      "bytes": 36224
+      "audioPath": "/var/folders/dp/z5frf3m511jcdpdf8v878v8h0000gn/T/gunnchai-ur004-keZmf5/audio/overview_1786813068664.wav",
+      "bytes": 36224,
+      "realTtsSpeech": false,
+      "stack": "hash_sine_wav_placeholder",
+      "completeness": "PARTIAL"
     },
     "companion": {
       "surfaceIds": [
@@ -585,9 +598,12 @@
         "privacy",
         "offline"
       ],
-      "htmlPath": "/var/folders/dp/z5frf3m511jcdpdf8v878v8h0000gn/T/gunnchai-ur004-4CnhJp/companion/companion_chrome.html",
+      "htmlPath": "/var/folders/dp/z5frf3m511jcdpdf8v878v8h0000gn/T/gunnchai-ur004-keZmf5/companion/companion_chrome.html",
       "pixels": "VISUAL UNAVAILABLE",
-      "humanPolishValidated": false
+      "humanPolishValidated": false,
+      "buttonBackendWired": false,
+      "stack": "static_html_surface_catalog",
+      "completeness": "PARTIAL"
     },
     "vision": {
       "tesseract": true,
@@ -612,8 +628,12 @@
   },
   "stubChallengeFailures": [],
   "next_packet": [
+    "AI-UR-009 real allowlisted tool execution for custom agents COMPLETE",
     "AI-UR-010 real LOCAL/PROVIDER STT+TTS for voice COMPLETE",
     "AI-UR-011 neural VLM for vision COMPLETE (OCR heuristics remain PARTIAL)",
+    "AI-UR-012 real allowlisted local OS/desktop automation COMPLETE",
+    "AI-UR-014 real TTS speech audio overview COMPLETE",
+    "AI-UR-015 button→backend wired companion UI COMPLETE",
     "LOCAL_PRO hashed HOST_OBSERVED when resources safe",
     "HUMAN_E6 companion polish validation",
     "device-os pixel proof for companion/cowrite chrome"
@@ -622,24 +642,32 @@
     "LOCAL_PRO LOCAL_PRO_RESOURCE_PENDING"
   ],
   "remaining_partial": [
+    "AI-UR-009 custom_agents",
     "AI-UR-010 voice_realtime",
-    "AI-UR-011 vision_screen"
+    "AI-UR-011 vision_screen",
+    "AI-UR-012 computer_use",
+    "AI-UR-014 audio_overview",
+    "AI-UR-015 companion_ux"
   ],
   "allImplementedPassed": true,
   "eval_summary": {
     "cowrite_complete": true,
-    "agents_complete": true,
+    "agents_partial": true,
+    "agents_real_tool_execution": false,
     "voice_partial": true,
-    "computer_use_complete": true,
-    "audio_overview_complete": true,
-    "companion_complete": true,
+    "computer_use_partial": true,
+    "computer_use_real_os_automation": false,
+    "audio_overview_partial": true,
+    "audio_real_tts_speech": false,
+    "companion_partial": true,
+    "companion_button_backend_wired": false,
     "vision_partial": true,
     "vision_neural_vlm": false,
     "local_fast": true,
     "local_pro": "LOCAL_PRO_RESOURCE_PENDING",
     "coverage": {
-      "complete": 14,
-      "partial": 2,
+      "complete": 10,
+      "partial": 6,
       "open": 0,
       "complete_ids": [
         "AI-UR-001",
@@ -650,16 +678,16 @@
         "AI-UR-006",
         "AI-UR-007",
         "AI-UR-008",
-        "AI-UR-009",
-        "AI-UR-012",
         "AI-UR-013",
-        "AI-UR-014",
-        "AI-UR-015",
         "AI-UR-016"
       ],
       "partial_ids": [
+        "AI-UR-009",
         "AI-UR-010",
-        "AI-UR-011"
+        "AI-UR-011",
+        "AI-UR-012",
+        "AI-UR-014",
+        "AI-UR-015"
       ],
       "open_ids": []
     },
@@ -669,8 +697,12 @@
   },
   "deferred_heavy_work": [
     "LOCAL_PRO ~1GB GGUF download + HOST_OBSERVED quality gate (LOCAL_PRO_RESOURCE_PENDING)",
+    "AI-UR-009 real allowlisted tool execution (string-template stays PARTIAL)",
     "AI-UR-010 real LOCAL/PROVIDER STT+TTS (synthetic stays PARTIAL)",
     "AI-UR-011 neural VLM weights/provider for vision COMPLETE",
+    "AI-UR-012 real allowlisted OS/desktop automation (a11y mock stays PARTIAL)",
+    "AI-UR-014 real TTS speech (hash→sine WAV stays PARTIAL)",
+    "AI-UR-015 button→backend companion wiring (static HTML stays PARTIAL)",
     "HUMAN_E6 companion polish validation"
   ]
 }

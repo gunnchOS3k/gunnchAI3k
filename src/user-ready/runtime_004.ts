@@ -20,6 +20,7 @@ import { runUserReady003Packet } from './runtime_003';
 import {
   assertNotStub,
   challengeImplementedFlags,
+  challengeMatrixInflation,
   challengeUserReady004,
 } from './stub_challenge';
 import {
@@ -182,6 +183,9 @@ export async function runUserReady004Packet(
     failClosed: !deniedInvoke.ok,
     consentedInvoke: allowedInvoke.ok,
     auditEvents: agents.audit.map((a) => a.event),
+    realToolExecution: false,
+    stack: 'string_template_invoke',
+    completeness: 'PARTIAL' as const,
   };
   results.push({
     task_id: 'AI-UR-009',
@@ -190,7 +194,7 @@ export async function runUserReady004Packet(
     local: true,
     cloud_only: false,
     notes: agentsPassed
-      ? 'Custom agents: manifest install, consent, fail-closed invoke, audit. Unrestricted shell/network rejected.'
+      ? 'PARTIAL: manifest/consent/fail-closed/audit work, but invoke is string-template — not real allowlisted tool execution.'
       : 'CUSTOM_AGENTS_INCOMPLETE',
     evidence: agentsEvidence,
   });
@@ -280,6 +284,9 @@ export async function runUserReady004Packet(
     allowlistedOk: okRun.ok,
     cancelled: cancelled.reason === 'CANCELLED',
     audit: cu.audit.length,
+    realOsAutomation: false,
+    stack: 'in_memory_a11y_mock',
+    completeness: 'PARTIAL' as const,
   };
   results.push({
     task_id: 'AI-UR-012',
@@ -288,7 +295,7 @@ export async function runUserReady004Packet(
     local: true,
     cloud_only: false,
     notes: cuPassed
-      ? 'Computer use: allowlisted lab env only; permission; audit; cancel. Production/finance/medical/surveillance blocked.'
+      ? 'PARTIAL: allowlist/permission/audit/cancel gates work, but action loop is in-memory a11y mock — not real OS/desktop automation.'
       : 'COMPUTER_USE_INCOMPLETE',
     evidence: cuEvidence,
   });
@@ -323,6 +330,9 @@ export async function runUserReady004Packet(
     rejectedClaims: overview.rejectedClaims,
     audioPath: overview.audioPath,
     bytes: overview.bytes,
+    realTtsSpeech: false,
+    stack: 'hash_sine_wav_placeholder',
+    completeness: 'PARTIAL' as const,
   };
   results.push({
     task_id: 'AI-UR-014',
@@ -331,7 +341,7 @@ export async function runUserReady004Packet(
     local: true,
     cloud_only: false,
     notes: audioPassed
-      ? 'Audio overview: grounded outline→script→WAV TTS; ungrounded claims rejected; sources cited.'
+      ? 'PARTIAL: grounded outline→cited script + ungrounded rejection; audio is hash→sine WAV placeholder — not real TTS speech.'
       : 'AUDIO_OVERVIEW_INCOMPLETE',
     evidence: audioEvidence,
   });
@@ -351,6 +361,9 @@ export async function runUserReady004Packet(
     htmlPath: chrome.htmlPath,
     pixels: chrome.pixels,
     humanPolishValidated: chrome.humanPolishValidated,
+    buttonBackendWired: false,
+    stack: 'static_html_surface_catalog',
+    completeness: 'PARTIAL' as const,
   };
   results.push({
     task_id: 'AI-UR-015',
@@ -359,7 +372,7 @@ export async function runUserReady004Packet(
     local: true,
     cloud_only: false,
     notes: companionPassed
-      ? 'Companion digital surfaces for conversation/workspace/skills/memory/voice/computer-use/privacy/offline. HUMAN polish not validated.'
+      ? 'PARTIAL: static HTML surface catalog for companion areas exists; no button→backend wiring. HUMAN polish not validated.'
       : 'COMPANION_INCOMPLETE',
     evidence: companionEvidence,
   });
@@ -389,6 +402,26 @@ export async function runUserReady004Packet(
       humanPolishWithoutHuman: chrome.humanPolishValidated === true,
       fakeLocalProHostObserved:
         proAudit.observation === 'HOST_OBSERVED' && proAudit.sha256 !== modelTiers.localPro.sha256,
+      agentsTemplateClaimedComplete:
+        matrix.tasks.find((t) => t.task_id === 'AI-UR-009')?.coverage_status === 'COMPLETE' &&
+        agentsEvidence.realToolExecution === false,
+      computerUseMockClaimedComplete:
+        matrix.tasks.find((t) => t.task_id === 'AI-UR-012')?.coverage_status === 'COMPLETE' &&
+        cuEvidence.realOsAutomation === false,
+      audioSineWavClaimedComplete:
+        matrix.tasks.find((t) => t.task_id === 'AI-UR-014')?.coverage_status === 'COMPLETE' &&
+        audioEvidence.realTtsSpeech === false,
+      companionStaticHtmlClaimedComplete:
+        matrix.tasks.find((t) => t.task_id === 'AI-UR-015')?.coverage_status === 'COMPLETE' &&
+        companionEvidence.buttonBackendWired === false,
+    }),
+    ...challengeMatrixInflation(matrix.tasks, {
+      agentsRealToolExecution: agentsEvidence.realToolExecution,
+      computerUseRealOsAutomation: cuEvidence.realOsAutomation,
+      audioRealTtsSpeech: audioEvidence.realTtsSpeech,
+      companionButtonBackendWired: companionEvidence.buttonBackendWired,
+      voiceRealSpeechBackends: spoken.mode !== 'SYNTHETIC' && spoken.completeness === 'COMPLETE',
+      visionNeuralVlm: false,
     }),
   ];
 
@@ -431,8 +464,12 @@ export async function runUserReady004Packet(
 
   const deferred_heavy_work = [
     'LOCAL_PRO ~1GB GGUF download + HOST_OBSERVED quality gate (LOCAL_PRO_RESOURCE_PENDING)',
+    'AI-UR-009 real allowlisted tool execution (string-template stays PARTIAL)',
     'AI-UR-010 real LOCAL/PROVIDER STT+TTS (synthetic stays PARTIAL)',
     'AI-UR-011 neural VLM weights/provider for vision COMPLETE',
+    'AI-UR-012 real allowlisted OS/desktop automation (a11y mock stays PARTIAL)',
+    'AI-UR-014 real TTS speech (hash→sine WAV stays PARTIAL)',
+    'AI-UR-015 button→backend companion wiring (static HTML stays PARTIAL)',
     'HUMAN_E6 companion polish validation',
   ];
 
@@ -473,11 +510,15 @@ export async function runUserReady004Packet(
     allImplementedPassed: digitalPass,
     eval_summary: {
       cowrite_complete: cowritePassed,
-      agents_complete: agentsPassed,
+      agents_partial: agentsPassed,
+      agents_real_tool_execution: false,
       voice_partial: voicePartialPassed,
-      computer_use_complete: cuPassed,
-      audio_overview_complete: audioPassed,
-      companion_complete: companionPassed,
+      computer_use_partial: cuPassed,
+      computer_use_real_os_automation: false,
+      audio_overview_partial: audioPassed,
+      audio_real_tts_speech: false,
+      companion_partial: companionPassed,
+      companion_button_backend_wired: false,
       vision_partial: visionRow?.passed ?? false,
       vision_neural_vlm: false,
       local_fast: results.find((r) => r.task_id === 'AI-UR-016')?.passed ?? false,

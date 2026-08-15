@@ -1,7 +1,7 @@
 {
   "schema": "gunnchai.user_ready_001.v1",
   "packet": "AI-USER-READY-001",
-  "generatedAt": "2026-08-15T16:50:32.010Z",
+  "generatedAt": "2026-08-15T16:56:58.205Z",
   "tokens": {
     "GUNNCHAI_APP_PRODUCT_COMPLETE": false,
     "GUNNCHAI_FRONTIER_PRODUCT_PARITY": false,
@@ -61,15 +61,15 @@
   },
   "coverage": {
     "required": 16,
-    "implemented": 14,
+    "implemented": 10,
     "runtime": 6,
-    "offline": 13,
+    "offline": 9,
     "cloud_only": 0,
     "cloud_consent": 7,
     "open": 0,
-    "gap": 2,
-    "complete": 14,
-    "partial": 2,
+    "gap": 6,
+    "complete": 10,
+    "partial": 6,
     "implemented_ids": [
       "AI-UR-001",
       "AI-UR-002",
@@ -79,11 +79,7 @@
       "AI-UR-006",
       "AI-UR-007",
       "AI-UR-008",
-      "AI-UR-009",
-      "AI-UR-012",
       "AI-UR-013",
-      "AI-UR-014",
-      "AI-UR-015",
       "AI-UR-016"
     ],
     "runtime_ids": [
@@ -102,11 +98,7 @@
       "AI-UR-005",
       "AI-UR-006",
       "AI-UR-008",
-      "AI-UR-009",
-      "AI-UR-012",
       "AI-UR-013",
-      "AI-UR-014",
-      "AI-UR-015",
       "AI-UR-016"
     ],
     "cloud_consent_ids": [
@@ -128,16 +120,16 @@
       "AI-UR-006",
       "AI-UR-007",
       "AI-UR-008",
-      "AI-UR-009",
-      "AI-UR-012",
       "AI-UR-013",
-      "AI-UR-014",
-      "AI-UR-015",
       "AI-UR-016"
     ],
     "partial_ids": [
+      "AI-UR-009",
       "AI-UR-010",
-      "AI-UR-011"
+      "AI-UR-011",
+      "AI-UR-012",
+      "AI-UR-014",
+      "AI-UR-015"
     ]
   },
   "results": [
@@ -179,7 +171,7 @@
       "cloud_only": false,
       "notes": "DOCX + code artifacts with targeted edit versions. Canvas UI OPEN.",
       "evidence": {
-        "docx": "/var/folders/dp/z5frf3m511jcdpdf8v878v8h0000gn/T/gunnchai-ur001-zAZjeD/artifacts/lab_report.docx",
+        "docx": "/var/folders/dp/z5frf3m511jcdpdf8v878v8h0000gn/T/gunnchai-ur001-2Vwgqm/artifacts/lab_report.docx",
         "versions": 2,
         "codeExists": true
       }
@@ -226,8 +218,12 @@
   ],
   "stubChallengeFailures": [],
   "next_packet": [
+    "AI-UR-009 real allowlisted tool execution for custom agents COMPLETE",
     "AI-UR-010 real LOCAL/PROVIDER STT+TTS for voice COMPLETE",
     "AI-UR-011 neural VLM for vision COMPLETE (OCR heuristics remain PARTIAL)",
+    "AI-UR-012 real allowlisted local OS/desktop automation COMPLETE",
+    "AI-UR-014 real TTS speech audio overview COMPLETE",
+    "AI-UR-015 button→backend wired companion UI COMPLETE",
     "LOCAL_PRO hashed HOST_OBSERVED when resources safe",
     "HUMAN_E6 companion polish validation",
     "device-os pixel proof for companion/cowrite chrome"

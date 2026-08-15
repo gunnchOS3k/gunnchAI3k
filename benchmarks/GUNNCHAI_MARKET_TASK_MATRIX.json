@@ -3,7 +3,7 @@
   "packet": "AI-USER-READY-004",
   "dated": "2026-08-15",
   "accepted_main_base": "da733a9",
-  "doctrine": "Map market executable classes onto gunnchAI3k. coverage_status COMPLETE|PARTIAL|OPEN. implemented=true only for COMPLETE. SmolLM2-135M Q4_K_M 512-ctx is Nano fallback only. HUMAN_E6=false. GUNNCHAI_APP_PRODUCT_COMPLETE=false. GUNNCHAI_FRONTIER_PRODUCT_PARITY=false. Quality beats inflated counts. AI-USER-READY-004: 008/009/012/014/015 COMPLETE; 010 synthetic voice PARTIAL; 011 OCR heuristics PARTIAL (neural VLM required for COMPLETE); Local Pro LOCAL_PRO_RESOURCE_PENDING when unsafe.",
+  "doctrine": "Map market executable classes onto gunnchAI3k. coverage_status COMPLETE|PARTIAL|OPEN. implemented=true only for COMPLETE. SmolLM2-135M Q4_K_M 512-ctx is Nano fallback only. HUMAN_E6=false. GUNNCHAI_APP_PRODUCT_COMPLETE=false. GUNNCHAI_FRONTIER_PRODUCT_PARITY=false. Quality beats inflated counts. AI-USER-READY-004 remediations: 008 cowrite COMPLETE; 009 agents PARTIAL (string-template invoke ≠ tool execution); 010 synthetic voice PARTIAL; 011 OCR≠VLM PARTIAL; 012 computer-use PARTIAL (in-memory a11y mock ≠ OS automation); 014 audio PARTIAL (hash→sine WAV ≠ real TTS); 015 companion PARTIAL (static HTML ≠ button→backend wiring); Local Pro LOCAL_PRO_RESOURCE_PENDING when unsafe.",
   "device_profiles": [
     "student_14_5",
     "handheld_hybrid",
@@ -245,16 +245,16 @@
       ],
       "local_required": true,
       "cloud_optional": true,
-      "implemented": true,
+      "implemented": false,
       "actual_runtime_test": "tests/user-ready/ai004_surfaces.test.ts",
-      "quality_metric": "manifest_permissions_fail_closed_audit_consent",
+      "quality_metric": "manifest_permissions_fail_closed_audit_consent_plus_real_tool_execution",
       "privacy_requirement": "per-agent tool consent; no unrestricted shell/network",
       "device_profiles": [
         "ds_xl_coder"
       ],
-      "evidence": "src/user-ready/custom_agents.ts: manifest install, consent, fail-closed invoke, audit; unrestricted/shell-without-allowlist rejected",
-      "gap": "Not a public Gem store marketplace UX.",
-      "coverage_status": "COMPLETE"
+      "evidence": "src/user-ready/custom_agents.ts: manifest install, consent, fail-closed invoke, audit. Invoke currently returns a string template — not allowlisted tool execution.",
+      "gap": "PARTIAL: string-template invoke ≠ real tool execution. COMPLETE requires deterministic allowlisted tools that actually run (e.g. files.read of a real path).",
+      "coverage_status": "PARTIAL"
     },
     {
       "task_id": "AI-UR-010",
@@ -306,16 +306,16 @@
       ],
       "local_required": true,
       "cloud_optional": false,
-      "implemented": true,
+      "implemented": false,
       "actual_runtime_test": "tests/user-ready/ai004_surfaces.test.ts",
-      "quality_metric": "allowlisted_lab_env_permission_audit_cancel",
+      "quality_metric": "allowlisted_lab_env_permission_audit_cancel_plus_real_os_automation",
       "privacy_requirement": "explicit desktop control grant; no surveillance/production finance/medical",
       "device_profiles": [
         "ds_xl_coder"
       ],
-      "evidence": "src/user-ready/computer_use_safe.ts: allowlisted lab envs only; permission; audit; cancel; production/finance/medical/surveillance blocked",
-      "gap": "Lab allowlist only — not production desktop agent product.",
-      "coverage_status": "COMPLETE"
+      "evidence": "src/user-ready/computer_use_safe.ts: allowlisted lab env ids, permission, audit, cancel gates. Action loop is an in-memory a11y-tree mock — not OS/desktop automation.",
+      "gap": "PARTIAL: in-memory a11y mock ≠ real allowlisted local desktop/OS automation. COMPLETE needs controlled local app/task automation evidence.",
+      "coverage_status": "PARTIAL"
     },
     {
       "task_id": "AI-UR-013",
@@ -348,17 +348,17 @@
       ],
       "local_required": true,
       "cloud_optional": true,
-      "implemented": true,
+      "implemented": false,
       "actual_runtime_test": "tests/user-ready/ai004_surfaces.test.ts",
-      "quality_metric": "grounded_outline_script_tts_with_citations",
+      "quality_metric": "grounded_outline_script_real_tts_with_citations",
       "privacy_requirement": "local sources",
       "device_profiles": [
         "student_14_5",
         "handheld_hybrid"
       ],
-      "evidence": "src/user-ready/audio_overview.ts: grounded outline→cited script→real WAV; ungrounded claims rejected",
-      "gap": "Not NotebookLM studio polish or multi-host natural voices.",
-      "coverage_status": "COMPLETE"
+      "evidence": "src/user-ready/audio_overview.ts: grounded outline→cited script; rejects ungrounded claims; emits hash→sine WAV placeholder (not speech TTS).",
+      "gap": "PARTIAL: hash→sine WAV ≠ real TTS speech. COMPLETE requires local or consented provider TTS that synthesizes spoken audio from the grounded script.",
+      "coverage_status": "PARTIAL"
     },
     {
       "task_id": "AI-UR-015",
@@ -369,18 +369,18 @@
       ],
       "local_required": true,
       "cloud_optional": false,
-      "implemented": true,
+      "implemented": false,
       "actual_runtime_test": "tests/user-ready/ai004_surfaces.test.ts",
-      "quality_metric": "usable_surfaces_conversation_workspace_skills_memory_voice_consent_privacy_offline",
+      "quality_metric": "button_to_backend_wired_companion_surfaces",
       "privacy_requirement": "OS-integrated companion surfaces; HUMAN_E6 false without human polish",
       "device_profiles": [
         "student_14_5",
         "handheld_hybrid",
         "ds_xl_coder"
       ],
-      "evidence": "src/user-ready/companion_ui.ts renders digital companion chrome HTML for required surfaces; pixels=VISUAL UNAVAILABLE; humanPolishValidated=false",
-      "gap": "HUMAN polish / HUMAN_E6 not validated. Device-os screenshot proof still separate.",
-      "coverage_status": "COMPLETE"
+      "evidence": "src/user-ready/companion_ui.ts renders static HTML surface list; pixels=VISUAL UNAVAILABLE; humanPolishValidated=false. No button→backend wiring.",
+      "gap": "PARTIAL: static HTML surface catalog ≠ wired companion UI. COMPLETE requires real button→backend handlers for conversation/workspace/skills/memory/voice/consent/privacy/offline.",
+      "coverage_status": "PARTIAL"
     },
     {
       "task_id": "AI-UR-016",
@@ -403,8 +403,12 @@
     }
   ],
   "next_packet": [
+    "AI-UR-009 real allowlisted tool execution for custom agents COMPLETE",
     "AI-UR-010 real LOCAL/PROVIDER STT+TTS for voice COMPLETE",
     "AI-UR-011 neural VLM for vision COMPLETE (OCR heuristics remain PARTIAL)",
+    "AI-UR-012 real allowlisted local OS/desktop automation COMPLETE",
+    "AI-UR-014 real TTS speech audio overview COMPLETE",
+    "AI-UR-015 button→backend wired companion UI COMPLETE",
     "LOCAL_PRO hashed HOST_OBSERVED when resources safe",
     "HUMAN_E6 companion polish validation",
     "device-os pixel proof for companion/cowrite chrome"
