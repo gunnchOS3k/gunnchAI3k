@@ -1,0 +1,684 @@
+{
+  "schema": "MASTERY_STRONGER_MODEL_COMPARE.v1",
+  "status": "OK",
+  "frozen_tips": {
+    "gunnchai_pr": 38,
+    "gunnchai_tip": "8aee77f88ab7e93fcb00831fa3e1ee466060ca8d",
+    "waike_pr": 48,
+    "waike_tip": "a60558d6de2ae3ef3c83329a22c37bfe86f17923"
+  },
+  "sample_design": {
+    "per_course_quiz": 6,
+    "per_course_mid": 2,
+    "per_course_final": 2,
+    "courses": 12,
+    "target_items": 120,
+    "held_out": true,
+    "same_curriculum_grader_parser_tools_prompt": true,
+    "no_tuning_after_results": true
+  },
+  "identities": {
+    "MODEL_A": {
+      "id": "SmolLM2-135M-Instruct-Q4_K_M",
+      "path": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k-mastery-002-wt/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+      "role": "NANO_LOCAL_baseline_path",
+      "sha256": "2e8040ceae7815abe0dcb3540b9995eaa1fa0d2ca9e797d0a635ae4433c68c2d",
+      "bytes": 105454432
+    },
+    "MODEL_B": {
+      "id": "SmolLM2-360M-Instruct-Q4_K_M",
+      "path": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k-mastery-002-wt/models/local/SmolLM2-360M-Instruct-Q4_K_M.gguf",
+      "role": "LOCAL_FAST_already_approved",
+      "sha256": "2fa3f013dcdd7b99f9b237717fa0b12d75bbb89984cc1274be1471a465bac9c2",
+      "bytes": 270590880
+    }
+  },
+  "MODEL_A": {
+    "overall_score": 0.30833333333333335,
+    "items_attempted": 120,
+    "items_correct": 37,
+    "parser_failures": 0,
+    "per_course": {
+      "AI_ML_EDGE": {
+        "correct": 4,
+        "total": 10,
+        "score": 0.4
+      },
+      "CLOUD_DEVOPS": {
+        "correct": 2,
+        "total": 10,
+        "score": 0.2
+      },
+      "COMPUTER_NETWORKING": {
+        "correct": 4,
+        "total": 10,
+        "score": 0.4
+      },
+      "CYBERSECURITY": {
+        "correct": 2,
+        "total": 10,
+        "score": 0.2
+      },
+      "DATA_VIZ_BI": {
+        "correct": 4,
+        "total": 10,
+        "score": 0.4
+      },
+      "GAME_DEV_INTERACTIVE": {
+        "correct": 3,
+        "total": 10,
+        "score": 0.3
+      },
+      "GENERAL_IT": {
+        "correct": 3,
+        "total": 10,
+        "score": 0.3
+      },
+      "HARDWARE_ENGINEERING": {
+        "correct": 2,
+        "total": 10,
+        "score": 0.2
+      },
+      "PM_AGILE_LSS": {
+        "correct": 1,
+        "total": 10,
+        "score": 0.1
+      },
+      "ROBOTICS_CONTROL": {
+        "correct": 4,
+        "total": 10,
+        "score": 0.4
+      },
+      "SOFTWARE_BUILDER": {
+        "correct": 4,
+        "total": 10,
+        "score": 0.4
+      },
+      "WIRELESS_6G": {
+        "correct": 4,
+        "total": 10,
+        "score": 0.4
+      }
+    },
+    "failure_rates": {
+      "parser": 0,
+      "reasoning": 0.025,
+      "knowledge": 0.5916666666666667,
+      "tool_required": 0,
+      "instruction": 0,
+      "calculation": 0.016666666666666666,
+      "concept_confusion": 0.016666666666666666,
+      "prerequisite": 0.041666666666666664
+    },
+    "failure_taxonomy": {
+      "schema": "gunnchai.failure_census.v1",
+      "miss_count": 83,
+      "counts": {
+        "MODEL_KNOWLEDGE_GAP": 71,
+        "CONCEPT_CONFUSION": 2,
+        "REASONING_FAILURE": 3,
+        "PREREQUISITE_GAP": 5,
+        "CALCULATION_FAILURE": 2
+      },
+      "by_course": {
+        "AI_ML_EDGE": {
+          "MODEL_KNOWLEDGE_GAP": 5,
+          "CONCEPT_CONFUSION": 1
+        },
+        "CLOUD_DEVOPS": {
+          "MODEL_KNOWLEDGE_GAP": 8
+        },
+        "COMPUTER_NETWORKING": {
+          "MODEL_KNOWLEDGE_GAP": 4,
+          "REASONING_FAILURE": 1,
+          "PREREQUISITE_GAP": 1
+        },
+        "CYBERSECURITY": {
+          "MODEL_KNOWLEDGE_GAP": 8
+        },
+        "DATA_VIZ_BI": {
+          "MODEL_KNOWLEDGE_GAP": 5,
+          "PREREQUISITE_GAP": 1
+        },
+        "GAME_DEV_INTERACTIVE": {
+          "MODEL_KNOWLEDGE_GAP": 7
+        },
+        "GENERAL_IT": {
+          "MODEL_KNOWLEDGE_GAP": 6,
+          "PREREQUISITE_GAP": 1
+        },
+        "HARDWARE_ENGINEERING": {
+          "MODEL_KNOWLEDGE_GAP": 7,
+          "PREREQUISITE_GAP": 1
+        },
+        "PM_AGILE_LSS": {
+          "MODEL_KNOWLEDGE_GAP": 8,
+          "CONCEPT_CONFUSION": 1
+        },
+        "ROBOTICS_CONTROL": {
+          "MODEL_KNOWLEDGE_GAP": 5,
+          "REASONING_FAILURE": 1
+        },
+        "SOFTWARE_BUILDER": {
+          "MODEL_KNOWLEDGE_GAP": 4,
+          "REASONING_FAILURE": 1,
+          "CALCULATION_FAILURE": 1
+        },
+        "WIRELESS_6G": {
+          "CALCULATION_FAILURE": 1,
+          "MODEL_KNOWLEDGE_GAP": 4,
+          "PREREQUISITE_GAP": 1
+        }
+      },
+      "by_assessment_type": {
+        "quiz": {
+          "MODEL_KNOWLEDGE_GAP": 45,
+          "CONCEPT_CONFUSION": 1,
+          "REASONING_FAILURE": 2,
+          "PREREQUISITE_GAP": 2,
+          "CALCULATION_FAILURE": 1
+        },
+        "mid": {
+          "MODEL_KNOWLEDGE_GAP": 13,
+          "PREREQUISITE_GAP": 2
+        },
+        "final": {
+          "MODEL_KNOWLEDGE_GAP": 13,
+          "PREREQUISITE_GAP": 1,
+          "CONCEPT_CONFUSION": 1,
+          "REASONING_FAILURE": 1,
+          "CALCULATION_FAILURE": 1
+        }
+      },
+      "by_skill": {},
+      "largest_classes": [
+        {
+          "code": "MODEL_KNOWLEDGE_GAP",
+          "n": 71
+        },
+        {
+          "code": "PREREQUISITE_GAP",
+          "n": 5
+        },
+        {
+          "code": "REASONING_FAILURE",
+          "n": 3
+        },
+        {
+          "code": "CONCEPT_CONFUSION",
+          "n": 2
+        },
+        {
+          "code": "CALCULATION_FAILURE",
+          "n": 2
+        }
+      ],
+      "taxonomy": [
+        "PARSER_FAILURE",
+        "MODEL_KNOWLEDGE_GAP",
+        "PREREQUISITE_GAP",
+        "CONCEPT_CONFUSION",
+        "REASONING_FAILURE",
+        "CALCULATION_FAILURE",
+        "INSTRUCTION_INTERPRETATION_FAILURE",
+        "TOOL_REQUIRED_NOT_USED",
+        "TOOL_SELECTION_FAILURE",
+        "TOOL_EXECUTION_FAILURE",
+        "SOURCE_GROUNDING_FAILURE",
+        "CONTEXT_LIMIT_FAILURE",
+        "PROMPT_FORMAT_FAILURE",
+        "AMBIGUOUS_ITEM",
+        "CURRICULUM_DEFECT_CANDIDATE",
+        "GRADER_DEFECT_CANDIDATE",
+        "UNKNOWN",
+        "VOCABULARY_FAILURE",
+        "TRANSFER_FAILURE",
+        "DEBUGGING_FAILURE",
+        "CODE_FAILURE",
+        "RUBRIC_FAILURE",
+        "PARTIAL_COMPLETION",
+        "CARELESS_ERROR",
+        "ACCESSIBILITY_BARRIER",
+        "AMBIGUOUS_PROMPT",
+        "POLICY_BLOCKED",
+        "RESOURCE_BLOCKED",
+        "DIAGNOSIS_UNCERTAIN"
+      ]
+    }
+  },
+  "MODEL_B": {
+    "overall_score": 0.2916666666666667,
+    "items_attempted": 120,
+    "items_correct": 35,
+    "parser_failures": 0,
+    "per_course": {
+      "AI_ML_EDGE": {
+        "correct": 2,
+        "total": 10,
+        "score": 0.2
+      },
+      "CLOUD_DEVOPS": {
+        "correct": 1,
+        "total": 10,
+        "score": 0.1
+      },
+      "COMPUTER_NETWORKING": {
+        "correct": 4,
+        "total": 10,
+        "score": 0.4
+      },
+      "CYBERSECURITY": {
+        "correct": 2,
+        "total": 10,
+        "score": 0.2
+      },
+      "DATA_VIZ_BI": {
+        "correct": 5,
+        "total": 10,
+        "score": 0.5
+      },
+      "GAME_DEV_INTERACTIVE": {
+        "correct": 4,
+        "total": 10,
+        "score": 0.4
+      },
+      "GENERAL_IT": {
+        "correct": 4,
+        "total": 10,
+        "score": 0.4
+      },
+      "HARDWARE_ENGINEERING": {
+        "correct": 1,
+        "total": 10,
+        "score": 0.1
+      },
+      "PM_AGILE_LSS": {
+        "correct": 3,
+        "total": 10,
+        "score": 0.3
+      },
+      "ROBOTICS_CONTROL": {
+        "correct": 2,
+        "total": 10,
+        "score": 0.2
+      },
+      "SOFTWARE_BUILDER": {
+        "correct": 4,
+        "total": 10,
+        "score": 0.4
+      },
+      "WIRELESS_6G": {
+        "correct": 3,
+        "total": 10,
+        "score": 0.3
+      }
+    },
+    "failure_rates": {
+      "parser": 0,
+      "reasoning": 0.016666666666666666,
+      "knowledge": 0.6166666666666667,
+      "tool_required": 0,
+      "instruction": 0,
+      "calculation": 0.008333333333333333,
+      "concept_confusion": 0.016666666666666666,
+      "prerequisite": 0.05
+    },
+    "failure_taxonomy": {
+      "schema": "gunnchai.failure_census.v1",
+      "miss_count": 85,
+      "counts": {
+        "MODEL_KNOWLEDGE_GAP": 74,
+        "PREREQUISITE_GAP": 6,
+        "CONCEPT_CONFUSION": 2,
+        "REASONING_FAILURE": 2,
+        "CALCULATION_FAILURE": 1
+      },
+      "by_course": {
+        "AI_ML_EDGE": {
+          "MODEL_KNOWLEDGE_GAP": 6,
+          "PREREQUISITE_GAP": 1,
+          "CONCEPT_CONFUSION": 1
+        },
+        "CLOUD_DEVOPS": {
+          "MODEL_KNOWLEDGE_GAP": 8,
+          "PREREQUISITE_GAP": 1
+        },
+        "COMPUTER_NETWORKING": {
+          "PREREQUISITE_GAP": 1,
+          "REASONING_FAILURE": 1,
+          "MODEL_KNOWLEDGE_GAP": 4
+        },
+        "CYBERSECURITY": {
+          "MODEL_KNOWLEDGE_GAP": 8
+        },
+        "DATA_VIZ_BI": {
+          "MODEL_KNOWLEDGE_GAP": 5
+        },
+        "GAME_DEV_INTERACTIVE": {
+          "MODEL_KNOWLEDGE_GAP": 6
+        },
+        "GENERAL_IT": {
+          "MODEL_KNOWLEDGE_GAP": 5,
+          "PREREQUISITE_GAP": 1
+        },
+        "HARDWARE_ENGINEERING": {
+          "MODEL_KNOWLEDGE_GAP": 8,
+          "PREREQUISITE_GAP": 1
+        },
+        "PM_AGILE_LSS": {
+          "MODEL_KNOWLEDGE_GAP": 6,
+          "CONCEPT_CONFUSION": 1
+        },
+        "ROBOTICS_CONTROL": {
+          "MODEL_KNOWLEDGE_GAP": 8
+        },
+        "SOFTWARE_BUILDER": {
+          "MODEL_KNOWLEDGE_GAP": 5,
+          "REASONING_FAILURE": 1
+        },
+        "WIRELESS_6G": {
+          "CALCULATION_FAILURE": 1,
+          "MODEL_KNOWLEDGE_GAP": 5,
+          "PREREQUISITE_GAP": 1
+        }
+      },
+      "by_assessment_type": {
+        "quiz": {
+          "MODEL_KNOWLEDGE_GAP": 47,
+          "PREREQUISITE_GAP": 4,
+          "CONCEPT_CONFUSION": 1,
+          "REASONING_FAILURE": 2,
+          "CALCULATION_FAILURE": 1
+        },
+        "mid": {
+          "MODEL_KNOWLEDGE_GAP": 16,
+          "PREREQUISITE_GAP": 1
+        },
+        "final": {
+          "MODEL_KNOWLEDGE_GAP": 11,
+          "PREREQUISITE_GAP": 1,
+          "CONCEPT_CONFUSION": 1
+        }
+      },
+      "by_skill": {},
+      "largest_classes": [
+        {
+          "code": "MODEL_KNOWLEDGE_GAP",
+          "n": 74
+        },
+        {
+          "code": "PREREQUISITE_GAP",
+          "n": 6
+        },
+        {
+          "code": "CONCEPT_CONFUSION",
+          "n": 2
+        },
+        {
+          "code": "REASONING_FAILURE",
+          "n": 2
+        },
+        {
+          "code": "CALCULATION_FAILURE",
+          "n": 1
+        }
+      ],
+      "taxonomy": [
+        "PARSER_FAILURE",
+        "MODEL_KNOWLEDGE_GAP",
+        "PREREQUISITE_GAP",
+        "CONCEPT_CONFUSION",
+        "REASONING_FAILURE",
+        "CALCULATION_FAILURE",
+        "INSTRUCTION_INTERPRETATION_FAILURE",
+        "TOOL_REQUIRED_NOT_USED",
+        "TOOL_SELECTION_FAILURE",
+        "TOOL_EXECUTION_FAILURE",
+        "SOURCE_GROUNDING_FAILURE",
+        "CONTEXT_LIMIT_FAILURE",
+        "PROMPT_FORMAT_FAILURE",
+        "AMBIGUOUS_ITEM",
+        "CURRICULUM_DEFECT_CANDIDATE",
+        "GRADER_DEFECT_CANDIDATE",
+        "UNKNOWN",
+        "VOCABULARY_FAILURE",
+        "TRANSFER_FAILURE",
+        "DEBUGGING_FAILURE",
+        "CODE_FAILURE",
+        "RUBRIC_FAILURE",
+        "PARTIAL_COMPLETION",
+        "CARELESS_ERROR",
+        "ACCESSIBILITY_BARRIER",
+        "AMBIGUOUS_PROMPT",
+        "POLICY_BLOCKED",
+        "RESOURCE_BLOCKED",
+        "DIAGNOSIS_UNCERTAIN"
+      ]
+    }
+  },
+  "delta_overall": -0.016666666666666663,
+  "per_course_deltas": {
+    "AI_ML_EDGE": {
+      "A": {
+        "correct": 4,
+        "total": 10,
+        "score": 0.4
+      },
+      "B": {
+        "correct": 2,
+        "total": 10,
+        "score": 0.2
+      },
+      "delta_score": -0.2
+    },
+    "CLOUD_DEVOPS": {
+      "A": {
+        "correct": 2,
+        "total": 10,
+        "score": 0.2
+      },
+      "B": {
+        "correct": 1,
+        "total": 10,
+        "score": 0.1
+      },
+      "delta_score": -0.1
+    },
+    "COMPUTER_NETWORKING": {
+      "A": {
+        "correct": 4,
+        "total": 10,
+        "score": 0.4
+      },
+      "B": {
+        "correct": 4,
+        "total": 10,
+        "score": 0.4
+      },
+      "delta_score": 0
+    },
+    "CYBERSECURITY": {
+      "A": {
+        "correct": 2,
+        "total": 10,
+        "score": 0.2
+      },
+      "B": {
+        "correct": 2,
+        "total": 10,
+        "score": 0.2
+      },
+      "delta_score": 0
+    },
+    "DATA_VIZ_BI": {
+      "A": {
+        "correct": 4,
+        "total": 10,
+        "score": 0.4
+      },
+      "B": {
+        "correct": 5,
+        "total": 10,
+        "score": 0.5
+      },
+      "delta_score": 0.09999999999999998
+    },
+    "GAME_DEV_INTERACTIVE": {
+      "A": {
+        "correct": 3,
+        "total": 10,
+        "score": 0.3
+      },
+      "B": {
+        "correct": 4,
+        "total": 10,
+        "score": 0.4
+      },
+      "delta_score": 0.10000000000000003
+    },
+    "GENERAL_IT": {
+      "A": {
+        "correct": 3,
+        "total": 10,
+        "score": 0.3
+      },
+      "B": {
+        "correct": 4,
+        "total": 10,
+        "score": 0.4
+      },
+      "delta_score": 0.10000000000000003
+    },
+    "HARDWARE_ENGINEERING": {
+      "A": {
+        "correct": 2,
+        "total": 10,
+        "score": 0.2
+      },
+      "B": {
+        "correct": 1,
+        "total": 10,
+        "score": 0.1
+      },
+      "delta_score": -0.1
+    },
+    "PM_AGILE_LSS": {
+      "A": {
+        "correct": 1,
+        "total": 10,
+        "score": 0.1
+      },
+      "B": {
+        "correct": 3,
+        "total": 10,
+        "score": 0.3
+      },
+      "delta_score": 0.19999999999999998
+    },
+    "ROBOTICS_CONTROL": {
+      "A": {
+        "correct": 4,
+        "total": 10,
+        "score": 0.4
+      },
+      "B": {
+        "correct": 2,
+        "total": 10,
+        "score": 0.2
+      },
+      "delta_score": -0.2
+    },
+    "SOFTWARE_BUILDER": {
+      "A": {
+        "correct": 4,
+        "total": 10,
+        "score": 0.4
+      },
+      "B": {
+        "correct": 4,
+        "total": 10,
+        "score": 0.4
+      },
+      "delta_score": 0
+    },
+    "WIRELESS_6G": {
+      "A": {
+        "correct": 4,
+        "total": 10,
+        "score": 0.4
+      },
+      "B": {
+        "correct": 3,
+        "total": 10,
+        "score": 0.3
+      },
+      "delta_score": -0.10000000000000003
+    }
+  },
+  "failure_class_shifts": {
+    "calculation": {
+      "A": 0.016666666666666666,
+      "B": 0.008333333333333333,
+      "delta": -0.008333333333333333
+    },
+    "concept_confusion": {
+      "A": 0.016666666666666666,
+      "B": 0.016666666666666666,
+      "delta": 0
+    },
+    "instruction": {
+      "A": 0,
+      "B": 0,
+      "delta": 0
+    },
+    "knowledge": {
+      "A": 0.5916666666666667,
+      "B": 0.6166666666666667,
+      "delta": 0.025000000000000022
+    },
+    "parser": {
+      "A": 0,
+      "B": 0,
+      "delta": 0
+    },
+    "prerequisite": {
+      "A": 0.041666666666666664,
+      "B": 0.05,
+      "delta": 0.008333333333333338
+    },
+    "reasoning": {
+      "A": 0.025,
+      "B": 0.016666666666666666,
+      "delta": -0.008333333333333335
+    },
+    "tool_required": {
+      "A": 0,
+      "B": 0,
+      "delta": 0
+    }
+  },
+  "REAL_SOLVER_BASELINE_V1": {
+    "before": {
+      "path": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k-mastery-002-wt/artifacts/waike-mastery/REAL_SOLVER_BASELINE_V1.json",
+      "sha256": "45bd3a9adacc92c3fe23d1c8f6381eb715a395b1a3d24c912d353fb7ea656d4d",
+      "overall": 0.16666666666666666
+    },
+    "after": {
+      "path": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k-mastery-002-wt/artifacts/waike-mastery/REAL_SOLVER_BASELINE_V1.json",
+      "sha256": "45bd3a9adacc92c3fe23d1c8f6381eb715a395b1a3d24c912d353fb7ea656d4d",
+      "overall": 0.16666666666666666
+    },
+    "intact": true
+  },
+  "WAIKE_AI_DIGITAL_MASTERY_PASS": false,
+  "DIGITAL_MASTERY_PASS_note": "Remains false unless ≥0.95 truly earned on real-runtime path.",
+  "classification": "capability_comparison_only",
+  "adoption_recommendation": "DO_NOT_ADOPT_AS_MASTERY_SOLVER_DEFAULT",
+  "mastery_tips_changed": false,
+  "OPEN": [
+    "WAIKE_AI_DIGITAL_MASTERY_PASS remains false (overall << 0.95).",
+    "Comparison is capability-only unless B reaches mastery threshold.",
+    "Qwen2.5-1.5B Local Pro GGUF not present locally — not downloaded per policy.",
+    "Cursor NEVER merges; tip DRAFT sources untouched by this compare script."
+  ]
+}
