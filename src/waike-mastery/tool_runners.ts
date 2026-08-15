@@ -8,7 +8,7 @@ import * as fs from 'node:fs';
 import * as os from 'node:os';
 import * as path from 'node:path';
 
-export const TOOL_RUNNER_VERSION = 'gunnchai.tool_runners.v1_real_exec';
+export const TOOL_RUNNER_VERSION = 'gunnchai.tool_runners.v1_real_exec_b13';
 
 export interface ToolRunRecord {
   tool_id: string;

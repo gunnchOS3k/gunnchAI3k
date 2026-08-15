@@ -37,6 +37,42 @@ export const TAXONOMY = [
 
 export type FailureCode = (typeof TAXONOMY)[number];
 
+/** Infer soft signals from stem text when explicit flags are absent (no gold keys). */
+export function inferStemSignals(stem: string): Partial<{
+  calcMismatch: boolean;
+  prerequisite: boolean;
+  conceptConfusion: boolean;
+  reasoning: boolean;
+  instruction: boolean;
+  grounding: boolean;
+  ambiguous: boolean;
+}> {
+  const s = stem || '';
+  const out: Record<string, boolean> = {};
+  if (/\b(calculate|compute|how many|fspl|log10|throughput|cidr|\/\d{1,2}\b)/i.test(s)) {
+    out.calcMismatch = true;
+  }
+  if (/\b(before|prerequisite|first must|depends on|prior week)\b/i.test(s)) {
+    out.prerequisite = true;
+  }
+  if (/\b(vs\.?|versus|confus|difference between|which of the following is NOT)\b/i.test(s)) {
+    out.conceptConfusion = true;
+  }
+  if (/\b(therefore|implies|if .+ then|reason|because)\b/i.test(s)) {
+    out.reasoning = true;
+  }
+  if (/\b(according to the (lesson|lab)|based on the (passage|notes)|from the text)\b/i.test(s)) {
+    out.grounding = true;
+  }
+  if (/\b(select all|best describes|most nearly|ambiguous)\b/i.test(s)) {
+    out.ambiguous = true;
+  }
+  if (/\b(carefully read|exactly as stated|follow the instruction)\b/i.test(s)) {
+    out.instruction = true;
+  }
+  return out;
+}
+
 export function classifyMiss(opts: {
   stem: string;
   chosen?: string | null;
@@ -59,26 +95,37 @@ export function classifyMiss(opts: {
   instruction?: boolean;
   grounding?: boolean;
 }): { failure_code: FailureCode; first_divergence: string; stem_excerpt: string } {
+  const soft = inferStemSignals(opts.stem);
+  const merged = {
+    ...opts,
+    calcMismatch: opts.calcMismatch ?? soft.calcMismatch,
+    prerequisite: opts.prerequisite ?? soft.prerequisite,
+    conceptConfusion: opts.conceptConfusion ?? soft.conceptConfusion,
+    reasoning: opts.reasoning ?? soft.reasoning,
+    instruction: opts.instruction ?? soft.instruction,
+    grounding: opts.grounding ?? soft.grounding,
+    ambiguous: opts.ambiguous ?? soft.ambiguous,
+  };
   let code: FailureCode = 'MODEL_KNOWLEDGE_GAP';
-  if (opts.usedKeys) code = 'POLICY_BLOCKED';
-  else if (opts.parserFailed) code = 'PARSER_FAILURE';
-  else if (opts.blockedResource) code = 'RESOURCE_BLOCKED';
-  else if (opts.blockedRuntime) code = 'DIAGNOSIS_UNCERTAIN';
-  else if (opts.contextLimit) code = 'CONTEXT_LIMIT_FAILURE';
-  else if (opts.promptFormat) code = 'PROMPT_FORMAT_FAILURE';
-  else if (opts.toolRequiredNotUsed) code = 'TOOL_REQUIRED_NOT_USED';
-  else if (opts.toolSelectionWrong) code = 'TOOL_SELECTION_FAILURE';
-  else if (opts.toolFailed) code = 'TOOL_EXECUTION_FAILURE';
-  else if (opts.calcMismatch) code = 'CALCULATION_FAILURE';
-  else if (opts.prerequisite) code = 'PREREQUISITE_GAP';
-  else if (opts.conceptConfusion) code = 'CONCEPT_CONFUSION';
-  else if (opts.reasoning) code = 'REASONING_FAILURE';
-  else if (opts.instruction) code = 'INSTRUCTION_INTERPRETATION_FAILURE';
-  else if (opts.grounding) code = 'SOURCE_GROUNDING_FAILURE';
-  else if (opts.ambiguous) code = 'AMBIGUOUS_ITEM';
-  else if (opts.curriculumDefect) code = 'CURRICULUM_DEFECT_CANDIDATE';
-  else if (opts.graderDefect) code = 'GRADER_DEFECT_CANDIDATE';
-  else if (opts.chosen == null || opts.chosen === '') code = 'PARSER_FAILURE';
+  if (merged.usedKeys) code = 'POLICY_BLOCKED';
+  else if (merged.parserFailed) code = 'PARSER_FAILURE';
+  else if (merged.blockedResource) code = 'RESOURCE_BLOCKED';
+  else if (merged.blockedRuntime) code = 'DIAGNOSIS_UNCERTAIN';
+  else if (merged.contextLimit) code = 'CONTEXT_LIMIT_FAILURE';
+  else if (merged.promptFormat) code = 'PROMPT_FORMAT_FAILURE';
+  else if (merged.toolRequiredNotUsed) code = 'TOOL_REQUIRED_NOT_USED';
+  else if (merged.toolSelectionWrong) code = 'TOOL_SELECTION_FAILURE';
+  else if (merged.toolFailed) code = 'TOOL_EXECUTION_FAILURE';
+  else if (merged.calcMismatch) code = 'CALCULATION_FAILURE';
+  else if (merged.prerequisite) code = 'PREREQUISITE_GAP';
+  else if (merged.conceptConfusion) code = 'CONCEPT_CONFUSION';
+  else if (merged.reasoning) code = 'REASONING_FAILURE';
+  else if (merged.instruction) code = 'INSTRUCTION_INTERPRETATION_FAILURE';
+  else if (merged.grounding) code = 'SOURCE_GROUNDING_FAILURE';
+  else if (merged.ambiguous) code = 'AMBIGUOUS_ITEM';
+  else if (merged.curriculumDefect) code = 'CURRICULUM_DEFECT_CANDIDATE';
+  else if (merged.graderDefect) code = 'GRADER_DEFECT_CANDIDATE';
+  else if (merged.chosen == null || merged.chosen === '') code = 'PARSER_FAILURE';
 
   return {
     failure_code: code,

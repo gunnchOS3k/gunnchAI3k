@@ -15,48 +15,57 @@
     "GAME_DEV_INTERACTIVE",
     "PM_AGILE_LSS"
   ],
+  "policy": {
+    "course_min": 0.9,
+    "transfer_min": 0.75,
+    "min_items": 12,
+    "remediation_required": true,
+    "memorization_forbidden": true,
+    "held_out_key_training_forbidden": true
+  },
   "baseline": {
-    "overall": 0.4,
-    "items_attempted": 5,
-    "items_correct": 2,
-    "parser_failures": 3,
+    "overall": 0.25,
+    "items_attempted": 16,
+    "items_correct": 4,
+    "parser_failures": 0,
     "per_course": {
       "GENERAL_IT": {
-        "correct": 2,
-        "total": 5,
-        "score": 0.4
+        "correct": 4,
+        "total": 16,
+        "score": 0.25
       }
     },
-    "status": "OK"
+    "status": "OK",
+    "infer_path": "lean_mcq_v1"
   },
   "failure_taxonomy": {
     "schema": "gunnchai.failure_census.v1",
-    "miss_count": 6,
+    "miss_count": 12,
     "counts": {
-      "PARSER_FAILURE": 3,
-      "MODEL_KNOWLEDGE_GAP": 3
+      "MODEL_KNOWLEDGE_GAP": 11,
+      "REASONING_FAILURE": 1
     },
     "by_course": {
       "GENERAL_IT": {
-        "PARSER_FAILURE": 3,
-        "MODEL_KNOWLEDGE_GAP": 3
+        "MODEL_KNOWLEDGE_GAP": 11,
+        "REASONING_FAILURE": 1
       }
     },
     "by_assessment_type": {
       "quiz": {
-        "PARSER_FAILURE": 3,
-        "MODEL_KNOWLEDGE_GAP": 3
+        "MODEL_KNOWLEDGE_GAP": 11,
+        "REASONING_FAILURE": 1
       }
     },
     "by_skill": {},
     "largest_classes": [
       {
-        "code": "PARSER_FAILURE",
-        "n": 3
+        "code": "MODEL_KNOWLEDGE_GAP",
+        "n": 11
       },
       {
-        "code": "MODEL_KNOWLEDGE_GAP",
-        "n": 3
+        "code": "REASONING_FAILURE",
+        "n": 1
       }
     ],
     "taxonomy": [
@@ -93,12 +102,12 @@
   },
   "top_gaps": [
     {
-      "code": "PARSER_FAILURE",
-      "n": 3
+      "code": "MODEL_KNOWLEDGE_GAP",
+      "n": 11
     },
     {
-      "code": "MODEL_KNOWLEDGE_GAP",
-      "n": 3
+      "code": "REASONING_FAILURE",
+      "n": 1
     }
   ],
   "remediation": {
@@ -134,20 +143,20 @@
       },
       {
         "step": "TRANSFER",
-        "ok": true,
-        "detail": "Transfer item correct"
+        "ok": false,
+        "detail": "Transfer missed or skipped"
       }
     ],
-    "REMEDIATION_SUCCESS": true,
+    "REMEDIATION_SUCCESS": false,
     "MEMORIZATION": false,
-    "transfer_ok": true,
+    "transfer_ok": false,
     "unseen_ok": true,
     "HUMAN_LEARNING_CLAIMED": false,
-    "evidence_state": "CERTAINLY_FILLED",
+    "evidence_state": "REASSESSED",
     "synthetic_learner_delta": {
-      "pre_score": 0.4,
-      "post_score": 0.55,
-      "delta": 0.15000000000000002,
+      "pre_score": 0.25,
+      "post_score": 0.3,
+      "delta": 0.04999999999999999,
       "note": "Synthetic opaque learner delta only — not a human learning claim."
     }
   },
@@ -191,12 +200,22 @@
     "HUMAN_LEARNING_CLAIMED": false
   },
   "transfer_rerun": {
-    "overall": 0.5,
-    "items_attempted": 2,
-    "items_correct": 1
+    "overall": 0.25,
+    "items_attempted": 8,
+    "items_correct": 2,
+    "delta_vs_baseline": 0
   },
   "held_out_answer_key_training": false,
   "HUMAN_LEARNING_CLAIMED": false,
   "closure_complete": false,
-  "note": "Full vertical closure requires ≥ policy thresholds on course machine-graded items + transfer. This run records baseline→taxonomy→remediation→transfer evidence without answer-key training."
+  "policy_result": {
+    "earned": false,
+    "reasons_not_earned": [
+      "course_score=0.25 < policy_min=0.9",
+      "transfer_score=0.25 < policy_min=0.75",
+      "REMEDIATION_SUCCESS=false"
+    ],
+    "verdict": "VERTICAL_COURSE_ATTEMPTED_NOT_CLOSED"
+  },
+  "note": "Defensible vertical policy result published. Full DIGITAL_MASTERY remains separate (≥0.95 real-runtime). No held-out answer-key training."
 }

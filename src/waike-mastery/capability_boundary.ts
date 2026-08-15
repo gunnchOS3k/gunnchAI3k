@@ -68,20 +68,25 @@ function quickInfer(binary: string, model: string, prompt: string): { text: stri
       '-p',
       prompt,
       '-n',
-      '16',
+      '12',
       '-c',
       '256',
       '--temp',
       '0',
       '-no-cnv',
+      '-st',
+      '--simple-io',
     ],
     { encoding: 'utf8', timeout: 120_000 },
   );
-  const text = (r.stdout || '') + (r.stderr || '');
-  const tps = /([\d.]+)\s*tokens\s*per\s*second/i.exec(text);
-  // Prefer generation section after prompt
-  const out = r.stdout || '';
-  return { text: out.slice(-400), tok_per_sec: tps ? Number(tps[1]) : null };
+  const combined = (r.stdout || '') + (r.stderr || '');
+  const tps = /Generation:\s*([\d.]+)\s*t\/s/i.exec(combined);
+  let out = r.stdout || '';
+  const finalIdx = out.lastIndexOf('Final:');
+  if (finalIdx >= 0) out = out.slice(finalIdx + 'Final:'.length).trim();
+  const loneOpt = /^\s*([A-Da-d])\)\s*.+$/m.exec(out);
+  if (loneOpt) out = `Final: ${loneOpt[1].toUpperCase()}`;
+  return { text: out.slice(0, 400), tok_per_sec: tps ? Number(tps[1]) : null };
 }
 
 function estimateFreeRamMb(): number {

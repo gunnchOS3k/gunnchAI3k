@@ -12,7 +12,8 @@ import { CHOICE_PARSER_VERSION } from './choice_parser';
 import { discoverCoursesFromContract, resolveWaikeRoot } from './contract';
 import { runCourseHonesty } from './course_honesty';
 import { diagnose, runRemediationLoop } from './diagnosis';
-import { proposeGradeAssist, runEducatorCopilot } from './educator';
+import { proposeGradeAssist, runEducatorCopilot, runEducatorEvidenceSuite } from './educator';
+import { runCurriculumIntegratedToolSuite } from './curriculum_tools';
 import { assertModePermission, createModeSession, MODE_PERMISSIONS } from './modes';
 import {
   runMisconceptionDiagnosisSuite,
@@ -52,6 +53,8 @@ export interface MasteryEvalReport {
   runtime_solver: Record<string, unknown> | null;
   tool_use: Record<string, unknown> | null;
   tool_use_real_exec: Record<string, unknown> | null;
+  tool_use_curriculum_integrated: Record<string, unknown> | null;
+  educator_evidence: Record<string, unknown> | null;
   parser: Record<string, unknown> | null;
   capability_boundary: Record<string, unknown> | null;
   vertical_closure: Record<string, unknown> | null;
@@ -153,11 +156,23 @@ export async function runMasteryEvalSuite(cwd = process.cwd()): Promise<MasteryE
   const runtimePostParser = runtime;
 
   const toolReal = runAllRealToolRunners(cwd);
+  const toolCurriculum = waikeRoot
+    ? runCurriculumIntegratedToolSuite(cwd, waikeRoot)
+    : {
+        coverage_status: 'PARTIAL',
+        mastery_complete: false,
+        attempted: 0,
+        passed: 0,
+      };
+  const educatorEvidence = runEducatorEvidenceSuite(
+    cwd,
+    discovered.courses[0]?.course_id || 'GENERAL_IT',
+  );
   const capability = runCapabilityBoundary(cwd);
 
   // Vertical closure on GENERAL_IT — limited item count for feasible runtime
   const verticalPer =
-    process.env.MASTERY_VERTICAL_FULL === '1' ? null : Number(process.env.MASTERY_VERTICAL_N || 8);
+    process.env.MASTERY_VERTICAL_FULL === '1' ? null : Number(process.env.MASTERY_VERTICAL_N || 16);
   const vertical = await runVerticalCourseClosure({
     cwd,
     courseId: 'GENERAL_IT',
@@ -211,13 +226,21 @@ export async function runMasteryEvalSuite(cwd = process.cwd()): Promise<MasteryE
     [SCORE_FAMILY.MASTERY_002_REAL_RUNTIME_12C]: {
       id: SCORE_FAMILY.MASTERY_002_REAL_RUNTIME_12C,
       score: runtimeOverall,
+      baseline_frozen: 0.16666666666666666,
       role: 'curriculum_mastery_only_path',
       solver: runtime.solver,
       parser_version: CHOICE_PARSER_VERSION,
+      infer_path: runtime.infer_path || 'lean_mcq_v1',
       counts_toward_curriculum_mastery: true,
       items_attempted: runtime.items_attempted,
       items_correct: runtime.items_correct,
       parser_failures: runtime.parser_failures,
+      score_delta_vs_baseline:
+        runtimeOverall == null ? null : runtimeOverall - 0.16666666666666666,
+      SCORE_DELTA_LABEL: 'SOLVER_PATH_GAIN',
+      MODEL_KNOWLEDGE_IMPROVED: false,
+      EVALUATION_BUG_FIXED: true,
+      note: 'Gain vs frozen REAL_SOLVER_BASELINE_V1≈0.167 is lean-MCQ/prompt/tool-path — not a stronger model.',
     },
     no_blended_average: true,
     note: 'Heuristics must never replace or average into MASTERY_002_REAL_RUNTIME_12C.',
@@ -319,10 +342,11 @@ export async function runMasteryEvalSuite(cwd = process.cwd()): Promise<MasteryE
     TOOL_USE_NOT_OVERCLAIMED: {
       pass:
         toolReal.mastery_complete === false &&
+        toolCurriculum.mastery_complete !== true &&
         (!toolUseFixtures ||
           toolUseFixtures.coverage_status === 'PARTIAL' ||
           toolUseFixtures.mastery_complete === false),
-      detail: `fixtures=${toolUseFixtures?.coverage_status};real=${toolReal.coverage_status}`,
+      detail: `fixtures=${toolUseFixtures?.coverage_status};real=${toolReal.coverage_status};curric=${toolCurriculum.coverage_status}`,
     },
     SCORE_FAMILIES_SEPARATED: {
       pass: scoreFamilies.no_blended_average === true,
@@ -341,8 +365,8 @@ export async function runMasteryEvalSuite(cwd = process.cwd()): Promise<MasteryE
     NO_KEY_LEAK: { pass: canary.pass, detail: canary.detail },
     COURSE_HONESTY: { pass: honesty.pass },
     TOOL_USE_COMPLETE: {
-      pass: false,
-      detail: `fixtures=${toolUseFixtures?.coverage_status};real_exec=${toolReal.coverage_status}`,
+      pass: toolCurriculum.mastery_complete === true && toolCurriculum.coverage_status === 'COMPLETE',
+      detail: `fixtures=${toolUseFixtures?.coverage_status};real_exec=${toolReal.coverage_status};curric=${toolCurriculum.coverage_status}`,
     },
     RUNTIME_NOT_KEY_MATCH: { pass: runtime.answer_key_matched !== true },
     ISOLATED_GRADE: {
@@ -387,6 +411,8 @@ export async function runMasteryEvalSuite(cwd = process.cwd()): Promise<MasteryE
     runtime_solver: runtimePostParser,
     tool_use: toolUseFixtures,
     tool_use_real_exec: toolReal,
+    tool_use_curriculum_integrated: toolCurriculum,
+    educator_evidence: educatorEvidence,
     parser: parserImpact,
     capability_boundary: capability,
     vertical_closure: vertical,
@@ -403,8 +429,9 @@ export async function runMasteryEvalSuite(cwd = process.cwd()): Promise<MasteryE
     open: [
       'WAIKE_AI_DIGITAL_MASTERY_PASS false until all mastery_children pass (honesty PASS ≠ mastery PASS).',
       'Score families: MASTERY_001_HEURISTIC_9C / MASTERY_002_HEURISTIC_12C / MASTERY_002_REAL_RUNTIME_12C — no blend.',
-      'Tool-use: fixtures PARTIAL; real runners MATERIAL_REAL_EXEC ≠ COMPLETE.',
-      'Vertical GENERAL_IT closure attempted; not yet course-closed to policy.',
+      `Tool-use: fixtures PARTIAL; real=${toolReal.coverage_status}; curriculum=${toolCurriculum.coverage_status} (COMPLETE only if earned).`,
+      `Vertical GENERAL_IT policy_result=${(vertical.policy_result as { verdict?: string } | undefined)?.verdict || 'pending'}; closure_complete=${vertical.closure_complete}.`,
+      'MODEL_CAPABILITY_LIMIT on available SmolLM2 GGUFs — stronger model / more resources needed for ≥0.95 real-runtime.',
       'REAL_*/HUMAN_E6/ACCREDITED remain false. gunnchAI #36 inspect-only; device-os #116 untouched.',
     ],
     WAIKE_AI_DIGITAL_MASTERY_PASS: tokens[MASTERY_PASS_TOKEN],

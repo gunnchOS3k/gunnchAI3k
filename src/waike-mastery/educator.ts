@@ -1,6 +1,8 @@
 /**
  * Educator copilot — planning / first-time / live / grading HITL / feedback / analytics.
  */
+import * as fs from 'node:fs';
+import * as path from 'node:path';
 import { assertModePermission, createModeSession } from './modes';
 
 export type EducatorIntent =
@@ -13,7 +15,6 @@ export type EducatorIntent =
 
 export function runEducatorCopilot(courseId: string, intent: EducatorIntent = 'planning') {
   const session = createModeSession('EDUCATOR_COPILOT');
-  // publishing grades without human is always forbidden in this mode
   let publishBlocked = false;
   try {
     assertModePermission('EDUCATOR_COPILOT', 'publish_grades');
@@ -51,4 +52,33 @@ export function proposeGradeAssist(courseId: string, proposedScore: number) {
     published: false,
     hitlRequired: true,
   };
+}
+
+/** Evidence pack across all educator intents — for Mastery-002 B13. */
+export function runEducatorEvidenceSuite(cwd: string, courseId = 'GENERAL_IT'): Record<string, unknown> {
+  const intents: EducatorIntent[] = [
+    'planning',
+    'first_time_teacher',
+    'live_support',
+    'grading_assist',
+    'feedback',
+    'analytics',
+  ];
+  const sessions = intents.map((intent) => runEducatorCopilot(courseId, intent));
+  const grade = proposeGradeAssist(courseId, 0.72);
+  const out = {
+    schema: 'gunnchai.educator_copilot_evidence.v1',
+    course_id: courseId,
+    intents_covered: intents,
+    sessions,
+    grade_assist: grade,
+    hitl_ok: sessions.every((s) => s.hitlGradingRequired && s.autoPublishGrades === false),
+    publish_blocked: sessions.every((s) => s.publishWithoutHumanBlocked === true),
+    HUMAN_LEARNING_CLAIMED: false,
+    note: 'Educator surfaces only; no auto-publish; no demeaning labels; keys never to learners.',
+  };
+  const outDir = path.join(cwd, 'artifacts', 'waike-mastery');
+  fs.mkdirSync(outDir, { recursive: true });
+  fs.writeFileSync(path.join(outDir, 'EDUCATOR_COPILOT_EVIDENCE.json'), JSON.stringify(out, null, 2) + '\n');
+  return out;
 }

@@ -9,8 +9,10 @@ import { LlamaCppBackend } from '../system-layer/local_inference/backends/llamac
 import { freezeRealSolverBaselineV1 } from './baseline_v1';
 import { CHOICE_PARSER_VERSION, parseFinalChoice } from './choice_parser';
 import { discoverCoursesFromContract, resolveWaikeRoot } from './contract';
+import { runToolAssistForStem } from './curriculum_tools';
 import { aggregateTaxonomy, classifyMiss, type FailureCode } from './failure_taxonomy';
 import { gradeIsolated } from './grader_bridge';
+import { buildLeanMcqPrompt, leanMcqInfer, resolveMasteryGguf } from './mcq_infer';
 
 export type SolverStatus =
   | 'OK'
@@ -71,7 +73,7 @@ function loadStudentMcq(
   return out;
 }
 
-function lessonContext(waikeRoot: string, courseId: string, maxChars = 1200): string {
+function lessonContext(waikeRoot: string, courseId: string, maxChars = 600): string {
   const weeks = path.join(waikeRoot, 'curriculum', 'digital_rc', courseId, 'weeks');
   if (!fs.existsSync(weeks)) return '';
   const parts: string[] = [];
@@ -183,33 +185,58 @@ export async function runGunnchaiRuntimeSolver(opts?: {
   }> = [];
   let keyHits = 0;
   let parserFailures = 0;
+  const stemByItem = new Map<string, string>();
+  for (const it of items) stemByItem.set(it.item_id, it.stem);
+
+  const masteryGguf = resolveMasteryGguf(cwd);
+  let toolAssists = 0;
+  let toolAssistOk = 0;
 
   for (const item of items) {
     const ctx = lessonContext(waikeRoot, item.course_id);
     if (ctx.includes('answer_index') || ctx.includes('waike.answer_keys')) {
       keyHits += 1;
     }
-    const letters = item.choices.map((c, i) => `${String.fromCharCode(65 + i)}) ${c}`).join('\n');
-    const query = [
-      'Answer the multiple-choice question using only the student lesson context.',
-      'Reply with a single letter (A/B/C/D) only.',
-      `Question: ${item.stem}`,
-      letters,
-    ].join('\n');
+
+    const toolAssist = runToolAssistForStem(item.stem);
+    if (toolAssist.required) {
+      toolAssists += 1;
+      if (toolAssist.used && toolAssist.record?.grader_ok) toolAssistOk += 1;
+    }
+
+    const prompt = buildLeanMcqPrompt({
+      stem: item.stem,
+      choices: item.choices,
+      lessonExcerpt: ctx || undefined,
+      toolNote: toolAssist.note || undefined,
+    });
 
     let choice: number | null = null;
     let raw = '';
     let runtimeError: string | null = null;
     let parseMeta: ReturnType<typeof parseFinalChoice> | null = null;
+    let latencyMs: number | null = null;
     try {
-      const result = await llama.infer({
-        capability: 'waike-mastery-mcq',
-        query,
-        contextDocs: ctx
-          ? [{ id: `${item.course_id}-lesson`, text: ctx }]
-          : undefined,
+      // Prefer lean MCQ path (no structured overlay pollution). Fallback to LlamaCppBackend.
+      const lean = leanMcqInfer({
+        cwd,
+        prompt,
+        ggufPath: masteryGguf,
       });
-      raw = result.text || '';
+      latencyMs = lean.latency_ms;
+      if (lean.ok && lean.text) {
+        raw = lean.text;
+      } else {
+        const result = await llama.infer({
+          capability: 'waike-mastery-mcq',
+          query: prompt,
+          contextDocs: ctx
+            ? [{ id: `${item.course_id}-lesson`, text: ctx }]
+            : undefined,
+        });
+        raw = result.text || '';
+        if (!lean.ok) runtimeError = lean.detail;
+      }
       parseMeta = parseFinalChoice(raw, item.choices.length);
       choice = parseMeta.index;
     } catch (err) {
@@ -223,10 +250,19 @@ export async function runGunnchaiRuntimeSolver(opts?: {
       parse: parseMeta,
       raw: raw.slice(0, 400),
       runtimeError,
+      latency_ms: latencyMs,
+      tool_assist: toolAssist.required
+        ? {
+            used: toolAssist.used,
+            tool_id: toolAssist.tool_id,
+            failure: toolAssist.failure,
+          }
+        : null,
       artifact: {
-        model: probe.ggufPath,
+        model: masteryGguf || probe.ggufPath,
         binary: probe.binaryOrModule,
         parser_version: CHOICE_PARSER_VERSION,
+        infer_path: 'lean_mcq_v1',
       },
     });
 
@@ -238,6 +274,9 @@ export async function runGunnchaiRuntimeSolver(opts?: {
           chosen: raw,
           blockedRuntime: Boolean(runtimeError),
           parserFailed: !runtimeError,
+          toolRequiredNotUsed: toolAssist.failure === 'TOOL_REQUIRED_NOT_USED',
+          toolFailed: toolAssist.failure === 'TOOL_EXECUTION_FAILURE',
+          calcMismatch: toolAssist.failure === 'CALCULATION_FAILURE',
         }),
         course_id: item.course_id,
         assessment_kind: item.assessment_kind,
@@ -275,7 +314,7 @@ export async function runGunnchaiRuntimeSolver(opts?: {
         } else {
           misses.push({
             ...classifyMiss({
-              stem: `${cid}:${it.id}`,
+              stem: stemByItem.get(`${cid}:${it.id}`) || `${cid}:${it.id}`,
               chosen: String(it.got),
             }),
             course_id: cid,
@@ -338,9 +377,15 @@ export async function runGunnchaiRuntimeSolver(opts?: {
       freeRamMb: probe.freeRamMb,
       metricsMode: probe.metricsMode,
     },
+    tool_assist: {
+      required_items: toolAssists,
+      assisted_ok: toolAssistOk,
+      note: 'Curriculum tool assist on calc-like stems; computation only — not answer-key feed.',
+    },
+    infer_path: 'lean_mcq_v1',
     claim_boundary:
       'Real llama.cpp MCQ attempts on student materials only. Isolated grade after submission. ' +
-      'Only MASTERY_002_REAL_RUNTIME_12C counts toward curriculum mastery.',
+      'Only MASTERY_002_REAL_RUNTIME_12C counts toward curriculum mastery. Lean MCQ path avoids overlay pollution.',
   };
 
   if (opts?.freezeBaseline) {

@@ -1,73 +1,88 @@
 {
   "schema": "gunnchai.failure_census.v1",
-  "miss_count": 48,
+  "miss_count": 88,
   "counts": {
-    "PARSER_FAILURE": 18,
-    "MODEL_KNOWLEDGE_GAP": 30
+    "MODEL_KNOWLEDGE_GAP": 81,
+    "CONCEPT_CONFUSION": 1,
+    "REASONING_FAILURE": 2,
+    "CALCULATION_FAILURE": 2,
+    "PREREQUISITE_GAP": 2
   },
   "by_course": {
     "AI_ML_EDGE": {
-      "PARSER_FAILURE": 1,
-      "MODEL_KNOWLEDGE_GAP": 3
+      "MODEL_KNOWLEDGE_GAP": 6,
+      "CONCEPT_CONFUSION": 1
     },
     "CLOUD_DEVOPS": {
-      "PARSER_FAILURE": 1,
-      "MODEL_KNOWLEDGE_GAP": 2
-    },
-    "CYBERSECURITY": {
-      "PARSER_FAILURE": 2,
-      "MODEL_KNOWLEDGE_GAP": 2
-    },
-    "DATA_VIZ_BI": {
-      "PARSER_FAILURE": 2,
-      "MODEL_KNOWLEDGE_GAP": 3
-    },
-    "GAME_DEV_INTERACTIVE": {
-      "PARSER_FAILURE": 2,
-      "MODEL_KNOWLEDGE_GAP": 2
-    },
-    "GENERAL_IT": {
-      "PARSER_FAILURE": 2,
-      "MODEL_KNOWLEDGE_GAP": 2
-    },
-    "PM_AGILE_LSS": {
-      "PARSER_FAILURE": 1,
-      "MODEL_KNOWLEDGE_GAP": 3
-    },
-    "ROBOTICS_CONTROL": {
-      "PARSER_FAILURE": 1,
-      "MODEL_KNOWLEDGE_GAP": 3
-    },
-    "SOFTWARE_BUILDER": {
-      "PARSER_FAILURE": 3,
-      "MODEL_KNOWLEDGE_GAP": 1
-    },
-    "WIRELESS_6G": {
-      "PARSER_FAILURE": 3,
-      "MODEL_KNOWLEDGE_GAP": 1
+      "MODEL_KNOWLEDGE_GAP": 7
     },
     "COMPUTER_NETWORKING": {
-      "MODEL_KNOWLEDGE_GAP": 4
+      "MODEL_KNOWLEDGE_GAP": 5,
+      "REASONING_FAILURE": 1,
+      "CALCULATION_FAILURE": 1
+    },
+    "CYBERSECURITY": {
+      "MODEL_KNOWLEDGE_GAP": 8
+    },
+    "DATA_VIZ_BI": {
+      "MODEL_KNOWLEDGE_GAP": 6,
+      "PREREQUISITE_GAP": 1
+    },
+    "GAME_DEV_INTERACTIVE": {
+      "MODEL_KNOWLEDGE_GAP": 8
+    },
+    "GENERAL_IT": {
+      "MODEL_KNOWLEDGE_GAP": 7
     },
     "HARDWARE_ENGINEERING": {
-      "MODEL_KNOWLEDGE_GAP": 4
+      "MODEL_KNOWLEDGE_GAP": 6,
+      "PREREQUISITE_GAP": 1
+    },
+    "PM_AGILE_LSS": {
+      "MODEL_KNOWLEDGE_GAP": 8
+    },
+    "ROBOTICS_CONTROL": {
+      "MODEL_KNOWLEDGE_GAP": 7
+    },
+    "SOFTWARE_BUILDER": {
+      "MODEL_KNOWLEDGE_GAP": 8,
+      "REASONING_FAILURE": 1
+    },
+    "WIRELESS_6G": {
+      "CALCULATION_FAILURE": 1,
+      "MODEL_KNOWLEDGE_GAP": 5
     }
   },
   "by_assessment_type": {
     "quiz": {
-      "PARSER_FAILURE": 18,
-      "MODEL_KNOWLEDGE_GAP": 30
+      "MODEL_KNOWLEDGE_GAP": 81,
+      "CONCEPT_CONFUSION": 1,
+      "REASONING_FAILURE": 2,
+      "CALCULATION_FAILURE": 2,
+      "PREREQUISITE_GAP": 2
     }
   },
   "by_skill": {},
   "largest_classes": [
     {
       "code": "MODEL_KNOWLEDGE_GAP",
-      "n": 30
+      "n": 81
     },
     {
-      "code": "PARSER_FAILURE",
-      "n": 18
+      "code": "REASONING_FAILURE",
+      "n": 2
+    },
+    {
+      "code": "CALCULATION_FAILURE",
+      "n": 2
+    },
+    {
+      "code": "PREREQUISITE_GAP",
+      "n": 2
+    },
+    {
+      "code": "CONCEPT_CONFUSION",
+      "n": 1
     }
   ],
   "taxonomy": [
@@ -100,5 +115,17 @@
     "POLICY_BLOCKED",
     "RESOURCE_BLOCKED",
     "DIAGNOSIS_UNCERTAIN"
-  ]
+  ],
+  "sample_design": {
+    "per_course": 10,
+    "courses": 12,
+    "target_items": 120,
+    "items_loaded": 120,
+    "items_attempted": 120,
+    "items_correct": 32,
+    "overall_score": 0.26666666666666666,
+    "parser_failures": 0,
+    "score_family_id": "MASTERY_002_REAL_RUNTIME_12C",
+    "note": "Expanded machine-graded failure census; distributions only — not blended with heuristic families."
+  }
 }

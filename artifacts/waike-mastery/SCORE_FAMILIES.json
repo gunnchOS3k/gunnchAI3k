@@ -14,15 +14,22 @@
   },
   "MASTERY_002_REAL_RUNTIME_12C": {
     "id": "MASTERY_002_REAL_RUNTIME_12C",
-    "score": 0.16666666666666666,
-    "baseline_frozen": 0.16666666666666666,
-    "post_parser": 0.16666666666666666,
+    "score": 0.375,
     "role": "curriculum_mastery_only_path",
-    "counts_toward_curriculum_mastery": true,
+    "solver": "gunnchai_llamacpp_v1",
     "parser_version": "gunnchai.choice_parser.v2_final_only",
+    "counts_toward_curriculum_mastery": true,
     "items_attempted": 24,
-    "items_correct": 4,
-    "parser_failures": 7
+    "items_correct": 9,
+    "parser_failures": 0,
+    "baseline_frozen": 0.16666666666666666,
+    "infer_path": "lean_mcq_v1",
+    "score_delta_vs_baseline": 0.20833333333333334,
+    "SCORE_DELTA_LABEL": "SOLVER_PATH_GAIN",
+    "MODEL_KNOWLEDGE_IMPROVED": false,
+    "EVALUATION_BUG_FIXED": true,
+    "note": "Gain vs frozen REAL_SOLVER_BASELINE_V1\u22480.167 is lean-MCQ/prompt/tool-path \u2014 not a stronger model."
   },
-  "no_blended_average": true
+  "no_blended_average": true,
+  "note": "Heuristics must never replace or average into MASTERY_002_REAL_RUNTIME_12C."
 }

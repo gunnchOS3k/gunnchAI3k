@@ -1,6 +1,6 @@
 {
   "schema": "gunnchai.tool_use_real_exec.v1",
-  "tool_runner_version": "gunnchai.tool_runners.v1_real_exec",
+  "tool_runner_version": "gunnchai.tool_runners.v1_real_exec_b13",
   "attempted": 11,
   "passed": 11,
   "pass_rate": 1,

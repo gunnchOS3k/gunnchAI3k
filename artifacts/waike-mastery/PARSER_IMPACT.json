@@ -1,19 +1,9 @@
 {
   "parser_version": "gunnchai.choice_parser.v2_final_only",
-  "baseline_parser": "gunnchai.choice_parser.v1_first_letter_BUGGY",
-  "baseline_score": 0.16666666666666666,
-  "post_parser_real_score_honest": 0.16666666666666666,
-  "parseable_only_score": 0.23529411764705882,
-  "parser_failures": 7,
+  "pre_fix_note": "v1 matched first \\b[A-D]\\b including prompt-echo A/B/C/D → systematic choice=0 bias",
+  "post_parser_real_score": 0.375,
+  "parser_failures": 0,
+  "score_delta_label": "If stratified score rises solely from parser correctness vs prompt-echo leak, label EVALUATION_BUG_FIXED not MODEL_KNOWLEDGE_IMPROVED",
   "EVALUATION_BUG_FIXED": true,
-  "MODEL_KNOWLEDGE_IMPROVED": false,
-  "delta": {
-    "baseline_MASTERY_002_REAL_RUNTIME_12C": 0.16666666666666666,
-    "post_parser_honest": 0.16666666666666666,
-    "delta": 0.0,
-    "label": "EVALUATION_BUG_FIXED",
-    "note": "Parser no longer auto-submits A from prompt echo; failures counted as incorrect. Score movement from eval hygiene is NOT MODEL_KNOWLEDGE_IMPROVED.",
-    "MODEL_KNOWLEDGE_IMPROVED": false,
-    "EVALUATION_BUG_FIXED": true
-  }
+  "MODEL_KNOWLEDGE_IMPROVED": false
 }
