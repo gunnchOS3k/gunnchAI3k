@@ -1,0 +1,36 @@
+{
+  "MASTERY_001_HEURISTIC_9C": {
+    "id": "MASTERY_001_HEURISTIC_9C",
+    "score": 0.6442307692307693,
+    "role": "historical_diagnostic",
+    "counts_toward_curriculum_mastery": false
+  },
+  "MASTERY_002_HEURISTIC_12C": {
+    "id": "MASTERY_002_HEURISTIC_12C",
+    "score": 0.6298076923076923,
+    "role": "diagnostic_only",
+    "solver": "curriculum_overlap_v1",
+    "counts_toward_curriculum_mastery": false
+  },
+  "MASTERY_002_REAL_RUNTIME_12C": {
+    "id": "MASTERY_002_REAL_RUNTIME_12C",
+    "score": 0.30833333333333335,
+    "role": "curriculum_mastery_only_path",
+    "solver": "gunnchai_llamacpp_v1",
+    "parser_version": "gunnchai.choice_parser.v2_final_only",
+    "counts_toward_curriculum_mastery": true,
+    "items_attempted": 120,
+    "items_correct": 37,
+    "parser_failures": 0,
+    "sample": "held_out_stratified_ge120",
+    "baseline_frozen": 0.16666666666666666,
+    "historical_solver_path_gain_24item": 0.375,
+    "SCORE_DELTA_LABEL": "SOLVER_PATH_GAIN",
+    "SOLVER_PATH_GAIN_NOTE": "0.375 is historical 24-item post-parser path-gain evidence; larger-sample score replaces it only as current runtime estimate.",
+    "MODEL_KNOWLEDGE_IMPROVED": false,
+    "EVALUATION_BUG_FIXED": true,
+    "note": "Larger-sample held-out estimate; does not alter REAL_SOLVER_BASELINE_V1≈0.167."
+  },
+  "no_blended_average": true,
+  "note": "Heuristics must never replace or average into MASTERY_002_REAL_RUNTIME_12C."
+}

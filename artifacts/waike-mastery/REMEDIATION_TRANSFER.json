@@ -1,0 +1,50 @@
+{
+  "schema": "gunnchai.remediation_transfer.v1",
+  "engine_version": "gunnchai.remediation_engine.v1",
+  "course_id": "GENERAL_IT",
+  "item_id": "plateau-x",
+  "steps": [
+    {
+      "step": "FAIL",
+      "ok": true,
+      "detail": "Gap identified on machine-graded miss"
+    },
+    {
+      "step": "PREREQ",
+      "ok": true,
+      "detail": "Revisit skill:GENERAL_IT:w01 prerequisites"
+    },
+    {
+      "step": "EXPLANATION",
+      "ok": true,
+      "detail": "Gap on skill:GENERAL_IT:w01 — revisit prerequisites before new content."
+    },
+    {
+      "step": "ANALOG",
+      "ok": true,
+      "detail": "Worked analog example (no answer-key dump)"
+    },
+    {
+      "step": "UNSEEN",
+      "ok": true,
+      "detail": "Unseen isomorphic item correct"
+    },
+    {
+      "step": "TRANSFER",
+      "ok": true,
+      "detail": "Transfer item correct"
+    }
+  ],
+  "REMEDIATION_SUCCESS": true,
+  "MEMORIZATION": false,
+  "transfer_ok": true,
+  "unseen_ok": true,
+  "HUMAN_LEARNING_CLAIMED": false,
+  "evidence_state": "CERTAINLY_FILLED",
+  "synthetic_learner_delta": {
+    "pre_score": 0.2,
+    "post_score": 0.85,
+    "delta": 0.6499999999999999,
+    "note": "Synthetic opaque learner delta only — not a human learning claim."
+  }
+}

@@ -1,8 +1,10 @@
 #!/usr/bin/env tsx
 import {
   assertNoFalseMasteryPass,
+  CORPUS_DISCOVERY_TOKEN,
   INFRA_SMOKE_TOKEN,
   MASTERY_PASS_TOKEN,
+  NO_KEY_LEAK_TOKEN,
 } from './tokens';
 import { runMasteryEvalSuite } from './eval_suite';
 
@@ -15,13 +17,20 @@ async function main(): Promise<void> {
 
   const summary = {
     suite: report.suite,
+    wave: report.wave,
     WAIKE_AI_DIGITAL_MASTERY_PASS: report.WAIKE_AI_DIGITAL_MASTERY_PASS,
     AI_WAIKE_MASTERY_INFRA_SMOKE_PASS: report.AI_WAIKE_MASTERY_INFRA_SMOKE_PASS,
+    WAIKE_AI_STUDENT_CORPUS_DISCOVERY_PASS: report.WAIKE_AI_STUDENT_CORPUS_DISCOVERY_PASS,
+    WAIKE_AI_NO_KEY_LEAK_PASS: report.WAIKE_AI_NO_KEY_LEAK_PASS,
     overall_score: overall,
+    runtime_status: (report.mastery_scores as { runtime_status?: string } | null)?.runtime_status,
     courses: report.corpus.discoverable_courses,
     canary: report.canary.pass,
     tokens: report.tokens,
     failed: Object.entries(report.children)
+      .filter(([, v]) => !v.pass)
+      .map(([k]) => k),
+    mastery_failed: Object.entries(report.mastery_children)
       .filter(([, v]) => !v.pass)
       .map(([k]) => k),
     open: report.open,
@@ -36,7 +45,6 @@ async function main(): Promise<void> {
     process.exit(2);
   }
 
-  // Hard honesty gate: cannot pass author suite with false mastery PASS at smoke scores
   try {
     assertNoFalseMasteryPass(overall, report.tokens[MASTERY_PASS_TOKEN]);
   } catch {
@@ -47,8 +55,15 @@ async function main(): Promise<void> {
     process.exit(2);
   }
 
-  // Author success = infra smoke green + mastery honestly false (or truly earned)
   if (!report.tokens[INFRA_SMOKE_TOKEN]) {
+    process.exit(1);
+  }
+
+  // Discovery token must be earned on current universe when WAIKE is present
+  if (report.corpus.waike_root && !report.tokens[CORPUS_DISCOVERY_TOKEN]) {
+    process.exit(1);
+  }
+  if (!report.tokens[NO_KEY_LEAK_TOKEN]) {
     process.exit(1);
   }
 }

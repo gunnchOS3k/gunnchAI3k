@@ -1,0 +1,646 @@
+{
+  "schema": "gunnchai.waike_runtime_solver.v1",
+  "status": "OK",
+  "solver": "gunnchai_llamacpp_v1",
+  "score_family_id": "MASTERY_002_REAL_RUNTIME_12C",
+  "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+  "binary": "/opt/homebrew/bin/llama-cli",
+  "parser_version": "gunnchai.choice_parser.v2_final_only",
+  "used_instructor_keys_during_solve": false,
+  "self_graded": false,
+  "answer_key_matched": false,
+  "grading_agent": "isolated_after_submission",
+  "items_loaded": 24,
+  "items_attempted": 24,
+  "items_graded": 24,
+  "items_correct": 9,
+  "parser_failures": 0,
+  "overall_score": 0.375,
+  "parseable_only_score": 0.375,
+  "per_course": {
+    "AI_ML_EDGE": {
+      "correct": 1,
+      "total": 2,
+      "score": 0.5
+    },
+    "CLOUD_DEVOPS": {
+      "correct": 1,
+      "total": 2,
+      "score": 0.5
+    },
+    "COMPUTER_NETWORKING": {
+      "correct": 1,
+      "total": 2,
+      "score": 0.5
+    },
+    "CYBERSECURITY": {
+      "correct": 0,
+      "total": 2,
+      "score": 0
+    },
+    "DATA_VIZ_BI": {
+      "correct": 1,
+      "total": 2,
+      "score": 0.5
+    },
+    "GAME_DEV_INTERACTIVE": {
+      "correct": 0,
+      "total": 2,
+      "score": 0
+    },
+    "GENERAL_IT": {
+      "correct": 1,
+      "total": 2,
+      "score": 0.5
+    },
+    "HARDWARE_ENGINEERING": {
+      "correct": 1,
+      "total": 2,
+      "score": 0.5
+    },
+    "PM_AGILE_LSS": {
+      "correct": 0,
+      "total": 2,
+      "score": 0
+    },
+    "ROBOTICS_CONTROL": {
+      "correct": 1,
+      "total": 2,
+      "score": 0.5
+    },
+    "SOFTWARE_BUILDER": {
+      "correct": 1,
+      "total": 2,
+      "score": 0.5
+    },
+    "WIRELESS_6G": {
+      "correct": 1,
+      "total": 2,
+      "score": 0.5
+    }
+  },
+  "attempts_sample": [
+    {
+      "item_id": "AI_ML_EDGE:aim-w1-1",
+      "course_id": "AI_ML_EDGE",
+      "choice": 1,
+      "parse": {
+        "index": 1,
+        "letter": "B",
+        "confidence": "high",
+        "matched_via": "final_marker",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "Final: B",
+      "runtimeError": null,
+      "latency_ms": 1242,
+      "tool_assist": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only",
+        "infer_path": "lean_mcq_v1"
+      }
+    },
+    {
+      "item_id": "AI_ML_EDGE:aim-w1-2",
+      "course_id": "AI_ML_EDGE",
+      "choice": 1,
+      "parse": {
+        "index": 1,
+        "letter": "B",
+        "confidence": "high",
+        "matched_via": "trailing_lone_letter",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "<letter>\nLesson notes:\n# Week 1: EdgeForge Bench — Python tensors as civic tables\nThe EdgeForge Bench in Gary is a rolling rack of three Coral-class USB accelerators and a battered ThinkPad that only sees the civic Wi-Fi. Week 1 is not 'learn Python.' It is naming columns so a sensor CSV becomes a matrix you can defend to a librarian. Ticket EF-2101 ships a 480-row occupancy CSV: timestamp_ ... (t",
+      "runtimeError": null,
+      "latency_ms": 797,
+      "tool_assist": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only",
+        "infer_path": "lean_mcq_v1"
+      }
+    },
+    {
+      "item_id": "CLOUD_DEVOPS:cd-w1-1",
+      "course_id": "CLOUD_DEVOPS",
+      "choice": 2,
+      "parse": {
+        "index": 2,
+        "letter": "C",
+        "confidence": "high",
+        "matched_via": "final_marker",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "Final: C",
+      "runtimeError": null,
+      "latency_ms": 728,
+      "tool_assist": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only",
+        "infer_path": "lean_mcq_v1"
+      }
+    },
+    {
+      "item_id": "CLOUD_DEVOPS:cd-w1-2",
+      "course_id": "CLOUD_DEVOPS",
+      "choice": 1,
+      "parse": {
+        "index": 1,
+        "letter": "B",
+        "confidence": "high",
+        "matched_via": "final_marker",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "Final: B",
+      "runtimeError": null,
+      "latency_ms": 693,
+      "tool_assist": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only",
+        "infer_path": "lean_mcq_v1"
+      }
+    },
+    {
+      "item_id": "COMPUTER_NETWORKING:net-w1-1",
+      "course_id": "COMPUTER_NETWORKING",
+      "choice": 1,
+      "parse": {
+        "index": 1,
+        "letter": "B",
+        "confidence": "high",
+        "matched_via": "final_marker",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "Final: B",
+      "runtimeError": null,
+      "latency_ms": 1394,
+      "tool_assist": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only",
+        "infer_path": "lean_mcq_v1"
+      }
+    },
+    {
+      "item_id": "COMPUTER_NETWORKING:net-w1-2",
+      "course_id": "COMPUTER_NETWORKING",
+      "choice": 1,
+      "parse": {
+        "index": 1,
+        "letter": "B",
+        "confidence": "high",
+        "matched_via": "final_marker",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "Final: B",
+      "runtimeError": null,
+      "latency_ms": 786,
+      "tool_assist": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only",
+        "infer_path": "lean_mcq_v1"
+      }
+    },
+    {
+      "item_id": "CYBERSECURITY:cy-w1-1",
+      "course_id": "CYBERSECURITY",
+      "choice": 1,
+      "parse": {
+        "index": 1,
+        "letter": "B",
+        "confidence": "high",
+        "matched_via": "final_marker",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "Final: B",
+      "runtimeError": null,
+      "latency_ms": 740,
+      "tool_assist": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only",
+        "infer_path": "lean_mcq_v1"
+      }
+    },
+    {
+      "item_id": "CYBERSECURITY:cy-w1-2",
+      "course_id": "CYBERSECURITY",
+      "choice": 1,
+      "parse": {
+        "index": 1,
+        "letter": "B",
+        "confidence": "high",
+        "matched_via": "final_marker",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "Final: B",
+      "runtimeError": null,
+      "latency_ms": 762,
+      "tool_assist": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only",
+        "infer_path": "lean_mcq_v1"
+      }
+    },
+    {
+      "item_id": "DATA_VIZ_BI:dv-w1-1",
+      "course_id": "DATA_VIZ_BI",
+      "choice": 1,
+      "parse": {
+        "index": 1,
+        "letter": "B",
+        "confidence": "high",
+        "matched_via": "final_marker",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "Final: B",
+      "runtimeError": null,
+      "latency_ms": 914,
+      "tool_assist": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only",
+        "infer_path": "lean_mcq_v1"
+      }
+    },
+    {
+      "item_id": "DATA_VIZ_BI:dv-w1-2",
+      "course_id": "DATA_VIZ_BI",
+      "choice": 1,
+      "parse": {
+        "index": 1,
+        "letter": "B",
+        "confidence": "high",
+        "matched_via": "final_marker",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "Final: B",
+      "runtimeError": null,
+      "latency_ms": 840,
+      "tool_assist": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only",
+        "infer_path": "lean_mcq_v1"
+      }
+    },
+    {
+      "item_id": "GAME_DEV_INTERACTIVE:ga-w1-1",
+      "course_id": "GAME_DEV_INTERACTIVE",
+      "choice": 1,
+      "parse": {
+        "index": 1,
+        "letter": "B",
+        "confidence": "high",
+        "matched_via": "final_marker",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "Final: B",
+      "runtimeError": null,
+      "latency_ms": 770,
+      "tool_assist": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only",
+        "infer_path": "lean_mcq_v1"
+      }
+    },
+    {
+      "item_id": "GAME_DEV_INTERACTIVE:ga-w1-2",
+      "course_id": "GAME_DEV_INTERACTIVE",
+      "choice": 0,
+      "parse": {
+        "index": 0,
+        "letter": "A",
+        "confidence": "high",
+        "matched_via": "trailing_lone_letter",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "<letter>\nLesson notes:\n# Week 1: Game loop — fixed dt honesty on Forge Arcade\nTicket GA-6101: fixed timestep dt=1/60 with accumulator pattern. Lab checks dt, steps,\nspiral_of_death_guard=true when frame_time exceeds 0.25 s clamp. Variable rendering may\ninterpolate; simulation steps stay fixed.\nConsensus Ladder: observed = clock card; inferred = fixed dt stabilizes physics; still need =\npro ... (tr",
+      "runtimeError": null,
+      "latency_ms": 781,
+      "tool_assist": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only",
+        "infer_path": "lean_mcq_v1"
+      }
+    }
+  ],
+  "failure_taxonomy": {
+    "miss_count": 15,
+    "samples": [
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "EF-2101 has 480 rows and a 20% time-ordered holdout. train_n?",
+        "course_id": "AI_ML_EDGE",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "Required mode this week?",
+        "course_id": "CLOUD_DEVOPS",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "The 5-tuple includes",
+        "course_id": "COMPUTER_NETWORKING",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "Upcoming ISC2 CC outline we prefer takes effect",
+        "course_id": "CYBERSECURITY",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "Model poisoning primarily attacks",
+        "course_id": "CYBERSECURITY",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "Negative wait_min handling?",
+        "course_id": "DATA_VIZ_BI",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "dt?",
+        "course_id": "GAME_DEV_INTERACTIVE",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "spiral_of_death_guard?",
+        "course_id": "GAME_DEV_INTERACTIVE",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "Ticket 4417 lost an essay after 20 idle minutes. Which job failed first?",
+        "course_id": "GENERAL_IT",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "Vout across 3k",
+        "course_id": "HARDWARE_ENGINEERING",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "fabricated_outcomes",
+        "course_id": "PM_AGILE_LSS",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "goal_metric should include",
+        "course_id": "PM_AGILE_LSS",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "Units?",
+        "course_id": "ROBOTICS_CONTROL",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "Ticket 8801 keeps only the feature side. What is missing?",
+        "course_id": "SOFTWARE_BUILDER",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "CALCULATION_FAILURE",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "WR-4101 uses which FSPL term?",
+        "course_id": "WIRELESS_6G",
+        "assessment_kind": "quiz"
+      }
+    ],
+    "census": {
+      "schema": "gunnchai.failure_census.v1",
+      "miss_count": 15,
+      "counts": {
+        "MODEL_KNOWLEDGE_GAP": 14,
+        "CALCULATION_FAILURE": 1
+      },
+      "by_course": {
+        "AI_ML_EDGE": {
+          "MODEL_KNOWLEDGE_GAP": 1
+        },
+        "CLOUD_DEVOPS": {
+          "MODEL_KNOWLEDGE_GAP": 1
+        },
+        "COMPUTER_NETWORKING": {
+          "MODEL_KNOWLEDGE_GAP": 1
+        },
+        "CYBERSECURITY": {
+          "MODEL_KNOWLEDGE_GAP": 2
+        },
+        "DATA_VIZ_BI": {
+          "MODEL_KNOWLEDGE_GAP": 1
+        },
+        "GAME_DEV_INTERACTIVE": {
+          "MODEL_KNOWLEDGE_GAP": 2
+        },
+        "GENERAL_IT": {
+          "MODEL_KNOWLEDGE_GAP": 1
+        },
+        "HARDWARE_ENGINEERING": {
+          "MODEL_KNOWLEDGE_GAP": 1
+        },
+        "PM_AGILE_LSS": {
+          "MODEL_KNOWLEDGE_GAP": 2
+        },
+        "ROBOTICS_CONTROL": {
+          "MODEL_KNOWLEDGE_GAP": 1
+        },
+        "SOFTWARE_BUILDER": {
+          "MODEL_KNOWLEDGE_GAP": 1
+        },
+        "WIRELESS_6G": {
+          "CALCULATION_FAILURE": 1
+        }
+      },
+      "by_assessment_type": {
+        "quiz": {
+          "MODEL_KNOWLEDGE_GAP": 14,
+          "CALCULATION_FAILURE": 1
+        }
+      },
+      "by_skill": {},
+      "largest_classes": [
+        {
+          "code": "MODEL_KNOWLEDGE_GAP",
+          "n": 14
+        },
+        {
+          "code": "CALCULATION_FAILURE",
+          "n": 1
+        }
+      ],
+      "taxonomy": [
+        "PARSER_FAILURE",
+        "MODEL_KNOWLEDGE_GAP",
+        "PREREQUISITE_GAP",
+        "CONCEPT_CONFUSION",
+        "REASONING_FAILURE",
+        "CALCULATION_FAILURE",
+        "INSTRUCTION_INTERPRETATION_FAILURE",
+        "TOOL_REQUIRED_NOT_USED",
+        "TOOL_SELECTION_FAILURE",
+        "TOOL_EXECUTION_FAILURE",
+        "SOURCE_GROUNDING_FAILURE",
+        "CONTEXT_LIMIT_FAILURE",
+        "PROMPT_FORMAT_FAILURE",
+        "AMBIGUOUS_ITEM",
+        "CURRICULUM_DEFECT_CANDIDATE",
+        "GRADER_DEFECT_CANDIDATE",
+        "UNKNOWN",
+        "VOCABULARY_FAILURE",
+        "TRANSFER_FAILURE",
+        "DEBUGGING_FAILURE",
+        "CODE_FAILURE",
+        "RUBRIC_FAILURE",
+        "PARTIAL_COMPLETION",
+        "CARELESS_ERROR",
+        "ACCESSIBILITY_BARRIER",
+        "AMBIGUOUS_PROMPT",
+        "POLICY_BLOCKED",
+        "RESOURCE_BLOCKED",
+        "DIAGNOSIS_UNCERTAIN"
+      ]
+    }
+  },
+  "corpus": {
+    "discoverable_courses": 12,
+    "course_ids": [
+      "AI_ML_EDGE",
+      "CLOUD_DEVOPS",
+      "COMPUTER_NETWORKING",
+      "CYBERSECURITY",
+      "DATA_VIZ_BI",
+      "GAME_DEV_INTERACTIVE",
+      "GENERAL_IT",
+      "HARDWARE_ENGINEERING",
+      "PM_AGILE_LSS",
+      "ROBOTICS_CONTROL",
+      "SOFTWARE_BUILDER",
+      "WIRELESS_6G"
+    ],
+    "hardcoded_course_names": false,
+    "sample_per_course": {
+      "AI_ML_EDGE": {
+        "correct": 1,
+        "total": 2,
+        "score": 0.5
+      },
+      "CLOUD_DEVOPS": {
+        "correct": 1,
+        "total": 2,
+        "score": 0.5
+      },
+      "COMPUTER_NETWORKING": {
+        "correct": 1,
+        "total": 2,
+        "score": 0.5
+      },
+      "CYBERSECURITY": {
+        "correct": 0,
+        "total": 2,
+        "score": 0
+      },
+      "DATA_VIZ_BI": {
+        "correct": 1,
+        "total": 2,
+        "score": 0.5
+      },
+      "GAME_DEV_INTERACTIVE": {
+        "correct": 0,
+        "total": 2,
+        "score": 0
+      },
+      "GENERAL_IT": {
+        "correct": 1,
+        "total": 2,
+        "score": 0.5
+      },
+      "HARDWARE_ENGINEERING": {
+        "correct": 1,
+        "total": 2,
+        "score": 0.5
+      },
+      "PM_AGILE_LSS": {
+        "correct": 0,
+        "total": 2,
+        "score": 0
+      },
+      "ROBOTICS_CONTROL": {
+        "correct": 1,
+        "total": 2,
+        "score": 0.5
+      },
+      "SOFTWARE_BUILDER": {
+        "correct": 1,
+        "total": 2,
+        "score": 0.5
+      },
+      "WIRELESS_6G": {
+        "correct": 1,
+        "total": 2,
+        "score": 0.5
+      }
+    },
+    "label": "post_parser_stratified_12x2"
+  },
+  "probe": {
+    "canRunRealInference": true,
+    "memoryBudgetOk": true,
+    "freeRamMb": 1217,
+    "metricsMode": "measured"
+  },
+  "tool_assist": {
+    "required_items": 3,
+    "assisted_ok": 1,
+    "note": "Curriculum tool assist on calc-like stems; computation only — not answer-key feed."
+  },
+  "infer_path": "lean_mcq_v1",
+  "claim_boundary": "Real llama.cpp MCQ attempts on student materials only. Isolated grade after submission. Only MASTERY_002_REAL_RUNTIME_12C counts toward curriculum mastery. Lean MCQ path avoids overlay pollution."
+}

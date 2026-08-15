@@ -1,0 +1,749 @@
+{
+  "schema": "gunnchai.waike_runtime_solver.v1",
+  "status": "OK",
+  "solver": "gunnchai_llamacpp_v1",
+  "score_family_id": "MASTERY_002_REAL_RUNTIME_12C",
+  "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k-mastery-002-wt/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+  "binary": "/opt/homebrew/bin/llama-cli",
+  "parser_version": "gunnchai.choice_parser.v2_final_only",
+  "used_instructor_keys_during_solve": false,
+  "self_graded": false,
+  "answer_key_matched": false,
+  "grading_agent": "isolated_after_submission",
+  "items_loaded": 120,
+  "items_attempted": 120,
+  "items_graded": 120,
+  "items_correct": 37,
+  "parser_failures": 0,
+  "overall_score": 0.30833333333333335,
+  "parseable_only_score": 0.30833333333333335,
+  "per_course": {
+    "AI_ML_EDGE": {
+      "correct": 4,
+      "total": 10,
+      "score": 0.4
+    },
+    "CLOUD_DEVOPS": {
+      "correct": 2,
+      "total": 10,
+      "score": 0.2
+    },
+    "COMPUTER_NETWORKING": {
+      "correct": 4,
+      "total": 10,
+      "score": 0.4
+    },
+    "CYBERSECURITY": {
+      "correct": 2,
+      "total": 10,
+      "score": 0.2
+    },
+    "DATA_VIZ_BI": {
+      "correct": 4,
+      "total": 10,
+      "score": 0.4
+    },
+    "GAME_DEV_INTERACTIVE": {
+      "correct": 3,
+      "total": 10,
+      "score": 0.3
+    },
+    "GENERAL_IT": {
+      "correct": 3,
+      "total": 10,
+      "score": 0.3
+    },
+    "HARDWARE_ENGINEERING": {
+      "correct": 2,
+      "total": 10,
+      "score": 0.2
+    },
+    "PM_AGILE_LSS": {
+      "correct": 1,
+      "total": 10,
+      "score": 0.1
+    },
+    "ROBOTICS_CONTROL": {
+      "correct": 4,
+      "total": 10,
+      "score": 0.4
+    },
+    "SOFTWARE_BUILDER": {
+      "correct": 4,
+      "total": 10,
+      "score": 0.4
+    },
+    "WIRELESS_6G": {
+      "correct": 4,
+      "total": 10,
+      "score": 0.4
+    }
+  },
+  "per_assessment_type": {
+    "quiz": {
+      "correct": 21,
+      "total": 72,
+      "score": 0.2916666666666667
+    },
+    "mid": {
+      "correct": 9,
+      "total": 24,
+      "score": 0.375
+    },
+    "final": {
+      "correct": 7,
+      "total": 24,
+      "score": 0.2916666666666667
+    }
+  },
+  "failure_rates": {
+    "parser": 0,
+    "reasoning": 0.025,
+    "knowledge": 0.5916666666666667,
+    "tool_required": 0,
+    "instruction": 0,
+    "calculation": 0.016666666666666666,
+    "concept_confusion": 0.016666666666666666,
+    "prerequisite": 0.041666666666666664
+  },
+  "attempts_sample": [
+    {
+      "item_id": "AI_ML_EDGE:aim-w1-1",
+      "course_id": "AI_ML_EDGE",
+      "choice": 1,
+      "parse": {
+        "index": 1,
+        "letter": "B",
+        "confidence": "high",
+        "matched_via": "final_marker",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "Final: B",
+      "runtimeError": null,
+      "latency_ms": 1010,
+      "tool_assist": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k-mastery-002-wt/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only",
+        "infer_path": "lean_mcq_v1"
+      }
+    },
+    {
+      "item_id": "AI_ML_EDGE:aim-w1-2",
+      "course_id": "AI_ML_EDGE",
+      "choice": 1,
+      "parse": {
+        "index": 1,
+        "letter": "B",
+        "confidence": "high",
+        "matched_via": "trailing_lone_letter",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "<letter>\nLesson notes:\n# Week 1: EdgeForge Bench — Python tensors as civic tables\nThe EdgeForge Bench in Gary is a rolling rack of three Coral-class USB accelerators and a battered ThinkPad that only sees the civic Wi-Fi. Week 1 is not 'learn Python.' It is naming columns so a sensor CSV becomes a matrix you can defend to a librarian. Ticket EF-2101 ships a 480-row occupancy CSV: timestamp_ ... (t",
+      "runtimeError": null,
+      "latency_ms": 633,
+      "tool_assist": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k-mastery-002-wt/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only",
+        "infer_path": "lean_mcq_v1"
+      }
+    },
+    {
+      "item_id": "AI_ML_EDGE:aim-w1-3",
+      "course_id": "AI_ML_EDGE",
+      "choice": 1,
+      "parse": {
+        "index": 1,
+        "letter": "B",
+        "confidence": "high",
+        "matched_via": "final_marker",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "Final: B",
+      "runtimeError": null,
+      "latency_ms": 700,
+      "tool_assist": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k-mastery-002-wt/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only",
+        "infer_path": "lean_mcq_v1"
+      }
+    },
+    {
+      "item_id": "AI_ML_EDGE:aim-w1-4",
+      "course_id": "AI_ML_EDGE",
+      "choice": 1,
+      "parse": {
+        "index": 1,
+        "letter": "B",
+        "confidence": "high",
+        "matched_via": "trailing_lone_letter",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "<letter>\nLesson notes:\n# Week 1: EdgeForge Bench — Python tensors as civic tables\nThe EdgeForge Bench in Gary is a rolling rack of three Coral-class USB accelerators and a battered ThinkPad that only sees the civic Wi-Fi. Week 1 is not 'learn Python.' It is naming columns so a sensor CSV becomes a matrix you can defend to a librarian. Ticket EF-2101 ships a 480-row occupancy CSV: timestamp_ ... (t",
+      "runtimeError": null,
+      "latency_ms": 830,
+      "tool_assist": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k-mastery-002-wt/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only",
+        "infer_path": "lean_mcq_v1"
+      }
+    },
+    {
+      "item_id": "AI_ML_EDGE:aim-w1-5",
+      "course_id": "AI_ML_EDGE",
+      "choice": 3,
+      "parse": {
+        "index": 3,
+        "letter": "D",
+        "confidence": "high",
+        "matched_via": "final_marker",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "Final: D",
+      "runtimeError": null,
+      "latency_ms": 630,
+      "tool_assist": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k-mastery-002-wt/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only",
+        "infer_path": "lean_mcq_v1"
+      }
+    },
+    {
+      "item_id": "AI_ML_EDGE:aim-w1-6",
+      "course_id": "AI_ML_EDGE",
+      "choice": 1,
+      "parse": {
+        "index": 1,
+        "letter": "B",
+        "confidence": "high",
+        "matched_via": "final_marker",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "Final: B",
+      "runtimeError": null,
+      "latency_ms": 647,
+      "tool_assist": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k-mastery-002-wt/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only",
+        "infer_path": "lean_mcq_v1"
+      }
+    },
+    {
+      "item_id": "AI_ML_EDGE:aim01",
+      "course_id": "AI_ML_EDGE",
+      "choice": 1,
+      "parse": {
+        "index": 1,
+        "letter": "B",
+        "confidence": "high",
+        "matched_via": "final_marker",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "Final: B",
+      "runtimeError": null,
+      "latency_ms": 676,
+      "tool_assist": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k-mastery-002-wt/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only",
+        "infer_path": "lean_mcq_v1"
+      }
+    },
+    {
+      "item_id": "AI_ML_EDGE:aim02",
+      "course_id": "AI_ML_EDGE",
+      "choice": 1,
+      "parse": {
+        "index": 1,
+        "letter": "B",
+        "confidence": "high",
+        "matched_via": "final_marker",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "Final: B",
+      "runtimeError": null,
+      "latency_ms": 658,
+      "tool_assist": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k-mastery-002-wt/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only",
+        "infer_path": "lean_mcq_v1"
+      }
+    },
+    {
+      "item_id": "AI_ML_EDGE:aif01",
+      "course_id": "AI_ML_EDGE",
+      "choice": 1,
+      "parse": {
+        "index": 1,
+        "letter": "B",
+        "confidence": "high",
+        "matched_via": "final_marker",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "Final: B",
+      "runtimeError": null,
+      "latency_ms": 714,
+      "tool_assist": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k-mastery-002-wt/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only",
+        "infer_path": "lean_mcq_v1"
+      }
+    },
+    {
+      "item_id": "AI_ML_EDGE:aif02",
+      "course_id": "AI_ML_EDGE",
+      "choice": 1,
+      "parse": {
+        "index": 1,
+        "letter": "B",
+        "confidence": "high",
+        "matched_via": "final_marker",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "Final: B",
+      "runtimeError": null,
+      "latency_ms": 655,
+      "tool_assist": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k-mastery-002-wt/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only",
+        "infer_path": "lean_mcq_v1"
+      }
+    },
+    {
+      "item_id": "CLOUD_DEVOPS:cd-w1-1",
+      "course_id": "CLOUD_DEVOPS",
+      "choice": 2,
+      "parse": {
+        "index": 2,
+        "letter": "C",
+        "confidence": "high",
+        "matched_via": "final_marker",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "Final: C",
+      "runtimeError": null,
+      "latency_ms": 651,
+      "tool_assist": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k-mastery-002-wt/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only",
+        "infer_path": "lean_mcq_v1"
+      }
+    },
+    {
+      "item_id": "CLOUD_DEVOPS:cd-w1-2",
+      "course_id": "CLOUD_DEVOPS",
+      "choice": 1,
+      "parse": {
+        "index": 1,
+        "letter": "B",
+        "confidence": "high",
+        "matched_via": "final_marker",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "Final: B",
+      "runtimeError": null,
+      "latency_ms": 647,
+      "tool_assist": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k-mastery-002-wt/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only",
+        "infer_path": "lean_mcq_v1"
+      }
+    }
+  ],
+  "failure_taxonomy": {
+    "miss_count": 83,
+    "samples": [
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "EF-2101 has 480 rows and a 20% time-ordered holdout. train_n?",
+        "course_id": "AI_ML_EDGE",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "Which column is forbidden on EdgeForge?",
+        "course_id": "AI_ML_EDGE",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "CONCEPT_CONFUSION",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "Observation vs inference for midnight zeros?",
+        "course_id": "AI_ML_EDGE",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "Lab rejects which claim?",
+        "course_id": "AI_ML_EDGE",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "EdgeForge holds 600 new rows and keeps a 25% time-ordered tail for validation. train_n?",
+        "course_id": "AI_ML_EDGE",
+        "assessment_kind": "mid"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "Precision with TP=18 FP=6?",
+        "course_id": "AI_ML_EDGE",
+        "assessment_kind": "final"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "Required mode this week?",
+        "course_id": "CLOUD_DEVOPS",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "0600 octal as int?",
+        "course_id": "CLOUD_DEVOPS",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "World-writable deploy key risk?",
+        "course_id": "CLOUD_DEVOPS",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "Bastion role?",
+        "course_id": "CLOUD_DEVOPS",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "World-writable deploy key 0666. Required fix mode?",
+        "course_id": "CLOUD_DEVOPS",
+        "assessment_kind": "mid"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "0600 as decimal?",
+        "course_id": "CLOUD_DEVOPS",
+        "assessment_kind": "mid"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "mode 0644 on private deploy key — acceptable?",
+        "course_id": "CLOUD_DEVOPS",
+        "assessment_kind": "final"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "ahead=0 behind=2 meaning?",
+        "course_id": "CLOUD_DEVOPS",
+        "assessment_kind": "final"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "The 5-tuple includes",
+        "course_id": "COMPUTER_NETWORKING",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "REASONING_FAILURE",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "MTU 1500 and a 2000-byte buffer implies",
+        "course_id": "COMPUTER_NETWORKING",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "Two students share an IP but different TCP ports. They are",
+        "course_id": "COMPUTER_NETWORKING",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "This course copies CS144 lab code?",
+        "course_id": "COMPUTER_NETWORKING",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "PREREQUISITE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "On receive, why is Ethernet peeled before IP?",
+        "course_id": "COMPUTER_NETWORKING",
+        "assessment_kind": "mid"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "BPDU guard on access ports is there so that?",
+        "course_id": "COMPUTER_NETWORKING",
+        "assessment_kind": "final"
+      }
+    ],
+    "census": {
+      "schema": "gunnchai.failure_census.v1",
+      "miss_count": 83,
+      "counts": {
+        "MODEL_KNOWLEDGE_GAP": 71,
+        "CONCEPT_CONFUSION": 2,
+        "REASONING_FAILURE": 3,
+        "PREREQUISITE_GAP": 5,
+        "CALCULATION_FAILURE": 2
+      },
+      "by_course": {
+        "AI_ML_EDGE": {
+          "MODEL_KNOWLEDGE_GAP": 5,
+          "CONCEPT_CONFUSION": 1
+        },
+        "CLOUD_DEVOPS": {
+          "MODEL_KNOWLEDGE_GAP": 8
+        },
+        "COMPUTER_NETWORKING": {
+          "MODEL_KNOWLEDGE_GAP": 4,
+          "REASONING_FAILURE": 1,
+          "PREREQUISITE_GAP": 1
+        },
+        "CYBERSECURITY": {
+          "MODEL_KNOWLEDGE_GAP": 8
+        },
+        "DATA_VIZ_BI": {
+          "MODEL_KNOWLEDGE_GAP": 5,
+          "PREREQUISITE_GAP": 1
+        },
+        "GAME_DEV_INTERACTIVE": {
+          "MODEL_KNOWLEDGE_GAP": 7
+        },
+        "GENERAL_IT": {
+          "MODEL_KNOWLEDGE_GAP": 6,
+          "PREREQUISITE_GAP": 1
+        },
+        "HARDWARE_ENGINEERING": {
+          "MODEL_KNOWLEDGE_GAP": 7,
+          "PREREQUISITE_GAP": 1
+        },
+        "PM_AGILE_LSS": {
+          "MODEL_KNOWLEDGE_GAP": 8,
+          "CONCEPT_CONFUSION": 1
+        },
+        "ROBOTICS_CONTROL": {
+          "MODEL_KNOWLEDGE_GAP": 5,
+          "REASONING_FAILURE": 1
+        },
+        "SOFTWARE_BUILDER": {
+          "MODEL_KNOWLEDGE_GAP": 4,
+          "REASONING_FAILURE": 1,
+          "CALCULATION_FAILURE": 1
+        },
+        "WIRELESS_6G": {
+          "CALCULATION_FAILURE": 1,
+          "MODEL_KNOWLEDGE_GAP": 4,
+          "PREREQUISITE_GAP": 1
+        }
+      },
+      "by_assessment_type": {
+        "quiz": {
+          "MODEL_KNOWLEDGE_GAP": 45,
+          "CONCEPT_CONFUSION": 1,
+          "REASONING_FAILURE": 2,
+          "PREREQUISITE_GAP": 2,
+          "CALCULATION_FAILURE": 1
+        },
+        "mid": {
+          "MODEL_KNOWLEDGE_GAP": 13,
+          "PREREQUISITE_GAP": 2
+        },
+        "final": {
+          "MODEL_KNOWLEDGE_GAP": 13,
+          "PREREQUISITE_GAP": 1,
+          "CONCEPT_CONFUSION": 1,
+          "REASONING_FAILURE": 1,
+          "CALCULATION_FAILURE": 1
+        }
+      },
+      "by_skill": {},
+      "largest_classes": [
+        {
+          "code": "MODEL_KNOWLEDGE_GAP",
+          "n": 71
+        },
+        {
+          "code": "PREREQUISITE_GAP",
+          "n": 5
+        },
+        {
+          "code": "REASONING_FAILURE",
+          "n": 3
+        },
+        {
+          "code": "CONCEPT_CONFUSION",
+          "n": 2
+        },
+        {
+          "code": "CALCULATION_FAILURE",
+          "n": 2
+        }
+      ],
+      "taxonomy": [
+        "PARSER_FAILURE",
+        "MODEL_KNOWLEDGE_GAP",
+        "PREREQUISITE_GAP",
+        "CONCEPT_CONFUSION",
+        "REASONING_FAILURE",
+        "CALCULATION_FAILURE",
+        "INSTRUCTION_INTERPRETATION_FAILURE",
+        "TOOL_REQUIRED_NOT_USED",
+        "TOOL_SELECTION_FAILURE",
+        "TOOL_EXECUTION_FAILURE",
+        "SOURCE_GROUNDING_FAILURE",
+        "CONTEXT_LIMIT_FAILURE",
+        "PROMPT_FORMAT_FAILURE",
+        "AMBIGUOUS_ITEM",
+        "CURRICULUM_DEFECT_CANDIDATE",
+        "GRADER_DEFECT_CANDIDATE",
+        "UNKNOWN",
+        "VOCABULARY_FAILURE",
+        "TRANSFER_FAILURE",
+        "DEBUGGING_FAILURE",
+        "CODE_FAILURE",
+        "RUBRIC_FAILURE",
+        "PARTIAL_COMPLETION",
+        "CARELESS_ERROR",
+        "ACCESSIBILITY_BARRIER",
+        "AMBIGUOUS_PROMPT",
+        "POLICY_BLOCKED",
+        "RESOURCE_BLOCKED",
+        "DIAGNOSIS_UNCERTAIN"
+      ]
+    }
+  },
+  "corpus": {
+    "discoverable_courses": 12,
+    "course_ids": [
+      "AI_ML_EDGE",
+      "CLOUD_DEVOPS",
+      "COMPUTER_NETWORKING",
+      "CYBERSECURITY",
+      "DATA_VIZ_BI",
+      "GAME_DEV_INTERACTIVE",
+      "GENERAL_IT",
+      "HARDWARE_ENGINEERING",
+      "PM_AGILE_LSS",
+      "ROBOTICS_CONTROL",
+      "SOFTWARE_BUILDER",
+      "WIRELESS_6G"
+    ],
+    "hardcoded_course_names": false,
+    "sample_per_course": {
+      "AI_ML_EDGE": {
+        "correct": 4,
+        "total": 10,
+        "score": 0.4
+      },
+      "CLOUD_DEVOPS": {
+        "correct": 2,
+        "total": 10,
+        "score": 0.2
+      },
+      "COMPUTER_NETWORKING": {
+        "correct": 4,
+        "total": 10,
+        "score": 0.4
+      },
+      "CYBERSECURITY": {
+        "correct": 2,
+        "total": 10,
+        "score": 0.2
+      },
+      "DATA_VIZ_BI": {
+        "correct": 4,
+        "total": 10,
+        "score": 0.4
+      },
+      "GAME_DEV_INTERACTIVE": {
+        "correct": 3,
+        "total": 10,
+        "score": 0.3
+      },
+      "GENERAL_IT": {
+        "correct": 3,
+        "total": 10,
+        "score": 0.3
+      },
+      "HARDWARE_ENGINEERING": {
+        "correct": 2,
+        "total": 10,
+        "score": 0.2
+      },
+      "PM_AGILE_LSS": {
+        "correct": 1,
+        "total": 10,
+        "score": 0.1
+      },
+      "ROBOTICS_CONTROL": {
+        "correct": 4,
+        "total": 10,
+        "score": 0.4
+      },
+      "SOFTWARE_BUILDER": {
+        "correct": 4,
+        "total": 10,
+        "score": 0.4
+      },
+      "WIRELESS_6G": {
+        "correct": 4,
+        "total": 10,
+        "score": 0.4
+      }
+    },
+    "label": "held_out_stratified_ge120"
+  },
+  "probe": {
+    "canRunRealInference": true,
+    "memoryBudgetOk": true,
+    "freeRamMb": 1147,
+    "metricsMode": "measured"
+  },
+  "tool_assist": {
+    "required_items": 8,
+    "assisted_ok": 3,
+    "note": "Curriculum tool assist on calc-like stems; computation only — not answer-key feed."
+  },
+  "infer_path": "lean_mcq_v1",
+  "claim_boundary": "Real llama.cpp MCQ attempts on student materials only. Isolated grade after submission. Only MASTERY_002_REAL_RUNTIME_12C counts toward curriculum mastery. Lean MCQ path avoids overlay pollution."
+}

@@ -1,0 +1,9 @@
+{
+  "parser_version": "gunnchai.choice_parser.v2_final_only",
+  "pre_fix_note": "v1 matched first \\b[A-D]\\b including prompt-echo A/B/C/D → systematic choice=0 bias",
+  "post_parser_real_score": 0.375,
+  "parser_failures": 0,
+  "score_delta_label": "If stratified score rises solely from parser correctness vs prompt-echo leak, label EVALUATION_BUG_FIXED not MODEL_KNOWLEDGE_IMPROVED",
+  "EVALUATION_BUG_FIXED": true,
+  "MODEL_KNOWLEDGE_IMPROVED": false
+}

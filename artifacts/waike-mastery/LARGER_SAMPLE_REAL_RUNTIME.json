@@ -1,0 +1,259 @@
+{
+  "schema": "MASTERY_002_LARGER_SAMPLE_REAL_RUNTIME.v1",
+  "score_family_id": "MASTERY_002_REAL_RUNTIME_12C",
+  "role": "current_larger_sample_runtime_estimate",
+  "replaces_as_current_estimate_only": 0.375,
+  "does_not_alter_frozen_baseline": true,
+  "frozen_baseline": 0.16666666666666666,
+  "historical_solver_path_gain_24item": 0.375,
+  "MODEL_KNOWLEDGE_IMPROVED": false,
+  "sample_design": {
+    "per_course_quiz": 6,
+    "per_course_mid": 2,
+    "per_course_final": 2,
+    "courses": 12,
+    "target_items": 120,
+    "held_out": true,
+    "answer_keys_during_solve": false,
+    "no_tuning_after_results": true
+  },
+  "items_attempted": 120,
+  "items_correct": 37,
+  "parser_failures": 0,
+  "overall_score": 0.30833333333333335,
+  "per_course": {
+    "AI_ML_EDGE": {
+      "correct": 4,
+      "total": 10,
+      "score": 0.4
+    },
+    "CLOUD_DEVOPS": {
+      "correct": 2,
+      "total": 10,
+      "score": 0.2
+    },
+    "COMPUTER_NETWORKING": {
+      "correct": 4,
+      "total": 10,
+      "score": 0.4
+    },
+    "CYBERSECURITY": {
+      "correct": 2,
+      "total": 10,
+      "score": 0.2
+    },
+    "DATA_VIZ_BI": {
+      "correct": 4,
+      "total": 10,
+      "score": 0.4
+    },
+    "GAME_DEV_INTERACTIVE": {
+      "correct": 3,
+      "total": 10,
+      "score": 0.3
+    },
+    "GENERAL_IT": {
+      "correct": 3,
+      "total": 10,
+      "score": 0.3
+    },
+    "HARDWARE_ENGINEERING": {
+      "correct": 2,
+      "total": 10,
+      "score": 0.2
+    },
+    "PM_AGILE_LSS": {
+      "correct": 1,
+      "total": 10,
+      "score": 0.1
+    },
+    "ROBOTICS_CONTROL": {
+      "correct": 4,
+      "total": 10,
+      "score": 0.4
+    },
+    "SOFTWARE_BUILDER": {
+      "correct": 4,
+      "total": 10,
+      "score": 0.4
+    },
+    "WIRELESS_6G": {
+      "correct": 4,
+      "total": 10,
+      "score": 0.4
+    }
+  },
+  "per_assessment_type": {
+    "quiz": {
+      "correct": 21,
+      "total": 72,
+      "score": 0.2916666666666667
+    },
+    "mid": {
+      "correct": 9,
+      "total": 24,
+      "score": 0.375
+    },
+    "final": {
+      "correct": 7,
+      "total": 24,
+      "score": 0.2916666666666667
+    }
+  },
+  "failure_rates": {
+    "parser": 0,
+    "reasoning": 0.025,
+    "knowledge": 0.5916666666666667,
+    "tool_required": 0,
+    "instruction": 0,
+    "calculation": 0.016666666666666666,
+    "concept_confusion": 0.016666666666666666,
+    "prerequisite": 0.041666666666666664
+  },
+  "failure_taxonomy": {
+    "schema": "gunnchai.failure_census.v1",
+    "miss_count": 83,
+    "counts": {
+      "MODEL_KNOWLEDGE_GAP": 71,
+      "CONCEPT_CONFUSION": 2,
+      "REASONING_FAILURE": 3,
+      "PREREQUISITE_GAP": 5,
+      "CALCULATION_FAILURE": 2
+    },
+    "by_course": {
+      "AI_ML_EDGE": {
+        "MODEL_KNOWLEDGE_GAP": 5,
+        "CONCEPT_CONFUSION": 1
+      },
+      "CLOUD_DEVOPS": {
+        "MODEL_KNOWLEDGE_GAP": 8
+      },
+      "COMPUTER_NETWORKING": {
+        "MODEL_KNOWLEDGE_GAP": 4,
+        "REASONING_FAILURE": 1,
+        "PREREQUISITE_GAP": 1
+      },
+      "CYBERSECURITY": {
+        "MODEL_KNOWLEDGE_GAP": 8
+      },
+      "DATA_VIZ_BI": {
+        "MODEL_KNOWLEDGE_GAP": 5,
+        "PREREQUISITE_GAP": 1
+      },
+      "GAME_DEV_INTERACTIVE": {
+        "MODEL_KNOWLEDGE_GAP": 7
+      },
+      "GENERAL_IT": {
+        "MODEL_KNOWLEDGE_GAP": 6,
+        "PREREQUISITE_GAP": 1
+      },
+      "HARDWARE_ENGINEERING": {
+        "MODEL_KNOWLEDGE_GAP": 7,
+        "PREREQUISITE_GAP": 1
+      },
+      "PM_AGILE_LSS": {
+        "MODEL_KNOWLEDGE_GAP": 8,
+        "CONCEPT_CONFUSION": 1
+      },
+      "ROBOTICS_CONTROL": {
+        "MODEL_KNOWLEDGE_GAP": 5,
+        "REASONING_FAILURE": 1
+      },
+      "SOFTWARE_BUILDER": {
+        "MODEL_KNOWLEDGE_GAP": 4,
+        "REASONING_FAILURE": 1,
+        "CALCULATION_FAILURE": 1
+      },
+      "WIRELESS_6G": {
+        "CALCULATION_FAILURE": 1,
+        "MODEL_KNOWLEDGE_GAP": 4,
+        "PREREQUISITE_GAP": 1
+      }
+    },
+    "by_assessment_type": {
+      "quiz": {
+        "MODEL_KNOWLEDGE_GAP": 45,
+        "CONCEPT_CONFUSION": 1,
+        "REASONING_FAILURE": 2,
+        "PREREQUISITE_GAP": 2,
+        "CALCULATION_FAILURE": 1
+      },
+      "mid": {
+        "MODEL_KNOWLEDGE_GAP": 13,
+        "PREREQUISITE_GAP": 2
+      },
+      "final": {
+        "MODEL_KNOWLEDGE_GAP": 13,
+        "PREREQUISITE_GAP": 1,
+        "CONCEPT_CONFUSION": 1,
+        "REASONING_FAILURE": 1,
+        "CALCULATION_FAILURE": 1
+      }
+    },
+    "by_skill": {},
+    "largest_classes": [
+      {
+        "code": "MODEL_KNOWLEDGE_GAP",
+        "n": 71
+      },
+      {
+        "code": "PREREQUISITE_GAP",
+        "n": 5
+      },
+      {
+        "code": "REASONING_FAILURE",
+        "n": 3
+      },
+      {
+        "code": "CONCEPT_CONFUSION",
+        "n": 2
+      },
+      {
+        "code": "CALCULATION_FAILURE",
+        "n": 2
+      }
+    ],
+    "taxonomy": [
+      "PARSER_FAILURE",
+      "MODEL_KNOWLEDGE_GAP",
+      "PREREQUISITE_GAP",
+      "CONCEPT_CONFUSION",
+      "REASONING_FAILURE",
+      "CALCULATION_FAILURE",
+      "INSTRUCTION_INTERPRETATION_FAILURE",
+      "TOOL_REQUIRED_NOT_USED",
+      "TOOL_SELECTION_FAILURE",
+      "TOOL_EXECUTION_FAILURE",
+      "SOURCE_GROUNDING_FAILURE",
+      "CONTEXT_LIMIT_FAILURE",
+      "PROMPT_FORMAT_FAILURE",
+      "AMBIGUOUS_ITEM",
+      "CURRICULUM_DEFECT_CANDIDATE",
+      "GRADER_DEFECT_CANDIDATE",
+      "UNKNOWN",
+      "VOCABULARY_FAILURE",
+      "TRANSFER_FAILURE",
+      "DEBUGGING_FAILURE",
+      "CODE_FAILURE",
+      "RUBRIC_FAILURE",
+      "PARTIAL_COMPLETION",
+      "CARELESS_ERROR",
+      "ACCESSIBILITY_BARRIER",
+      "AMBIGUOUS_PROMPT",
+      "POLICY_BLOCKED",
+      "RESOURCE_BLOCKED",
+      "DIAGNOSIS_UNCERTAIN"
+    ]
+  },
+  "tool_assist": {
+    "required_items": 8,
+    "assisted_ok": 3,
+    "note": "Curriculum tool assist on calc-like stems; computation only — not answer-key feed."
+  },
+  "parser_version": "gunnchai.choice_parser.v2_final_only",
+  "infer_path": "lean_mcq_v1",
+  "used_instructor_keys_during_solve": false,
+  "self_graded": false,
+  "answer_key_matched": false,
+  "status": "OK"
+}

@@ -1,0 +1,221 @@
+{
+  "schema": "REAL_SOLVER_BASELINE_V1",
+  "frozen_utc": "2026-08-15T18:59:12.837Z",
+  "immutable": true,
+  "frozen_from": "pre_parser_v2_tip_e8f9d19b_GUNNCHAI_RUNTIME_SOLVER",
+  "model_identity": "SmolLM2-135M-Instruct-Q4_K_M.gguf",
+  "model_path": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+  "model_file_hash": "2e8040ceae7815abe0dcb3540b9995eaa1fa0d2ca9e797d0a635ae4433c68c2d",
+  "quant": "Q4_K_M",
+  "llama_cpp_version": "",
+  "llama_binary": "/opt/homebrew/bin/llama-cli",
+  "prompt_format": {
+    "instruction": "Reply with a single letter (A/B/C/D) only.",
+    "context": "student_lesson_excerpts_max_1200",
+    "includes_gold_keys": false
+  },
+  "context": {
+    "n_ctx_target": 512,
+    "lesson_chars": 1200
+  },
+  "temperature": null,
+  "seed_policy": "unset_runtime_default",
+  "course_corpus_hash": "e333a5073228ce4f3ff523748176fb87ebc1485755636ac908edeea3954af996",
+  "question_count_in_corpus": 720,
+  "parser_version": "gunnchai.choice_parser.v1_first_letter_BUGGY",
+  "tool_policy": "no_tools_during_mcq_baseline_solve",
+  "hardware": {
+    "platform": "darwin",
+    "arch": "arm64",
+    "cpus": 8,
+    "total_mem_mb": 8192,
+    "free_mem_mb": 128,
+    "hostname_hash": "dcb9b37648da78fd"
+  },
+  "runtime_settings": {
+    "solver": "gunnchai_llamacpp_v1",
+    "status": "OK",
+    "grading_agent": "isolated_after_submission",
+    "used_instructor_keys_during_solve": false,
+    "self_graded": false,
+    "answer_key_matched": false,
+    "sample": "2_quiz_items_per_course_x_12"
+  },
+  "scores": {
+    "score_family_id": "MASTERY_002_REAL_RUNTIME_12C",
+    "overall": 0.16666666666666666,
+    "items_attempted": 24,
+    "items_correct": 4,
+    "per_course": {
+      "AI_ML_EDGE": {
+        "correct": 1,
+        "total": 2,
+        "score": 0.5
+      },
+      "CLOUD_DEVOPS": {
+        "correct": 0,
+        "total": 2,
+        "score": 0
+      },
+      "COMPUTER_NETWORKING": {
+        "correct": 0,
+        "total": 2,
+        "score": 0
+      },
+      "CYBERSECURITY": {
+        "correct": 0,
+        "total": 2,
+        "score": 0
+      },
+      "DATA_VIZ_BI": {
+        "correct": 0,
+        "total": 2,
+        "score": 0
+      },
+      "GAME_DEV_INTERACTIVE": {
+        "correct": 0,
+        "total": 2,
+        "score": 0
+      },
+      "GENERAL_IT": {
+        "correct": 1,
+        "total": 2,
+        "score": 0.5
+      },
+      "HARDWARE_ENGINEERING": {
+        "correct": 0,
+        "total": 2,
+        "score": 0
+      },
+      "PM_AGILE_LSS": {
+        "correct": 0,
+        "total": 2,
+        "score": 0
+      },
+      "ROBOTICS_CONTROL": {
+        "correct": 0,
+        "total": 2,
+        "score": 0
+      },
+      "SOFTWARE_BUILDER": {
+        "correct": 1,
+        "total": 2,
+        "score": 0.5
+      },
+      "WIRELESS_6G": {
+        "correct": 1,
+        "total": 2,
+        "score": 0.5
+      }
+    }
+  },
+  "per_type_score": {
+    "quiz_stratified_sample": 0.16666666666666666
+  },
+  "failure_taxonomy": {
+    "miss_count": 20,
+    "samples": [
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "AI_ML_EDGE:aim-w1-2"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "CLOUD_DEVOPS:cd-w1-1"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "CLOUD_DEVOPS:cd-w1-2"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "COMPUTER_NETWORKING:net-w1-1"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "COMPUTER_NETWORKING:net-w1-2"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "CYBERSECURITY:cy-w1-1"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "CYBERSECURITY:cy-w1-2"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "DATA_VIZ_BI:dv-w1-1"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "DATA_VIZ_BI:dv-w1-2"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "GAME_DEV_INTERACTIVE:ga-w1-1"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "GAME_DEV_INTERACTIVE:ga-w1-2"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "GENERAL_IT:git-w1-2"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "HARDWARE_ENGINEERING:hw1-1"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "HARDWARE_ENGINEERING:hw1-2"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "PM_AGILE_LSS:pm1-1"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "PM_AGILE_LSS:pm1-2"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "ROBOTICS_CONTROL:rb-w1-1"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "ROBOTICS_CONTROL:rb-w1-2"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "SOFTWARE_BUILDER:sw1-2"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "WIRELESS_6G:wr-w1-2"
+      }
+    ]
+  },
+  "claim_boundary": "Immutable freeze of ~0.167 real-runtime baseline BEFORE parser v2 / tool / vertical changes. Heuristics must not replace this family."
+}

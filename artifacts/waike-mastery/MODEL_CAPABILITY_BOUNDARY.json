@@ -1,0 +1,89 @@
+{
+  "schema": "gunnchai.model_capability_boundary.v1",
+  "hardware": {
+    "platform": "darwin",
+    "arch": "arm64",
+    "cpus": 8,
+    "total_mem_mb": 8192,
+    "free_mem_mb": 970
+  },
+  "llama_binary": "/opt/homebrew/bin/llama-cli",
+  "models_available": [
+    {
+      "id": "SmolLM2-135M-Instruct-Q4_K_M",
+      "params": "135M",
+      "quant": "Q4_K_M",
+      "bytes": 105454432,
+      "file_hash": "2e8040ceae7815abe0dcb3540b9995eaa1fa0d2ca9e797d0a635ae4433c68c2d"
+    },
+    {
+      "id": "SmolLM2-360M-Instruct-Q4_K_M",
+      "params": "360M",
+      "quant": "Q4_K_M",
+      "bytes": 270590880,
+      "file_hash": "2fa3f013dcdd7b99f9b237717fa0b12d75bbb89984cc1274be1471a465bac9c2"
+    }
+  ],
+  "comparisons": [
+    {
+      "model": "SmolLM2-135M-Instruct-Q4_K_M",
+      "status": "OK",
+      "architecture": "SmolLM2",
+      "params": "135M",
+      "quant": "Q4_K_M",
+      "context": 256,
+      "memory_mb_file": 101,
+      "tokens_per_sec": 205.7,
+      "probe_choice": "A",
+      "probe_ok": false,
+      "file_hash": "2e8040ceae7815abe0dcb3540b9995eaa1fa0d2ca9e797d0a635ae4433c68c2d",
+      "required_ram_heuristic_mb": 357
+    },
+    {
+      "model": "SmolLM2-360M-Instruct-Q4_K_M",
+      "status": "OK",
+      "architecture": "SmolLM2",
+      "params": "360M",
+      "quant": "Q4_K_M",
+      "context": 256,
+      "memory_mb_file": 259,
+      "tokens_per_sec": 190.7,
+      "probe_choice": "A",
+      "probe_ok": false,
+      "file_hash": "2fa3f013dcdd7b99f9b237717fa0b12d75bbb89984cc1274be1471a465bac9c2",
+      "required_ram_heuristic_mb": 515
+    }
+  ],
+  "MODEL_A_vs_MODEL_B": {
+    "MODEL_A": {
+      "model": "SmolLM2-135M-Instruct-Q4_K_M",
+      "status": "OK",
+      "architecture": "SmolLM2",
+      "params": "135M",
+      "quant": "Q4_K_M",
+      "context": 256,
+      "memory_mb_file": 101,
+      "tokens_per_sec": 205.7,
+      "probe_choice": "A",
+      "probe_ok": false,
+      "file_hash": "2e8040ceae7815abe0dcb3540b9995eaa1fa0d2ca9e797d0a635ae4433c68c2d",
+      "required_ram_heuristic_mb": 357
+    },
+    "MODEL_B": {
+      "model": "SmolLM2-360M-Instruct-Q4_K_M",
+      "status": "OK",
+      "architecture": "SmolLM2",
+      "params": "360M",
+      "quant": "Q4_K_M",
+      "context": 256,
+      "memory_mb_file": 259,
+      "tokens_per_sec": 190.7,
+      "probe_choice": "A",
+      "probe_ok": false,
+      "file_hash": "2fa3f013dcdd7b99f9b237717fa0b12d75bbb89984cc1274be1471a465bac9c2",
+      "required_ram_heuristic_mb": 515
+    }
+  },
+  "MODEL_CAPABILITY_LIMIT": true,
+  "claim_boundary": "Local already-available GGUF comparison only. No large downloads while Product-Use/QEMU may own resources. Weak probe accuracy may indicate MODEL_CAPABILITY_LIMIT for curriculum mastery."
+}

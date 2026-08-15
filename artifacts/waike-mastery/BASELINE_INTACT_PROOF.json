@@ -1,0 +1,11 @@
+{
+  "schema": "REAL_SOLVER_BASELINE_V1_INTACT_PROOF.v1",
+  "intact": true,
+  "expected_overall": 0.16666666666666666,
+  "observed_overall": 0.16666666666666666,
+  "sha256_before": "45bd3a9adacc92c3fe23d1c8f6381eb715a395b1a3d24c912d353fb7ea656d4d",
+  "sha256_after": "45bd3a9adacc92c3fe23d1c8f6381eb715a395b1a3d24c912d353fb7ea656d4d",
+  "sha256_file": "45bd3a9adacc92c3fe23d1c8f6381eb715a395b1a3d24c912d353fb7ea656d4d",
+  "immutable_flag": true,
+  "MODEL_KNOWLEDGE_IMPROVED": false
+}

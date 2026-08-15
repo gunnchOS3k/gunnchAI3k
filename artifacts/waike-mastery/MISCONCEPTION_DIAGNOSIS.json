@@ -1,0 +1,35 @@
+{
+  "schema": "gunnchai.misconception_diagnosis_suite.v1",
+  "course_id": "GENERAL_IT",
+  "cases": [
+    {
+      "item_id": "mis-prereq",
+      "hypothesized_failure": "PREREQUISITE_GAP",
+      "skill_id": "skill:GENERAL_IT:w02",
+      "feedback": "Focus next on skill:GENERAL_IT:w02. Try an isomorphic practice item, then reassess.",
+      "demeaning_label_used": false
+    },
+    {
+      "item_id": "mis-concept",
+      "hypothesized_failure": "CONCEPT_CONFUSION",
+      "skill_id": "skill:GENERAL_IT:w02",
+      "feedback": "Focus next on skill:GENERAL_IT:w02. Try an isomorphic practice item, then reassess.",
+      "demeaning_label_used": false
+    },
+    {
+      "item_id": "mis-calc",
+      "hypothesized_failure": "CALCULATION_FAILURE",
+      "skill_id": "skill:GENERAL_IT:w02",
+      "feedback": "Focus next on skill:GENERAL_IT:w02. Try an isomorphic practice item, then reassess.",
+      "demeaning_label_used": false
+    },
+    {
+      "item_id": "mis-instr",
+      "hypothesized_failure": "INSTRUCTION_INTERPRETATION_FAILURE",
+      "skill_id": "skill:GENERAL_IT:w02",
+      "feedback": "Focus next on skill:GENERAL_IT:w02. Try an isomorphic practice item, then reassess.",
+      "demeaning_label_used": false
+    }
+  ],
+  "HUMAN_LEARNING_CLAIMED": false
+}
