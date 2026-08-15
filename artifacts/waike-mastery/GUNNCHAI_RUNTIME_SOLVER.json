@@ -3,7 +3,7 @@
   "status": "OK",
   "solver": "gunnchai_llamacpp_v1",
   "score_family_id": "MASTERY_002_REAL_RUNTIME_12C",
-  "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+  "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k-mastery-002-wt/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
   "binary": "/opt/homebrew/bin/llama-cli",
   "parser_version": "gunnchai.choice_parser.v2_final_only",
   "used_instructor_keys_during_solve": false,
@@ -24,6 +24,23 @@
       "score": 0.25
     }
   },
+  "per_assessment_type": {
+    "quiz": {
+      "correct": 2,
+      "total": 8,
+      "score": 0.25
+    }
+  },
+  "failure_rates": {
+    "parser": 0,
+    "reasoning": 0,
+    "knowledge": 0.75,
+    "tool_required": 0,
+    "instruction": 0,
+    "calculation": 0,
+    "concept_confusion": 0,
+    "prerequisite": 0
+  },
   "attempts_sample": [
     {
       "item_id": "GENERAL_IT:git-w1-1",
@@ -38,10 +55,10 @@
       },
       "raw": "Final: D",
       "runtimeError": null,
-      "latency_ms": 701,
+      "latency_ms": 674,
       "tool_assist": null,
       "artifact": {
-        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k-mastery-002-wt/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
         "binary": "/opt/homebrew/bin/llama-cli",
         "parser_version": "gunnchai.choice_parser.v2_final_only",
         "infer_path": "lean_mcq_v1"
@@ -60,14 +77,14 @@
       },
       "raw": "Final: B",
       "runtimeError": null,
-      "latency_ms": 696,
+      "latency_ms": 666,
       "tool_assist": {
         "used": false,
         "tool_id": null,
         "failure": "TOOL_REQUIRED_NOT_USED"
       },
       "artifact": {
-        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k-mastery-002-wt/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
         "binary": "/opt/homebrew/bin/llama-cli",
         "parser_version": "gunnchai.choice_parser.v2_final_only",
         "infer_path": "lean_mcq_v1"
@@ -86,10 +103,10 @@
       },
       "raw": "Final: B",
       "runtimeError": null,
-      "latency_ms": 726,
+      "latency_ms": 682,
       "tool_assist": null,
       "artifact": {
-        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k-mastery-002-wt/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
         "binary": "/opt/homebrew/bin/llama-cli",
         "parser_version": "gunnchai.choice_parser.v2_final_only",
         "infer_path": "lean_mcq_v1"
@@ -108,10 +125,10 @@
       },
       "raw": "Final: B",
       "runtimeError": null,
-      "latency_ms": 984,
+      "latency_ms": 665,
       "tool_assist": null,
       "artifact": {
-        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k-mastery-002-wt/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
         "binary": "/opt/homebrew/bin/llama-cli",
         "parser_version": "gunnchai.choice_parser.v2_final_only",
         "infer_path": "lean_mcq_v1"
@@ -130,10 +147,10 @@
       },
       "raw": "Final: B",
       "runtimeError": null,
-      "latency_ms": 690,
+      "latency_ms": 661,
       "tool_assist": null,
       "artifact": {
-        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k-mastery-002-wt/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
         "binary": "/opt/homebrew/bin/llama-cli",
         "parser_version": "gunnchai.choice_parser.v2_final_only",
         "infer_path": "lean_mcq_v1"
@@ -152,10 +169,10 @@
       },
       "raw": "Final: B",
       "runtimeError": null,
-      "latency_ms": 732,
+      "latency_ms": 672,
       "tool_assist": null,
       "artifact": {
-        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k-mastery-002-wt/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
         "binary": "/opt/homebrew/bin/llama-cli",
         "parser_version": "gunnchai.choice_parser.v2_final_only",
         "infer_path": "lean_mcq_v1"
@@ -174,10 +191,10 @@
       },
       "raw": "Final: D",
       "runtimeError": null,
-      "latency_ms": 703,
+      "latency_ms": 691,
       "tool_assist": null,
       "artifact": {
-        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k-mastery-002-wt/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
         "binary": "/opt/homebrew/bin/llama-cli",
         "parser_version": "gunnchai.choice_parser.v2_final_only",
         "infer_path": "lean_mcq_v1"
@@ -196,10 +213,10 @@
       },
       "raw": "<letter>\nLesson notes:\n# Week 1: The Civic Tech Desk — three jobs a computer actually has\nAt the Gary Civic Tech Desk the machine in front of a patron is not a personality. It remembers (files), it calculates (apps), and it talks (network). Beginners freeze when a window disappears because they cannot name which of those three jobs failed. Ticket 4417 from the library kiosk is a remember-jo ... (t",
       "runtimeError": null,
-      "latency_ms": 632,
+      "latency_ms": 678,
       "tool_assist": null,
       "artifact": {
-        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k-mastery-002-wt/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
         "binary": "/opt/homebrew/bin/llama-cli",
         "parser_version": "gunnchai.choice_parser.v2_final_only",
         "infer_path": "lean_mcq_v1"
@@ -337,7 +354,7 @@
   "probe": {
     "canRunRealInference": true,
     "memoryBudgetOk": true,
-    "freeRamMb": 1198,
+    "freeRamMb": 946,
     "metricsMode": "measured"
   },
   "tool_assist": {

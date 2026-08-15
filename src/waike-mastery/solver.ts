@@ -30,43 +30,140 @@ export interface SolverItem {
   choices: string[];
 }
 
+type McqItemRaw = { id: string; kind?: string; stem?: string; choices?: string[] };
+
+function assertNoStudentKeys(course: string, rel: string, it: McqItemRaw): void {
+  if ('answer_index' in it || 'explanation' in it) {
+    throw new Error(`student_assessment_leaked_keys:${course}/${rel}`);
+  }
+}
+
+function pushMcqItems(
+  out: SolverItem[],
+  course: string,
+  assessmentKind: string,
+  assessmentId: string,
+  items: McqItemRaw[],
+  limit: number | null,
+  maxTotal: number | null,
+  rel: string,
+): number {
+  let taken = 0;
+  for (const it of items) {
+    if (limit != null && taken >= limit) break;
+    if (maxTotal != null && out.length >= maxTotal) break;
+    if (!it.choices || it.choices.length < 2) continue;
+    assertNoStudentKeys(course, rel, it);
+    out.push({
+      course_id: course,
+      item_id: `${course}:${it.id}`,
+      assessment_kind: assessmentKind,
+      assessment_id: assessmentId,
+      local_id: it.id,
+      stem: it.stem || '',
+      choices: it.choices,
+    });
+    taken += 1;
+  }
+  return taken;
+}
+
+/**
+ * Load student-facing MCQs only (no instructor keys).
+ * Default: quiz-only for backward-compatible stratified samples.
+ * Stratified held-out: set perCourseQuiz / perCourseMid / perCourseFinal.
+ */
 function loadStudentMcq(
   waikeRoot: string,
-  opts: { perCourse?: number | null; courseIds?: string[] | null; maxTotal?: number | null },
+  opts: {
+    perCourse?: number | null;
+    perCourseQuiz?: number | null;
+    perCourseMid?: number | null;
+    perCourseFinal?: number | null;
+    courseIds?: string[] | null;
+    maxTotal?: number | null;
+  },
 ): SolverItem[] {
   const digital = path.join(waikeRoot, 'curriculum', 'digital_rc');
   const out: SolverItem[] = [];
   if (!fs.existsSync(digital)) return out;
   const allow = opts.courseIds ? new Set(opts.courseIds) : null;
+  const stratified =
+    opts.perCourseQuiz != null || opts.perCourseMid != null || opts.perCourseFinal != null;
+  const quizBudget = stratified
+    ? opts.perCourseQuiz ?? 0
+    : opts.perCourse === undefined
+      ? 2
+      : opts.perCourse;
+  const midBudget = stratified ? opts.perCourseMid ?? 0 : 0;
+  const finalBudget = stratified ? opts.perCourseFinal ?? 0 : 0;
+
   for (const course of fs.readdirSync(digital).sort()) {
     if (allow && !allow.has(course)) continue;
-    const quizzes = path.join(digital, course, 'quizzes');
-    if (!fs.existsSync(quizzes)) continue;
-    let taken = 0;
-    for (const qf of fs.readdirSync(quizzes).sort().filter((f) => /^q\d+\.json$/.test(f))) {
-      if (opts.perCourse != null && taken >= opts.perCourse) break;
-      if (opts.maxTotal != null && out.length >= opts.maxTotal) break;
-      const data = JSON.parse(fs.readFileSync(path.join(quizzes, qf), 'utf8')) as {
-        quiz_id?: string;
-        items?: Array<{ id: string; kind?: string; stem?: string; choices?: string[] }>;
-      };
-      for (const it of data.items || []) {
-        if (opts.perCourse != null && taken >= opts.perCourse) break;
-        if (opts.maxTotal != null && out.length >= opts.maxTotal) break;
-        if (!it.choices || it.choices.length < 2) continue;
-        if ('answer_index' in it || 'explanation' in it) {
-          throw new Error(`student_quiz_leaked_keys:${course}/${qf}`);
+    if (opts.maxTotal != null && out.length >= opts.maxTotal) break;
+
+    if (quizBudget == null || quizBudget > 0) {
+      const quizzes = path.join(digital, course, 'quizzes');
+      if (fs.existsSync(quizzes)) {
+        let taken = 0;
+        for (const qf of fs.readdirSync(quizzes).sort().filter((f) => /^q\d+\.json$/.test(f))) {
+          if (quizBudget != null && taken >= quizBudget) break;
+          if (opts.maxTotal != null && out.length >= opts.maxTotal) break;
+          const data = JSON.parse(fs.readFileSync(path.join(quizzes, qf), 'utf8')) as {
+            quiz_id?: string;
+            items?: McqItemRaw[];
+          };
+          taken += pushMcqItems(
+            out,
+            course,
+            'quiz',
+            data.quiz_id || qf.replace(/\.json$/, ''),
+            data.items || [],
+            quizBudget == null ? null : quizBudget - taken,
+            opts.maxTotal ?? null,
+            `quizzes/${qf}`,
+          );
         }
-        out.push({
-          course_id: course,
-          item_id: `${course}:${it.id}`,
-          assessment_kind: 'quiz',
-          assessment_id: data.quiz_id || qf.replace(/\.json$/, ''),
-          local_id: it.id,
-          stem: it.stem || '',
-          choices: it.choices,
-        });
-        taken += 1;
+      }
+    }
+
+    if (midBudget > 0) {
+      const midPath = path.join(digital, course, 'assessments', 'mid_course.json');
+      if (fs.existsSync(midPath)) {
+        const data = JSON.parse(fs.readFileSync(midPath, 'utf8')) as {
+          assessment_id?: string;
+          items?: McqItemRaw[];
+        };
+        pushMcqItems(
+          out,
+          course,
+          'mid',
+          data.assessment_id || `${course}-mid`,
+          data.items || [],
+          midBudget,
+          opts.maxTotal ?? null,
+          'assessments/mid_course.json',
+        );
+      }
+    }
+
+    if (finalBudget > 0) {
+      const finPath = path.join(digital, course, 'assessments', 'final_knowledge.json');
+      if (fs.existsSync(finPath)) {
+        const data = JSON.parse(fs.readFileSync(finPath, 'utf8')) as {
+          assessment_id?: string;
+          items?: McqItemRaw[];
+        };
+        pushMcqItems(
+          out,
+          course,
+          'final',
+          data.assessment_id || `${course}-final`,
+          data.items || [],
+          finalBudget,
+          opts.maxTotal ?? null,
+          'assessments/final_knowledge.json',
+        );
       }
     }
   }
@@ -89,6 +186,9 @@ function lessonContext(waikeRoot: string, courseId: string, maxChars = 600): str
 export async function runGunnchaiRuntimeSolver(opts?: {
   cwd?: string;
   perCourse?: number | null;
+  perCourseQuiz?: number | null;
+  perCourseMid?: number | null;
+  perCourseFinal?: number | null;
   courseIds?: string[] | null;
   maxTotal?: number | null;
   skipInference?: boolean;
@@ -171,6 +271,9 @@ export async function runGunnchaiRuntimeSolver(opts?: {
 
   const items = loadStudentMcq(waikeRoot, {
     perCourse,
+    perCourseQuiz: opts?.perCourseQuiz ?? null,
+    perCourseMid: opts?.perCourseMid ?? null,
+    perCourseFinal: opts?.perCourseFinal ?? null,
     courseIds: opts?.courseIds ?? null,
     maxTotal: opts?.maxTotal ?? null,
   });
@@ -338,6 +441,42 @@ export async function runGunnchaiRuntimeSolver(opts?: {
   const parseableOnlyScore = gradedTotal ? correct / gradedTotal : 0;
   const census = aggregateTaxonomy(misses);
 
+  const perType: Record<string, { correct: number; total: number; score: number }> = {};
+  for (const [cid, assessments] of Object.entries(submissions)) {
+    for (const [akey, answers] of Object.entries(assessments)) {
+      const [kind, aid] = akey.split('::');
+      const graded = gradeIsolated(waikeRoot, {
+        courseId: cid,
+        assessmentKind: kind as 'quiz' | 'mid' | 'final',
+        assessmentId: aid,
+        answers,
+      });
+      if ('blocked' in graded) continue;
+      for (const git of graded.items) {
+        if (!(git.id in answers)) continue;
+        perType[kind] ??= { correct: 0, total: 0, score: 0 };
+        perType[kind].total += 1;
+        if (git.ok) perType[kind].correct += 1;
+      }
+    }
+  }
+  for (const row of Object.values(perType)) {
+    row.score = row.total ? row.correct / row.total : 0;
+  }
+
+  const denom = honestTotal || 1;
+  const counts = (census.counts || {}) as Record<string, number>;
+  const failRates = {
+    parser: parserFailures / denom,
+    reasoning: (counts.REASONING_FAILURE || 0) / denom,
+    knowledge: (counts.MODEL_KNOWLEDGE_GAP || 0) / denom,
+    tool_required: (counts.TOOL_REQUIRED_NOT_USED || 0) / denom,
+    instruction: (counts.INSTRUCTION_INTERPRETATION_FAILURE || 0) / denom,
+    calculation: (counts.CALCULATION_FAILURE || 0) / denom,
+    concept_confusion: (counts.CONCEPT_CONFUSION || 0) / denom,
+    prerequisite: (counts.PREREQUISITE_GAP || 0) / denom,
+  };
+
   const out: Record<string, unknown> = {
     schema: 'gunnchai.waike_runtime_solver.v1',
     status: (attempts.length ? 'OK' : 'PARTIAL') as SolverStatus,
@@ -358,6 +497,8 @@ export async function runGunnchaiRuntimeSolver(opts?: {
     overall_score: overall,
     parseable_only_score: parseableOnlyScore,
     per_course: perCourseScores,
+    per_assessment_type: perType,
+    failure_rates: failRates,
     attempts_sample: attempts.slice(0, 12),
     failure_taxonomy: {
       miss_count: misses.length,

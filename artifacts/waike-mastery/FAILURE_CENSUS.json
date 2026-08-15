@@ -1,88 +1,104 @@
 {
   "schema": "gunnchai.failure_census.v1",
-  "miss_count": 88,
+  "miss_count": 83,
   "counts": {
-    "MODEL_KNOWLEDGE_GAP": 81,
-    "CONCEPT_CONFUSION": 1,
-    "REASONING_FAILURE": 2,
-    "CALCULATION_FAILURE": 2,
-    "PREREQUISITE_GAP": 2
+    "MODEL_KNOWLEDGE_GAP": 71,
+    "CONCEPT_CONFUSION": 2,
+    "REASONING_FAILURE": 3,
+    "PREREQUISITE_GAP": 5,
+    "CALCULATION_FAILURE": 2
   },
   "by_course": {
     "AI_ML_EDGE": {
-      "MODEL_KNOWLEDGE_GAP": 6,
+      "MODEL_KNOWLEDGE_GAP": 5,
       "CONCEPT_CONFUSION": 1
     },
     "CLOUD_DEVOPS": {
-      "MODEL_KNOWLEDGE_GAP": 7
+      "MODEL_KNOWLEDGE_GAP": 8
     },
     "COMPUTER_NETWORKING": {
-      "MODEL_KNOWLEDGE_GAP": 5,
+      "MODEL_KNOWLEDGE_GAP": 4,
       "REASONING_FAILURE": 1,
-      "CALCULATION_FAILURE": 1
+      "PREREQUISITE_GAP": 1
     },
     "CYBERSECURITY": {
       "MODEL_KNOWLEDGE_GAP": 8
     },
     "DATA_VIZ_BI": {
-      "MODEL_KNOWLEDGE_GAP": 6,
+      "MODEL_KNOWLEDGE_GAP": 5,
       "PREREQUISITE_GAP": 1
     },
     "GAME_DEV_INTERACTIVE": {
-      "MODEL_KNOWLEDGE_GAP": 8
-    },
-    "GENERAL_IT": {
       "MODEL_KNOWLEDGE_GAP": 7
     },
-    "HARDWARE_ENGINEERING": {
+    "GENERAL_IT": {
       "MODEL_KNOWLEDGE_GAP": 6,
       "PREREQUISITE_GAP": 1
     },
+    "HARDWARE_ENGINEERING": {
+      "MODEL_KNOWLEDGE_GAP": 7,
+      "PREREQUISITE_GAP": 1
+    },
     "PM_AGILE_LSS": {
-      "MODEL_KNOWLEDGE_GAP": 8
+      "MODEL_KNOWLEDGE_GAP": 8,
+      "CONCEPT_CONFUSION": 1
     },
     "ROBOTICS_CONTROL": {
-      "MODEL_KNOWLEDGE_GAP": 7
+      "MODEL_KNOWLEDGE_GAP": 5,
+      "REASONING_FAILURE": 1
     },
     "SOFTWARE_BUILDER": {
-      "MODEL_KNOWLEDGE_GAP": 8,
-      "REASONING_FAILURE": 1
+      "MODEL_KNOWLEDGE_GAP": 4,
+      "REASONING_FAILURE": 1,
+      "CALCULATION_FAILURE": 1
     },
     "WIRELESS_6G": {
       "CALCULATION_FAILURE": 1,
-      "MODEL_KNOWLEDGE_GAP": 5
+      "MODEL_KNOWLEDGE_GAP": 4,
+      "PREREQUISITE_GAP": 1
     }
   },
   "by_assessment_type": {
     "quiz": {
-      "MODEL_KNOWLEDGE_GAP": 81,
+      "MODEL_KNOWLEDGE_GAP": 45,
       "CONCEPT_CONFUSION": 1,
       "REASONING_FAILURE": 2,
-      "CALCULATION_FAILURE": 2,
+      "PREREQUISITE_GAP": 2,
+      "CALCULATION_FAILURE": 1
+    },
+    "mid": {
+      "MODEL_KNOWLEDGE_GAP": 13,
       "PREREQUISITE_GAP": 2
+    },
+    "final": {
+      "MODEL_KNOWLEDGE_GAP": 13,
+      "PREREQUISITE_GAP": 1,
+      "CONCEPT_CONFUSION": 1,
+      "REASONING_FAILURE": 1,
+      "CALCULATION_FAILURE": 1
     }
   },
   "by_skill": {},
   "largest_classes": [
     {
       "code": "MODEL_KNOWLEDGE_GAP",
-      "n": 81
+      "n": 71
+    },
+    {
+      "code": "PREREQUISITE_GAP",
+      "n": 5
     },
     {
       "code": "REASONING_FAILURE",
+      "n": 3
+    },
+    {
+      "code": "CONCEPT_CONFUSION",
       "n": 2
     },
     {
       "code": "CALCULATION_FAILURE",
       "n": 2
-    },
-    {
-      "code": "PREREQUISITE_GAP",
-      "n": 2
-    },
-    {
-      "code": "CONCEPT_CONFUSION",
-      "n": 1
     }
   ],
   "taxonomy": [
@@ -117,15 +133,29 @@
     "DIAGNOSIS_UNCERTAIN"
   ],
   "sample_design": {
-    "per_course": 10,
+    "per_course_quiz": 6,
+    "per_course_mid": 2,
+    "per_course_final": 2,
     "courses": 12,
     "target_items": 120,
-    "items_loaded": 120,
-    "items_attempted": 120,
-    "items_correct": 32,
-    "overall_score": 0.26666666666666666,
-    "parser_failures": 0,
-    "score_family_id": "MASTERY_002_REAL_RUNTIME_12C",
-    "note": "Expanded machine-graded failure census; distributions only — not blended with heuristic families."
-  }
+    "held_out": true,
+    "answer_keys_during_solve": false,
+    "no_tuning_after_results": true
+  },
+  "items_attempted": 120,
+  "items_correct": 37,
+  "overall_score": 0.30833333333333335,
+  "parser_failures": 0,
+  "failure_rates": {
+    "parser": 0,
+    "reasoning": 0.025,
+    "knowledge": 0.5916666666666667,
+    "tool_required": 0,
+    "instruction": 0,
+    "calculation": 0.016666666666666666,
+    "concept_confusion": 0.016666666666666666,
+    "prerequisite": 0.041666666666666664
+  },
+  "score_family_id": "MASTERY_002_REAL_RUNTIME_12C",
+  "note": "Held-out larger-sample failure census; not blended with heuristic families."
 }

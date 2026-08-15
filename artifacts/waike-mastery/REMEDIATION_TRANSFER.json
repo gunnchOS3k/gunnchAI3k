@@ -2,7 +2,7 @@
   "schema": "gunnchai.remediation_transfer.v1",
   "engine_version": "gunnchai.remediation_engine.v1",
   "course_id": "GENERAL_IT",
-  "item_id": "x",
+  "item_id": "plateau-x",
   "steps": [
     {
       "step": "FAIL",

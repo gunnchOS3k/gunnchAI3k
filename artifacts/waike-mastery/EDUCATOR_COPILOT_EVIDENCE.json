@@ -1,6 +1,6 @@
 {
   "schema": "gunnchai.educator_copilot_evidence.v1",
-  "course_id": "AI_ML_EDGE",
+  "course_id": "GENERAL_IT",
   "intents_covered": [
     "planning",
     "first_time_teacher",
@@ -12,7 +12,7 @@
   "sessions": [
     {
       "mode": "EDUCATOR_COPILOT",
-      "courseId": "AI_ML_EDGE",
+      "courseId": "GENERAL_IT",
       "intent": "planning",
       "actions": [
         "Map hook → lab → quiz",
@@ -33,7 +33,7 @@
     },
     {
       "mode": "EDUCATOR_COPILOT",
-      "courseId": "AI_ML_EDGE",
+      "courseId": "GENERAL_IT",
       "intent": "first_time_teacher",
       "actions": [
         "Read instructor packet offline",
@@ -54,7 +54,7 @@
     },
     {
       "mode": "EDUCATOR_COPILOT",
-      "courseId": "AI_ML_EDGE",
+      "courseId": "GENERAL_IT",
       "intent": "live_support",
       "actions": [
         "Socratic learner channel",
@@ -75,7 +75,7 @@
     },
     {
       "mode": "EDUCATOR_COPILOT",
-      "courseId": "AI_ML_EDGE",
+      "courseId": "GENERAL_IT",
       "intent": "grading_assist",
       "actions": [
         "Propose rubric scores",
@@ -96,7 +96,7 @@
     },
     {
       "mode": "EDUCATOR_COPILOT",
-      "courseId": "AI_ML_EDGE",
+      "courseId": "GENERAL_IT",
       "intent": "feedback",
       "actions": [
         "Skill-focused comments only",
@@ -117,7 +117,7 @@
     },
     {
       "mode": "EDUCATOR_COPILOT",
-      "courseId": "AI_ML_EDGE",
+      "courseId": "GENERAL_IT",
       "intent": "analytics",
       "actions": [
         "Aggregate by domain",
@@ -139,7 +139,7 @@
   ],
   "grade_assist": {
     "mode": "EDUCATOR_COPILOT",
-    "courseId": "AI_ML_EDGE",
+    "courseId": "GENERAL_IT",
     "proposedScore": 0.72,
     "status": "AWAITING_HUMAN_CONFIRM",
     "published": false,

@@ -31,17 +31,17 @@
     {
       "tool_id": "shell_probe",
       "input": {
-        "cwd": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k"
+        "cwd": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k-mastery-002-wt"
       },
       "command": [
         "bash",
         "-lc",
         "uname -s && pwd && echo TOOL_OK"
       ],
-      "stdout": "Darwin\n/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k\nTOOL_OK\n",
+      "stdout": "Darwin\n/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k-mastery-002-wt\nTOOL_OK\n",
       "stderr": "",
       "exit_code": 0,
-      "artifact_hash": "3024480bb53e0b837e4b1153eedf7eea256f511f57927a64743bba20af161b03",
+      "artifact_hash": "d6ba0294b67558e203346ffb72961b324e8972423b93df4e58b6bb24df48a18e",
       "grader_ok": true,
       "grader_detail": "shell_ok",
       "real_execution": true,
@@ -50,7 +50,7 @@
     {
       "tool_id": "git_inspect",
       "input": {
-        "cwd": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k"
+        "cwd": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k-mastery-002-wt"
       },
       "command": [
         "git",
@@ -135,10 +135,10 @@
         "-e",
         "fs.writeFileSync(svg)"
       ],
-      "stdout": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/artifacts/waike-mastery/tool_artifacts/chart_stub.svg",
+      "stdout": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k-mastery-002-wt/artifacts/waike-mastery/tool_artifacts/chart_stub.svg",
       "stderr": "",
       "exit_code": 0,
-      "artifact_path": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/artifacts/waike-mastery/tool_artifacts/chart_stub.svg",
+      "artifact_path": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k-mastery-002-wt/artifacts/waike-mastery/tool_artifacts/chart_stub.svg",
       "artifact_hash": "c4f68df3438e20bfd5fd73a9cfca63983a6d0892d439775a48d720a0dcfd07f3",
       "grader_ok": true,
       "grader_detail": "svg_hash=c4f68df3438e",
@@ -168,12 +168,12 @@
     {
       "tool_id": "build_test_probe",
       "input": {
-        "probe": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/src/waike-mastery/choice_parser.ts"
+        "probe": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k-mastery-002-wt/src/waike-mastery/choice_parser.ts"
       },
       "command": [
         "node",
         "-e",
-        "require('fs').accessSync(\"/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/src/waike-mastery/choice_parser.ts\"); console.log('BUILD_PROBE_OK')"
+        "require('fs').accessSync(\"/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k-mastery-002-wt/src/waike-mastery/choice_parser.ts\"); console.log('BUILD_PROBE_OK')"
       ],
       "stdout": "BUILD_PROBE_OK\n",
       "stderr": "",

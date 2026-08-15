@@ -1,0 +1,199 @@
+{
+  "schema": "MASTERY_002_PLATEAU_EVIDENCE_PACK.v1",
+  "wave": "AI-WAIKE-MASTERY-002",
+  "classification": "MASTERY_002_PLATEAU_MERGE_READY",
+  "WAIKE_AI_DIGITAL_MASTERY_PASS": false,
+  "MODEL_KNOWLEDGE_IMPROVED": false,
+  "REAL_SOLVER_BASELINE_V1": 0.16666666666666666,
+  "historical_SOLVER_PATH_GAIN_24item": 0.375,
+  "current_larger_sample_score": 0.30833333333333335,
+  "larger_sample": {
+    "attempted": 120,
+    "correct": 37,
+    "score": 0.30833333333333335,
+    "per_course": {
+      "AI_ML_EDGE": {
+        "correct": 4,
+        "total": 10,
+        "score": 0.4
+      },
+      "CLOUD_DEVOPS": {
+        "correct": 2,
+        "total": 10,
+        "score": 0.2
+      },
+      "COMPUTER_NETWORKING": {
+        "correct": 4,
+        "total": 10,
+        "score": 0.4
+      },
+      "CYBERSECURITY": {
+        "correct": 2,
+        "total": 10,
+        "score": 0.2
+      },
+      "DATA_VIZ_BI": {
+        "correct": 4,
+        "total": 10,
+        "score": 0.4
+      },
+      "GAME_DEV_INTERACTIVE": {
+        "correct": 3,
+        "total": 10,
+        "score": 0.3
+      },
+      "GENERAL_IT": {
+        "correct": 3,
+        "total": 10,
+        "score": 0.3
+      },
+      "HARDWARE_ENGINEERING": {
+        "correct": 2,
+        "total": 10,
+        "score": 0.2
+      },
+      "PM_AGILE_LSS": {
+        "correct": 1,
+        "total": 10,
+        "score": 0.1
+      },
+      "ROBOTICS_CONTROL": {
+        "correct": 4,
+        "total": 10,
+        "score": 0.4
+      },
+      "SOFTWARE_BUILDER": {
+        "correct": 4,
+        "total": 10,
+        "score": 0.4
+      },
+      "WIRELESS_6G": {
+        "correct": 4,
+        "total": 10,
+        "score": 0.4
+      }
+    },
+    "per_assessment_type": {
+      "quiz": {
+        "correct": 21,
+        "total": 72,
+        "score": 0.2916666666666667
+      },
+      "mid": {
+        "correct": 9,
+        "total": 24,
+        "score": 0.375
+      },
+      "final": {
+        "correct": 7,
+        "total": 24,
+        "score": 0.2916666666666667
+      }
+    },
+    "failure_rates": {
+      "parser": 0,
+      "reasoning": 0.025,
+      "knowledge": 0.5916666666666667,
+      "tool_required": 0,
+      "instruction": 0,
+      "calculation": 0.016666666666666666,
+      "concept_confusion": 0.016666666666666666,
+      "prerequisite": 0.041666666666666664
+    }
+  },
+  "parser_correctness": {
+    "parser_version": "gunnchai.choice_parser.v2_final_only",
+    "parser_failures_on_larger_sample": 0,
+    "parser_failure_rate": 0,
+    "note": "Parser v2 final-only; failures count as incorrect in honest denominator."
+  },
+  "checklist": {
+    "parser_correctness": {
+      "present": true,
+      "artifact": "PARSER_IMPACT.json",
+      "parser_failures": 0,
+      "ok": true
+    },
+    "failure_census": {
+      "present": true,
+      "artifact": "FAILURE_CENSUS.json",
+      "ok": true
+    },
+    "real_tool_execution_rate": {
+      "present": true,
+      "artifact": "TOOL_USE_REAL_EXEC.json",
+      "pass_rate": 1,
+      "coverage": "MATERIAL_REAL_EXEC",
+      "ok": true
+    },
+    "GENERAL_IT_vertical_closure": {
+      "present": true,
+      "artifact": "VERTICAL_CLOSURE_GENERAL_IT.json",
+      "verdict": "VERTICAL_COURSE_ATTEMPTED_NOT_CLOSED",
+      "closure_complete": false,
+      "ok": true
+    },
+    "remediation": {
+      "present": true,
+      "artifact": "REMEDIATION_TRANSFER.json",
+      "REMEDIATION_SUCCESS": true,
+      "ok": true
+    },
+    "transfer": {
+      "present": true,
+      "artifact": "REMEDIATION_TRANSFER.json / VERTICAL_CLOSURE transfer_rerun",
+      "ok": true
+    },
+    "educator_copilot": {
+      "present": true,
+      "artifact": "EDUCATOR_COPILOT_EVIDENCE.json",
+      "hitl_ok": true,
+      "ok": true
+    },
+    "no_key_leak": {
+      "present": true,
+      "canary_pass": true,
+      "used_keys_during_solve": false,
+      "ok": true
+    },
+    "MODEL_CAPABILITY_LIMIT": {
+      "present": true,
+      "artifact": "MODEL_CAPABILITY_BOUNDARY.json",
+      "value": true,
+      "ok": true
+    },
+    "frozen_baseline_intact": {
+      "present": true,
+      "artifact": "BASELINE_INTACT_PROOF.json",
+      "ok": true
+    },
+    "larger_sample_ge_120": {
+      "present": true,
+      "artifact": "LARGER_SAMPLE_REAL_RUNTIME.json",
+      "attempted": 120,
+      "ok": true
+    }
+  },
+  "artifacts": {
+    "LARGER_SAMPLE_REAL_RUNTIME": "artifacts/waike-mastery/LARGER_SAMPLE_REAL_RUNTIME.json",
+    "SCORE_FAMILIES": "artifacts/waike-mastery/SCORE_FAMILIES.json",
+    "FAILURE_CENSUS": "artifacts/waike-mastery/FAILURE_CENSUS.json",
+    "TOOL_USE_REAL_EXEC": "artifacts/waike-mastery/TOOL_USE_REAL_EXEC.json",
+    "TOOL_USE_CURRICULUM_INTEGRATED": "artifacts/waike-mastery/TOOL_USE_CURRICULUM_INTEGRATED.json",
+    "VERTICAL_CLOSURE_GENERAL_IT": "artifacts/waike-mastery/VERTICAL_CLOSURE_GENERAL_IT.json",
+    "REMEDIATION_TRANSFER": "artifacts/waike-mastery/REMEDIATION_TRANSFER.json",
+    "EDUCATOR_COPILOT_EVIDENCE": "artifacts/waike-mastery/EDUCATOR_COPILOT_EVIDENCE.json",
+    "MODEL_CAPABILITY_BOUNDARY": "artifacts/waike-mastery/MODEL_CAPABILITY_BOUNDARY.json",
+    "REAL_SOLVER_BASELINE_V1": "artifacts/waike-mastery/REAL_SOLVER_BASELINE_V1.json",
+    "BASELINE_INTACT_PROOF": "artifacts/waike-mastery/BASELINE_INTACT_PROOF.json"
+  },
+  "open": [
+    "WAIKE_AI_DIGITAL_MASTERY_PASS remains false (overall << 0.95 real-runtime).",
+    "MODEL_CAPABILITY_LIMIT=true on available SmolLM2 GGUFs — do not tune current model solely for benchmark.",
+    "GENERAL_IT vertical: VERTICAL_COURSE_ATTEMPTED_NOT_CLOSED.",
+    "Tool-use curriculum integration MATERIAL/PARTIAL — not COMPLETE.",
+    "Cursor NEVER merges; parent/independent verifier must adversarial-check tips.",
+    "Do not start Mastery-003; do not touch gunnchAI #36 or device-os #116."
+  ],
+  "verifier_note": "Artifacts published for independent verifier. Parent should adversarial-verify tips and baseline sha256."
+}
