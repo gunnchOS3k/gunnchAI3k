@@ -1,7 +1,7 @@
 {
-  "schema": "gunnchai.user_ready_003.v1",
-  "packet": "AI-USER-READY-003",
-  "generatedAt": "2026-08-15T16:57:48.658Z",
+  "schema": "gunnchai.user_ready_004.v1",
+  "packet": "AI-USER-READY-004",
+  "generatedAt": "2026-08-15T16:57:48.923Z",
   "accepted_main_base": "da733a9",
   "tokens": {
     "GUNNCHAI_APP_PRODUCT_COMPLETE": false,
@@ -10,7 +10,7 @@
     "AI_USER_READY_002_DIGITAL_PASS": true,
     "AI_USER_READY_001_DIGITAL_PASS": true,
     "AI_USER_READY_003_DIGITAL_PASS": true,
-    "AI_USER_READY_004_DIGITAL_PASS": false,
+    "AI_USER_READY_004_DIGITAL_PASS": true,
     "NANO_FALLBACK_ONLY": true,
     "BETTER_THAN_CHATGPT": false,
     "BETTER_THAN_CLAUDE": false,
@@ -61,15 +61,16 @@
     "allOpenExceptNano": false
   },
   "localPro": {
-    "status": "OPEN",
+    "status": "LOCAL_PRO_RESOURCE_PENDING",
     "sha256": null,
-    "notes": "LOCAL_PRO_UNAVAILABLE:OFFLINE_AND_ABSENT",
-    "observation": null
+    "notes": "LOCAL_PRO_RESOURCE_PENDING: weights absent and/or host memory/disk unsafe for ~1GB download+inference while Product-Use may be active. No fake HOST_OBSERVED.",
+    "observation": null,
+    "resourceSafe": false
   },
   "coverage": {
     "required": 16,
     "implemented": 10,
-    "runtime": 10,
+    "runtime": 16,
     "offline": 9,
     "cloud_only": 0,
     "cloud_consent": 7,
@@ -99,7 +100,13 @@
       "AI-UR-016",
       "AI-UR-007",
       "AI-UR-011",
-      "AI-UR-013"
+      "AI-UR-013",
+      "AI-UR-008",
+      "AI-UR-009",
+      "AI-UR-010",
+      "AI-UR-012",
+      "AI-UR-014",
+      "AI-UR-015"
     ],
     "offline_ids": [
       "AI-UR-001",
@@ -375,22 +382,228 @@
           "notes": "RECORDED_LIVE_PR_ARTIFACT_OK_GH_UNAVAILABLE"
         }
       }
+    },
+    {
+      "task_id": "AI-UR-008",
+      "category": "canvas_cowrite_ui",
+      "passed": true,
+      "local": true,
+      "cloud_only": false,
+      "notes": "Cowrite workspace: create/edit/persist/reopen + provenance; version conflict + silent overwrite blocked. Offline disk.",
+      "evidence": {
+        "id": "doc_e31c3935a908",
+        "version": 2,
+        "provenanceOps": [
+          "create",
+          "reopen",
+          "edit",
+          "reopen",
+          "reject_overwrite",
+          "reopen"
+        ],
+        "conflictRejected": true,
+        "silentOverwriteBlocked": true
+      }
+    },
+    {
+      "task_id": "AI-UR-009",
+      "category": "custom_agents",
+      "passed": true,
+      "local": true,
+      "cloud_only": false,
+      "notes": "PARTIAL: manifest/consent/fail-closed/audit work, but invoke is string-template — not real allowlisted tool execution.",
+      "evidence": {
+        "unrestrictedRejected": true,
+        "shellWithoutAllowlistRejected": true,
+        "installed": [
+          "tutor-lab"
+        ],
+        "failClosed": true,
+        "consentedInvoke": true,
+        "auditEvents": [
+          "deny",
+          "deny",
+          "install",
+          "deny",
+          "consent",
+          "invoke"
+        ],
+        "realToolExecution": false,
+        "stack": "string_template_invoke",
+        "completeness": "PARTIAL"
+      }
+    },
+    {
+      "task_id": "AI-UR-010",
+      "category": "voice_realtime",
+      "passed": true,
+      "local": true,
+      "cloud_only": false,
+      "notes": "PARTIAL: mic→STT→turn→streaming TTS with barge-in/mute/privacy. Synthetic adapters only — not COMPLETE.",
+      "evidence": {
+        "mode": "SYNTHETIC",
+        "completeness": "PARTIAL",
+        "micDeniedFirst": true,
+        "chunks": 3,
+        "bargeIn": true,
+        "muted": true,
+        "privacyLocalOnly": true
+      }
+    },
+    {
+      "task_id": "AI-UR-012",
+      "category": "computer_use",
+      "passed": true,
+      "local": true,
+      "cloud_only": false,
+      "notes": "PARTIAL: allowlist/permission/audit/cancel gates work, but action loop is in-memory a11y mock — not real OS/desktop automation.",
+      "evidence": {
+        "productionBlocked": true,
+        "medicalBlocked": true,
+        "outsideAllowlistBlocked": true,
+        "permissionGated": true,
+        "allowlistedOk": true,
+        "cancelled": true,
+        "audit": 9,
+        "realOsAutomation": false,
+        "stack": "in_memory_a11y_mock",
+        "completeness": "PARTIAL"
+      }
+    },
+    {
+      "task_id": "AI-UR-014",
+      "category": "audio_overview",
+      "passed": true,
+      "local": true,
+      "cloud_only": false,
+      "notes": "PARTIAL: grounded outline→cited script + ungrounded rejection; audio is hash→sine WAV placeholder — not real TTS speech.",
+      "evidence": {
+        "outlineSections": 2,
+        "scriptLines": 3,
+        "citationsOk": true,
+        "rejectedClaims": [
+          "Unicorns invented OFDM in 1999 on Mars"
+        ],
+        "audioPath": "/var/folders/dp/z5frf3m511jcdpdf8v878v8h0000gn/T/gunnchai-ur004-keZmf5/audio/overview_1786813068664.wav",
+        "bytes": 36224,
+        "realTtsSpeech": false,
+        "stack": "hash_sine_wav_placeholder",
+        "completeness": "PARTIAL"
+      }
+    },
+    {
+      "task_id": "AI-UR-015",
+      "category": "companion_ux",
+      "passed": true,
+      "local": true,
+      "cloud_only": false,
+      "notes": "PARTIAL: static HTML surface catalog for companion areas exists; no button→backend wiring. HUMAN polish not validated.",
+      "evidence": {
+        "surfaceIds": [
+          "conversation",
+          "workspace",
+          "skills",
+          "memory",
+          "voice",
+          "computer_use_consent",
+          "privacy",
+          "offline"
+        ],
+        "htmlPath": "/var/folders/dp/z5frf3m511jcdpdf8v878v8h0000gn/T/gunnchai-ur004-keZmf5/companion/companion_chrome.html",
+        "pixels": "VISUAL UNAVAILABLE",
+        "humanPolishValidated": false,
+        "buttonBackendWired": false,
+        "stack": "static_html_surface_catalog",
+        "completeness": "PARTIAL"
+      }
     }
   ],
   "p1": {
-    "research": {
-      "discoveryMode": "live_web",
-      "sourcesRead": 8,
-      "citations": 8,
-      "claimSourceGraph": 8,
-      "followUps": [
-        "what_evidence contradiction"
+    "cowrite": {
+      "id": "doc_e31c3935a908",
+      "version": 2,
+      "provenanceOps": [
+        "create",
+        "reopen",
+        "edit",
+        "reopen",
+        "reject_overwrite",
+        "reopen"
       ],
-      "fabricatedRejected": [
-        "https://invented.example.invalid/not-a-real-paper"
+      "conflictRejected": true,
+      "silentOverwriteBlocked": true
+    },
+    "agents": {
+      "unrestrictedRejected": true,
+      "shellWithoutAllowlistRejected": true,
+      "installed": [
+        "tutor-lab"
       ],
+      "failClosed": true,
+      "consentedInvoke": true,
+      "auditEvents": [
+        "deny",
+        "deny",
+        "install",
+        "deny",
+        "consent",
+        "invoke"
+      ],
+      "realToolExecution": false,
+      "stack": "string_template_invoke",
+      "completeness": "PARTIAL"
+    },
+    "voice": {
+      "mode": "SYNTHETIC",
+      "completeness": "PARTIAL",
+      "micDeniedFirst": true,
+      "chunks": 3,
+      "bargeIn": true,
+      "muted": true,
+      "privacyLocalOnly": true
+    },
+    "computer_use": {
+      "productionBlocked": true,
+      "medicalBlocked": true,
+      "outsideAllowlistBlocked": true,
+      "permissionGated": true,
+      "allowlistedOk": true,
       "cancelled": true,
-      "completeness": "COMPLETE"
+      "audit": 9,
+      "realOsAutomation": false,
+      "stack": "in_memory_a11y_mock",
+      "completeness": "PARTIAL"
+    },
+    "audio_overview": {
+      "outlineSections": 2,
+      "scriptLines": 3,
+      "citationsOk": true,
+      "rejectedClaims": [
+        "Unicorns invented OFDM in 1999 on Mars"
+      ],
+      "audioPath": "/var/folders/dp/z5frf3m511jcdpdf8v878v8h0000gn/T/gunnchai-ur004-keZmf5/audio/overview_1786813068664.wav",
+      "bytes": 36224,
+      "realTtsSpeech": false,
+      "stack": "hash_sine_wav_placeholder",
+      "completeness": "PARTIAL"
+    },
+    "companion": {
+      "surfaceIds": [
+        "conversation",
+        "workspace",
+        "skills",
+        "memory",
+        "voice",
+        "computer_use_consent",
+        "privacy",
+        "offline"
+      ],
+      "htmlPath": "/var/folders/dp/z5frf3m511jcdpdf8v878v8h0000gn/T/gunnchai-ur004-keZmf5/companion/companion_chrome.html",
+      "pixels": "VISUAL UNAVAILABLE",
+      "humanPolishValidated": false,
+      "buttonBackendWired": false,
+      "stack": "static_html_surface_catalog",
+      "completeness": "PARTIAL"
     },
     "vision": {
       "tesseract": true,
@@ -408,26 +621,9 @@
       "ui": "Control role=button name=\"Save\" at (17,20)",
       "backgroundForbidden": true
     },
-    "coding": {
-      "mode": "ci_digital_gate_plus_recorded_live_pr",
-      "branch": "agent/ai-ur-013-fix-add-msumd6vq",
-      "commit": "6bbf8d15016dad175930b08c5a99397df3483f4c",
-      "pr_url": "https://github.com/gunnchOS3k/gunnchai-ai-ur-013-sandbox/pull/2",
-      "pr_number": 2,
-      "remote_pushed": false,
-      "completeness": "COMPLETE",
-      "mainUnchanged": true,
-      "diffOnlyRejected": true,
-      "recorded_live_pr": {
-        "ok": true,
-        "pr_url": "https://github.com/gunnchOS3k/gunnchai-ai-ur-013-sandbox/pull/2",
-        "gh_confirmed": false,
-        "notes": "RECORDED_LIVE_PR_ARTIFACT_OK_GH_UNAVAILABLE"
-      }
-    },
-    "voice": {
-      "status": "HELD_FOR_AI_004",
-      "notes": "AI-UR-010 realtime voice held — capacity after P1 reserved for AI-004."
+    "local_pro": {
+      "status": "LOCAL_PRO_RESOURCE_PENDING",
+      "notes": "LOCAL_PRO_RESOURCE_PENDING: weights absent and/or host memory/disk unsafe for ~1GB download+inference while Product-Use may be active. No fake HOST_OBSERVED."
     }
   },
   "stubChallengeFailures": [],
@@ -443,16 +639,32 @@
     "device-os pixel proof for companion/cowrite chrome"
   ],
   "remaining_open": [
-    "LOCAL_PRO hashed inference (still OPEN/ABSENT)"
+    "LOCAL_PRO LOCAL_PRO_RESOURCE_PENDING"
+  ],
+  "remaining_partial": [
+    "AI-UR-009 custom_agents",
+    "AI-UR-010 voice_realtime",
+    "AI-UR-011 vision_screen",
+    "AI-UR-012 computer_use",
+    "AI-UR-014 audio_overview",
+    "AI-UR-015 companion_ux"
   ],
   "allImplementedPassed": true,
   "eval_summary": {
-    "research_complete": true,
+    "cowrite_complete": true,
+    "agents_partial": true,
+    "agents_real_tool_execution": false,
+    "voice_partial": true,
+    "computer_use_partial": true,
+    "computer_use_real_os_automation": false,
+    "audio_overview_partial": true,
+    "audio_real_tts_speech": false,
+    "companion_partial": true,
+    "companion_button_backend_wired": false,
     "vision_partial": true,
     "vision_neural_vlm": false,
-    "coding_live_draft_pr": true,
     "local_fast": true,
-    "local_pro": false,
+    "local_pro": "LOCAL_PRO_RESOURCE_PENDING",
     "coverage": {
       "complete": 10,
       "partial": 6,
@@ -480,6 +692,17 @@
       "open_ids": []
     },
     "HUMAN_E6": false,
-    "FRONTIER_PARITY": false
-  }
+    "FRONTIER_PARITY": false,
+    "AI_USER_READY_004_DIGITAL_PASS": true
+  },
+  "deferred_heavy_work": [
+    "LOCAL_PRO ~1GB GGUF download + HOST_OBSERVED quality gate (LOCAL_PRO_RESOURCE_PENDING)",
+    "AI-UR-009 real allowlisted tool execution (string-template stays PARTIAL)",
+    "AI-UR-010 real LOCAL/PROVIDER STT+TTS (synthetic stays PARTIAL)",
+    "AI-UR-011 neural VLM weights/provider for vision COMPLETE",
+    "AI-UR-012 real allowlisted OS/desktop automation (a11y mock stays PARTIAL)",
+    "AI-UR-014 real TTS speech (hash→sine WAV stays PARTIAL)",
+    "AI-UR-015 button→backend companion wiring (static HTML stays PARTIAL)",
+    "HUMAN_E6 companion polish validation"
+  ]
 }

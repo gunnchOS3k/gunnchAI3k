@@ -108,3 +108,77 @@ export function challengeUserReady003(input: Challenge003Input): string[] {
   if (input.unsafeTools) failures.push('UNSAFE_TOOLS');
   return failures;
 }
+
+export interface Challenge004Input {
+  silentCowriteOverwrite: boolean;
+  unrestrictedAgentInstalled: boolean;
+  syntheticVoiceClaimedComplete: boolean;
+  ocrHeuristicClaimedComplete: boolean;
+  computerUseOutsideAllowlist: boolean;
+  audioOverviewHallucinated: boolean;
+  humanPolishWithoutHuman: boolean;
+  fakeLocalProHostObserved: boolean;
+  /** Author-bar: COMPLETE claimed without real tool execution. */
+  agentsTemplateClaimedComplete: boolean;
+  /** Author-bar: COMPLETE claimed for in-memory a11y mock only. */
+  computerUseMockClaimedComplete: boolean;
+  /** Author-bar: COMPLETE claimed for hash→sine WAV placeholder. */
+  audioSineWavClaimedComplete: boolean;
+  /** Author-bar: COMPLETE claimed for static HTML without button→backend. */
+  companionStaticHtmlClaimedComplete: boolean;
+}
+
+export function challengeUserReady004(input: Challenge004Input): string[] {
+  const failures: string[] = [];
+  if (input.silentCowriteOverwrite) failures.push('SILENT_COWRITE_OVERWRITE');
+  if (input.unrestrictedAgentInstalled) failures.push('UNRESTRICTED_AGENT');
+  if (input.syntheticVoiceClaimedComplete) failures.push('SYNTHETIC_VOICE_AS_COMPLETE');
+  if (input.ocrHeuristicClaimedComplete) failures.push('OCR_HEURISTICS_AS_VLM_COMPLETE');
+  if (input.computerUseOutsideAllowlist) failures.push('COMPUTER_USE_OUTSIDE_ALLOWLIST');
+  if (input.audioOverviewHallucinated) failures.push('AUDIO_OVERVIEW_HALLUCINATION');
+  if (input.humanPolishWithoutHuman) failures.push('HUMAN_POLISH_WITHOUT_HUMAN');
+  if (input.fakeLocalProHostObserved) failures.push('FAKE_LOCAL_PRO_HOST_OBSERVED');
+  if (input.agentsTemplateClaimedComplete) failures.push('AGENTS_TEMPLATE_AS_COMPLETE');
+  if (input.computerUseMockClaimedComplete) failures.push('COMPUTER_USE_MOCK_AS_COMPLETE');
+  if (input.audioSineWavClaimedComplete) failures.push('AUDIO_SINE_WAV_AS_COMPLETE');
+  if (input.companionStaticHtmlClaimedComplete) failures.push('COMPANION_STATIC_HTML_AS_COMPLETE');
+  return failures;
+}
+
+/**
+ * Living-matrix author bar: refuse inflated COMPLETE for known PARTIAL stacks.
+ * Call with matrix + runtime honesty flags so packet digital pass cannot inflate counts.
+ */
+export function challengeMatrixInflation(
+  tasks: Array<{ task_id: string; coverage_status?: string }>,
+  flags: {
+    agentsRealToolExecution: boolean;
+    computerUseRealOsAutomation: boolean;
+    audioRealTtsSpeech: boolean;
+    companionButtonBackendWired: boolean;
+    voiceRealSpeechBackends: boolean;
+    visionNeuralVlm: boolean;
+  },
+): string[] {
+  const status = (id: string) => tasks.find((t) => t.task_id === id)?.coverage_status;
+  const failures: string[] = [];
+  if (status('AI-UR-009') === 'COMPLETE' && !flags.agentsRealToolExecution) {
+    failures.push('MATRIX_INFLATION:AI-UR-009_TEMPLATE_INVOKE');
+  }
+  if (status('AI-UR-012') === 'COMPLETE' && !flags.computerUseRealOsAutomation) {
+    failures.push('MATRIX_INFLATION:AI-UR-012_A11Y_MOCK');
+  }
+  if (status('AI-UR-014') === 'COMPLETE' && !flags.audioRealTtsSpeech) {
+    failures.push('MATRIX_INFLATION:AI-UR-014_SINE_WAV');
+  }
+  if (status('AI-UR-015') === 'COMPLETE' && !flags.companionButtonBackendWired) {
+    failures.push('MATRIX_INFLATION:AI-UR-015_STATIC_HTML');
+  }
+  if (status('AI-UR-010') === 'COMPLETE' && !flags.voiceRealSpeechBackends) {
+    failures.push('MATRIX_INFLATION:AI-UR-010_SYNTHETIC_VOICE');
+  }
+  if (status('AI-UR-011') === 'COMPLETE' && !flags.visionNeuralVlm) {
+    failures.push('MATRIX_INFLATION:AI-UR-011_OCR_AS_VLM');
+  }
+  return failures;
+}

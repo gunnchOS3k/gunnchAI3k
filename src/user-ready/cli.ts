@@ -4,32 +4,42 @@ import {
   HUMAN_E6_TOKEN,
   USER_READY_001_TOKEN,
   USER_READY_003_TOKEN,
+  USER_READY_004_TOKEN,
   USER_READY_PACKET_TOKEN,
 } from './tokens';
 import { runUserReady001Packet } from './runtime_001';
 import { runUserReadyPacket } from './runtime';
 import { runUserReady003Packet } from './runtime_003';
+import { runUserReady004Packet } from './runtime_004';
 
-export type PacketId = '001' | '002' | '003';
+export type PacketId = '001' | '002' | '003' | '004';
 
 export function resolvePacket(argv = process.argv.slice(2)): PacketId {
   const flag = argv.find((a) => a.startsWith('--packet='));
   if (flag) {
     const v = flag.split('=')[1];
-    if (v === '001' || v === '002' || v === '003') return v;
+    if (v === '001' || v === '002' || v === '003' || v === '004') return v;
   }
   const idx = argv.indexOf('--packet');
-  if (idx >= 0 && (argv[idx + 1] === '001' || argv[idx + 1] === '002' || argv[idx + 1] === '003')) {
+  if (
+    idx >= 0 &&
+    (argv[idx + 1] === '001' ||
+      argv[idx + 1] === '002' ||
+      argv[idx + 1] === '003' ||
+      argv[idx + 1] === '004')
+  ) {
     return argv[idx + 1] as PacketId;
   }
   if (process.env.GUNNCHAI_USER_READY_PACKET === '001') return '001';
   if (process.env.GUNNCHAI_USER_READY_PACKET === '002') return '002';
   if (process.env.GUNNCHAI_USER_READY_PACKET === '003') return '003';
+  if (process.env.GUNNCHAI_USER_READY_PACKET === '004') return '004';
   const script = process.env.npm_lifecycle_event || '';
   if (script.includes('001')) return '001';
+  if (script.includes('004')) return '004';
   if (script.includes('003')) return '003';
   if (script.includes('002')) return '002';
-  return '003';
+  return '004';
 }
 
 async function main(): Promise<void> {
@@ -89,6 +99,34 @@ async function main(): Promise<void> {
     if (report.tokens[FRONTIER_PARITY_TOKEN] !== false) process.exit(2);
     if (report.tokens[HUMAN_E6_TOKEN] !== false) process.exit(2);
     if (!report.allImplementedPassed || report.tokens[USER_READY_003_TOKEN] !== true) {
+      process.exit(1);
+    }
+    return;
+  }
+
+  if (packet === '004') {
+    const report = await runUserReady004Packet(process.cwd(), {
+      fastNetworkConsent: true,
+      proNetworkConsent: process.env.GUNNCHAI_PRO_NETWORK_CONSENT === '1',
+    });
+    const summary = {
+      packet: report.packet,
+      allImplementedPassed: report.allImplementedPassed,
+      coverage: report.coverage,
+      tokens: report.tokens,
+      localPro: report.localPro,
+      remaining_partial: report.remaining_partial,
+      remaining_open: report.remaining_open,
+      deferred_heavy_work: report.deferred_heavy_work,
+      eval_summary: report.eval_summary,
+      failed: report.results.filter((r) => !r.passed).map((r) => r.task_id),
+      stubChallengeFailures: report.stubChallengeFailures,
+    };
+    console.log(JSON.stringify(summary, null, 2));
+    if (report.tokens[APP_PRODUCT_COMPLETE_TOKEN] !== false) process.exit(2);
+    if (report.tokens[FRONTIER_PARITY_TOKEN] !== false) process.exit(2);
+    if (report.tokens[HUMAN_E6_TOKEN] !== false) process.exit(2);
+    if (!report.allImplementedPassed || report.tokens[USER_READY_004_TOKEN] !== true) {
       process.exit(1);
     }
     return;

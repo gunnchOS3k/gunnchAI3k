@@ -74,15 +74,27 @@ describe('AI-USER-READY tokens + matrix honesty', () => {
         'AI-UR-005',
         'AI-UR-006',
         'AI-UR-007',
+        'AI-UR-008',
         'AI-UR-013',
         'AI-UR-016',
       ]),
     );
+    expect(complete).not.toContain('AI-UR-009');
+    expect(complete).not.toContain('AI-UR-010');
     expect(complete).not.toContain('AI-UR-011');
-    expect(partial).toEqual(['AI-UR-011']);
-    expect(open).toEqual(
-      expect.arrayContaining(['AI-UR-008', 'AI-UR-009', 'AI-UR-010', 'AI-UR-012', 'AI-UR-014', 'AI-UR-015']),
-    );
+    expect(complete).not.toContain('AI-UR-012');
+    expect(complete).not.toContain('AI-UR-014');
+    expect(complete).not.toContain('AI-UR-015');
+    expect(partial.sort()).toEqual([
+      'AI-UR-009',
+      'AI-UR-010',
+      'AI-UR-011',
+      'AI-UR-012',
+      'AI-UR-014',
+      'AI-UR-015',
+    ]);
+    expect(open).toEqual([]);
+    expect(complete).toHaveLength(10);
   });
 
   it('labels Nano as fallback only; Fast never uses 135M; Pro uses pinned hashed candidate', () => {
@@ -158,14 +170,20 @@ describe('AI-USER-READY-002 market packet', () => {
     expect(report.pixels).toBe(VISUAL_UNAVAILABLE);
     expect(report.stubChallengeFailures).toEqual([]);
     expect(report.coverage.required).toBe(16);
-    expect(report.coverage.complete).toBe(9);
-    expect(report.coverage.partial).toBe(1);
-    expect(report.coverage.open).toBe(6);
-    expect(report.coverage.implemented).toBe(9);
-    expect(report.coverage.partial_ids).toEqual(['AI-UR-011']);
-    expect(report.coverage.open_ids).toEqual(
-      expect.arrayContaining(['AI-UR-008', 'AI-UR-009', 'AI-UR-010', 'AI-UR-012', 'AI-UR-014', 'AI-UR-015']),
-    );
+    // Matrix living (004 remediated): 10 COMPLETE / 6 PARTIAL / 0 OPEN.
+    expect(report.coverage.complete).toBe(10);
+    expect(report.coverage.partial).toBe(6);
+    expect(report.coverage.open).toBe(0);
+    expect(report.coverage.implemented).toBe(10);
+    expect(report.coverage.partial_ids.sort()).toEqual([
+      'AI-UR-009',
+      'AI-UR-010',
+      'AI-UR-011',
+      'AI-UR-012',
+      'AI-UR-014',
+      'AI-UR-015',
+    ]);
+    expect(report.coverage.open_ids).toEqual([]);
     const completePass = report.results.filter((r) =>
       ['AI-UR-001', 'AI-UR-002', 'AI-UR-003', 'AI-UR-004', 'AI-UR-005', 'AI-UR-006'].includes(r.task_id),
     );

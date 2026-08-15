@@ -35,6 +35,20 @@ import {
 } from './tokens';
 import { runUserReadyPacket, type TaskRunResult } from './runtime';
 
+/** Packet 003 evaluates the same runtime set as 002 (007/011/013 upgraded). */
+export const PACKET_003_TASK_IDS = [
+  'AI-UR-001',
+  'AI-UR-002',
+  'AI-UR-003',
+  'AI-UR-004',
+  'AI-UR-005',
+  'AI-UR-006',
+  'AI-UR-007',
+  'AI-UR-011',
+  'AI-UR-013',
+  'AI-UR-016',
+] as const;
+
 export interface UserReady003Report {
   schema: 'gunnchai.user_ready_003.v1';
   packet: 'AI-USER-READY-003';
@@ -377,8 +391,11 @@ export async function runUserReady003Packet(
   ];
 
   const coverage = coverageFrom(matrix, results);
+  const packetScope = new Set<string>(PACKET_003_TASK_IDS);
   const completeIds = new Set(
-    matrix.tasks.filter((t) => t.coverage_status === 'COMPLETE').map((t) => t.task_id),
+    matrix.tasks
+      .filter((t) => packetScope.has(t.task_id) && t.coverage_status === 'COMPLETE')
+      .map((t) => t.task_id),
   );
   const completeResults = results.filter((r) => completeIds.has(r.task_id));
   const allImplementedPassed =
