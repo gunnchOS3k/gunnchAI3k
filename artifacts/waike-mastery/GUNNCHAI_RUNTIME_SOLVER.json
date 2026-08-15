@@ -1,0 +1,402 @@
+{
+  "schema": "gunnchai.waike_runtime_solver.v1",
+  "status": "OK",
+  "solver": "gunnchai_llamacpp_v1",
+  "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+  "binary": "/opt/homebrew/bin/llama-cli",
+  "used_instructor_keys_during_solve": false,
+  "self_graded": false,
+  "answer_key_matched": false,
+  "grading_agent": "isolated_after_submission",
+  "items_attempted": 24,
+  "items_correct": 4,
+  "overall_score": 0.16666666666666666,
+  "per_course": {
+    "AI_ML_EDGE": {
+      "correct": 1,
+      "total": 2,
+      "score": 0.5
+    },
+    "CLOUD_DEVOPS": {
+      "correct": 0,
+      "total": 2,
+      "score": 0
+    },
+    "COMPUTER_NETWORKING": {
+      "correct": 0,
+      "total": 2,
+      "score": 0
+    },
+    "CYBERSECURITY": {
+      "correct": 0,
+      "total": 2,
+      "score": 0
+    },
+    "DATA_VIZ_BI": {
+      "correct": 0,
+      "total": 2,
+      "score": 0
+    },
+    "GAME_DEV_INTERACTIVE": {
+      "correct": 0,
+      "total": 2,
+      "score": 0
+    },
+    "GENERAL_IT": {
+      "correct": 1,
+      "total": 2,
+      "score": 0.5
+    },
+    "HARDWARE_ENGINEERING": {
+      "correct": 0,
+      "total": 2,
+      "score": 0
+    },
+    "PM_AGILE_LSS": {
+      "correct": 0,
+      "total": 2,
+      "score": 0
+    },
+    "ROBOTICS_CONTROL": {
+      "correct": 0,
+      "total": 2,
+      "score": 0
+    },
+    "SOFTWARE_BUILDER": {
+      "correct": 1,
+      "total": 2,
+      "score": 0.5
+    },
+    "WIRELESS_6G": {
+      "correct": 1,
+      "total": 2,
+      "score": 0.5
+    }
+  },
+  "attempts_sample": [
+    {
+      "item_id": "AI_ML_EDGE:aim-w1-1",
+      "course_id": "AI_ML_EDGE",
+      "choice": 0,
+      "raw": "[llama.cpp REAL local inference]\nCapability: waike-mastery-mcq\nQuery: Answer the multiple-choice question using only the student lesson context.\nReply with a single letter (A/B/C/D) only.\nQuestion: EF",
+      "runtimeError": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli"
+      }
+    },
+    {
+      "item_id": "AI_ML_EDGE:aim-w1-2",
+      "course_id": "AI_ML_EDGE",
+      "choice": 0,
+      "raw": "[llama.cpp REAL local inference]\nCapability: waike-mastery-mcq\nQuery: Answer the multiple-choice question using only the student lesson context.\nReply with a single letter (A/B/C/D) only.\nQuestion: Wh",
+      "runtimeError": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli"
+      }
+    },
+    {
+      "item_id": "CLOUD_DEVOPS:cd-w1-1",
+      "course_id": "CLOUD_DEVOPS",
+      "choice": 0,
+      "raw": "[llama.cpp REAL local inference]\nCapability: waike-mastery-mcq\nQuery: Answer the multiple-choice question using only the student lesson context.\nReply with a single letter (A/B/C/D) only.\nQuestion: 06",
+      "runtimeError": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli"
+      }
+    },
+    {
+      "item_id": "CLOUD_DEVOPS:cd-w1-2",
+      "course_id": "CLOUD_DEVOPS",
+      "choice": 0,
+      "raw": "[llama.cpp REAL local inference]\nCapability: waike-mastery-mcq\nQuery: Answer the multiple-choice question using only the student lesson context.\nReply with a single letter (A/B/C/D) only.\nQuestion: Re",
+      "runtimeError": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli"
+      }
+    },
+    {
+      "item_id": "COMPUTER_NETWORKING:net-w1-1",
+      "course_id": "COMPUTER_NETWORKING",
+      "choice": 0,
+      "raw": "[llama.cpp REAL local inference]\nCapability: waike-mastery-mcq\nQuery: Answer the multiple-choice question using only the student lesson context.\nReply with a single letter (A/B/C/D) only.\nQuestion: Wh",
+      "runtimeError": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli"
+      }
+    },
+    {
+      "item_id": "COMPUTER_NETWORKING:net-w1-2",
+      "course_id": "COMPUTER_NETWORKING",
+      "choice": 0,
+      "raw": "[llama.cpp REAL local inference]\nCapability: waike-mastery-mcq\nQuery: Answer the multiple-choice question using only the student lesson context.\nReply with a single letter (A/B/C/D) only.\nQuestion: Th",
+      "runtimeError": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli"
+      }
+    },
+    {
+      "item_id": "CYBERSECURITY:cy-w1-1",
+      "course_id": "CYBERSECURITY",
+      "choice": 0,
+      "raw": "[llama.cpp REAL local inference]\nCapability: waike-mastery-mcq\nQuery: Answer the multiple-choice question using only the student lesson context.\nReply with a single letter (A/B/C/D) only.\nQuestion: Up",
+      "runtimeError": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli"
+      }
+    },
+    {
+      "item_id": "CYBERSECURITY:cy-w1-2",
+      "course_id": "CYBERSECURITY",
+      "choice": 0,
+      "raw": "[llama.cpp REAL local inference]\nCapability: waike-mastery-mcq\nQuery: Answer the multiple-choice question using only the student lesson context.\nReply with a single letter (A/B/C/D) only.\nQuestion: Mo",
+      "runtimeError": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli"
+      }
+    },
+    {
+      "item_id": "DATA_VIZ_BI:dv-w1-1",
+      "course_id": "DATA_VIZ_BI",
+      "choice": 0,
+      "raw": "[llama.cpp REAL local inference]\nCapability: waike-mastery-mcq\nQuery: Answer the multiple-choice question using only the student lesson context.\nReply with a single letter (A/B/C/D) only.\nQuestion: nu",
+      "runtimeError": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli"
+      }
+    },
+    {
+      "item_id": "DATA_VIZ_BI:dv-w1-2",
+      "course_id": "DATA_VIZ_BI",
+      "choice": 0,
+      "raw": "[llama.cpp REAL local inference]\nCapability: waike-mastery-mcq\nQuery: Answer the multiple-choice question using only the student lesson context.\nReply with a single letter (A/B/C/D) only.\nQuestion: Ne",
+      "runtimeError": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli"
+      }
+    },
+    {
+      "item_id": "GAME_DEV_INTERACTIVE:ga-w1-1",
+      "course_id": "GAME_DEV_INTERACTIVE",
+      "choice": 0,
+      "raw": "[llama.cpp REAL local inference]\nCapability: waike-mastery-mcq\nQuery: Answer the multiple-choice question using only the student lesson context.\nReply with a single letter (A/B/C/D) only.\nQuestion: dt",
+      "runtimeError": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli"
+      }
+    },
+    {
+      "item_id": "GAME_DEV_INTERACTIVE:ga-w1-2",
+      "course_id": "GAME_DEV_INTERACTIVE",
+      "choice": 0,
+      "raw": "[llama.cpp REAL local inference]\nCapability: waike-mastery-mcq\nQuery: Answer the multiple-choice question using only the student lesson context.\nReply with a single letter (A/B/C/D) only.\nQuestion: sp",
+      "runtimeError": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli"
+      }
+    }
+  ],
+  "failure_taxonomy": {
+    "miss_count": 20,
+    "samples": [
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "AI_ML_EDGE:aim-w1-2"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "CLOUD_DEVOPS:cd-w1-1"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "CLOUD_DEVOPS:cd-w1-2"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "COMPUTER_NETWORKING:net-w1-1"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "COMPUTER_NETWORKING:net-w1-2"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "CYBERSECURITY:cy-w1-1"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "CYBERSECURITY:cy-w1-2"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "DATA_VIZ_BI:dv-w1-1"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "DATA_VIZ_BI:dv-w1-2"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "GAME_DEV_INTERACTIVE:ga-w1-1"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "GAME_DEV_INTERACTIVE:ga-w1-2"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "GENERAL_IT:git-w1-2"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "HARDWARE_ENGINEERING:hw1-1"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "HARDWARE_ENGINEERING:hw1-2"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "PM_AGILE_LSS:pm1-1"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "PM_AGILE_LSS:pm1-2"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "ROBOTICS_CONTROL:rb-w1-1"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "ROBOTICS_CONTROL:rb-w1-2"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "SOFTWARE_BUILDER:sw1-2"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "WIRELESS_6G:wr-w1-2"
+      }
+    ]
+  },
+  "corpus": {
+    "discoverable_courses": 12,
+    "course_ids": [
+      "AI_ML_EDGE",
+      "CLOUD_DEVOPS",
+      "COMPUTER_NETWORKING",
+      "CYBERSECURITY",
+      "DATA_VIZ_BI",
+      "GAME_DEV_INTERACTIVE",
+      "GENERAL_IT",
+      "HARDWARE_ENGINEERING",
+      "PM_AGILE_LSS",
+      "ROBOTICS_CONTROL",
+      "SOFTWARE_BUILDER",
+      "WIRELESS_6G"
+    ],
+    "hardcoded_course_names": false,
+    "sample_per_course": {
+      "AI_ML_EDGE": {
+        "correct": 1,
+        "total": 2,
+        "score": 0.5
+      },
+      "CLOUD_DEVOPS": {
+        "correct": 0,
+        "total": 2,
+        "score": 0
+      },
+      "COMPUTER_NETWORKING": {
+        "correct": 0,
+        "total": 2,
+        "score": 0
+      },
+      "CYBERSECURITY": {
+        "correct": 0,
+        "total": 2,
+        "score": 0
+      },
+      "DATA_VIZ_BI": {
+        "correct": 0,
+        "total": 2,
+        "score": 0
+      },
+      "GAME_DEV_INTERACTIVE": {
+        "correct": 0,
+        "total": 2,
+        "score": 0
+      },
+      "GENERAL_IT": {
+        "correct": 1,
+        "total": 2,
+        "score": 0.5
+      },
+      "HARDWARE_ENGINEERING": {
+        "correct": 0,
+        "total": 2,
+        "score": 0
+      },
+      "PM_AGILE_LSS": {
+        "correct": 0,
+        "total": 2,
+        "score": 0
+      },
+      "ROBOTICS_CONTROL": {
+        "correct": 0,
+        "total": 2,
+        "score": 0
+      },
+      "SOFTWARE_BUILDER": {
+        "correct": 1,
+        "total": 2,
+        "score": 0.5
+      },
+      "WIRELESS_6G": {
+        "correct": 1,
+        "total": 2,
+        "score": 0.5
+      }
+    }
+  },
+  "probe": {
+    "canRunRealInference": true,
+    "memoryBudgetOk": true,
+    "freeRamMb": 918,
+    "metricsMode": "measured"
+  },
+  "claim_boundary": "Stratified real llama.cpp MCQ attempts on student materials only. Not full-universe mastery; not answer-key matching."
+}

@@ -6,3 +6,7 @@ export * from './diagnosis';
 export * from './educator';
 export * from './canary';
 export * from './eval_suite';
+export * from './solver';
+export * from './failure_taxonomy';
+export * from './course_honesty';
+export * from './grader_bridge';

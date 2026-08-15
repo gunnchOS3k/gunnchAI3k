@@ -12,11 +12,13 @@ import {
   assertNoFalseMasteryPass,
   buildMasteryTokens,
   FORBIDDEN_SMOKE_BAR,
+  MASTERY_001_NINE_COURSE_BASELINE,
   MASTERY_OVERALL_MIN,
 } from '../../src/waike-mastery/tokens';
 import { assertNoDemeaningLabels, createStudentModel } from '../../src/waike-mastery/student_model';
+import { runCourseHonesty } from '../../src/waike-mastery/course_honesty';
 
-describe('AI-WAIKE-MASTERY honesty remediation', () => {
+describe('AI-WAIKE-MASTERY-002 honesty + discovery', () => {
   it('hard-separates instructor key access', () => {
     expect(MODE_PERMISSIONS.MASTERY_BENCHMARK.mayReadInstructorKeys).toBe(false);
     expect(MODE_PERMISSIONS.LEARNER_TUTOR.mayReadInstructorKeys).toBe(false);
@@ -27,14 +29,23 @@ describe('AI-WAIKE-MASTERY honesty remediation', () => {
   });
 
   it('demotes mastery PASS; infra smoke is separate; REAL_* stay false', () => {
-    const t = buildMasteryTokens({ masteryPass: false, infraSmoke: true });
+    const t = buildMasteryTokens({
+      masteryPass: false,
+      infraSmoke: true,
+      corpusDiscoveryPass: true,
+      noKeyLeakPass: true,
+    });
     expect(t.WAIKE_AI_DIGITAL_MASTERY_PASS).toBe(false);
     expect(t.AI_WAIKE_MASTERY_EVAL).toBe(false);
     expect(t.AI_WAIKE_MASTERY_INFRA_SMOKE_PASS).toBe(true);
+    expect(t.WAIKE_AI_STUDENT_CORPUS_DISCOVERY_PASS).toBe(true);
+    expect(t.WAIKE_AI_NO_KEY_LEAK_PASS).toBe(true);
+    expect(t.MASTERY_001_NINE_COURSE_BASELINE).toBe(0.6442307692307693);
     expect(t.REAL_STUDENT).toBe(false);
     expect(t.REAL_TEACHER).toBe(false);
     expect(t.HUMAN_E6).toBe(false);
     expect(t.ACCREDITED).toBe(false);
+    expect(MASTERY_001_NINE_COURSE_BASELINE).toBe(0.6442307692307693);
   });
 
   it('blocks false mastery PASS at 0.55 smoke bar', () => {
@@ -69,7 +80,7 @@ describe('AI-WAIKE-MASTERY honesty remediation', () => {
     expect(() => assertNoDemeaningLabels('you are dumb')).toThrow(/demeaning/);
   });
 
-  it('discovers WAIKE courses without hardcoding nine names when repo present', () => {
+  it('discovers current WAIKE 12-course universe dynamically', () => {
     const root = resolveWaikeRoot(process.cwd());
     if (!root) {
       console.warn('WAIKE repo not adjacent — skipping discovery assert');
@@ -77,6 +88,11 @@ describe('AI-WAIKE-MASTERY honesty remediation', () => {
     }
     const d = discoverCoursesFromContract(root);
     expect(d.hardcoded_course_names).toBe(false);
-    expect(d.course_count).toBeGreaterThanOrEqual(9);
+    expect(d.course_count).toBeGreaterThanOrEqual(12);
+    const ids = new Set(d.courses.map((c) => c.course_id));
+    expect(ids.has('WIRELESS_6G')).toBe(true);
+    expect(ids.has('ROBOTICS_CONTROL')).toBe(true);
+    expect(ids.has('GAME_DEV_INTERACTIVE')).toBe(true);
+    expect(runCourseHonesty(root).pass).toBe(true);
   });
 });

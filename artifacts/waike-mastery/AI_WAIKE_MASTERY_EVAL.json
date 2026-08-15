@@ -1,19 +1,24 @@
 {
   "suite": "AI_WAIKE_MASTERY_EVAL",
+  "wave": "AI-WAIKE-MASTERY-002",
   "corpus": {
-    "discoverable_courses": 9,
+    "discoverable_courses": 12,
     "course_ids": [
       "AI_ML_EDGE",
       "CLOUD_DEVOPS",
       "COMPUTER_NETWORKING",
       "CYBERSECURITY",
       "DATA_VIZ_BI",
+      "GAME_DEV_INTERACTIVE",
       "GENERAL_IT",
       "HARDWARE_ENGINEERING",
       "PM_AGILE_LSS",
-      "SOFTWARE_BUILDER"
+      "ROBOTICS_CONTROL",
+      "SOFTWARE_BUILDER",
+      "WIRELESS_6G"
     ],
-    "waike_root": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/waike-research-ops"
+    "waike_root": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/waike-research-ops",
+    "hardcoded_course_names": false
   },
   "children": {
     "MODE_SEPARATION": {
@@ -22,7 +27,11 @@
     },
     "LEARNING_CONTRACT_DISCOVERY": {
       "pass": true,
-      "detail": "courses=9"
+      "detail": "courses=12"
+    },
+    "CORPUS_DISCOVERY_CURRENT": {
+      "pass": true,
+      "detail": "courses=12 new3=true"
     },
     "KEY_LEAK_CANARY": {
       "pass": true,
@@ -36,107 +45,531 @@
       "pass": true,
       "detail": "HITL grading assist"
     },
+    "COURSE_HONESTY": {
+      "pass": true,
+      "detail": "WIRELESS_6G:true,ROBOTICS_CONTROL:true,GAME_DEV_INTERACTIVE:true"
+    },
+    "RUNTIME_SOLVER_HONEST": {
+      "pass": true,
+      "detail": "status=OK answer_key_matched=false"
+    },
     "WAIKE_INFRA_SMOKE": {
       "pass": true,
       "detail": "waike_infra=true"
     },
     "WAIKE_MASTERY_HONESTLY_FALSE_OR_EARNED": {
       "pass": true,
-      "detail": "waike_mastery_pass=false overall=0.6442307692307693"
+      "detail": "waike_mastery_pass=false overall=0.16666666666666666"
     },
     "TOOL_USE_NOT_OVERCLAIMED": {
       "pass": true,
       "detail": "status=PARTIAL"
     }
   },
+  "mastery_children": {
+    "OVERALL_GE_095": {
+      "pass": false,
+      "detail": "0.16666666666666666"
+    },
+    "CORPUS_DISCOVERY": {
+      "pass": true,
+      "detail": "courses=12"
+    },
+    "NO_KEY_LEAK": {
+      "pass": true,
+      "detail": "no-leak-refused-feed"
+    },
+    "COURSE_HONESTY": {
+      "pass": true
+    },
+    "TOOL_USE_COMPLETE": {
+      "pass": false,
+      "detail": "PARTIAL"
+    },
+    "RUNTIME_NOT_KEY_MATCH": {
+      "pass": true
+    },
+    "ISOLATED_GRADE": {
+      "pass": true,
+      "detail": "self_graded=false usedKeys=false"
+    }
+  },
   "mastery_scores": {
-    "overall": 0.6442307692307693,
+    "overall": 0.16666666666666666,
+    "runtime_overall": 0.16666666666666666,
+    "curriculum_overlap_overall": 0.6298076923076923,
+    "historical_baseline_001": 0.6442307692307693,
     "per_course": {
       "AI_ML_EDGE": {
-        "correct": 64,
-        "total": 104,
-        "score": 0.6153846153846154
+        "correct": 1,
+        "total": 2,
+        "score": 0.5
       },
       "CLOUD_DEVOPS": {
-        "correct": 80,
-        "total": 104,
-        "score": 0.7692307692307693
+        "correct": 0,
+        "total": 2,
+        "score": 0
       },
       "COMPUTER_NETWORKING": {
-        "correct": 55,
-        "total": 104,
-        "score": 0.5288461538461539
+        "correct": 0,
+        "total": 2,
+        "score": 0
       },
       "CYBERSECURITY": {
-        "correct": 73,
-        "total": 104,
-        "score": 0.7019230769230769
+        "correct": 0,
+        "total": 2,
+        "score": 0
       },
       "DATA_VIZ_BI": {
-        "correct": 62,
-        "total": 104,
-        "score": 0.5961538461538461
+        "correct": 0,
+        "total": 2,
+        "score": 0
+      },
+      "GAME_DEV_INTERACTIVE": {
+        "correct": 0,
+        "total": 2,
+        "score": 0
       },
       "GENERAL_IT": {
-        "correct": 69,
-        "total": 104,
-        "score": 0.6634615384615384
+        "correct": 1,
+        "total": 2,
+        "score": 0.5
       },
       "HARDWARE_ENGINEERING": {
-        "correct": 68,
-        "total": 104,
-        "score": 0.6538461538461539
+        "correct": 0,
+        "total": 2,
+        "score": 0
       },
       "PM_AGILE_LSS": {
-        "correct": 64,
-        "total": 104,
-        "score": 0.6153846153846154
+        "correct": 0,
+        "total": 2,
+        "score": 0
+      },
+      "ROBOTICS_CONTROL": {
+        "correct": 0,
+        "total": 2,
+        "score": 0
       },
       "SOFTWARE_BUILDER": {
-        "correct": 68,
-        "total": 104,
-        "score": 0.6538461538461539
+        "correct": 1,
+        "total": 2,
+        "score": 0.5
+      },
+      "WIRELESS_6G": {
+        "correct": 1,
+        "total": 2,
+        "score": 0.5
       }
     },
-    "per_assessment_sample": {
-      "AI_ML_EDGE:AI_ML_EDGE-q01": 0.8333333333333334,
-      "AI_ML_EDGE:AI_ML_EDGE-q02": 0.8333333333333334,
-      "AI_ML_EDGE:AI_ML_EDGE-q03": 0.5,
-      "AI_ML_EDGE:AI_ML_EDGE-q04": 0.16666666666666666,
-      "AI_ML_EDGE:AI_ML_EDGE-q05": 0.6666666666666666,
-      "AI_ML_EDGE:AI_ML_EDGE-q06": 0.6666666666666666,
-      "AI_ML_EDGE:AI_ML_EDGE-q07": 0.8333333333333334,
-      "AI_ML_EDGE:AI_ML_EDGE-q08": 0.8333333333333334,
-      "AI_ML_EDGE:AI_ML_EDGE-q09": 0.5,
-      "AI_ML_EDGE:AI_ML_EDGE-q10": 0.6666666666666666,
-      "AI_ML_EDGE:AI_ML_EDGE-mid": 0.5,
-      "AI_ML_EDGE:AI_ML_EDGE-final": 0.625
-    },
-    "per_domain": {
-      "AI_ML_EDGE.knowledge": 0.6354166666666666,
-      "CLOUD_DEVOPS.knowledge": 0.7680555555555556,
-      "COMPUTER_NETWORKING.knowledge": 0.5284722222222221,
-      "CYBERSECURITY.knowledge": 0.6909722222222223,
-      "DATA_VIZ_BI.knowledge": 0.6180555555555556,
-      "GENERAL_IT.knowledge": 0.6354166666666666,
-      "HARDWARE_ENGINEERING.knowledge": 0.6298611111111111,
-      "PM_AGILE_LSS.knowledge": 0.5958333333333334,
-      "SOFTWARE_BUILDER.knowledge": 0.6833333333333335
-    },
-    "items_attempted": 936,
-    "items_correct": 603,
-    "solver": "curriculum_overlap_v1",
-    "transfer": {
-      "items": 60,
-      "correct": 46,
-      "score": 0.7666666666666667,
-      "method": "isomorphic_choice_permutation"
-    },
+    "solver": "gunnchai_llamacpp_v1",
+    "runtime_status": "OK",
     "published_without_false_pass": true
   },
+  "runtime_solver": {
+    "schema": "gunnchai.waike_runtime_solver.v1",
+    "status": "OK",
+    "solver": "gunnchai_llamacpp_v1",
+    "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+    "binary": "/opt/homebrew/bin/llama-cli",
+    "used_instructor_keys_during_solve": false,
+    "self_graded": false,
+    "answer_key_matched": false,
+    "grading_agent": "isolated_after_submission",
+    "items_attempted": 24,
+    "items_correct": 4,
+    "overall_score": 0.16666666666666666,
+    "per_course": {
+      "AI_ML_EDGE": {
+        "correct": 1,
+        "total": 2,
+        "score": 0.5
+      },
+      "CLOUD_DEVOPS": {
+        "correct": 0,
+        "total": 2,
+        "score": 0
+      },
+      "COMPUTER_NETWORKING": {
+        "correct": 0,
+        "total": 2,
+        "score": 0
+      },
+      "CYBERSECURITY": {
+        "correct": 0,
+        "total": 2,
+        "score": 0
+      },
+      "DATA_VIZ_BI": {
+        "correct": 0,
+        "total": 2,
+        "score": 0
+      },
+      "GAME_DEV_INTERACTIVE": {
+        "correct": 0,
+        "total": 2,
+        "score": 0
+      },
+      "GENERAL_IT": {
+        "correct": 1,
+        "total": 2,
+        "score": 0.5
+      },
+      "HARDWARE_ENGINEERING": {
+        "correct": 0,
+        "total": 2,
+        "score": 0
+      },
+      "PM_AGILE_LSS": {
+        "correct": 0,
+        "total": 2,
+        "score": 0
+      },
+      "ROBOTICS_CONTROL": {
+        "correct": 0,
+        "total": 2,
+        "score": 0
+      },
+      "SOFTWARE_BUILDER": {
+        "correct": 1,
+        "total": 2,
+        "score": 0.5
+      },
+      "WIRELESS_6G": {
+        "correct": 1,
+        "total": 2,
+        "score": 0.5
+      }
+    },
+    "attempts_sample": [
+      {
+        "item_id": "AI_ML_EDGE:aim-w1-1",
+        "course_id": "AI_ML_EDGE",
+        "choice": 0,
+        "raw": "[llama.cpp REAL local inference]\nCapability: waike-mastery-mcq\nQuery: Answer the multiple-choice question using only the student lesson context.\nReply with a single letter (A/B/C/D) only.\nQuestion: EF",
+        "runtimeError": null,
+        "artifact": {
+          "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+          "binary": "/opt/homebrew/bin/llama-cli"
+        }
+      },
+      {
+        "item_id": "AI_ML_EDGE:aim-w1-2",
+        "course_id": "AI_ML_EDGE",
+        "choice": 0,
+        "raw": "[llama.cpp REAL local inference]\nCapability: waike-mastery-mcq\nQuery: Answer the multiple-choice question using only the student lesson context.\nReply with a single letter (A/B/C/D) only.\nQuestion: Wh",
+        "runtimeError": null,
+        "artifact": {
+          "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+          "binary": "/opt/homebrew/bin/llama-cli"
+        }
+      },
+      {
+        "item_id": "CLOUD_DEVOPS:cd-w1-1",
+        "course_id": "CLOUD_DEVOPS",
+        "choice": 0,
+        "raw": "[llama.cpp REAL local inference]\nCapability: waike-mastery-mcq\nQuery: Answer the multiple-choice question using only the student lesson context.\nReply with a single letter (A/B/C/D) only.\nQuestion: 06",
+        "runtimeError": null,
+        "artifact": {
+          "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+          "binary": "/opt/homebrew/bin/llama-cli"
+        }
+      },
+      {
+        "item_id": "CLOUD_DEVOPS:cd-w1-2",
+        "course_id": "CLOUD_DEVOPS",
+        "choice": 0,
+        "raw": "[llama.cpp REAL local inference]\nCapability: waike-mastery-mcq\nQuery: Answer the multiple-choice question using only the student lesson context.\nReply with a single letter (A/B/C/D) only.\nQuestion: Re",
+        "runtimeError": null,
+        "artifact": {
+          "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+          "binary": "/opt/homebrew/bin/llama-cli"
+        }
+      },
+      {
+        "item_id": "COMPUTER_NETWORKING:net-w1-1",
+        "course_id": "COMPUTER_NETWORKING",
+        "choice": 0,
+        "raw": "[llama.cpp REAL local inference]\nCapability: waike-mastery-mcq\nQuery: Answer the multiple-choice question using only the student lesson context.\nReply with a single letter (A/B/C/D) only.\nQuestion: Wh",
+        "runtimeError": null,
+        "artifact": {
+          "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+          "binary": "/opt/homebrew/bin/llama-cli"
+        }
+      },
+      {
+        "item_id": "COMPUTER_NETWORKING:net-w1-2",
+        "course_id": "COMPUTER_NETWORKING",
+        "choice": 0,
+        "raw": "[llama.cpp REAL local inference]\nCapability: waike-mastery-mcq\nQuery: Answer the multiple-choice question using only the student lesson context.\nReply with a single letter (A/B/C/D) only.\nQuestion: Th",
+        "runtimeError": null,
+        "artifact": {
+          "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+          "binary": "/opt/homebrew/bin/llama-cli"
+        }
+      },
+      {
+        "item_id": "CYBERSECURITY:cy-w1-1",
+        "course_id": "CYBERSECURITY",
+        "choice": 0,
+        "raw": "[llama.cpp REAL local inference]\nCapability: waike-mastery-mcq\nQuery: Answer the multiple-choice question using only the student lesson context.\nReply with a single letter (A/B/C/D) only.\nQuestion: Up",
+        "runtimeError": null,
+        "artifact": {
+          "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+          "binary": "/opt/homebrew/bin/llama-cli"
+        }
+      },
+      {
+        "item_id": "CYBERSECURITY:cy-w1-2",
+        "course_id": "CYBERSECURITY",
+        "choice": 0,
+        "raw": "[llama.cpp REAL local inference]\nCapability: waike-mastery-mcq\nQuery: Answer the multiple-choice question using only the student lesson context.\nReply with a single letter (A/B/C/D) only.\nQuestion: Mo",
+        "runtimeError": null,
+        "artifact": {
+          "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+          "binary": "/opt/homebrew/bin/llama-cli"
+        }
+      },
+      {
+        "item_id": "DATA_VIZ_BI:dv-w1-1",
+        "course_id": "DATA_VIZ_BI",
+        "choice": 0,
+        "raw": "[llama.cpp REAL local inference]\nCapability: waike-mastery-mcq\nQuery: Answer the multiple-choice question using only the student lesson context.\nReply with a single letter (A/B/C/D) only.\nQuestion: nu",
+        "runtimeError": null,
+        "artifact": {
+          "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+          "binary": "/opt/homebrew/bin/llama-cli"
+        }
+      },
+      {
+        "item_id": "DATA_VIZ_BI:dv-w1-2",
+        "course_id": "DATA_VIZ_BI",
+        "choice": 0,
+        "raw": "[llama.cpp REAL local inference]\nCapability: waike-mastery-mcq\nQuery: Answer the multiple-choice question using only the student lesson context.\nReply with a single letter (A/B/C/D) only.\nQuestion: Ne",
+        "runtimeError": null,
+        "artifact": {
+          "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+          "binary": "/opt/homebrew/bin/llama-cli"
+        }
+      },
+      {
+        "item_id": "GAME_DEV_INTERACTIVE:ga-w1-1",
+        "course_id": "GAME_DEV_INTERACTIVE",
+        "choice": 0,
+        "raw": "[llama.cpp REAL local inference]\nCapability: waike-mastery-mcq\nQuery: Answer the multiple-choice question using only the student lesson context.\nReply with a single letter (A/B/C/D) only.\nQuestion: dt",
+        "runtimeError": null,
+        "artifact": {
+          "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+          "binary": "/opt/homebrew/bin/llama-cli"
+        }
+      },
+      {
+        "item_id": "GAME_DEV_INTERACTIVE:ga-w1-2",
+        "course_id": "GAME_DEV_INTERACTIVE",
+        "choice": 0,
+        "raw": "[llama.cpp REAL local inference]\nCapability: waike-mastery-mcq\nQuery: Answer the multiple-choice question using only the student lesson context.\nReply with a single letter (A/B/C/D) only.\nQuestion: sp",
+        "runtimeError": null,
+        "artifact": {
+          "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+          "binary": "/opt/homebrew/bin/llama-cli"
+        }
+      }
+    ],
+    "failure_taxonomy": {
+      "miss_count": 20,
+      "samples": [
+        {
+          "failure_code": "MODEL_KNOWLEDGE_GAP",
+          "first_divergence": "answer_selection",
+          "stem_excerpt": "AI_ML_EDGE:aim-w1-2"
+        },
+        {
+          "failure_code": "MODEL_KNOWLEDGE_GAP",
+          "first_divergence": "answer_selection",
+          "stem_excerpt": "CLOUD_DEVOPS:cd-w1-1"
+        },
+        {
+          "failure_code": "MODEL_KNOWLEDGE_GAP",
+          "first_divergence": "answer_selection",
+          "stem_excerpt": "CLOUD_DEVOPS:cd-w1-2"
+        },
+        {
+          "failure_code": "MODEL_KNOWLEDGE_GAP",
+          "first_divergence": "answer_selection",
+          "stem_excerpt": "COMPUTER_NETWORKING:net-w1-1"
+        },
+        {
+          "failure_code": "MODEL_KNOWLEDGE_GAP",
+          "first_divergence": "answer_selection",
+          "stem_excerpt": "COMPUTER_NETWORKING:net-w1-2"
+        },
+        {
+          "failure_code": "MODEL_KNOWLEDGE_GAP",
+          "first_divergence": "answer_selection",
+          "stem_excerpt": "CYBERSECURITY:cy-w1-1"
+        },
+        {
+          "failure_code": "MODEL_KNOWLEDGE_GAP",
+          "first_divergence": "answer_selection",
+          "stem_excerpt": "CYBERSECURITY:cy-w1-2"
+        },
+        {
+          "failure_code": "MODEL_KNOWLEDGE_GAP",
+          "first_divergence": "answer_selection",
+          "stem_excerpt": "DATA_VIZ_BI:dv-w1-1"
+        },
+        {
+          "failure_code": "MODEL_KNOWLEDGE_GAP",
+          "first_divergence": "answer_selection",
+          "stem_excerpt": "DATA_VIZ_BI:dv-w1-2"
+        },
+        {
+          "failure_code": "MODEL_KNOWLEDGE_GAP",
+          "first_divergence": "answer_selection",
+          "stem_excerpt": "GAME_DEV_INTERACTIVE:ga-w1-1"
+        },
+        {
+          "failure_code": "MODEL_KNOWLEDGE_GAP",
+          "first_divergence": "answer_selection",
+          "stem_excerpt": "GAME_DEV_INTERACTIVE:ga-w1-2"
+        },
+        {
+          "failure_code": "MODEL_KNOWLEDGE_GAP",
+          "first_divergence": "answer_selection",
+          "stem_excerpt": "GENERAL_IT:git-w1-2"
+        },
+        {
+          "failure_code": "MODEL_KNOWLEDGE_GAP",
+          "first_divergence": "answer_selection",
+          "stem_excerpt": "HARDWARE_ENGINEERING:hw1-1"
+        },
+        {
+          "failure_code": "MODEL_KNOWLEDGE_GAP",
+          "first_divergence": "answer_selection",
+          "stem_excerpt": "HARDWARE_ENGINEERING:hw1-2"
+        },
+        {
+          "failure_code": "MODEL_KNOWLEDGE_GAP",
+          "first_divergence": "answer_selection",
+          "stem_excerpt": "PM_AGILE_LSS:pm1-1"
+        },
+        {
+          "failure_code": "MODEL_KNOWLEDGE_GAP",
+          "first_divergence": "answer_selection",
+          "stem_excerpt": "PM_AGILE_LSS:pm1-2"
+        },
+        {
+          "failure_code": "MODEL_KNOWLEDGE_GAP",
+          "first_divergence": "answer_selection",
+          "stem_excerpt": "ROBOTICS_CONTROL:rb-w1-1"
+        },
+        {
+          "failure_code": "MODEL_KNOWLEDGE_GAP",
+          "first_divergence": "answer_selection",
+          "stem_excerpt": "ROBOTICS_CONTROL:rb-w1-2"
+        },
+        {
+          "failure_code": "MODEL_KNOWLEDGE_GAP",
+          "first_divergence": "answer_selection",
+          "stem_excerpt": "SOFTWARE_BUILDER:sw1-2"
+        },
+        {
+          "failure_code": "MODEL_KNOWLEDGE_GAP",
+          "first_divergence": "answer_selection",
+          "stem_excerpt": "WIRELESS_6G:wr-w1-2"
+        }
+      ]
+    },
+    "corpus": {
+      "discoverable_courses": 12,
+      "course_ids": [
+        "AI_ML_EDGE",
+        "CLOUD_DEVOPS",
+        "COMPUTER_NETWORKING",
+        "CYBERSECURITY",
+        "DATA_VIZ_BI",
+        "GAME_DEV_INTERACTIVE",
+        "GENERAL_IT",
+        "HARDWARE_ENGINEERING",
+        "PM_AGILE_LSS",
+        "ROBOTICS_CONTROL",
+        "SOFTWARE_BUILDER",
+        "WIRELESS_6G"
+      ],
+      "hardcoded_course_names": false,
+      "sample_per_course": {
+        "AI_ML_EDGE": {
+          "correct": 1,
+          "total": 2,
+          "score": 0.5
+        },
+        "CLOUD_DEVOPS": {
+          "correct": 0,
+          "total": 2,
+          "score": 0
+        },
+        "COMPUTER_NETWORKING": {
+          "correct": 0,
+          "total": 2,
+          "score": 0
+        },
+        "CYBERSECURITY": {
+          "correct": 0,
+          "total": 2,
+          "score": 0
+        },
+        "DATA_VIZ_BI": {
+          "correct": 0,
+          "total": 2,
+          "score": 0
+        },
+        "GAME_DEV_INTERACTIVE": {
+          "correct": 0,
+          "total": 2,
+          "score": 0
+        },
+        "GENERAL_IT": {
+          "correct": 1,
+          "total": 2,
+          "score": 0.5
+        },
+        "HARDWARE_ENGINEERING": {
+          "correct": 0,
+          "total": 2,
+          "score": 0
+        },
+        "PM_AGILE_LSS": {
+          "correct": 0,
+          "total": 2,
+          "score": 0
+        },
+        "ROBOTICS_CONTROL": {
+          "correct": 0,
+          "total": 2,
+          "score": 0
+        },
+        "SOFTWARE_BUILDER": {
+          "correct": 1,
+          "total": 2,
+          "score": 0.5
+        },
+        "WIRELESS_6G": {
+          "correct": 1,
+          "total": 2,
+          "score": 0.5
+        }
+      }
+    },
+    "probe": {
+      "canRunRealInference": true,
+      "memoryBudgetOk": true,
+      "freeRamMb": 918,
+      "metricsMode": "measured"
+    },
+    "claim_boundary": "Stratified real llama.cpp MCQ attempts on student materials only. Not full-universe mastery; not answer-key matching."
+  },
   "tool_use": {
-    "attempted": 10,
-    "passed": 10,
+    "attempted": 13,
+    "passed": 13,
     "pass_rate": 1,
     "coverage_status": "PARTIAL",
     "claim": "TOOL_USE_GRADER_CHECKED_FIXTURES",
@@ -181,6 +614,18 @@
       {
         "lab_id": "lab_frontend_ui",
         "ok": true
+      },
+      {
+        "lab_id": "lab_fspl_budget",
+        "ok": true
+      },
+      {
+        "lab_id": "lab_pid_step",
+        "ok": true
+      },
+      {
+        "lab_id": "lab_game_loop",
+        "ok": true
       }
     ]
   },
@@ -193,6 +638,26 @@
     "permissionBlocked": true,
     "registryClean": true,
     "detail": "no-leak-refused-feed"
+  },
+  "course_honesty": {
+    "pass": true,
+    "checks": [
+      {
+        "course_id": "WIRELESS_6G",
+        "pass": true,
+        "detail": "5G/5GA/NTN/AI-RAN honesty; no commercial standardized 6G claim"
+      },
+      {
+        "course_id": "ROBOTICS_CONTROL",
+        "pass": true,
+        "detail": "PID/kinematics/estop surfaces required"
+      },
+      {
+        "course_id": "GAME_DEV_INTERACTIVE",
+        "pass": true,
+        "detail": "Real loop/input/state — prose concept insufficient"
+      }
+    ]
   },
   "diagnosis_remediation": {
     "open_loop_final": "PRACTICE_IN_PROGRESS",
@@ -223,21 +688,29 @@
     "WAIKE_AI_DIGITAL_MASTERY_PASS": false,
     "AI_WAIKE_MASTERY_EVAL": false,
     "AI_WAIKE_MASTERY_INFRA_SMOKE_PASS": true,
+    "WAIKE_AI_STUDENT_CORPUS_DISCOVERY_PASS": true,
+    "WAIKE_AI_NO_KEY_LEAK_PASS": true,
+    "MASTERY_001_NINE_COURSE_BASELINE": 0.6442307692307693,
     "REAL_STUDENT": false,
     "REAL_TEACHER": false,
     "HUMAN_E6": false,
     "ACCREDITED": false,
+    "REAL_STUDENT_MASTERY_VALIDATED": false,
+    "REAL_TEACHER_EFFECTIVENESS_VALIDATED": false,
     "USED_INSTRUCTOR_KEYS_IN_BENCHMARK_SOLVE": false,
     "SELF_GRADED": false,
     "GUNNCHAI_APP_PRODUCT_COMPLETE": false,
     "GUNNCHAI_FRONTIER_PRODUCT_PARITY": false
   },
   "open": [
-    "WAIKE_AI_DIGITAL_MASTERY_PASS demoted — scores published without false PASS.",
-    "AI_WAIKE_MASTERY_EVAL tracks mastery (false until earned); INFRA_SMOKE is separate.",
-    "Tool-use PARTIAL fixtures ≠ COMPLETE. REAL_*/HUMAN_E6/ACCREDITED remain false.",
-    "device-os #116 untouched."
+    "WAIKE_AI_DIGITAL_MASTERY_PASS false until all mastery_children pass.",
+    "Runtime solver uses llama.cpp when memory/model allow; else BLOCKED_* without key matching.",
+    "Historical 0.644 preserved as MASTERY_001_NINE_COURSE_BASELINE.",
+    "Tool-use PARTIAL ≠ COMPLETE. REAL_*/HUMAN_E6/ACCREDITED remain false.",
+    "gunnchAI #36 inspect-only (not a fourth stream). device-os #116 untouched."
   ],
   "WAIKE_AI_DIGITAL_MASTERY_PASS": false,
-  "AI_WAIKE_MASTERY_INFRA_SMOKE_PASS": true
+  "AI_WAIKE_MASTERY_INFRA_SMOKE_PASS": true,
+  "WAIKE_AI_STUDENT_CORPUS_DISCOVERY_PASS": true,
+  "WAIKE_AI_NO_KEY_LEAK_PASS": true
 }
