@@ -1,0 +1,321 @@
+{
+  "schema": "gunnchai.waike_runtime_solver.v1",
+  "status": "OK",
+  "solver": "gunnchai_llamacpp_v1",
+  "score_family_id": "MASTERY_002_REAL_RUNTIME_12C",
+  "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+  "binary": "/opt/homebrew/bin/llama-cli",
+  "parser_version": "gunnchai.choice_parser.v2_final_only",
+  "used_instructor_keys_during_solve": false,
+  "self_graded": false,
+  "answer_key_matched": false,
+  "grading_agent": "isolated_after_submission",
+  "items_loaded": 8,
+  "items_attempted": 5,
+  "items_correct": 2,
+  "parser_failures": 3,
+  "overall_score": 0.4,
+  "per_course": {
+    "GENERAL_IT": {
+      "correct": 2,
+      "total": 5,
+      "score": 0.4
+    }
+  },
+  "attempts_sample": [
+    {
+      "item_id": "GENERAL_IT:git-w1-1",
+      "course_id": "GENERAL_IT",
+      "choice": 0,
+      "parse": {
+        "index": 0,
+        "letter": "A",
+        "confidence": "low",
+        "matched_via": "last_standalone_letter",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "[llama.cpp REAL local inference]\nCapability: waike-mastery-mcq\nQuery: Answer the multiple-choice question using only the student lesson context.\nReply with a single letter (A/B/C/D) only.\nQuestion: Ticket 4417 lost an essay after 20 idle minutes. Which job failed first?\nA) Remember (session/files)\nB) Talk (network)\nC) Calculate (CPU thermal)\nD) Print spooler\nLocal context:\n[GENERAL_IT-lesson] # We",
+      "runtimeError": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      }
+    },
+    {
+      "item_id": "GENERAL_IT:git-w1-2",
+      "course_id": "GENERAL_IT",
+      "choice": 0,
+      "parse": {
+        "index": 0,
+        "letter": "A",
+        "confidence": "high",
+        "matched_via": "final_marker",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "[llama.cpp REAL local inference]\nCapability: waike-mastery-mcq\nQuery: Answer the multiple-choice question using only the student lesson context.\nReply with a single letter (A/B/C/D) only.\nQuestion: Idle logout is 1200 seconds. How many minutes is that?\nA) 12\nB) 20\nC) 15\nD) 1200\nLocal context:\n[GENERAL_IT-lesson] # Week 1: The Civic Tech Desk — three jobs a computer actually has\n\nAt the Gary Civic ",
+      "runtimeError": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      }
+    },
+    {
+      "item_id": "GENERAL_IT:git-w1-3",
+      "course_id": "GENERAL_IT",
+      "choice": null,
+      "parse": {
+        "index": null,
+        "letter": null,
+        "confidence": "none",
+        "matched_via": null,
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "[llama.cpp REAL local inference]\nCapability: waike-mastery-mcq\nQuery: Answer the multiple-choice question using only the student lesson context.\nReply with a single letter (A/B/C/D) only.\nQuestion: A patron dictates a password at the desk. What do you record in the ticket?\nA) The password in plaintext\nB) A screenshot of the login form\nC) 'credential reset requested' and no secret\nD) The library ca",
+      "runtimeError": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      }
+    },
+    {
+      "item_id": "GENERAL_IT:git-w1-4",
+      "course_id": "GENERAL_IT",
+      "choice": 0,
+      "parse": {
+        "index": 0,
+        "letter": "A",
+        "confidence": "high",
+        "matched_via": "final_marker",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "[llama.cpp REAL local inference]\nCapability: waike-mastery-mcq\nQuery: Answer the multiple-choice question using only the student lesson context.\nReply with a single letter (A/B/C/D) only.\nQuestion: Which statement is an observation, not an inference?\nA) The kiosk is broken\nB) The Internet is down\nC) Someone hacked the kiosk\nD) The textarea was empty after idle logout at 14:28\nLocal context:\n[GENER",
+      "runtimeError": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      }
+    },
+    {
+      "item_id": "GENERAL_IT:git-w1-5",
+      "course_id": "GENERAL_IT",
+      "choice": 0,
+      "parse": {
+        "index": 0,
+        "letter": "A",
+        "confidence": "high",
+        "matched_via": "final_marker",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "[llama.cpp REAL local inference]\nCapability: waike-mastery-mcq\nQuery: Answer the multiple-choice question using only the student lesson context.\nReply with a single letter (A/B/C/D) only.\nQuestion: Why does the lab mark extra Desktop folders as clutter?\nA) Required paths are the contract; extras are not the job\nB) Desktop is faster storage\nC) Windows forbids Desktop folders\nD) Antivirus scans Desk",
+      "runtimeError": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      }
+    },
+    {
+      "item_id": "GENERAL_IT:git-w1-6",
+      "course_id": "GENERAL_IT",
+      "choice": null,
+      "parse": {
+        "index": null,
+        "letter": null,
+        "confidence": "none",
+        "matched_via": null,
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "[llama.cpp REAL local inference]\nCapability: waike-mastery-mcq\nQuery: Answer the multiple-choice question using only the student lesson context.\nReply with a single letter (A/B/C/D) only.\nQuestion: Which restore method is acceptable for 4417 besides Undo?\nA) Disable the idle timer forever\nB) Copy from auto-save or previous export if present\nC) Reimage the kiosk immediately\nD) Post the essay to Dis",
+      "runtimeError": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      }
+    },
+    {
+      "item_id": "GENERAL_IT:git-w2-1",
+      "course_id": "GENERAL_IT",
+      "choice": null,
+      "parse": {
+        "index": null,
+        "letter": null,
+        "confidence": "none",
+        "matched_via": null,
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "[llama.cpp REAL local inference]\nCapability: waike-mastery-mcq\nQuery: Answer the multiple-choice question using only the student lesson context.\nReply with a single letter (A/B/C/D) only.\nQuestion: A 4.7 GiB video vanishes on a camera card. Most likely filesystem limit?\nA) ext4 16 TiB file cap\nB) exFAT forbids video\nC) FAT32 4 GiB file cap\nD) NTFS compression\nLocal context:\n[GENERAL_IT-lesson] # W",
+      "runtimeError": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      }
+    },
+    {
+      "item_id": "GENERAL_IT:git-w2-2",
+      "course_id": "GENERAL_IT",
+      "choice": 0,
+      "parse": {
+        "index": 0,
+        "letter": "A",
+        "confidence": "low",
+        "matched_via": "last_standalone_letter",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "[llama.cpp REAL local inference]\nCapability: waike-mastery-mcq\nQuery: Answer the multiple-choice question using only the student lesson context.\nReply with a single letter (A/B/C/D) only.\nQuestion: Disk 100%, CPU 4%, UI frozen. First evidence to capture?\nA) Reboot immediately\nB) Reinstall Windows\nC) Disable Debian GRUB\nD) Disk queue / Task Manager Performance\nLocal context:\n[GENERAL_IT-lesson] # W",
+      "runtimeError": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      }
+    }
+  ],
+  "failure_taxonomy": {
+    "miss_count": 6,
+    "samples": [
+      {
+        "failure_code": "PARSER_FAILURE",
+        "first_divergence": "parser",
+        "stem_excerpt": "A patron dictates a password at the desk. What do you record in the ticket?",
+        "course_id": "GENERAL_IT",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "PARSER_FAILURE",
+        "first_divergence": "parser",
+        "stem_excerpt": "Which restore method is acceptable for 4417 besides Undo?",
+        "course_id": "GENERAL_IT",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "PARSER_FAILURE",
+        "first_divergence": "parser",
+        "stem_excerpt": "A 4.7 GiB video vanishes on a camera card. Most likely filesystem limit?",
+        "course_id": "GENERAL_IT",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "GENERAL_IT:git-w1-2",
+        "course_id": "GENERAL_IT",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "GENERAL_IT:git-w1-4",
+        "course_id": "GENERAL_IT",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "GENERAL_IT:git-w2-2",
+        "course_id": "GENERAL_IT",
+        "assessment_kind": "quiz"
+      }
+    ],
+    "census": {
+      "schema": "gunnchai.failure_census.v1",
+      "miss_count": 6,
+      "counts": {
+        "PARSER_FAILURE": 3,
+        "MODEL_KNOWLEDGE_GAP": 3
+      },
+      "by_course": {
+        "GENERAL_IT": {
+          "PARSER_FAILURE": 3,
+          "MODEL_KNOWLEDGE_GAP": 3
+        }
+      },
+      "by_assessment_type": {
+        "quiz": {
+          "PARSER_FAILURE": 3,
+          "MODEL_KNOWLEDGE_GAP": 3
+        }
+      },
+      "by_skill": {},
+      "largest_classes": [
+        {
+          "code": "PARSER_FAILURE",
+          "n": 3
+        },
+        {
+          "code": "MODEL_KNOWLEDGE_GAP",
+          "n": 3
+        }
+      ],
+      "taxonomy": [
+        "PARSER_FAILURE",
+        "MODEL_KNOWLEDGE_GAP",
+        "PREREQUISITE_GAP",
+        "CONCEPT_CONFUSION",
+        "REASONING_FAILURE",
+        "CALCULATION_FAILURE",
+        "INSTRUCTION_INTERPRETATION_FAILURE",
+        "TOOL_REQUIRED_NOT_USED",
+        "TOOL_SELECTION_FAILURE",
+        "TOOL_EXECUTION_FAILURE",
+        "SOURCE_GROUNDING_FAILURE",
+        "CONTEXT_LIMIT_FAILURE",
+        "PROMPT_FORMAT_FAILURE",
+        "AMBIGUOUS_ITEM",
+        "CURRICULUM_DEFECT_CANDIDATE",
+        "GRADER_DEFECT_CANDIDATE",
+        "UNKNOWN",
+        "VOCABULARY_FAILURE",
+        "TRANSFER_FAILURE",
+        "DEBUGGING_FAILURE",
+        "CODE_FAILURE",
+        "RUBRIC_FAILURE",
+        "PARTIAL_COMPLETION",
+        "CARELESS_ERROR",
+        "ACCESSIBILITY_BARRIER",
+        "AMBIGUOUS_PROMPT",
+        "POLICY_BLOCKED",
+        "RESOURCE_BLOCKED",
+        "DIAGNOSIS_UNCERTAIN"
+      ]
+    }
+  },
+  "corpus": {
+    "discoverable_courses": 12,
+    "course_ids": [
+      "AI_ML_EDGE",
+      "CLOUD_DEVOPS",
+      "COMPUTER_NETWORKING",
+      "CYBERSECURITY",
+      "DATA_VIZ_BI",
+      "GAME_DEV_INTERACTIVE",
+      "GENERAL_IT",
+      "HARDWARE_ENGINEERING",
+      "PM_AGILE_LSS",
+      "ROBOTICS_CONTROL",
+      "SOFTWARE_BUILDER",
+      "WIRELESS_6G"
+    ],
+    "hardcoded_course_names": false,
+    "sample_per_course": {
+      "GENERAL_IT": {
+        "correct": 2,
+        "total": 5,
+        "score": 0.4
+      }
+    },
+    "label": "vertical_GENERAL_IT_baseline"
+  },
+  "probe": {
+    "canRunRealInference": true,
+    "memoryBudgetOk": true,
+    "freeRamMb": 1045,
+    "metricsMode": "measured"
+  },
+  "claim_boundary": "Real llama.cpp MCQ attempts on student materials only. Isolated grade after submission. Only MASTERY_002_REAL_RUNTIME_12C counts toward curriculum mastery."
+}

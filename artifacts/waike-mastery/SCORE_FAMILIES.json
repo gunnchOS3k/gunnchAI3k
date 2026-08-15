@@ -1,0 +1,28 @@
+{
+  "MASTERY_001_HEURISTIC_9C": {
+    "id": "MASTERY_001_HEURISTIC_9C",
+    "score": 0.6442307692307693,
+    "role": "historical_diagnostic",
+    "counts_toward_curriculum_mastery": false
+  },
+  "MASTERY_002_HEURISTIC_12C": {
+    "id": "MASTERY_002_HEURISTIC_12C",
+    "score": 0.6298076923076923,
+    "role": "diagnostic_only",
+    "solver": "curriculum_overlap_v1",
+    "counts_toward_curriculum_mastery": false
+  },
+  "MASTERY_002_REAL_RUNTIME_12C": {
+    "id": "MASTERY_002_REAL_RUNTIME_12C",
+    "score": 0.16666666666666666,
+    "baseline_frozen": 0.16666666666666666,
+    "post_parser": 0.16666666666666666,
+    "role": "curriculum_mastery_only_path",
+    "counts_toward_curriculum_mastery": true,
+    "parser_version": "gunnchai.choice_parser.v2_final_only",
+    "items_attempted": 24,
+    "items_correct": 4,
+    "parser_failures": 7
+  },
+  "no_blended_average": true
+}

@@ -15,6 +15,17 @@ export const FORBIDDEN_SMOKE_BAR = 0.55;
 /** Historical Mastery-001 nine-course baseline — do not overwrite. */
 export const MASTERY_001_NINE_COURSE_BASELINE = 0.6442307692307693;
 
+/** Exact score-family IDs — never collapse into ambiguous "mastery score". */
+export const SCORE_FAMILY = {
+  MASTERY_001_HEURISTIC_9C: 'MASTERY_001_HEURISTIC_9C',
+  MASTERY_002_HEURISTIC_12C: 'MASTERY_002_HEURISTIC_12C',
+  /** ONLY this family counts toward actual curriculum mastery. */
+  MASTERY_002_REAL_RUNTIME_12C: 'MASTERY_002_REAL_RUNTIME_12C',
+} as const;
+
+export const MASTERY_001_HEURISTIC_9C = 0.6442307692307693;
+export const MASTERY_002_HEURISTIC_12C_APPROX = 0.6298076923076923;
+
 export interface MasteryHonestTokens {
   [MASTERY_PASS_TOKEN]: boolean;
   [MASTERY_EVAL_TOKEN]: boolean;

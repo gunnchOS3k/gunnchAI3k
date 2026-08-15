@@ -1,13 +1,16 @@
 /**
  * Real gunnchAI runtime solver for AI-WAIKE-MASTERY-002.
  * Uses llama.cpp when available; never answer-key matches; never reads instructor keys.
+ * Choice parsing is final-answer-only (see choice_parser.ts).
  */
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { LlamaCppBackend } from '../system-layer/local_inference/backends/llamacpp';
+import { freezeRealSolverBaselineV1 } from './baseline_v1';
+import { CHOICE_PARSER_VERSION, parseFinalChoice } from './choice_parser';
 import { discoverCoursesFromContract, resolveWaikeRoot } from './contract';
+import { aggregateTaxonomy, classifyMiss, type FailureCode } from './failure_taxonomy';
 import { gradeIsolated } from './grader_bridge';
-import { classifyMiss, type FailureCode } from './failure_taxonomy';
 
 export type SolverStatus =
   | 'OK'
@@ -25,27 +28,30 @@ export interface SolverItem {
   choices: string[];
 }
 
-function loadStudentMcqSample(
+function loadStudentMcq(
   waikeRoot: string,
-  perCourse: number,
+  opts: { perCourse?: number | null; courseIds?: string[] | null; maxTotal?: number | null },
 ): SolverItem[] {
   const digital = path.join(waikeRoot, 'curriculum', 'digital_rc');
   const out: SolverItem[] = [];
   if (!fs.existsSync(digital)) return out;
+  const allow = opts.courseIds ? new Set(opts.courseIds) : null;
   for (const course of fs.readdirSync(digital).sort()) {
+    if (allow && !allow.has(course)) continue;
     const quizzes = path.join(digital, course, 'quizzes');
     if (!fs.existsSync(quizzes)) continue;
     let taken = 0;
     for (const qf of fs.readdirSync(quizzes).sort().filter((f) => /^q\d+\.json$/.test(f))) {
-      if (taken >= perCourse) break;
+      if (opts.perCourse != null && taken >= opts.perCourse) break;
+      if (opts.maxTotal != null && out.length >= opts.maxTotal) break;
       const data = JSON.parse(fs.readFileSync(path.join(quizzes, qf), 'utf8')) as {
         quiz_id?: string;
         items?: Array<{ id: string; kind?: string; stem?: string; choices?: string[] }>;
       };
       for (const it of data.items || []) {
-        if (taken >= perCourse) break;
+        if (opts.perCourse != null && taken >= opts.perCourse) break;
+        if (opts.maxTotal != null && out.length >= opts.maxTotal) break;
         if (!it.choices || it.choices.length < 2) continue;
-        // Refuse any key-shaped fields if present
         if ('answer_index' in it || 'explanation' in it) {
           throw new Error(`student_quiz_leaked_keys:${course}/${qf}`);
         }
@@ -78,25 +84,17 @@ function lessonContext(waikeRoot: string, courseId: string, maxChars = 1200): st
   return parts.join('\n').slice(0, maxChars);
 }
 
-function parseChoiceIndex(text: string, n: number): number | null {
-  const m = /\b([A-D]|[0-3])\b/i.exec(text.trim());
-  if (!m) return null;
-  const raw = m[1].toUpperCase();
-  if (raw >= 'A' && raw <= 'D') {
-    const i = raw.charCodeAt(0) - 65;
-    return i < n ? i : null;
-  }
-  const i = Number(raw);
-  return Number.isFinite(i) && i >= 0 && i < n ? i : null;
-}
-
 export async function runGunnchaiRuntimeSolver(opts?: {
   cwd?: string;
-  perCourse?: number;
+  perCourse?: number | null;
+  courseIds?: string[] | null;
+  maxTotal?: number | null;
   skipInference?: boolean;
+  freezeBaseline?: boolean;
+  label?: string;
 }): Promise<Record<string, unknown>> {
   const cwd = opts?.cwd || process.cwd();
-  const perCourse = opts?.perCourse ?? 2;
+  const perCourse = opts?.perCourse === undefined ? 2 : opts.perCourse;
   const waikeRoot = resolveWaikeRoot(cwd);
   const discovered = waikeRoot
     ? discoverCoursesFromContract(waikeRoot)
@@ -169,11 +167,22 @@ export async function runGunnchaiRuntimeSolver(opts?: {
     };
   }
 
-  const items = loadStudentMcqSample(waikeRoot, perCourse);
+  const items = loadStudentMcq(waikeRoot, {
+    perCourse,
+    courseIds: opts?.courseIds ?? null,
+    maxTotal: opts?.maxTotal ?? null,
+  });
   const submissions: Record<string, Record<string, Record<string, number>>> = {};
   const attempts: Array<Record<string, unknown>> = [];
-  const misses: Array<{ failure_code: FailureCode; detail?: string }> = [];
+  const misses: Array<{
+    failure_code: FailureCode;
+    first_divergence: string;
+    stem_excerpt: string;
+    course_id?: string;
+    assessment_kind?: string;
+  }> = [];
   let keyHits = 0;
+  let parserFailures = 0;
 
   for (const item of items) {
     const ctx = lessonContext(waikeRoot, item.course_id);
@@ -191,6 +200,7 @@ export async function runGunnchaiRuntimeSolver(opts?: {
     let choice: number | null = null;
     let raw = '';
     let runtimeError: string | null = null;
+    let parseMeta: ReturnType<typeof parseFinalChoice> | null = null;
     try {
       const result = await llama.infer({
         capability: 'waike-mastery-mcq',
@@ -200,7 +210,8 @@ export async function runGunnchaiRuntimeSolver(opts?: {
           : undefined,
       });
       raw = result.text || '';
-      choice = parseChoiceIndex(raw, item.choices.length);
+      parseMeta = parseFinalChoice(raw, item.choices.length);
+      choice = parseMeta.index;
     } catch (err) {
       runtimeError = err instanceof Error ? err.message : String(err);
     }
@@ -209,22 +220,28 @@ export async function runGunnchaiRuntimeSolver(opts?: {
       item_id: item.item_id,
       course_id: item.course_id,
       choice,
-      raw: raw.slice(0, 200),
+      parse: parseMeta,
+      raw: raw.slice(0, 400),
       runtimeError,
       artifact: {
         model: probe.ggufPath,
         binary: probe.binaryOrModule,
+        parser_version: CHOICE_PARSER_VERSION,
       },
     });
 
     if (choice == null) {
-      misses.push(
-        classifyMiss({
+      parserFailures += 1;
+      misses.push({
+        ...classifyMiss({
           stem: item.stem,
           chosen: raw,
           blockedRuntime: Boolean(runtimeError),
+          parserFailed: !runtimeError,
         }),
-      );
+        course_id: item.course_id,
+        assessment_kind: item.assessment_kind,
+      });
       continue;
     }
     submissions[item.course_id] ??= {};
@@ -233,7 +250,6 @@ export async function runGunnchaiRuntimeSolver(opts?: {
     submissions[item.course_id][key][item.local_id] = choice;
   }
 
-  // Isolated grade after all submissions
   let correct = 0;
   let total = 0;
   const perCourseScores: Record<string, { correct: number; total: number; score: number }> = {};
@@ -257,12 +273,14 @@ export async function runGunnchaiRuntimeSolver(opts?: {
           cCorrect += 1;
           correct += 1;
         } else {
-          misses.push(
-            classifyMiss({
+          misses.push({
+            ...classifyMiss({
               stem: `${cid}:${it.id}`,
               chosen: String(it.got),
             }),
-          );
+            course_id: cid,
+            assessment_kind: kind,
+          });
         }
       }
     }
@@ -273,31 +291,46 @@ export async function runGunnchaiRuntimeSolver(opts?: {
     };
   }
 
-  const overall = total ? correct / total : 0;
-  const out = {
+  // Honesty: parser failures count as incorrect in the real-runtime denominator.
+  const attemptedUniverse = items.length;
+  const gradedTotal = total;
+  const honestTotal = gradedTotal + parserFailures;
+  const overall = honestTotal ? correct / honestTotal : 0;
+  const parseableOnlyScore = gradedTotal ? correct / gradedTotal : 0;
+  const census = aggregateTaxonomy(misses);
+
+  const out: Record<string, unknown> = {
     schema: 'gunnchai.waike_runtime_solver.v1',
     status: (attempts.length ? 'OK' : 'PARTIAL') as SolverStatus,
     solver: 'gunnchai_llamacpp_v1',
+    score_family_id: 'MASTERY_002_REAL_RUNTIME_12C',
     model: probe.ggufPath,
     binary: probe.binaryOrModule,
+    parser_version: CHOICE_PARSER_VERSION,
     used_instructor_keys_during_solve: keyHits > 0,
     self_graded: false,
     answer_key_matched: false,
     grading_agent: 'isolated_after_submission',
-    items_attempted: total,
+    items_loaded: attemptedUniverse,
+    items_attempted: honestTotal,
+    items_graded: gradedTotal,
     items_correct: correct,
+    parser_failures: parserFailures,
     overall_score: overall,
+    parseable_only_score: parseableOnlyScore,
     per_course: perCourseScores,
     attempts_sample: attempts.slice(0, 12),
     failure_taxonomy: {
       miss_count: misses.length,
       samples: misses.slice(0, 20),
+      census,
     },
     corpus: {
       discoverable_courses: discovered.course_count,
       course_ids: discovered.courses.map((c) => c.course_id),
       hardcoded_course_names: discovered.hardcoded_course_names,
       sample_per_course: perCourseScores,
+      label: opts?.label || 'stratified_sample',
     },
     probe: {
       canRunRealInference: probe.canRunRealInference,
@@ -306,11 +339,27 @@ export async function runGunnchaiRuntimeSolver(opts?: {
       metricsMode: probe.metricsMode,
     },
     claim_boundary:
-      'Stratified real llama.cpp MCQ attempts on student materials only. Not full-universe mastery; not answer-key matching.',
+      'Real llama.cpp MCQ attempts on student materials only. Isolated grade after submission. ' +
+      'Only MASTERY_002_REAL_RUNTIME_12C counts toward curriculum mastery.',
   };
+
+  if (opts?.freezeBaseline) {
+    out.baseline_v1 = freezeRealSolverBaselineV1({
+      cwd,
+      waikeRoot,
+      solverReport: out,
+    });
+  }
 
   const outDir = path.join(cwd, 'artifacts', 'waike-mastery');
   fs.mkdirSync(outDir, { recursive: true });
   fs.writeFileSync(path.join(outDir, 'GUNNCHAI_RUNTIME_SOLVER.json'), JSON.stringify(out, null, 2) + '\n');
+  if (opts?.label) {
+    const safe = opts.label.replace(/[^a-zA-Z0-9_-]+/g, '_');
+    fs.writeFileSync(
+      path.join(outDir, `GUNNCHAI_RUNTIME_SOLVER_${safe}.json`),
+      JSON.stringify(out, null, 2) + '\n',
+    );
+  }
   return out;
 }

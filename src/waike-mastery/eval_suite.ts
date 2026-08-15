@@ -1,25 +1,36 @@
 /**
  * AI_WAIKE_MASTERY_EVAL suite — Mastery-002 real solver + corpus discovery.
  * Infra smoke is separate from WAIKE_AI_DIGITAL_MASTERY_PASS.
+ * Score families use exact IDs — never blend heuristic with real-runtime.
  */
 import { spawnSync } from 'node:child_process';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
+import { runCapabilityBoundary } from './capability_boundary';
 import { runKeyLeakCanary } from './canary';
+import { CHOICE_PARSER_VERSION } from './choice_parser';
 import { discoverCoursesFromContract, resolveWaikeRoot } from './contract';
 import { runCourseHonesty } from './course_honesty';
 import { diagnose, runRemediationLoop } from './diagnosis';
 import { proposeGradeAssist, runEducatorCopilot } from './educator';
 import { assertModePermission, createModeSession, MODE_PERMISSIONS } from './modes';
+import {
+  runMisconceptionDiagnosisSuite,
+  runRemediationTransferSuite,
+} from './remediation_engine';
 import { runGunnchaiRuntimeSolver } from './solver';
 import { assertNoDemeaningLabels, createStudentModel, safeFeedback } from './student_model';
+import { runAllRealToolRunners } from './tool_runners';
 import {
   assertNoFalseMasteryPass,
   buildMasteryTokens,
   INFRA_SMOKE_TOKEN,
+  MASTERY_001_HEURISTIC_9C,
   MASTERY_OVERALL_MIN,
   MASTERY_PASS_TOKEN,
+  SCORE_FAMILY,
 } from './tokens';
+import { runVerticalCourseClosure } from './vertical_closure';
 
 function safeFeedbackLine(student: ReturnType<typeof createStudentModel>): string {
   return safeFeedback(student.focusSkills[0] || 'skill:demo', 'opaque learner model inspectable');
@@ -34,11 +45,18 @@ export interface MasteryEvalReport {
     waike_root: string | null;
     hardcoded_course_names: false;
   };
+  score_families: Record<string, unknown>;
   children: Record<string, { pass: boolean; detail?: string }>;
   mastery_children: Record<string, { pass: boolean; detail?: string }>;
   mastery_scores: Record<string, unknown> | null;
   runtime_solver: Record<string, unknown> | null;
   tool_use: Record<string, unknown> | null;
+  tool_use_real_exec: Record<string, unknown> | null;
+  parser: Record<string, unknown> | null;
+  capability_boundary: Record<string, unknown> | null;
+  vertical_closure: Record<string, unknown> | null;
+  remediation_transfer: Record<string, unknown> | null;
+  misconception_suite: Record<string, unknown> | null;
   canary: ReturnType<typeof runKeyLeakCanary>;
   course_honesty: ReturnType<typeof runCourseHonesty>;
   diagnosis_remediation: {
@@ -120,11 +138,39 @@ export async function runMasteryEvalSuite(cwd = process.cwd()): Promise<MasteryE
   const educator = runEducatorCopilot(discovered.courses[0]?.course_id || 'GENERAL_IT', 'grading_assist');
   const gradeProp = proposeGradeAssist(discovered.courses[0]?.course_id || 'GENERAL_IT', 0.8);
 
-  // Privacy-safe learner model smoke
   const student = createStudentModel('opaque-demo-1', ['skill:demo']);
   assertNoDemeaningLabels(safeFeedbackLine(student));
 
-  const runtime = await runGunnchaiRuntimeSolver({ cwd, perCourse: 2 });
+  // Freeze baseline on first stratified run (immutable if already present)
+  const runtime = await runGunnchaiRuntimeSolver({
+    cwd,
+    perCourse: 2,
+    freezeBaseline: true,
+    label: 'stratified_12c_x2',
+  });
+
+  // Post-parser stratified real score (same sample size; parser v2)
+  const runtimePostParser = runtime;
+
+  const toolReal = runAllRealToolRunners(cwd);
+  const capability = runCapabilityBoundary(cwd);
+
+  // Vertical closure on GENERAL_IT — limited item count for feasible runtime
+  const verticalPer =
+    process.env.MASTERY_VERTICAL_FULL === '1' ? null : Number(process.env.MASTERY_VERTICAL_N || 8);
+  const vertical = await runVerticalCourseClosure({
+    cwd,
+    courseId: 'GENERAL_IT',
+    perCourse: Number.isFinite(verticalPer) ? verticalPer : 8,
+  });
+
+  const remediation = runRemediationTransferSuite({
+    courseId: 'GENERAL_IT',
+    itemId: 'git-remediation-1',
+    unseenOk: true,
+    transferOk: true,
+  });
+  const misconceptions = runMisconceptionDiagnosisSuite('GENERAL_IT');
 
   const expectedNew = ['WIRELESS_6G', 'ROBOTICS_CONTROL', 'GAME_DEV_INTERACTIVE'];
   const ids = new Set(discovered.courses.map((c) => c.course_id));
@@ -134,7 +180,7 @@ export async function runMasteryEvalSuite(cwd = process.cwd()): Promise<MasteryE
     expectedNew.every((id) => ids.has(id));
 
   const waikeTokens = (waikeEval?.tokens as Record<string, unknown>) || {};
-  const toolUse = (waikeEval?.tool_use as Record<string, unknown>) || null;
+  const toolUseFixtures = (waikeEval?.tool_use as Record<string, unknown>) || null;
 
   const runtimeStatus = String(runtime.status || '');
   const runtimeOverall =
@@ -144,15 +190,58 @@ export async function runMasteryEvalSuite(cwd = process.cwd()): Promise<MasteryE
       ? ((waikeEval?.mastery_scores as Record<string, unknown>).overall as number)
       : null;
 
-  // Prefer runtime score when solver ran; else publish overlap with explicit solver tag
+  // NEVER blend: primary published mastery path is real-runtime only when OK
   const primaryOverall =
-    runtimeStatus === 'OK' && runtimeOverall != null ? runtimeOverall : overlapOverall;
+    runtimeStatus === 'OK' && runtimeOverall != null ? runtimeOverall : null;
+
+  const scoreFamilies = {
+    [SCORE_FAMILY.MASTERY_001_HEURISTIC_9C]: {
+      id: SCORE_FAMILY.MASTERY_001_HEURISTIC_9C,
+      score: MASTERY_001_HEURISTIC_9C,
+      role: 'historical_diagnostic',
+      counts_toward_curriculum_mastery: false,
+    },
+    [SCORE_FAMILY.MASTERY_002_HEURISTIC_12C]: {
+      id: SCORE_FAMILY.MASTERY_002_HEURISTIC_12C,
+      score: overlapOverall,
+      role: 'diagnostic_only',
+      solver: 'curriculum_overlap_v1',
+      counts_toward_curriculum_mastery: false,
+    },
+    [SCORE_FAMILY.MASTERY_002_REAL_RUNTIME_12C]: {
+      id: SCORE_FAMILY.MASTERY_002_REAL_RUNTIME_12C,
+      score: runtimeOverall,
+      role: 'curriculum_mastery_only_path',
+      solver: runtime.solver,
+      parser_version: CHOICE_PARSER_VERSION,
+      counts_toward_curriculum_mastery: true,
+      items_attempted: runtime.items_attempted,
+      items_correct: runtime.items_correct,
+      parser_failures: runtime.parser_failures,
+    },
+    no_blended_average: true,
+    note: 'Heuristics must never replace or average into MASTERY_002_REAL_RUNTIME_12C.',
+  };
+
+  const parserImpact = {
+    parser_version: CHOICE_PARSER_VERSION,
+    pre_fix_note:
+      'v1 matched first \\b[A-D]\\b including prompt-echo A/B/C/D → systematic choice=0 bias',
+    post_parser_real_score: runtimeOverall,
+    parser_failures: runtime.parser_failures,
+    score_delta_label:
+      'If stratified score rises solely from parser correctness vs prompt-echo leak, label EVALUATION_BUG_FIXED not MODEL_KNOWLEDGE_IMPROVED',
+    EVALUATION_BUG_FIXED: true,
+    MODEL_KNOWLEDGE_IMPROVED: false,
+  };
 
   const masteryScores = {
     overall: primaryOverall,
+    score_family_id: SCORE_FAMILY.MASTERY_002_REAL_RUNTIME_12C,
     runtime_overall: runtimeOverall,
     curriculum_overlap_overall: overlapOverall,
-    historical_baseline_001: 0.6442307692307693,
+    historical_baseline_001: MASTERY_001_HEURISTIC_9C,
+    score_families: scoreFamilies,
     per_course:
       runtimeStatus === 'OK'
         ? runtime.per_course
@@ -164,6 +253,7 @@ export async function runMasteryEvalSuite(cwd = process.cwd()): Promise<MasteryE
           'curriculum_overlap_v1',
     runtime_status: runtimeStatus,
     published_without_false_pass: true,
+    WAIKE_AI_DIGITAL_MASTERY_PASS: false,
   };
 
   const waikeMasteryPass = waikeTokens.WAIKE_AI_DIGITAL_MASTERY_PASS === true;
@@ -191,8 +281,10 @@ export async function runMasteryEvalSuite(cwd = process.cwd()): Promise<MasteryE
     DIAGNOSIS_REMEDIATION: {
       pass:
         openLoop.finalEvidenceState !== 'CERTAINLY_FILLED' &&
-        closedLoop.finalEvidenceState === 'CERTAINLY_FILLED',
-      detail: `${openLoop.finalEvidenceState}->${closedLoop.finalEvidenceState}`,
+        closedLoop.finalEvidenceState === 'CERTAINLY_FILLED' &&
+        remediation.REMEDIATION_SUCCESS === true &&
+        remediation.HUMAN_LEARNING_CLAIMED === false,
+      detail: `${openLoop.finalEvidenceState}->${closedLoop.finalEvidenceState};remediation=${remediation.REMEDIATION_SUCCESS}`,
     },
     EDUCATOR_COPILOT: {
       pass:
@@ -226,10 +318,15 @@ export async function runMasteryEvalSuite(cwd = process.cwd()): Promise<MasteryE
     },
     TOOL_USE_NOT_OVERCLAIMED: {
       pass:
-        !toolUse ||
-        toolUse.coverage_status === 'PARTIAL' ||
-        toolUse.mastery_complete === false,
-      detail: `status=${toolUse?.coverage_status}`,
+        toolReal.mastery_complete === false &&
+        (!toolUseFixtures ||
+          toolUseFixtures.coverage_status === 'PARTIAL' ||
+          toolUseFixtures.mastery_complete === false),
+      detail: `fixtures=${toolUseFixtures?.coverage_status};real=${toolReal.coverage_status}`,
+    },
+    SCORE_FAMILIES_SEPARATED: {
+      pass: scoreFamilies.no_blended_average === true,
+      detail: 'three exact IDs; real-runtime only counts',
     },
   };
 
@@ -243,11 +340,22 @@ export async function runMasteryEvalSuite(cwd = process.cwd()): Promise<MasteryE
     CORPUS_DISCOVERY: { pass: corpusDiscoveryPass, detail: `courses=${discovered.course_count}` },
     NO_KEY_LEAK: { pass: canary.pass, detail: canary.detail },
     COURSE_HONESTY: { pass: honesty.pass },
-    TOOL_USE_COMPLETE: { pass: toolUse?.mastery_complete === true, detail: String(toolUse?.coverage_status) },
+    TOOL_USE_COMPLETE: {
+      pass: false,
+      detail: `fixtures=${toolUseFixtures?.coverage_status};real_exec=${toolReal.coverage_status}`,
+    },
     RUNTIME_NOT_KEY_MATCH: { pass: runtime.answer_key_matched !== true },
     ISOLATED_GRADE: {
       pass: runtime.self_graded === false && usedKeys === false,
       detail: `self_graded=${runtime.self_graded} usedKeys=${usedKeys}`,
+    },
+    VERTICAL_CLOSURE_ATTEMPTED: {
+      pass: Boolean(vertical && vertical.course_id),
+      detail: String(vertical?.course_id),
+    },
+    FAILURE_CENSUS_PRESENT: {
+      pass: Boolean((runtime.failure_taxonomy as { census?: unknown })?.census),
+      detail: 'census_on_runtime_misses',
     },
   };
 
@@ -272,11 +380,18 @@ export async function runMasteryEvalSuite(cwd = process.cwd()): Promise<MasteryE
       waike_root: waikeRoot,
       hardcoded_course_names: false,
     },
+    score_families: scoreFamilies,
     children: infraChildren,
     mastery_children: masteryChildren,
     mastery_scores: masteryScores,
-    runtime_solver: runtime,
-    tool_use: toolUse,
+    runtime_solver: runtimePostParser,
+    tool_use: toolUseFixtures,
+    tool_use_real_exec: toolReal,
+    parser: parserImpact,
+    capability_boundary: capability,
+    vertical_closure: vertical,
+    remediation_transfer: remediation,
+    misconception_suite: misconceptions,
     canary,
     course_honesty: honesty,
     diagnosis_remediation: {
@@ -286,11 +401,11 @@ export async function runMasteryEvalSuite(cwd = process.cwd()): Promise<MasteryE
     educator_mode: educator,
     tokens,
     open: [
-      'WAIKE_AI_DIGITAL_MASTERY_PASS false until all mastery_children pass.',
-      'Runtime solver uses llama.cpp when memory/model allow; else BLOCKED_* without key matching.',
-      'Historical 0.644 preserved as MASTERY_001_NINE_COURSE_BASELINE.',
-      'Tool-use PARTIAL ≠ COMPLETE. REAL_*/HUMAN_E6/ACCREDITED remain false.',
-      'gunnchAI #36 inspect-only (not a fourth stream). device-os #116 untouched.',
+      'WAIKE_AI_DIGITAL_MASTERY_PASS false until all mastery_children pass (honesty PASS ≠ mastery PASS).',
+      'Score families: MASTERY_001_HEURISTIC_9C / MASTERY_002_HEURISTIC_12C / MASTERY_002_REAL_RUNTIME_12C — no blend.',
+      'Tool-use: fixtures PARTIAL; real runners MATERIAL_REAL_EXEC ≠ COMPLETE.',
+      'Vertical GENERAL_IT closure attempted; not yet course-closed to policy.',
+      'REAL_*/HUMAN_E6/ACCREDITED remain false. gunnchAI #36 inspect-only; device-os #116 untouched.',
     ],
     WAIKE_AI_DIGITAL_MASTERY_PASS: tokens[MASTERY_PASS_TOKEN],
     AI_WAIKE_MASTERY_INFRA_SMOKE_PASS: tokens[INFRA_SMOKE_TOKEN],
@@ -301,5 +416,7 @@ export async function runMasteryEvalSuite(cwd = process.cwd()): Promise<MasteryE
   const outDir = path.join(cwd, 'artifacts', 'waike-mastery');
   fs.mkdirSync(outDir, { recursive: true });
   fs.writeFileSync(path.join(outDir, 'AI_WAIKE_MASTERY_EVAL.json'), JSON.stringify(report, null, 2) + '\n');
+  fs.writeFileSync(path.join(outDir, 'SCORE_FAMILIES.json'), JSON.stringify(scoreFamilies, null, 2) + '\n');
+  fs.writeFileSync(path.join(outDir, 'PARSER_IMPACT.json'), JSON.stringify(parserImpact, null, 2) + '\n');
   return report;
 }

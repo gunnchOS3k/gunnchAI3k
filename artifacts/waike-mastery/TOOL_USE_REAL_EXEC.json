@@ -1,0 +1,230 @@
+{
+  "schema": "gunnchai.tool_use_real_exec.v1",
+  "tool_runner_version": "gunnchai.tool_runners.v1_real_exec",
+  "attempted": 11,
+  "passed": 11,
+  "pass_rate": 1,
+  "coverage_status": "MATERIAL_REAL_EXEC",
+  "claim": "TOOL_USE_REAL_ACTION_RUNNERS",
+  "mastery_complete": false,
+  "note": "Real subprocess/file runners with captured stdout/stderr/exit/hash. Material execution ≠ full curriculum tool-use COMPLETE. Fixtures alone ≠ competence.",
+  "results": [
+    {
+      "tool_id": "python_calc",
+      "input": {
+        "expr": "2+2"
+      },
+      "command": [
+        "python3",
+        "-c",
+        "print(2+2)"
+      ],
+      "stdout": "4\n",
+      "stderr": "",
+      "exit_code": 0,
+      "artifact_hash": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
+      "grader_ok": true,
+      "grader_detail": "value=4",
+      "real_execution": true,
+      "fixture_style": false
+    },
+    {
+      "tool_id": "shell_probe",
+      "input": {
+        "cwd": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k"
+      },
+      "command": [
+        "bash",
+        "-lc",
+        "uname -s && pwd && echo TOOL_OK"
+      ],
+      "stdout": "Darwin\n/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k\nTOOL_OK\n",
+      "stderr": "",
+      "exit_code": 0,
+      "artifact_hash": "3024480bb53e0b837e4b1153eedf7eea256f511f57927a64743bba20af161b03",
+      "grader_ok": true,
+      "grader_detail": "shell_ok",
+      "real_execution": true,
+      "fixture_style": false
+    },
+    {
+      "tool_id": "git_inspect",
+      "input": {
+        "cwd": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k"
+      },
+      "command": [
+        "git",
+        "rev-parse",
+        "--is-inside-work-tree"
+      ],
+      "stdout": "true\n",
+      "stderr": "",
+      "exit_code": 0,
+      "artifact_hash": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+      "grader_ok": true,
+      "grader_detail": "inside_worktree",
+      "real_execution": true,
+      "fixture_style": false
+    },
+    {
+      "tool_id": "network_inspect",
+      "input": {},
+      "command": [
+        "python3",
+        "-c",
+        "import socket; print(socket.gethostname()); print(\"127.0.0.1\")"
+      ],
+      "stdout": "Edmunds-MacBook-Pro.local\n127.0.0.1\n",
+      "stderr": "",
+      "exit_code": 0,
+      "artifact_hash": "50043eba631bb033ac71aec41e6d8553fdf3a75d51be193885f5079d7c4b1573",
+      "grader_ok": true,
+      "grader_detail": "hostname+loopback",
+      "real_execution": true,
+      "fixture_style": false
+    },
+    {
+      "tool_id": "packet_parse",
+      "input": {
+        "synthetic_frame": true
+      },
+      "command": [
+        "python3",
+        "-c",
+        "<packet_parse_script>"
+      ],
+      "stdout": "ethertype 0x800\nipv4 True\nok True\nhash 14edeb2a7b8d0771\n",
+      "stderr": "",
+      "exit_code": 0,
+      "artifact_hash": "54889a999122b56fd8c9d208b0af93e9dcce98eb3e40a3f627522d2c6ca0684c",
+      "grader_ok": true,
+      "grader_detail": "parsed_synthetic_ipv4",
+      "real_execution": true,
+      "fixture_style": false
+    },
+    {
+      "tool_id": "data_processing",
+      "input": {
+        "csv": "name,score"
+      },
+      "command": [
+        "python3",
+        "-c",
+        "<csv_avg>"
+      ],
+      "stdout": "{\"n\": 3, \"avg\": 80.0}\n785189604092ab14\n",
+      "stderr": "",
+      "exit_code": 0,
+      "artifact_hash": "011be98348189db1c4a59cfcbedf418040c2c9585a5fcaf2a81f33c118159d50",
+      "grader_ok": true,
+      "grader_detail": "avg_80",
+      "real_execution": true,
+      "fixture_style": false
+    },
+    {
+      "tool_id": "chart_gen",
+      "input": {
+        "bars": [
+          40,
+          50,
+          30
+        ]
+      },
+      "command": [
+        "node",
+        "-e",
+        "fs.writeFileSync(svg)"
+      ],
+      "stdout": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/artifacts/waike-mastery/tool_artifacts/chart_stub.svg",
+      "stderr": "",
+      "exit_code": 0,
+      "artifact_path": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/artifacts/waike-mastery/tool_artifacts/chart_stub.svg",
+      "artifact_hash": "c4f68df3438e20bfd5fd73a9cfca63983a6d0892d439775a48d720a0dcfd07f3",
+      "grader_ok": true,
+      "grader_detail": "svg_hash=c4f68df3438e",
+      "real_execution": true,
+      "fixture_style": false
+    },
+    {
+      "tool_id": "config_validation",
+      "input": {
+        "port": 8080,
+        "tls": true
+      },
+      "command": [
+        "python3",
+        "-c",
+        "<validate_cfg>"
+      ],
+      "stdout": "config_ok\n{\"port\": 8080, \"roles\": [\"desk\", \"reader\"], \"tls\": true}\n",
+      "stderr": "",
+      "exit_code": 0,
+      "artifact_hash": "a3bd664052972e44e8699783f32f293adda50988733608246e6634552b7e157f",
+      "grader_ok": true,
+      "grader_detail": "config_ok",
+      "real_execution": true,
+      "fixture_style": false
+    },
+    {
+      "tool_id": "build_test_probe",
+      "input": {
+        "probe": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/src/waike-mastery/choice_parser.ts"
+      },
+      "command": [
+        "node",
+        "-e",
+        "require('fs').accessSync(\"/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/src/waike-mastery/choice_parser.ts\"); console.log('BUILD_PROBE_OK')"
+      ],
+      "stdout": "BUILD_PROBE_OK\n",
+      "stderr": "",
+      "exit_code": 0,
+      "artifact_hash": "d6fe360e621ec786f8ea71d41364088bfa0709b97189f6425462ab94cf5aaaa4",
+      "grader_ok": true,
+      "grader_detail": "source_present",
+      "real_execution": true,
+      "fixture_style": false
+    },
+    {
+      "tool_id": "simulation_pid",
+      "input": {
+        "errors": [
+          1,
+          0.6,
+          0.2
+        ]
+      },
+      "command": [
+        "python3",
+        "-c",
+        "<pid_sim>"
+      ],
+      "stdout": "-0.088\n",
+      "stderr": "",
+      "exit_code": 0,
+      "artifact_hash": "7b40229ec78cecfb1e7b45a06c39b995a6c8d834a5cff7028b546bb610d6c53d",
+      "grader_ok": true,
+      "grader_detail": "u=-0.088",
+      "real_execution": true,
+      "fixture_style": false
+    },
+    {
+      "tool_id": "fspl_calc",
+      "input": {
+        "expr": "20*__import__(\"math\").log10(120)+20*__import__(\"math\").log10(3500)-27.55"
+      },
+      "command": [
+        "python3",
+        "-c",
+        "print(20*__import__(\"math\").log10(120)+20*__import__(\"math\").log10(3500)-27.55)"
+      ],
+      "stdout": "84.91498580795802\n",
+      "stderr": "",
+      "exit_code": 0,
+      "artifact_hash": "3c370d09a8aba363365fcd9cfca67609daac0651caf24a43723bf327af7186dd",
+      "grader_ok": true,
+      "grader_detail": "value=84.91498580795802",
+      "real_execution": true,
+      "fixture_style": false
+    }
+  ]
+}

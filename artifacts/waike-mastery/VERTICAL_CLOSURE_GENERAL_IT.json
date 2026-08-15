@@ -1,0 +1,202 @@
+{
+  "schema": "gunnchai.vertical_course_closure.v1",
+  "course_id": "GENERAL_IT",
+  "attack_order": [
+    "GENERAL_IT",
+    "COMPUTER_NETWORKING",
+    "CYBERSECURITY",
+    "SOFTWARE_BUILDER",
+    "WIRELESS_6G",
+    "AI_ML_EDGE",
+    "CLOUD_DEVOPS",
+    "DATA_VIZ_BI",
+    "HARDWARE_ENGINEERING",
+    "ROBOTICS_CONTROL",
+    "GAME_DEV_INTERACTIVE",
+    "PM_AGILE_LSS"
+  ],
+  "baseline": {
+    "overall": 0.4,
+    "items_attempted": 5,
+    "items_correct": 2,
+    "parser_failures": 3,
+    "per_course": {
+      "GENERAL_IT": {
+        "correct": 2,
+        "total": 5,
+        "score": 0.4
+      }
+    },
+    "status": "OK"
+  },
+  "failure_taxonomy": {
+    "schema": "gunnchai.failure_census.v1",
+    "miss_count": 6,
+    "counts": {
+      "PARSER_FAILURE": 3,
+      "MODEL_KNOWLEDGE_GAP": 3
+    },
+    "by_course": {
+      "GENERAL_IT": {
+        "PARSER_FAILURE": 3,
+        "MODEL_KNOWLEDGE_GAP": 3
+      }
+    },
+    "by_assessment_type": {
+      "quiz": {
+        "PARSER_FAILURE": 3,
+        "MODEL_KNOWLEDGE_GAP": 3
+      }
+    },
+    "by_skill": {},
+    "largest_classes": [
+      {
+        "code": "PARSER_FAILURE",
+        "n": 3
+      },
+      {
+        "code": "MODEL_KNOWLEDGE_GAP",
+        "n": 3
+      }
+    ],
+    "taxonomy": [
+      "PARSER_FAILURE",
+      "MODEL_KNOWLEDGE_GAP",
+      "PREREQUISITE_GAP",
+      "CONCEPT_CONFUSION",
+      "REASONING_FAILURE",
+      "CALCULATION_FAILURE",
+      "INSTRUCTION_INTERPRETATION_FAILURE",
+      "TOOL_REQUIRED_NOT_USED",
+      "TOOL_SELECTION_FAILURE",
+      "TOOL_EXECUTION_FAILURE",
+      "SOURCE_GROUNDING_FAILURE",
+      "CONTEXT_LIMIT_FAILURE",
+      "PROMPT_FORMAT_FAILURE",
+      "AMBIGUOUS_ITEM",
+      "CURRICULUM_DEFECT_CANDIDATE",
+      "GRADER_DEFECT_CANDIDATE",
+      "UNKNOWN",
+      "VOCABULARY_FAILURE",
+      "TRANSFER_FAILURE",
+      "DEBUGGING_FAILURE",
+      "CODE_FAILURE",
+      "RUBRIC_FAILURE",
+      "PARTIAL_COMPLETION",
+      "CARELESS_ERROR",
+      "ACCESSIBILITY_BARRIER",
+      "AMBIGUOUS_PROMPT",
+      "POLICY_BLOCKED",
+      "RESOURCE_BLOCKED",
+      "DIAGNOSIS_UNCERTAIN"
+    ]
+  },
+  "top_gaps": [
+    {
+      "code": "PARSER_FAILURE",
+      "n": 3
+    },
+    {
+      "code": "MODEL_KNOWLEDGE_GAP",
+      "n": 3
+    }
+  ],
+  "remediation": {
+    "schema": "gunnchai.remediation_transfer.v1",
+    "engine_version": "gunnchai.remediation_engine.v1",
+    "course_id": "GENERAL_IT",
+    "item_id": "GENERAL_IT:vertical-gap-1",
+    "steps": [
+      {
+        "step": "FAIL",
+        "ok": true,
+        "detail": "Gap identified on machine-graded miss"
+      },
+      {
+        "step": "PREREQ",
+        "ok": true,
+        "detail": "Revisit skill:GENERAL_IT:w01 prerequisites"
+      },
+      {
+        "step": "EXPLANATION",
+        "ok": true,
+        "detail": "Gap on skill:GENERAL_IT:w01 — revisit prerequisites before new content."
+      },
+      {
+        "step": "ANALOG",
+        "ok": true,
+        "detail": "Worked analog example (no answer-key dump)"
+      },
+      {
+        "step": "UNSEEN",
+        "ok": true,
+        "detail": "Unseen isomorphic item correct"
+      },
+      {
+        "step": "TRANSFER",
+        "ok": true,
+        "detail": "Transfer item correct"
+      }
+    ],
+    "REMEDIATION_SUCCESS": true,
+    "MEMORIZATION": false,
+    "transfer_ok": true,
+    "unseen_ok": true,
+    "HUMAN_LEARNING_CLAIMED": false,
+    "evidence_state": "CERTAINLY_FILLED",
+    "synthetic_learner_delta": {
+      "pre_score": 0.4,
+      "post_score": 0.55,
+      "delta": 0.15000000000000002,
+      "note": "Synthetic opaque learner delta only — not a human learning claim."
+    }
+  },
+  "memorization_trap": {
+    "MEMORIZATION": true,
+    "REMEDIATION_SUCCESS": false
+  },
+  "misconceptions": {
+    "schema": "gunnchai.misconception_diagnosis_suite.v1",
+    "course_id": "GENERAL_IT",
+    "cases": [
+      {
+        "item_id": "mis-prereq",
+        "hypothesized_failure": "PREREQUISITE_GAP",
+        "skill_id": "skill:GENERAL_IT:w02",
+        "feedback": "Focus next on skill:GENERAL_IT:w02. Try an isomorphic practice item, then reassess.",
+        "demeaning_label_used": false
+      },
+      {
+        "item_id": "mis-concept",
+        "hypothesized_failure": "CONCEPT_CONFUSION",
+        "skill_id": "skill:GENERAL_IT:w02",
+        "feedback": "Focus next on skill:GENERAL_IT:w02. Try an isomorphic practice item, then reassess.",
+        "demeaning_label_used": false
+      },
+      {
+        "item_id": "mis-calc",
+        "hypothesized_failure": "CALCULATION_FAILURE",
+        "skill_id": "skill:GENERAL_IT:w02",
+        "feedback": "Focus next on skill:GENERAL_IT:w02. Try an isomorphic practice item, then reassess.",
+        "demeaning_label_used": false
+      },
+      {
+        "item_id": "mis-instr",
+        "hypothesized_failure": "INSTRUCTION_INTERPRETATION_FAILURE",
+        "skill_id": "skill:GENERAL_IT:w02",
+        "feedback": "Focus next on skill:GENERAL_IT:w02. Try an isomorphic practice item, then reassess.",
+        "demeaning_label_used": false
+      }
+    ],
+    "HUMAN_LEARNING_CLAIMED": false
+  },
+  "transfer_rerun": {
+    "overall": 0.5,
+    "items_attempted": 2,
+    "items_correct": 1
+  },
+  "held_out_answer_key_training": false,
+  "HUMAN_LEARNING_CLAIMED": false,
+  "closure_complete": false,
+  "note": "Full vertical closure requires ≥ policy thresholds on course machine-graded items + transfer. This run records baseline→taxonomy→remediation→transfer evidence without answer-key training."
+}

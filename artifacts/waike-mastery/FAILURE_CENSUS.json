@@ -1,0 +1,104 @@
+{
+  "schema": "gunnchai.failure_census.v1",
+  "miss_count": 48,
+  "counts": {
+    "PARSER_FAILURE": 18,
+    "MODEL_KNOWLEDGE_GAP": 30
+  },
+  "by_course": {
+    "AI_ML_EDGE": {
+      "PARSER_FAILURE": 1,
+      "MODEL_KNOWLEDGE_GAP": 3
+    },
+    "CLOUD_DEVOPS": {
+      "PARSER_FAILURE": 1,
+      "MODEL_KNOWLEDGE_GAP": 2
+    },
+    "CYBERSECURITY": {
+      "PARSER_FAILURE": 2,
+      "MODEL_KNOWLEDGE_GAP": 2
+    },
+    "DATA_VIZ_BI": {
+      "PARSER_FAILURE": 2,
+      "MODEL_KNOWLEDGE_GAP": 3
+    },
+    "GAME_DEV_INTERACTIVE": {
+      "PARSER_FAILURE": 2,
+      "MODEL_KNOWLEDGE_GAP": 2
+    },
+    "GENERAL_IT": {
+      "PARSER_FAILURE": 2,
+      "MODEL_KNOWLEDGE_GAP": 2
+    },
+    "PM_AGILE_LSS": {
+      "PARSER_FAILURE": 1,
+      "MODEL_KNOWLEDGE_GAP": 3
+    },
+    "ROBOTICS_CONTROL": {
+      "PARSER_FAILURE": 1,
+      "MODEL_KNOWLEDGE_GAP": 3
+    },
+    "SOFTWARE_BUILDER": {
+      "PARSER_FAILURE": 3,
+      "MODEL_KNOWLEDGE_GAP": 1
+    },
+    "WIRELESS_6G": {
+      "PARSER_FAILURE": 3,
+      "MODEL_KNOWLEDGE_GAP": 1
+    },
+    "COMPUTER_NETWORKING": {
+      "MODEL_KNOWLEDGE_GAP": 4
+    },
+    "HARDWARE_ENGINEERING": {
+      "MODEL_KNOWLEDGE_GAP": 4
+    }
+  },
+  "by_assessment_type": {
+    "quiz": {
+      "PARSER_FAILURE": 18,
+      "MODEL_KNOWLEDGE_GAP": 30
+    }
+  },
+  "by_skill": {},
+  "largest_classes": [
+    {
+      "code": "MODEL_KNOWLEDGE_GAP",
+      "n": 30
+    },
+    {
+      "code": "PARSER_FAILURE",
+      "n": 18
+    }
+  ],
+  "taxonomy": [
+    "PARSER_FAILURE",
+    "MODEL_KNOWLEDGE_GAP",
+    "PREREQUISITE_GAP",
+    "CONCEPT_CONFUSION",
+    "REASONING_FAILURE",
+    "CALCULATION_FAILURE",
+    "INSTRUCTION_INTERPRETATION_FAILURE",
+    "TOOL_REQUIRED_NOT_USED",
+    "TOOL_SELECTION_FAILURE",
+    "TOOL_EXECUTION_FAILURE",
+    "SOURCE_GROUNDING_FAILURE",
+    "CONTEXT_LIMIT_FAILURE",
+    "PROMPT_FORMAT_FAILURE",
+    "AMBIGUOUS_ITEM",
+    "CURRICULUM_DEFECT_CANDIDATE",
+    "GRADER_DEFECT_CANDIDATE",
+    "UNKNOWN",
+    "VOCABULARY_FAILURE",
+    "TRANSFER_FAILURE",
+    "DEBUGGING_FAILURE",
+    "CODE_FAILURE",
+    "RUBRIC_FAILURE",
+    "PARTIAL_COMPLETION",
+    "CARELESS_ERROR",
+    "ACCESSIBILITY_BARRIER",
+    "AMBIGUOUS_PROMPT",
+    "POLICY_BLOCKED",
+    "RESOURCE_BLOCKED",
+    "DIAGNOSIS_UNCERTAIN"
+  ]
+}

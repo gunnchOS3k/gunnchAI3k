@@ -1,0 +1,653 @@
+{
+  "schema": "gunnchai.waike_runtime_solver.v1",
+  "status": "OK",
+  "solver": "gunnchai_llamacpp_v1",
+  "score_family_id": "MASTERY_002_REAL_RUNTIME_12C",
+  "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+  "binary": "/opt/homebrew/bin/llama-cli",
+  "parser_version": "gunnchai.choice_parser.v2_final_only",
+  "used_instructor_keys_during_solve": false,
+  "self_graded": false,
+  "answer_key_matched": false,
+  "grading_agent": "isolated_after_submission",
+  "items_loaded": 24,
+  "items_attempted": 24,
+  "items_correct": 4,
+  "parser_failures": 7,
+  "overall_score": 0.16666666666666666,
+  "per_course": {
+    "AI_ML_EDGE": {
+      "correct": 0,
+      "total": 1,
+      "score": 0
+    },
+    "CLOUD_DEVOPS": {
+      "correct": 0,
+      "total": 2,
+      "score": 0
+    },
+    "COMPUTER_NETWORKING": {
+      "correct": 0,
+      "total": 1,
+      "score": 0
+    },
+    "CYBERSECURITY": {
+      "correct": 0,
+      "total": 1,
+      "score": 0
+    },
+    "DATA_VIZ_BI": {
+      "correct": 0,
+      "total": 1,
+      "score": 0
+    },
+    "GAME_DEV_INTERACTIVE": {
+      "correct": 0,
+      "total": 1,
+      "score": 0
+    },
+    "GENERAL_IT": {
+      "correct": 1,
+      "total": 2,
+      "score": 0.5
+    },
+    "HARDWARE_ENGINEERING": {
+      "correct": 0,
+      "total": 2,
+      "score": 0
+    },
+    "PM_AGILE_LSS": {
+      "correct": 1,
+      "total": 1,
+      "score": 1
+    },
+    "ROBOTICS_CONTROL": {
+      "correct": 0,
+      "total": 2,
+      "score": 0
+    },
+    "SOFTWARE_BUILDER": {
+      "correct": 1,
+      "total": 1,
+      "score": 1
+    },
+    "WIRELESS_6G": {
+      "correct": 1,
+      "total": 2,
+      "score": 0.5
+    }
+  },
+  "attempts_sample": [
+    {
+      "item_id": "AI_ML_EDGE:aim-w1-1",
+      "course_id": "AI_ML_EDGE",
+      "choice": null,
+      "parse": {
+        "index": null,
+        "letter": null,
+        "confidence": "none",
+        "matched_via": null,
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "[llama.cpp REAL local inference]\nCapability: waike-mastery-mcq\nQuery: Answer the multiple-choice question using only the student lesson context.\nReply with a single letter (A/B/C/D) only.\nQuestion: EF-2101 has 480 rows and a 20% time-ordered holdout. train_n?\nA) 384\nB) 96\nC) 400\nD) 480\nLocal context:\n[AI_ML_EDGE-lesson] # Week 1: EdgeForge Bench \u2014 Python tensors as civic tables\n\nThe EdgeForge Benc",
+      "runtimeError": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      }
+    },
+    {
+      "item_id": "AI_ML_EDGE:aim-w1-2",
+      "course_id": "AI_ML_EDGE",
+      "choice": 0,
+      "parse": {
+        "index": 0,
+        "letter": "A",
+        "confidence": "low",
+        "matched_via": "last_standalone_letter",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "[llama.cpp REAL local inference]\nCapability: waike-mastery-mcq\nQuery: Answer the multiple-choice question using only the student lesson context.\nReply with a single letter (A/B/C/D) only.\nQuestion: Why forbid shuffle before the occupancy holdout?\nA) GPUs dislike shuffle\nB) Midnight cleaning zeros would leak across folds\nC) CSV forbids shuffle\nD) Validators require alphabetical zones\nLocal context:",
+      "runtimeError": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      }
+    },
+    {
+      "item_id": "CLOUD_DEVOPS:cd-w1-1",
+      "course_id": "CLOUD_DEVOPS",
+      "choice": 0,
+      "parse": {
+        "index": 0,
+        "letter": "A",
+        "confidence": "low",
+        "matched_via": "last_standalone_letter",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "[llama.cpp REAL local inference]\nCapability: waike-mastery-mcq\nQuery: Answer the multiple-choice question using only the student lesson context.\nReply with a single letter (A/B/C/D) only.\nQuestion: 0666 means?\nA) Owner only\nB) Setuid\nC) World writable\nD) Directory sticky\nLocal context:\n[CLOUD_DEVOPS-lesson] # Week 1: ForgeCloud \u2014 Linux permissions before the fancy YAML\n\nForgeCloud Platform starts ",
+      "runtimeError": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      }
+    },
+    {
+      "item_id": "CLOUD_DEVOPS:cd-w1-2",
+      "course_id": "CLOUD_DEVOPS",
+      "choice": 1,
+      "parse": {
+        "index": 1,
+        "letter": "B",
+        "confidence": "high",
+        "matched_via": "final_marker",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "[llama.cpp REAL local inference]\nCapability: waike-mastery-mcq\nQuery: Answer the multiple-choice question using only the student lesson context.\nReply with a single letter (A/B/C/D) only.\nQuestion: Required mode this week?\nA) 0777\nB) 0000\nC) 0666\nD) 0600\nLocal context:\n[CLOUD_DEVOPS-lesson] # Week 1: ForgeCloud \u2014 Linux permissions before the fancy YAML\n\nForgeCloud Platform starts on a Linux bastio",
+      "runtimeError": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      }
+    },
+    {
+      "item_id": "COMPUTER_NETWORKING:net-w1-1",
+      "course_id": "COMPUTER_NETWORKING",
+      "choice": null,
+      "parse": {
+        "index": null,
+        "letter": null,
+        "confidence": "none",
+        "matched_via": null,
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "[llama.cpp REAL local inference]\nCapability: waike-mastery-mcq\nQuery: Answer the multiple-choice question using only the student lesson context.\nReply with a single letter (A/B/C/D) only.\nQuestion: Why peel Ethernet before IP on receive?\nA) IP is optional\nB) Last-on, first-off encapsulation\nC) TCP forbids IP\nD) MAC addresses are IPv6\nLocal context:\n[COMPUTER_NETWORKING-lesson] # Week 1: Packets ar",
+      "runtimeError": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      }
+    },
+    {
+      "item_id": "COMPUTER_NETWORKING:net-w1-2",
+      "course_id": "COMPUTER_NETWORKING",
+      "choice": 0,
+      "parse": {
+        "index": 0,
+        "letter": "A",
+        "confidence": "high",
+        "matched_via": "final_marker",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "[llama.cpp REAL local inference]\nCapability: waike-mastery-mcq\nQuery: Answer the multiple-choice question using only the student lesson context.\nReply with a single letter (A/B/C/D) only.\nQuestion: The 5-tuple includes\nA) Only MACs\nB) Only DNS names\nC) src/dst IP, protocol, src/dst port\nD) VLAN 1 only\nLocal context:\n[COMPUTER_NETWORKING-lesson] # Week 1: Packets are chopped on purpose\n\nThe WAIKE P",
+      "runtimeError": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      }
+    },
+    {
+      "item_id": "CYBERSECURITY:cy-w1-1",
+      "course_id": "CYBERSECURITY",
+      "choice": 0,
+      "parse": {
+        "index": 0,
+        "letter": "A",
+        "confidence": "low",
+        "matched_via": "last_standalone_letter",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "[llama.cpp REAL local inference]\nCapability: waike-mastery-mcq\nQuery: Answer the multiple-choice question using only the student lesson context.\nReply with a single letter (A/B/C/D) only.\nQuestion: Upcoming ISC2 CC outline we prefer takes effect\nA) 2012-01-01\nB) 1999-12-31\nC) 2026-09-01\nD) Never\nLocal context:\n[CYBERSECURITY-lesson] # Week 1: Harbor SOC \u2014 principles, governance, and the model that",
+      "runtimeError": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      }
+    },
+    {
+      "item_id": "CYBERSECURITY:cy-w1-2",
+      "course_id": "CYBERSECURITY",
+      "choice": null,
+      "parse": {
+        "index": null,
+        "letter": null,
+        "confidence": "none",
+        "matched_via": null,
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "[llama.cpp REAL local inference]\nCapability: waike-mastery-mcq\nQuery: Answer the multiple-choice question using only the student lesson context.\nReply with a single letter (A/B/C/D) only.\nQuestion: Model poisoning primarily attacks\nA) Availability of power\nB) STP\nC) CIDR\nD) Integrity of the model's behavior\nLocal context:\n[CYBERSECURITY-lesson] # Week 1: Harbor SOC \u2014 principles, governance, and th",
+      "runtimeError": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      }
+    },
+    {
+      "item_id": "DATA_VIZ_BI:dv-w1-1",
+      "course_id": "DATA_VIZ_BI",
+      "choice": null,
+      "parse": {
+        "index": null,
+        "letter": null,
+        "confidence": "none",
+        "matched_via": null,
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "[llama.cpp REAL local inference]\nCapability: waike-mastery-mcq\nQuery: Answer the multiple-choice question using only the student lesson context.\nReply with a single letter (A/B/C/D) only.\nQuestion: null_rate for 10 nulls in 200?\nA) 0.10\nB) 0.05\nC) 5\nD) 10\nLocal context:\n[DATA_VIZ_BI-lesson] # Week 1: Civic Metrics Studio \u2014 dirty rows before pretty charts\n\nThe Civic Metrics Studio in Ghana/Gary par",
+      "runtimeError": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      }
+    },
+    {
+      "item_id": "DATA_VIZ_BI:dv-w1-2",
+      "course_id": "DATA_VIZ_BI",
+      "choice": 1,
+      "parse": {
+        "index": 1,
+        "letter": "B",
+        "confidence": "low",
+        "matched_via": "last_standalone_letter",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "[llama.cpp REAL local inference]\nCapability: waike-mastery-mcq\nQuery: Answer the multiple-choice question using only the student lesson context.\nReply with a single letter (A/B/C/D) only.\nQuestion: Negative wait_min handling?\nA) abs() into dashboard\nB) Impute 0 always\nC) Drop as invalid\nD) Ignore\nLocal context:\n[DATA_VIZ_BI-lesson] # Week 1: Civic Metrics Studio \u2014 dirty rows before pretty charts\n\n",
+      "runtimeError": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      }
+    },
+    {
+      "item_id": "GAME_DEV_INTERACTIVE:ga-w1-1",
+      "course_id": "GAME_DEV_INTERACTIVE",
+      "choice": 0,
+      "parse": {
+        "index": 0,
+        "letter": "A",
+        "confidence": "high",
+        "matched_via": "final_marker",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "[llama.cpp REAL local inference]\nCapability: waike-mastery-mcq\nQuery: Answer the multiple-choice question using only the student lesson context.\nReply with a single letter (A/B/C/D) only.\nQuestion: dt?\nA) 1\nB) 0\nC) 1/60\nD) 60\nLocal context:\n[GAME_DEV_INTERACTIVE-lesson] # Week 1: Game loop \u2014 fixed dt honesty on Forge Arcade\n\nTicket GA-6101: fixed timestep dt=1/60 with accumulator pattern. Lab chec",
+      "runtimeError": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      }
+    },
+    {
+      "item_id": "GAME_DEV_INTERACTIVE:ga-w1-2",
+      "course_id": "GAME_DEV_INTERACTIVE",
+      "choice": null,
+      "parse": {
+        "index": null,
+        "letter": null,
+        "confidence": "none",
+        "matched_via": null,
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "[llama.cpp REAL local inference]\nCapability: waike-mastery-mcq\nQuery: Answer the multiple-choice question using only the student lesson context.\nReply with a single letter (A/B/C/D) only.\nQuestion: spiral_of_death_guard?\nA) false\nB) null\nC) ai\nD) true\nLocal context:\n[GAME_DEV_INTERACTIVE-lesson] # Week 1: Game loop \u2014 fixed dt honesty on Forge Arcade\n\nTicket GA-6101: fixed timestep dt=1/60 with acc",
+      "runtimeError": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      }
+    }
+  ],
+  "failure_taxonomy": {
+    "miss_count": 20,
+    "samples": [
+      {
+        "failure_code": "PARSER_FAILURE",
+        "first_divergence": "parser",
+        "stem_excerpt": "EF-2101 has 480 rows and a 20% time-ordered holdout. train_n?",
+        "course_id": "AI_ML_EDGE",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "PARSER_FAILURE",
+        "first_divergence": "parser",
+        "stem_excerpt": "Why peel Ethernet before IP on receive?",
+        "course_id": "COMPUTER_NETWORKING",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "PARSER_FAILURE",
+        "first_divergence": "parser",
+        "stem_excerpt": "Model poisoning primarily attacks",
+        "course_id": "CYBERSECURITY",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "PARSER_FAILURE",
+        "first_divergence": "parser",
+        "stem_excerpt": "null_rate for 10 nulls in 200?",
+        "course_id": "DATA_VIZ_BI",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "PARSER_FAILURE",
+        "first_divergence": "parser",
+        "stem_excerpt": "spiral_of_death_guard?",
+        "course_id": "GAME_DEV_INTERACTIVE",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "PARSER_FAILURE",
+        "first_divergence": "parser",
+        "stem_excerpt": "fabricated_outcomes",
+        "course_id": "PM_AGILE_LSS",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "PARSER_FAILURE",
+        "first_divergence": "parser",
+        "stem_excerpt": "Why forbid open_hours_v1 and open_hours_v2?",
+        "course_id": "SOFTWARE_BUILDER",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "AI_ML_EDGE:aim-w1-2",
+        "course_id": "AI_ML_EDGE",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "CLOUD_DEVOPS:cd-w1-1",
+        "course_id": "CLOUD_DEVOPS",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "CLOUD_DEVOPS:cd-w1-2",
+        "course_id": "CLOUD_DEVOPS",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "COMPUTER_NETWORKING:net-w1-2",
+        "course_id": "COMPUTER_NETWORKING",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "CYBERSECURITY:cy-w1-1",
+        "course_id": "CYBERSECURITY",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "DATA_VIZ_BI:dv-w1-2",
+        "course_id": "DATA_VIZ_BI",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "GAME_DEV_INTERACTIVE:ga-w1-1",
+        "course_id": "GAME_DEV_INTERACTIVE",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "GENERAL_IT:git-w1-2",
+        "course_id": "GENERAL_IT",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "HARDWARE_ENGINEERING:hw1-1",
+        "course_id": "HARDWARE_ENGINEERING",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "HARDWARE_ENGINEERING:hw1-2",
+        "course_id": "HARDWARE_ENGINEERING",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "ROBOTICS_CONTROL:rb-w1-1",
+        "course_id": "ROBOTICS_CONTROL",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "ROBOTICS_CONTROL:rb-w1-2",
+        "course_id": "ROBOTICS_CONTROL",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "WIRELESS_6G:wr-w1-2",
+        "course_id": "WIRELESS_6G",
+        "assessment_kind": "quiz"
+      }
+    ],
+    "census": {
+      "schema": "gunnchai.failure_census.v1",
+      "miss_count": 20,
+      "counts": {
+        "PARSER_FAILURE": 7,
+        "MODEL_KNOWLEDGE_GAP": 13
+      },
+      "by_course": {
+        "AI_ML_EDGE": {
+          "PARSER_FAILURE": 1,
+          "MODEL_KNOWLEDGE_GAP": 1
+        },
+        "COMPUTER_NETWORKING": {
+          "PARSER_FAILURE": 1,
+          "MODEL_KNOWLEDGE_GAP": 1
+        },
+        "CYBERSECURITY": {
+          "PARSER_FAILURE": 1,
+          "MODEL_KNOWLEDGE_GAP": 1
+        },
+        "DATA_VIZ_BI": {
+          "PARSER_FAILURE": 1,
+          "MODEL_KNOWLEDGE_GAP": 1
+        },
+        "GAME_DEV_INTERACTIVE": {
+          "PARSER_FAILURE": 1,
+          "MODEL_KNOWLEDGE_GAP": 1
+        },
+        "PM_AGILE_LSS": {
+          "PARSER_FAILURE": 1
+        },
+        "SOFTWARE_BUILDER": {
+          "PARSER_FAILURE": 1
+        },
+        "CLOUD_DEVOPS": {
+          "MODEL_KNOWLEDGE_GAP": 2
+        },
+        "GENERAL_IT": {
+          "MODEL_KNOWLEDGE_GAP": 1
+        },
+        "HARDWARE_ENGINEERING": {
+          "MODEL_KNOWLEDGE_GAP": 2
+        },
+        "ROBOTICS_CONTROL": {
+          "MODEL_KNOWLEDGE_GAP": 2
+        },
+        "WIRELESS_6G": {
+          "MODEL_KNOWLEDGE_GAP": 1
+        }
+      },
+      "by_assessment_type": {
+        "quiz": {
+          "PARSER_FAILURE": 7,
+          "MODEL_KNOWLEDGE_GAP": 13
+        }
+      },
+      "by_skill": {},
+      "largest_classes": [
+        {
+          "code": "MODEL_KNOWLEDGE_GAP",
+          "n": 13
+        },
+        {
+          "code": "PARSER_FAILURE",
+          "n": 7
+        }
+      ],
+      "taxonomy": [
+        "PARSER_FAILURE",
+        "MODEL_KNOWLEDGE_GAP",
+        "PREREQUISITE_GAP",
+        "CONCEPT_CONFUSION",
+        "REASONING_FAILURE",
+        "CALCULATION_FAILURE",
+        "INSTRUCTION_INTERPRETATION_FAILURE",
+        "TOOL_REQUIRED_NOT_USED",
+        "TOOL_SELECTION_FAILURE",
+        "TOOL_EXECUTION_FAILURE",
+        "SOURCE_GROUNDING_FAILURE",
+        "CONTEXT_LIMIT_FAILURE",
+        "PROMPT_FORMAT_FAILURE",
+        "AMBIGUOUS_ITEM",
+        "CURRICULUM_DEFECT_CANDIDATE",
+        "GRADER_DEFECT_CANDIDATE",
+        "UNKNOWN",
+        "VOCABULARY_FAILURE",
+        "TRANSFER_FAILURE",
+        "DEBUGGING_FAILURE",
+        "CODE_FAILURE",
+        "RUBRIC_FAILURE",
+        "PARTIAL_COMPLETION",
+        "CARELESS_ERROR",
+        "ACCESSIBILITY_BARRIER",
+        "AMBIGUOUS_PROMPT",
+        "POLICY_BLOCKED",
+        "RESOURCE_BLOCKED",
+        "DIAGNOSIS_UNCERTAIN"
+      ]
+    }
+  },
+  "corpus": {
+    "discoverable_courses": 12,
+    "course_ids": [
+      "AI_ML_EDGE",
+      "CLOUD_DEVOPS",
+      "COMPUTER_NETWORKING",
+      "CYBERSECURITY",
+      "DATA_VIZ_BI",
+      "GAME_DEV_INTERACTIVE",
+      "GENERAL_IT",
+      "HARDWARE_ENGINEERING",
+      "PM_AGILE_LSS",
+      "ROBOTICS_CONTROL",
+      "SOFTWARE_BUILDER",
+      "WIRELESS_6G"
+    ],
+    "hardcoded_course_names": false,
+    "sample_per_course": {
+      "AI_ML_EDGE": {
+        "correct": 0,
+        "total": 1,
+        "score": 0
+      },
+      "CLOUD_DEVOPS": {
+        "correct": 0,
+        "total": 2,
+        "score": 0
+      },
+      "COMPUTER_NETWORKING": {
+        "correct": 0,
+        "total": 1,
+        "score": 0
+      },
+      "CYBERSECURITY": {
+        "correct": 0,
+        "total": 1,
+        "score": 0
+      },
+      "DATA_VIZ_BI": {
+        "correct": 0,
+        "total": 1,
+        "score": 0
+      },
+      "GAME_DEV_INTERACTIVE": {
+        "correct": 0,
+        "total": 1,
+        "score": 0
+      },
+      "GENERAL_IT": {
+        "correct": 1,
+        "total": 2,
+        "score": 0.5
+      },
+      "HARDWARE_ENGINEERING": {
+        "correct": 0,
+        "total": 2,
+        "score": 0
+      },
+      "PM_AGILE_LSS": {
+        "correct": 1,
+        "total": 1,
+        "score": 1
+      },
+      "ROBOTICS_CONTROL": {
+        "correct": 0,
+        "total": 2,
+        "score": 0
+      },
+      "SOFTWARE_BUILDER": {
+        "correct": 1,
+        "total": 1,
+        "score": 1
+      },
+      "WIRELESS_6G": {
+        "correct": 1,
+        "total": 2,
+        "score": 0.5
+      }
+    },
+    "label": "post_parser_stratified_12x2"
+  },
+  "probe": {
+    "canRunRealInference": true,
+    "memoryBudgetOk": true,
+    "freeRamMb": 1166,
+    "metricsMode": "measured"
+  },
+  "claim_boundary": "Real llama.cpp MCQ attempts on student materials only. Isolated grade after submission. Only MASTERY_002_REAL_RUNTIME_12C counts toward curriculum mastery.",
+  "items_graded": 17,
+  "parseable_only_score": 0.23529411764705882,
+  "score_delta_vs_baseline": {
+    "baseline_MASTERY_002_REAL_RUNTIME_12C": 0.16666666666666666,
+    "post_parser_honest": 0.16666666666666666,
+    "delta": 0.0,
+    "label": "EVALUATION_BUG_FIXED",
+    "note": "Parser no longer auto-submits A from prompt echo; failures counted as incorrect. Score movement from eval hygiene is NOT MODEL_KNOWLEDGE_IMPROVED.",
+    "MODEL_KNOWLEDGE_IMPROVED": false,
+    "EVALUATION_BUG_FIXED": true
+  }
+}
