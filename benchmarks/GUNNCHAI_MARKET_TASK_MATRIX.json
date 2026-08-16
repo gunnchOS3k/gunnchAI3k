@@ -3,7 +3,7 @@
   "packet": "AI-USER-READY-004",
   "dated": "2026-08-15",
   "accepted_main_base": "da733a9",
-  "doctrine": "Map market executable classes onto gunnchAI3k. coverage_status COMPLETE|PARTIAL|OPEN. implemented=true only for COMPLETE. SmolLM2-135M Q4_K_M 512-ctx is Nano fallback only. HUMAN_E6=false. GUNNCHAI_APP_PRODUCT_COMPLETE=false. GUNNCHAI_FRONTIER_PRODUCT_PARITY=false. Quality beats inflated counts. AI-USER-READY-004 remediations: 008 cowrite COMPLETE; 009 agents PARTIAL (string-template invoke ≠ tool execution); 010 synthetic voice PARTIAL; 011 OCR≠VLM PARTIAL; 012 computer-use PARTIAL (in-memory a11y mock ≠ OS automation); 014 audio PARTIAL (hash→sine WAV ≠ real TTS); 015 companion PARTIAL (static HTML ≠ button→backend wiring); Local Pro LOCAL_PRO_RESOURCE_PENDING when unsafe.",
+  "doctrine": "Map market executable classes onto gunnchAI3k. coverage_status COMPLETE|PARTIAL|OPEN. implemented=true only for COMPLETE. SmolLM2-135M Q4_K_M 512-ctx is Nano fallback only. HUMAN_E6=false. GUNNCHAI_APP_PRODUCT_COMPLETE=false. GUNNCHAI_FRONTIER_PRODUCT_PARITY=false. Quality beats inflated counts. AI-USER-READY-004 remediations: 008 cowrite COMPLETE; 009 agents PARTIAL (string-template invoke ≠ tool execution); 010 synthetic voice PARTIAL; 011 OCR≠VLM PARTIAL; 012 computer-use PARTIAL (in-memory a11y mock ≠ OS automation); 014 audio PARTIAL (hash→sine WAV ≠ real TTS); 015 companion COMPLETE digital (button→backend.v1 wired; HUMAN_E6 false); Local Pro LOCAL_PRO_RESOURCE_PENDING when unsafe.",
   "device_profiles": [
     "student_14_5",
     "handheld_hybrid",
@@ -369,7 +369,7 @@
       ],
       "local_required": true,
       "cloud_optional": false,
-      "implemented": false,
+      "implemented": true,
       "actual_runtime_test": "tests/user-ready/ai004_surfaces.test.ts",
       "quality_metric": "button_to_backend_wired_companion_surfaces",
       "privacy_requirement": "OS-integrated companion surfaces; HUMAN_E6 false without human polish",
@@ -378,9 +378,9 @@
         "handheld_hybrid",
         "ds_xl_coder"
       ],
-      "evidence": "src/user-ready/companion_ui.ts renders static HTML surface list; pixels=VISUAL UNAVAILABLE; humanPolishValidated=false. No button→backend wiring.",
-      "gap": "PARTIAL: static HTML surface catalog ≠ wired companion UI. COMPLETE requires real button→backend handlers for conversation/workspace/skills/memory/voice/consent/privacy/offline.",
-      "coverage_status": "PARTIAL"
+      "evidence": "src/user-ready/companion_ui.ts + companion_backend.ts: HTML buttons dispatch to companion_backend.v1 for all required surfaces; audit jsonl; pixels=VISUAL UNAVAILABLE; humanPolishValidated=false.",
+      "gap": "HUMAN_E6 companion polish validation still OPEN. Digital button→backend wiring COMPLETE.",
+      "coverage_status": "COMPLETE"
     },
     {
       "task_id": "AI-UR-016",
@@ -408,7 +408,6 @@
     "AI-UR-011 neural VLM for vision COMPLETE (OCR heuristics remain PARTIAL)",
     "AI-UR-012 real allowlisted local OS/desktop automation COMPLETE",
     "AI-UR-014 real TTS speech audio overview COMPLETE",
-    "AI-UR-015 button→backend wired companion UI COMPLETE",
     "LOCAL_PRO hashed HOST_OBSERVED when resources safe",
     "HUMAN_E6 companion polish validation",
     "device-os pixel proof for companion/cowrite chrome"

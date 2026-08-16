@@ -84,17 +84,16 @@ describe('AI-USER-READY tokens + matrix honesty', () => {
     expect(complete).not.toContain('AI-UR-011');
     expect(complete).not.toContain('AI-UR-012');
     expect(complete).not.toContain('AI-UR-014');
-    expect(complete).not.toContain('AI-UR-015');
+    expect(complete).toContain('AI-UR-015');
     expect(partial.sort()).toEqual([
       'AI-UR-009',
       'AI-UR-010',
       'AI-UR-011',
       'AI-UR-012',
       'AI-UR-014',
-      'AI-UR-015',
     ]);
     expect(open).toEqual([]);
-    expect(complete).toHaveLength(10);
+    expect(complete).toHaveLength(11);
   });
 
   it('labels Nano as fallback only; Fast never uses 135M; Pro uses pinned hashed candidate', () => {
@@ -170,18 +169,17 @@ describe('AI-USER-READY-002 market packet', () => {
     expect(report.pixels).toBe(VISUAL_UNAVAILABLE);
     expect(report.stubChallengeFailures).toEqual([]);
     expect(report.coverage.required).toBe(16);
-    // Matrix living (004 remediated): 10 COMPLETE / 6 PARTIAL / 0 OPEN.
-    expect(report.coverage.complete).toBe(10);
-    expect(report.coverage.partial).toBe(6);
+    // Matrix living (STREAM-B companion wiring): 11 COMPLETE / 5 PARTIAL / 0 OPEN.
+    expect(report.coverage.complete).toBe(11);
+    expect(report.coverage.partial).toBe(5);
     expect(report.coverage.open).toBe(0);
-    expect(report.coverage.implemented).toBe(10);
+    expect(report.coverage.implemented).toBe(11);
     expect(report.coverage.partial_ids.sort()).toEqual([
       'AI-UR-009',
       'AI-UR-010',
       'AI-UR-011',
       'AI-UR-012',
       'AI-UR-014',
-      'AI-UR-015',
     ]);
     expect(report.coverage.open_ids).toEqual([]);
     const completePass = report.results.filter((r) =>

@@ -352,18 +352,21 @@ export async function runUserReady004Packet(
     chrome.ok &&
     chrome.surfaces.length >= 8 &&
     chrome.humanPolishValidated === false &&
+    chrome.buttonBackendWired === true &&
     chrome.pixels === VISUAL_UNAVAILABLE &&
     Boolean(chrome.htmlPath) &&
     fs.existsSync(chrome.htmlPath!) &&
-    /data-surface="voice"/.test(fs.readFileSync(chrome.htmlPath!, 'utf8'));
+    /data-surface="voice"/.test(fs.readFileSync(chrome.htmlPath!, 'utf8')) &&
+    /data-action=/.test(fs.readFileSync(chrome.htmlPath!, 'utf8')) &&
+    /__gunnchaiCompanionDispatch/.test(fs.readFileSync(chrome.htmlPath!, 'utf8'));
   const companionEvidence = {
     surfaceIds: chrome.surfaces.map((s) => s.id),
     htmlPath: chrome.htmlPath,
     pixels: chrome.pixels,
     humanPolishValidated: chrome.humanPolishValidated,
-    buttonBackendWired: false,
-    stack: 'static_html_surface_catalog',
-    completeness: 'PARTIAL' as const,
+    buttonBackendWired: chrome.buttonBackendWired,
+    stack: 'companion_backend.v1',
+    completeness: companionPassed ? ('COMPLETE' as const) : ('PARTIAL' as const),
   };
   results.push({
     task_id: 'AI-UR-015',
@@ -372,7 +375,7 @@ export async function runUserReady004Packet(
     local: true,
     cloud_only: false,
     notes: companionPassed
-      ? 'PARTIAL: static HTML surface catalog for companion areas exists; no button→backend wiring. HUMAN polish not validated.'
+      ? 'COMPLETE digital: HTML buttons dispatch to companion_backend.v1 for all required surfaces. HUMAN_E6 polish remains false.'
       : 'COMPANION_INCOMPLETE',
     evidence: companionEvidence,
   });
@@ -469,8 +472,7 @@ export async function runUserReady004Packet(
     'AI-UR-011 neural VLM weights/provider for vision COMPLETE',
     'AI-UR-012 real allowlisted OS/desktop automation (a11y mock stays PARTIAL)',
     'AI-UR-014 real TTS speech (hash→sine WAV stays PARTIAL)',
-    'AI-UR-015 button→backend companion wiring (static HTML stays PARTIAL)',
-    'HUMAN_E6 companion polish validation',
+    'HUMAN_E6 companion polish validation (AI-UR-015 digital wiring COMPLETE; polish not human-validated)',
   ];
 
   const report: UserReady004Report = {
@@ -517,8 +519,9 @@ export async function runUserReady004Packet(
       computer_use_real_os_automation: false,
       audio_overview_partial: audioPassed,
       audio_real_tts_speech: false,
-      companion_partial: companionPassed,
-      companion_button_backend_wired: false,
+      companion_partial: false,
+      companion_complete_digital: companionPassed,
+      companion_button_backend_wired: companionEvidence.buttonBackendWired,
       vision_partial: visionRow?.passed ?? false,
       vision_neural_vlm: false,
       local_fast: results.find((r) => r.task_id === 'AI-UR-016')?.passed ?? false,
