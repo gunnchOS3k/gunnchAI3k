@@ -194,6 +194,10 @@ export async function runGunnchaiRuntimeSolver(opts?: {
   skipInference?: boolean;
   freezeBaseline?: boolean;
   label?: string;
+  /** Override default 12C family for course-specific runs (e.g. COMM_PD). */
+  scoreFamilyId?: string;
+  /** When false, do not overwrite artifacts/waike-mastery/GUNNCHAI_RUNTIME_SOLVER.json (12C tip). */
+  writePrimarySolverArtifact?: boolean;
 }): Promise<Record<string, unknown>> {
   const cwd = opts?.cwd || process.cwd();
   const perCourse = opts?.perCourse === undefined ? 2 : opts.perCourse;
@@ -481,7 +485,7 @@ export async function runGunnchaiRuntimeSolver(opts?: {
     schema: 'gunnchai.waike_runtime_solver.v1',
     status: (attempts.length ? 'OK' : 'PARTIAL') as SolverStatus,
     solver: 'gunnchai_llamacpp_v1',
-    score_family_id: 'MASTERY_002_REAL_RUNTIME_12C',
+    score_family_id: opts?.scoreFamilyId || 'MASTERY_002_REAL_RUNTIME_12C',
     model: probe.ggufPath,
     binary: probe.binaryOrModule,
     parser_version: CHOICE_PARSER_VERSION,
@@ -539,7 +543,10 @@ export async function runGunnchaiRuntimeSolver(opts?: {
 
   const outDir = path.join(cwd, 'artifacts', 'waike-mastery');
   fs.mkdirSync(outDir, { recursive: true });
-  fs.writeFileSync(path.join(outDir, 'GUNNCHAI_RUNTIME_SOLVER.json'), JSON.stringify(out, null, 2) + '\n');
+  const writePrimary = opts?.writePrimarySolverArtifact !== false;
+  if (writePrimary) {
+    fs.writeFileSync(path.join(outDir, 'GUNNCHAI_RUNTIME_SOLVER.json'), JSON.stringify(out, null, 2) + '\n');
+  }
   if (opts?.label) {
     const safe = opts.label.replace(/[^a-zA-Z0-9_-]+/g, '_');
     fs.writeFileSync(

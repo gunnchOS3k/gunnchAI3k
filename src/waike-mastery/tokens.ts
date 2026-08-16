@@ -21,6 +21,8 @@ export const SCORE_FAMILY = {
   MASTERY_002_HEURISTIC_12C: 'MASTERY_002_HEURISTIC_12C',
   /** ONLY this family counts toward actual curriculum mastery. */
   MASTERY_002_REAL_RUNTIME_12C: 'MASTERY_002_REAL_RUNTIME_12C',
+  /** COMM_PD-only runtime family — NEVER blend into historical 12C 0.30833. */
+  MASTERY_002_COMM_PD_ETHICS_RUNTIME: 'MASTERY_002_COMM_PD_ETHICS_RUNTIME',
 } as const;
 
 export const MASTERY_001_HEURISTIC_9C = 0.6442307692307693;

@@ -1,0 +1,408 @@
+{
+  "schema": "gunnchai.waike_runtime_solver.v1",
+  "status": "OK",
+  "solver": "gunnchai_llamacpp_v1",
+  "score_family_id": "MASTERY_002_COMM_PD_ETHICS_RUNTIME",
+  "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+  "binary": "/opt/homebrew/bin/llama-cli",
+  "parser_version": "gunnchai.choice_parser.v2_final_only",
+  "used_instructor_keys_during_solve": false,
+  "self_graded": false,
+  "answer_key_matched": false,
+  "grading_agent": "isolated_after_submission",
+  "items_loaded": 10,
+  "items_attempted": 10,
+  "items_graded": 10,
+  "items_correct": 4,
+  "parser_failures": 0,
+  "overall_score": 0.4,
+  "parseable_only_score": 0.4,
+  "per_course": {
+    "COMM_PD_ETHICS": {
+      "correct": 4,
+      "total": 10,
+      "score": 0.4
+    }
+  },
+  "per_assessment_type": {
+    "quiz": {
+      "correct": 4,
+      "total": 10,
+      "score": 0.4
+    }
+  },
+  "failure_rates": {
+    "parser": 0,
+    "reasoning": 0,
+    "knowledge": 0.6,
+    "tool_required": 0,
+    "instruction": 0,
+    "calculation": 0,
+    "concept_confusion": 0,
+    "prerequisite": 0
+  },
+  "attempts_sample": [
+    {
+      "item_id": "COMM_PD_ETHICS:pd-w1-1",
+      "course_id": "COMM_PD_ETHICS",
+      "choice": 3,
+      "parse": {
+        "index": 3,
+        "letter": "D",
+        "confidence": "high",
+        "matched_via": "final_marker",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "Final: D",
+      "runtimeError": null,
+      "latency_ms": 1351,
+      "tool_assist": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only",
+        "infer_path": "lean_mcq_v1"
+      }
+    },
+    {
+      "item_id": "COMM_PD_ETHICS:pd-w1-2",
+      "course_id": "COMM_PD_ETHICS",
+      "choice": 1,
+      "parse": {
+        "index": 1,
+        "letter": "B",
+        "confidence": "high",
+        "matched_via": "final_marker",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "Final: B",
+      "runtimeError": null,
+      "latency_ms": 1072,
+      "tool_assist": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only",
+        "infer_path": "lean_mcq_v1"
+      }
+    },
+    {
+      "item_id": "COMM_PD_ETHICS:pd-w1-3",
+      "course_id": "COMM_PD_ETHICS",
+      "choice": 2,
+      "parse": {
+        "index": 2,
+        "letter": "C",
+        "confidence": "high",
+        "matched_via": "final_marker",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "Final: C",
+      "runtimeError": null,
+      "latency_ms": 791,
+      "tool_assist": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only",
+        "infer_path": "lean_mcq_v1"
+      }
+    },
+    {
+      "item_id": "COMM_PD_ETHICS:pd-w1-4",
+      "course_id": "COMM_PD_ETHICS",
+      "choice": 2,
+      "parse": {
+        "index": 2,
+        "letter": "C",
+        "confidence": "high",
+        "matched_via": "final_marker",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "Final: C",
+      "runtimeError": null,
+      "latency_ms": 698,
+      "tool_assist": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only",
+        "infer_path": "lean_mcq_v1"
+      }
+    },
+    {
+      "item_id": "COMM_PD_ETHICS:pd-w1-5",
+      "course_id": "COMM_PD_ETHICS",
+      "choice": 2,
+      "parse": {
+        "index": 2,
+        "letter": "C",
+        "confidence": "high",
+        "matched_via": "final_marker",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "Final: C",
+      "runtimeError": null,
+      "latency_ms": 720,
+      "tool_assist": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only",
+        "infer_path": "lean_mcq_v1"
+      }
+    },
+    {
+      "item_id": "COMM_PD_ETHICS:pd-w1-6",
+      "course_id": "COMM_PD_ETHICS",
+      "choice": 0,
+      "parse": {
+        "index": 0,
+        "letter": "A",
+        "confidence": "high",
+        "matched_via": "trailing_lone_letter",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "<letter>\nLesson notes:\n# Week 1: Consent on the walk-up desk \u2014 name audience and purpose\nHarbor Desk Voice opens with a consent card, not a slogan. When a patron asks the desk AI tutor for help on ticket PD-2101, you must say who hears the log, why it is kept, which data classes are stored, how many days it lives, and how to opt out. 'Everyone' is not an audience. 'Improve the product' is n ... (t",
+      "runtimeError": null,
+      "latency_ms": 726,
+      "tool_assist": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only",
+        "infer_path": "lean_mcq_v1"
+      }
+    },
+    {
+      "item_id": "COMM_PD_ETHICS:pd-w2-1",
+      "course_id": "COMM_PD_ETHICS",
+      "choice": 2,
+      "parse": {
+        "index": 2,
+        "letter": "C",
+        "confidence": "high",
+        "matched_via": "final_marker",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "Final: C",
+      "runtimeError": null,
+      "latency_ms": 728,
+      "tool_assist": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only",
+        "infer_path": "lean_mcq_v1"
+      }
+    },
+    {
+      "item_id": "COMM_PD_ETHICS:pd-w2-2",
+      "course_id": "COMM_PD_ETHICS",
+      "choice": 1,
+      "parse": {
+        "index": 1,
+        "letter": "B",
+        "confidence": "high",
+        "matched_via": "final_marker",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "Final: B",
+      "runtimeError": null,
+      "latency_ms": 757,
+      "tool_assist": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only",
+        "infer_path": "lean_mcq_v1"
+      }
+    },
+    {
+      "item_id": "COMM_PD_ETHICS:pd-w2-3",
+      "course_id": "COMM_PD_ETHICS",
+      "choice": 0,
+      "parse": {
+        "index": 0,
+        "letter": "A",
+        "confidence": "high",
+        "matched_via": "trailing_lone_letter",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "<letter>\nLesson notes:\n# Week 1: Consent on the walk-up desk \u2014 name audience and purpose\nHarbor Desk Voice opens with a consent card, not a slogan. When a patron asks the desk AI tutor for help on ticket PD-2101, you must say who hears the log, why it is kept, which data classes are stored, how many days it lives, and how to opt out. 'Everyone' is not an audience. 'Improve the product' is n ... (t",
+      "runtimeError": null,
+      "latency_ms": 694,
+      "tool_assist": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only",
+        "infer_path": "lean_mcq_v1"
+      }
+    },
+    {
+      "item_id": "COMM_PD_ETHICS:pd-w2-4",
+      "course_id": "COMM_PD_ETHICS",
+      "choice": 0,
+      "parse": {
+        "index": 0,
+        "letter": "A",
+        "confidence": "high",
+        "matched_via": "trailing_lone_letter",
+        "parser_version": "gunnchai.choice_parser.v2_final_only"
+      },
+      "raw": "<letter>\nLesson notes:\n# Week 1: Consent on the walk-up desk \u2014 name audience and purpose\nHarbor Desk Voice opens with a consent card, not a slogan. When a patron asks the desk AI tutor for help on ticket PD-2101, you must say who hears the log, why it is kept, which data classes are stored, how many days it lives, and how to opt out. 'Everyone' is not an audience. 'Improve the product' is n ... (t",
+      "runtimeError": null,
+      "latency_ms": 679,
+      "tool_assist": null,
+      "artifact": {
+        "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "binary": "/opt/homebrew/bin/llama-cli",
+        "parser_version": "gunnchai.choice_parser.v2_final_only",
+        "infer_path": "lean_mcq_v1"
+      }
+    }
+  ],
+  "failure_taxonomy": {
+    "miss_count": 6,
+    "samples": [
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "retention_days 0 should?",
+        "course_id": "COMM_PD_ETHICS",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "Audience 'everyone' is?",
+        "course_id": "COMM_PD_ETHICS",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "Opt-out path missing means?",
+        "course_id": "COMM_PD_ETHICS",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "When conflict_present true, recuse must be?",
+        "course_id": "COMM_PD_ETHICS",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "disclose_to empty should?",
+        "course_id": "COMM_PD_ETHICS",
+        "assessment_kind": "quiz"
+      },
+      {
+        "failure_code": "MODEL_KNOWLEDGE_GAP",
+        "first_divergence": "answer_selection",
+        "stem_excerpt": "Scenario under 40 chars?",
+        "course_id": "COMM_PD_ETHICS",
+        "assessment_kind": "quiz"
+      }
+    ],
+    "census": {
+      "schema": "gunnchai.failure_census.v1",
+      "miss_count": 6,
+      "counts": {
+        "MODEL_KNOWLEDGE_GAP": 6
+      },
+      "by_course": {
+        "COMM_PD_ETHICS": {
+          "MODEL_KNOWLEDGE_GAP": 6
+        }
+      },
+      "by_assessment_type": {
+        "quiz": {
+          "MODEL_KNOWLEDGE_GAP": 6
+        }
+      },
+      "by_skill": {},
+      "largest_classes": [
+        {
+          "code": "MODEL_KNOWLEDGE_GAP",
+          "n": 6
+        }
+      ],
+      "taxonomy": [
+        "PARSER_FAILURE",
+        "MODEL_KNOWLEDGE_GAP",
+        "PREREQUISITE_GAP",
+        "CONCEPT_CONFUSION",
+        "REASONING_FAILURE",
+        "CALCULATION_FAILURE",
+        "INSTRUCTION_INTERPRETATION_FAILURE",
+        "TOOL_REQUIRED_NOT_USED",
+        "TOOL_SELECTION_FAILURE",
+        "TOOL_EXECUTION_FAILURE",
+        "SOURCE_GROUNDING_FAILURE",
+        "CONTEXT_LIMIT_FAILURE",
+        "PROMPT_FORMAT_FAILURE",
+        "AMBIGUOUS_ITEM",
+        "CURRICULUM_DEFECT_CANDIDATE",
+        "GRADER_DEFECT_CANDIDATE",
+        "UNKNOWN",
+        "VOCABULARY_FAILURE",
+        "TRANSFER_FAILURE",
+        "DEBUGGING_FAILURE",
+        "CODE_FAILURE",
+        "RUBRIC_FAILURE",
+        "PARTIAL_COMPLETION",
+        "CARELESS_ERROR",
+        "ACCESSIBILITY_BARRIER",
+        "AMBIGUOUS_PROMPT",
+        "POLICY_BLOCKED",
+        "RESOURCE_BLOCKED",
+        "DIAGNOSIS_UNCERTAIN"
+      ]
+    }
+  },
+  "corpus": {
+    "discoverable_courses": 13,
+    "course_ids": [
+      "AI_ML_EDGE",
+      "CLOUD_DEVOPS",
+      "COMM_PD_ETHICS",
+      "COMPUTER_NETWORKING",
+      "CYBERSECURITY",
+      "DATA_VIZ_BI",
+      "GAME_DEV_INTERACTIVE",
+      "GENERAL_IT",
+      "HARDWARE_ENGINEERING",
+      "PM_AGILE_LSS",
+      "ROBOTICS_CONTROL",
+      "SOFTWARE_BUILDER",
+      "WIRELESS_6G"
+    ],
+    "hardcoded_course_names": false,
+    "sample_per_course": {
+      "COMM_PD_ETHICS": {
+        "correct": 4,
+        "total": 10,
+        "score": 0.4
+      }
+    },
+    "label": "comm_pd_ethics_runtime_b_pkt_002"
+  },
+  "probe": {
+    "canRunRealInference": true,
+    "memoryBudgetOk": true,
+    "freeRamMb": 910,
+    "metricsMode": "measured"
+  },
+  "tool_assist": {
+    "required_items": 0,
+    "assisted_ok": 0,
+    "note": "Curriculum tool assist on calc-like stems; computation only \u2014 not answer-key feed."
+  },
+  "infer_path": "lean_mcq_v1",
+  "claim_boundary": "COMM_PD_ETHICS-only llama.cpp MCQ sample. score_family_id=MASTERY_002_COMM_PD_ETHICS_RUNTIME. Does not replace or blend into MASTERY_002_REAL_RUNTIME_12C (historical 120-item 0.30833). Primary GUNNCHAI_RUNTIME_SOLVER.json remains the 12C tip artifact."
+}

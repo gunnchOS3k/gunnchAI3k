@@ -32,5 +32,20 @@
     "note": "Larger-sample held-out estimate; does not alter REAL_SOLVER_BASELINE_V1≈0.167."
   },
   "no_blended_average": true,
-  "note": "Heuristics must never replace or average into MASTERY_002_REAL_RUNTIME_12C."
+  "note": "Heuristics must never replace or average into MASTERY_002_REAL_RUNTIME_12C. COMM_PD family is additive and unblended.",
+  "MASTERY_002_COMM_PD_ETHICS_RUNTIME": {
+    "id": "MASTERY_002_COMM_PD_ETHICS_RUNTIME",
+    "score": 0.4,
+    "role": "course_specific_runtime_unblended",
+    "solver": "gunnchai_llamacpp_v1",
+    "course_id": "COMM_PD_ETHICS",
+    "counts_toward_curriculum_mastery": false,
+    "items_attempted": 10,
+    "items_correct": 4,
+    "parser_failures": 0,
+    "sample": "COMM_PD_ETHICS_only_b_pkt_002",
+    "blended_into_historical_12c": false,
+    "historical_12c_preserved": 0.30833333333333335,
+    "note": "NEW versioned COMM_PD-only family. Do not average into MASTERY_002_REAL_RUNTIME_12C."
+  }
 }

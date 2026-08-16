@@ -1,0 +1,382 @@
+{
+  "schema": "gunnchai.comm_pd_ethics_consumption.v1",
+  "packet": "STREAM-B-PKT-002",
+  "course_id": "COMM_PD_ETHICS",
+  "discovery": {
+    "method": "filesystem_scan",
+    "hardcoded_course_names": false,
+    "course_count": 13,
+    "found": true,
+    "lab_ids": [
+      "lab_accessibility_comm",
+      "lab_ai_disclosure_modes",
+      "lab_attribution_cite",
+      "lab_conflict_interest",
+      "lab_consent_disclosure",
+      "lab_ethics_ladder",
+      "lab_feedback_rubric",
+      "lab_meeting_minutes",
+      "lab_pd_capstone",
+      "lab_professional_comm"
+    ],
+    "weeks": 10
+  },
+  "lesson_grounding": {
+    "ok": true,
+    "lesson_id": "COMM_PD_ETHICS-w01",
+    "title": "Week 1: Consent on the walk-up desk — name audience and purpose",
+    "excerpt": "# Week 1: Consent on the walk-up desk — name audience and purpose\n\nHarbor Desk Voice opens with a consent card, not a slogan. When a patron asks the desk AI tutor for help on ticket PD-2101, you must say who hears the log, why it is kept, which data classes are stored, how many d",
+    "path": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/waike-research-ops/curriculum/digital_rc/COMM_PD_ETHICS/weeks/w01/lesson.md"
+  },
+  "socratic": {
+    "mode": "LEARNER_TUTOR",
+    "socratic": true,
+    "prompts": [
+      "What did you observe in \"Week 1: Consent on the walk-up desk — name audience and purpose\" before you inferred a cause?",
+      "Name the audience and purpose before enabling any desk AI logging.",
+      "If mentoring and scoring collide, what two actions does Harbor Desk require?",
+      "Which ladder rung is still missing before you change a shared system?"
+    ],
+    "discloses_final_answers": false
+  },
+  "tools": {
+    "tools": [
+      {
+        "id": "consent_field_check",
+        "ok": true,
+        "detail": "audience/purpose/retention present; no SSN class"
+      },
+      {
+        "id": "ethics_ladder_order",
+        "ok": true,
+        "detail": "observation→inference→need→action fields present"
+      },
+      {
+        "id": "key_leak_guard",
+        "ok": true,
+        "detail": "learner tools never open instructor key store"
+      }
+    ],
+    "used_instructor_keys": false
+  },
+  "misconception": {
+    "schema": "gunnchai.misconception_diagnosis_suite.v1",
+    "course_id": "COMM_PD_ETHICS",
+    "cases": [
+      {
+        "item_id": "mis-prereq",
+        "hypothesized_failure": "PREREQUISITE_GAP",
+        "skill_id": "skill:COMM_PD_ETHICS:w02",
+        "feedback": "Focus next on skill:COMM_PD_ETHICS:w02. Try an isomorphic practice item, then reassess.",
+        "demeaning_label_used": false
+      },
+      {
+        "item_id": "mis-concept",
+        "hypothesized_failure": "CONCEPT_CONFUSION",
+        "skill_id": "skill:COMM_PD_ETHICS:w02",
+        "feedback": "Focus next on skill:COMM_PD_ETHICS:w02. Try an isomorphic practice item, then reassess.",
+        "demeaning_label_used": false
+      },
+      {
+        "item_id": "mis-calc",
+        "hypothesized_failure": "CALCULATION_FAILURE",
+        "skill_id": "skill:COMM_PD_ETHICS:w02",
+        "feedback": "Focus next on skill:COMM_PD_ETHICS:w02. Try an isomorphic practice item, then reassess.",
+        "demeaning_label_used": false
+      },
+      {
+        "item_id": "mis-instr",
+        "hypothesized_failure": "INSTRUCTION_INTERPRETATION_FAILURE",
+        "skill_id": "skill:COMM_PD_ETHICS:w02",
+        "feedback": "Focus next on skill:COMM_PD_ETHICS:w02. Try an isomorphic practice item, then reassess.",
+        "demeaning_label_used": false
+      }
+    ],
+    "HUMAN_LEARNING_CLAIMED": false
+  },
+  "remediation": {
+    "schema": "gunnchai.remediation_transfer.v1",
+    "engine_version": "gunnchai.remediation_engine.v1",
+    "course_id": "COMM_PD_ETHICS",
+    "item_id": "COMM_PD_ETHICS:rem-ladder",
+    "steps": [
+      {
+        "step": "FAIL",
+        "ok": true,
+        "detail": "Gap identified on machine-graded miss"
+      },
+      {
+        "step": "PREREQ",
+        "ok": true,
+        "detail": "Revisit skill:COMM_PD_ETHICS:w01 prerequisites"
+      },
+      {
+        "step": "EXPLANATION",
+        "ok": true,
+        "detail": "Gap on skill:COMM_PD_ETHICS:w01 — revisit prerequisites before new content."
+      },
+      {
+        "step": "ANALOG",
+        "ok": true,
+        "detail": "Worked analog example (no answer-key dump)"
+      },
+      {
+        "step": "UNSEEN",
+        "ok": true,
+        "detail": "Unseen isomorphic item correct"
+      },
+      {
+        "step": "TRANSFER",
+        "ok": true,
+        "detail": "Transfer item correct"
+      }
+    ],
+    "REMEDIATION_SUCCESS": true,
+    "MEMORIZATION": false,
+    "transfer_ok": true,
+    "unseen_ok": true,
+    "HUMAN_LEARNING_CLAIMED": false,
+    "evidence_state": "CERTAINLY_FILLED",
+    "synthetic_learner_delta": {
+      "pre_score": 0.4,
+      "post_score": 0.7,
+      "delta": 0.29999999999999993,
+      "note": "Synthetic opaque learner delta only — not a human learning claim."
+    }
+  },
+  "remediation_loop": {
+    "finalEvidenceState": "CERTAINLY_FILLED",
+    "states": [
+      "GAP_IDENTIFIED",
+      "REMEDIATION_ASSIGNED",
+      "PRACTICE_IN_PROGRESS",
+      "REASSESSED",
+      "TRANSFER_CHECKED",
+      "CERTAINLY_FILLED"
+    ],
+    "steps": [
+      {
+        "step": "DIAGNOSE",
+        "evidenceState": "GAP_IDENTIFIED"
+      },
+      {
+        "step": "ASSIGN",
+        "evidenceState": "REMEDIATION_ASSIGNED"
+      },
+      {
+        "step": "PRACTICE",
+        "evidenceState": "PRACTICE_IN_PROGRESS"
+      },
+      {
+        "step": "REASSESS",
+        "evidenceState": "REASSESSED"
+      },
+      {
+        "step": "TRANSFER",
+        "evidenceState": "TRANSFER_CHECKED"
+      },
+      {
+        "step": "CLOSE",
+        "evidenceState": "CERTAINLY_FILLED"
+      }
+    ]
+  },
+  "educator_copilot": {
+    "evidence": {
+      "schema": "gunnchai.educator_copilot_evidence.v1",
+      "course_id": "COMM_PD_ETHICS",
+      "intents_covered": [
+        "planning",
+        "first_time_teacher",
+        "live_support",
+        "grading_assist",
+        "feedback",
+        "analytics"
+      ],
+      "sessions": [
+        {
+          "mode": "EDUCATOR_COPILOT",
+          "courseId": "COMM_PD_ETHICS",
+          "intent": "planning",
+          "actions": [
+            "Map hook → lab → quiz",
+            "Check skill-graph prerequisites"
+          ],
+          "permissions": {
+            "mayReadStudentMaterials": true,
+            "mayReadInstructorKeys": true,
+            "maySelfGrade": false,
+            "mayPublishGradesWithoutHuman": false,
+            "hitlGradingRequired": true,
+            "mayDiscloseFinalAnswersToLearner": false,
+            "gradingAgent": "hitl"
+          },
+          "hitlGradingRequired": true,
+          "autoPublishGrades": false,
+          "publishWithoutHumanBlocked": true
+        },
+        {
+          "mode": "EDUCATOR_COPILOT",
+          "courseId": "COMM_PD_ETHICS",
+          "intent": "first_time_teacher",
+          "actions": [
+            "Read instructor packet offline",
+            "Demo empty-lab fail"
+          ],
+          "permissions": {
+            "mayReadStudentMaterials": true,
+            "mayReadInstructorKeys": true,
+            "maySelfGrade": false,
+            "mayPublishGradesWithoutHuman": false,
+            "hitlGradingRequired": true,
+            "mayDiscloseFinalAnswersToLearner": false,
+            "gradingAgent": "hitl"
+          },
+          "hitlGradingRequired": true,
+          "autoPublishGrades": false,
+          "publishWithoutHumanBlocked": true
+        },
+        {
+          "mode": "EDUCATOR_COPILOT",
+          "courseId": "COMM_PD_ETHICS",
+          "intent": "live_support",
+          "actions": [
+            "Socratic learner channel",
+            "Never paste answer keys to learners"
+          ],
+          "permissions": {
+            "mayReadStudentMaterials": true,
+            "mayReadInstructorKeys": true,
+            "maySelfGrade": false,
+            "mayPublishGradesWithoutHuman": false,
+            "hitlGradingRequired": true,
+            "mayDiscloseFinalAnswersToLearner": false,
+            "gradingAgent": "hitl"
+          },
+          "hitlGradingRequired": true,
+          "autoPublishGrades": false,
+          "publishWithoutHumanBlocked": true
+        },
+        {
+          "mode": "EDUCATOR_COPILOT",
+          "courseId": "COMM_PD_ETHICS",
+          "intent": "grading_assist",
+          "actions": [
+            "Propose rubric scores",
+            "Require human confirm before publish"
+          ],
+          "permissions": {
+            "mayReadStudentMaterials": true,
+            "mayReadInstructorKeys": true,
+            "maySelfGrade": false,
+            "mayPublishGradesWithoutHuman": false,
+            "hitlGradingRequired": true,
+            "mayDiscloseFinalAnswersToLearner": false,
+            "gradingAgent": "hitl"
+          },
+          "hitlGradingRequired": true,
+          "autoPublishGrades": false,
+          "publishWithoutHumanBlocked": true
+        },
+        {
+          "mode": "EDUCATOR_COPILOT",
+          "courseId": "COMM_PD_ETHICS",
+          "intent": "feedback",
+          "actions": [
+            "Skill-focused comments only",
+            "No demeaning labels"
+          ],
+          "permissions": {
+            "mayReadStudentMaterials": true,
+            "mayReadInstructorKeys": true,
+            "maySelfGrade": false,
+            "mayPublishGradesWithoutHuman": false,
+            "hitlGradingRequired": true,
+            "mayDiscloseFinalAnswersToLearner": false,
+            "gradingAgent": "hitl"
+          },
+          "hitlGradingRequired": true,
+          "autoPublishGrades": false,
+          "publishWithoutHumanBlocked": true
+        },
+        {
+          "mode": "EDUCATOR_COPILOT",
+          "courseId": "COMM_PD_ETHICS",
+          "intent": "analytics",
+          "actions": [
+            "Aggregate by domain",
+            "Opaque learner refs"
+          ],
+          "permissions": {
+            "mayReadStudentMaterials": true,
+            "mayReadInstructorKeys": true,
+            "maySelfGrade": false,
+            "mayPublishGradesWithoutHuman": false,
+            "hitlGradingRequired": true,
+            "mayDiscloseFinalAnswersToLearner": false,
+            "gradingAgent": "hitl"
+          },
+          "hitlGradingRequired": true,
+          "autoPublishGrades": false,
+          "publishWithoutHumanBlocked": true
+        }
+      ],
+      "grade_assist": {
+        "mode": "EDUCATOR_COPILOT",
+        "courseId": "COMM_PD_ETHICS",
+        "proposedScore": 0.72,
+        "status": "AWAITING_HUMAN_CONFIRM",
+        "published": false,
+        "hitlRequired": true
+      },
+      "hitl_ok": true,
+      "publish_blocked": true,
+      "HUMAN_LEARNING_CLAIMED": false,
+      "note": "Educator surfaces only; no auto-publish; no demeaning labels; keys never to learners."
+    },
+    "live_support": {
+      "mode": "EDUCATOR_COPILOT",
+      "courseId": "COMM_PD_ETHICS",
+      "intent": "live_support",
+      "actions": [
+        "Socratic learner channel",
+        "Never paste answer keys to learners"
+      ],
+      "permissions": {
+        "mayReadStudentMaterials": true,
+        "mayReadInstructorKeys": true,
+        "maySelfGrade": false,
+        "mayPublishGradesWithoutHuman": false,
+        "hitlGradingRequired": true,
+        "mayDiscloseFinalAnswersToLearner": false,
+        "gradingAgent": "hitl"
+      },
+      "hitlGradingRequired": true,
+      "autoPublishGrades": false,
+      "publishWithoutHumanBlocked": true
+    },
+    "grade_assist": {
+      "mode": "EDUCATOR_COPILOT",
+      "courseId": "COMM_PD_ETHICS",
+      "proposedScore": 0.8,
+      "status": "AWAITING_HUMAN_CONFIRM",
+      "published": false,
+      "hitlRequired": true
+    }
+  },
+  "gunnchai_contract_present": true,
+  "key_leak_guard": {
+    "LEARNER_TUTOR_blocked": true,
+    "MASTERY_BENCHMARK_blocked": true,
+    "EDUCATOR_may_read_keys": true,
+    "WAIKE_AI_NO_KEY_LEAK_PASS": true
+  },
+  "score_family_id_for_eval": "MASTERY_002_COMM_PD_ETHICS_RUNTIME",
+  "historical_12c_untouched": true,
+  "historical_12c_family": "MASTERY_002_REAL_RUNTIME_12C",
+  "historical_12c_score": 0.30833333333333335,
+  "REAL_STUDENT": false,
+  "REAL_TEACHER": false,
+  "HUMAN_E6": false,
+  "claim_boundary": "COMM_PD_ETHICS consumption surfaces only. New COMM_PD score family is unblended with historical 120-item 0.30833. No instructor keys in learner modes."
+}
