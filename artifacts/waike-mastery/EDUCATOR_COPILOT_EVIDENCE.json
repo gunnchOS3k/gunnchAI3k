@@ -1,6 +1,6 @@
 {
   "schema": "gunnchai.educator_copilot_evidence.v1",
-  "course_id": "COMM_PD_ETHICS",
+  "course_id": "DATA_DASHBOARDS",
   "intents_covered": [
     "planning",
     "first_time_teacher",
@@ -12,7 +12,7 @@
   "sessions": [
     {
       "mode": "EDUCATOR_COPILOT",
-      "courseId": "COMM_PD_ETHICS",
+      "courseId": "DATA_DASHBOARDS",
       "intent": "planning",
       "actions": [
         "Map hook → lab → quiz",
@@ -33,7 +33,7 @@
     },
     {
       "mode": "EDUCATOR_COPILOT",
-      "courseId": "COMM_PD_ETHICS",
+      "courseId": "DATA_DASHBOARDS",
       "intent": "first_time_teacher",
       "actions": [
         "Read instructor packet offline",
@@ -54,7 +54,7 @@
     },
     {
       "mode": "EDUCATOR_COPILOT",
-      "courseId": "COMM_PD_ETHICS",
+      "courseId": "DATA_DASHBOARDS",
       "intent": "live_support",
       "actions": [
         "Socratic learner channel",
@@ -75,7 +75,7 @@
     },
     {
       "mode": "EDUCATOR_COPILOT",
-      "courseId": "COMM_PD_ETHICS",
+      "courseId": "DATA_DASHBOARDS",
       "intent": "grading_assist",
       "actions": [
         "Propose rubric scores",
@@ -96,7 +96,7 @@
     },
     {
       "mode": "EDUCATOR_COPILOT",
-      "courseId": "COMM_PD_ETHICS",
+      "courseId": "DATA_DASHBOARDS",
       "intent": "feedback",
       "actions": [
         "Skill-focused comments only",
@@ -117,7 +117,7 @@
     },
     {
       "mode": "EDUCATOR_COPILOT",
-      "courseId": "COMM_PD_ETHICS",
+      "courseId": "DATA_DASHBOARDS",
       "intent": "analytics",
       "actions": [
         "Aggregate by domain",
@@ -139,7 +139,7 @@
   ],
   "grade_assist": {
     "mode": "EDUCATOR_COPILOT",
-    "courseId": "COMM_PD_ETHICS",
+    "courseId": "DATA_DASHBOARDS",
     "proposedScore": 0.72,
     "status": "AWAITING_HUMAN_CONFIRM",
     "published": false,

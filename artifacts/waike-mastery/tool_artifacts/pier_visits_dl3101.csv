@@ -1,0 +1,4 @@
+visit_id,pier_bay,ts_utc,headcount
+v1,bay_a,2026-08-16T18:10:00Z,42
+v2,bay_b,2026-08-16T18:20:00Z,31
+v3,bay_a,2026-08-16T19:00:00Z,55

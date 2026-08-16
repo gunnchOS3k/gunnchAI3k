@@ -1,0 +1,456 @@
+{
+  "schema": "gunnchai.data_dashboards_mastery_delta.v1",
+  "packet": "STREAM-B-PKT-003",
+  "score_family_id": "MASTERY_003_DATA_DASHBOARDS_RUNTIME",
+  "score": 0.2,
+  "runtime": {
+    "schema": "gunnchai.waike_runtime_solver.v1",
+    "status": "OK",
+    "solver": "gunnchai_llamacpp_v1",
+    "score_family_id": "MASTERY_003_DATA_DASHBOARDS_RUNTIME",
+    "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+    "binary": "/opt/homebrew/bin/llama-cli",
+    "parser_version": "gunnchai.choice_parser.v2_final_only",
+    "used_instructor_keys_during_solve": false,
+    "self_graded": false,
+    "answer_key_matched": false,
+    "grading_agent": "isolated_after_submission",
+    "items_loaded": 10,
+    "items_attempted": 10,
+    "items_graded": 10,
+    "items_correct": 2,
+    "parser_failures": 0,
+    "overall_score": 0.2,
+    "parseable_only_score": 0.2,
+    "per_course": {
+      "DATA_DASHBOARDS": {
+        "correct": 2,
+        "total": 10,
+        "score": 0.2
+      }
+    },
+    "per_assessment_type": {
+      "quiz": {
+        "correct": 2,
+        "total": 10,
+        "score": 0.2
+      }
+    },
+    "failure_rates": {
+      "parser": 0,
+      "reasoning": 0,
+      "knowledge": 0.6,
+      "tool_required": 0,
+      "instruction": 0,
+      "calculation": 0,
+      "concept_confusion": 0.1,
+      "prerequisite": 0.1
+    },
+    "attempts_sample": [
+      {
+        "item_id": "DATA_DASHBOARDS:dl-w1-1",
+        "course_id": "DATA_DASHBOARDS",
+        "choice": 3,
+        "parse": {
+          "index": 3,
+          "letter": "D",
+          "confidence": "high",
+          "matched_via": "final_marker",
+          "parser_version": "gunnchai.choice_parser.v2_final_only"
+        },
+        "raw": "Final: D",
+        "runtimeError": null,
+        "latency_ms": 2134,
+        "tool_assist": null,
+        "artifact": {
+          "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+          "binary": "/opt/homebrew/bin/llama-cli",
+          "parser_version": "gunnchai.choice_parser.v2_final_only",
+          "infer_path": "lean_mcq_v1"
+        }
+      },
+      {
+        "item_id": "DATA_DASHBOARDS:dl-w1-2",
+        "course_id": "DATA_DASHBOARDS",
+        "choice": 1,
+        "parse": {
+          "index": 1,
+          "letter": "B",
+          "confidence": "high",
+          "matched_via": "final_marker",
+          "parser_version": "gunnchai.choice_parser.v2_final_only"
+        },
+        "raw": "Final: B",
+        "runtimeError": null,
+        "latency_ms": 863,
+        "tool_assist": null,
+        "artifact": {
+          "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+          "binary": "/opt/homebrew/bin/llama-cli",
+          "parser_version": "gunnchai.choice_parser.v2_final_only",
+          "infer_path": "lean_mcq_v1"
+        }
+      },
+      {
+        "item_id": "DATA_DASHBOARDS:dl-w1-3",
+        "course_id": "DATA_DASHBOARDS",
+        "choice": 1,
+        "parse": {
+          "index": 1,
+          "letter": "B",
+          "confidence": "high",
+          "matched_via": "final_marker",
+          "parser_version": "gunnchai.choice_parser.v2_final_only"
+        },
+        "raw": "Final: B",
+        "runtimeError": null,
+        "latency_ms": 819,
+        "tool_assist": null,
+        "artifact": {
+          "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+          "binary": "/opt/homebrew/bin/llama-cli",
+          "parser_version": "gunnchai.choice_parser.v2_final_only",
+          "infer_path": "lean_mcq_v1"
+        }
+      },
+      {
+        "item_id": "DATA_DASHBOARDS:dl-w1-4",
+        "course_id": "DATA_DASHBOARDS",
+        "choice": 1,
+        "parse": {
+          "index": 1,
+          "letter": "B",
+          "confidence": "high",
+          "matched_via": "final_marker",
+          "parser_version": "gunnchai.choice_parser.v2_final_only"
+        },
+        "raw": "Final: B",
+        "runtimeError": null,
+        "latency_ms": 819,
+        "tool_assist": null,
+        "artifact": {
+          "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+          "binary": "/opt/homebrew/bin/llama-cli",
+          "parser_version": "gunnchai.choice_parser.v2_final_only",
+          "infer_path": "lean_mcq_v1"
+        }
+      },
+      {
+        "item_id": "DATA_DASHBOARDS:dl-w1-5",
+        "course_id": "DATA_DASHBOARDS",
+        "choice": 1,
+        "parse": {
+          "index": 1,
+          "letter": "B",
+          "confidence": "high",
+          "matched_via": "final_marker",
+          "parser_version": "gunnchai.choice_parser.v2_final_only"
+        },
+        "raw": "Final: B",
+        "runtimeError": null,
+        "latency_ms": 741,
+        "tool_assist": null,
+        "artifact": {
+          "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+          "binary": "/opt/homebrew/bin/llama-cli",
+          "parser_version": "gunnchai.choice_parser.v2_final_only",
+          "infer_path": "lean_mcq_v1"
+        }
+      },
+      {
+        "item_id": "DATA_DASHBOARDS:dl-w1-6",
+        "course_id": "DATA_DASHBOARDS",
+        "choice": 0,
+        "parse": {
+          "index": 0,
+          "letter": "A",
+          "confidence": "low",
+          "matched_via": "last_standalone_letter",
+          "parser_version": "gunnchai.choice_parser.v2_final_only"
+        },
+        "raw": "<letter>\nLesson notes:\n# Week 1: Schema first — ingest without inventing columns\nPier Ledger Bench opens with schema discipline, not a dashboard mock. Ticket DL-3101 drops a pier foot-traffic CSV into the desk warehouse. Before any chart, you declare table pier_visits with columns visit_id, pier_bay, ts_utc, headcount, and source_file — and you refuse invented columns like vibe_score that ... (tru",
+        "runtimeError": null,
+        "latency_ms": 652,
+        "tool_assist": null,
+        "artifact": {
+          "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+          "binary": "/opt/homebrew/bin/llama-cli",
+          "parser_version": "gunnchai.choice_parser.v2_final_only",
+          "infer_path": "lean_mcq_v1"
+        }
+      },
+      {
+        "item_id": "DATA_DASHBOARDS:dl-w2-1",
+        "course_id": "DATA_DASHBOARDS",
+        "choice": 1,
+        "parse": {
+          "index": 1,
+          "letter": "B",
+          "confidence": "high",
+          "matched_via": "final_marker",
+          "parser_version": "gunnchai.choice_parser.v2_final_only"
+        },
+        "raw": "Final: B",
+        "runtimeError": null,
+        "latency_ms": 1876,
+        "tool_assist": null,
+        "artifact": {
+          "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+          "binary": "/opt/homebrew/bin/llama-cli",
+          "parser_version": "gunnchai.choice_parser.v2_final_only",
+          "infer_path": "lean_mcq_v1"
+        }
+      },
+      {
+        "item_id": "DATA_DASHBOARDS:dl-w2-2",
+        "course_id": "DATA_DASHBOARDS",
+        "choice": 1,
+        "parse": {
+          "index": 1,
+          "letter": "B",
+          "confidence": "high",
+          "matched_via": "final_marker",
+          "parser_version": "gunnchai.choice_parser.v2_final_only"
+        },
+        "raw": "Final: B",
+        "runtimeError": null,
+        "latency_ms": 962,
+        "tool_assist": null,
+        "artifact": {
+          "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+          "binary": "/opt/homebrew/bin/llama-cli",
+          "parser_version": "gunnchai.choice_parser.v2_final_only",
+          "infer_path": "lean_mcq_v1"
+        }
+      },
+      {
+        "item_id": "DATA_DASHBOARDS:dl-w2-3",
+        "course_id": "DATA_DASHBOARDS",
+        "choice": 2,
+        "parse": {
+          "index": 2,
+          "letter": "C",
+          "confidence": "high",
+          "matched_via": "final_marker",
+          "parser_version": "gunnchai.choice_parser.v2_final_only"
+        },
+        "raw": "Final: C",
+        "runtimeError": null,
+        "latency_ms": 821,
+        "tool_assist": null,
+        "artifact": {
+          "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+          "binary": "/opt/homebrew/bin/llama-cli",
+          "parser_version": "gunnchai.choice_parser.v2_final_only",
+          "infer_path": "lean_mcq_v1"
+        }
+      },
+      {
+        "item_id": "DATA_DASHBOARDS:dl-w2-4",
+        "course_id": "DATA_DASHBOARDS",
+        "choice": 1,
+        "parse": {
+          "index": 1,
+          "letter": "B",
+          "confidence": "high",
+          "matched_via": "final_marker",
+          "parser_version": "gunnchai.choice_parser.v2_final_only"
+        },
+        "raw": "Final: B",
+        "runtimeError": null,
+        "latency_ms": 900,
+        "tool_assist": null,
+        "artifact": {
+          "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+          "binary": "/opt/homebrew/bin/llama-cli",
+          "parser_version": "gunnchai.choice_parser.v2_final_only",
+          "infer_path": "lean_mcq_v1"
+        }
+      }
+    ],
+    "failure_taxonomy": {
+      "miss_count": 8,
+      "samples": [
+        {
+          "failure_code": "PREREQUISITE_GAP",
+          "first_divergence": "answer_selection",
+          "stem_excerpt": "DL-3101 must declare which before charts?",
+          "course_id": "DATA_DASHBOARDS",
+          "assessment_kind": "quiz"
+        },
+        {
+          "failure_code": "MODEL_KNOWLEDGE_GAP",
+          "first_divergence": "answer_selection",
+          "stem_excerpt": "Ingest honesty requires?",
+          "course_id": "DATA_DASHBOARDS",
+          "assessment_kind": "quiz"
+        },
+        {
+          "failure_code": "CONCEPT_CONFUSION",
+          "first_divergence": "answer_selection",
+          "stem_excerpt": "DATA_DASHBOARDS vs DATA_VIZ_BI this week?",
+          "course_id": "DATA_DASHBOARDS",
+          "assessment_kind": "quiz"
+        },
+        {
+          "failure_code": "MODEL_KNOWLEDGE_GAP",
+          "first_divergence": "answer_selection",
+          "stem_excerpt": "Empty {} for schema lab?",
+          "course_id": "DATA_DASHBOARDS",
+          "assessment_kind": "quiz"
+        },
+        {
+          "failure_code": "MODEL_KNOWLEDGE_GAP",
+          "first_divergence": "answer_selection",
+          "stem_excerpt": "PASS-only file should?",
+          "course_id": "DATA_DASHBOARDS",
+          "assessment_kind": "quiz"
+        },
+        {
+          "failure_code": "MODEL_KNOWLEDGE_GAP",
+          "first_divergence": "answer_selection",
+          "stem_excerpt": "Honest busy-bay query needs?",
+          "course_id": "DATA_DASHBOARDS",
+          "assessment_kind": "quiz"
+        },
+        {
+          "failure_code": "MODEL_KNOWLEDGE_GAP",
+          "first_divergence": "answer_selection",
+          "stem_excerpt": "filter_count mismatch should?",
+          "course_id": "DATA_DASHBOARDS",
+          "assessment_kind": "quiz"
+        },
+        {
+          "failure_code": "MODEL_KNOWLEDGE_GAP",
+          "first_divergence": "answer_selection",
+          "stem_excerpt": "SELECT * dump to Slack is?",
+          "course_id": "DATA_DASHBOARDS",
+          "assessment_kind": "quiz"
+        }
+      ],
+      "census": {
+        "schema": "gunnchai.failure_census.v1",
+        "miss_count": 8,
+        "counts": {
+          "PREREQUISITE_GAP": 1,
+          "MODEL_KNOWLEDGE_GAP": 6,
+          "CONCEPT_CONFUSION": 1
+        },
+        "by_course": {
+          "DATA_DASHBOARDS": {
+            "PREREQUISITE_GAP": 1,
+            "MODEL_KNOWLEDGE_GAP": 6,
+            "CONCEPT_CONFUSION": 1
+          }
+        },
+        "by_assessment_type": {
+          "quiz": {
+            "PREREQUISITE_GAP": 1,
+            "MODEL_KNOWLEDGE_GAP": 6,
+            "CONCEPT_CONFUSION": 1
+          }
+        },
+        "by_skill": {},
+        "largest_classes": [
+          {
+            "code": "MODEL_KNOWLEDGE_GAP",
+            "n": 6
+          },
+          {
+            "code": "PREREQUISITE_GAP",
+            "n": 1
+          },
+          {
+            "code": "CONCEPT_CONFUSION",
+            "n": 1
+          }
+        ],
+        "taxonomy": [
+          "PARSER_FAILURE",
+          "MODEL_KNOWLEDGE_GAP",
+          "PREREQUISITE_GAP",
+          "CONCEPT_CONFUSION",
+          "REASONING_FAILURE",
+          "CALCULATION_FAILURE",
+          "INSTRUCTION_INTERPRETATION_FAILURE",
+          "TOOL_REQUIRED_NOT_USED",
+          "TOOL_SELECTION_FAILURE",
+          "TOOL_EXECUTION_FAILURE",
+          "SOURCE_GROUNDING_FAILURE",
+          "CONTEXT_LIMIT_FAILURE",
+          "PROMPT_FORMAT_FAILURE",
+          "AMBIGUOUS_ITEM",
+          "CURRICULUM_DEFECT_CANDIDATE",
+          "GRADER_DEFECT_CANDIDATE",
+          "UNKNOWN",
+          "VOCABULARY_FAILURE",
+          "TRANSFER_FAILURE",
+          "DEBUGGING_FAILURE",
+          "CODE_FAILURE",
+          "RUBRIC_FAILURE",
+          "PARTIAL_COMPLETION",
+          "CARELESS_ERROR",
+          "ACCESSIBILITY_BARRIER",
+          "AMBIGUOUS_PROMPT",
+          "POLICY_BLOCKED",
+          "RESOURCE_BLOCKED",
+          "DIAGNOSIS_UNCERTAIN"
+        ]
+      }
+    },
+    "corpus": {
+      "discoverable_courses": 14,
+      "course_ids": [
+        "AI_ML_EDGE",
+        "CLOUD_DEVOPS",
+        "COMM_PD_ETHICS",
+        "COMPUTER_NETWORKING",
+        "CYBERSECURITY",
+        "DATA_DASHBOARDS",
+        "DATA_VIZ_BI",
+        "GAME_DEV_INTERACTIVE",
+        "GENERAL_IT",
+        "HARDWARE_ENGINEERING",
+        "PM_AGILE_LSS",
+        "ROBOTICS_CONTROL",
+        "SOFTWARE_BUILDER",
+        "WIRELESS_6G"
+      ],
+      "hardcoded_course_names": false,
+      "sample_per_course": {
+        "DATA_DASHBOARDS": {
+          "correct": 2,
+          "total": 10,
+          "score": 0.2
+        }
+      },
+      "label": "data_dashboards_runtime_b_pkt_003"
+    },
+    "probe": {
+      "canRunRealInference": true,
+      "memoryBudgetOk": true,
+      "freeRamMb": 906,
+      "metricsMode": "measured"
+    },
+    "tool_assist": {
+      "required_items": 0,
+      "assisted_ok": 0,
+      "note": "Curriculum tool assist on calc-like stems; computation only — not answer-key feed."
+    },
+    "infer_path": "lean_mcq_v1",
+    "claim_boundary": "Real llama.cpp MCQ attempts on student materials only. Isolated grade after submission. Only MASTERY_002_REAL_RUNTIME_12C counts toward curriculum mastery. Lean MCQ path avoids overlay pollution."
+  },
+  "tool_execution": {
+    "attempted": 6,
+    "passed": 6
+  },
+  "historical_families_preserved": {
+    "MASTERY_001_HEURISTIC_9C": 0.6442307692307693,
+    "MASTERY_002_HEURISTIC_12C": 0.6298076923076923,
+    "MASTERY_002_REAL_RUNTIME_12C": 0.30833333333333335
+  },
+  "comm_pd_family_preserved": true,
+  "blended": false,
+  "SELF_GRADED": false,
+  "claim_boundary": "Course-specific DATA_DASHBOARDS eval + real tool stages only. Historical 120-item 0.30833 untouched. COMM_PD family separate. Not DIGITAL_MASTERY_PASS."
+}
