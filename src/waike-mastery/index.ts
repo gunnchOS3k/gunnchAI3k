@@ -16,3 +16,4 @@ export * from './tool_runners';
 export * from './capability_boundary';
 export * from './vertical_closure';
 export * from './remediation_engine';
+export * from './comm_pd_consumption';
