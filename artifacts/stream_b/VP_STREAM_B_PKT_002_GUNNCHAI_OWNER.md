@@ -33,3 +33,10 @@ PY
 - Historical 120-item `0.30833` preserved
 - Local Pro: `LOCAL_PRO_RESOURCE_PENDING` (no retry loop); 360M negative preserved
 - HUMAN_E6=false; Cursor NEVER merges
+
+## Remediation (post independent FAIL)
+- COMM_PD labeled solver artifact now uses `score_family_id=MASTERY_002_COMM_PD_ETHICS_RUNTIME`
+- `GUNNCHAI_RUNTIME_SOLVER.json` restored as 12C tip (not overwritten by COMM_PD run)
+- Historical `MASTERY_002_REAL_RUNTIME_12C` score `0.30833333333333335` untouched
+- **Note:** wait/re-check market-runtime CI after push; do not treat red market-runtime as COMM_PD family PASS
+

@@ -22,10 +22,15 @@ async function main() {
     perCourse: 10, // 10 quiz items across weeks if available
     maxTotal: 24,
     label: 'comm_pd_ethics_runtime_b_pkt_002',
+    scoreFamilyId: SCORE_FAMILY.MASTERY_002_COMM_PD_ETHICS_RUNTIME,
+    writePrimarySolverArtifact: false, // never overwrite 12C tip artifact
   });
 
   const score =
     typeof runtime.overall_score === 'number' ? (runtime.overall_score as number) : null;
+  // Harden labeling if an older solver path omitted the override.
+  (runtime as { score_family_id?: string }).score_family_id =
+    SCORE_FAMILY.MASTERY_002_COMM_PD_ETHICS_RUNTIME;
 
   const familiesPath = path.join(cwd, 'artifacts', 'waike-mastery', 'SCORE_FAMILIES.json');
   const families = JSON.parse(fs.readFileSync(familiesPath, 'utf8')) as Record<string, unknown>;

@@ -7,7 +7,7 @@
     "schema": "gunnchai.waike_runtime_solver.v1",
     "status": "OK",
     "solver": "gunnchai_llamacpp_v1",
-    "score_family_id": "MASTERY_002_REAL_RUNTIME_12C",
+    "score_family_id": "MASTERY_002_COMM_PD_ETHICS_RUNTIME",
     "model": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
     "binary": "/opt/homebrew/bin/llama-cli",
     "parser_version": "gunnchai.choice_parser.v2_final_only",
@@ -168,7 +168,7 @@
           "matched_via": "trailing_lone_letter",
           "parser_version": "gunnchai.choice_parser.v2_final_only"
         },
-        "raw": "<letter>\nLesson notes:\n# Week 1: Consent on the walk-up desk — name audience and purpose\nHarbor Desk Voice opens with a consent card, not a slogan. When a patron asks the desk AI tutor for help on ticket PD-2101, you must say who hears the log, why it is kept, which data classes are stored, how many days it lives, and how to opt out. 'Everyone' is not an audience. 'Improve the product' is n ... (t",
+        "raw": "<letter>\nLesson notes:\n# Week 1: Consent on the walk-up desk \u2014 name audience and purpose\nHarbor Desk Voice opens with a consent card, not a slogan. When a patron asks the desk AI tutor for help on ticket PD-2101, you must say who hears the log, why it is kept, which data classes are stored, how many days it lives, and how to opt out. 'Everyone' is not an audience. 'Improve the product' is n ... (t",
         "runtimeError": null,
         "latency_ms": 726,
         "tool_assist": null,
@@ -234,7 +234,7 @@
           "matched_via": "trailing_lone_letter",
           "parser_version": "gunnchai.choice_parser.v2_final_only"
         },
-        "raw": "<letter>\nLesson notes:\n# Week 1: Consent on the walk-up desk — name audience and purpose\nHarbor Desk Voice opens with a consent card, not a slogan. When a patron asks the desk AI tutor for help on ticket PD-2101, you must say who hears the log, why it is kept, which data classes are stored, how many days it lives, and how to opt out. 'Everyone' is not an audience. 'Improve the product' is n ... (t",
+        "raw": "<letter>\nLesson notes:\n# Week 1: Consent on the walk-up desk \u2014 name audience and purpose\nHarbor Desk Voice opens with a consent card, not a slogan. When a patron asks the desk AI tutor for help on ticket PD-2101, you must say who hears the log, why it is kept, which data classes are stored, how many days it lives, and how to opt out. 'Everyone' is not an audience. 'Improve the product' is n ... (t",
         "runtimeError": null,
         "latency_ms": 694,
         "tool_assist": null,
@@ -256,7 +256,7 @@
           "matched_via": "trailing_lone_letter",
           "parser_version": "gunnchai.choice_parser.v2_final_only"
         },
-        "raw": "<letter>\nLesson notes:\n# Week 1: Consent on the walk-up desk — name audience and purpose\nHarbor Desk Voice opens with a consent card, not a slogan. When a patron asks the desk AI tutor for help on ticket PD-2101, you must say who hears the log, why it is kept, which data classes are stored, how many days it lives, and how to opt out. 'Everyone' is not an audience. 'Improve the product' is n ... (t",
+        "raw": "<letter>\nLesson notes:\n# Week 1: Consent on the walk-up desk \u2014 name audience and purpose\nHarbor Desk Voice opens with a consent card, not a slogan. When a patron asks the desk AI tutor for help on ticket PD-2101, you must say who hears the log, why it is kept, which data classes are stored, how many days it lives, and how to opt out. 'Everyone' is not an audience. 'Improve the product' is n ... (t",
         "runtimeError": null,
         "latency_ms": 679,
         "tool_assist": null,
@@ -406,10 +406,10 @@
     "tool_assist": {
       "required_items": 0,
       "assisted_ok": 0,
-      "note": "Curriculum tool assist on calc-like stems; computation only — not answer-key feed."
+      "note": "Curriculum tool assist on calc-like stems; computation only \u2014 not answer-key feed."
     },
     "infer_path": "lean_mcq_v1",
-    "claim_boundary": "Real llama.cpp MCQ attempts on student materials only. Isolated grade after submission. Only MASTERY_002_REAL_RUNTIME_12C counts toward curriculum mastery. Lean MCQ path avoids overlay pollution."
+    "claim_boundary": "COMM_PD_ETHICS-only runtime nested under unblended family; historical 12C untouched."
   },
   "historical_families_preserved": {
     "MASTERY_001_HEURISTIC_9C": 0.6442307692307693,
