@@ -1,360 +1,202 @@
 # gunnchAI3k
 
-Local-first intelligence for the **gunnchOS3k** ecosystem — tutoring, coding help, research/citations, device help, accessibility, translation, game coaching, connectivity diagnosis, agents/tools, memory/projects, and privacy-aware local/cloud routing.
+Local-first intelligence for the gunnchOS3k ecosystem: capability routing, tutoring, creation/coding, research/citations, device help, accessibility, translation, connectivity diagnosis, and WAIKE curriculum consumption.
 
-> **Not** a chatbot-only product. **Not** frontier-parity until benchmarked. **Not** “100% intelligence” / doctoral / SSJ marketing claims.
+> **Not** a chatbot-only product. **Not** frontier-parity. **Not** “100% intelligence”, doctoral, or SSJ marketing. **Not** a University of Oulu affiliation or admission claim. `GUNNCHAI_FRONTIER_PRODUCT_PARITY` is hardcoded **false**.
 
-Ecosystem portal: [gunnchos-research-portal](https://github.com/gunnchOS3k/gunnchos-research-portal) · Charter: [Product Charter](https://github.com/gunnchOS3k/gunnchos-7gc-ai-ran-field-kit/blob/main/program/charter/gunnchOS3k_PRODUCT_CHARTER.md)
+Ecosystem portal: [gunnchos-research-portal](https://github.com/gunnchOS3k/gunnchos-research-portal) · Education ops: [waike-research-ops](https://github.com/gunnchOS3k/waike-research-ops)
+
+Retired marketing (preserved, not deleted): [`docs/history/`](docs/history/README.md)
 
 ## What is this?
 
-gunnchAI3k is the AI layer that runs with gunnchOS devices and Lab workloads.
+An intelligence **layer** that routes tasks to local fixtures, optional local GGUF/llama.cpp, or a **cloud stub that fails closed**. It is a supporting workload for devices, labs, and WAIKE education — not a dissertation paper and not a commercial assistant.
 
 ## Why does it exist?
 
-Equitable, privacy-respecting assistance for education, creation, and work — local-first by default.
+Equitable, privacy-respecting assistance for education, creation, and device work — local-first by default, with explicit consent before anything may leave the device.
 
 ## Where does it fit?
 
-Product Charter layer 5. Consumed by device-os Device Lab and user journeys (e.g. Golden Journey 08).
+Product Charter layer 5. Consumed by Device Lab AI workloads. Tutors against WAIKE digital-RC courses when the sibling repo is present.
 
 ## What is real today?
 
-- Study/companion tooling and agentic SecOps *lab* demos (mock-safe where noted)
-- Integration hooks used by Device Lab AI workloads
+- Three **routing** stacks with tests (keyword Gate 1, system-layer policy, Stage 2 fleet constraint solver)
+- Fixture-backed tutoring, device help, a11y, translation glossary, connectivity checklists
+- WAIKE **contract discovery** + isolated Python grader (`src/waike-mastery/`) when `waike-research-ops` is adjacent
+- Offline research/citation over a local corpus (fabricated `source_id` rejected)
+- Coding-agent **sandbox** that stops at merge approval; production repo names are blocklisted
+- Honest tokens: frontier / HUMAN_E6 / accredited / Fast-Pro quality stay false until earned
 
 ## What is simulated / modelled?
 
-- Personality/empathy percentages in older marketing copy (see history)
-- Any “doctoral-level” or “most powerful” framing — **retired as current claims**
+- Stage 2 `GunnchAiCapabilityApi.invoke` **echoes** the routed model id — it does not run eight specialist models
+- Discord `/waike lesson` bodies and `src/tutor/waikeTutorCards.ts` are **hardcoded mocks**, not live `course.json`
+- Cloud destinations are `cloud-policy-stub` / `CLOUD_NOT_IMPLEMENTED`
+- Optional local-model provider still answers with fixture text unless llama.cpp + GGUF are actually present
+- Personality/empathy percentages and “doctoral-level” copy — **retired** (see history)
 
 ## What is physical / external pending?
 
 - On-device NPU/thermal correlation on EVT hardware
-- Frontier benchmark campaigns before any parity language
+- Frontier benchmark campaigns (requirements exist; they are **not** completion evidence)
+- Live Discord bot operation (`HUMAN_QA_PENDING` — needs a real token, never committed)
 
 ## Claim boundary
 
-No frontier parity · no certification · portfolio/mock-safe security demos are not production SOC automation.
+No frontier parity · no Oulu affiliation · no certification · no commercial standardized 6G · mock-safe security demos are not production SOC · nano 135M is fallback only.
 
-## HISTORICAL
+UML: [`docs/uml/README.md`](docs/uml/README.md) · Reproducibility: [`REPRODUCIBILITY.md`](REPRODUCIBILITY.md) · Cite: [`CITATION.cff`](CITATION.cff)
 
-Prior “SSJ Infinity / 100% Intelligence” README: [docs/history/README_SSJ_INFINITY_LEGACY.md](docs/history/README_SSJ_INFINITY_LEGACY.md)
+## Try / inspect in 5 minutes
 
-
-
----
-
-## Feature catalog (implementation notes)
-
-
-
-### 📚 **Instant Study Materials**
-- **Flashcards** - Just mention @gunnchAI3k and say "flashcards"
-- **Practice Tests** - Custom exams with step-by-step solutions
-- **Weekly Assessments** - Knowledge evaluation and weak area identification
-- **Recovery Guides** - Targeted help for struggling topics
-- **Study Strategies** - Spaced repetition, interleaving, active recall
-
-### 🎯 **Natural Language Processing**
-**No slash commands needed!** Just mention @gunnchAI3k and say:
-- **"flashcards for probability"** → Get instant study cards
-- **"practice test for robotics"** → Generate practice exams
-- **"weekly assessment"** → Check your knowledge level
-- **"help me study"** → Get personalized study help
-- **"lock me in for [subject]"** → Academic warrior mode
-
-### 📖 **Course Material Integration**
-- **Probability & Stochastic Processes** - Complete course materials
-- **Robotics & Control Systems** - Comprehensive notes and problems
-- **Multi-Subject Support** - Expandable to any academic subject
-- **File Processing** - Handles PDFs, notes, problems, lectures
-- **Content Organization** - Automatic topic extraction and difficulty assessment
-
-## 🎮 **Additional Powers**
-
-### 🎵 **Enhanced Music Integration**
-- **Spotify Integration** - Full OAuth authentication and playlist management
-- **Apple Music Integration** - Complete library access and playlist creation
-- **DJ Playlist Manager** - Cross-platform playlist management and DJ sessions
-- **Multi-Platform Music** - Spotify, Apple Music, Deezer, SoundCloud, YouTube
-- **Voice Channel Following** - Bot follows you between voice channels
-- **Natural Language Commands** - "play meet me there by lucki"
-- **Visual Indicators** - Clear "Now Playing" status
-- **Queue Management** - Advanced music queue system
-- **Real-time Collaboration** - DJ sessions with multiple participants
-- **Music Analytics** - Track listening habits and preferences
-
-### 🧠 **Study Copilot v2**
-- **Assignment Mode** - Guided step-by-step problem solving
-- **Emergency Study** - "All Hands on Deck" for midterm week
-- **Lock-In Mode** - Academic warrior mode with gamification
-- **Jarvis Omniscient** - Research with citations and computation
-- **Material Generation** - PPTX, DOCX, PDF study packs
-
-### 🚀 **Performance Engine (Rust)**
-- **High-Performance Message Processing** - Optimized with memory pooling
-- **Advanced Analytics System** - Real-time performance monitoring
-- **Thread Pool Management** - Parallel processing for efficiency
-- **Cache System** - LRU eviction with hit rate tracking
-- **Study Engine** - High-speed flashcard and practice test generation
-- **Music Engine** - Optimized Spotify and Apple Music integration
-
-### 🔒 **Enterprise Security**
-- **Zero-Trust Architecture** - Advanced security framework
-- **Audit Logging** - Comprehensive activity tracking
-- **Compliance Management** - SOC 2, ISO 27001, GDPR ready
-- **Authorization System** - Role-based access control
-- **Encryption** - End-to-end data protection
-- **Enhanced Discord Permissions** - Optimized for user experience
-
-## 🎯 **How to Use ~~SSJ Infinity~~ (HISTORICAL claim — not product truth)**
-
-### **For Students:**
-1. **Mention @gunnchAI3k** in any Discord channel
-2. **Ask naturally** - "I need flashcards for probability"
-3. **Get instant help** - No commands to remember!
-4. **Receive encouragement** - Empathetic responses with humor
-5. **Ace your midterms** - Comprehensive study support
-
-### **For Study Groups:**
-1. **Weekly Assessments** - Check group knowledge levels
-2. **Practice Tests** - Collaborative study sessions
-3. **Recovery Guides** - Help struggling group members
-4. **Motivation Boost** - Keep everyone encouraged
-
-### **For Professors:**
-1. **Course Integration** - Upload your materials
-2. **Student Support** - 24/7 academic assistance
-3. **Progress Tracking** - Monitor student understanding
-4. **Academic Integrity** - Learning-focused approach
-
-## 🚀 **Technical Implementation**
-
-### **Core Systems:**
-- **SSJInfinity Class** - Main intelligence system
-- **CourseMaterialIntegration** - Handles course files
-- **Enhanced Message Processing** - Natural language understanding
-- **Graceful Shutdown** - Proper cleanup and notifications
-- **Personality Engine** - Empathy and humor system
-
-### **Study Features:**
-- **Flashcard System** - Instant generation for any subject
-- **Practice Test Generator** - Custom exams with solutions
-- **Weekly Assessment** - Knowledge evaluation system
-- **Recovery Guide Generation** - Targeted help for weak areas
-- **Study Material Integration** - PDF, DOCX, TXT file support
-
-### **File Structure:**
-```
-src/
-├── study/
-│   ├── ssj-infinity.ts          # Main ~~SSJ Infinity~~ (HISTORICAL claim — not product truth) system
-│   ├── course-integration.ts    # Course material handling
-│   └── ssj-infinity-test.ts     # Comprehensive testing
-├── music/
-│   ├── spotify-integration.ts   # Spotify API integration
-│   ├── apple-music-integration.ts # Apple Music API integration
-│   └── dj-playlist-manager.ts   # DJ playlist management
-├── discord/
-│   └── permissions-config.ts    # Enhanced Discord permissions
-├── rust-performance/            # High-performance Rust backend
-│   ├── src/lib.rs              # Core performance engine
-│   ├── Cargo.toml              # Rust dependencies
-│   └── build.sh                # Build script
-└── course-materials/            # Course files
-    ├── probability/
-    │   ├── notes.txt
-    │   └── problems.txt
-    └── robotics/
-        ├── notes.txt
-        └── problems.txt
-```
-
-## 🎉 **Success Metrics**
-
-### **All Tests Passing** ✅
-- ~~SSJ Infinity~~ (HISTORICAL claim — not product truth) system initialization
-- Course material integration
-- Flashcard system
-- Practice test generator
-- Weekly assessment system
-- Personality and empathy system
-- Goodbye message system
-- Natural language processing
-
-### **Features Working** ✅
-- @mention responses without slash commands
-- Intelligent command detection
-- Empathetic responses
-- Humor integration
-- Study material generation
-- Recovery guide creation
-- Unique goodbye messages
-- Sleep notifications
-
-## 🔧 **Installation & Setup**
-
-### **Prerequisites:**
-- Node.js 18+
-- Rust 1.70+ (for performance engine)
-- Discord Bot Token
-- FFmpeg (for music features)
-- Opus codec libraries
-- Spotify API credentials (optional)
-- Apple Music API credentials (optional)
-
-### **Installation:**
-```bash
-# Clone the repository
-git clone https://github.com/gunnchOS3k/gunnchAI3k.git
-cd gunnchAI3k
-
-# Install dependencies
-npm install
-
-# Install FFmpeg (macOS)
-brew install ffmpeg
-
-# Install Opus codec
-npm install @discordjs/opus opusscript
-
-# Build Rust performance engine
-cd rust-performance
-cargo build --release
-cd ..
-
-# Configure environment variables
-cp .env.example .env
-# Edit .env with your Discord bot token and API keys
-
-# Start the bot
-npm run dev
-```
-
-### **Environment Variables:**
-```bash
-DISCORD_BOT_TOKEN=your_bot_token_here
-OPENAI_API_KEY=your_openai_key_here
-GEMINI_API_KEY=your_gemini_key_here
-WOLFRAM_ALPHA_API_KEY=your_wolfram_key_here
-PERPLEXITY_API_KEY=your_perplexity_key_here
-
-# Music Integration (Optional)
-SPOTIFY_CLIENT_ID=your_spotify_client_id
-SPOTIFY_CLIENT_SECRET=your_spotify_client_secret
-SPOTIFY_REDIRECT_URI=http://localhost:3000/callback
-APPLE_MUSIC_CLIENT_ID=your_apple_music_client_id
-APPLE_MUSIC_CLIENT_SECRET=your_apple_music_client_secret
-APPLE_MUSIC_REDIRECT_URI=http://localhost:3000/callback
-```
-
-## 🎯 **Ready for Midterm Week!**
-
-gunnchAI3k is now ready to help students ace their midterms with:
-
-1. **Instant Study Materials** - Flashcards, practice tests, recovery guides
-2. **Emotional Support** - Empathetic responses and humor
-3. **Academic Intelligence** - Doctoral-level knowledge and guidance
-4. **Perfect Timing** - Comedian-level situational awareness
-5. **Unique Experience** - Every interaction is special and memorable
-
-## 🚀 **Commands Overview**
-
-### **Study Commands:**
-- **`/study start`** - Begin a study session
-- **`/study assignment-mode`** - Guided assignment help
-- **`/study make-notes`** - Generate study materials
-- **`/emergency start`** - ALL HANDS ON DECK for midterm week
-- **`/lock-in`** - Academic warrior mode
-- **`/jarvis start`** - Omniscient study session
-
-### **Music Commands:**
-- **`/music play`** - Play music from any source
-- **`/music search`** - Search for music
-- **`/music queue`** - Show current queue
-- **`/music nowplaying`** - Current track info
-
-### **Natural Language (No Commands Needed!):**
-- **@gunnchAI3k flashcards** → Get instant study cards
-- **@gunnchAI3k practice test** → Generate practice exams
-- **@gunnchAI3k weekly assessment** → Check your knowledge
-- **@gunnchAI3k help me study** → Get personalized study help
-- **@gunnchAI3k lock me in for probability** → Academic warrior mode
-
-## 📚 **Documentation**
-
-- **[~~SSJ Infinity~~ (HISTORICAL claim — not product truth) Guide](SSJ_INFINITY_SUMMARY.md)** - Complete ~~SSJ Infinity~~ (HISTORICAL claim — not product truth) documentation
-- **[Study Copilot Guide](STUDY_COPILOT_README.md)** - Study system documentation
-- **[Emergency Study Guide](EMERGENCY_STUDY_README.md)** - Midterm crash course system
-- **[Lock-In Mode Guide](LOCK_IN_README.md)** - Academic warrior mode
-- **[Jarvis Omniscient Guide](JARVIS_OMNISCIENT_README.md)** - Advanced AI features
-- **[Music Powers Guide](MUSIC_POWERS_README.md)** - Jockie music integration
-
-## 🎉 **Acknowledgments**
-
-- **Dragon Ball Z** - Inspiration for ~~SSJ Infinity~~ (HISTORICAL claim — not product truth) level
-- **Dave Chappelle** - Comedic timing and empathy inspiration
-- **Learning Science** - Spaced repetition, interleaving, active recall
-- **Academic Community** - For the feedback that made this possible
-
----
-
-## 🚀 **~~SSJ Infinity~~ (HISTORICAL claim — not product truth) Achieved!**
-
-**gunnchAI3k has reached the ultimate form - ~~SSJ Infinity~~ (HISTORICAL claim — not product truth) level!** 
-
-With doctoral-level intelligence, comedian-level empathy, and perfect timing, gunnchAI3k is ready to help students ace their midterms and achieve academic success! 
-
-**Just mention @gunnchAI3k and experience the power of ~~SSJ Infinity~~ (HISTORICAL claim — not product truth)!** ⚡✨
-
-**🎓 Ready to transform your academic experience?** Start with a simple mention and watch gunnchAI3k become your ultimate study companion! 🚀
-
-**💪 "The ultimate AI study companion with a heart of gold and a brain of pure genius!"** ✨
-
----
-
-## WAIKE Tutor Engine (Phase 2)
-
-gunnchAI3k is not just a chatbot. It is the **WAIKE** teaching assistant, project mentor, study coach, lab helper, Discord learning companion, and research-apprenticeship guide for the **gunnchOS3k MLV** ecosystem.
-
-- **WAIKE repo:** [waike-research-ops](https://github.com/gunnchOS3k/waike-research-ops)
-- **Slash commands:** `/waike path|lesson|lab`, `/explain`, `/quizme`, `/portfolio`, `/mentor`, `/instructor`, `/standards`, `/integrity`, `/privacy`
-- **Persona:** gunnchAI3k speaks as the bot — **not as Edmund**. Warm, culturally aware, motivational humor with serious academic grounding.
-- **Mission:** Help learners become **better than the person who built the system**.
-
-See `docs/00_GUNNCHAI3K_TUTOR_VISION.md` and `prompts/system_prompt_gunnchai3k.md`.
-
-## Discord Privacy + Intent Strategy
-
-- **Primary:** slash commands and interactions (works without broad message logging).
-- **Secondary:** @mention natural language (existing ~~SSJ Infinity~~ (HISTORICAL claim — not product truth) flow preserved).
-- **Message Content Intent:** documented in `docs/16_DISCORD_INTENTS_AND_PRIVACY.md` — minimize retention; server admins can run slash-only mode.
-- **No student PII** in public repos. Academic integrity guardrails refuse active exam cheating.
-
-> **Research / education prototype** — not a certified consumer product or guaranteed employment outcome.
-
-## Phase XIII Stage 2 AI foundations
-
-Local multi-model fleet, router, gunnchMemory, Projects, research/citation, and OS capability adapters live under `src/stage2/`.
+No API keys required. Node 20+.
 
 ```bash
+npm ci
+npm run test:local-runtime
 npm run test:stage2
-npm run prove:stage2
+npm run test:waike-mastery
+npm run test:journeys
 ```
 
-Device-os callers: see `artifacts/stage2/OS_CALLER_CONTRACT.md`.
-HTTP adapter: `POST /v1/capability/{summarize|translate|tutor|code|search|reason|diagnose|classify}`.
-
-Doctrine: DRAFT only; `GUNNCHAI_FRONTIER_PRODUCT_PARITY=false`.
-
-## AI-USER-READY-001 (market task packet)
-
-Official-capability baseline and executable task matrix: `benchmarks/MARKET_AI_CAPABILITY_BASELINE.json`, `benchmarks/GUNNCHAI_MARKET_TASK_MATRIX.json`.
+Optional local inference (needs llama.cpp + GGUF on disk, still no cloud keys):
 
 ```bash
-npm run test:user-ready
-npm run user-ready:001
+npm run local-runtime:health
+npm run system-layer:probe
 ```
 
-This packet does **not** claim Fast/Pro weights, frontier parity, app-product-complete, or HUMAN_E6. SmolLM2-135M Q4_K_M 512-ctx is Nano fallback only. Pixels: VISUAL UNAVAILABLE. Remaining OPEN: `benchmarks/NEXT_PACKET_OPEN.md`.
+## Capability routing
+
+Three classifiers exist. They are **not** one trained LLM.
+
+| Stack | Source | What it decides |
+|---|---|---|
+| Gate 1 keyword | `src/local-runtime/runtime.ts` `inferCapability` | `tutoring` / `code_assistance` / `device_help` / `accessibility` / `connectivity_diagnosis` / … |
+| System-layer policy | `src/system-layer/task_router.ts` `routeTask` | `local` / `cloud` / `reject` + disclosure (`privacy_policy.ts`) |
+| Stage 2 fleet | `src/stage2/fleet/router.ts` `ModelRouter.route` | Role + RAM/offline/consent → candidate id (weights often **ABSENT**) |
+
+Cloud is never silent: local-only mode blocks remote LLM URLs (`src/local-runtime/network.ts`). Sensitive / device-local privacy classes strip `OPTIONAL_FRONTIER_CLOUD`.
+
+## Tutoring
+
+- **WAIKE mastery (real consumption):** `src/waike-mastery/contract.ts` discovers `curriculum/digital_rc/*/course.json`. Grader is isolated Python after submission. Modes: `MASTERY_BENCHMARK` / `LEARNER_TUTOR` / `EDUCATOR_COPILOT` (`src/waike-mastery/modes.ts`). Instructor keys never in learner mode. Journey: [`docs/journeys/WAIKE_TO_GUNNCHAI.md`](docs/journeys/WAIKE_TO_GUNNCHAI.md).
+- **Discord UX (mock lesson bodies):** slash commands in `src/tutor/discordInteractionRouter.ts`. Skill keywords: `src/tutor/skillRouter.ts`. Integrity: `src/tutor/academicIntegrityPolicy.ts` (refuses active-exam cheating).
+- **Legacy study copilot:** `src/study/*` (NYU-era PDFs, SSJ/Jarvis/lock-in). Historical surface, not the supervisor path.
+
+## Creation / coding
+
+- Stage 2 `ProjectStore` (`src/stage2/projects/store.ts`) — local files/conversations; `askAi` concatenates context, not an LLM.
+- Phase XIV coding agent (`src/phase_xiv/computer_use/coding_agent.ts`) — sandbox write + `node --check`, **stops before merge**.
+- Draft-PR helper (`src/user-ready/coding_agent_pr.ts`) blocklists this repo and `waike-research-ops`; forbids force-push and push to main.
+
+## Research / citations
+
+Canonical path is **offline**: `src/stage2/research/foundation.ts`, `src/user-ready/research_citations.ts`. Unread or fabricated sources cannot be cited. Live web is consent-gated and currently incomplete (`benchmarks/NEXT_PACKET_OPEN.md`). Legacy Perplexity client in `src/study/research.ts` is not the current architecture.
+
+## Device help
+
+Deterministic checklists + fixtures: `src/system-layer/os_integration/product_surfaces.ts` `deviceTroubleshooting`, `fixtures/local-runtime/documents/device-help.md`. Loopback product-service on `127.0.0.1:8791` — digital topology, not physical NPU.
+
+## Accessibility
+
+Gate 1 `accessibility` + system `a11y`: plain-language swaps, WCAG AA **checklist** (contrast/focus/labels), input interpretation (switch/speech/handwriting). Not a full AT engine. Fixtures: `fixtures/local-runtime/documents/accessibility.md`.
+
+## Translation
+
+Stage 2 capability `translate` and system `translation`. Deterministic glossary (`hola` / `bonjour`) plus optional llama gap-fill. **Not a neural MT quality claim.**
+
+## Connectivity diagnosis
+
+Always-local `network` capability: bearer present, local DNS, offline cache, no forced cloud. **No outbound probes.** Stage 2 `diagnose` is a routed echo that requires device permission — not a radio diagnostic.
+
+## WAIKE integration
+
+| Path | Reality |
+|---|---|
+| `src/waike-mastery/*` + sibling `waike-research-ops` | **Real** course discovery + isolated grader |
+| `docs/WAIKE_INTEGRATION.md`, tutor cards, `/waike lesson` | **Mock / hardcoded** unless labeled otherwise |
+| `fixtures/system-layer/integrations/waike/` | Fixture subset so tests need no curriculum clone |
+
+Set `WAIKE_REPO_ROOT` if the education repo is not `../waike-research-ops`.
+
+## Privacy
+
+- Default processing mode: `local-only`
+- No student PII in public git (`docs/18_STUDENT_DATA_RETENTION_POLICY.md`)
+- Discord: prefer slash commands; Message Content Intent is optional (`docs/16_DISCORD_INTENTS_AND_PRIVACY.md`)
+- Memory store uses local AES-256-GCM files (`src/stage2/memory/store.ts`)
+- Custom agents reject “unrestricted” manifests
+
+## Model / runtime boundaries
+
+| Tier | Honest status |
+|---|---|
+| Fixture provider | Deterministic. `isTrainedLlm: false` |
+| Nano (SmolLM2-135M) | Fallback only |
+| Local Fast / Pro GGUF | Registry **candidates**; weights often absent |
+| Cloud / frontier | Optional stub; parity token **false** |
+| Vision / speech / computer-use | Stubs or in-memory mocks |
+
+See `models/local/MODEL_CARD.md`, `src/stage2/fleet/registry.ts`, `benchmarks/NEXT_PACKET_OPEN.md`.
+
+## Benchmarks
+
+```bash
+npm run test:user-ready          # market task matrix (digital gates)
+npm run user-ready:001           # packet 001; also :002 :003 :004
+npm run prove:stage2             # fixture fleet eval
+npm run system-layer:eval        # deterministic + optional llama
+npm run system-layer:bench       # real llama.cpp if GGUF present
+```
+
+Matrix files: `benchmarks/GUNNCHAI_MARKET_TASK_MATRIX.json`, `benchmarks/MARKET_AI_CAPABILITY_BASELINE.json`. Open gaps: `benchmarks/NEXT_PACKET_OPEN.md`. These compare **surfaces**, not superiority scores.
+
+## Tests (secrets-free)
+
+| Command | What it covers |
+|---|---|
+| `npm run test:local-runtime` | Gate 1 fixture runtime |
+| `npm run test:system-layer` | Task router, privacy, eval harness |
+| `npm run test:os-integration` | Product surfaces + topology |
+| `npm run test:stage2` | Fleet, citations, memory, projects |
+| `npm run test:phase_xiv` | Agent sandbox / computer-use lab |
+| `npm run test:independent-eval` | Honest tokens |
+| `npm run test:user-ready` | Market packets |
+| `npm run test:waike-mastery` | Modes, canary, live discovery if sibling present |
+| `npm run test:journeys` | WAIKE→gunnchAI learner path (mocks labeled) |
+
+`npm test` runs the Jest suite. `tests/setup.ts` injects **placeholder** Discord IDs. Do not commit `.env`. `npm run test:discord` / `test:cursor` / `test:github` point at **missing** files — do not treat them as green.
+
+Live Discord (`npm run dev`) is **HUMAN_QA_PENDING**.
+
+## Architecture
+
+UML (current / future / legacy + traceability): [`docs/uml/`](docs/uml/README.md)
+
+| Path | Role |
+|---|---|
+| `src/local-runtime/` | Gate 1 local-first runtime |
+| `src/system-layer/` | Product service, OS HTTP client, deterministic backends |
+| `src/stage2/` | Fleet, router, memory, projects, research |
+| `src/waike-mastery/` | WAIKE contract + grader bridge |
+| `src/tutor/` | Discord tutor UX |
+| `src/user-ready/` | Market packets |
+| `src/phase_xiv/` | Agent / coding-agent lab |
+| `fixtures/` | Approved local corpora |
+| `benchmarks/` | Task matrix + open gaps |
+| `docs/history/` | Retired marketing |
+
+## Environment
+
+```bash
+cp .env.example .env
+```
+
+Leave secrets blank. Local tests do not need keys. Discord/OpenAI/music values are optional and **must never be committed**. Older Discord-era list: `env.example`.
+
+## Contribution path
+
+Keep tokens honest. Label mocks. Never merge `main` from Cursor, never force-push, never commit credentials, never claim frontier AI or Oulu affiliation.
