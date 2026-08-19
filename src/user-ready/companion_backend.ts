@@ -15,7 +15,13 @@ export type CompanionSurfaceId =
   | 'voice'
   | 'computer_use_consent'
   | 'privacy'
-  | 'offline';
+  | 'offline'
+  | 'research'
+  | 'notebook'
+  | 'waike_tutor'
+  | 'vision'
+  | 'audio_overview'
+  | 'coding_agent';
 
 export type CompanionActionResult = {
   ok: boolean;
@@ -46,6 +52,12 @@ export const COMPANION_ACTION_MAP: Record<CompanionSurfaceId, string[]> = {
   computer_use_consent: ['grant_desktop', 'attach_env', 'cancel', 'audit'],
   privacy: ['review_grants', 'revoke', 'export_audit'],
   offline: ['enable_offline', 'status'],
+  research: ['cite', 'deep_research', 'stop'],
+  notebook: ['attach', 'ask', 'export'],
+  waike_tutor: ['hint', 'quiz', 'mastery'],
+  vision: ['share', 'compare_modes', 'revoke'],
+  audio_overview: ['generate', 'play', 'transcript'],
+  coding_agent: ['sandbox_edit', 'run_tests', 'draft_pr'],
 };
 
 type Handler = (surfaceId: CompanionSurfaceId, action: string, payload?: Record<string, unknown>) => string;
@@ -78,6 +90,24 @@ const HANDLERS: Record<string, Handler> = {
   'privacy:export_audit': () => 'privacy_audit_exported',
   'offline:enable_offline': () => 'offline_mode_enabled',
   'offline:status': () => 'offline_status_reported',
+  'research:cite': () => 'cited_research_local_corpus',
+  'research:deep_research': () => 'deep_research_consent_gated',
+  'research:stop': () => 'deep_research_cancelled',
+  'notebook:attach': () => 'source_attached_local',
+  'notebook:ask': () => 'source_grounded_qa_routed',
+  'notebook:export': () => 'notebook_export_staged',
+  'waike_tutor:hint': () => 'socratic_hint_no_answer_dump',
+  'waike_tutor:quiz': () => 'waike_quiz_local',
+  'waike_tutor:mastery': () => 'waike_runtime_mastery_unblended',
+  'vision:share': () => 'explicit_share_permission_prompted',
+  'vision:compare_modes': () => 'ocr_vs_vlm_compare_routed',
+  'vision:revoke': () => 'vision_permission_revoked',
+  'audio_overview:generate': () => 'grounded_solo_narrator_tts',
+  'audio_overview:play': () => 'audio_playback_local',
+  'audio_overview:transcript': () => 'audio_transcript_chapters',
+  'coding_agent:sandbox_edit': () => 'coding_sandbox_edit_allowlisted',
+  'coding_agent:run_tests': () => 'coding_sandbox_tests_run',
+  'coding_agent:draft_pr': () => 'coding_draft_pr_never_merge',
 };
 
 let auditSeq = 0;

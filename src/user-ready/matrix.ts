@@ -2,6 +2,14 @@ import * as fs from 'node:fs';
 import * as path from 'node:path';
 
 export type CoverageStatus = 'COMPLETE' | 'PARTIAL' | 'OPEN';
+export type RuntimeClass =
+  | 'COMPLETE_REAL'
+  | 'PARTIAL_REAL'
+  | 'MOCK_ONLY'
+  | 'SYNTHETIC_ONLY'
+  | 'RESOURCE_BLOCKED'
+  | 'PROVIDER_BLOCKED'
+  | 'HUMAN_PENDING';
 
 export interface MarketTask {
   task_id: string;
@@ -11,6 +19,7 @@ export interface MarketTask {
   cloud_optional: boolean;
   implemented: boolean;
   coverage_status: CoverageStatus;
+  runtime_class?: RuntimeClass;
   actual_runtime_test: string | null;
   quality_metric: string;
   privacy_requirement: string;

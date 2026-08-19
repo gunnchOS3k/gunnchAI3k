@@ -83,6 +83,48 @@ export const REQUIRED_SURFACES: CompanionSurface[] = [
     actions: COMPANION_ACTION_MAP.offline,
     offlineCapable: true,
   },
+  {
+    id: 'research',
+    title: 'Research',
+    description: 'Cited local research and consent-gated deep research.',
+    actions: COMPANION_ACTION_MAP.research,
+    offlineCapable: true,
+  },
+  {
+    id: 'notebook',
+    title: 'Source-grounded notebook',
+    description: 'Ask only from attached local sources.',
+    actions: COMPANION_ACTION_MAP.notebook,
+    offlineCapable: true,
+  },
+  {
+    id: 'waike_tutor',
+    title: 'WAIKE tutor',
+    description: 'Socratic hints, quizzes, unblended runtime mastery.',
+    actions: COMPANION_ACTION_MAP.waike_tutor,
+    offlineCapable: true,
+  },
+  {
+    id: 'vision',
+    title: 'Vision',
+    description: 'Explicit-share OCR + local semantic VLM. No silent capture.',
+    actions: COMPANION_ACTION_MAP.vision,
+    offlineCapable: true,
+  },
+  {
+    id: 'audio_overview',
+    title: 'Audio Overview',
+    description: 'Grounded solo-narrator TTS with citations and chapters.',
+    actions: COMPANION_ACTION_MAP.audio_overview,
+    offlineCapable: true,
+  },
+  {
+    id: 'coding_agent',
+    title: 'Coding agent',
+    description: 'Allowlisted sandbox edits, tests, draft PR. Never merge.',
+    actions: COMPANION_ACTION_MAP.coding_agent,
+    offlineCapable: true,
+  },
 ];
 
 export interface CompanionChromeReport {
@@ -141,6 +183,7 @@ export function renderCompanionChrome(outDir: string): CompanionChromeReport {
   <header>
     <h1>gunnchAI Companion</h1>
     <p>Wired companion chrome: each button dispatches to companion_backend.v1. HUMAN polish not validated.</p>
+    <p data-status="product">permissions: deny-by-default · local/cloud: local-first · active model: Local Fast · stop/cancel: exposed · provenance: audit jsonl · tool actions: allowlisted · privacy: no silent mic/screen/cloud</p>
   </header>
   <main>
     ${REQUIRED_SURFACES.map(

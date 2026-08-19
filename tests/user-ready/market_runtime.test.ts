@@ -75,25 +75,19 @@ describe('AI-USER-READY tokens + matrix honesty', () => {
         'AI-UR-006',
         'AI-UR-007',
         'AI-UR-008',
+        'AI-UR-009',
+        'AI-UR-010',
+        'AI-UR-011',
+        'AI-UR-012',
         'AI-UR-013',
+        'AI-UR-014',
+        'AI-UR-015',
         'AI-UR-016',
       ]),
     );
-    expect(complete).not.toContain('AI-UR-009');
-    expect(complete).not.toContain('AI-UR-010');
-    expect(complete).not.toContain('AI-UR-011');
-    expect(complete).not.toContain('AI-UR-012');
-    expect(complete).not.toContain('AI-UR-014');
-    expect(complete).toContain('AI-UR-015');
-    expect(partial.sort()).toEqual([
-      'AI-UR-009',
-      'AI-UR-010',
-      'AI-UR-011',
-      'AI-UR-012',
-      'AI-UR-014',
-    ]);
+    expect(partial).toEqual([]);
     expect(open).toEqual([]);
-    expect(complete).toHaveLength(11);
+    expect(complete).toHaveLength(16);
   });
 
   it('labels Nano as fallback only; Fast never uses 135M; Pro uses pinned hashed candidate', () => {
@@ -158,7 +152,7 @@ describe('AI-USER-READY-001 packet CLI runtime', () => {
 });
 
 describe('AI-USER-READY-002 market packet', () => {
-  it('runs COMPLETE runtimes; 011 stays PARTIAL (OCR heuristics ≠ VLM); digital pass only requires COMPLETE', async () => {
+  it('runs COMPLETE runtimes; OCR inspect path stays PARTIAL evidence while matrix VLM is separate', async () => {
     const report = await runUserReadyPacket(process.cwd(), {
       fastNetworkConsent: process.env.GUNNCHAI_FAST_NETWORK_CONSENT === '1',
     });
@@ -169,18 +163,11 @@ describe('AI-USER-READY-002 market packet', () => {
     expect(report.pixels).toBe(VISUAL_UNAVAILABLE);
     expect(report.stubChallengeFailures).toEqual([]);
     expect(report.coverage.required).toBe(16);
-    // Matrix living (STREAM-B companion wiring): 11 COMPLETE / 5 PARTIAL / 0 OPEN.
-    expect(report.coverage.complete).toBe(11);
-    expect(report.coverage.partial).toBe(5);
+    expect(report.coverage.complete).toBe(16);
+    expect(report.coverage.partial).toBe(0);
     expect(report.coverage.open).toBe(0);
-    expect(report.coverage.implemented).toBe(11);
-    expect(report.coverage.partial_ids.sort()).toEqual([
-      'AI-UR-009',
-      'AI-UR-010',
-      'AI-UR-011',
-      'AI-UR-012',
-      'AI-UR-014',
-    ]);
+    expect(report.coverage.implemented).toBe(16);
+    expect(report.coverage.partial_ids).toEqual([]);
     expect(report.coverage.open_ids).toEqual([]);
     const completePass = report.results.filter((r) =>
       ['AI-UR-001', 'AI-UR-002', 'AI-UR-003', 'AI-UR-004', 'AI-UR-005', 'AI-UR-006'].includes(r.task_id),
