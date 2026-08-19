@@ -36,9 +36,9 @@
     "notes": "Local Pro OPEN until hashed GGUF verifies. Fast landing does not imply Pro.",
     "auditStatus": "LOCAL_PRO_RESOURCE_PENDING",
     "hostObserved": false,
-    "freeMem": 115900416,
+    "freeMem": 114229248,
     "totalMem": 8589934592,
-    "freeDisk": 56334106624,
+    "freeDisk": 57305444352,
     "resourceSafe": false
   }
 }

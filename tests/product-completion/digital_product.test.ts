@@ -43,6 +43,25 @@ describe('digital product completion surfaces', () => {
     const calc = await store.executeTool('lab', 'calc.evaluate', { expr: '(2+3)*4' });
     expect(calc.ok).toBe(true);
     expect(calc.output.value).toBe(20);
+    store.tools.notebook.attach(
+      path.join(dir, 'read', 'notes.txt'),
+      'notes',
+      'Cyclic prefix absorbs delay spread in OFDM.',
+    );
+    const plan = await store.runPlan('lab', 'Grounded OFDM lab note', [
+      { id: 'read', toolId: 'local.files.read', args: { path: 'notes.txt' }, inspect: 'Cyclic' },
+      { id: 'calc', toolId: 'calc.evaluate', args: { expr: '(2+3)*4' }, inspect: '20' },
+      { id: 'code', toolId: 'code.sandbox.exec', args: { code: 'print(40+2)' }, inspect: '42' },
+      { id: 'waike', toolId: 'waike.course.query', args: { courseId: 'GENERAL_IT', field: 'title' } },
+    ]);
+    expect(plan.ok).toBe(true);
+    expect(plan.artifactPath && fs.existsSync(plan.artifactPath)).toBe(true);
+    const blocked = await store.executeTool('lab', 'waike.course.query', {
+      courseId: 'GENERAL_IT/instructor/answer_keys',
+      field: 'title',
+    });
+    expect(blocked.ok).toBe(false);
+    expect(blocked.reason).toMatch(/INSTRUCTOR_KEYS_BLOCKED/);
   });
 
   it('formant STT/TTS is real speech WAV and does not echo source text into STT', () => {

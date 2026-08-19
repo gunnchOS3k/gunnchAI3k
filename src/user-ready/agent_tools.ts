@@ -388,11 +388,17 @@ export class AllowlistedAgentTools {
   }
 
   private waikeQuery(courseId: string, field: string): Record<string, unknown> {
+    if (FORBIDDEN_WAIKE.some((re) => re.test(courseId) || re.test(field))) {
+      throw new Error('INSTRUCTOR_KEYS_BLOCKED');
+    }
     if (!this.ctx.waikeRoot) throw new Error('WAIKE_ROOT_ABSENT');
     if (!/^[A-Z0-9_]+$/.test(courseId)) throw new Error('INVALID_COURSE_ID');
     const courseFile = path.join(this.ctx.waikeRoot, 'curriculum', 'digital_rc', courseId, 'course.json');
     const resolved = path.resolve(courseFile);
-    if (!resolved.startsWith(path.resolve(this.ctx.waikeRoot))) throw new Error('PATH_ESCAPE');
+    const rootResolved = path.resolve(this.ctx.waikeRoot);
+    if (resolved !== rootResolved && !resolved.startsWith(rootResolved + path.sep)) {
+      throw new Error('PATH_ESCAPE');
+    }
     if (FORBIDDEN_WAIKE.some((re) => re.test(resolved))) throw new Error('INSTRUCTOR_KEYS_BLOCKED');
     if (!fs.existsSync(resolved)) throw new Error('COURSE_NOT_FOUND');
     const raw = JSON.parse(fs.readFileSync(resolved, 'utf8')) as Record<string, unknown>;
@@ -419,11 +425,21 @@ export class AllowlistedAgentTools {
       timeout: timeoutMs,
       env: { PATH: process.env.PATH ?? '/usr/bin', HOME: cwd, PYTHONDONTWRITEBYTECODE: '1' },
     });
+    if (r.error && /ENOENT/.test(String(r.error))) {
+      return this.codeSandboxJs(code);
+    }
     if (r.error && /TIMEOUT|ETIMEDOUT/i.test(String(r.error))) throw new Error('TIMEOUT');
     if (r.status !== 0) {
       throw new Error(`CODE_SANDBOX_FAIL:${(r.stderr || '').slice(0, 200)}`);
     }
-    return { stdout: (r.stdout || '').trim(), exit: r.status, stderr: r.stderr || '' };
+    return { stdout: (r.stdout || '').trim(), exit: r.status, stderr: r.stderr || '', backend: 'python3' };
+  }
+
+  /** Restricted `print(<arith>)` when python3 is absent. Still not unrestricted exec. */
+  private codeSandboxJs(code: string): Record<string, unknown> {
+    const m = /^print\((.+)\)$/.exec(code.trim());
+    if (!m) throw new Error('CODE_SANDBOX_FAIL:python3_absent');
+    return { stdout: String(safeEval(m[1])), exit: 0, stderr: '', backend: 'js_arith_fallback' };
   }
 }
 
@@ -491,10 +507,17 @@ export async function runAgentPlan(
 }
 
 export function defaultWaikeRoot(): string | null {
-  const sibling = path.resolve(process.cwd(), '..', 'waike-research-ops');
-  const env = process.env.WAIKE_ROOT;
-  const cand = env && fs.existsSync(env) ? env : sibling;
-  return fs.existsSync(path.join(cand, 'curriculum', 'digital_rc')) ? cand : null;
+  const bundled = path.resolve(__dirname, '..', '..', 'fixtures', 'waike', 'public');
+  const candidates = [
+    process.env.WAIKE_ROOT,
+    path.resolve(process.cwd(), '..', 'waike-research-ops'),
+    path.resolve(process.cwd(), 'fixtures', 'waike', 'public'),
+    bundled,
+  ].filter((x): x is string => Boolean(x));
+  for (const cand of candidates) {
+    if (fs.existsSync(path.join(cand, 'curriculum', 'digital_rc'))) return cand;
+  }
+  return null;
 }
 
 function safeEval(expr: string): number {

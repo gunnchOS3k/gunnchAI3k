@@ -1,7 +1,7 @@
 {
   "schema": "gunnchai.preexisting_capability_audit.v1",
-  "generatedAt": "2026-08-19T02:29:04.171Z",
-  "current_main_sha": "e248836f42ad186524b32ace516c5db80a88da8e",
+  "generatedAt": "2026-08-19T02:41:06.048Z",
+  "current_main_sha": "86ee80052b6fc8f02c453dca6d899196e6da81f4",
   "doctrine": "Verified against CURRENT source/runtime. Do not replace working implementations. Classifications are honest.",
   "tasks": [
     {

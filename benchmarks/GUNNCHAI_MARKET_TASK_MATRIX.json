@@ -2,7 +2,7 @@
   "schema": "gunnchai.market_task_matrix.v1",
   "packet": "GUNNCHAI-DIGITAL-PRODUCT-COMPLETION-001",
   "dated": "2026-08-19",
-  "accepted_main_base": "e248836f42ad186524b32ace516c5db80a88da8e",
+  "accepted_main_base": "86ee80052b6fc8f02c453dca6d899196e6da81f4",
   "doctrine": "Regenerated FROM runtime. COMPLETE only when COMPLETE_REAL. No BETTER_THAN_*. HUMAN_E6=false. Fast ≠ Pro. Live mic HUMAN_PENDING.",
   "device_profiles": [
     "student_14_5",

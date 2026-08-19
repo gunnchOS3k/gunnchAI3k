@@ -1,7 +1,7 @@
 {
   "schema": "gunnchai.digital_product_completion.v1",
-  "generatedAt": "2026-08-19T02:29:06.090Z",
-  "current_main_sha": "e248836f42ad186524b32ace516c5db80a88da8e",
+  "generatedAt": "2026-08-19T02:41:07.912Z",
+  "current_main_sha": "86ee80052b6fc8f02c453dca6d899196e6da81f4",
   "pixels": "VISUAL UNAVAILABLE",
   "tokens": {
     "GUNNCHAI_APP_PRODUCT_COMPLETE": false,
@@ -159,8 +159,10 @@
     "agents": {
       "deniedTool": "FAIL_CLOSED:files.read",
       "plan": "OK",
-      "artifact": "/var/folders/dp/z5frf3m511jcdpdf8v878v8h0000gn/T/gunnchai-pc-44CERy/agents/sandbox/plan_artifact.json",
-      "blockedKeys": "INVALID_COURSE_ID"
+      "artifact": "/var/folders/dp/z5frf3m511jcdpdf8v878v8h0000gn/T/gunnchai-pc-xNezDn/agents/sandbox/plan_artifact.json",
+      "blockedKeys": "INSTRUCTOR_KEYS_BLOCKED",
+      "failedStep": null,
+      "waikeRoot": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/waike-research-ops"
     },
     "voice": {
       "sttText": "cyclic prefix",
@@ -297,9 +299,9 @@
     },
     "local_pro": {
       "status": "LOCAL_PRO_RESOURCE_PENDING",
-      "freeMem": 115900416,
+      "freeMem": 114229248,
       "totalMem": 8589934592,
-      "freeDisk": 56334106624,
+      "freeDisk": 57305444352,
       "resourceSafe": false,
       "notes": "LOCAL_PRO_RESOURCE_PENDING: weights absent and/or host memory/disk unsafe for ~1GB download+inference while Product-Use may be active. No fake HOST_OBSERVED."
     },

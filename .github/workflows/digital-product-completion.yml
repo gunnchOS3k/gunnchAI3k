@@ -22,11 +22,12 @@ jobs:
         with:
           node-version: "20"
           cache: npm
-      - name: Install tesseract OCR
+      - name: Install tesseract OCR and python3
         run: |
           sudo apt-get update
-          sudo apt-get install -y tesseract-ocr
+          sudo apt-get install -y tesseract-ocr python3
           tesseract --version
+          python3 --version
       - run: npm ci
       - name: Product-completion unit tests
         run: npm run test:product-completion
