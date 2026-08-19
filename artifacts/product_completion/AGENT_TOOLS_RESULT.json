@@ -1,0 +1,6 @@
+{
+  "deniedTool": "FAIL_CLOSED:files.read",
+  "plan": "OK",
+  "artifact": "/var/folders/dp/z5frf3m511jcdpdf8v878v8h0000gn/T/gunnchai-pc-44CERy/agents/sandbox/plan_artifact.json",
+  "blockedKeys": "INVALID_COURSE_ID"
+}

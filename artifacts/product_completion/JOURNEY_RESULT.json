@@ -1,0 +1,19 @@
+{
+  "companion": true,
+  "surfaces": [
+    "conversation",
+    "workspace",
+    "skills",
+    "memory",
+    "voice",
+    "computer_use_consent",
+    "privacy",
+    "offline",
+    "research",
+    "notebook",
+    "waike_tutor",
+    "vision",
+    "audio_overview",
+    "coding_agent"
+  ]
+}

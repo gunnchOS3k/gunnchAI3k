@@ -55,7 +55,9 @@
     "test:user-ready": "jest tests/user-ready --runInBand --forceExit",
     "waike-mastery": "tsx src/waike-mastery/cli.ts",
     "test:waike-mastery": "jest tests/waike-mastery --runInBand --forceExit",
-    "test:journeys": "jest tests/journeys tests/readme_supervisor_front_door.test.ts --runInBand --forceExit"
+    "test:journeys": "jest tests/journeys tests/readme_supervisor_front_door.test.ts --runInBand --forceExit",
+    "product-completion": "tsx src/product-completion/cli.ts",
+    "test:product-completion": "jest tests/product-completion --runInBand --forceExit"
   },
   "keywords": [
     "ai",

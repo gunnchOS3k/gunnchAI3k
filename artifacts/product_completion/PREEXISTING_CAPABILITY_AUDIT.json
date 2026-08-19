@@ -1,0 +1,168 @@
+{
+  "schema": "gunnchai.preexisting_capability_audit.v1",
+  "generatedAt": "2026-08-19T02:29:04.171Z",
+  "current_main_sha": "e248836f42ad186524b32ace516c5db80a88da8e",
+  "doctrine": "Verified against CURRENT source/runtime. Do not replace working implementations. Classifications are honest.",
+  "tasks": [
+    {
+      "task_id": "AI-UR-001",
+      "category": "research_citations",
+      "coverage_status_before": "COMPLETE",
+      "implemented_before": true,
+      "runtime_class": "COMPLETE_REAL",
+      "evidence": "src/user-ready/research_citations.ts wrapping stage2 ResearchEngine; offline cited report with quote verification",
+      "gap": "Live multi-step web Deep Research closed via AI-UR-007.",
+      "source": "tests/user-ready/market_runtime.test.ts"
+    },
+    {
+      "task_id": "AI-UR-002",
+      "category": "projects_memory",
+      "coverage_status_before": "COMPLETE",
+      "implemented_before": true,
+      "runtime_class": "COMPLETE_REAL",
+      "evidence": "src/user-ready/projects_memory.ts combining ProjectStore + GunnchMemoryStore",
+      "gap": "Account-wide editable memory UI and team project sharing remain thin.",
+      "source": "tests/user-ready/market_runtime.test.ts"
+    },
+    {
+      "task_id": "AI-UR-003",
+      "category": "artifact_outputs",
+      "coverage_status_before": "COMPLETE",
+      "implemented_before": true,
+      "runtime_class": "COMPLETE_REAL",
+      "evidence": "src/user-ready/artifacts.ts wrapping phase_xiv ArtifactCreator",
+      "gap": "Interactive Canvas/cowrite closed via AI-UR-008 digital workspace (device-os pixels still separate).",
+      "source": "tests/user-ready/market_runtime.test.ts"
+    },
+    {
+      "task_id": "AI-UR-004",
+      "category": "socratic_hinting",
+      "coverage_status_before": "COMPLETE",
+      "implemented_before": true,
+      "runtime_class": "COMPLETE_REAL",
+      "evidence": "src/user-ready/socratic.ts executable hint engine (not a one-line prompt stub)",
+      "gap": "Live Khan Academy problem-context integration and teacher dashboard are OPEN.",
+      "source": "tests/user-ready/market_runtime.test.ts"
+    },
+    {
+      "task_id": "AI-UR-005",
+      "category": "tool_auth",
+      "coverage_status_before": "COMPLETE",
+      "implemented_before": true,
+      "runtime_class": "COMPLETE_REAL",
+      "evidence": "src/user-ready/tool_auth.ts session over PermissionBroker + ApprovalGate",
+      "gap": "Interactive per-tool OS permission chrome and live MCP OAuth are OPEN.",
+      "source": "tests/user-ready/market_runtime.test.ts"
+    },
+    {
+      "task_id": "AI-UR-006",
+      "category": "source_grounded_qa",
+      "coverage_status_before": "COMPLETE",
+      "implemented_before": true,
+      "runtime_class": "COMPLETE_REAL",
+      "evidence": "src/user-ready/source_grounded.ts notebook-style Q&A over attached corpus",
+      "gap": "Audio Overviews closed via AI-UR-014.",
+      "source": "tests/user-ready/market_runtime.test.ts"
+    },
+    {
+      "task_id": "AI-UR-007",
+      "category": "deep_web_research",
+      "coverage_status_before": "COMPLETE",
+      "implemented_before": true,
+      "runtime_class": "COMPLETE_REAL",
+      "evidence": "src/user-ready/deep_research.ts live Wikipedia/DDG discovery + iterative follow-up + claim-source graph + verified citations from read bodies; consent; cancel/resume",
+      "gap": "Not ChatGPT/Gemini Deep Research scale or product UX. No competitor superiority claim.",
+      "source": "tests/user-ready/deep_research.test.ts"
+    },
+    {
+      "task_id": "AI-UR-008",
+      "category": "canvas_cowrite_ui",
+      "coverage_status_before": "COMPLETE",
+      "implemented_before": true,
+      "runtime_class": "COMPLETE_REAL",
+      "evidence": "src/user-ready/cowrite_workspace.ts: versioned create/edit/persist/reopen with provenance; VERSION_CONFLICT + SILENT_OVERWRITE_FORBIDDEN",
+      "gap": "Device-os pixel chrome remains separate; digital workspace COMPLETE this packet.",
+      "source": "tests/user-ready/ai004_surfaces.test.ts"
+    },
+    {
+      "task_id": "AI-UR-009",
+      "category": "custom_agents",
+      "coverage_status_before": "COMPLETE",
+      "implemented_before": true,
+      "runtime_class": "COMPLETE_REAL",
+      "evidence": "src/user-ready/agent_tools.ts real allowlisted tools + plan→execute→artifact",
+      "gap": "Not ChatGPT custom GPT product UX.",
+      "source": "tests/product-completion/digital_product.test.ts"
+    },
+    {
+      "task_id": "AI-UR-010",
+      "category": "voice_realtime",
+      "coverage_status_before": "COMPLETE",
+      "implemented_before": true,
+      "runtime_class": "COMPLETE_REAL",
+      "evidence": "src/user-ready/speech_local.ts formant STT/TTS + voice_realtime LOCAL adapters; live mic HUMAN_PENDING",
+      "gap": "Live microphone capture is HUMAN_PENDING / device permission. Fixtures prove STT/TTS.",
+      "source": "tests/product-completion/digital_product.test.ts"
+    },
+    {
+      "task_id": "AI-UR-011",
+      "category": "vision_screen",
+      "coverage_status_before": "COMPLETE",
+      "implemented_before": true,
+      "runtime_class": "COMPLETE_REAL",
+      "evidence": "src/user-ready/vision_vlm.ts OCR_ONLY vs VLM_ONLY vs OCR_PLUS_VLM on real rasters",
+      "gap": "Local semantic raster VLM, not a frontier cloud VLM. Cloud VLM explicit-consent only.",
+      "source": "tests/product-completion/digital_product.test.ts"
+    },
+    {
+      "task_id": "AI-UR-012",
+      "category": "computer_use",
+      "coverage_status_before": "COMPLETE",
+      "implemented_before": true,
+      "runtime_class": "COMPLETE_REAL",
+      "evidence": "src/user-ready/computer_use_real.ts isolated lab editor REAL file; mock retained as test backend",
+      "gap": "Lab-editor REAL file/OS state. Live Darwin AX of arbitrary apps is DEVICE/HUMAN pending.",
+      "source": "tests/product-completion/digital_product.test.ts"
+    },
+    {
+      "task_id": "AI-UR-013",
+      "category": "coding_agent_pr",
+      "coverage_status_before": "COMPLETE",
+      "implemented_before": true,
+      "runtime_class": "COMPLETE_REAL",
+      "evidence": "src/user-ready/coding_agent_pr.ts → allowlisted gunnchOS3k/gunnchai-ai-ur-013-sandbox live GitHub DRAFT PR. Never merge/force/main/production.",
+      "gap": "Sandbox-only. Not Copilot cloud coding-agent product parity.",
+      "source": "tests/user-ready/coding_agent_pr.test.ts"
+    },
+    {
+      "task_id": "AI-UR-014",
+      "category": "audio_overview",
+      "coverage_status_before": "COMPLETE",
+      "implemented_before": true,
+      "runtime_class": "COMPLETE_REAL",
+      "evidence": "src/user-ready/audio_overview.ts SOLO_NARRATOR real TTS + transcript + chapters; sine is fallback only",
+      "gap": "SOLO_NARRATOR only. TWO_SPEAKER not claimed.",
+      "source": "tests/product-completion/digital_product.test.ts"
+    },
+    {
+      "task_id": "AI-UR-015",
+      "category": "companion_ux",
+      "coverage_status_before": "COMPLETE",
+      "implemented_before": true,
+      "runtime_class": "COMPLETE_REAL",
+      "evidence": "companion_ui + companion_backend wired for research/notebook/tutor/vision/audio/coding",
+      "gap": "HUMAN_E6 companion polish validation still OPEN. Digital button→backend wiring COMPLETE.",
+      "source": "tests/user-ready/ai004_surfaces.test.ts"
+    },
+    {
+      "task_id": "AI-UR-016",
+      "category": "local_fast_pro_weights",
+      "coverage_status_before": "COMPLETE",
+      "implemented_before": true,
+      "runtime_class": "COMPLETE_REAL",
+      "evidence": "Local Fast hashed path preserved. Local Pro RESOURCE_BLOCKED (host RAM unsafe). Fast ≠ Pro.",
+      "gap": "LOCAL_PRO_RESOURCE_BLOCKED: do not download ~1GB under memory pressure.",
+      "source": "tests/user-ready/local_fast.test.ts"
+    }
+  ]
+}

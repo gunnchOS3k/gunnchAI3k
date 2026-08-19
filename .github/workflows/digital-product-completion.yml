@@ -1,0 +1,51 @@
+name: Digital product completion
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: gunnchai-digital-product-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  product-completion:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - name: Install tesseract OCR
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y tesseract-ocr
+          tesseract --version
+      - run: npm ci
+      - name: Product-completion unit tests
+        run: npm run test:product-completion
+        env:
+          GUNNCHAI_SKIP_FAST_DOWNLOAD: "1"
+          GUNNCHAI_SKIP_PRO_DOWNLOAD: "1"
+          GUNNCHAI_AI_UR_013_LIVE_PR: "0"
+      - name: npm run product-completion
+        env:
+          GUNNCHAI_SKIP_PRO_DOWNLOAD: "1"
+          GUNNCHAI_PRO_NETWORK_CONSENT: "0"
+        run: npm run product-completion
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: digital-product-completion
+          path: |
+            artifacts/product_completion/
+            benchmarks/GUNNCHAI_MARKET_TASK_MATRIX.json
+            benchmarks/LOCAL_PRO_STATUS.json
+          if-no-files-found: error
+          retention-days: 14

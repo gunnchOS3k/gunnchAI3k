@@ -1,25 +1,16 @@
 {
   "schema": "gunnchai.local_pro_status.v1",
-  "packet": "STREAM-B-PKT-003",
+  "packet": "AI-USER-READY-004",
   "status": "LOCAL_PRO_RESOURCE_PENDING",
   "candidate": "Qwen/Qwen2.5-1.5B-Instruct",
   "license": "Apache-2.0",
   "pinned_sha256": "1adf0b11065d8ad2e8123ea110d1ec956dab4ab038eab665614adba04b6c3370",
   "expected_bytes": 986048768,
-  "freeMemBytes": 248561664,
-  "freeDiskBytes": null,
+  "freeMemBytes": 354156544,
+  "freeDiskBytes": 56331923456,
   "resourceSafe": false,
   "host_observed_inference": false,
-  "controlled_run_attempted": false,
-  "notes": "LOCAL_PRO_RESOURCE_PENDING: freemem below 2 GiB gate; no ~1GB Pro download attempted; no retry loop.",
-  "preserve_360M_negative": {
-    "source": "artifacts/local_pro/LOCAL_PRO_AB_STREAM_B_PKT_001.json",
-    "MODEL_A_135M_overall": 0.30833333333333335,
-    "MODEL_B_360M_overall": 0.2916666666666667,
-    "delta_overall": -0.016666666666666663,
-    "adoption_recommendation": "DO_NOT_ADOPT_AS_MASTERY_SOLVER_DEFAULT",
-    "preserved": true
-  },
+  "notes": "LOCAL_PRO_RESOURCE_PENDING: weights absent and/or host memory/disk unsafe for ~1GB download+inference while Product-Use may be active. No fake HOST_OBSERVED.",
   "HUMAN_E6": false,
   "FRONTIER_PARITY": false
 }
