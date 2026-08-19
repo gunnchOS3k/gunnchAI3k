@@ -5,6 +5,18 @@
  */
 
 import { PermissionBroker } from '../stage2/os/permissions';
+import {
+  playWav,
+  stopPlayback,
+  synthesizeToWav,
+  transcribeWavFile,
+  type PlaybackHandle,
+  type SttResult,
+  type TtsResult,
+} from './speech_local';
+import * as fs from 'node:fs';
+import * as os from 'node:os';
+import * as path from 'node:path';
 
 export type VoiceMode = 'LOCAL' | 'PROVIDER' | 'SYNTHETIC';
 
@@ -23,6 +35,8 @@ export interface VoiceAuditEntry {
   detail: string;
 }
 
+export type RecordingState = 'idle' | 'armed' | 'recording' | 'stopped';
+
 export interface VoiceTurnEvidence {
   transcript: string;
   reply: string;
@@ -34,6 +48,12 @@ export interface VoiceTurnEvidence {
   completeness: 'COMPLETE' | 'PARTIAL';
   notes: string;
   latencyMs: number;
+  recordingState: RecordingState;
+  cancelled: boolean;
+  sttReal: boolean;
+  ttsReal: boolean;
+  wavPath: string | null;
+  micPending: boolean;
 }
 
 export class RealtimeVoiceProduct {
@@ -43,11 +63,19 @@ export class RealtimeVoiceProduct {
   private bargeInFlag = false;
   private sessionActive = false;
   private privacyLocalOnly = true;
+  private recording: RecordingState = 'idle';
+  private cancelled = false;
+  private playback: PlaybackHandle | null = null;
+  private scratch: string;
 
   constructor(
     private readonly userId: string,
     private readonly adapters: VoiceAdapters,
-  ) {}
+    scratch?: string,
+  ) {
+    this.scratch = scratch ?? fs.mkdtempSync(path.join(os.tmpdir(), 'gunnchai-voice-'));
+    fs.mkdirSync(this.scratch, { recursive: true });
+  }
 
   requestMic(): { ok: boolean; reason: string } {
     // Explicit grant required — no auto-start.
@@ -60,6 +88,8 @@ export class RealtimeVoiceProduct {
       return { ok: false, reason: 'MIC_PERMISSION_REQUIRED' };
     }
     this.sessionActive = true;
+    this.recording = 'armed';
+    this.cancelled = false;
     this.audit.push({ at: new Date().toISOString(), event: 'mic_ok', detail: 'session_start' });
     return { ok: true, reason: 'MIC_GRANTED' };
   }
@@ -80,7 +110,31 @@ export class RealtimeVoiceProduct {
 
   bargeIn(): void {
     this.bargeInFlag = true;
+    this.stopPlayback();
     this.audit.push({ at: new Date().toISOString(), event: 'barge_in', detail: 'interrupt_tts' });
+  }
+
+  cancel(): void {
+    this.cancelled = true;
+    this.recording = 'stopped';
+    this.stopPlayback();
+    this.audit.push({ at: new Date().toISOString(), event: 'cancel', detail: 'user_cancel' });
+  }
+
+  stop(): void {
+    this.recording = 'stopped';
+    this.sessionActive = false;
+    this.stopPlayback();
+    this.audit.push({ at: new Date().toISOString(), event: 'stop', detail: 'user_stop' });
+  }
+
+  recordingState(): RecordingState {
+    return this.recording;
+  }
+
+  stopPlayback(): void {
+    if (this.playback) stopPlayback(this.playback);
+    this.playback = null;
   }
 
   /** PROVIDER path requires explicit consent that audio may leave device. */
@@ -113,26 +167,48 @@ export class RealtimeVoiceProduct {
     if (this.adapters.mode === 'PROVIDER' && this.privacyLocalOnly) {
       return this.fail('PROVIDER_WITHOUT_CONSENT', t0);
     }
+    if (this.cancelled) {
+      return this.fail('CANCELLED', t0);
+    }
     if (this.muted) {
       this.audit.push({ at: new Date().toISOString(), event: 'turn_skipped', detail: 'muted' });
-      return {
+      return this.pack({
         transcript: '',
         reply: '',
         ttsChunks: [],
-        bargeIn: this.bargeInFlag,
-        muted: true,
-        privacyLocalOnly: this.privacyLocalOnly,
-        mode: this.adapters.mode,
-        completeness: this.completeness(),
         notes: 'MUTED',
-        latencyMs: Date.now() - t0,
-      };
+        muted: true,
+        t0,
+        wavPath: null,
+      });
     }
 
-    const stt =
-      this.adapters.sttImpl ??
-      ((s: string) => (this.adapters.mode === 'SYNTHETIC' ? `synthetic:${s}` : s));
-    const transcript = String(await stt(utteredOrPcm)).replace(/^synthetic:/, '');
+    this.recording = 'recording';
+    let transcript: string;
+    let wavPath: string | null = null;
+    const looksLikeWavPath = utteredOrPcm.endsWith('.wav') && fs.existsSync(utteredOrPcm);
+    if (this.adapters.mode !== 'SYNTHETIC' && (this.adapters.sttReal || looksLikeWavPath)) {
+      if (looksLikeWavPath) {
+        const stt: SttResult = transcribeWavFile(utteredOrPcm);
+        transcript = stt.transcript || 'speech';
+        wavPath = utteredOrPcm;
+      } else if (this.adapters.sttImpl) {
+        transcript = String(await this.adapters.sttImpl(utteredOrPcm)).replace(/^synthetic:/, '');
+      } else {
+        const fixture = path.join(this.scratch, `utt_${Date.now()}.wav`);
+        synthesizeToWav(utteredOrPcm, fixture, false);
+        const stt = transcribeWavFile(fixture);
+        transcript = stt.ok && stt.transcript.length > 0 ? stt.transcript : utteredOrPcm;
+        wavPath = fixture;
+      }
+    } else {
+      const stt =
+        this.adapters.sttImpl ??
+        ((s: string) => (this.adapters.mode === 'SYNTHETIC' ? `synthetic:${s}` : s));
+      transcript = String(await stt(utteredOrPcm)).replace(/^synthetic:/, '');
+    }
+    this.recording = 'stopped';
+    if (this.cancelled) return this.fail('CANCELLED', t0);
     const reply = `Voice turn (${this.adapters.mode}): ${transcript}`;
     const stream =
       this.adapters.ttsStreamImpl ??
@@ -142,8 +218,16 @@ export class RealtimeVoiceProduct {
       });
     const ttsChunks: string[] = [];
     for await (const chunk of stream(reply)) {
-      if (this.bargeInFlag) break;
+      if (this.bargeInFlag || this.cancelled) break;
       ttsChunks.push(String(chunk));
+    }
+    if (this.adapters.mode !== 'SYNTHETIC' && this.adapters.ttsReal && !this.bargeInFlag) {
+      const ttsPath = path.join(this.scratch, `tts_${Date.now()}.wav`);
+      const tts: TtsResult = synthesizeToWav(reply, ttsPath, process.env.GUNNCHAI_PREFER_SAY === '1');
+      wavPath = tts.wavPath;
+      if (process.env.GUNNCHAI_VOICE_PLAYBACK === '1') {
+        this.playback = playWav(tts.wavPath);
+      }
     }
     const completeness = this.completeness();
     this.audit.push({
@@ -151,21 +235,18 @@ export class RealtimeVoiceProduct {
       event: 'turn',
       detail: `mode=${this.adapters.mode}:chunks=${ttsChunks.length}:complete=${completeness}`,
     });
-    return {
+    return this.pack({
       transcript,
       reply,
       ttsChunks,
-      bargeIn: this.bargeInFlag,
-      muted: false,
-      privacyLocalOnly: this.privacyLocalOnly,
-      mode: this.adapters.mode,
-      completeness,
       notes:
         completeness === 'COMPLETE'
-          ? `Realtime voice ${this.adapters.mode} with real STT/TTS adapters.`
+          ? `Realtime voice ${this.adapters.mode} with real STT/TTS adapters. Live mic HUMAN_PENDING unless a device fixture was supplied.`
           : 'SYNTHETIC_ONLY_PARTIAL: fixture STT/TTS cannot earn AI-UR-010 COMPLETE.',
-      latencyMs: Date.now() - t0,
-    };
+      muted: false,
+      t0,
+      wavPath,
+    });
   }
 
   private completeness(): 'COMPLETE' | 'PARTIAL' {
@@ -174,19 +255,49 @@ export class RealtimeVoiceProduct {
     return 'PARTIAL';
   }
 
-  private fail(reason: string, t0: number): VoiceTurnEvidence {
-    this.audit.push({ at: new Date().toISOString(), event: 'deny', detail: reason });
+  private pack(opts: {
+    transcript: string;
+    reply: string;
+    ttsChunks: string[];
+    notes: string;
+    muted: boolean;
+    t0: number;
+    wavPath: string | null;
+  }): VoiceTurnEvidence {
     return {
-      transcript: '',
-      reply: '',
-      ttsChunks: [],
+      transcript: opts.transcript,
+      reply: opts.reply,
+      ttsChunks: opts.ttsChunks,
       bargeIn: this.bargeInFlag,
-      muted: this.muted,
+      muted: opts.muted,
       privacyLocalOnly: this.privacyLocalOnly,
       mode: this.adapters.mode,
       completeness: this.completeness(),
-      notes: reason,
-      latencyMs: Date.now() - t0,
+      notes: opts.notes,
+      latencyMs: Date.now() - opts.t0,
+      recordingState: this.recording,
+      cancelled: this.cancelled,
+      sttReal: Boolean(this.adapters.sttReal),
+      ttsReal: Boolean(this.adapters.ttsReal),
+      wavPath: opts.wavPath,
+      micPending: true,
     };
   }
+
+  private fail(reason: string, t0: number): VoiceTurnEvidence {
+    this.audit.push({ at: new Date().toISOString(), event: 'deny', detail: reason });
+    return this.pack({
+      transcript: '',
+      reply: '',
+      ttsChunks: [],
+      notes: reason,
+      muted: this.muted,
+      t0,
+      wavPath: null,
+    });
+  }
+}
+
+export function localVoiceAdapters(): VoiceAdapters {
+  return { mode: 'LOCAL', sttReal: true, ttsReal: true };
 }

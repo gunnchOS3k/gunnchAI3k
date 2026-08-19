@@ -7,6 +7,15 @@
 import { createHash } from 'node:crypto';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
+import {
+  AllowlistedAgentTools,
+  runAgentPlan,
+  tmpToolContext,
+  type AgentPlanResult,
+  type AgentToolId,
+  type AgentToolPermission,
+  type ToolCallResult,
+} from './agent_tools';
 
 export type AgentPermission =
   | 'files.read'
@@ -50,10 +59,19 @@ export class CustomAgentStore {
   readonly audit: AgentAuditEntry[] = [];
   private manifests = new Map<string, AgentManifest>();
   private consents = new Map<string, Set<AgentPermission>>();
+  readonly tools: AllowlistedAgentTools;
+  lastPlan: AgentPlanResult | null = null;
 
-  constructor(private readonly rootDir: string) {
+  constructor(private readonly rootDir: string, tools?: AllowlistedAgentTools) {
     fs.mkdirSync(this.rootDir, { recursive: true });
     this.load();
+    const ctx = tmpToolContext();
+    ctx.readRoot = path.join(this.rootDir, 'read');
+    ctx.sandboxRoot = path.join(this.rootDir, 'sandbox');
+    ctx.corpusDir = path.join(this.rootDir, 'corpus');
+    fs.mkdirSync(ctx.readRoot, { recursive: true });
+    fs.mkdirSync(ctx.sandboxRoot, { recursive: true });
+    this.tools = tools ?? new AllowlistedAgentTools(ctx);
   }
 
   install(manifest: AgentManifest): { ok: boolean; reason: string } {
@@ -183,6 +201,74 @@ export class CustomAgentStore {
       ok: true,
     });
     return { ok: true, output, reason: 'OK' };
+  }
+
+  grantedPermissions(agentId: string): Set<AgentToolPermission> {
+    const granted = this.consents.get(agentId) ?? new Set();
+    const out = new Set<AgentToolPermission>();
+    for (const p of granted) {
+      if (p === 'files.read' || p === 'files.write' || p === 'memory.read' || p === 'memory.write') {
+        out.add(p);
+      }
+    }
+    return out;
+  }
+
+  async executeTool(
+    agentId: string,
+    toolId: AgentToolId,
+    args: Record<string, unknown>,
+  ): Promise<ToolCallResult> {
+    const m = this.manifests.get(agentId);
+    if (!m) {
+      this.audit.push({
+        at: new Date().toISOString(),
+        agentId,
+        event: 'deny',
+        detail: 'UNKNOWN_AGENT',
+        ok: false,
+      });
+      return {
+        ok: false,
+        toolId,
+        output: {},
+        reason: 'UNKNOWN_AGENT',
+        cancelled: false,
+        timedOut: false,
+        durationMs: 0,
+        auditId: 'none',
+      };
+    }
+    const result = await this.tools.execute({ toolId, args }, this.grantedPermissions(agentId));
+    this.audit.push({
+      at: new Date().toISOString(),
+      agentId,
+      event: result.ok ? 'invoke' : 'deny',
+      detail: `tool=${toolId}:${result.reason}`,
+      ok: result.ok,
+    });
+    return result;
+  }
+
+  async runPlan(
+    agentId: string,
+    goal: string,
+    steps: Parameters<typeof runAgentPlan>[3],
+  ): Promise<AgentPlanResult> {
+    const m = this.manifests.get(agentId);
+    if (!m) {
+      return { ok: false, steps: [], artifactPath: null, reason: 'UNKNOWN_AGENT' };
+    }
+    const plan = await runAgentPlan(this.tools, this.grantedPermissions(agentId), goal, steps);
+    this.lastPlan = plan;
+    this.audit.push({
+      at: new Date().toISOString(),
+      agentId,
+      event: plan.ok ? 'invoke' : 'deny',
+      detail: `plan:${plan.reason}`,
+      ok: plan.ok,
+    });
+    return plan;
   }
 
   list(): AgentManifest[] {

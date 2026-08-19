@@ -6,6 +6,7 @@
 import { createHash } from 'node:crypto';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
+import { isRealSpeechWav, synthesizeToWav } from './speech_local';
 
 export interface AudioSource {
   id: string;
@@ -20,9 +21,16 @@ export interface OutlineSection {
 }
 
 export interface ScriptLine {
-  speaker: 'A' | 'B';
+  speaker: 'NARRATOR' | 'A' | 'B';
   text: string;
   citations: string[];
+}
+
+export interface AudioChapter {
+  title: string;
+  startSec: number;
+  endSec: number;
+  sourceIds: string[];
 }
 
 export interface AudioOverviewResult {
@@ -33,6 +41,12 @@ export interface AudioOverviewResult {
   bytes: number;
   rejectedClaims: string[];
   notes: string;
+  narratorMode: 'SOLO_NARRATOR' | 'TWO_SPEAKER';
+  realTtsSpeech: boolean;
+  ttsBackend: string;
+  transcript: string;
+  chapters: AudioChapter[];
+  citationsMap: Array<{ line: number; citations: string[] }>;
 }
 
 function tokenize(s: string): Set<string> {
@@ -109,19 +123,28 @@ export class AudioOverviewRuntime {
     this.sources.push(source);
   }
 
-  generate(topic: string, extraClaims: string[] = []): AudioOverviewResult {
+  generate(
+    topic: string,
+    extraClaims: string[] = [],
+    opts?: { allowPlaceholderSine?: boolean; twoSpeaker?: boolean },
+  ): AudioOverviewResult {
     const rejectedClaims: string[] = [];
-    if (this.sources.length === 0) {
-      return {
-        ok: false,
-        outline: [],
-        script: [],
-        audioPath: null,
-        bytes: 0,
-        rejectedClaims: ['NO_SOURCES'],
-        notes: 'NO_SOURCES',
-      };
-    }
+    const empty = (notes: string): AudioOverviewResult => ({
+      ok: false,
+      outline: [],
+      script: [],
+      audioPath: null,
+      bytes: 0,
+      rejectedClaims: notes === 'NO_SOURCES' ? ['NO_SOURCES'] : rejectedClaims,
+      notes,
+      narratorMode: 'SOLO_NARRATOR',
+      realTtsSpeech: false,
+      ttsBackend: 'none',
+      transcript: '',
+      chapters: [],
+      citationsMap: [],
+    });
+    if (this.sources.length === 0) return empty('NO_SOURCES');
 
     const outline: OutlineSection[] = this.sources.map((s) => {
       const sentences = s.text
@@ -144,11 +167,10 @@ export class AudioOverviewRuntime {
 
     const script: ScriptLine[] = [];
     script.push({
-      speaker: 'A',
+      speaker: 'NARRATOR',
       text: `Audio overview on ${topic}, grounded only in attached sources.`,
       citations: this.sources.map((s) => s.id),
     });
-    let flip: 'A' | 'B' = 'B';
     for (const section of outline) {
       for (const bullet of section.bullets) {
         const cites = groundedIn(bullet, this.sources);
@@ -157,37 +179,73 @@ export class AudioOverviewRuntime {
           continue;
         }
         script.push({
-          speaker: flip,
+          speaker: 'NARRATOR',
           text: bullet,
           citations: cites,
         });
-        flip = flip === 'A' ? 'B' : 'A';
       }
     }
 
-    if (script.length < 2) {
-      return {
-        ok: false,
-        outline,
-        script,
-        audioPath: null,
-        bytes: 0,
-        rejectedClaims,
-        notes: 'INSUFFICIENT_GROUNDED_SCRIPT',
-      };
-    }
+    const packFail = (notes: string): AudioOverviewResult => ({
+      ok: false,
+      outline,
+      script,
+      audioPath: null,
+      bytes: 0,
+      rejectedClaims,
+      notes,
+      narratorMode: 'SOLO_NARRATOR',
+      realTtsSpeech: false,
+      ttsBackend: 'none',
+      transcript: '',
+      chapters: [],
+      citationsMap: script.map((l, i) => ({ line: i, citations: l.citations })),
+    });
 
+    if (script.length < 2) return packFail('INSUFFICIENT_GROUNDED_SCRIPT');
+
+    const transcript = script.map((l) => l.text).join(' ');
     const audioPath = path.join(this.outDir, `overview_${Date.now()}.wav`);
-    const bytes = writeWavFromScript(audioPath, script);
-    const magic = fs.readFileSync(audioPath).subarray(0, 4).toString('ascii');
+    const tts = synthesizeToWav(transcript.slice(0, 1400), audioPath, process.env.GUNNCHAI_PREFER_SAY === '1');
+    let realTtsSpeech = tts.ok && isRealSpeechWav(fs.readFileSync(audioPath));
+    let ttsBackend = tts.backend;
+    let bytes = tts.bytes;
+    if (!realTtsSpeech && opts?.allowPlaceholderSine) {
+      bytes = writeWavFromScript(audioPath, script);
+      ttsBackend = 'hash_sine_wav_placeholder';
+      realTtsSpeech = false;
+    }
+    const chapters: AudioChapter[] = [];
+    let t = 0;
+    for (const section of outline) {
+      const dur = Math.max(1.2, section.bullets.join(' ').length / 18);
+      chapters.push({
+        title: section.heading,
+        startSec: t,
+        endSec: t + dur,
+        sourceIds: section.sourceIds,
+      });
+      t += dur;
+    }
+    const magic = fs.existsSync(audioPath)
+      ? fs.readFileSync(audioPath).subarray(0, 4).toString('ascii')
+      : '';
     return {
-      ok: magic === 'RIFF' && bytes > 44,
+      ok: magic === 'RIFF' && bytes > 44 && script.every((l) => l.citations.length > 0),
       outline,
       script,
       audioPath,
       bytes,
       rejectedClaims,
-      notes: `Grounded audio overview WAV (${bytes} bytes); rejected ${rejectedClaims.length} ungrounded claim(s).`,
+      notes: realTtsSpeech
+        ? `SOLO_NARRATOR real TTS (${ttsBackend}, ${bytes} bytes); rejected ${rejectedClaims.length} ungrounded claim(s).`
+        : `Placeholder sine WAV; rejected ${rejectedClaims.length} ungrounded claim(s).`,
+      narratorMode: 'SOLO_NARRATOR',
+      realTtsSpeech,
+      ttsBackend,
+      transcript,
+      chapters,
+      citationsMap: script.map((l, i) => ({ line: i, citations: l.citations })),
     };
   }
 }
