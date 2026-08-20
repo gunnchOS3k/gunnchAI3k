@@ -1,0 +1,8 @@
+{
+  "requirementId": "AI-GOV-012",
+  "validationState": "VALIDATED",
+  "metrics": {
+    "snapshotCount": 10,
+    "activeModelVersion": "wave003-eval@1"
+  }
+}

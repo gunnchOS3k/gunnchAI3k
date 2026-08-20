@@ -1,0 +1,5 @@
+{
+  "evalBaselineRef": "fixtures/system-layer/eval",
+  "capabilitySpecs": "src/system-layer/evaluation/metrics.ts#CAPABILITY_SPECS",
+  "wave003Fixtures": "evals/wave003/fixtures"
+}

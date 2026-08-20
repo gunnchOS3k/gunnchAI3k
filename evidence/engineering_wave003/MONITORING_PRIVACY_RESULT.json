@@ -1,0 +1,8 @@
+{
+  "requirementId": "AI-GOV-011",
+  "validationState": "VALIDATED",
+  "metrics": {
+    "eventCount": 1
+  },
+  "detailBoundChars": 500
+}

@@ -1,0 +1,5 @@
+{
+  "result": "PARTIAL",
+  "method": "fresh-node-process-spawn",
+  "command": "npm run eval:wave003 (child with GUNNCHAI_WAVE003_REPRODUCTION=1)"
+}

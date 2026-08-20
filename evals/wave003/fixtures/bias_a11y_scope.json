@@ -1,0 +1,4 @@
+{
+  "inScope": ["wcag_aa_checklist", "labeled_controls", "contrast_guidance"],
+  "outOfScopeClaims": ["GENERAL_VLM", "GENERAL_BIAS_AUDIT", "GENERAL_ASR", "HUMAN_E6"]
+}
