@@ -39,9 +39,6 @@ jobs:
       - name: Wave003 independent eval harness (reproduction required)
         run: npm run eval:wave003
 
-      - name: Jest wave003 tests
-        run: npm run test:wave003
-
       - name: Enforce independent reproduction PASS for release
         run: |
           node -e "
@@ -55,6 +52,9 @@ jobs:
             if (e.releaseComplete !== true) { console.error('releaseComplete false; PARTIAL does not qualify'); process.exit(1); }
             console.log('WAVE003_INTEGRITY_REQUIRED_CI=PASS');
           "
+
+      - name: Jest wave003 tests
+        run: npm run test:wave003
 
       - name: Upload wave003 evidence
         if: always()

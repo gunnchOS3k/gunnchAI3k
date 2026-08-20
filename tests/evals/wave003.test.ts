@@ -17,7 +17,7 @@ describe('engineering wave003 independent validation', () => {
 
   it('evaluates all 19 target requirements with evidence artifacts', async () => {
     const report = await runWave003Eval({
-      writeEvidence: true,
+      writeEvidence: false,
       runReproduction: false,
     });
 

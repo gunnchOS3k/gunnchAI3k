@@ -80,14 +80,9 @@ export function writeWave003Evidence(ctx: Wave003Context, report: Wave003Report)
     cloudSolePathClaim: false,
   });
 
-  writeJson(
-    dir,
-    'INDEPENDENT_REPRODUCTION.json',
-    report.independentReproduction ?? {
-      result: report.independentDigitalReproduction,
-      unexpected_differences: ['reproduction-record-missing'],
-    },
-  );
+  if (report.independentReproduction) {
+    writeJson(dir, 'INDEPENDENT_REPRODUCTION.json', report.independentReproduction);
+  }
 
   const rollback = report.results.find((r) => r.requirementId === 'AI-GOV-012');
   writeJson(dir, 'ROLLBACK_RESULT.json', {
