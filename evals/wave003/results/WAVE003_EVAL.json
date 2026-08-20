@@ -1,9 +1,9 @@
 {
   "schema": "gunnchai.engineering_wave003.v1",
   "wave": "003",
-  "generatedAt": "2026-08-20T00:08:07.991Z",
-  "branch": "eng/wave003-validation",
-  "acceptedMainSha": "d357846810b952ed49a2c168c05720143b32796b",
+  "generatedAt": "2026-08-20T00:54:02.238Z",
+  "branch": "eng/wave003-integrity-repair",
+  "acceptedMainSha": "a28ff83b6efe95cdb8be9d959f908516b2666367",
   "doctrine": {
     "independentEvaluator": true,
     "validationImportsRequirementProof": false,
@@ -34,29 +34,35 @@
     {
       "requirementId": "AI-GOV-001",
       "title": "AI governance: Declared purpose",
-      "pass": true,
       "runtimeKind": "LOCAL_GOVERNANCE_RUNTIME",
       "metrics": {
-        "purposeLength": 52
+        "purposeLength": 147,
+        "purposeStructureComplete": true
       },
       "negativeCases": [
         {
           "id": "purpose-declared",
           "description": "Governance exposes non-empty declared purpose",
           "passed": true,
-          "detail": "Wave003 declared purpose: local tutoring assist only"
+          "detail": "Local-first gunnchAI assist for tutoring, code, device help, accessibility, coac"
+        },
+        {
+          "id": "purpose-structure",
+          "description": "Purpose record includes users, uses, out-of-scope, limitations",
+          "passed": true,
+          "detail": "{\"purpose\":\"Local-first gunnchAI assist for tutoring, code, device help, accessibility, coaching, network diagnosis, and retrieval — not a general cloud agent.\",\"intendedUsers\":[\"students\",\"local operators\",\"device owners using gunnchOS local-first mode\"],\"intendedUses\":[\"offline tutoring packs\",\"local code assistance\",\"device-state-grounded help\",\"bounded accessibility checklist\"],\"outOfScope\":[\"GENERAL_ASR\",\"GENERAL_VLM\",\"GENERAL_BIAS_AUDIT\",\"trained game-playing agent\",\"cloud-sole-path assist\"],\"limitations\":[\"Deterministic/template runtimes are not neural quality claims.\",\"Physical device facts must come from supplied fixtures, never invented.\",\"HUMAN_E6 and HUMAN_ACCESSIBILITY_VALIDATED remain false.\"]}"
         },
         {
           "id": "purpose-required-block",
-          "description": "Empty purpose path would block (simulated)",
+          "description": "Declared purpose persisted on governance state",
           "passed": true,
-          "detail": "52"
+          "detail": "147"
         }
       ],
       "evidencePaths": [
         "src/system-layer/product_service/governance.ts#declarePurpose"
       ],
-      "notes": "Runtime purpose declaration enforced before assist decisions.",
+      "notes": "Purpose structure validated: intended users/uses/out-of-scope/limitations.",
       "validationState": "VALIDATED",
       "crossCheckRequirementProof": {
         "runtimeProven": true,
@@ -66,7 +72,6 @@
     {
       "requirementId": "AI-GOV-003",
       "title": "AI governance: Data minimization",
-      "pass": true,
       "runtimeKind": "LOCAL_GOVERNANCE_RUNTIME",
       "metrics": {
         "minimizationApplied": true
@@ -104,7 +109,6 @@
     {
       "requirementId": "AI-GOV-004",
       "title": "AI governance: Local/cloud processing disclosure",
-      "pass": true,
       "runtimeKind": "LOCAL_GOVERNANCE_RUNTIME",
       "metrics": {
         "cloudPermitted": false
@@ -136,7 +140,6 @@
     {
       "requirementId": "AI-GOV-005",
       "title": "AI governance: Model and version identification",
-      "pass": true,
       "runtimeKind": "LOCAL_GOVERNANCE_RUNTIME",
       "metrics": {
         "historyLength": 3
@@ -174,36 +177,36 @@
     {
       "requirementId": "AI-GOV-006",
       "title": "AI governance: Evaluation baseline",
-      "pass": true,
       "runtimeKind": "LOCAL_GOVERNANCE_RUNTIME",
       "metrics": {
-        "evalBaselineRef": "fixtures/system-layer/eval",
-        "datasetsPresent": true
+        "evalBaselineRef": "a28ff83b6efe95cdb8be9d959f908516b2666367",
+        "datasetsPresent": true,
+        "baselineComplete": true
       },
       "negativeCases": [
         {
-          "id": "baseline-ref-set",
-          "description": "Governance state includes eval baseline ref",
+          "id": "schema",
+          "description": "Baseline schema is versioned evaluation_baseline.v1",
           "passed": true,
-          "detail": "fixtures/system-layer/eval"
+          "detail": "gunnchai.engineering_wave003.evaluation_baseline.v1"
         },
         {
-          "id": "baseline-dir-present",
-          "description": "Referenced baseline directory exists on disk",
+          "id": "commits-env-hashes",
+          "description": "Baseline includes commits, environment, fixture hashes",
           "passed": true,
-          "detail": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/fixtures/system-layer/eval"
+          "detail": "{\"head\":\"a28ff83b6efe95cdb8be9d959f908516b2666367\",\"node\":\"v24.9.0\",\"fixtureCount\":8}"
         },
         {
-          "id": "dataset-present",
-          "description": "At least one capability dataset jsonl exists",
+          "id": "per-req-thresholds",
+          "description": "Every target requirement has metrics, thresholds, current_result, validation_state",
           "passed": true,
           "detail": "true"
         }
       ],
       "evidencePaths": [
-        "fixtures/system-layer/eval/tutoring.jsonl"
+        "evidence/engineering_wave003/EVALUATION_BASELINE.json"
       ],
-      "notes": "Eval baseline ref points to shipped structured datasets (Continuance III harness).",
+      "notes": "Versioned EVALUATION_BASELINE.json completeness + meaningful per-req thresholds.",
       "validationState": "VALIDATED",
       "crossCheckRequirementProof": {
         "runtimeProven": true,
@@ -213,7 +216,6 @@
     {
       "requirementId": "AI-GOV-007",
       "title": "AI governance: Failure analysis",
-      "pass": true,
       "runtimeKind": "LOCAL_TEMPLATE_ENGINE",
       "metrics": {
         "goodScore": 3,
@@ -252,35 +254,38 @@
     {
       "requirementId": "AI-GOV-008",
       "title": "AI governance: Bias and accessibility evaluation",
-      "pass": true,
       "runtimeKind": "LOCAL_TEMPLATE_ENGINE",
       "metrics": {
-        "inScopeChecks": 3
+        "inScopeChecks": 3,
+        "differentialExecuted": true,
+        "generalBiasAudit": false,
+        "dimensions": 5
       },
       "negativeCases": [
         {
-          "id": "a11y-structured",
-          "description": "Accessibility evaluation returns structured issues",
+          "id": "differential-executed",
+          "description": "Bounded differential eval executed on supported dimensions",
           "passed": true,
-          "detail": "3"
+          "detail": "language,reading-level,input-length,a11y-mode,device-profile"
+        },
+        {
+          "id": "missing-label-delta",
+          "description": "Labeled vs unlabeled control changes labels issue",
+          "passed": true,
+          "detail": "labelDiff=true"
         },
         {
           "id": "scope-honest",
           "description": "Scope file denies general bias audit / VLM claims",
           "passed": true,
           "detail": "GENERAL_VLM,GENERAL_BIAS_AUDIT,GENERAL_ASR,HUMAN_E6"
-        },
-        {
-          "id": "wcag-boundary",
-          "description": "WCAG AA target only (not full certification)",
-          "passed": true,
-          "detail": "AA"
         }
       ],
       "evidencePaths": [
-        "evals/wave003/fixtures/bias_a11y_scope.json"
+        "evals/wave003/fixtures/bias_a11y_scope.json",
+        "evidence/engineering_wave003/BIAS_ACCESSIBILITY_EVALUATION.json"
       ],
-      "notes": "Bounded a11y checklist evaluation; general bias/VLM claims remain out of scope.",
+      "notes": "Bounded differential a11y/language/input/device-profile eval. GENERAL_BIAS_AUDIT remains false.",
       "validationState": "VALIDATED",
       "crossCheckRequirementProof": {
         "runtimeProven": true,
@@ -290,7 +295,6 @@
     {
       "requirementId": "AI-GOV-010",
       "title": "AI governance: Safe fallback",
-      "pass": true,
       "runtimeKind": "LOCAL_ROUTER",
       "metrics": {
         "fallbackRole": "NANO_LOCAL"
@@ -329,35 +333,38 @@
     {
       "requirementId": "AI-GOV-011",
       "title": "AI governance: Monitoring",
-      "pass": true,
       "runtimeKind": "LOCAL_GOVERNANCE_RUNTIME",
       "metrics": {
-        "eventCount": 1
+        "eventCount": 8,
+        "privacyLeaks": 0,
+        "missingEventTypes": 0,
+        "latencyFieldPresent": true
       },
       "negativeCases": [
         {
-          "id": "event-recorded",
-          "description": "Monitoring records governance events",
+          "id": "required-events",
+          "description": "Required monitoring event types observed",
           "passed": true,
-          "detail": "wave003_probe"
+          "detail": "none-missing"
         },
         {
-          "id": "jsonl-append",
-          "description": "Monitor jsonl file appended on disk",
+          "id": "no-sentinel-leaks",
+          "description": "Privacy sentinels do not appear in monitor jsonl or event details",
           "passed": true,
-          "detail": "true"
+          "detail": "no-leaks"
         },
         {
-          "id": "privacy-detail-bound",
-          "description": "Event detail length bounded (no raw dump)",
+          "id": "redactions-and-latency",
+          "description": "Redaction tokens present and latencyMs on events",
           "passed": true,
-          "detail": "22"
+          "detail": "redactions=true latency=true"
         }
       ],
       "evidencePaths": [
-        "src/system-layer/product_service/governance.ts#record"
+        "src/system-layer/product_service/governance.ts#record",
+        "evidence/engineering_wave003/MONITORING_PRIVACY_RESULT.json"
       ],
-      "notes": "Local governance monitoring with bounded detail; not external SIEM integration.",
+      "notes": "Monitoring covers invocation/identity/route/fallback/error/eval/rollback with privacy sentinels redacted.",
       "validationState": "VALIDATED",
       "crossCheckRequirementProof": {
         "runtimeProven": true,
@@ -367,7 +374,6 @@
     {
       "requirementId": "AI-GOV-012",
       "title": "AI governance: Rollback capability",
-      "pass": true,
       "runtimeKind": "LOCAL_GOVERNANCE_RUNTIME",
       "metrics": {
         "snapshotCount": 10,
@@ -407,7 +413,6 @@
     {
       "requirementId": "AI-LOCAL-001",
       "title": "Local-first AI: Offline tutoring packs",
-      "pass": true,
       "runtimeKind": "LOCAL_TEMPLATE_ENGINE",
       "metrics": {
         "offlinePackPresent": true,
@@ -449,7 +454,6 @@
     {
       "requirementId": "AI-LOCAL-002",
       "title": "Local-first AI: Local code assistance",
-      "pass": true,
       "runtimeKind": "LOCAL_TEMPLATE_ENGINE",
       "metrics": {
         "hasCodeFence": true,
@@ -490,36 +494,36 @@
     {
       "requirementId": "AI-LOCAL-003",
       "title": "Local-first AI: Device help",
-      "pass": true,
       "runtimeKind": "LOCAL_TEMPLATE_ENGINE",
       "metrics": {
-        "fixtureProfileId": "handheld_hybrid",
-        "storageHealth": "healthy"
+        "groundedProfiles": 4,
+        "fabricatedPhysicalFacts": false
       },
       "negativeCases": [
         {
-          "id": "profile-aware",
-          "description": "Device help references structured profile id",
+          "id": "four-profile-grounding",
+          "description": "Recommendations ground to low battery, storage pressure, disconnected, healthy fixtures",
           "passed": true,
-          "detail": "handheld_hybrid"
+          "detail": "[\"low_battery\",\"storage_pressure\",\"network_disconnected\",\"healthy_control\"]"
         },
         {
           "id": "no-cloud-upload",
           "description": "Device help must not recommend cloud upload",
           "passed": true,
-          "detail": "DEVICE_HELP[profile=handheld_hybrid]\nConfirm device profile=handheld_hybrid\nCheck storage health indicator\nCapture local diagnostics without cloud upload"
+          "detail": "DEVICE_HELP[profile=low_battery]\nConfirm device profile=low_battery from supplied fixture.\nLow battery (8% supplied): reduce background work; stay local-only.\nS"
         },
         {
-          "id": "structured-steps",
-          "description": "Device help returns actionable local steps",
+          "id": "no-fabricated-physical",
+          "description": "No fabricated physical facts outside supplied state",
           "passed": true,
-          "detail": "3"
+          "detail": "true"
         }
       ],
       "evidencePaths": [
-        "evals/wave003/fixtures/device_state.json"
+        "evals/wave003/fixtures/device_state.json",
+        "evals/wave003/fixtures/device_states.json"
       ],
-      "notes": "Profile-aware deterministic device help driven by structured state fixture.",
+      "notes": "Device help grounded to supplied fixture state (battery/storage/network); no invented telemetry.",
       "validationState": "VALIDATED",
       "crossCheckRequirementProof": {
         "runtimeProven": true,
@@ -529,7 +533,6 @@
     {
       "requirementId": "AI-LOCAL-005",
       "title": "Local-first AI: Basic translation",
-      "pass": true,
       "runtimeKind": "LOCAL_TEMPLATE_ENGINE",
       "metrics": {
         "glossaryHit": true,
@@ -569,7 +572,6 @@
     {
       "requirementId": "AI-LOCAL-006",
       "title": "Local-first AI: Accessibility services",
-      "pass": true,
       "runtimeKind": "LOCAL_TEMPLATE_ENGINE",
       "metrics": {
         "issueCount": 3,
@@ -608,7 +610,6 @@
     {
       "requirementId": "AI-LOCAL-007",
       "title": "Local-first AI: Local document retrieval",
-      "pass": true,
       "runtimeKind": "LOCAL_RAG_INDEX",
       "metrics": {
         "precision": 1,
@@ -648,11 +649,11 @@
     {
       "requirementId": "AI-LOCAL-008",
       "title": "Local-first AI: Game AI",
-      "pass": true,
       "runtimeKind": "LOCAL_TEMPLATE_ENGINE",
       "metrics": {
         "fixtureWave": 7,
-        "tips": 2
+        "tips": 2,
+        "trainedGamePlayingAgent": false
       },
       "negativeCases": [
         {
@@ -677,7 +678,7 @@
       "evidencePaths": [
         "evals/wave003/fixtures/game_state.json"
       ],
-      "notes": "Deterministic game-state coach; not a trained game-playing agent.",
+      "notes": "Deterministic game-state coach VALIDATED with NOT_TRAINED_GAME_PLAYING_AGENT boundary; not a learned policy/agent.",
       "validationState": "VALIDATED",
       "crossCheckRequirementProof": {
         "runtimeProven": true,
@@ -687,7 +688,6 @@
     {
       "requirementId": "AI-LOCAL-009",
       "title": "Local-first AI: Connectivity diagnosis",
-      "pass": true,
       "runtimeKind": "LOCAL_TEMPLATE_ENGINE",
       "metrics": {
         "bearerPresent": true,
@@ -727,7 +727,6 @@
     {
       "requirementId": "AI-LOCAL-011",
       "title": "Cloud models not sole path to basic operation",
-      "pass": true,
       "runtimeKind": "LOCAL_PRODUCT_SERVICE",
       "metrics": {
         "selectedRole": "LOCAL_FAST",
@@ -781,8 +780,348 @@
     "GENERAL_VLM": false,
     "GENERAL_MT": false,
     "LOCAL_PRO_PRIMARY": false,
-    "CLOUD_SOLE_PATH": false
+    "CLOUD_SOLE_PATH": false,
+    "GENERAL_BIAS_AUDIT": false,
+    "HUMAN_ACCESSIBILITY_VALIDATED": false,
+    "NOT_TRAINED_GAME_PLAYING_AGENT": true
   },
-  "independentDigitalReproduction": "PARTIAL",
-  "allTargetEvaluated": true
+  "independentDigitalReproduction": "PASS",
+  "allTargetEvaluated": true,
+  "releaseComplete": true,
+  "independentReproduction": {
+    "schema": "gunnchai.engineering_wave003.independent_reproduction.v1",
+    "primaryRunId": "d8f3dd4f-256c-4179-a6c5-badefdecee59",
+    "freshRunId": "fa197355-1856-4363-8102-0d7b2b8bb243",
+    "primaryCommit": "a28ff83b6efe95cdb8be9d959f908516b2666367",
+    "freshCommit": "a28ff83b6efe95cdb8be9d959f908516b2666367",
+    "evaluatorHash": "7bfb598f424c957cf2aa2de4297d8169ef92c25a50852ec52161d1d0eb955367",
+    "fixtureHashes": {
+      "a11y_ui.json": "559e5c0759e504695100f98a6463277c79e4c34c05b3a5b226b58834497088aa",
+      "bias_a11y_scope.json": "b261f1e3f83fc023d40ca9d5b180eaadb9f7ee03ed4b8a6a37ba9401d17a0e80",
+      "code_fixture_repo/README.md": "16cc508641aba9ef5b341a57e12594877670312f3810a8522c8ec191ef4ae1f7",
+      "connectivity_telemetry.json": "c2650222172427c39a9505310366e64199b4d9af4925de2c914bd734e269ce80",
+      "device_state.json": "03178c1f1eb9cf06d7c885b1fa7179704b1be5b77f49c07cded1e94971f32986",
+      "device_states.json": "42c6da7cd1320a757d8269f3cc0ed617212dbb0337685c9b043017b895245a09",
+      "game_state.json": "46089e8bd41a02991457a7fa74c3a311c81b78791c28b90e342717bc775d62fb",
+      "mini_corpus/doc-a.md": "0c3f81c4824a6bfa4291fb68d4e5927fe14a06411eb5e4075879bc1b703a488a"
+    },
+    "seed": "wave003-integrity-repair",
+    "perRequirementStateMatch": true,
+    "metricComparison": [
+      {
+        "requirementId": "AI-GOV-001",
+        "metric": "purposeLength",
+        "primary": 147,
+        "fresh": 147,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-GOV-001",
+        "metric": "purposeStructureComplete",
+        "primary": true,
+        "fresh": true,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-GOV-003",
+        "metric": "minimizationApplied",
+        "primary": true,
+        "fresh": true,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-GOV-004",
+        "metric": "cloudPermitted",
+        "primary": false,
+        "fresh": false,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-GOV-005",
+        "metric": "historyLength",
+        "primary": 3,
+        "fresh": 3,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-GOV-006",
+        "metric": "evalBaselineRef",
+        "primary": "a28ff83b6efe95cdb8be9d959f908516b2666367",
+        "fresh": "a28ff83b6efe95cdb8be9d959f908516b2666367",
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-GOV-006",
+        "metric": "datasetsPresent",
+        "primary": true,
+        "fresh": true,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-GOV-006",
+        "metric": "baselineComplete",
+        "primary": true,
+        "fresh": true,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-GOV-007",
+        "metric": "goodScore",
+        "primary": 3,
+        "fresh": 3,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-GOV-007",
+        "metric": "badScore",
+        "primary": 0,
+        "fresh": 0,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-GOV-008",
+        "metric": "inScopeChecks",
+        "primary": 3,
+        "fresh": 3,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-GOV-008",
+        "metric": "differentialExecuted",
+        "primary": true,
+        "fresh": true,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-GOV-008",
+        "metric": "generalBiasAudit",
+        "primary": false,
+        "fresh": false,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-GOV-008",
+        "metric": "dimensions",
+        "primary": 5,
+        "fresh": 5,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-GOV-010",
+        "metric": "fallbackRole",
+        "primary": "NANO_LOCAL",
+        "fresh": "NANO_LOCAL",
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-GOV-011",
+        "metric": "privacyLeaks",
+        "primary": 0,
+        "fresh": 0,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-GOV-011",
+        "metric": "missingEventTypes",
+        "primary": 0,
+        "fresh": 0,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-GOV-011",
+        "metric": "latencyFieldPresent",
+        "primary": true,
+        "fresh": true,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-GOV-012",
+        "metric": "activeModelVersion",
+        "primary": "wave003-eval@1",
+        "fresh": "wave003-eval@1",
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-001",
+        "metric": "offlinePackPresent",
+        "primary": true,
+        "fresh": true,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-001",
+        "metric": "waikeFixturePresent",
+        "primary": true,
+        "fresh": true,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-001",
+        "metric": "structuredSteps",
+        "primary": 3,
+        "fresh": 3,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-001",
+        "metric": "networkDenied",
+        "primary": true,
+        "fresh": true,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-002",
+        "metric": "hasCodeFence",
+        "primary": true,
+        "fresh": true,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-002",
+        "metric": "codingAgentOk",
+        "primary": true,
+        "fresh": true,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-003",
+        "metric": "groundedProfiles",
+        "primary": 4,
+        "fresh": 4,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-003",
+        "metric": "fabricatedPhysicalFacts",
+        "primary": false,
+        "fresh": false,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-005",
+        "metric": "glossaryHit",
+        "primary": true,
+        "fresh": true,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-005",
+        "metric": "offline",
+        "primary": true,
+        "fresh": true,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-005",
+        "metric": "generalMtClaim",
+        "primary": false,
+        "fresh": false,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-006",
+        "metric": "issueCount",
+        "primary": 3,
+        "fresh": 3,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-006",
+        "metric": "wcagTarget",
+        "primary": "AA",
+        "fresh": "AA",
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-007",
+        "metric": "precision",
+        "primary": 1,
+        "fresh": 1,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-007",
+        "metric": "recall",
+        "primary": 1,
+        "fresh": 1,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-007",
+        "metric": "hitCount",
+        "primary": 1,
+        "fresh": 1,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-008",
+        "metric": "fixtureWave",
+        "primary": 7,
+        "fresh": 7,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-008",
+        "metric": "tips",
+        "primary": 2,
+        "fresh": 2,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-008",
+        "metric": "trainedGamePlayingAgent",
+        "primary": false,
+        "fresh": false,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-009",
+        "metric": "bearerPresent",
+        "primary": true,
+        "fresh": true,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-009",
+        "metric": "dnsLocal",
+        "primary": true,
+        "fresh": true,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-011",
+        "metric": "selectedRole",
+        "primary": "LOCAL_FAST",
+        "fresh": "LOCAL_FAST",
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-011",
+        "metric": "assistOk",
+        "primary": true,
+        "fresh": true,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-011",
+        "metric": "cloudSolePath",
+        "primary": false,
+        "fresh": false,
+        "withinTolerance": true
+      }
+    ],
+    "tolerances": {
+      "latencyMsAbs": 50000,
+      "ignoreMetricKeys": [
+        "generatedAt",
+        "latencyMs",
+        "eventCount",
+        "snapshotCount"
+      ]
+    },
+    "unexpected_differences": [],
+    "result": "PASS",
+    "childExitCode": 0,
+    "method": "primary-vs-fresh-node-process; exact state equivalence; not inferred from child exit 0"
+  }
 }

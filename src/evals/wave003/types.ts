@@ -60,4 +60,37 @@ export interface Wave003Report {
   claimBoundaries: Record<string, boolean>;
   independentDigitalReproduction: 'PASS' | 'PARTIAL' | 'FAIL';
   allTargetEvaluated: boolean;
+  releaseComplete: boolean;
+  independentReproduction?: IndependentReproductionRecord;
+}
+
+export interface CanonicalRequirementRow {
+  requirementId: string;
+  validationState: ValidationState;
+  negativeCasePass: Record<string, boolean>;
+  metrics: Record<string, number | boolean | string>;
+}
+
+export interface IndependentReproductionRecord {
+  schema: 'gunnchai.engineering_wave003.independent_reproduction.v1';
+  primaryRunId: string;
+  freshRunId: string;
+  primaryCommit: string;
+  freshCommit: string;
+  evaluatorHash: string;
+  fixtureHashes: Record<string, string>;
+  seed: string;
+  perRequirementStateMatch: boolean;
+  metricComparison: Array<{
+    requirementId: string;
+    metric: string;
+    primary: number | boolean | string | undefined;
+    fresh: number | boolean | string | undefined;
+    withinTolerance: boolean;
+  }>;
+  tolerances: { latencyMsAbs: number; ignoreMetricKeys: string[] };
+  unexpected_differences: string[];
+  result: 'PASS' | 'PARTIAL' | 'FAIL';
+  childExitCode: number | null;
+  method: string;
 }

@@ -12,9 +12,18 @@ import type { SystemCapability } from '../model_registry';
 import { evaluateCloudDisclosure } from '../privacy_policy';
 import type { ProductRoute } from './types';
 
+export interface DeclaredPurposeRecord {
+  purpose: string;
+  intendedUsers: string[];
+  intendedUses: string[];
+  outOfScope: string[];
+  limitations: string[];
+}
+
 export interface GovernanceState {
   schemaVersion: '1.0.0';
   declaredPurpose: string | null;
+  declaredPurposeRecord: DeclaredPurposeRecord | null;
   userCloudConsent: boolean;
   minimization: {
     stripPiiHints: boolean;
@@ -69,6 +78,7 @@ export interface MonitorEvent {
   capability?: ProductRoute;
   detail: string;
   ok: boolean;
+  latencyMs: number;
 }
 
 const DEFAULT_PURPOSE =
@@ -97,6 +107,7 @@ function emptyState(modelVersion: string): GovernanceState {
   return {
     schemaVersion: '1.0.0',
     declaredPurpose: DEFAULT_PURPOSE,
+    declaredPurposeRecord: null,
     userCloudConsent: false,
     minimization: {
       stripPiiHints: true,
@@ -118,7 +129,12 @@ function stripPiiHints(text: string): string {
   return text
     .replace(/\b[\w.+-]+@[\w.-]+\.\w{2,}\b/g, '[redacted-email]')
     .replace(/\b(?:\+?1[-.\s]?)?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}\b/g, '[redacted-phone]')
-    .replace(/\b(?:ssn|social security)\s*[#:]?\s*\d{3}-\d{2}-\d{4}\b/gi, '[redacted-ssn]');
+    .replace(/\b(?:ssn|social security)\s*[#:]?\s*\d{3}-\d{2}-\d{4}\b/gi, '[redacted-ssn]')
+    .replace(/wave003-secret-token-DO-NOT-LOG/g, '[redacted-secret]');
+}
+
+export function redactMonitorDetail(detail: string): string {
+  return stripPiiHints(detail);
 }
 
 export class GovernanceRuntime {
@@ -142,6 +158,17 @@ export class GovernanceRuntime {
       if (!Array.isArray(this.state.modelVersionHistory) || this.state.modelVersionHistory.length === 0) {
         this.state.modelVersionHistory = [this.state.activeModelVersion];
       }
+      if (!this.state.declaredPurposeRecord) {
+        this.state.declaredPurposeRecord = this.state.declaredPurpose
+          ? {
+              purpose: this.state.declaredPurpose,
+              intendedUsers: [],
+              intendedUses: [],
+              outOfScope: [],
+              limitations: [],
+            }
+          : null;
+      }
     } else {
       this.state = emptyState(modelVersion);
       this.persist();
@@ -152,12 +179,30 @@ export class GovernanceRuntime {
     return structuredClone(this.state);
   }
 
-  declarePurpose(purpose: string): GovernanceState {
+  declarePurpose(purpose: string | DeclaredPurposeRecord): GovernanceState {
     this.snapshot('pre-purpose');
-    this.state.declaredPurpose = purpose.trim() || DEFAULT_PURPOSE;
+    if (typeof purpose === 'string') {
+      this.state.declaredPurpose = purpose.trim() || DEFAULT_PURPOSE;
+      this.state.declaredPurposeRecord = {
+        purpose: this.state.declaredPurpose,
+        intendedUsers: [],
+        intendedUses: [],
+        outOfScope: [],
+        limitations: [],
+      };
+    } else {
+      this.state.declaredPurposeRecord = {
+        purpose: purpose.purpose.trim(),
+        intendedUsers: [...purpose.intendedUsers],
+        intendedUses: [...purpose.intendedUses],
+        outOfScope: [...purpose.outOfScope],
+        limitations: [...purpose.limitations],
+      };
+      this.state.declaredPurpose = this.state.declaredPurposeRecord.purpose;
+    }
     this.state.updatedAt = new Date().toISOString();
     this.persist();
-    this.record('purpose', `Declared purpose (${this.state.declaredPurpose.length} chars)`, true);
+    this.record('purpose', `Declared purpose (${this.state.declaredPurpose?.length ?? 0} chars)`, true);
     return this.getState();
   }
 
@@ -350,14 +395,16 @@ export class GovernanceRuntime {
     detail: string,
     ok: boolean,
     capability?: ProductRoute,
+    latencyMs = 0,
   ): MonitorEvent {
     const event: MonitorEvent = {
       id: randomUUID(),
       at: new Date().toISOString(),
       kind,
       capability,
-      detail: detail.slice(0, 500),
+      detail: redactMonitorDetail(detail).slice(0, 500),
       ok,
+      latencyMs,
     };
     this.events.push(event);
     if (this.events.length > 500) this.events.shift();
