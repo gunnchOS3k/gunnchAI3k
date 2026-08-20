@@ -1,9 +1,10 @@
 {
   "schema": "gunnchai.engineering_wave003.v1",
   "wave": "003",
-  "generatedAt": "2026-08-20T00:08:07.991Z",
-  "branch": "eng/wave003-validation",
-  "acceptedMainSha": "d357846810b952ed49a2c168c05720143b32796b",
+  "generatedAt": "2026-08-20T00:54:21.610Z",
+  "branch": "eng/wave003-integrity-repair",
+  "acceptedMainSha": "a28ff83b6efe95cdb8be9d959f908516b2666367",
+  "historicalPr": 44,
   "summary": {
     "validated": 19,
     "implementedValidationOpen": 0,
@@ -12,14 +13,18 @@
     "blockedExternal": 0,
     "total": 19
   },
-  "independentDigitalReproduction": "PARTIAL",
+  "independentDigitalReproduction": "PASS",
+  "releaseComplete": true,
   "claimBoundaries": {
     "HUMAN_E6": false,
     "GENERAL_ASR": false,
     "GENERAL_VLM": false,
     "GENERAL_MT": false,
     "LOCAL_PRO_PRIMARY": false,
-    "CLOUD_SOLE_PATH": false
+    "CLOUD_SOLE_PATH": false,
+    "GENERAL_BIAS_AUDIT": false,
+    "HUMAN_ACCESSIBILITY_VALIDATED": false,
+    "NOT_TRAINED_GAME_PLAYING_AGENT": true
   },
   "doctrine": {
     "independentEvaluator": true,

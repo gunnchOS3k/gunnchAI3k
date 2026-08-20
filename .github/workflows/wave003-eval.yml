@@ -11,7 +11,7 @@ on:
       - 'tests/evals/wave003.test.ts'
       - '.github/workflows/wave003-eval.yml'
   push:
-    branches: [main, 'eng/wave003-validation']
+    branches: [main, 'eng/wave003-validation', 'eng/wave003-integrity-repair']
   workflow_dispatch:
 
 permissions:
@@ -36,8 +36,22 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Wave003 independent eval harness
+      - name: Wave003 independent eval harness (reproduction required)
         run: npm run eval:wave003
+
+      - name: Enforce independent reproduction PASS for release
+        run: |
+          node -e "
+            const fs=require('fs');
+            const p='evidence/engineering_wave003/INDEPENDENT_REPRODUCTION.json';
+            const r=JSON.parse(fs.readFileSync(p,'utf8'));
+            const evalp='evals/wave003/results/WAVE003_EVAL.json';
+            const e=JSON.parse(fs.readFileSync(evalp,'utf8'));
+            if (r.result !== 'PASS') { console.error('INDEPENDENT_DIGITAL_REPRODUCTION', r.result, r.unexpected_differences); process.exit(1); }
+            if (e.independentDigitalReproduction !== 'PASS') { console.error('report reproduction', e.independentDigitalReproduction); process.exit(1); }
+            if (e.releaseComplete !== true) { console.error('releaseComplete false; PARTIAL does not qualify'); process.exit(1); }
+            console.log('WAVE003_INTEGRITY_REQUIRED_CI=PASS');
+          "
 
       - name: Jest wave003 tests
         run: npm run test:wave003

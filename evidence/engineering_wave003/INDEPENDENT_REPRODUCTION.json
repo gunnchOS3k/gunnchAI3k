@@ -1,5 +1,336 @@
 {
-  "result": "PARTIAL",
-  "method": "fresh-node-process-spawn",
-  "command": "npm run eval:wave003 (child with GUNNCHAI_WAVE003_REPRODUCTION=1)"
+  "schema": "gunnchai.engineering_wave003.independent_reproduction.v1",
+  "primaryRunId": "b17ae179-b008-4c59-8ddf-6aeffead9528",
+  "freshRunId": "f5bc228e-75ef-43e1-b121-5210424aa207",
+  "primaryCommit": "4c315ccd5ac33366444b5a780d17900924239a50",
+  "freshCommit": "4c315ccd5ac33366444b5a780d17900924239a50",
+  "evaluatorHash": "7bfb598f424c957cf2aa2de4297d8169ef92c25a50852ec52161d1d0eb955367",
+  "fixtureHashes": {
+    "a11y_ui.json": "559e5c0759e504695100f98a6463277c79e4c34c05b3a5b226b58834497088aa",
+    "bias_a11y_scope.json": "b261f1e3f83fc023d40ca9d5b180eaadb9f7ee03ed4b8a6a37ba9401d17a0e80",
+    "code_fixture_repo/README.md": "16cc508641aba9ef5b341a57e12594877670312f3810a8522c8ec191ef4ae1f7",
+    "connectivity_telemetry.json": "c2650222172427c39a9505310366e64199b4d9af4925de2c914bd734e269ce80",
+    "device_state.json": "03178c1f1eb9cf06d7c885b1fa7179704b1be5b77f49c07cded1e94971f32986",
+    "device_states.json": "42c6da7cd1320a757d8269f3cc0ed617212dbb0337685c9b043017b895245a09",
+    "game_state.json": "46089e8bd41a02991457a7fa74c3a311c81b78791c28b90e342717bc775d62fb",
+    "mini_corpus/doc-a.md": "0c3f81c4824a6bfa4291fb68d4e5927fe14a06411eb5e4075879bc1b703a488a"
+  },
+  "seed": "wave003-integrity-repair",
+  "perRequirementStateMatch": true,
+  "metricComparison": [
+    {
+      "requirementId": "AI-GOV-001",
+      "metric": "purposeLength",
+      "primary": 147,
+      "fresh": 147,
+      "withinTolerance": true
+    },
+    {
+      "requirementId": "AI-GOV-001",
+      "metric": "purposeStructureComplete",
+      "primary": true,
+      "fresh": true,
+      "withinTolerance": true
+    },
+    {
+      "requirementId": "AI-GOV-003",
+      "metric": "minimizationApplied",
+      "primary": true,
+      "fresh": true,
+      "withinTolerance": true
+    },
+    {
+      "requirementId": "AI-GOV-004",
+      "metric": "cloudPermitted",
+      "primary": false,
+      "fresh": false,
+      "withinTolerance": true
+    },
+    {
+      "requirementId": "AI-GOV-005",
+      "metric": "historyLength",
+      "primary": 3,
+      "fresh": 3,
+      "withinTolerance": true
+    },
+    {
+      "requirementId": "AI-GOV-006",
+      "metric": "evalBaselineRef",
+      "primary": "4c315ccd5ac33366444b5a780d17900924239a50",
+      "fresh": "4c315ccd5ac33366444b5a780d17900924239a50",
+      "withinTolerance": true
+    },
+    {
+      "requirementId": "AI-GOV-006",
+      "metric": "datasetsPresent",
+      "primary": true,
+      "fresh": true,
+      "withinTolerance": true
+    },
+    {
+      "requirementId": "AI-GOV-006",
+      "metric": "baselineComplete",
+      "primary": true,
+      "fresh": true,
+      "withinTolerance": true
+    },
+    {
+      "requirementId": "AI-GOV-007",
+      "metric": "goodScore",
+      "primary": 3,
+      "fresh": 3,
+      "withinTolerance": true
+    },
+    {
+      "requirementId": "AI-GOV-007",
+      "metric": "badScore",
+      "primary": 0,
+      "fresh": 0,
+      "withinTolerance": true
+    },
+    {
+      "requirementId": "AI-GOV-008",
+      "metric": "inScopeChecks",
+      "primary": 3,
+      "fresh": 3,
+      "withinTolerance": true
+    },
+    {
+      "requirementId": "AI-GOV-008",
+      "metric": "differentialExecuted",
+      "primary": true,
+      "fresh": true,
+      "withinTolerance": true
+    },
+    {
+      "requirementId": "AI-GOV-008",
+      "metric": "generalBiasAudit",
+      "primary": false,
+      "fresh": false,
+      "withinTolerance": true
+    },
+    {
+      "requirementId": "AI-GOV-008",
+      "metric": "dimensions",
+      "primary": 5,
+      "fresh": 5,
+      "withinTolerance": true
+    },
+    {
+      "requirementId": "AI-GOV-010",
+      "metric": "fallbackRole",
+      "primary": "NANO_LOCAL",
+      "fresh": "NANO_LOCAL",
+      "withinTolerance": true
+    },
+    {
+      "requirementId": "AI-GOV-011",
+      "metric": "privacyLeaks",
+      "primary": 0,
+      "fresh": 0,
+      "withinTolerance": true
+    },
+    {
+      "requirementId": "AI-GOV-011",
+      "metric": "missingEventTypes",
+      "primary": 0,
+      "fresh": 0,
+      "withinTolerance": true
+    },
+    {
+      "requirementId": "AI-GOV-011",
+      "metric": "latencyFieldPresent",
+      "primary": true,
+      "fresh": true,
+      "withinTolerance": true
+    },
+    {
+      "requirementId": "AI-GOV-012",
+      "metric": "activeModelVersion",
+      "primary": "wave003-eval@1",
+      "fresh": "wave003-eval@1",
+      "withinTolerance": true
+    },
+    {
+      "requirementId": "AI-LOCAL-001",
+      "metric": "offlinePackPresent",
+      "primary": true,
+      "fresh": true,
+      "withinTolerance": true
+    },
+    {
+      "requirementId": "AI-LOCAL-001",
+      "metric": "waikeFixturePresent",
+      "primary": true,
+      "fresh": true,
+      "withinTolerance": true
+    },
+    {
+      "requirementId": "AI-LOCAL-001",
+      "metric": "structuredSteps",
+      "primary": 3,
+      "fresh": 3,
+      "withinTolerance": true
+    },
+    {
+      "requirementId": "AI-LOCAL-001",
+      "metric": "networkDenied",
+      "primary": true,
+      "fresh": true,
+      "withinTolerance": true
+    },
+    {
+      "requirementId": "AI-LOCAL-002",
+      "metric": "hasCodeFence",
+      "primary": true,
+      "fresh": true,
+      "withinTolerance": true
+    },
+    {
+      "requirementId": "AI-LOCAL-002",
+      "metric": "codingAgentOk",
+      "primary": true,
+      "fresh": true,
+      "withinTolerance": true
+    },
+    {
+      "requirementId": "AI-LOCAL-003",
+      "metric": "groundedProfiles",
+      "primary": 4,
+      "fresh": 4,
+      "withinTolerance": true
+    },
+    {
+      "requirementId": "AI-LOCAL-003",
+      "metric": "fabricatedPhysicalFacts",
+      "primary": false,
+      "fresh": false,
+      "withinTolerance": true
+    },
+    {
+      "requirementId": "AI-LOCAL-005",
+      "metric": "glossaryHit",
+      "primary": true,
+      "fresh": true,
+      "withinTolerance": true
+    },
+    {
+      "requirementId": "AI-LOCAL-005",
+      "metric": "offline",
+      "primary": true,
+      "fresh": true,
+      "withinTolerance": true
+    },
+    {
+      "requirementId": "AI-LOCAL-005",
+      "metric": "generalMtClaim",
+      "primary": false,
+      "fresh": false,
+      "withinTolerance": true
+    },
+    {
+      "requirementId": "AI-LOCAL-006",
+      "metric": "issueCount",
+      "primary": 3,
+      "fresh": 3,
+      "withinTolerance": true
+    },
+    {
+      "requirementId": "AI-LOCAL-006",
+      "metric": "wcagTarget",
+      "primary": "AA",
+      "fresh": "AA",
+      "withinTolerance": true
+    },
+    {
+      "requirementId": "AI-LOCAL-007",
+      "metric": "precision",
+      "primary": 1,
+      "fresh": 1,
+      "withinTolerance": true
+    },
+    {
+      "requirementId": "AI-LOCAL-007",
+      "metric": "recall",
+      "primary": 1,
+      "fresh": 1,
+      "withinTolerance": true
+    },
+    {
+      "requirementId": "AI-LOCAL-007",
+      "metric": "hitCount",
+      "primary": 1,
+      "fresh": 1,
+      "withinTolerance": true
+    },
+    {
+      "requirementId": "AI-LOCAL-008",
+      "metric": "fixtureWave",
+      "primary": 7,
+      "fresh": 7,
+      "withinTolerance": true
+    },
+    {
+      "requirementId": "AI-LOCAL-008",
+      "metric": "tips",
+      "primary": 2,
+      "fresh": 2,
+      "withinTolerance": true
+    },
+    {
+      "requirementId": "AI-LOCAL-008",
+      "metric": "trainedGamePlayingAgent",
+      "primary": false,
+      "fresh": false,
+      "withinTolerance": true
+    },
+    {
+      "requirementId": "AI-LOCAL-009",
+      "metric": "bearerPresent",
+      "primary": true,
+      "fresh": true,
+      "withinTolerance": true
+    },
+    {
+      "requirementId": "AI-LOCAL-009",
+      "metric": "dnsLocal",
+      "primary": true,
+      "fresh": true,
+      "withinTolerance": true
+    },
+    {
+      "requirementId": "AI-LOCAL-011",
+      "metric": "selectedRole",
+      "primary": "LOCAL_FAST",
+      "fresh": "LOCAL_FAST",
+      "withinTolerance": true
+    },
+    {
+      "requirementId": "AI-LOCAL-011",
+      "metric": "assistOk",
+      "primary": true,
+      "fresh": true,
+      "withinTolerance": true
+    },
+    {
+      "requirementId": "AI-LOCAL-011",
+      "metric": "cloudSolePath",
+      "primary": false,
+      "fresh": false,
+      "withinTolerance": true
+    }
+  ],
+  "tolerances": {
+    "latencyMsAbs": 50000,
+    "ignoreMetricKeys": [
+      "generatedAt",
+      "latencyMs",
+      "eventCount",
+      "snapshotCount"
+    ]
+  },
+  "unexpected_differences": [],
+  "result": "PASS",
+  "childExitCode": 0,
+  "method": "primary-vs-fresh-node-process; exact state equivalence; not inferred from child exit 0"
 }

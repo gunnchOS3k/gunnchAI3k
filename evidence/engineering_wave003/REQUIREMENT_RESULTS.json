@@ -5,23 +5,30 @@
     "validationState": "VALIDATED",
     "runtimeKind": "LOCAL_GOVERNANCE_RUNTIME",
     "metrics": {
-      "purposeLength": 52
+      "purposeLength": 147,
+      "purposeStructureComplete": true
     },
     "negativeCases": [
       {
         "id": "purpose-declared",
         "description": "Governance exposes non-empty declared purpose",
         "passed": true,
-        "detail": "Wave003 declared purpose: local tutoring assist only"
+        "detail": "Local-first gunnchAI assist for tutoring, code, device help, accessibility, coac"
+      },
+      {
+        "id": "purpose-structure",
+        "description": "Purpose record includes users, uses, out-of-scope, limitations",
+        "passed": true,
+        "detail": "{\"purpose\":\"Local-first gunnchAI assist for tutoring, code, device help, accessibility, coaching, network diagnosis, and retrieval — not a general cloud agent.\",\"intendedUsers\":[\"students\",\"local operators\",\"device owners using gunnchOS local-first mode\"],\"intendedUses\":[\"offline tutoring packs\",\"local code assistance\",\"device-state-grounded help\",\"bounded accessibility checklist\"],\"outOfScope\":[\"GENERAL_ASR\",\"GENERAL_VLM\",\"GENERAL_BIAS_AUDIT\",\"trained game-playing agent\",\"cloud-sole-path assist\"],\"limitations\":[\"Deterministic/template runtimes are not neural quality claims.\",\"Physical device facts must come from supplied fixtures, never invented.\",\"HUMAN_E6 and HUMAN_ACCESSIBILITY_VALIDATED remain false.\"]}"
       },
       {
         "id": "purpose-required-block",
-        "description": "Empty purpose path would block (simulated)",
+        "description": "Declared purpose persisted on governance state",
         "passed": true,
-        "detail": "52"
+        "detail": "147"
       }
     ],
-    "notes": "Runtime purpose declaration enforced before assist decisions.",
+    "notes": "Purpose structure validated: intended users/uses/out-of-scope/limitations.",
     "crossCheckRequirementProof": {
       "runtimeProven": true,
       "note": "requirement_proof.ts agrees node is RUNTIME (cross-check only)"
@@ -129,30 +136,31 @@
     "validationState": "VALIDATED",
     "runtimeKind": "LOCAL_GOVERNANCE_RUNTIME",
     "metrics": {
-      "evalBaselineRef": "fixtures/system-layer/eval",
-      "datasetsPresent": true
+      "evalBaselineRef": "4c315ccd5ac33366444b5a780d17900924239a50",
+      "datasetsPresent": true,
+      "baselineComplete": true
     },
     "negativeCases": [
       {
-        "id": "baseline-ref-set",
-        "description": "Governance state includes eval baseline ref",
+        "id": "schema",
+        "description": "Baseline schema is versioned evaluation_baseline.v1",
         "passed": true,
-        "detail": "fixtures/system-layer/eval"
+        "detail": "gunnchai.engineering_wave003.evaluation_baseline.v1"
       },
       {
-        "id": "baseline-dir-present",
-        "description": "Referenced baseline directory exists on disk",
+        "id": "commits-env-hashes",
+        "description": "Baseline includes commits, environment, fixture hashes",
         "passed": true,
-        "detail": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/fixtures/system-layer/eval"
+        "detail": "{\"head\":\"4c315ccd5ac33366444b5a780d17900924239a50\",\"node\":\"v24.9.0\",\"fixtureCount\":8}"
       },
       {
-        "id": "dataset-present",
-        "description": "At least one capability dataset jsonl exists",
+        "id": "per-req-thresholds",
+        "description": "Every target requirement has metrics, thresholds, current_result, validation_state",
         "passed": true,
         "detail": "true"
       }
     ],
-    "notes": "Eval baseline ref points to shipped structured datasets (Continuance III harness).",
+    "notes": "Versioned EVALUATION_BASELINE.json completeness + meaningful per-req thresholds.",
     "crossCheckRequirementProof": {
       "runtimeProven": true,
       "note": "requirement_proof.ts agrees node is RUNTIME (cross-check only)"
@@ -199,29 +207,32 @@
     "validationState": "VALIDATED",
     "runtimeKind": "LOCAL_TEMPLATE_ENGINE",
     "metrics": {
-      "inScopeChecks": 3
+      "inScopeChecks": 3,
+      "differentialExecuted": true,
+      "generalBiasAudit": false,
+      "dimensions": 5
     },
     "negativeCases": [
       {
-        "id": "a11y-structured",
-        "description": "Accessibility evaluation returns structured issues",
+        "id": "differential-executed",
+        "description": "Bounded differential eval executed on supported dimensions",
         "passed": true,
-        "detail": "3"
+        "detail": "language,reading-level,input-length,a11y-mode,device-profile"
+      },
+      {
+        "id": "missing-label-delta",
+        "description": "Labeled vs unlabeled control changes labels issue",
+        "passed": true,
+        "detail": "labelDiff=true"
       },
       {
         "id": "scope-honest",
         "description": "Scope file denies general bias audit / VLM claims",
         "passed": true,
         "detail": "GENERAL_VLM,GENERAL_BIAS_AUDIT,GENERAL_ASR,HUMAN_E6"
-      },
-      {
-        "id": "wcag-boundary",
-        "description": "WCAG AA target only (not full certification)",
-        "passed": true,
-        "detail": "AA"
       }
     ],
-    "notes": "Bounded a11y checklist evaluation; general bias/VLM claims remain out of scope.",
+    "notes": "Bounded differential a11y/language/input/device-profile eval. GENERAL_BIAS_AUDIT remains false.",
     "crossCheckRequirementProof": {
       "runtimeProven": true,
       "note": "requirement_proof.ts agrees node is RUNTIME (cross-check only)"
@@ -267,29 +278,32 @@
     "validationState": "VALIDATED",
     "runtimeKind": "LOCAL_GOVERNANCE_RUNTIME",
     "metrics": {
-      "eventCount": 1
+      "eventCount": 8,
+      "privacyLeaks": 0,
+      "missingEventTypes": 0,
+      "latencyFieldPresent": true
     },
     "negativeCases": [
       {
-        "id": "event-recorded",
-        "description": "Monitoring records governance events",
+        "id": "required-events",
+        "description": "Required monitoring event types observed",
         "passed": true,
-        "detail": "wave003_probe"
+        "detail": "none-missing"
       },
       {
-        "id": "jsonl-append",
-        "description": "Monitor jsonl file appended on disk",
+        "id": "no-sentinel-leaks",
+        "description": "Privacy sentinels do not appear in monitor jsonl or event details",
         "passed": true,
-        "detail": "true"
+        "detail": "no-leaks"
       },
       {
-        "id": "privacy-detail-bound",
-        "description": "Event detail length bounded (no raw dump)",
+        "id": "redactions-and-latency",
+        "description": "Redaction tokens present and latencyMs on events",
         "passed": true,
-        "detail": "22"
+        "detail": "redactions=true latency=true"
       }
     ],
-    "notes": "Local governance monitoring with bounded detail; not external SIEM integration.",
+    "notes": "Monitoring covers invocation/identity/route/fallback/error/eval/rollback with privacy sentinels redacted.",
     "crossCheckRequirementProof": {
       "runtimeProven": true,
       "note": "requirement_proof.ts agrees node is RUNTIME (cross-check only)"
@@ -408,30 +422,30 @@
     "validationState": "VALIDATED",
     "runtimeKind": "LOCAL_TEMPLATE_ENGINE",
     "metrics": {
-      "fixtureProfileId": "handheld_hybrid",
-      "storageHealth": "healthy"
+      "groundedProfiles": 4,
+      "fabricatedPhysicalFacts": false
     },
     "negativeCases": [
       {
-        "id": "profile-aware",
-        "description": "Device help references structured profile id",
+        "id": "four-profile-grounding",
+        "description": "Recommendations ground to low battery, storage pressure, disconnected, healthy fixtures",
         "passed": true,
-        "detail": "handheld_hybrid"
+        "detail": "[\"low_battery\",\"storage_pressure\",\"network_disconnected\",\"healthy_control\"]"
       },
       {
         "id": "no-cloud-upload",
         "description": "Device help must not recommend cloud upload",
         "passed": true,
-        "detail": "DEVICE_HELP[profile=handheld_hybrid]\nConfirm device profile=handheld_hybrid\nCheck storage health indicator\nCapture local diagnostics without cloud upload"
+        "detail": "DEVICE_HELP[profile=low_battery]\nConfirm device profile=low_battery from supplied fixture.\nLow battery (8% supplied): reduce background work; stay local-only.\nS"
       },
       {
-        "id": "structured-steps",
-        "description": "Device help returns actionable local steps",
+        "id": "no-fabricated-physical",
+        "description": "No fabricated physical facts outside supplied state",
         "passed": true,
-        "detail": "3"
+        "detail": "true"
       }
     ],
-    "notes": "Profile-aware deterministic device help driven by structured state fixture.",
+    "notes": "Device help grounded to supplied fixture state (battery/storage/network); no invented telemetry.",
     "crossCheckRequirementProof": {
       "runtimeProven": true,
       "note": "requirement_proof.ts agrees node is RUNTIME (cross-check only)"
@@ -551,7 +565,8 @@
     "runtimeKind": "LOCAL_TEMPLATE_ENGINE",
     "metrics": {
       "fixtureWave": 7,
-      "tips": 2
+      "tips": 2,
+      "trainedGamePlayingAgent": false
     },
     "negativeCases": [
       {
@@ -573,7 +588,7 @@
         "detail": "game_coach"
       }
     ],
-    "notes": "Deterministic game-state coach; not a trained game-playing agent.",
+    "notes": "Deterministic game-state coach VALIDATED with NOT_TRAINED_GAME_PLAYING_AGENT boundary; not a learned policy/agent.",
     "crossCheckRequirementProof": {
       "runtimeProven": true,
       "note": "requirement_proof.ts agrees node is RUNTIME (cross-check only)"

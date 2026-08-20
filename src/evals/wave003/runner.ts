@@ -10,9 +10,11 @@ import {
 } from './constants';
 import { cleanupWave003Context, createWave003Context } from './context';
 import { writeWave003Evidence } from './evidence';
-import { evaluateAllAiGov } from './scorers/ai_gov';
+import { writeEvaluationBaseline } from './baseline';
+import { evaluateAllAiGov, rescoreAiGov006FromBaseline } from './scorers/ai_gov';
 import { evaluateAllAiLocal } from './scorers/ai_local';
 import { crossCheckRequirementProof } from './scorers/crosscheck_requirement_proof';
+import { releaseComplete, runIndependentReproduction } from './reproduction';
 import type { RequirementEvalResult, Wave003Report } from './types';
 
 export interface RunWave003Options {
@@ -35,23 +37,20 @@ function summarize(results: RequirementEvalResult[]): Wave003Report['summary'] {
   };
 }
 
+/** @deprecated child-exit inference is not used for PASS. Kept for CLI flag parsing only. */
 export function runFreshProcessReproduction(cwd: string): 'PASS' | 'PARTIAL' | 'FAIL' {
   const cli = path.join(cwd, 'src', 'evals', 'wave003', 'cli.ts');
   const child = spawnSync(
     process.platform === 'win32' ? 'npx.cmd' : 'npx',
-    ['tsx', cli, '--reproduction-child', '--no-evidence', '--no-crosscheck'],
+    ['tsx', cli, '--reproduction-child', '--no-evidence'],
     {
       cwd,
-      env: {
-        ...process.env,
-        GUNNCHAI_WAVE003_REPRODUCTION: '1',
-      },
+      env: { ...process.env, GUNNCHAI_WAVE003_REPRODUCTION: '1' },
       encoding: 'utf8',
       timeout: 120_000,
     },
   );
-  if (child.status === 0) return 'PASS';
-  if (child.status === 2) return 'PARTIAL';
+  if (child.status === 0) return 'PARTIAL';
   return 'FAIL';
 }
 
@@ -86,15 +85,23 @@ export async function runWave003Eval(opts: RunWave003Options = {}): Promise<Wave
       crossCheckRequirementProof(ctx.repoRoot, ctx.scratchRoot, results);
     }
 
-    let independentDigitalReproduction: Wave003Report['independentDigitalReproduction'] = 'PARTIAL';
-    if (opts.runReproduction !== false && !process.env.GUNNCHAI_WAVE003_REPRODUCTION) {
-      independentDigitalReproduction = runFreshProcessReproduction(cwd);
-    } else if (process.env.GUNNCHAI_WAVE003_REPRODUCTION === '1') {
-      independentDigitalReproduction = results.every((r) => r.validationState === 'VALIDATED')
-        ? 'PASS'
-        : results.some((r) => r.validationState === 'VALIDATED')
-          ? 'PARTIAL'
-          : 'FAIL';
+    writeEvaluationBaseline(ctx, results, ACCEPTED_MAIN_SHA);
+    const rescored006 = rescoreAiGov006FromBaseline(ctx);
+    const idx006 = results.findIndex((r) => r.requirementId === 'AI-GOV-006');
+    if (idx006 >= 0) {
+      rescored006.crossCheckRequirementProof = results[idx006].crossCheckRequirementProof;
+      results[idx006] = rescored006;
+    }
+    writeEvaluationBaseline(ctx, results, ACCEPTED_MAIN_SHA);
+
+    let independentDigitalReproduction: Wave003Report['independentDigitalReproduction'] = 'FAIL';
+    let independentReproduction: Wave003Report['independentReproduction'];
+    const isChild = Boolean(process.env.GUNNCHAI_WAVE003_REPRODUCTION);
+    if (opts.runReproduction !== false && !isChild) {
+      independentReproduction = runIndependentReproduction(cwd, results);
+      independentDigitalReproduction = independentReproduction.result;
+    } else if (isChild) {
+      independentDigitalReproduction = 'PARTIAL';
     }
 
     const report: Wave003Report = {
@@ -114,6 +121,11 @@ export async function runWave003Eval(opts: RunWave003Options = {}): Promise<Wave
       claimBoundaries: { ...CLAIM_BOUNDARIES },
       independentDigitalReproduction,
       allTargetEvaluated: TARGET_REQUIREMENTS.every((id) => ids.has(id)),
+      releaseComplete: releaseComplete({
+        results,
+        independentDigitalReproduction,
+      }),
+      independentReproduction,
     };
 
     fs.writeFileSync(
@@ -133,6 +145,8 @@ export async function runWave003Eval(opts: RunWave003Options = {}): Promise<Wave
 
 export function exitCodeForReport(report: Wave003Report): number {
   if (report.summary.implementedValidationOpen > 0) return 1;
-  if (report.independentDigitalReproduction === 'FAIL') return 1;
+  if (report.summary.reclassify > 0) return 1;
+  if (report.independentDigitalReproduction !== 'PASS') return 1;
+  if (!report.releaseComplete) return 1;
   return 0;
 }

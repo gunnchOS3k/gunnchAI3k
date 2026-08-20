@@ -1,8 +1,26 @@
 {
-  "requirementId": "AI-GOV-011",
-  "validationState": "VALIDATED",
-  "metrics": {
-    "eventCount": 1
-  },
-  "detailBoundChars": 500
+  "schema": "gunnchai.engineering_wave003.monitoring_privacy.v1",
+  "required_event_types": [
+    "invocation",
+    "runtime_identity",
+    "local_cloud_route",
+    "fallback",
+    "injected_error",
+    "eval_outcome",
+    "rollback"
+  ],
+  "observed": [
+    "invocation",
+    "runtime_identity",
+    "local_cloud_route",
+    "fallback",
+    "injected_error",
+    "eval_outcome",
+    "consent",
+    "rollback"
+  ],
+  "missing": [],
+  "leaks": [],
+  "redactions": true,
+  "latency_field_present": true
 }
