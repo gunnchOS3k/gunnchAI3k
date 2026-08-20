@@ -2,7 +2,7 @@
   "schema": "gunnchai.engineering_wave003.evaluation_baseline.v1",
   "commits": {
     "acceptedMain": "a28ff83b6efe95cdb8be9d959f908516b2666367",
-    "head": "a28ff83b6efe95cdb8be9d959f908516b2666367"
+    "head": "4c315ccd5ac33366444b5a780d17900924239a50"
   },
   "environment": {
     "node": "v24.9.0",
@@ -272,7 +272,7 @@
     },
     "AI-GOV-006": {
       "metrics": {
-        "evalBaselineRef": "a28ff83b6efe95cdb8be9d959f908516b2666367",
+        "evalBaselineRef": "4c315ccd5ac33366444b5a780d17900924239a50",
         "datasetsPresent": true,
         "baselineComplete": true
       },

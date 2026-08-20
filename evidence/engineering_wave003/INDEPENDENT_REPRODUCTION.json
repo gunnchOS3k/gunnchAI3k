@@ -1,9 +1,9 @@
 {
   "schema": "gunnchai.engineering_wave003.independent_reproduction.v1",
-  "primaryRunId": "d8f3dd4f-256c-4179-a6c5-badefdecee59",
-  "freshRunId": "fa197355-1856-4363-8102-0d7b2b8bb243",
-  "primaryCommit": "a28ff83b6efe95cdb8be9d959f908516b2666367",
-  "freshCommit": "a28ff83b6efe95cdb8be9d959f908516b2666367",
+  "primaryRunId": "b17ae179-b008-4c59-8ddf-6aeffead9528",
+  "freshRunId": "f5bc228e-75ef-43e1-b121-5210424aa207",
+  "primaryCommit": "4c315ccd5ac33366444b5a780d17900924239a50",
+  "freshCommit": "4c315ccd5ac33366444b5a780d17900924239a50",
   "evaluatorHash": "7bfb598f424c957cf2aa2de4297d8169ef92c25a50852ec52161d1d0eb955367",
   "fixtureHashes": {
     "a11y_ui.json": "559e5c0759e504695100f98a6463277c79e4c34c05b3a5b226b58834497088aa",
@@ -56,8 +56,8 @@
     {
       "requirementId": "AI-GOV-006",
       "metric": "evalBaselineRef",
-      "primary": "a28ff83b6efe95cdb8be9d959f908516b2666367",
-      "fresh": "a28ff83b6efe95cdb8be9d959f908516b2666367",
+      "primary": "4c315ccd5ac33366444b5a780d17900924239a50",
+      "fresh": "4c315ccd5ac33366444b5a780d17900924239a50",
       "withinTolerance": true
     },
     {
