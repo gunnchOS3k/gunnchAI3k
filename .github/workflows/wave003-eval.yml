@@ -1,0 +1,54 @@
+name: Wave003 independent validation
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/evals/wave003/**'
+      - 'evals/wave003/**'
+      - 'src/system-layer/**'
+      - 'src/local-runtime/**'
+      - 'tests/evals/wave003.test.ts'
+      - '.github/workflows/wave003-eval.yml'
+  push:
+    branches: [main, 'eng/wave003-validation']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: wave003-eval-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  wave003-eval:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Wave003 independent eval harness
+        run: npm run eval:wave003
+
+      - name: Jest wave003 tests
+        run: npm run test:wave003
+
+      - name: Upload wave003 evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: engineering-wave003-evidence
+          path: |
+            evidence/engineering_wave003/**
+            evals/wave003/results/**
+          if-no-files-found: ignore
+          retention-days: 14

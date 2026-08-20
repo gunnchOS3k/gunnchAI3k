@@ -1,0 +1,29 @@
+{
+  "schema": "gunnchai.engineering_wave003.v1",
+  "wave": "003",
+  "generatedAt": "2026-08-20T00:08:07.991Z",
+  "branch": "eng/wave003-validation",
+  "acceptedMainSha": "d357846810b952ed49a2c168c05720143b32796b",
+  "summary": {
+    "validated": 19,
+    "implementedValidationOpen": 0,
+    "reclassify": 0,
+    "blockedEnvironment": 0,
+    "blockedExternal": 0,
+    "total": 19
+  },
+  "independentDigitalReproduction": "PARTIAL",
+  "claimBoundaries": {
+    "HUMAN_E6": false,
+    "GENERAL_ASR": false,
+    "GENERAL_VLM": false,
+    "GENERAL_MT": false,
+    "LOCAL_PRO_PRIMARY": false,
+    "CLOUD_SOLE_PATH": false
+  },
+  "doctrine": {
+    "independentEvaluator": true,
+    "validationImportsRequirementProof": false,
+    "requirementProofRole": "cross-check-only"
+  }
+}

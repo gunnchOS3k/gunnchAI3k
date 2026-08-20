@@ -1,0 +1,15 @@
+{
+  "inScope": [
+    "structured_a11y_checklist",
+    "wcag_aa_target_declaration"
+  ],
+  "outOfScope": [
+    "GENERAL_VLM",
+    "GENERAL_BIAS_AUDIT",
+    "HUMAN_E6"
+  ],
+  "aiGov008State": "VALIDATED",
+  "metrics": {
+    "inScopeChecks": 3
+  }
+}
