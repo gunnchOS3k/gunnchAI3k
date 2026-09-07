@@ -25,7 +25,11 @@ def sha256_bytes(data: bytes) -> str:
 
 
 def head_sha() -> str:
-    env_sha = (os.environ.get("GITHUB_SHA") or "").strip()
+    env_sha = (
+        os.environ.get("WINDOWS_PILOT0_HEAD_SHA")
+        or os.environ.get("GITHUB_SHA")
+        or ""
+    ).strip()
     if env_sha:
         return env_sha
     return subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
@@ -244,7 +248,13 @@ def main() -> int:
     (REPORTS / "WINDOWS_PILOT0_EVIDENCE.md").write_text(
         f"# Windows Pilot 0 — gunnchAI3k\n\n- claim: `{claim}`\n- head: `{sha[:12]}`\n- blockers: {blockers}\n"
     )
-    print(json.dumps({"claim": claim, "sha12": sha[:12], "blockers": blockers}, indent=2))
+    # Emit Actions annotations so blockers are visible without private log download.
+    for b in blockers:
+        print(f"::error title=WINDOWS_PILOT0::{b}")
+    for k in hard_failed:
+        print(f"::error title=WINDOWS_PILOT0_CHECK_FAIL::{k}")
+    print(f"::notice title=WINDOWS_PILOT0_CLAIM::{claim} head={sha[:12]}")
+    print(json.dumps({"claim": claim, "sha12": sha[:12], "blockers": blockers, "hard_failed": hard_failed}, indent=2))
     return 0 if claim in {"WINDOWS_PILOT0_PASS", "WINDOWS_PILOT0_PARTIAL"} else 1
 
 
