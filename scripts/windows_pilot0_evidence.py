@@ -36,9 +36,12 @@ def head_sha() -> str:
 
 
 def run_npm(args: list[str], *, capture: bool = True, timeout: int | None = None) -> subprocess.CompletedProcess:
-    """Run npm portably on Windows (.cmd shims need cmd.exe /c)."""
+    """Run npm portably on Windows (.cmd shims need cmd.exe /c with one command string)."""
     if platform.system() == "Windows":
-        cmd = ["cmd.exe", "/d", "/s", "/c", "npm", *args]
+        # CRITICAL: everything after /c must be a single command string.
+        # ["cmd","/c","npm","run","build"] only executes "npm" and drops the rest.
+        cmdline = subprocess.list2cmdline(["npm", *args])
+        cmd = ["cmd.exe", "/d", "/s", "/c", cmdline]
     else:
         cmd = ["npm", *args]
     return subprocess.run(
@@ -173,7 +176,7 @@ def main() -> int:
     if checks["first_launch_health"]["status"] == "PASS":
         start = time.time()
         proc = subprocess.Popen(
-            ["cmd.exe", "/d", "/s", "/c", "npm", "run", "local-runtime:serve"]
+            ["cmd.exe", "/d", "/s", "/c", "npm run local-runtime:serve"]
             if platform.system() == "Windows"
             else ["npm", "run", "local-runtime:serve"],
             cwd=ROOT,
