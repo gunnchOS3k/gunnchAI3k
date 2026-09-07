@@ -1,0 +1,78 @@
+name: Windows Pilot 0
+
+# Authentic Windows evidence for gunnchAI3k (CLI / local-runtime).
+# Authoritative: windows-2025. Compatibility: windows-latest.
+
+on:
+  pull_request:
+  push:
+    branches: [main, "cursor/windows-pilot0-authentic-evidence*"]
+  workflow_dispatch:
+    inputs:
+      soak_seconds:
+        description: "Soak duration seconds (>=1800 for PASS)"
+        required: false
+        default: "1800"
+
+jobs:
+  windows-pilot0-windows-2025:
+    name: windows-pilot0-windows-2025
+    runs-on: windows-2025
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - name: Record runner metadata
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path reports/windows_pilot0 | Out-Null
+          @{
+            ImageOS = $env:ImageOS
+            ImageVersion = $env:ImageVersion
+            RUNNER_OS = $env:RUNNER_OS
+            GITHUB_SHA = $env:GITHUB_SHA
+          } | ConvertTo-Json | Set-Content reports/windows_pilot0/RUNNER_META.json
+      - name: Windows Pilot 0 evidence
+        shell: pwsh
+        env:
+          WINDOWS_PILOT0_SOAK_SECONDS: ${{ github.event.inputs.soak_seconds || '1800' }}
+        run: python scripts/windows_pilot0_evidence.py
+      - name: Short SHA
+        id: meta
+        shell: bash
+        run: echo "short_sha=${GITHUB_SHA:0:12}" >> "$GITHUB_OUTPUT"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gunnchai-windows-pilot0-${{ steps.meta.outputs.short_sha }}
+          path: reports/windows_pilot0/**
+          retention-days: 14
+          if-no-files-found: error
+
+  windows-pilot0-windows-latest:
+    name: windows-pilot0-windows-latest
+    runs-on: windows-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - name: Compatibility smoke
+        shell: bash
+        run: |
+          npm ci || npm install
+          npm run proof:all
+      - name: Compat note
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path reports/windows_pilot0 | Out-Null
+          @{ role = "compatibility_smoke_not_authoritative"; ImageOS = $env:ImageOS; ImageVersion = $env:ImageVersion } |
+            ConvertTo-Json | Set-Content reports/windows_pilot0/WINDOWS_LATEST_COMPAT.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gunnchai-windows-pilot0-latest-compat-${{ github.sha }}
+          path: reports/windows_pilot0/WINDOWS_LATEST_COMPAT.json
