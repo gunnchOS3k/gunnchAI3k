@@ -90,13 +90,19 @@ def main() -> int:
         blockers.append("NO_LOCKFILE")
         skipped_required += 1
 
-    print("== npm ci ==")
-    build = run_npm(["ci"], capture=True)
+    # Native optional deps (@tensorflow/tfjs-node, @discordjs/opus) fail node-gyp on
+    # hosted windows-2025. Pilot 0 path (esbuild --packages=external + local-runtime)
+    # does not require those native bindings — install JS tooling with --ignore-scripts.
+    print("== npm ci --ignore-scripts ==")
+    build = run_npm(["ci", "--ignore-scripts"], capture=True)
     if build.returncode != 0:
-        print("npm ci failed; falling back to npm install")
+        print("npm ci --ignore-scripts failed; falling back to npm install --ignore-scripts")
         print(((build.stdout or "") + (build.stderr or ""))[-2000:])
-        build = run_npm(["install"], capture=True)
+        build = run_npm(["install", "--ignore-scripts"], capture=True)
         print(((build.stdout or "") + (build.stderr or ""))[-2000:])
+    if build.returncode != 0:
+        blockers.append("NPM_INSTALL_FAILED")
+        print("::error title=WINDOWS_PILOT0::NPM_INSTALL_FAILED")
 
     print("== npm run build ==")
     built = run_npm(["run", "build"], capture=True)
@@ -258,7 +264,8 @@ def main() -> int:
         print(f"::error title=WINDOWS_PILOT0_CHECK_FAIL::{k}")
     print(f"::notice title=WINDOWS_PILOT0_CLAIM::{claim} head={sha[:12]}")
     print(json.dumps({"claim": claim, "sha12": sha[:12], "blockers": blockers, "hard_failed": hard_failed}, indent=2))
-    return 0 if claim in {"WINDOWS_PILOT0_PASS", "WINDOWS_PILOT0_PARTIAL"} else 1
+    # Fail-closed: only authentic PASS greens CI. PARTIAL/BLOCKED stay red.
+    return 0 if claim == "WINDOWS_PILOT0_PASS" else 1
 
 
 if __name__ == "__main__":

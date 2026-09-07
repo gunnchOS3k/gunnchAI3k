@@ -77,7 +77,7 @@ jobs:
           DISCORD_CLIENT_ID: test_client_id
           DISCORD_GUILD_ID: test_guild_id
         run: |
-          call npm ci || call npm install
+          call npm ci --ignore-scripts || call npm install --ignore-scripts
           call npm run build
           call npm run proof:unit
           call npm run proof:smoke
