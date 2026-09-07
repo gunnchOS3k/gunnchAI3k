@@ -31,6 +31,18 @@ def head_sha() -> str:
     return subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
 
 
+def win_cmd(name: str) -> str:
+    if platform.system() != "Windows":
+        return name
+    from shutil import which
+
+    for cand in (f"{name}.cmd", name):
+        found = which(cand)
+        if found:
+            return found
+    return f"{name}.cmd"
+
+
 def main() -> int:
     if platform.system() != "Windows":
         print("REFUSE: must run on Windows", file=sys.stderr)
@@ -62,11 +74,11 @@ def main() -> int:
         blockers.append("NO_LOCKFILE")
         skipped_required += 1
 
-    build = subprocess.run(["npm", "ci"], cwd=ROOT, text=True, capture_output=True)
+    build = subprocess.run([win_cmd("npm"), "ci"], cwd=ROOT, text=True, capture_output=True)
     if build.returncode != 0:
         # fallback npm install if ci fails on older trees
-        build = subprocess.run(["npm", "install"], cwd=ROOT, text=True, capture_output=True)
-    proof = subprocess.run(["npm", "run", "proof:all"], cwd=ROOT, text=True, capture_output=True)
+        build = subprocess.run([win_cmd("npm"), "install"], cwd=ROOT, text=True, capture_output=True)
+    proof = subprocess.run([win_cmd("npm"), "run", "proof:all"], cwd=ROOT, text=True, capture_output=True)
     checks["build_and_proof"] = {
         "status": "PASS" if proof.returncode == 0 else "FAIL",
         "npm_install_exit": build.returncode,
@@ -88,7 +100,7 @@ def main() -> int:
 
     # Launch local-runtime health
     health = subprocess.run(
-        ["npm", "run", "local-runtime:health"],
+        [win_cmd("npm"), "run", "local-runtime:health"],
         cwd=ROOT,
         text=True,
         capture_output=True,
@@ -128,7 +140,7 @@ def main() -> int:
     if checks["first_launch_health"]["status"] == "PASS":
         start = time.time()
         proc = subprocess.Popen(
-            ["npm", "run", "local-runtime:serve"],
+            [win_cmd("npm"), "run", "local-runtime:serve"],
             cwd=ROOT,
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
