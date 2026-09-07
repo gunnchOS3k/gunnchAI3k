@@ -39,17 +39,22 @@ jobs:
         shell: pwsh
         env:
           WINDOWS_PILOT0_SOAK_SECONDS: ${{ github.event.inputs.soak_seconds || '1800' }}
+          DISCORD_BOT_TOKEN: test_token
+          DISCORD_CLIENT_ID: test_client_id
+          DISCORD_GUILD_ID: test_guild_id
         run: python scripts/windows_pilot0_evidence.py
       - name: Short SHA
         id: meta
+        if: always()
         shell: bash
         run: echo "short_sha=${GITHUB_SHA:0:12}" >> "$GITHUB_OUTPUT"
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: gunnchai-windows-pilot0-${{ steps.meta.outputs.short_sha }}
           path: reports/windows_pilot0/**
           retention-days: 14
-          if-no-files-found: error
+          if-no-files-found: warn
 
   windows-pilot0-windows-latest:
     name: windows-pilot0-windows-latest
@@ -62,10 +67,16 @@ jobs:
           node-version: "20"
           cache: npm
       - name: Compatibility smoke
-        shell: bash
+        shell: cmd
+        env:
+          DISCORD_BOT_TOKEN: test_token
+          DISCORD_CLIENT_ID: test_client_id
+          DISCORD_GUILD_ID: test_guild_id
         run: |
-          npm ci || npm install
-          npm run proof:all
+          call npm ci || call npm install
+          call npm run build
+          call npm run proof:unit
+          call npm run proof:smoke
       - name: Compat note
         shell: pwsh
         run: |

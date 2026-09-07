@@ -31,16 +31,20 @@ def head_sha() -> str:
     return subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
 
 
-def win_cmd(name: str) -> str:
-    if platform.system() != "Windows":
-        return name
-    from shutil import which
-
-    for cand in (f"{name}.cmd", name):
-        found = which(cand)
-        if found:
-            return found
-    return f"{name}.cmd"
+def run_npm(args: list[str], *, capture: bool = True, timeout: int | None = None) -> subprocess.CompletedProcess:
+    """Run npm portably on Windows (.cmd shims need cmd.exe /c)."""
+    if platform.system() == "Windows":
+        cmd = ["cmd.exe", "/d", "/s", "/c", "npm", *args]
+    else:
+        cmd = ["npm", *args]
+    return subprocess.run(
+        cmd,
+        cwd=ROOT,
+        text=True,
+        capture_output=capture,
+        timeout=timeout,
+        shell=False,
+    )
 
 
 def main() -> int:
@@ -54,6 +58,11 @@ def main() -> int:
     checks: dict[str, dict] = {}
     blockers: list[str] = []
     skipped_required = 0
+
+    # Jest basic.test.ts expects these values (also set in tests/setup.ts; belt-and-suspenders for npm scripts).
+    os.environ.setdefault("DISCORD_BOT_TOKEN", "test_token")
+    os.environ.setdefault("DISCORD_CLIENT_ID", "test_client_id")
+    os.environ.setdefault("DISCORD_GUILD_ID", "test_guild_id")
 
     meta = {
         "platform_system": platform.system(),
@@ -74,20 +83,41 @@ def main() -> int:
         blockers.append("NO_LOCKFILE")
         skipped_required += 1
 
-    build = subprocess.run([win_cmd("npm"), "ci"], cwd=ROOT, text=True, capture_output=True)
+    print("== npm ci ==")
+    build = run_npm(["ci"], capture=True)
     if build.returncode != 0:
-        # fallback npm install if ci fails on older trees
-        build = subprocess.run([win_cmd("npm"), "install"], cwd=ROOT, text=True, capture_output=True)
-    proof = subprocess.run([win_cmd("npm"), "run", "proof:all"], cwd=ROOT, text=True, capture_output=True)
+        print("npm ci failed; falling back to npm install")
+        print(((build.stdout or "") + (build.stderr or ""))[-2000:])
+        build = run_npm(["install"], capture=True)
+        print(((build.stdout or "") + (build.stderr or ""))[-2000:])
+
+    print("== npm run build ==")
+    built = run_npm(["run", "build"], capture=True)
+    print(((built.stdout or "") + (built.stderr or ""))[-2000:])
+    if built.returncode != 0:
+        blockers.append("BUILD_FAILED")
+
+    print("== npm run proof:unit ==")
+    unit = run_npm(["run", "proof:unit"], capture=True)
+    print(((unit.stdout or "") + (unit.stderr or ""))[-2000:])
+
+    print("== npm run proof:smoke ==")
+    smoke = run_npm(["run", "proof:smoke"], capture=True)
+    print(((smoke.stdout or "") + (smoke.stderr or ""))[-800:])
+
+    proof_ok = built.returncode == 0 and unit.returncode == 0 and smoke.returncode == 0
     checks["build_and_proof"] = {
-        "status": "PASS" if proof.returncode == 0 else "FAIL",
+        "status": "PASS" if proof_ok else "FAIL",
         "npm_install_exit": build.returncode,
-        "proof_exit": proof.returncode,
-        "proof_tail": ((proof.stdout or "") + (proof.stderr or ""))[-1500:],
+        "build_exit": built.returncode,
+        "unit_exit": unit.returncode,
+        "smoke_exit": smoke.returncode,
+        "unit_tail": ((unit.stdout or "") + (unit.stderr or ""))[-1500:],
+        "build_tail": ((built.stdout or "") + (built.stderr or ""))[-1500:],
         "repeatability": "REPEATABLE",
         "bit_reproducible": False,
     }
-    if proof.returncode != 0:
+    if not proof_ok:
         blockers.append("PROOF_FAILED")
 
     dist = ROOT / "dist" / "simple-bot.js"
@@ -97,14 +127,13 @@ def main() -> int:
         "sha256": sha256_bytes(dist.read_bytes()) if dist.is_file() else None,
         "signing": "UNSIGNED_PILOT_ARTIFACT_NOT_FOR_PRODUCTION",
     }
+    if not dist.is_file():
+        blockers.append("NO_DIST_ARTIFACT")
 
     # Launch local-runtime health
-    health = subprocess.run(
-        [win_cmd("npm"), "run", "local-runtime:health"],
-        cwd=ROOT,
-        text=True,
-        capture_output=True,
-    )
+    print("== local-runtime:health ==")
+    health = run_npm(["run", "local-runtime:health"], capture=True)
+    print(((health.stdout or "") + (health.stderr or ""))[-1200:])
     checks["first_launch_health"] = {
         "status": "PASS" if health.returncode == 0 else "FAIL",
         "exit": health.returncode,
@@ -140,7 +169,9 @@ def main() -> int:
     if checks["first_launch_health"]["status"] == "PASS":
         start = time.time()
         proc = subprocess.Popen(
-            [win_cmd("npm"), "run", "local-runtime:serve"],
+            ["cmd.exe", "/d", "/s", "/c", "npm", "run", "local-runtime:serve"]
+            if platform.system() == "Windows"
+            else ["npm", "run", "local-runtime:serve"],
             cwd=ROOT,
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
