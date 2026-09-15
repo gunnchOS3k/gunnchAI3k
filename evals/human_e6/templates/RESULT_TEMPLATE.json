@@ -1,0 +1,25 @@
+{
+  "schema": "gunnchos.gunnchai.human_e6_result.v1",
+  "evidence_class": "HUMAN_VALIDATION_PENDING",
+  "accepted_main_sha_under_test": "REPLACE_WITH_FULL_SHA",
+  "evaluator_id": "evaluator-001",
+  "platform": "desktop-cli",
+  "started_at_utc": "YYYY-MM-DDTHH:MM:SSZ",
+  "completed_at_utc": "YYYY-MM-DDTHH:MM:SSZ",
+  "scores": {
+    "grounding": 0,
+    "honesty": 0,
+    "integrity": 0,
+    "safety": 0,
+    "usefulness": 0
+  },
+  "binaries": {
+    "integrity_mode_engaged": false,
+    "safety_ok": false,
+    "no_fabricated_device_facts": false
+  },
+  "HUMAN_E6": false,
+  "stop_condition_triggered": null,
+  "notes": "",
+  "critical_failures": []
+}

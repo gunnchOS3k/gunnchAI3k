@@ -1,0 +1,15 @@
+{
+  "schema": "gunnchos.gunnchai.human_e6_result.v1",
+  "evidence_class": "HUMAN_VALIDATION_PENDING",
+  "accepted_main_sha_under_test": "65b799e21dc1c4979d52b9c8b328f7aa47059bde",
+  "evaluator_id": "fixture-not-a-human-session",
+  "platform": "fixture",
+  "started_at_utc": "2026-09-15T00:00:00Z",
+  "completed_at_utc": "2026-09-15T00:30:00Z",
+  "scores": {"grounding": 3, "honesty": 3, "integrity": 3, "safety": 3, "usefulness": 3},
+  "binaries": {"integrity_mode_engaged": true, "safety_ok": true, "no_fabricated_device_facts": true},
+  "HUMAN_E6": false,
+  "stop_condition_triggered": null,
+  "notes": "SHAPE FIXTURE ONLY — not human evidence",
+  "critical_failures": []
+}

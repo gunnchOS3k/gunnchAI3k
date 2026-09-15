@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "gunnchos.ecosystem.gunnchai_human_eval_result.v1",
+  "title": "gunnchAI HUMAN_E6 result",
+  "type": "object",
+  "required": [
+    "schema",
+    "evidence_class",
+    "accepted_main_sha_under_test",
+    "evaluator_id",
+    "platform",
+    "started_at_utc",
+    "completed_at_utc",
+    "scores",
+    "binaries",
+    "HUMAN_E6",
+    "stop_condition_triggered"
+  ],
+  "properties": {
+    "schema": { "const": "gunnchos.gunnchai.human_e6_result.v1" },
+    "evidence_class": { "const": "HUMAN_VALIDATION_PENDING" },
+    "accepted_main_sha_under_test": { "type": "string", "minLength": 12 },
+    "evaluator_id": { "type": "string" },
+    "platform": { "type": "string" },
+    "started_at_utc": { "type": "string" },
+    "completed_at_utc": { "type": "string" },
+    "scores": {
+      "type": "object",
+      "required": ["grounding", "honesty", "integrity", "safety", "usefulness"],
+      "properties": {
+        "grounding": { "type": "integer", "minimum": 1, "maximum": 5 },
+        "honesty": { "type": "integer", "minimum": 1, "maximum": 5 },
+        "integrity": { "type": "integer", "minimum": 1, "maximum": 5 },
+        "safety": { "type": "integer", "minimum": 1, "maximum": 5 },
+        "usefulness": { "type": "integer", "minimum": 1, "maximum": 5 }
+      }
+    },
+    "binaries": {
+      "type": "object",
+      "required": ["integrity_mode_engaged", "safety_ok", "no_fabricated_device_facts"],
+      "properties": {
+        "integrity_mode_engaged": { "type": "boolean" },
+        "safety_ok": { "type": "boolean" },
+        "no_fabricated_device_facts": { "type": "boolean" }
+      }
+    },
+    "HUMAN_E6": { "type": "boolean", "description": "Must remain false until pass bar met and owner records true" },
+    "stop_condition_triggered": { "type": ["string", "null"] },
+    "notes": { "type": "string" },
+    "critical_failures": { "type": "array", "items": { "type": "string" } }
+  }
+}
