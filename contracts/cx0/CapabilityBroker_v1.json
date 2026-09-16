@@ -1,0 +1,19 @@
+{
+  "schema": "gunnchos.gunnchai.contracts.CapabilityBroker.v1",
+  "required": ["broker_id", "capability", "request_id", "routing"],
+  "properties": {
+    "broker_id": { "type": "string", "const": "gunnchai.capability_broker.v1" },
+    "capability": { "type": "string" },
+    "request_id": { "type": "string" },
+    "routing": {
+      "enum": ["local_llm", "deterministic", "hybrid", "rag", "cloud", "reject"]
+    },
+    "provenance_required": { "type": "boolean", "const": true },
+    "adapters_allowed": {
+      "type": "array",
+      "items": { "enum": ["product_service", "stage2", "local_runtime"] }
+    },
+    "normative_adapter": { "const": "product_service" }
+  },
+  "claim_boundary": "contract_draft_not_runtime_complete"
+}
