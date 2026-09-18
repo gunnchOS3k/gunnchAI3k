@@ -1,17 +1,30 @@
 {
   "PIXEL_NEARBY_EDGE_PHYSICAL_JOURNEY_PASS": false,
-  "detail": "PIXEL_ADB_UNAUTHORIZED_OWNER_MUST_ALLOW_USB_DEBUG",
+  "detail": "PIXEL_ADB_OFFLINE_AFTER_REAUTH_RETRY",
   "adb_connected": false,
-  "adb_unauthorized": true,
+  "adb_unauthorized": false,
+  "adb_offline": true,
   "transport": {
     "mode": "LOCALHOST",
     "preferred_for_pixel": false,
     "adb_reverse_applied": false,
-    "note": "Pixel ADB unavailable; LOCALHOST only (no unauthenticated LAN)"
+    "note": "Pixel ADB offline after brief authorize; physical journey not earned"
+  },
+  "steps": {
+    "adb_reverse": false,
+    "pilot_chrome_opened": false,
+    "pair": false,
+    "execute_smollm2": false,
+    "provenance_nearby_edge": false,
+    "provider_disconnect_honest_fallback": false,
+    "session_recover": false,
+    "revoke_denied": false
   },
   "log": [
-    "adb device present but unauthorized — complete USB debugging allow prompt on Pixel",
-    "List of devices attached\n27211JEGR06194         unauthorized usb:17825792X transport_id:5"
+    "Re-auth retry: kill-server/start-server briefly yielded AUTHORIZED device bluejay/Pixel_6a",
+    "Controlled integration re-run while authorized: reverse applied; Pixel Chrome fetch failed — gate kept false",
+    "Device later stuck offline (USB present in ioreg, adb offline) — fail closed",
+    "List of devices attached\n27211JEGR06194         offline usb:17825792X transport_id:23"
   ],
   "honesty": {
     "PIXEL6A_LIVE_LOCAL_MODEL_PASS": false,

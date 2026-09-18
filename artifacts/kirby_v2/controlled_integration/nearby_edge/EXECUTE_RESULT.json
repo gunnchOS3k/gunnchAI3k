@@ -5,11 +5,11 @@
   "model_id": "smollm2-135m-instruct-q4_k_m",
   "provenance": {
     "schema": "gunnchai.nearby_edge.provenance.v1",
-    "request_id": "b265e9d5-0f92-452e-86d5-a78f7f2f77f2",
+    "request_id": "89dc6bfb-7cd0-4e15-a926-5b57a6efb394",
     "compute_host": "mac_nearby_edge",
     "evidence_class": "LIVE_MAC",
-    "device_role": "localhost_client",
-    "transport": "LOCALHOST",
+    "device_role": "pixel6a_adb_client",
+    "transport": "ADB_REVERSE",
     "model_id": "smollm2-135m-instruct-q4_k_m",
     "provider_id": "prov_llamacpp_live",
     "promotion_state": "CONTROLLED_INTEGRATION",
@@ -18,6 +18,6 @@
     "adb_reverse_is_not_on_device": true,
     "privacy_label": "device_local_adjacent",
     "task_class": "intent_route",
-    "timestamp": "2026-09-18T23:25:41.510Z"
+    "timestamp": "2026-09-18T23:42:18.383Z"
   }
 }

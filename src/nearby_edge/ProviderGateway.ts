@@ -24,10 +24,15 @@ export interface GatewayExecuteResult {
  */
 export class ProviderGateway {
   constructor(
-    private readonly provider: ModelProviderV2 | null,
+    private provider: ModelProviderV2 | null,
     private readonly modelId = 'smollm2-135m-instruct-q4_k_m',
     private readonly root?: string,
   ) {}
+
+  /** Test/ops hook: disconnect or restore Mac live provider without restarting the edge. */
+  setProvider(provider: ModelProviderV2 | null): void {
+    this.provider = provider;
+  }
 
   capabilities(): Record<string, unknown> {
     const policy = loadLiveProviderPolicy(this.root);

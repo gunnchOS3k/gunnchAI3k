@@ -1,0 +1,9 @@
+{
+  "ok": false,
+  "provenance": null,
+  "via": "not_earned",
+  "reason": "Physical Pixel execute not completed — ADB ended offline after re-auth retry",
+  "expected_compute_host": "mac_nearby_edge",
+  "on_device_local": false,
+  "note": "Do not invent provenance; Mac localhost EXECUTE_RESULT.json remains separate evidence"
+}

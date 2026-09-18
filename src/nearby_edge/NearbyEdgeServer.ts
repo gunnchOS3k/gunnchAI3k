@@ -27,6 +27,7 @@ export interface NearbyEdgeServerHandle {
   audit: AuditLog;
   gateway: ProviderGateway;
   mintPairingCode: () => { code: string; expires_at: number };
+  setProvider: (provider: ModelProviderV2 | null) => void;
   close: () => Promise<void>;
 }
 
@@ -39,14 +40,24 @@ function readBody(req: http.IncomingMessage): Promise<string> {
   });
 }
 
-function json(res: http.ServerResponse, status: number, body: unknown): void {
+function json(res: http.ServerResponse, status: number, body: unknown, req?: http.IncomingMessage): void {
   const payload = JSON.stringify(body);
-  res.writeHead(status, {
+  const origin = req?.headers.origin;
+  const allowOrigin =
+    origin && /^https?:\/\/(127\.0\.0\.1|localhost)(:\d+)?$/i.test(origin) ? origin : null;
+  const headers: Record<string, string | number> = {
     'Content-Type': 'application/json',
     'Content-Length': Buffer.byteLength(payload),
     'X-GunnchAI-Nearby-Edge': 'v1',
     'X-On-Device-Local': 'false',
-  });
+  };
+  if (allowOrigin) {
+    headers['Access-Control-Allow-Origin'] = allowOrigin;
+    headers['Access-Control-Allow-Headers'] = 'Authorization, Content-Type';
+    headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS';
+    headers['Vary'] = 'Origin';
+  }
+  res.writeHead(status, headers);
   res.end(payload);
 }
 
@@ -91,10 +102,30 @@ export async function startNearbyEdgeServer(opts: NearbyEdgeServerOptions = {}):
     idle.touch();
     const url = new URL(req.url || '/', `http://${host}:${port}`);
     const pathName = url.pathname;
+    const reply = (status: number, body: unknown) => json(res, status, body, req);
 
     try {
+      // Loopback CORS for Pixel Chrome pilot (ADB reverse) — never open LAN without TLS path
+      if (req.method === 'OPTIONS' && pathName.startsWith('/v1/')) {
+        const origin = req.headers.origin;
+        const allowOrigin =
+          origin && /^https?:\/\/(127\.0\.0\.1|localhost)(:\d+)?$/i.test(origin) ? origin : null;
+        res.writeHead(204, {
+          ...(allowOrigin
+            ? {
+                'Access-Control-Allow-Origin': allowOrigin,
+                'Access-Control-Allow-Headers': 'Authorization, Content-Type',
+                'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+                Vary: 'Origin',
+              }
+            : {}),
+        });
+        res.end();
+        return;
+      }
+
       if (req.method === 'GET' && pathName === '/v1/healthz') {
-        return json(res, 200, { ...healthPayload(gateway, transport), health: await gateway.health() });
+        return reply(200, { ...healthPayload(gateway, transport), health: await gateway.health() });
       }
 
       if (req.method === 'POST' && pathName === '/v1/session/pair') {
@@ -102,11 +133,11 @@ export async function startNearbyEdgeServer(opts: NearbyEdgeServerOptions = {}):
         const body = raw ? (JSON.parse(raw) as { code?: string; client_label?: string }) : {};
         if (!body.code || !pairing.consumePairingCode(body.code)) {
           audit.record('pair_deny', { reason: 'INVALID_OR_EXPIRED_CODE' });
-          return json(res, 401, { ok: false, error: 'INVALID_OR_EXPIRED_CODE' });
+          return reply(401, { ok: false, error: 'INVALID_OR_EXPIRED_CODE' });
         }
         const session = sessions.createSession(body.client_label ?? 'pilot');
         audit.record('pair_ok', { client_label: session.client_label });
-        return json(res, 200, {
+        return reply(200, {
           ok: true,
           session_token: session.token,
           expires_at: session.expires_at,
@@ -120,35 +151,35 @@ export async function startNearbyEdgeServer(opts: NearbyEdgeServerOptions = {}):
         // capabilities / execute / cancel / revoke require session
         if (pathName.startsWith('/v1/')) {
           audit.record('auth_deny', { path: pathName });
-          return json(res, 401, { ok: false, error: 'SESSION_REQUIRED' });
+          return reply(401, { ok: false, error: 'SESSION_REQUIRED' });
         }
       }
 
       if (req.method === 'GET' && pathName === '/v1/capabilities') {
-        if (!auth) return json(res, 401, { ok: false, error: 'SESSION_REQUIRED' });
-        return json(res, 200, gateway.capabilities());
+        if (!auth) return reply(401, { ok: false, error: 'SESSION_REQUIRED' });
+        return reply(200, gateway.capabilities());
       }
 
       if (req.method === 'POST' && pathName === '/v1/session/revoke') {
-        if (!auth) return json(res, 401, { ok: false, error: 'SESSION_REQUIRED' });
+        if (!auth) return reply(401, { ok: false, error: 'SESSION_REQUIRED' });
         sessions.revoke(req.headers.authorization);
         audit.record('session_revoke', { client_label: auth.client_label });
-        return json(res, 200, { ok: true });
+        return reply(200, { ok: true });
       }
 
       if (req.method === 'POST' && pathName === '/v1/cancel') {
-        if (!auth) return json(res, 401, { ok: false, error: 'SESSION_REQUIRED' });
+        if (!auth) return reply(401, { ok: false, error: 'SESSION_REQUIRED' });
         cancelled = true;
         audit.record('cancel', {});
-        return json(res, 200, { ok: true, cancelled: true });
+        return reply(200, { ok: true, cancelled: true });
       }
 
       if (req.method === 'POST' && pathName === '/v1/execute') {
-        if (!auth) return json(res, 401, { ok: false, error: 'SESSION_REQUIRED' });
+        if (!auth) return reply(401, { ok: false, error: 'SESSION_REQUIRED' });
         const rl = limiter.allow();
         if (!rl.ok) {
           audit.record('rate_limit', { reason: rl.reason });
-          return json(res, 429, { ok: false, error: rl.reason });
+          return reply(429, { ok: false, error: rl.reason });
         }
         const raw = await readBody(req);
         const body = JSON.parse(raw || '{}') as {
@@ -159,7 +190,7 @@ export async function startNearbyEdgeServer(opts: NearbyEdgeServerOptions = {}):
         };
         if (cancelled) {
           cancelled = false;
-          return json(res, 499, { ok: false, error: 'CANCELLED' });
+          return reply(499, { ok: false, error: 'CANCELLED' });
         }
         const result = await gateway.execute({
           task_class: body.task_class ?? 'short_assist',
@@ -179,16 +210,16 @@ export async function startNearbyEdgeServer(opts: NearbyEdgeServerOptions = {}):
           task_class: body.task_class,
           request_id: provenance.request_id,
         });
-        return json(res, result.ok ? 200 : result.denied ? 403 : 503, {
+        return reply(result.ok ? 200 : result.denied ? 403 : 503, {
           ...result,
           provenance,
         });
       }
 
-      return json(res, 404, { ok: false, error: 'NOT_FOUND' });
+      return reply(404, { ok: false, error: 'NOT_FOUND' });
     } catch (err) {
       audit.record('error', { message: err instanceof Error ? err.message : String(err) });
-      return json(res, 500, { ok: false, error: 'INTERNAL' });
+      return reply(500, { ok: false, error: 'INTERNAL' });
     }
   });
 
@@ -206,6 +237,7 @@ export async function startNearbyEdgeServer(opts: NearbyEdgeServerOptions = {}):
     audit,
     gateway,
     mintPairingCode: () => pairing.mintPairingCode(),
+    setProvider: (provider: ModelProviderV2 | null) => gateway.setProvider(provider),
     close: async () => {
       idle.stop();
       sessions.clearAll();

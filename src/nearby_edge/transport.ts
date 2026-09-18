@@ -32,7 +32,11 @@ export function applyAdbReverse(port: number): { ok: boolean; detail: string } {
     return { ok: false, detail: 'FLAG_OFF' };
   }
   try {
-    execFileSync('adb', ['reverse', `tcp:${port}`, `tcp:${port}`], { encoding: 'utf8' });
+    const serial = process.env.ANDROID_SERIAL;
+    const args = serial
+      ? ['-s', serial, 'reverse', `tcp:${port}`, `tcp:${port}`]
+      : ['reverse', `tcp:${port}`, `tcp:${port}`];
+    execFileSync('adb', args, { encoding: 'utf8' });
     return { ok: true, detail: `adb reverse tcp:${port} tcp:${port}` };
   } catch (err) {
     return { ok: false, detail: err instanceof Error ? err.message : String(err) };
@@ -41,7 +45,11 @@ export function applyAdbReverse(port: number): { ok: boolean; detail: string } {
 
 export function clearAdbReverse(port: number): void {
   try {
-    execFileSync('adb', ['reverse', '--remove', `tcp:${port}`], { encoding: 'utf8' });
+    const serial = process.env.ANDROID_SERIAL;
+    const args = serial
+      ? ['-s', serial, 'reverse', '--remove', `tcp:${port}`]
+      : ['reverse', '--remove', `tcp:${port}`];
+    execFileSync('adb', args, { encoding: 'utf8' });
   } catch {
     /* ignore */
   }

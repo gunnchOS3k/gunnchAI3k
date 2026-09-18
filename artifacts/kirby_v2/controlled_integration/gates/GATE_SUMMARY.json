@@ -27,5 +27,11 @@
     "PIXEL6A_LIVE_LOCAL_MODEL_PASS": false,
     "GUNNCHAI_ANDROID_PRODUCTION_CLIENT_PASS": false,
     "PRODUCTION_DEFAULT_PROVIDER_FROZEN": false
+  },
+  "physical_retry": {
+    "at": "2026-09-18T23:48:42Z",
+    "PIXEL_NEARBY_EDGE_PHYSICAL_JOURNEY_PASS": false,
+    "detail": "PIXEL_ADB_OFFLINE_AFTER_REAUTH_RETRY",
+    "note": "Brief authorize then offline; fail closed"
   }
 }

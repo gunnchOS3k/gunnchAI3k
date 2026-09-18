@@ -1,27 +1,27 @@
 {
   "entries": [
     {
-      "ts": "2026-09-18T23:25:40.476Z",
+      "ts": "2026-09-18T23:42:16.530Z",
       "event": "pair_ok",
       "client_label": "controlled_integration_runner"
     },
     {
-      "ts": "2026-09-18T23:25:41.510Z",
+      "ts": "2026-09-18T23:42:18.383Z",
       "event": "execute",
       "ok": true,
       "task_class": "intent_route",
-      "request_id": "b265e9d5-0f92-452e-86d5-a78f7f2f77f2"
+      "request_id": "89dc6bfb-7cd0-4e15-a926-5b57a6efb394"
     },
     {
-      "ts": "2026-09-18T23:25:41.512Z",
+      "ts": "2026-09-18T23:42:18.386Z",
       "event": "execute_deny",
       "ok": false,
       "error": "DISALLOWED_TASK_CLASS",
       "task_class": "exam_answer_dump",
-      "request_id": "48b0576f-c5ce-4f8e-a58e-a7527943da45"
+      "request_id": "5f88b395-1943-4d91-a38c-dd78ea62e2c7"
     },
     {
-      "ts": "2026-09-18T23:25:41.513Z",
+      "ts": "2026-09-18T23:42:18.387Z",
       "event": "auth_deny",
       "path": "/v1/execute"
     }

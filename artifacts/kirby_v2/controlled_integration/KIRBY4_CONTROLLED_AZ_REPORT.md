@@ -6,9 +6,20 @@
 
 ## Executive verdict
 
-SmolLM2-135M promoted **only** to `CONTROLLED_INTEGRATION` behind feature flags (default off). Mac NearbyEdgeServer provides a **canonical** secured API (not llama.cpp schema) with pairing, session auth, provenance, rate limits, and idle shutdown. Live micro execute **PASS** on Mac. Pixel physical ADB-reverse journey **FAIL (honest)** — device present but **`unauthorized`** (owner must re-allow USB debugging). Unearned gates remain false: `PIXEL6A_LIVE_LOCAL_MODEL_PASS`, `GUNNCHAI_ANDROID_PRODUCTION_CLIENT_PASS`, `PRODUCTION_DEFAULT_PROVIDER_FROZEN`.
+SmolLM2-135M promoted **only** to `CONTROLLED_INTEGRATION` behind feature flags (default off). Mac NearbyEdgeServer provides a **canonical** secured API (not llama.cpp schema) with pairing, session auth, provenance, rate limits, and idle shutdown. Live micro execute **PASS** on Mac. Pixel physical ADB-reverse journey **FAIL (honest)** after re-auth retry — ADB briefly reached `device` (authorized) then stuck **`offline`** (USB still present). Unearned gates remain false: `PIXEL6A_LIVE_LOCAL_MODEL_PASS`, `GUNNCHAI_ANDROID_PRODUCTION_CLIENT_PASS`, `PRODUCTION_DEFAULT_PROVIDER_FROZEN`.
 
 **Next:** `NEXT_GUNNCHAI_ACTION=INTEGRATE_NEARBY_EDGE_PROVIDER_INTO_GUNNCHOS_CAPSULE_AND_WAIKE_PIXEL_PILOT`
+
+---
+
+### Physical Pixel re-auth retry (follow-up)
+
+- Tip at start of retry: `24be5a85425ba623340b4493f374dbc59b8461cb`
+- `adb kill-server && adb start-server` → briefly **AUTHORIZED** (`27211JEGR06194 device … Pixel_6a`)
+- Controlled re-run while authorized: `adb reverse` applied; Pixel Chrome CDP fetch still failed (`Failed to fetch`); **gate kept false** (Mac localhost evidence does not earn physical pass)
+- Final blocker: `adb devices` → **offline** while ioreg still shows Pixel 6a USB
+- Artifacts: `pixel_journey/PHYSICAL_PIXEL_JOURNEY.json`, `PAIRING_TRACE.json`, `EXECUTION_PROVENANCE.json`, `JOURNEY_LOG.json`
+- Owner recovery: unlock + File transfer USB mode + Allow USB debugging / revoke+re-allow; stop competing adb clients; re-run `scripts/run_pixel_physical_nearby_edge_journey.ts`
 
 ---
 
@@ -46,7 +57,7 @@ Every execute response includes provenance with `on_device_local=false`, `adb_re
 `pilot/nearby_edge_pwa/index.html` — `PILOT_CLIENT_NOT_PRODUCTION_UI`; intended via ADB reverse. Capsule not blocked.
 
 ### L — Physical Pixel journey
-**FAIL (honest):** `PIXEL_NEARBY_EDGE_PHYSICAL_JOURNEY_PASS=false` — ADB shows `unauthorized`. Owner must tap Allow USB debugging. Mac localhost nearby-edge path still validated. Prior KIRBY-3 authorize cleared after adb daemon restart.
+**FAIL (honest):** `PIXEL_NEARBY_EDGE_PHYSICAL_JOURNEY_PASS=false` — re-auth retry briefly authorized, then ADB stuck **offline** (USB present). Chrome-over-reverse fetch also failed while authorized; Mac localhost nearby-edge path still validated. See Physical Pixel re-auth retry section.
 
 ### M — WAIKE contract
 `integrations/waike/nearby_edge_contract_v1.ts`
@@ -104,7 +115,7 @@ Kirby foundation + bakeoff + live + controlled: **36/36 PASS** (`artifacts/kirby
 | PROVENANCE_ON_RESPONSE | PASS |
 | CONTROLLED_ROUTER_WIRED | PASS |
 | PILOT_CLIENT_NOT_PRODUCTION_UI | PASS |
-| PIXEL_NEARBY_EDGE_PHYSICAL_JOURNEY_PASS | FAIL (ADB unauthorized) |
+| PIXEL_NEARBY_EDGE_PHYSICAL_JOURNEY_PASS | FAIL (ADB offline after re-auth retry) |
 | WAIKE_NEARBY_EDGE_CONTRACT | PASS |
 | CAPSULE_NEARBY_EDGE_CONTRACT | PASS |
 | PIXEL_OFFLINE_HONESTY | PASS |
@@ -120,7 +131,8 @@ Kirby foundation + bakeoff + live + controlled: **36/36 PASS** (`artifacts/kirby
 
 ## Honesty notes
 
-- Pixel USB present but ADB **unauthorized** after daemon restart — physical ADB_REVERSE journey not claimed.
+- Pixel USB present but ADB **offline** after re-auth retry (earlier brief `device` authorize did not stick) — physical ADB_REVERSE journey not claimed.
 - ADB reverse ≠ on-device inference; `RUNTIME_ON_DEVICE_LOCAL` stays false.
 - SmolLM2-135M is CONTROLLED_INTEGRATION only — not production default.
 - Do not merge #50/#51/#52 via this PR.
+- Mac localhost pair/exec evidence must not flip `PIXEL_NEARBY_EDGE_PHYSICAL_JOURNEY_PASS`.
