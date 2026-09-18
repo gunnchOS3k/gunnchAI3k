@@ -1,0 +1,156 @@
+{
+  "schema": "gunnchai.kirby_gates.v2",
+  "claim_boundary": "Tokens reflect foundation/evidence in this PR only. No human-validation, real-device performance, or model-quality claims.",
+  "accepted_main_sha": "076b7ccd7c3f71d3299ead9a72e45291cd33689a",
+  "tokens": {
+    "KIRBY_DOCTRINE_V2": {
+      "status": "PASS",
+      "evidence": [
+        "docs/frontier/KIRBY_DOCTRINE_V2.md"
+      ]
+    },
+    "KIRBY_CAPABILITY_REGISTRY": {
+      "status": "PASS",
+      "evidence": [
+        "config/frontier_capabilities.yaml",
+        "config/frontier_capabilities.json",
+        "src/frontier/capability_registry.ts"
+      ]
+    },
+    "KIRBY_MODEL_PROVIDER_V2": {
+      "status": "PASS",
+      "evidence": [
+        "src/providers/model_provider_v2.ts",
+        "src/providers/provider_registry.ts"
+      ]
+    },
+    "KIRBY_REASONING_POLICY_V2": {
+      "status": "PASS",
+      "evidence": [
+        "src/control/reasoning_policy.ts"
+      ]
+    },
+    "KIRBY_MODEL_ROUTER_V2": {
+      "status": "PASS",
+      "evidence": [
+        "src/control/model_router_v2.ts"
+      ]
+    },
+    "KIRBY_TOOL_INVOCATION_V2": {
+      "status": "PASS",
+      "evidence": [
+        "src/tools/tool_invocation_v2.ts"
+      ]
+    },
+    "KIRBY_AGENT_RUNTIME_V2": {
+      "status": "PASS",
+      "evidence": [
+        "src/agents/agent_runtime_v2.ts",
+        "src/agents/agent_budget.ts"
+      ]
+    },
+    "KIRBY_COMPUTER_USE": {
+      "status": "PASS",
+      "evidence": [
+        "src/capabilities/computer_use/index.ts"
+      ]
+    },
+    "KIRBY_MULTIMODAL_OBSERVATION_V2": {
+      "status": "PASS",
+      "evidence": [
+        "src/multimodal/observation.ts"
+      ]
+    },
+    "KIRBY_MEMORY_PLANE": {
+      "status": "PASS",
+      "evidence": [
+        "src/memory/index.ts"
+      ]
+    },
+    "KIRBY_CONTEXT_MANAGER_V2": {
+      "status": "PASS",
+      "evidence": [
+        "src/context/context_manager_v2.ts"
+      ]
+    },
+    "KIRBY_VERIFICATION_PLANE": {
+      "status": "PASS",
+      "evidence": [
+        "src/verification/index.ts"
+      ]
+    },
+    "KIRBY_BACKGROUND_TASKS": {
+      "status": "PASS",
+      "evidence": [
+        "src/agents/background_tasks/index.ts"
+      ]
+    },
+    "KIRBY_EFFICIENCY_CONTROLLER": {
+      "status": "PASS",
+      "evidence": [
+        "src/runtime/efficiency_controller.ts"
+      ]
+    },
+    "KIRBY_MODEL_LADDER": {
+      "status": "PASS",
+      "evidence": [
+        "config/model_ladder.yaml",
+        "config/model_ladder.json"
+      ]
+    },
+    "KIRBY_FRONTIER_BAKEOFF_HARNESS": {
+      "status": "PASS",
+      "evidence": [
+        "benchmarks/frontier_bakeoff/"
+      ]
+    },
+    "KIRBY_DISTILLATION_RESEARCH_ONLY": {
+      "status": "PASS",
+      "evidence": [
+        "research/distillation/"
+      ],
+      "note": "Design only; no training executed"
+    },
+    "KIRBY_PROMPT_INJECTION_GUARDS": {
+      "status": "PASS",
+      "evidence": [
+        "src/security/prompt_injection/index.ts",
+        "tests/kirby_v2/"
+      ]
+    },
+    "KIRBY_INTEGRATION_CONTRACTS_V2": {
+      "status": "PASS",
+      "evidence": [
+        "integrations/waike/frontier_contract_v2.ts",
+        "integrations/device_os/frontier_contract_v2.ts",
+        "integrations/creator/tool_providers.ts",
+        "integrations/research/tool_providers.ts"
+      ]
+    },
+    "KIRBY_FOUNDATION_TESTS": {
+      "status": "PASS",
+      "evidence": [
+        "tests/kirby_v2/kirby_foundation.test.ts",
+        "artifacts/kirby_v2/FULL_TEST_RUN.log"
+      ],
+      "detail": "17/17 Kirby + 287/287 full jest"
+    },
+    "KIRBY_HUMAN_VALIDATION": {
+      "status": "NOT_CLAIMED",
+      "evidence": []
+    },
+    "KIRBY_REAL_DEVICE_PERFORMANCE": {
+      "status": "NOT_CLAIMED",
+      "evidence": []
+    },
+    "KIRBY_MODEL_QUALITY_WIN": {
+      "status": "NOT_CLAIMED",
+      "evidence": []
+    },
+    "KIRBY_PROVIDER_BAKEOFF_EXECUTED": {
+      "status": "NOT_CLAIMED",
+      "evidence": [],
+      "next": "NEXT_GUNNCHAI_ACTION=RUN_PROVIDER_BAKEOFF_AND_PROMOTE_QUALIFIED_CAPABILITIES"
+    }
+  }
+}
