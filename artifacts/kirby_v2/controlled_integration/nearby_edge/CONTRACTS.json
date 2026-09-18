@@ -1,0 +1,47 @@
+{
+  "waike": {
+    "schema": "gunnchai.waike.nearby_edge_contract.v1",
+    "preferred_transport": "ADB_REVERSE",
+    "compute_host": "mac_nearby_edge",
+    "device_role": "pixel_client",
+    "on_device_local": false,
+    "endpoints": [
+      "/v1/healthz",
+      "/v1/capabilities",
+      "/v1/execute",
+      "/v1/cancel",
+      "/v1/session"
+    ],
+    "requires_session": true,
+    "production_client": false,
+    "rules": {
+      "academic_integrity": true,
+      "no_exam_answer_dump": true,
+      "model_owned_shell_authority": false,
+      "adb_reverse_is_not_on_device": true
+    }
+  },
+  "capsule": {
+    "schema": "gunnchai.gunnchos_capsule.nearby_edge_contract.v1",
+    "preferred_transport": "ADB_REVERSE",
+    "compute_host": "mac_nearby_edge",
+    "on_device_local": false,
+    "requires_pairing": true,
+    "production_default_provider": false,
+    "surfaces": [
+      "capsule_pilot",
+      "status",
+      "short_assist"
+    ],
+    "rules": {
+      "no_unauthenticated_lan": true,
+      "provenance_required": true,
+      "reversible_via_feature_flags": true
+    }
+  },
+  "capsule_ready": {
+    "contract_present": true,
+    "wired_into_product": false,
+    "next": "NEXT_GUNNCHAI_ACTION=INTEGRATE_NEARBY_EDGE_PROVIDER_INTO_GUNNCHOS_CAPSULE_AND_WAIKE_PIXEL_PILOT"
+  }
+}

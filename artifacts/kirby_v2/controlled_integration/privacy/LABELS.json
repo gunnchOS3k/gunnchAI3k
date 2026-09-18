@@ -1,0 +1,10 @@
+{
+  "schema": "gunnchai.nearby_edge.privacy.v1",
+  "labels": {
+    "compute": "mac_nearby_edge",
+    "client": "pixel_adb_or_localhost",
+    "privacy_class": "device_local_adjacent",
+    "no_cloud_by_default": true,
+    "prompts_not_committed": true
+  }
+}

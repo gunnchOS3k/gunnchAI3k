@@ -1,0 +1,22 @@
+{
+  "PIXEL_NEARBY_EDGE_PHYSICAL_JOURNEY_PASS": false,
+  "detail": "PIXEL_ADB_UNAUTHORIZED_OWNER_MUST_ALLOW_USB_DEBUG",
+  "adb_connected": false,
+  "adb_unauthorized": true,
+  "transport": {
+    "mode": "LOCALHOST",
+    "preferred_for_pixel": false,
+    "adb_reverse_applied": false,
+    "note": "Pixel ADB unavailable; LOCALHOST only (no unauthenticated LAN)"
+  },
+  "log": [
+    "adb device present but unauthorized — complete USB debugging allow prompt on Pixel",
+    "List of devices attached\n27211JEGR06194         unauthorized usb:17825792X transport_id:5"
+  ],
+  "honesty": {
+    "PIXEL6A_LIVE_LOCAL_MODEL_PASS": false,
+    "GUNNCHAI_ANDROID_PRODUCTION_CLIENT_PASS": false,
+    "RUNTIME_ON_DEVICE_LOCAL": false,
+    "adb_reverse_is_not_on_device": true
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "entries": [
+    {
+      "ts": "2026-09-18T23:25:40.476Z",
+      "event": "pair_ok",
+      "client_label": "controlled_integration_runner"
+    },
+    {
+      "ts": "2026-09-18T23:25:41.510Z",
+      "event": "execute",
+      "ok": true,
+      "task_class": "intent_route",
+      "request_id": "b265e9d5-0f92-452e-86d5-a78f7f2f77f2"
+    },
+    {
+      "ts": "2026-09-18T23:25:41.512Z",
+      "event": "execute_deny",
+      "ok": false,
+      "error": "DISALLOWED_TASK_CLASS",
+      "task_class": "exam_answer_dump",
+      "request_id": "48b0576f-c5ce-4f8e-a58e-a7527943da45"
+    },
+    {
+      "ts": "2026-09-18T23:25:41.513Z",
+      "event": "auth_deny",
+      "path": "/v1/execute"
+    }
+  ]
+}
