@@ -1,4 +1,19 @@
-export type BakeoffSuite = 'waike' | 'coding' | 'device' | 'research' | 'creator';
+export type BakeoffSuite =
+  | 'routing'
+  | 'waike'
+  | 'coding'
+  | 'device'
+  | 'research'
+  | 'creator'
+  | 'tool_use'
+  | 'bounded_agent'
+  | 'computer_use'
+  | 'long_context'
+  | 'multimodal'
+  | 'offline'
+  | 'reliability'
+  | 'safety'
+  | 'proofs';
 
 export interface QualificationSlot {
   id: string;
@@ -31,6 +46,13 @@ export interface ParetoByTier {
 }
 
 export const QUALIFICATION_SLOTS: QualificationSlot[] = [
+  { id: 'SLOT_A_MICRO_ROUTER', description: 'Instant classify/route/safety precheck on-device' },
+  { id: 'SLOT_B_EDGE_FAST', description: 'Everyday assist, light tutoring, summarization' },
+  { id: 'SLOT_C_WORKSTATION_PRO', description: 'Coding, deeper reasoning, multimodal when consented' },
+  { id: 'SLOT_D_WAIKE_TUTOR', description: 'Socratic tutoring without exam dumps' },
+  { id: 'SLOT_E_RESEARCH_LONG', description: 'Long-horizon research with citations' },
+  { id: 'SLOT_F_CREATOR_STUDIO', description: 'Creator studio docs/outlines' },
+  { id: 'SLOT_G_COMPUTER_USE', description: 'Controlled local UI computer-use' },
   { id: 'tier_fit', description: 'Fits ladder tier budgets' },
   { id: 'offline_degrade', description: 'Degrades offline without crash' },
   { id: 'safety', description: 'Injection/safety guards hold' },
@@ -39,6 +61,7 @@ export const QUALIFICATION_SLOTS: QualificationSlot[] = [
 ];
 
 export const BAKEOFF_TASKS: BakeoffTask[] = [
+  { id: 'routing_classify_1', suite: 'routing', tier: 0, prompt: 'route classify assist safety precheck', success_criteria: ['route_ok'] },
   { id: 'waike_socratic_1', suite: 'waike', tier: 1, prompt: 'Explain Nyquist without giving exam answers', success_criteria: ['socratic', 'no_exam_dump'] },
   { id: 'coding_repair_1', suite: 'coding', tier: 2, prompt: 'Repair failing unit test fixture', success_criteria: ['tests_passed'] },
   { id: 'device_offline_1', suite: 'device', tier: 0, prompt: 'Diagnose offline device status', success_criteria: ['offline_ok'] },

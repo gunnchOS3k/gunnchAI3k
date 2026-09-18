@@ -1,0 +1,16 @@
+{
+  "suite": "proofs",
+  "task_id": "fallback_chain",
+  "model_id": "sim-qwen-workstation",
+  "provider_id": "prov_qwen",
+  "success": true,
+  "latency_ms": 1,
+  "cost_usd": 0,
+  "energy_j": 0,
+  "verifier_pass": true,
+  "evidence_mode": "simulated_deterministic",
+  "detail": "sim-qwen-workstation -> sim-mistral-workstation -> sim-glm-tools -> sim-llama-edge-fast -> sim-gemma-edge -> sim-micro-router",
+  "tokens": {
+    "MODEL_ROUTER_FALLBACK_CHAIN_PASS": true
+  }
+}
