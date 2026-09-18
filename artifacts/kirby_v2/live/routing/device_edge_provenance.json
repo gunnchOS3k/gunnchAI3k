@@ -1,0 +1,8 @@
+{
+  "compute_host": "mac",
+  "device_role": "client_or_unavailable",
+  "pixel_local_inference": false,
+  "adb_forward_equals_on_device": false,
+  "evidence_class_compute": "LIVE_MAC",
+  "evidence_class_pixel_local": "UNAVAILABLE"
+}

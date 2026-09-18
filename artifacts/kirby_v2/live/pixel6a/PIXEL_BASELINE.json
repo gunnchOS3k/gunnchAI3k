@@ -1,0 +1,23 @@
+{
+  "schema": "kirby.live.pixel_baseline.v1",
+  "captured_at": "2026-09-18T22:11:41.529Z",
+  "usb_pixel6a_seen": true,
+  "adb_present": true,
+  "adb_devices_raw": "List of devices attached\n27211JEGR06194         device usb:17825792X product:bluejay model:Pixel_6a device:bluejay transport_id:3",
+  "authorized_device": false,
+  "classification": "PIXEL_ADB_BLOCKED",
+  "owner_approve_steps": [
+    "Unlock Pixel 6a; keep USB-C connected to this Mac.",
+    "Settings → Developer options → USB debugging = ON.",
+    "Accept the Allow USB debugging? prompt (Allow / Always allow this computer).",
+    "If no prompt: USB notification → File transfer / MTP (not Charge only).",
+    "On Mac: adb kill-server && adb start-server && adb devices -l",
+    "Expect: <serial> device ... model:Pixel_6a (or product:bluejay).",
+    "Re-run: npm run bakeoff:kirby-live"
+  ],
+  "fail_closed": true,
+  "on_device_inference_possible": false,
+  "notes": [
+    "Pixel 6a visible on USB bus but not authorized in adb devices — PIXEL_ADB_BLOCKED"
+  ]
+}

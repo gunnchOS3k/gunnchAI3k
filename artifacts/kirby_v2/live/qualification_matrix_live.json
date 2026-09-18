@@ -1,0 +1,123 @@
+{
+  "schema": "kirby.qualification_matrix.live_rebind.v1",
+  "note": "Simulated KIRBY-2 rows preserved; live columns added — not silently replaced.",
+  "columns": [
+    "model",
+    "sim_state",
+    "sim_evidence",
+    "mac_evidence",
+    "pixel_evidence",
+    "remote_evidence",
+    "live_state"
+  ],
+  "rows": [
+    {
+      "model": "sim-micro-router",
+      "sim_state": "PREFERRED_FOR_SLOT",
+      "sim_evidence": "SIMULATED",
+      "mac_evidence": "UNAVAILABLE",
+      "pixel_evidence": "UNAVAILABLE",
+      "remote_evidence": "UNAVAILABLE",
+      "live_state": "n/a_sim_only"
+    },
+    {
+      "model": "sim-llama-edge-fast",
+      "sim_state": "PREFERRED_FOR_SLOT",
+      "sim_evidence": "SIMULATED",
+      "mac_evidence": "UNAVAILABLE",
+      "pixel_evidence": "UNAVAILABLE",
+      "remote_evidence": "UNAVAILABLE",
+      "live_state": "n/a_sim_only"
+    },
+    {
+      "model": "sim-gemma-edge",
+      "sim_state": "PREFERRED_FOR_SLOT",
+      "sim_evidence": "SIMULATED",
+      "mac_evidence": "UNAVAILABLE",
+      "pixel_evidence": "UNAVAILABLE",
+      "remote_evidence": "UNAVAILABLE",
+      "live_state": "n/a_sim_only"
+    },
+    {
+      "model": "sim-qwen-workstation",
+      "sim_state": "QUALIFIED",
+      "sim_evidence": "SIMULATED",
+      "mac_evidence": "UNAVAILABLE",
+      "pixel_evidence": "UNAVAILABLE",
+      "remote_evidence": "UNAVAILABLE",
+      "live_state": "n/a_sim_only"
+    },
+    {
+      "model": "sim-mistral-workstation",
+      "sim_state": "QUALIFIED",
+      "sim_evidence": "SIMULATED",
+      "mac_evidence": "UNAVAILABLE",
+      "pixel_evidence": "UNAVAILABLE",
+      "remote_evidence": "UNAVAILABLE",
+      "live_state": "n/a_sim_only"
+    },
+    {
+      "model": "sim-glm-tools",
+      "sim_state": "QUALIFIED",
+      "sim_evidence": "SIMULATED",
+      "mac_evidence": "UNAVAILABLE",
+      "pixel_evidence": "UNAVAILABLE",
+      "remote_evidence": "UNAVAILABLE",
+      "live_state": "n/a_sim_only"
+    },
+    {
+      "model": "sim-openai-frontier-shape",
+      "sim_state": "QUALIFIED",
+      "sim_evidence": "SIMULATED",
+      "mac_evidence": "UNAVAILABLE",
+      "pixel_evidence": "UNAVAILABLE",
+      "remote_evidence": "UNAVAILABLE",
+      "live_state": "n/a_sim_only"
+    },
+    {
+      "model": "sim-anthropic-frontier-shape",
+      "sim_state": "QUALIFIED",
+      "sim_evidence": "SIMULATED",
+      "mac_evidence": "UNAVAILABLE",
+      "pixel_evidence": "UNAVAILABLE",
+      "remote_evidence": "UNAVAILABLE",
+      "live_state": "n/a_sim_only"
+    },
+    {
+      "model": "sim-gemini-multimodal-shape",
+      "sim_state": "QUALIFIED",
+      "sim_evidence": "SIMULATED",
+      "mac_evidence": "UNAVAILABLE",
+      "pixel_evidence": "UNAVAILABLE",
+      "remote_evidence": "UNAVAILABLE",
+      "live_state": "n/a_sim_only"
+    },
+    {
+      "model": "sim-kimi-long-context-shape",
+      "sim_state": "QUALIFIED",
+      "sim_evidence": "SIMULATED",
+      "mac_evidence": "UNAVAILABLE",
+      "pixel_evidence": "UNAVAILABLE",
+      "remote_evidence": "UNAVAILABLE",
+      "live_state": "n/a_sim_only"
+    },
+    {
+      "model": "sim-deepseek-efficient-shape",
+      "sim_state": "QUALIFIED",
+      "sim_evidence": "SIMULATED",
+      "mac_evidence": "UNAVAILABLE",
+      "pixel_evidence": "UNAVAILABLE",
+      "remote_evidence": "UNAVAILABLE",
+      "live_state": "n/a_sim_only"
+    },
+    {
+      "model": "smollm2-135m-instruct-q4_k_m",
+      "sim_state": "n/a",
+      "sim_evidence": "—",
+      "mac_evidence": "LIVE_MAC",
+      "pixel_evidence": "UNAVAILABLE",
+      "remote_evidence": "UNAVAILABLE",
+      "live_state": "LIVE_QUALIFIED"
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "shorts": 20,
+  "results": [
+    {
+      "i": 0,
+      "ok": true,
+      "ms": 471
+    },
+    {
+      "i": 1,
+      "ok": true,
+      "ms": 593
+    },
+    {
+      "i": 2,
+      "ok": true,
+      "ms": 398
+    },
+    {
+      "i": 3,
+      "ok": true,
+      "ms": 383
+    },
+    {
+      "i": 4,
+      "ok": true,
+      "ms": 429
+    },
+    {
+      "i": 5,
+      "ok": true,
+      "ms": 369
+    },
+    {
+      "i": 6,
+      "ok": true,
+      "ms": 448
+    },
+    {
+      "i": 7,
+      "ok": true,
+      "ms": 365
+    },
+    {
+      "i": 8,
+      "ok": true,
+      "ms": 345
+    },
+    {
+      "i": 9,
+      "ok": true,
+      "ms": 434
+    },
+    {
+      "i": 10,
+      "ok": true,
+      "ms": 308
+    },
+    {
+      "i": 11,
+      "ok": true,
+      "ms": 389
+    },
+    {
+      "i": 12,
+      "ok": true,
+      "ms": 886
+    },
+    {
+      "i": 13,
+      "ok": true,
+      "ms": 344
+    },
+    {
+      "i": 14,
+      "ok": true,
+      "ms": 626
+    },
+    {
+      "i": 15,
+      "ok": true,
+      "ms": 923
+    },
+    {
+      "i": 16,
+      "ok": true,
+      "ms": 565
+    },
+    {
+      "i": 17,
+      "ok": true,
+      "ms": 402
+    },
+    {
+      "i": 18,
+      "ok": true,
+      "ms": 378
+    },
+    {
+      "i": 19,
+      "ok": true,
+      "ms": 385
+    }
+  ],
+  "soak_5min": {
+    "run": false,
+    "reason": "skipped_to_avoid_thermal_and_disk_pressure_on_8gb_host; short burst only"
+  },
+  "severe_thermal_stop": false
+}

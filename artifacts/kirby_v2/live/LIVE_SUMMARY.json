@@ -1,0 +1,17 @@
+{
+  "microPass": true,
+  "assistantPass": false,
+  "offlinePass": true,
+  "fallbackPass": true,
+  "replacePass": true,
+  "toolPass": true,
+  "agentPass": true,
+  "pixelLocalPass": false,
+  "injPass": true,
+  "structuredPass": true,
+  "liveQualified": true,
+  "promotion_state": "LIVE_QUALIFIED",
+  "pixel_classification": "PIXEL_ADB_BLOCKED",
+  "android_client": "GUNNCHAI_ANDROID_CLIENT_NOT_AVAILABLE",
+  "nextAction": "NEXT_GUNNCHAI_ACTION=PROMOTE_LIVE_QUALIFIED_PROVIDER_TO_CONTROLLED_PRODUCT_INTEGRATION"
+}

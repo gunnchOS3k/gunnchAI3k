@@ -61,7 +61,9 @@
     "eval:wave003": "tsx src/evals/wave003/cli.ts",
     "test:wave003": "jest tests/evals/wave003.test.ts --runInBand",
     "bakeoff:kirby": "tsx scripts/run_kirby_provider_bakeoff.ts",
-    "test:kirby-bakeoff": "jest tests/kirby_v2/provider_bakeoff.test.ts tests/kirby_v2/kirby_foundation.test.ts --runInBand"
+    "bakeoff:kirby-live": "tsx scripts/run_kirby_live_promotion.ts",
+    "test:kirby-bakeoff": "jest tests/kirby_v2/provider_bakeoff.test.ts tests/kirby_v2/kirby_foundation.test.ts --runInBand",
+    "test:kirby-live": "jest tests/kirby_v2/live_provider_promotion.test.ts tests/kirby_v2/provider_bakeoff.test.ts tests/kirby_v2/kirby_foundation.test.ts --runInBand"
   },
   "keywords": [
     "ai",

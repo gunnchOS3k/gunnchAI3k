@@ -1,0 +1,113 @@
+{
+  "schema": "kirby.live.gate_report.v1",
+  "captured_at": "2026-09-18T22:12:12.851Z",
+  "gates": {
+    "LIVE_MAC_MICRO_PROVIDER_PASS": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/live/host/MICRO_ROUTER_RESULT.json"
+      ],
+      "detail": "ok text=The answer is 2+2.\nUser: Classify intent as route|assist|refuse. Question: what is 2+2\n\trepeat_last_n = 64, repeat_penalty = 1.000, frequency_penalty = 0.000, p"
+    },
+    "LIVE_MAC_LOCAL_ASSISTANT_PASS": {
+      "status": "FAIL",
+      "value": false,
+      "evidence": [
+        "artifacts/kirby_v2/live/host/LOCAL_ASSISTANT_RESULT.json"
+      ],
+      "detail": "resource_incompatible free_ram_mb=866 free_disk_gb=3.4 (skip 360M to avoid thrashing)"
+    },
+    "LIVE_OFFLINE_GUNNCHAI_PASS": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/live/host/OFFLINE_RESULT.json"
+      ]
+    },
+    "LIVE_PROVIDER_FALLBACK_PASS": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/live/routing/fallback_chain.json"
+      ]
+    },
+    "LIVE_WAIKE_MODEL_REPLACEABILITY_PASS": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/live/routing/waike_replaceability.json"
+      ]
+    },
+    "LIVE_TOOL_SCHEMA_PROVIDER_INDEPENDENCE_PASS": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/live/routing/tool_schema_independence.json"
+      ]
+    },
+    "LIVE_BOUNDED_AGENT_PASS": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/live/host/BOUNDED_AGENT_RESULT.json"
+      ]
+    },
+    "PIXEL6A_LIVE_LOCAL_MODEL_PASS": {
+      "status": "FAIL",
+      "value": false,
+      "evidence": [
+        "artifacts/kirby_v2/live/pixel6a/PIXEL_LOCAL_MODEL_STATUS.json",
+        "docs/frontier/PIXEL6A_INFERENCE_RUNTIME_DECISION.md"
+      ],
+      "detail": "PIXEL_ADB_BLOCKED"
+    },
+    "DEVICE_EDGE_ROUTING_PROVENANCE_PASS": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/live/routing/device_edge_provenance.json"
+      ]
+    },
+    "LIVE_THERMAL_ENERGY_SANITY_PASS": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/live/thermal/MAC_SHORT_BURST.json"
+      ]
+    },
+    "LIVE_PROMPT_INJECTION_BOUNDARY_PASS": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/live/security/prompt_injection.json"
+      ]
+    },
+    "LIVE_STRUCTURED_OUTPUT_RELIABILITY_PASS": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/live/structured/STRUCTURED_OUTPUT_RELIABILITY.json"
+      ],
+      "detail": "threshold=0.7"
+    }
+  },
+  "summary": {
+    "microPass": true,
+    "assistantPass": false,
+    "offlinePass": true,
+    "fallbackPass": true,
+    "replacePass": true,
+    "toolPass": true,
+    "agentPass": true,
+    "pixelLocalPass": false,
+    "injPass": true,
+    "structuredPass": true,
+    "liveQualified": true,
+    "promotion_state": "LIVE_QUALIFIED",
+    "pixel_classification": "PIXEL_ADB_BLOCKED",
+    "android_client": "GUNNCHAI_ANDROID_CLIENT_NOT_AVAILABLE",
+    "nextAction": "NEXT_GUNNCHAI_ACTION=PROMOTE_LIVE_QUALIFIED_PROVIDER_TO_CONTROLLED_PRODUCT_INTEGRATION"
+  },
+  "next": "NEXT_GUNNCHAI_ACTION=PROMOTE_LIVE_QUALIFIED_PROVIDER_TO_CONTROLLED_PRODUCT_INTEGRATION"
+}

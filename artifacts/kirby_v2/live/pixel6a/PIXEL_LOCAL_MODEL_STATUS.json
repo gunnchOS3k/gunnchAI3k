@@ -1,0 +1,14 @@
+{
+  "PIXEL6A_LIVE_LOCAL_MODEL_PASS": false,
+  "reason": "PIXEL_ADB_BLOCKED — USB seen but adb unauthorized; no on-device inference claimed",
+  "owner_approve_steps": [
+    "Unlock Pixel 6a; keep USB-C connected to this Mac.",
+    "Settings → Developer options → USB debugging = ON.",
+    "Accept the Allow USB debugging? prompt (Allow / Always allow this computer).",
+    "If no prompt: USB notification → File transfer / MTP (not Charge only).",
+    "On Mac: adb kill-server && adb start-server && adb devices -l",
+    "Expect: <serial> device ... model:Pixel_6a (or product:bluejay).",
+    "Re-run: npm run bakeoff:kirby-live"
+  ],
+  "adb_forwarded_mac_not_claimed_as_pixel": true
+}
