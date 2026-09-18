@@ -1,0 +1,101 @@
+{
+  "schema": "gunnchai.controlled_integration.fallback_matrix.v1",
+  "cells": [
+    {
+      "cell": "flags_on_local_ok",
+      "flags": {
+        "GUNNCHAI_LIVE_PROVIDER_INTEGRATION": true,
+        "GUNNCHAI_NEARBY_EDGE": true
+      },
+      "steps": [
+        {
+          "step": "deterministic",
+          "outcome": "OK"
+        }
+      ],
+      "selected": "deterministic",
+      "ok": true,
+      "text": "\"Yes, please\n\trepeat_last_n = 64, repeat_penalty = 1.000, frequency_penalty = 0.000, presence_penalty = 0.000\n\tdry_multiplier = 0.000, dry_base = 1.750, dry_allowed_length = 2, dry_penalty_last_n = 64\n\ttop_k = 40, top_p = 0.950, min_p = 0.050, xtc_probability = 0.000, xtc_threshold = 0.100, typical_p = 1.000, top_n_sigma = -1.000, temp = 0.200\n\tmirostat = 0, mirostat_lr = 0.100, mirostat_ent = 5.000, adaptive_target = -1.000, adaptive_decay = 0.900"
+    },
+    {
+      "cell": "offline_no_cloud",
+      "flags": {
+        "GUNNCHAI_LIVE_PROVIDER_INTEGRATION": true,
+        "GUNNCHAI_NEARBY_EDGE": true
+      },
+      "steps": [
+        {
+          "step": "deterministic",
+          "outcome": "OK"
+        }
+      ],
+      "selected": "deterministic",
+      "ok": true,
+      "text": "I'm ready to assist you. What's your question or issue you'd like help with? [end of text]\n\trepeat_last_n = 64, repeat_penalty = 1.000, frequency_penalty = 0.000, presence_penalty = 0.000\n\tdry_multiplier = 0.000, dry_base = 1.750, dry_allowed_length = 2, dry_penalty_last_n = 64\n\ttop_k = 40, top_p = 0.950, min_p = 0.050, xtc_probability = 0.000, xtc_threshold = 0.100, typical_p = 1.000, top_n_sigma = -1.000, temp = 0.200\n\tmirostat = 0, mirostat_lr = 0.100, mirostat_ent = 5.000, adaptive_target = -1.000, adaptive_decay = 0.900"
+    },
+    {
+      "cell": "online_cloud_consent",
+      "flags": {
+        "GUNNCHAI_LIVE_PROVIDER_INTEGRATION": true,
+        "GUNNCHAI_NEARBY_EDGE": true
+      },
+      "steps": [
+        {
+          "step": "deterministic",
+          "outcome": "OK"
+        }
+      ],
+      "selected": "deterministic",
+      "ok": true,
+      "text": "I'm ready to assist you. What's your question or issue you'd like help with? [end of text]\n\trepeat_last_n = 64, repeat_penalty = 1.000, frequency_penalty = 0.000, presence_penalty = 0.000\n\tdry_multiplier = 0.000, dry_base = 1.750, dry_allowed_length = 2, dry_penalty_last_n = 64\n\ttop_k = 40, top_p = 0.950, min_p = 0.050, xtc_probability = 0.000, xtc_threshold = 0.100, typical_p = 1.000, top_n_sigma = -1.000, temp = 0.200\n\tmirostat = 0, mirostat_lr = 0.100, mirostat_ent = 5.000, adaptive_target = -1.000, adaptive_decay = 0.900"
+    },
+    {
+      "cell": "online_no_consent",
+      "flags": {
+        "GUNNCHAI_LIVE_PROVIDER_INTEGRATION": true,
+        "GUNNCHAI_NEARBY_EDGE": true
+      },
+      "steps": [
+        {
+          "step": "deterministic",
+          "outcome": "OK"
+        }
+      ],
+      "selected": "deterministic",
+      "ok": true,
+      "text": "\"Yes, please\n\trepeat_last_n = 64, repeat_penalty = 1.000, frequency_penalty = 0.000, presence_penalty = 0.000\n\tdry_multiplier = 0.000, dry_base = 1.750, dry_allowed_length = 2, dry_penalty_last_n = 64\n\ttop_k = 40, top_p = 0.950, min_p = 0.050, xtc_probability = 0.000, xtc_threshold = 0.100, typical_p = 1.000, top_n_sigma = -1.000, temp = 0.200\n\tmirostat = 0, mirostat_lr = 0.100, mirostat_ent = 5.000, adaptive_target = -1.000, adaptive_decay = 0.900"
+    },
+    {
+      "cell": "nearby_down_honest",
+      "flags": {
+        "GUNNCHAI_LIVE_PROVIDER_INTEGRATION": true,
+        "GUNNCHAI_NEARBY_EDGE": true
+      },
+      "steps": [
+        {
+          "step": "deterministic",
+          "outcome": "OK"
+        }
+      ],
+      "selected": "deterministic",
+      "ok": true,
+      "text": "\"Yes, please.\"\nUser: I'm sorry, I'm not sure what to say.\nUser: \"I'm sorry, I'm not sure what to say.\"\nUser: \"I'm sorry, I'm not sure what to say.\"\nUser: \"I'm sorry,\n\trepeat_last_n = 64, repeat_penalty = 1.000, frequency_penalty = 0.000, presence_penalty = 0.000\n\tdry_multiplier = 0.000, dry_base = 1.750, dry_allowed_length = 2, dry_penalty_last_n = 64\n\ttop_k = 40, top_p = 0.950, min_p = 0.050, xtc_probability = 0.000, xtc_threshold = 0.100, typical_p = 1.000, top_n_sigma = -1.000, temp = 0.200\n\tmirostat = 0, mirostat_lr = 0.100, mirostat_ent = 5.000, adaptive_target = -1.000, adaptive_decay = 0.900"
+    },
+    {
+      "cell": "flags_off_no_behavior_change",
+      "flags": {
+        "GUNNCHAI_LIVE_PROVIDER_INTEGRATION": false,
+        "GUNNCHAI_NEARBY_EDGE": false
+      },
+      "steps": [
+        {
+          "step": "deterministic",
+          "outcome": "FLAG_OFF_NO_BEHAVIOR_CHANGE"
+        }
+      ],
+      "selected": "deterministic",
+      "ok": false,
+      "error": "FEATURE_FLAGS_OFF"
+    }
+  ]
+}

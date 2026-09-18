@@ -1,0 +1,10 @@
+{
+  "intent_route": {
+    "ok": true,
+    "reason": "ALLOWED"
+  },
+  "exam_answer_dump": {
+    "ok": false,
+    "reason": "DISALLOWED_TASK_CLASS"
+  }
+}

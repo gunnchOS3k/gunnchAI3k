@@ -1,6 +1,6 @@
 {
-  "schema": "gunnchai.kirby_gates.v3_live",
-  "claim_boundary": "Live tokens reflect real Mac/Pixel evidence only. Simulated adapters never LIVE_QUALIFIED. No production default pin.",
+  "schema": "gunnchai.kirby_gates.v4_controlled",
+  "claim_boundary": "CONTROLLED_INTEGRATION behind flags only. SmolLM2 never PRODUCTION_DEFAULT. Nearby-edge Mac compute; ADB reverse ≠ on-device. Unearned Pixel-local/Android production gates remain false.",
   "accepted_main_sha": "076b7ccd7c3f71d3299ead9a72e45291cd33689a",
   "tokens": {
     "KIRBY_DOCTRINE_V2": {
@@ -340,12 +340,10 @@
     },
     "PIXEL6A_LIVE_LOCAL_MODEL_PASS": {
       "status": "FAIL",
+      "value": false,
       "evidence": [
-        "artifacts/kirby_v2/live/pixel6a/PIXEL_LOCAL_MODEL_STATUS.json",
-        "docs/frontier/PIXEL6A_INFERENCE_RUNTIME_DECISION.md"
-      ],
-      "detail": "ADB_OK_NO_ON_DEVICE_RUNTIME",
-      "value": false
+        "artifacts/kirby_v2/controlled_integration/"
+      ]
     },
     "DEVICE_EDGE_ROUTING_PROVENANCE_PASS": {
       "status": "PASS",
@@ -396,6 +394,154 @@
         "artifacts/kirby_v2/live/pixel6a/PIXEL_BASELINE.json"
       ],
       "detail": "Pixel 6a bluejay authorized; PIXEL_ADB_BLOCKED cleared"
+    },
+    "CONTROLLED_PROVIDER_PROMOTION_DOC": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/controlled_integration/"
+      ]
+    },
+    "LIVE_PROVIDER_POLICY": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/controlled_integration/"
+      ]
+    },
+    "FEATURE_FLAGS_DEFAULT_OFF": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/controlled_integration/"
+      ]
+    },
+    "NEARBY_EDGE_SERVER": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/controlled_integration/"
+      ]
+    },
+    "PAIRING_SESSION_AUTH": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/controlled_integration/"
+      ]
+    },
+    "PROVENANCE_ON_RESPONSE": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/controlled_integration/"
+      ]
+    },
+    "CONTROLLED_ROUTER_WIRED": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/controlled_integration/"
+      ]
+    },
+    "PILOT_CLIENT_NOT_PRODUCTION_UI": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/controlled_integration/"
+      ]
+    },
+    "PIXEL_NEARBY_EDGE_PHYSICAL_JOURNEY_PASS": {
+      "status": "FAIL",
+      "value": false,
+      "evidence": [
+        "artifacts/kirby_v2/controlled_integration/"
+      ]
+    },
+    "WAIKE_NEARBY_EDGE_CONTRACT": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/controlled_integration/"
+      ]
+    },
+    "CAPSULE_NEARBY_EDGE_CONTRACT": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/controlled_integration/"
+      ]
+    },
+    "PIXEL_OFFLINE_HONESTY": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/controlled_integration/"
+      ]
+    },
+    "RESOURCE_GUARD_8GB": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/controlled_integration/"
+      ]
+    },
+    "SECURITY_THREAT_CASES": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/controlled_integration/"
+      ]
+    },
+    "PRIVACY_LABELS": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/controlled_integration/"
+      ]
+    },
+    "FALLBACK_MATRIX": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/controlled_integration/"
+      ]
+    },
+    "ROLLBACK_VIA_FLAGS": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/controlled_integration/"
+      ]
+    },
+    "MICRO_EARNED_TASK_PASS": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/controlled_integration/"
+      ]
+    },
+    "GUNNCHAI_ANDROID_PRODUCTION_CLIENT_PASS": {
+      "status": "FAIL",
+      "value": false,
+      "evidence": [
+        "artifacts/kirby_v2/controlled_integration/"
+      ]
+    },
+    "PRODUCTION_DEFAULT_PROVIDER_FROZEN": {
+      "status": "FAIL",
+      "value": false,
+      "evidence": [
+        "artifacts/kirby_v2/controlled_integration/"
+      ]
+    },
+    "KIRBY_CONTROLLED_PRODUCT_INTEGRATION": {
+      "status": "PASS",
+      "evidence": [
+        "artifacts/kirby_v2/controlled_integration/",
+        "docs/frontier/CONTROLLED_PROVIDER_PROMOTION.md"
+      ],
+      "next": "NEXT_GUNNCHAI_ACTION=INTEGRATE_NEARBY_EDGE_PROVIDER_INTO_GUNNCHOS_CAPSULE_AND_WAIKE_PIXEL_PILOT"
     }
   },
   "live": {
@@ -490,6 +636,29 @@
       "detail": "threshold=0.7"
     }
   },
-  "next_gunnchai_action": "NEXT_GUNNCHAI_ACTION=PROMOTE_LIVE_QUALIFIED_PROVIDER_TO_CONTROLLED_PRODUCT_INTEGRATION",
-  "secondary_pixel_action": "NEXT_GUNNCHAI_ACTION=KEEP_PIXEL_AS_CLIENT_AND_QUALIFY_NEARBY_EDGE_EXECUTION"
+  "next_gunnchai_action": "NEXT_GUNNCHAI_ACTION=INTEGRATE_NEARBY_EDGE_PROVIDER_INTO_GUNNCHOS_CAPSULE_AND_WAIKE_PIXEL_PILOT",
+  "secondary_pixel_action": "NEXT_GUNNCHAI_ACTION=KEEP_PIXEL_AS_CLIENT_AND_QUALIFY_NEARBY_EDGE_EXECUTION",
+  "controlled": {
+    "CONTROLLED_PROVIDER_PROMOTION_DOC": true,
+    "LIVE_PROVIDER_POLICY": true,
+    "FEATURE_FLAGS_DEFAULT_OFF": true,
+    "NEARBY_EDGE_SERVER": true,
+    "PAIRING_SESSION_AUTH": true,
+    "PROVENANCE_ON_RESPONSE": true,
+    "CONTROLLED_ROUTER_WIRED": true,
+    "PILOT_CLIENT_NOT_PRODUCTION_UI": true,
+    "PIXEL_NEARBY_EDGE_PHYSICAL_JOURNEY_PASS": false,
+    "WAIKE_NEARBY_EDGE_CONTRACT": true,
+    "CAPSULE_NEARBY_EDGE_CONTRACT": true,
+    "PIXEL_OFFLINE_HONESTY": true,
+    "RESOURCE_GUARD_8GB": true,
+    "SECURITY_THREAT_CASES": true,
+    "PRIVACY_LABELS": true,
+    "FALLBACK_MATRIX": true,
+    "ROLLBACK_VIA_FLAGS": true,
+    "MICRO_EARNED_TASK_PASS": true,
+    "PIXEL6A_LIVE_LOCAL_MODEL_PASS": false,
+    "GUNNCHAI_ANDROID_PRODUCTION_CLIENT_PASS": false,
+    "PRODUCTION_DEFAULT_PROVIDER_FROZEN": false
+  }
 }

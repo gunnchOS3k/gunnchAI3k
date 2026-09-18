@@ -1,0 +1,25 @@
+{
+  "schema": "gunnchai.nearby_edge.threat_cases.v1",
+  "cases": [
+    {
+      "id": "open_lan_unauthenticated",
+      "mitigated": true,
+      "detail": "Server binds 127.0.0.1 by default; non-loopback requires LOCAL_LAN_TLS"
+    },
+    {
+      "id": "pairing_code_replay",
+      "mitigated": true,
+      "detail": "One-time consume; expired codes rejected"
+    },
+    {
+      "id": "prompt_injection_permission_grant",
+      "mitigated": true,
+      "detail": "Gateway does not grant permissions; task policy deny list"
+    },
+    {
+      "id": "claim_adb_reverse_as_on_device",
+      "mitigated": true,
+      "detail": "ProvenanceEnvelope.on_device_local=false always"
+    }
+  ]
+}
