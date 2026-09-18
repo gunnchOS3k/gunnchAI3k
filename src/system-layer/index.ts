@@ -13,3 +13,6 @@ export * from './evaluation';
 export * from './platform_status';
 export * from './product_service';
 export * from './os_integration';
+export * from './tool_registry';
+export * from './runtime_metrics';
+export * from './pre_human_eval/synthetic_suite';
