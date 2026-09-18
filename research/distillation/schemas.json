@@ -1,0 +1,16 @@
+{
+  "schema": "gunnchai.distillation.trace.v1",
+  "required_fields": [
+    "task_id",
+    "objective",
+    "plan_summary",
+    "completed_steps",
+    "tool_outputs",
+    "verifier_outcomes",
+    "user_visible_rationale"
+  ],
+  "forbidden_fields": ["hidden_cot", "raw_chain_of_thought"],
+  "filters": ["safety", "injection", "permission_escalation", "pii"],
+  "splits": ["train", "val", "test"],
+  "leakage_checks": ["objective_tool_fingerprint", "memory_export_block"]
+}

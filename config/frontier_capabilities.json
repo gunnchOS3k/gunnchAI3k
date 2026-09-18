@@ -1,0 +1,1281 @@
+{
+  "schema_version": "frontier.capability_registry.v2",
+  "identity": "gunnchAI",
+  "doctrine_ref": "docs/frontier/KIRBY_DOCTRINE_V2.md",
+  "capabilities": [
+    {
+      "id": "adaptive_reasoning_effort",
+      "name": "Adaptive reasoning effort",
+      "capability_class": "control",
+      "description": "Normalized Kirby absorption class for Adaptive reasoning effort.",
+      "adoption_status": "research",
+      "maturity": "foundation",
+      "local_offline_viable": "true",
+      "cloud_optional": true,
+      "consent_required": false,
+      "verification_required": false,
+      "side_effect_class": "read_only",
+      "privacy_class": "personal",
+      "budget_dimensions": [
+        "latency_ms",
+        "tokens",
+        "energy_j",
+        "cost_usd",
+        "ram_mb"
+      ],
+      "device_constraints": [
+        "thermal",
+        "battery",
+        "offline",
+        "accelerator"
+      ],
+      "provider_agnostic": true,
+      "hard_provider_pin": false,
+      "hidden_cot_required": false,
+      "broker_mediated": true,
+      "kirby_absorption_notes": "Qualify via bake-off; promote only with evidence.",
+      "qualification_slots": [
+        "tier_fit",
+        "offline_degrade",
+        "safety",
+        "verifier_pass"
+      ],
+      "integrations": [
+        "waike",
+        "device_os",
+        "creator",
+        "research"
+      ],
+      "references": [
+        "public_frontier_patterns_only"
+      ],
+      "evidence_refs": [],
+      "gate_tokens": []
+    },
+    {
+      "id": "long_horizon_task_execution",
+      "name": "Long-horizon task execution",
+      "capability_class": "agent",
+      "description": "Normalized Kirby absorption class for Long-horizon task execution.",
+      "adoption_status": "research",
+      "maturity": "foundation",
+      "local_offline_viable": "partial",
+      "cloud_optional": true,
+      "consent_required": false,
+      "verification_required": true,
+      "side_effect_class": "read_only",
+      "privacy_class": "personal",
+      "budget_dimensions": [
+        "latency_ms",
+        "tokens",
+        "energy_j",
+        "cost_usd",
+        "ram_mb"
+      ],
+      "device_constraints": [
+        "thermal",
+        "battery",
+        "offline",
+        "accelerator"
+      ],
+      "provider_agnostic": true,
+      "hard_provider_pin": false,
+      "hidden_cot_required": false,
+      "broker_mediated": true,
+      "kirby_absorption_notes": "Qualify via bake-off; promote only with evidence.",
+      "qualification_slots": [
+        "tier_fit",
+        "offline_degrade",
+        "safety",
+        "verifier_pass"
+      ],
+      "integrations": [
+        "waike",
+        "device_os",
+        "creator",
+        "research"
+      ],
+      "references": [
+        "public_frontier_patterns_only"
+      ],
+      "evidence_refs": [],
+      "gate_tokens": []
+    },
+    {
+      "id": "tool_calling",
+      "name": "Tool calling",
+      "capability_class": "tools",
+      "description": "Normalized Kirby absorption class for Tool calling.",
+      "adoption_status": "research",
+      "maturity": "foundation",
+      "local_offline_viable": "true",
+      "cloud_optional": true,
+      "consent_required": false,
+      "verification_required": false,
+      "side_effect_class": "mutating",
+      "privacy_class": "personal",
+      "budget_dimensions": [
+        "latency_ms",
+        "tokens",
+        "energy_j",
+        "cost_usd",
+        "ram_mb"
+      ],
+      "device_constraints": [
+        "thermal",
+        "battery",
+        "offline",
+        "accelerator"
+      ],
+      "provider_agnostic": true,
+      "hard_provider_pin": false,
+      "hidden_cot_required": false,
+      "broker_mediated": true,
+      "kirby_absorption_notes": "Qualify via bake-off; promote only with evidence.",
+      "qualification_slots": [
+        "tier_fit",
+        "offline_degrade",
+        "safety",
+        "verifier_pass"
+      ],
+      "integrations": [
+        "waike",
+        "device_os",
+        "creator",
+        "research"
+      ],
+      "references": [
+        "public_frontier_patterns_only"
+      ],
+      "evidence_refs": [],
+      "gate_tokens": []
+    },
+    {
+      "id": "programmatic_tool_calling",
+      "name": "Programmatic tool calling",
+      "capability_class": "tools",
+      "description": "Normalized Kirby absorption class for Programmatic tool calling.",
+      "adoption_status": "research",
+      "maturity": "foundation",
+      "local_offline_viable": "partial",
+      "cloud_optional": true,
+      "consent_required": false,
+      "verification_required": false,
+      "side_effect_class": "mutating",
+      "privacy_class": "personal",
+      "budget_dimensions": [
+        "latency_ms",
+        "tokens",
+        "energy_j",
+        "cost_usd",
+        "ram_mb"
+      ],
+      "device_constraints": [
+        "thermal",
+        "battery",
+        "offline",
+        "accelerator"
+      ],
+      "provider_agnostic": true,
+      "hard_provider_pin": false,
+      "hidden_cot_required": false,
+      "broker_mediated": true,
+      "kirby_absorption_notes": "Qualify via bake-off; promote only with evidence.",
+      "qualification_slots": [
+        "tier_fit",
+        "offline_degrade",
+        "safety",
+        "verifier_pass"
+      ],
+      "integrations": [
+        "waike",
+        "device_os",
+        "creator",
+        "research"
+      ],
+      "references": [
+        "public_frontier_patterns_only"
+      ],
+      "evidence_refs": [],
+      "gate_tokens": []
+    },
+    {
+      "id": "structured_output",
+      "name": "Structured output",
+      "capability_class": "io",
+      "description": "Normalized Kirby absorption class for Structured output.",
+      "adoption_status": "research",
+      "maturity": "foundation",
+      "local_offline_viable": "true",
+      "cloud_optional": true,
+      "consent_required": false,
+      "verification_required": false,
+      "side_effect_class": "read_only",
+      "privacy_class": "personal",
+      "budget_dimensions": [
+        "latency_ms",
+        "tokens",
+        "energy_j",
+        "cost_usd",
+        "ram_mb"
+      ],
+      "device_constraints": [
+        "thermal",
+        "battery",
+        "offline",
+        "accelerator"
+      ],
+      "provider_agnostic": true,
+      "hard_provider_pin": false,
+      "hidden_cot_required": false,
+      "broker_mediated": true,
+      "kirby_absorption_notes": "Qualify via bake-off; promote only with evidence.",
+      "qualification_slots": [
+        "tier_fit",
+        "offline_degrade",
+        "safety",
+        "verifier_pass"
+      ],
+      "integrations": [
+        "waike",
+        "device_os",
+        "creator",
+        "research"
+      ],
+      "references": [
+        "public_frontier_patterns_only"
+      ],
+      "evidence_refs": [],
+      "gate_tokens": []
+    },
+    {
+      "id": "multimodal_input",
+      "name": "Multimodal input",
+      "capability_class": "multimodal",
+      "description": "Normalized Kirby absorption class for Multimodal input.",
+      "adoption_status": "research",
+      "maturity": "foundation",
+      "local_offline_viable": "partial",
+      "cloud_optional": true,
+      "consent_required": false,
+      "verification_required": false,
+      "side_effect_class": "read_only",
+      "privacy_class": "personal",
+      "budget_dimensions": [
+        "latency_ms",
+        "tokens",
+        "energy_j",
+        "cost_usd",
+        "ram_mb"
+      ],
+      "device_constraints": [
+        "thermal",
+        "battery",
+        "offline",
+        "accelerator"
+      ],
+      "provider_agnostic": true,
+      "hard_provider_pin": false,
+      "hidden_cot_required": false,
+      "broker_mediated": true,
+      "kirby_absorption_notes": "Qualify via bake-off; promote only with evidence.",
+      "qualification_slots": [
+        "tier_fit",
+        "offline_degrade",
+        "safety",
+        "verifier_pass"
+      ],
+      "integrations": [
+        "waike",
+        "device_os",
+        "creator",
+        "research"
+      ],
+      "references": [
+        "public_frontier_patterns_only"
+      ],
+      "evidence_refs": [],
+      "gate_tokens": []
+    },
+    {
+      "id": "native_audio",
+      "name": "Native audio",
+      "capability_class": "multimodal",
+      "description": "Normalized Kirby absorption class for Native audio.",
+      "adoption_status": "research",
+      "maturity": "foundation",
+      "local_offline_viable": "partial",
+      "cloud_optional": true,
+      "consent_required": true,
+      "verification_required": false,
+      "side_effect_class": "read_only",
+      "privacy_class": "personal",
+      "budget_dimensions": [
+        "latency_ms",
+        "tokens",
+        "energy_j",
+        "cost_usd",
+        "ram_mb"
+      ],
+      "device_constraints": [
+        "thermal",
+        "battery",
+        "offline",
+        "accelerator"
+      ],
+      "provider_agnostic": true,
+      "hard_provider_pin": false,
+      "hidden_cot_required": false,
+      "broker_mediated": true,
+      "kirby_absorption_notes": "Qualify via bake-off; promote only with evidence.",
+      "qualification_slots": [
+        "tier_fit",
+        "offline_degrade",
+        "safety",
+        "verifier_pass"
+      ],
+      "integrations": [
+        "waike",
+        "device_os",
+        "creator",
+        "research"
+      ],
+      "references": [
+        "public_frontier_patterns_only"
+      ],
+      "evidence_refs": [],
+      "gate_tokens": []
+    },
+    {
+      "id": "screen_understanding",
+      "name": "Screen understanding",
+      "capability_class": "multimodal",
+      "description": "Normalized Kirby absorption class for Screen understanding.",
+      "adoption_status": "research",
+      "maturity": "foundation",
+      "local_offline_viable": "partial",
+      "cloud_optional": true,
+      "consent_required": false,
+      "verification_required": false,
+      "side_effect_class": "read_only",
+      "privacy_class": "personal",
+      "budget_dimensions": [
+        "latency_ms",
+        "tokens",
+        "energy_j",
+        "cost_usd",
+        "ram_mb"
+      ],
+      "device_constraints": [
+        "thermal",
+        "battery",
+        "offline",
+        "accelerator"
+      ],
+      "provider_agnostic": true,
+      "hard_provider_pin": false,
+      "hidden_cot_required": false,
+      "broker_mediated": true,
+      "kirby_absorption_notes": "Qualify via bake-off; promote only with evidence.",
+      "qualification_slots": [
+        "tier_fit",
+        "offline_degrade",
+        "safety",
+        "verifier_pass"
+      ],
+      "integrations": [
+        "waike",
+        "device_os",
+        "creator",
+        "research"
+      ],
+      "references": [
+        "public_frontier_patterns_only"
+      ],
+      "evidence_refs": [],
+      "gate_tokens": []
+    },
+    {
+      "id": "computer_use_gui",
+      "name": "Computer use / GUI",
+      "capability_class": "computer_use",
+      "description": "Normalized Kirby absorption class for Computer use / GUI.",
+      "adoption_status": "research",
+      "maturity": "foundation",
+      "local_offline_viable": "partial",
+      "cloud_optional": true,
+      "consent_required": true,
+      "verification_required": false,
+      "side_effect_class": "mutating",
+      "privacy_class": "sensitive",
+      "budget_dimensions": [
+        "latency_ms",
+        "tokens",
+        "energy_j",
+        "cost_usd",
+        "ram_mb"
+      ],
+      "device_constraints": [
+        "thermal",
+        "battery",
+        "offline",
+        "accelerator"
+      ],
+      "provider_agnostic": true,
+      "hard_provider_pin": false,
+      "hidden_cot_required": false,
+      "broker_mediated": true,
+      "kirby_absorption_notes": "Qualify via bake-off; promote only with evidence.",
+      "qualification_slots": [
+        "tier_fit",
+        "offline_degrade",
+        "safety",
+        "verifier_pass"
+      ],
+      "integrations": [
+        "waike",
+        "device_os",
+        "creator",
+        "research"
+      ],
+      "references": [
+        "public_frontier_patterns_only"
+      ],
+      "evidence_refs": [],
+      "gate_tokens": []
+    },
+    {
+      "id": "browser_use",
+      "name": "Browser use",
+      "capability_class": "computer_use",
+      "description": "Normalized Kirby absorption class for Browser use.",
+      "adoption_status": "research",
+      "maturity": "foundation",
+      "local_offline_viable": "partial",
+      "cloud_optional": true,
+      "consent_required": true,
+      "verification_required": false,
+      "side_effect_class": "mutating",
+      "privacy_class": "sensitive",
+      "budget_dimensions": [
+        "latency_ms",
+        "tokens",
+        "energy_j",
+        "cost_usd",
+        "ram_mb"
+      ],
+      "device_constraints": [
+        "thermal",
+        "battery",
+        "offline",
+        "accelerator"
+      ],
+      "provider_agnostic": true,
+      "hard_provider_pin": false,
+      "hidden_cot_required": false,
+      "broker_mediated": true,
+      "kirby_absorption_notes": "Qualify via bake-off; promote only with evidence.",
+      "qualification_slots": [
+        "tier_fit",
+        "offline_degrade",
+        "safety",
+        "verifier_pass"
+      ],
+      "integrations": [
+        "waike",
+        "device_os",
+        "creator",
+        "research"
+      ],
+      "references": [
+        "public_frontier_patterns_only"
+      ],
+      "evidence_refs": [],
+      "gate_tokens": []
+    },
+    {
+      "id": "terminal_code_execution",
+      "name": "Terminal / code execution",
+      "capability_class": "tools",
+      "description": "Normalized Kirby absorption class for Terminal / code execution.",
+      "adoption_status": "research",
+      "maturity": "foundation",
+      "local_offline_viable": "partial",
+      "cloud_optional": true,
+      "consent_required": false,
+      "verification_required": true,
+      "side_effect_class": "mutating",
+      "privacy_class": "personal",
+      "budget_dimensions": [
+        "latency_ms",
+        "tokens",
+        "energy_j",
+        "cost_usd",
+        "ram_mb"
+      ],
+      "device_constraints": [
+        "thermal",
+        "battery",
+        "offline",
+        "accelerator"
+      ],
+      "provider_agnostic": true,
+      "hard_provider_pin": false,
+      "hidden_cot_required": false,
+      "broker_mediated": true,
+      "kirby_absorption_notes": "Qualify via bake-off; promote only with evidence.",
+      "qualification_slots": [
+        "tier_fit",
+        "offline_degrade",
+        "safety",
+        "verifier_pass"
+      ],
+      "integrations": [
+        "waike",
+        "device_os",
+        "creator",
+        "research"
+      ],
+      "references": [
+        "public_frontier_patterns_only"
+      ],
+      "evidence_refs": [],
+      "gate_tokens": []
+    },
+    {
+      "id": "multi_agent_decomposition",
+      "name": "Multi-agent decomposition",
+      "capability_class": "agent",
+      "description": "Normalized Kirby absorption class for Multi-agent decomposition.",
+      "adoption_status": "research",
+      "maturity": "foundation",
+      "local_offline_viable": "partial",
+      "cloud_optional": true,
+      "consent_required": false,
+      "verification_required": true,
+      "side_effect_class": "read_only",
+      "privacy_class": "personal",
+      "budget_dimensions": [
+        "latency_ms",
+        "tokens",
+        "energy_j",
+        "cost_usd",
+        "ram_mb"
+      ],
+      "device_constraints": [
+        "thermal",
+        "battery",
+        "offline",
+        "accelerator"
+      ],
+      "provider_agnostic": true,
+      "hard_provider_pin": false,
+      "hidden_cot_required": false,
+      "broker_mediated": true,
+      "kirby_absorption_notes": "Qualify via bake-off; promote only with evidence.",
+      "qualification_slots": [
+        "tier_fit",
+        "offline_degrade",
+        "safety",
+        "verifier_pass"
+      ],
+      "integrations": [
+        "waike",
+        "device_os",
+        "creator",
+        "research"
+      ],
+      "references": [
+        "public_frontier_patterns_only"
+      ],
+      "evidence_refs": [],
+      "gate_tokens": []
+    },
+    {
+      "id": "persistent_resumable_task_state",
+      "name": "Persistent resumable task state",
+      "capability_class": "memory",
+      "description": "Normalized Kirby absorption class for Persistent resumable task state.",
+      "adoption_status": "research",
+      "maturity": "foundation",
+      "local_offline_viable": "true",
+      "cloud_optional": true,
+      "consent_required": true,
+      "verification_required": false,
+      "side_effect_class": "read_only",
+      "privacy_class": "sensitive",
+      "budget_dimensions": [
+        "latency_ms",
+        "tokens",
+        "energy_j",
+        "cost_usd",
+        "ram_mb"
+      ],
+      "device_constraints": [
+        "thermal",
+        "battery",
+        "offline",
+        "accelerator"
+      ],
+      "provider_agnostic": true,
+      "hard_provider_pin": false,
+      "hidden_cot_required": false,
+      "broker_mediated": true,
+      "kirby_absorption_notes": "Qualify via bake-off; promote only with evidence.",
+      "qualification_slots": [
+        "tier_fit",
+        "offline_degrade",
+        "safety",
+        "verifier_pass"
+      ],
+      "integrations": [
+        "waike",
+        "device_os",
+        "creator",
+        "research"
+      ],
+      "references": [
+        "public_frontier_patterns_only"
+      ],
+      "evidence_refs": [],
+      "gate_tokens": []
+    },
+    {
+      "id": "long_context",
+      "name": "Long context",
+      "capability_class": "context",
+      "description": "Normalized Kirby absorption class for Long context.",
+      "adoption_status": "research",
+      "maturity": "foundation",
+      "local_offline_viable": "partial",
+      "cloud_optional": true,
+      "consent_required": false,
+      "verification_required": false,
+      "side_effect_class": "read_only",
+      "privacy_class": "personal",
+      "budget_dimensions": [
+        "latency_ms",
+        "tokens",
+        "energy_j",
+        "cost_usd",
+        "ram_mb"
+      ],
+      "device_constraints": [
+        "thermal",
+        "battery",
+        "offline",
+        "accelerator"
+      ],
+      "provider_agnostic": true,
+      "hard_provider_pin": false,
+      "hidden_cot_required": false,
+      "broker_mediated": true,
+      "kirby_absorption_notes": "Qualify via bake-off; promote only with evidence.",
+      "qualification_slots": [
+        "tier_fit",
+        "offline_degrade",
+        "safety",
+        "verifier_pass"
+      ],
+      "integrations": [
+        "waike",
+        "device_os",
+        "creator",
+        "research"
+      ],
+      "references": [
+        "public_frontier_patterns_only"
+      ],
+      "evidence_refs": [],
+      "gate_tokens": []
+    },
+    {
+      "id": "retrieval_project_memory",
+      "name": "Retrieval / project memory",
+      "capability_class": "memory",
+      "description": "Normalized Kirby absorption class for Retrieval / project memory.",
+      "adoption_status": "research",
+      "maturity": "foundation",
+      "local_offline_viable": "partial",
+      "cloud_optional": true,
+      "consent_required": true,
+      "verification_required": false,
+      "side_effect_class": "read_only",
+      "privacy_class": "sensitive",
+      "budget_dimensions": [
+        "latency_ms",
+        "tokens",
+        "energy_j",
+        "cost_usd",
+        "ram_mb"
+      ],
+      "device_constraints": [
+        "thermal",
+        "battery",
+        "offline",
+        "accelerator"
+      ],
+      "provider_agnostic": true,
+      "hard_provider_pin": false,
+      "hidden_cot_required": false,
+      "broker_mediated": true,
+      "kirby_absorption_notes": "Qualify via bake-off; promote only with evidence.",
+      "qualification_slots": [
+        "tier_fit",
+        "offline_degrade",
+        "safety",
+        "verifier_pass"
+      ],
+      "integrations": [
+        "waike",
+        "device_os",
+        "creator",
+        "research"
+      ],
+      "references": [
+        "public_frontier_patterns_only"
+      ],
+      "evidence_refs": [],
+      "gate_tokens": []
+    },
+    {
+      "id": "verifier_critic",
+      "name": "Verifier / critic",
+      "capability_class": "verification",
+      "description": "Normalized Kirby absorption class for Verifier / critic.",
+      "adoption_status": "research",
+      "maturity": "foundation",
+      "local_offline_viable": "true",
+      "cloud_optional": true,
+      "consent_required": false,
+      "verification_required": true,
+      "side_effect_class": "read_only",
+      "privacy_class": "personal",
+      "budget_dimensions": [
+        "latency_ms",
+        "tokens",
+        "energy_j",
+        "cost_usd",
+        "ram_mb"
+      ],
+      "device_constraints": [
+        "thermal",
+        "battery",
+        "offline",
+        "accelerator"
+      ],
+      "provider_agnostic": true,
+      "hard_provider_pin": false,
+      "hidden_cot_required": false,
+      "broker_mediated": true,
+      "kirby_absorption_notes": "Qualify via bake-off; promote only with evidence.",
+      "qualification_slots": [
+        "tier_fit",
+        "offline_degrade",
+        "safety",
+        "verifier_pass"
+      ],
+      "integrations": [
+        "waike",
+        "device_os",
+        "creator",
+        "research"
+      ],
+      "references": [
+        "public_frontier_patterns_only"
+      ],
+      "evidence_refs": [],
+      "gate_tokens": []
+    },
+    {
+      "id": "code_generation",
+      "name": "Code generation",
+      "capability_class": "coding",
+      "description": "Normalized Kirby absorption class for Code generation.",
+      "adoption_status": "research",
+      "maturity": "foundation",
+      "local_offline_viable": "partial",
+      "cloud_optional": true,
+      "consent_required": false,
+      "verification_required": true,
+      "side_effect_class": "read_only",
+      "privacy_class": "personal",
+      "budget_dimensions": [
+        "latency_ms",
+        "tokens",
+        "energy_j",
+        "cost_usd",
+        "ram_mb"
+      ],
+      "device_constraints": [
+        "thermal",
+        "battery",
+        "offline",
+        "accelerator"
+      ],
+      "provider_agnostic": true,
+      "hard_provider_pin": false,
+      "hidden_cot_required": false,
+      "broker_mediated": true,
+      "kirby_absorption_notes": "Qualify via bake-off; promote only with evidence.",
+      "qualification_slots": [
+        "tier_fit",
+        "offline_degrade",
+        "safety",
+        "verifier_pass"
+      ],
+      "integrations": [
+        "waike",
+        "device_os",
+        "creator",
+        "research"
+      ],
+      "references": [
+        "public_frontier_patterns_only"
+      ],
+      "evidence_refs": [],
+      "gate_tokens": []
+    },
+    {
+      "id": "code_repair",
+      "name": "Code repair",
+      "capability_class": "coding",
+      "description": "Normalized Kirby absorption class for Code repair.",
+      "adoption_status": "research",
+      "maturity": "foundation",
+      "local_offline_viable": "partial",
+      "cloud_optional": true,
+      "consent_required": false,
+      "verification_required": true,
+      "side_effect_class": "read_only",
+      "privacy_class": "personal",
+      "budget_dimensions": [
+        "latency_ms",
+        "tokens",
+        "energy_j",
+        "cost_usd",
+        "ram_mb"
+      ],
+      "device_constraints": [
+        "thermal",
+        "battery",
+        "offline",
+        "accelerator"
+      ],
+      "provider_agnostic": true,
+      "hard_provider_pin": false,
+      "hidden_cot_required": false,
+      "broker_mediated": true,
+      "kirby_absorption_notes": "Qualify via bake-off; promote only with evidence.",
+      "qualification_slots": [
+        "tier_fit",
+        "offline_degrade",
+        "safety",
+        "verifier_pass"
+      ],
+      "integrations": [
+        "waike",
+        "device_os",
+        "creator",
+        "research"
+      ],
+      "references": [
+        "public_frontier_patterns_only"
+      ],
+      "evidence_refs": [],
+      "gate_tokens": []
+    },
+    {
+      "id": "document_understanding",
+      "name": "Document understanding",
+      "capability_class": "multimodal",
+      "description": "Normalized Kirby absorption class for Document understanding.",
+      "adoption_status": "research",
+      "maturity": "foundation",
+      "local_offline_viable": "partial",
+      "cloud_optional": true,
+      "consent_required": false,
+      "verification_required": false,
+      "side_effect_class": "read_only",
+      "privacy_class": "personal",
+      "budget_dimensions": [
+        "latency_ms",
+        "tokens",
+        "energy_j",
+        "cost_usd",
+        "ram_mb"
+      ],
+      "device_constraints": [
+        "thermal",
+        "battery",
+        "offline",
+        "accelerator"
+      ],
+      "provider_agnostic": true,
+      "hard_provider_pin": false,
+      "hidden_cot_required": false,
+      "broker_mediated": true,
+      "kirby_absorption_notes": "Qualify via bake-off; promote only with evidence.",
+      "qualification_slots": [
+        "tier_fit",
+        "offline_degrade",
+        "safety",
+        "verifier_pass"
+      ],
+      "integrations": [
+        "waike",
+        "device_os",
+        "creator",
+        "research"
+      ],
+      "references": [
+        "public_frontier_patterns_only"
+      ],
+      "evidence_refs": [],
+      "gate_tokens": []
+    },
+    {
+      "id": "image_understanding",
+      "name": "Image understanding",
+      "capability_class": "multimodal",
+      "description": "Normalized Kirby absorption class for Image understanding.",
+      "adoption_status": "research",
+      "maturity": "foundation",
+      "local_offline_viable": "partial",
+      "cloud_optional": true,
+      "consent_required": false,
+      "verification_required": false,
+      "side_effect_class": "read_only",
+      "privacy_class": "personal",
+      "budget_dimensions": [
+        "latency_ms",
+        "tokens",
+        "energy_j",
+        "cost_usd",
+        "ram_mb"
+      ],
+      "device_constraints": [
+        "thermal",
+        "battery",
+        "offline",
+        "accelerator"
+      ],
+      "provider_agnostic": true,
+      "hard_provider_pin": false,
+      "hidden_cot_required": false,
+      "broker_mediated": true,
+      "kirby_absorption_notes": "Qualify via bake-off; promote only with evidence.",
+      "qualification_slots": [
+        "tier_fit",
+        "offline_degrade",
+        "safety",
+        "verifier_pass"
+      ],
+      "integrations": [
+        "waike",
+        "device_os",
+        "creator",
+        "research"
+      ],
+      "references": [
+        "public_frontier_patterns_only"
+      ],
+      "evidence_refs": [],
+      "gate_tokens": []
+    },
+    {
+      "id": "local_offline_inference",
+      "name": "Local / offline inference",
+      "capability_class": "runtime",
+      "description": "Normalized Kirby absorption class for Local / offline inference.",
+      "adoption_status": "research",
+      "maturity": "foundation",
+      "local_offline_viable": "true",
+      "cloud_optional": true,
+      "consent_required": false,
+      "verification_required": false,
+      "side_effect_class": "read_only",
+      "privacy_class": "personal",
+      "budget_dimensions": [
+        "latency_ms",
+        "tokens",
+        "energy_j",
+        "cost_usd",
+        "ram_mb"
+      ],
+      "device_constraints": [
+        "thermal",
+        "battery",
+        "offline",
+        "accelerator"
+      ],
+      "provider_agnostic": true,
+      "hard_provider_pin": false,
+      "hidden_cot_required": false,
+      "broker_mediated": true,
+      "kirby_absorption_notes": "Qualify via bake-off; promote only with evidence.",
+      "qualification_slots": [
+        "tier_fit",
+        "offline_degrade",
+        "safety",
+        "verifier_pass"
+      ],
+      "integrations": [
+        "waike",
+        "device_os",
+        "creator",
+        "research"
+      ],
+      "references": [
+        "public_frontier_patterns_only"
+      ],
+      "evidence_refs": [],
+      "gate_tokens": []
+    },
+    {
+      "id": "speculative_multi_token_hints",
+      "name": "Speculative / multi-token hints",
+      "capability_class": "efficiency",
+      "description": "Normalized Kirby absorption class for Speculative / multi-token hints.",
+      "adoption_status": "research",
+      "maturity": "foundation",
+      "local_offline_viable": "partial",
+      "cloud_optional": true,
+      "consent_required": false,
+      "verification_required": false,
+      "side_effect_class": "read_only",
+      "privacy_class": "personal",
+      "budget_dimensions": [
+        "latency_ms",
+        "tokens",
+        "energy_j",
+        "cost_usd",
+        "ram_mb"
+      ],
+      "device_constraints": [
+        "thermal",
+        "battery",
+        "offline",
+        "accelerator"
+      ],
+      "provider_agnostic": true,
+      "hard_provider_pin": false,
+      "hidden_cot_required": false,
+      "broker_mediated": true,
+      "kirby_absorption_notes": "Qualify via bake-off; promote only with evidence.",
+      "qualification_slots": [
+        "tier_fit",
+        "offline_degrade",
+        "safety",
+        "verifier_pass"
+      ],
+      "integrations": [
+        "waike",
+        "device_os",
+        "creator",
+        "research"
+      ],
+      "references": [
+        "public_frontier_patterns_only"
+      ],
+      "evidence_refs": [],
+      "gate_tokens": []
+    },
+    {
+      "id": "model_provider_health",
+      "name": "Model / provider health",
+      "capability_class": "runtime",
+      "description": "Normalized Kirby absorption class for Model / provider health.",
+      "adoption_status": "research",
+      "maturity": "foundation",
+      "local_offline_viable": "true",
+      "cloud_optional": true,
+      "consent_required": false,
+      "verification_required": false,
+      "side_effect_class": "read_only",
+      "privacy_class": "personal",
+      "budget_dimensions": [
+        "latency_ms",
+        "tokens",
+        "energy_j",
+        "cost_usd",
+        "ram_mb"
+      ],
+      "device_constraints": [
+        "thermal",
+        "battery",
+        "offline",
+        "accelerator"
+      ],
+      "provider_agnostic": true,
+      "hard_provider_pin": false,
+      "hidden_cot_required": false,
+      "broker_mediated": true,
+      "kirby_absorption_notes": "Qualify via bake-off; promote only with evidence.",
+      "qualification_slots": [
+        "tier_fit",
+        "offline_degrade",
+        "safety",
+        "verifier_pass"
+      ],
+      "integrations": [
+        "waike",
+        "device_os",
+        "creator",
+        "research"
+      ],
+      "references": [
+        "public_frontier_patterns_only"
+      ],
+      "evidence_refs": [],
+      "gate_tokens": []
+    },
+    {
+      "id": "safety_policy_evaluation",
+      "name": "Safety / policy evaluation",
+      "capability_class": "security",
+      "description": "Normalized Kirby absorption class for Safety / policy evaluation.",
+      "adoption_status": "research",
+      "maturity": "foundation",
+      "local_offline_viable": "true",
+      "cloud_optional": true,
+      "consent_required": false,
+      "verification_required": false,
+      "side_effect_class": "read_only",
+      "privacy_class": "personal",
+      "budget_dimensions": [
+        "latency_ms",
+        "tokens",
+        "energy_j",
+        "cost_usd",
+        "ram_mb"
+      ],
+      "device_constraints": [
+        "thermal",
+        "battery",
+        "offline",
+        "accelerator"
+      ],
+      "provider_agnostic": true,
+      "hard_provider_pin": false,
+      "hidden_cot_required": false,
+      "broker_mediated": true,
+      "kirby_absorption_notes": "Qualify via bake-off; promote only with evidence.",
+      "qualification_slots": [
+        "tier_fit",
+        "offline_degrade",
+        "safety",
+        "verifier_pass"
+      ],
+      "integrations": [
+        "waike",
+        "device_os",
+        "creator",
+        "research"
+      ],
+      "references": [
+        "public_frontier_patterns_only"
+      ],
+      "evidence_refs": [],
+      "gate_tokens": []
+    },
+    {
+      "id": "streaming",
+      "name": "Streaming",
+      "capability_class": "io",
+      "description": "Normalized Kirby absorption class for Streaming.",
+      "adoption_status": "research",
+      "maturity": "foundation",
+      "local_offline_viable": "partial",
+      "cloud_optional": true,
+      "consent_required": false,
+      "verification_required": false,
+      "side_effect_class": "read_only",
+      "privacy_class": "personal",
+      "budget_dimensions": [
+        "latency_ms",
+        "tokens",
+        "energy_j",
+        "cost_usd",
+        "ram_mb"
+      ],
+      "device_constraints": [
+        "thermal",
+        "battery",
+        "offline",
+        "accelerator"
+      ],
+      "provider_agnostic": true,
+      "hard_provider_pin": false,
+      "hidden_cot_required": false,
+      "broker_mediated": true,
+      "kirby_absorption_notes": "Qualify via bake-off; promote only with evidence.",
+      "qualification_slots": [
+        "tier_fit",
+        "offline_degrade",
+        "safety",
+        "verifier_pass"
+      ],
+      "integrations": [
+        "waike",
+        "device_os",
+        "creator",
+        "research"
+      ],
+      "references": [
+        "public_frontier_patterns_only"
+      ],
+      "evidence_refs": [],
+      "gate_tokens": []
+    },
+    {
+      "id": "background_proactive_execution",
+      "name": "Background / proactive execution",
+      "capability_class": "agent",
+      "description": "Normalized Kirby absorption class for Background / proactive execution.",
+      "adoption_status": "research",
+      "maturity": "foundation",
+      "local_offline_viable": "partial",
+      "cloud_optional": true,
+      "consent_required": true,
+      "verification_required": true,
+      "side_effect_class": "read_only",
+      "privacy_class": "personal",
+      "budget_dimensions": [
+        "latency_ms",
+        "tokens",
+        "energy_j",
+        "cost_usd",
+        "ram_mb"
+      ],
+      "device_constraints": [
+        "thermal",
+        "battery",
+        "offline",
+        "accelerator"
+      ],
+      "provider_agnostic": true,
+      "hard_provider_pin": false,
+      "hidden_cot_required": false,
+      "broker_mediated": true,
+      "kirby_absorption_notes": "Qualify via bake-off; promote only with evidence.",
+      "qualification_slots": [
+        "tier_fit",
+        "offline_degrade",
+        "safety",
+        "verifier_pass"
+      ],
+      "integrations": [
+        "waike",
+        "device_os",
+        "creator",
+        "research"
+      ],
+      "references": [
+        "public_frontier_patterns_only"
+      ],
+      "evidence_refs": [],
+      "gate_tokens": []
+    }
+  ]
+}
