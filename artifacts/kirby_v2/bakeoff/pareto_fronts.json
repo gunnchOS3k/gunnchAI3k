@@ -1,0 +1,190 @@
+{
+  "schema": "kirby.pareto_fronts.v1",
+  "note": "No overall ranking — Pareto within tier only",
+  "fronts": [
+    {
+      "tier": 0,
+      "non_dominated": [
+        {
+          "task_id": "routing_classify_1",
+          "model_id": "sim-gemma-edge",
+          "tier": 0,
+          "success": true,
+          "latency_ms": 1,
+          "cost_usd": 0,
+          "energy_j": 0.011600000000000001,
+          "verifier_pass": true
+        },
+        {
+          "task_id": "routing_classify_1",
+          "model_id": "sim-glm-tools",
+          "tier": 0,
+          "success": true,
+          "latency_ms": 1,
+          "cost_usd": 0,
+          "energy_j": 0.011600000000000001,
+          "verifier_pass": true
+        },
+        {
+          "task_id": "routing_classify_1",
+          "model_id": "sim-openai-frontier-shape",
+          "tier": 0,
+          "success": true,
+          "latency_ms": 1,
+          "cost_usd": 0.00019599999999999997,
+          "energy_j": 0.0016,
+          "verifier_pass": true
+        },
+        {
+          "task_id": "routing_classify_1",
+          "model_id": "sim-gemini-multimodal-shape",
+          "tier": 0,
+          "success": true,
+          "latency_ms": 1,
+          "cost_usd": 0.00019599999999999997,
+          "energy_j": 0.0016,
+          "verifier_pass": true
+        },
+        {
+          "task_id": "routing_classify_1",
+          "model_id": "sim-kimi-long-context-shape",
+          "tier": 0,
+          "success": true,
+          "latency_ms": 1,
+          "cost_usd": 0.00019599999999999997,
+          "energy_j": 0.0016,
+          "verifier_pass": true
+        },
+        {
+          "task_id": "device_offline_1",
+          "model_id": "sim-micro-router",
+          "tier": 0,
+          "success": true,
+          "latency_ms": 1,
+          "cost_usd": 0,
+          "energy_j": 0.011600000000000001,
+          "verifier_pass": true
+        },
+        {
+          "task_id": "device_offline_1",
+          "model_id": "sim-gemma-edge",
+          "tier": 0,
+          "success": true,
+          "latency_ms": 1,
+          "cost_usd": 0,
+          "energy_j": 0.011600000000000001,
+          "verifier_pass": true
+        },
+        {
+          "task_id": "device_offline_1",
+          "model_id": "sim-glm-tools",
+          "tier": 0,
+          "success": true,
+          "latency_ms": 1,
+          "cost_usd": 0,
+          "energy_j": 0.011600000000000001,
+          "verifier_pass": true
+        }
+      ],
+      "note": "No overall ranking — Pareto within tier only"
+    },
+    {
+      "tier": 1,
+      "non_dominated": [
+        {
+          "task_id": "waike_socratic_1",
+          "model_id": "sim-gemma-edge",
+          "tier": 1,
+          "success": true,
+          "latency_ms": 1,
+          "cost_usd": 0,
+          "energy_j": 0.0148,
+          "verifier_pass": true
+        },
+        {
+          "task_id": "waike_socratic_1",
+          "model_id": "sim-glm-tools",
+          "tier": 1,
+          "success": true,
+          "latency_ms": 1,
+          "cost_usd": 0,
+          "energy_j": 0.0148,
+          "verifier_pass": true
+        },
+        {
+          "task_id": "waike_socratic_1",
+          "model_id": "sim-openai-frontier-shape",
+          "tier": 1,
+          "success": true,
+          "latency_ms": 1,
+          "cost_usd": 0.000254,
+          "energy_j": 0.002,
+          "verifier_pass": true
+        }
+      ],
+      "note": "No overall ranking — Pareto within tier only"
+    },
+    {
+      "tier": 2,
+      "non_dominated": [
+        {
+          "task_id": "creator_doc_1",
+          "model_id": "sim-glm-tools",
+          "tier": 2,
+          "success": true,
+          "latency_ms": 1,
+          "cost_usd": 0,
+          "energy_j": 0.010400000000000001,
+          "verifier_pass": true
+        },
+        {
+          "task_id": "creator_doc_1",
+          "model_id": "sim-openai-frontier-shape",
+          "tier": 2,
+          "success": true,
+          "latency_ms": 1,
+          "cost_usd": 0.00019600000000000002,
+          "energy_j": 0.0014500000000000001,
+          "verifier_pass": true
+        }
+      ],
+      "note": "No overall ranking — Pareto within tier only"
+    },
+    {
+      "tier": 3,
+      "non_dominated": [
+        {
+          "task_id": "research_cite_1",
+          "model_id": "sim-gemma-edge",
+          "tier": 3,
+          "success": true,
+          "latency_ms": 1,
+          "cost_usd": 0,
+          "energy_j": 0.014400000000000001,
+          "verifier_pass": true
+        },
+        {
+          "task_id": "research_cite_1",
+          "model_id": "sim-glm-tools",
+          "tier": 3,
+          "success": true,
+          "latency_ms": 1,
+          "cost_usd": 0,
+          "energy_j": 0.014400000000000001,
+          "verifier_pass": true
+        },
+        {
+          "task_id": "research_cite_1",
+          "model_id": "sim-openai-frontier-shape",
+          "tier": 3,
+          "success": true,
+          "latency_ms": 1,
+          "cost_usd": 0.00023999999999999998,
+          "energy_j": 0.0019500000000000001,
+          "verifier_pass": true
+        }
+      ],
+      "note": "No overall ranking — Pareto within tier only"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "tasks": 104,
+  "successes": 104,
+  "cost_per_success_usd": 0.000054211538461538466,
+  "energy_per_success_j": 0.022973557692307703,
+  "latency_per_success_ms": 3.855769230769231,
+  "ideas_enabled": {
+    "speculative_decoding_hints": true,
+    "cache_prompt_prefixes": true,
+    "modality_shedding": true,
+    "tier_downshift_on_thermal": true,
+    "early_exit_on_verifier_pass": true
+  }
+}
