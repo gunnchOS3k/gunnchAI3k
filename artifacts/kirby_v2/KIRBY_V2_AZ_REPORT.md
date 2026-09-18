@@ -5,7 +5,7 @@
 
 ## B. Branch / final SHA
 - Branch: `research/kirby-frontier-capability-adoption-v2`
-- Final SHA: `a2a51c87205f975af86015e7d778cb31f415857a`
+- Final SHA: `47aec69ab7897c569a1fd0ceb0b37e22d4d8bd96`
 
 ## C. Doctrine
 `docs/frontier/KIRBY_DOCTRINE_V2.md` with 10 non-negotiables.
