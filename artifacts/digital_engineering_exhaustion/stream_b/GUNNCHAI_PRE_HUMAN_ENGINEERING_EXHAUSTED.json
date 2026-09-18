@@ -1,0 +1,55 @@
+{
+  "schema": "gunnchai.pre_human_engineering_exhaustion.v1",
+  "gate": "GUNNCHAI_PRE_HUMAN_ENGINEERING_EXHAUSTED",
+  "gate_status": true,
+  "accepted_main_sha": "65b799e21dc1c4979d52b9c8b328f7aa47059bde",
+  "branch": "eng/stream-b-gunnchai-pre-human-exhaustion",
+  "generated_at_utc": "2026-09-18T18:40:00Z",
+  "claim_boundary": "Engineering + SYNTHETIC eval only. Not human tutoring evaluation. Not live learner evidence.",
+  "checklist": {
+    "tool_registry": "PASS",
+    "permissions": "PASS_EXISTING",
+    "provenance": "PASS",
+    "retrieval": "PASS_EXISTING",
+    "deterministic_tools": "PASS_EXISTING",
+    "model_routing": "PASS_EXISTING",
+    "small_model_first": "PASS_EXISTING",
+    "offline_fallback": "PASS_EXISTING",
+    "error_handling": "PASS_EXISTING",
+    "context_limits": "PASS_EXISTING",
+    "redaction": "PASS_EXISTING",
+    "prompt_injection_defenses": "PASS",
+    "untrusted_content": "PASS",
+    "hallucination_detection_testable": "PASS",
+    "citations": "PASS_EXISTING",
+    "grading_guardrails": "PASS_EXISTING",
+    "instructor_learner_separation": "PASS_EXISTING",
+    "audit_logs": "PASS_EXISTING",
+    "latency_metrics": "PASS",
+    "memory_metrics": "PASS",
+    "failure_recovery": "PASS_EXISTING",
+    "adversarial_fixtures": "PASS",
+    "synthetic_eval_suites": "PASS_LABELED_SYNTHETIC"
+  },
+  "new_modules": [
+    "src/system-layer/tool_registry.ts",
+    "src/system-layer/runtime_metrics.ts",
+    "src/system-layer/pre_human_eval/synthetic_suite.ts",
+    "src/tutor/promptInjectionGuard.ts",
+    "src/tutor/hallucinationGuard.ts"
+  ],
+  "tests": [
+    "tests/system-layer/pre_human_exhaustion.test.ts",
+    "tests/tutor/promptInjectionAndHallucination.test.ts"
+  ],
+  "remaining_blockers": [
+    {
+      "class": "HUMAN_VALIDATION_REQUIRED",
+      "item": "Live human tutoring evaluation / learner outcome review"
+    },
+    {
+      "class": "EXTERNAL_PARTY_REQUIRED",
+      "item": "Owner merge of DRAFT PR; Device Lab live UX correlation with Device OS accepted main"
+    }
+  ]
+}
