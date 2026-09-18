@@ -1,0 +1,7 @@
+{
+  "primary_ok": false,
+  "primary_error": "CANCELLED",
+  "secondary_ok": true,
+  "secondary_mode": "simulated_deterministic",
+  "note": "Live primary failed closed; control plane fell back without hard pin"
+}
