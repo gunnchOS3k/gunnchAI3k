@@ -1,8 +1,11 @@
 {
   "compute_host": "mac",
-  "device_role": "client_or_unavailable",
+  "device_role": "pixel6a_adb_client",
+  "pixel_serial_redacted": "2721…",
   "pixel_local_inference": false,
   "adb_forward_equals_on_device": false,
+  "PIXEL6A_ADB_CONNECTED": true,
   "evidence_class_compute": "LIVE_MAC",
-  "evidence_class_pixel_local": "UNAVAILABLE"
+  "evidence_class_pixel_local": "UNAVAILABLE",
+  "routing_note": "Mac runs ModelProviderV2 live micro; Pixel is ADB-connected client surface only until an on-device runtime exists"
 }

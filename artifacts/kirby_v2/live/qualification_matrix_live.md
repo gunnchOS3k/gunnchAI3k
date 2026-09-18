@@ -15,4 +15,4 @@ Simulated KIRBY-2 results preserved. Live columns added.
 | sim-gemini-multimodal-shape | SIMULATED | UNAVAILABLE | UNAVAILABLE | UNAVAILABLE | n/a_sim_only |
 | sim-kimi-long-context-shape | SIMULATED | UNAVAILABLE | UNAVAILABLE | UNAVAILABLE | n/a_sim_only |
 | sim-deepseek-efficient-shape | SIMULATED | UNAVAILABLE | UNAVAILABLE | UNAVAILABLE | n/a_sim_only |
-| smollm2-135m-instruct-q4_k_m | — | LIVE_MAC | UNAVAILABLE | UNAVAILABLE | LIVE_QUALIFIED |
+| smollm2-135m-instruct-q4_k_m | — | LIVE_MAC | ADB_CLIENT_NO_LOCAL_MODEL | UNAVAILABLE | LIVE_QUALIFIED |

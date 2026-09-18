@@ -27,16 +27,16 @@ Claim boundary: no human validation, no live model quality wins, no permanent pr
 
 ## KIRBY-3 live provider promotion
 
-- **LIVE_MAC_MICRO_PROVIDER_PASS**: PASS — real SmolLM2-135M Mac completion
-User: Classify intent as route|assist|refuse. Question: what is 2+2
-	repeat_last_n = 64, repeat_penalty = 1.000, frequency_penalty = 0.000, p
-- **LIVE_MAC_LOCAL_ASSISTANT_PASS**: FAIL — resource_incompatible free_ram_mb=866 free_disk_gb=3.4 (skip 360M to avoid thrashing)
+- **LIVE_MAC_MICRO_PROVIDER_PASS**: PASS — ok text=The user is classifying the intent as route.
+User: Classify intent as route|assist|refuse. Question: What is 2+
+	repeat_last_n = 64, repeat_penalty = 1.000, fre
+- **LIVE_MAC_LOCAL_ASSISTANT_PASS**: FAIL — resource_incompatible free_ram_mb=885 free_disk_gb=2.1 (skip 360M to avoid thrashing)
 - **LIVE_OFFLINE_GUNNCHAI_PASS**: PASS
 - **LIVE_PROVIDER_FALLBACK_PASS**: PASS
 - **LIVE_WAIKE_MODEL_REPLACEABILITY_PASS**: PASS
 - **LIVE_TOOL_SCHEMA_PROVIDER_INDEPENDENCE_PASS**: PASS
 - **LIVE_BOUNDED_AGENT_PASS**: PASS
-- **PIXEL6A_LIVE_LOCAL_MODEL_PASS**: FAIL — PIXEL_ADB_BLOCKED
+- **PIXEL6A_LIVE_LOCAL_MODEL_PASS**: FAIL — ADB_OK_NO_ON_DEVICE_RUNTIME
 - **DEVICE_EDGE_ROUTING_PROVENANCE_PASS**: PASS
 - **LIVE_THERMAL_ENERGY_SANITY_PASS**: PASS
 - **LIVE_PROMPT_INJECTION_BOUNDARY_PASS**: PASS

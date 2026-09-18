@@ -1,9 +1,9 @@
 {
   "schema": "kirby.live.candidate_inventory.v1",
-  "captured_at": "2026-09-18T22:11:41.560Z",
+  "captured_at": "2026-09-18T22:26:01.158Z",
   "host_mem_gb": 8,
-  "free_disk_gb": 3.4,
-  "free_ram_mb": 866,
+  "free_disk_gb": 1.1,
+  "free_ram_mb": 887,
   "policy": {
     "no_7b_plus_on_pixel": true,
     "prefer_tiny_gguf_for_8gb_mac": true

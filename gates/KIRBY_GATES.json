@@ -287,7 +287,7 @@
       "evidence": [
         "artifacts/kirby_v2/live/host/MICRO_ROUTER_RESULT.json"
       ],
-      "detail": "ok text=The answer is 2+2.\nUser: Classify intent as route|assist|refuse. Question: what is 2+2\n\trepeat_last_n = 64, repeat_penalty = 1.000, frequency_penalty = 0.000, p",
+      "detail": "ok text=The user is classifying the intent as route.\nUser: Classify intent as route|assist|refuse. Question: What is 2+\n\trepeat_last_n = 64, repeat_penalty = 1.000, fre",
       "value": true
     },
     "LIVE_MAC_LOCAL_ASSISTANT_PASS": {
@@ -295,7 +295,7 @@
       "evidence": [
         "artifacts/kirby_v2/live/host/LOCAL_ASSISTANT_RESULT.json"
       ],
-      "detail": "resource_incompatible free_ram_mb=866 free_disk_gb=3.4 (skip 360M to avoid thrashing)",
+      "detail": "resource_incompatible free_ram_mb=885 free_disk_gb=2.1 (skip 360M to avoid thrashing)",
       "value": false
     },
     "LIVE_OFFLINE_GUNNCHAI_PASS": {
@@ -303,6 +303,7 @@
       "evidence": [
         "artifacts/kirby_v2/live/host/OFFLINE_RESULT.json"
       ],
+      "detail": null,
       "value": true
     },
     "LIVE_PROVIDER_FALLBACK_PASS": {
@@ -310,6 +311,7 @@
       "evidence": [
         "artifacts/kirby_v2/live/routing/fallback_chain.json"
       ],
+      "detail": null,
       "value": true
     },
     "LIVE_WAIKE_MODEL_REPLACEABILITY_PASS": {
@@ -317,6 +319,7 @@
       "evidence": [
         "artifacts/kirby_v2/live/routing/waike_replaceability.json"
       ],
+      "detail": null,
       "value": true
     },
     "LIVE_TOOL_SCHEMA_PROVIDER_INDEPENDENCE_PASS": {
@@ -324,6 +327,7 @@
       "evidence": [
         "artifacts/kirby_v2/live/routing/tool_schema_independence.json"
       ],
+      "detail": null,
       "value": true
     },
     "LIVE_BOUNDED_AGENT_PASS": {
@@ -331,6 +335,7 @@
       "evidence": [
         "artifacts/kirby_v2/live/host/BOUNDED_AGENT_RESULT.json"
       ],
+      "detail": null,
       "value": true
     },
     "PIXEL6A_LIVE_LOCAL_MODEL_PASS": {
@@ -339,7 +344,7 @@
         "artifacts/kirby_v2/live/pixel6a/PIXEL_LOCAL_MODEL_STATUS.json",
         "docs/frontier/PIXEL6A_INFERENCE_RUNTIME_DECISION.md"
       ],
-      "detail": "PIXEL_ADB_BLOCKED",
+      "detail": "ADB_OK_NO_ON_DEVICE_RUNTIME",
       "value": false
     },
     "DEVICE_EDGE_ROUTING_PROVENANCE_PASS": {
@@ -347,13 +352,16 @@
       "evidence": [
         "artifacts/kirby_v2/live/routing/device_edge_provenance.json"
       ],
+      "detail": null,
       "value": true
     },
     "LIVE_THERMAL_ENERGY_SANITY_PASS": {
       "status": "PASS",
       "evidence": [
-        "artifacts/kirby_v2/live/thermal/MAC_SHORT_BURST.json"
+        "artifacts/kirby_v2/live/thermal/MAC_SHORT_BURST.json",
+        "artifacts/kirby_v2/live/thermal/PIXEL_THERMAL_SNAPSHOT.json"
       ],
+      "detail": null,
       "value": true
     },
     "LIVE_PROMPT_INJECTION_BOUNDARY_PASS": {
@@ -361,6 +369,7 @@
       "evidence": [
         "artifacts/kirby_v2/live/security/prompt_injection.json"
       ],
+      "detail": null,
       "value": true
     },
     "LIVE_STRUCTURED_OUTPUT_RELIABILITY_PASS": {
@@ -378,7 +387,15 @@
         "docs/frontier/KIRBY2_LIVE_EVIDENCE_REBIND.md"
       ],
       "next": "NEXT_GUNNCHAI_ACTION=PROMOTE_LIVE_QUALIFIED_PROVIDER_TO_CONTROLLED_PRODUCT_INTEGRATION",
-      "detail": "{\"microPass\":true,\"assistantPass\":false,\"offlinePass\":true,\"fallbackPass\":true,\"replacePass\":true,\"toolPass\":true,\"agentPass\":true,\"pixelLocalPass\":false,\"injPass\":true,\"structuredPass\":true,\"liveQualified\":true,\"promotion_state\":\"LIVE_QUALIFIED\",\"pixel_classification\":\"PIXEL_ADB_BLOCKED\",\"android_client\":\"GUNNCHAI_ANDROID_CLIENT_NOT_AVAILABLE\",\"nextAction\":\"NEXT_GUNNCHAI_ACTION=PROMOTE_LIVE_QUALIFIED_PROVIDER_TO_CONTROLLED_PRODUCT_INTEGRATION\"}"
+      "detail": "{\"microPass\":true,\"assistantPass\":false,\"offlinePass\":true,\"fallbackPass\":true,\"replacePass\":true,\"toolPass\":true,\"agentPass\":true,\"pixelLocalPass\":false,\"injPass\":true,\"structuredPass\":true,\"liveQualified\":true,\"promotion_state\":\"LIVE_QUALIFIED\",\"pixel_classification\":\"PIXEL_READY\",\"android_client\":\"GUNNCHAI_ANDROID_CLIENT_NOT_AVAILABLE\",\"nextAction\":\"NEXT_GUNNCHAI_ACTION=PROMOTE_LIVE_QUALIFIED_PROVIDER_TO_CONTROLLED_PRODUCT_INTEGRATION\"}"
+    },
+    "PIXEL6A_ADB_CONNECTED": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/live/pixel6a/PIXEL_BASELINE.json"
+      ],
+      "detail": "Pixel 6a bluejay authorized; PIXEL_ADB_BLOCKED cleared"
     }
   },
   "live": {
@@ -388,7 +405,7 @@
       "evidence": [
         "artifacts/kirby_v2/live/host/MICRO_ROUTER_RESULT.json"
       ],
-      "detail": "ok text=The answer is 2+2.\nUser: Classify intent as route|assist|refuse. Question: what is 2+2\n\trepeat_last_n = 64, repeat_penalty = 1.000, frequency_penalty = 0.000, p"
+      "detail": "ok text=The user is classifying the intent as route.\nUser: Classify intent as route|assist|refuse. Question: What is 2+\n\trepeat_last_n = 64, repeat_penalty = 1.000, fre"
     },
     "LIVE_MAC_LOCAL_ASSISTANT_PASS": {
       "status": "FAIL",
@@ -396,7 +413,7 @@
       "evidence": [
         "artifacts/kirby_v2/live/host/LOCAL_ASSISTANT_RESULT.json"
       ],
-      "detail": "resource_incompatible free_ram_mb=866 free_disk_gb=3.4 (skip 360M to avoid thrashing)"
+      "detail": "resource_incompatible free_ram_mb=885 free_disk_gb=2.1 (skip 360M to avoid thrashing)"
     },
     "LIVE_OFFLINE_GUNNCHAI_PASS": {
       "status": "PASS",
@@ -440,7 +457,7 @@
         "artifacts/kirby_v2/live/pixel6a/PIXEL_LOCAL_MODEL_STATUS.json",
         "docs/frontier/PIXEL6A_INFERENCE_RUNTIME_DECISION.md"
       ],
-      "detail": "PIXEL_ADB_BLOCKED"
+      "detail": "ADB_OK_NO_ON_DEVICE_RUNTIME"
     },
     "DEVICE_EDGE_ROUTING_PROVENANCE_PASS": {
       "status": "PASS",
@@ -453,7 +470,8 @@
       "status": "PASS",
       "value": true,
       "evidence": [
-        "artifacts/kirby_v2/live/thermal/MAC_SHORT_BURST.json"
+        "artifacts/kirby_v2/live/thermal/MAC_SHORT_BURST.json",
+        "artifacts/kirby_v2/live/thermal/PIXEL_THERMAL_SNAPSHOT.json"
       ]
     },
     "LIVE_PROMPT_INJECTION_BOUNDARY_PASS": {
@@ -472,5 +490,6 @@
       "detail": "threshold=0.7"
     }
   },
-  "next_gunnchai_action": "NEXT_GUNNCHAI_ACTION=PROMOTE_LIVE_QUALIFIED_PROVIDER_TO_CONTROLLED_PRODUCT_INTEGRATION"
+  "next_gunnchai_action": "NEXT_GUNNCHAI_ACTION=PROMOTE_LIVE_QUALIFIED_PROVIDER_TO_CONTROLLED_PRODUCT_INTEGRATION",
+  "secondary_pixel_action": "NEXT_GUNNCHAI_ACTION=KEEP_PIXEL_AS_CLIENT_AND_QUALIFY_NEARBY_EDGE_EXECUTION"
 }

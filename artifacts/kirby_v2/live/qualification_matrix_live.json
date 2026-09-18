@@ -115,7 +115,7 @@
       "sim_state": "n/a",
       "sim_evidence": "—",
       "mac_evidence": "LIVE_MAC",
-      "pixel_evidence": "UNAVAILABLE",
+      "pixel_evidence": "ADB_CLIENT_NO_LOCAL_MODEL",
       "remote_evidence": "UNAVAILABLE",
       "live_state": "LIVE_QUALIFIED"
     }

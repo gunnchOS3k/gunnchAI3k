@@ -1,15 +1,15 @@
 {
   "schema": "kirby.live.mac_baseline.v1",
-  "captured_at": "2026-09-18T22:11:39.407Z",
+  "captured_at": "2026-09-18T22:26:00.991Z",
   "host": {
     "platform": "darwin",
     "arch": "arm64",
     "os_release": "ProductName:\t\tmacOS\nProductVersion:\t\t26.6.2\nBuildVersion:\t\t25G83",
     "memsize_bytes": 8589934592,
     "memsize_gb": 8,
-    "free_ram_mb": 866,
-    "free_disk_bytes": 3635916800,
-    "free_disk_gb": 3.4,
+    "free_ram_mb": 887,
+    "free_disk_bytes": 1198915584,
+    "free_disk_gb": 1.1,
     "cpu_brand": "unknown",
     "apple_silicon": true
   },

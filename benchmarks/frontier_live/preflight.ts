@@ -70,15 +70,27 @@ export interface MacBaseline {
   };
 }
 
+export interface PixelOnDeviceRuntimeProbe {
+  termux: boolean;
+  llama_cli: boolean;
+  llama_server: boolean;
+  ollama: boolean;
+  gguf_on_device: boolean;
+  matching_packages: string[];
+  note: string;
+}
+
 export interface PixelBaseline {
   schema: 'kirby.live.pixel_baseline.v1';
   captured_at: string;
+  PIXEL6A_ADB_CONNECTED: boolean;
   usb_pixel6a_seen: boolean;
   adb_present: boolean;
   adb_devices_raw: string;
   authorized_device: boolean;
   serial?: string;
   model?: string;
+  product_device?: string;
   classification:
     | 'PIXEL_READY'
     | 'PIXEL_ADB_BLOCKED'
@@ -86,7 +98,19 @@ export interface PixelBaseline {
     | 'PIXEL_ADB_MISSING';
   owner_approve_steps: string[];
   fail_closed: boolean;
+  /** True only when ADB connected AND an on-device inference runtime is present. */
   on_device_inference_possible: boolean;
+  props?: Record<string, string>;
+  meminfo?: Record<string, string>;
+  storage?: string;
+  battery?: Record<string, string>;
+  thermal?: {
+    status: string;
+    skin_c?: number;
+    battery_c?: number;
+    excerpt: string;
+  };
+  on_device_runtime?: PixelOnDeviceRuntimeProbe;
   notes: string[];
 }
 
@@ -139,6 +163,96 @@ const OWNER_APPROVE_STEPS = [
   'Re-run: npm run bakeoff:kirby-live',
 ];
 
+function adbShell(serial: string, cmd: string, timeout = 12000): string {
+  return sh(`adb -s ${serial} shell ${cmd}`, timeout);
+}
+
+function probeOnDeviceRuntime(serial: string): PixelOnDeviceRuntimeProbe {
+  const packages = adbShell(
+    serial,
+    `"pm list packages 2>/dev/null | grep -iE 'termux|llama|ollama|mlc|executorch|mediapipe|onnxruntime|gunnchai' || true"`,
+  )
+    .split('\n')
+    .map((l) => l.trim())
+    .filter(Boolean);
+  const whichBins = adbShell(serial, `"which llama-cli llama-server ollama 2>/dev/null || true"`);
+  const gguf = adbShell(
+    serial,
+    `"ls /data/local/tmp/*.gguf /sdcard/Download/*.gguf /sdcard/*.gguf 2>/dev/null || true"`,
+  );
+  const termux = packages.some((p) => /termux/i.test(p));
+  const llama_cli = /llama-cli/.test(whichBins) || packages.some((p) => /llama/i.test(p));
+  const llama_server = /llama-server/.test(whichBins);
+  const ollama = /ollama/.test(whichBins) || packages.some((p) => /ollama/i.test(p));
+  const gguf_on_device = /\.gguf/i.test(gguf);
+  return {
+    termux,
+    llama_cli,
+    llama_server,
+    ollama,
+    gguf_on_device,
+    matching_packages: packages.slice(0, 40),
+    note:
+      termux || llama_cli || llama_server || ollama || gguf_on_device
+        ? 'Partial on-device assets detected — still require a verified inference path before LIVE_PIXEL claims'
+        : 'No Termux/llama.cpp/ollama/GGUF on-device runtime found — PIXEL6A_LIVE_LOCAL_MODEL_PASS stays false',
+  };
+}
+
+function capturePixelSuite(serial: string): Pick<
+  PixelBaseline,
+  'props' | 'meminfo' | 'storage' | 'battery' | 'thermal' | 'on_device_runtime' | 'product_device'
+> {
+  const propKeys = [
+    'ro.product.model',
+    'ro.product.device',
+    'ro.product.name',
+    'ro.build.version.release',
+    'ro.build.version.sdk',
+    'ro.product.cpu.abi',
+    'ro.hardware',
+    'ro.board.platform',
+  ];
+  const props: Record<string, string> = {};
+  for (const k of propKeys) {
+    props[k] = adbShell(serial, `getprop ${k}`);
+  }
+  const memRaw = adbShell(serial, `"cat /proc/meminfo | head -8"`);
+  const meminfo: Record<string, string> = {};
+  for (const line of memRaw.split('\n')) {
+    const m = line.match(/^(\w+):\s+(\d+)/);
+    if (m) meminfo[m[1]] = m[2];
+  }
+  const storage = adbShell(serial, `"df -h /data /sdcard 2>/dev/null | head -10"`);
+  const battRaw = adbShell(serial, `"dumpsys battery | head -30"`);
+  const battery: Record<string, string> = {};
+  for (const line of battRaw.split('\n')) {
+    const m = line.trim().match(/^([^:]+):\s*(.+)$/);
+    if (m) battery[m[1].trim()] = m[2].trim();
+  }
+  const thermalRaw = adbShell(serial, `"dumpsys thermalservice 2>/dev/null | head -60"`);
+  const statusMatch = /Thermal Status:\s*(\d+)/.exec(thermalRaw);
+  const skinMatch = /VIRTUAL-SKIN[^}]*mValue=([0-9.]+)/.exec(thermalRaw);
+  const battTherm = /mName=battery,\s*mStatus=\d+\}|Temperature\{mValue=([0-9.]+)[^}]*mName=battery/.exec(
+    thermalRaw,
+  );
+  const batteryTempFromDumpsys = Number(battery['temperature']);
+  return {
+    product_device: props['ro.product.device'] || undefined,
+    props,
+    meminfo,
+    storage,
+    battery,
+    thermal: {
+      status: statusMatch?.[1] ?? 'unknown',
+      skin_c: skinMatch ? Number(skinMatch[1]) : undefined,
+      battery_c: Number.isFinite(batteryTempFromDumpsys) ? batteryTempFromDumpsys / 10 : undefined,
+      excerpt: thermalRaw.slice(0, 1800),
+    },
+    on_device_runtime: probeOnDeviceRuntime(serial),
+  };
+}
+
 export function capturePixelBaseline(): PixelBaseline {
   const adbPath = sh('command -v adb');
   const ioreg = sh('ioreg -p IOUSB -w0 2>/dev/null | grep -i "Pixel 6a" || true');
@@ -147,6 +261,7 @@ export function capturePixelBaseline(): PixelBaseline {
     return {
       schema: 'kirby.live.pixel_baseline.v1',
       captured_at: new Date().toISOString(),
+      PIXEL6A_ADB_CONNECTED: false,
       usb_pixel6a_seen: usbSeen,
       adb_present: false,
       adb_devices_raw: '',
@@ -166,9 +281,9 @@ export function capturePixelBaseline(): PixelBaseline {
     .map((l) => l.trim())
     .filter((l) => l && !l.startsWith('List of'));
 
-  const deviceLine = lines.find((l) => /\tdevice\b/.test(l));
-  const unauthorized = lines.some((l) => /\tunauthorized\b/.test(l));
-  const offline = lines.some((l) => /\toffline\b/.test(l));
+  const deviceLine = lines.find((l) => /\s+device\b/.test(l) && !/\soffline\b/.test(l) && !/\sunauthorized\b/.test(l));
+  const unauthorized = lines.some((l) => /\sunauthorized\b/.test(l));
+  const offline = lines.some((l) => /\soffline\b/.test(l));
 
   if (deviceLine) {
     const serial = deviceLine.split(/\s+/)[0];
@@ -178,6 +293,7 @@ export function capturePixelBaseline(): PixelBaseline {
       return {
         schema: 'kirby.live.pixel_baseline.v1',
         captured_at: new Date().toISOString(),
+        PIXEL6A_ADB_CONNECTED: false,
         usb_pixel6a_seen: usbSeen,
         adb_present: true,
         adb_devices_raw: devices,
@@ -191,9 +307,14 @@ export function capturePixelBaseline(): PixelBaseline {
         notes: [`Authorized device is not Pixel 6a (model=${model}) — fail closed`],
       };
     }
+    const suite = capturePixelSuite(serial);
+    const runtime = suite.on_device_runtime!;
+    const runtimePresent =
+      runtime.llama_cli || runtime.llama_server || runtime.ollama || (runtime.termux && runtime.gguf_on_device);
     return {
       schema: 'kirby.live.pixel_baseline.v1',
       captured_at: new Date().toISOString(),
+      PIXEL6A_ADB_CONNECTED: true,
       usb_pixel6a_seen: true,
       adb_present: true,
       adb_devices_raw: devices,
@@ -203,8 +324,16 @@ export function capturePixelBaseline(): PixelBaseline {
       classification: 'PIXEL_READY',
       owner_approve_steps: [],
       fail_closed: false,
-      on_device_inference_possible: true,
-      notes: ['Pixel 6a authorized via adb'],
+      on_device_inference_possible: runtimePresent,
+      ...suite,
+      notes: [
+        'Pixel 6a authorized via adb — PIXEL6A_ADB_CONNECTED=true',
+        'Prior PIXEL_ADB_BLOCKED classification cleared',
+        runtime.note,
+        runtimePresent
+          ? 'On-device runtime present — live local model gate may be attempted'
+          : 'ADB connected does not equal on-device inference — no genuine local model runtime',
+      ],
     };
   }
 
@@ -213,6 +342,7 @@ export function capturePixelBaseline(): PixelBaseline {
   return {
     schema: 'kirby.live.pixel_baseline.v1',
     captured_at: new Date().toISOString(),
+    PIXEL6A_ADB_CONNECTED: false,
     usb_pixel6a_seen: usbSeen,
     adb_present: true,
     adb_devices_raw: devices || '(empty)',

@@ -5,50 +5,43 @@
 Can gunnchAI3k run a **genuine on-device** micro-model on the connected Pixel 6a for KIRBY-3,
 or must Pixel remain a **client** with nearby-edge (Mac) execution?
 
-## Observed host state (preflight)
+## Observed host state (updated after ADB authorize)
 
-- USB: Pixel 6a appears on the Mac USB bus (`IOUSBHostDevice`, Google Pixel 6a).
-- ADB: `adb devices` lists **no** authorized devices after daemon restart.
-- Classification: **`PIXEL_ADB_BLOCKED`** — physical attach ≠ debug authorization.
-- Android client APK / Termux / MediaPipe LLM / ExecuTorch / llama.cpp-android packages:
-  **not present** in this gunnchAI3k tree for on-device serving.
+- USB: Pixel 6a on Mac USB bus.
+- ADB: **authorized** — `adb devices -l` shows `device … product:bluejay model:Pixel_6a`.
+- Token: **`PIXEL6A_ADB_CONNECTED=true`** (prior `PIXEL_ADB_BLOCKED` cleared).
+- Device facts (preflight suite): Android 17 / SDK 37, `arm64-v8a`, ~5.5 GiB RAM total / ~2.2 GiB available, `/data` ~27 GiB free, battery ~20% AC charging, thermal status **0 (NONE)**.
+- On-device packages/binaries: **no** Termux, llama.cpp, ollama, ExecuTorch, MediaPipe LLM, or GGUF weights found under probed paths.
+- Android client APK in this gunnchAI3k tree: **`GUNNCHAI_ANDROID_CLIENT_NOT_AVAILABLE`**.
 
 ## Runtime classification
 
 | Token | Selected | Meaning |
 |---|---|---|
 | `RUNTIME_ON_DEVICE_LOCAL` | **false** | Weights execute on Pixel SoC |
-| `RUNTIME_NEARBY_EDGE_MAC` | **candidate** | Mac runs model; Pixel is client / UI |
+| `RUNTIME_NEARBY_EDGE_MAC` | **true (preferred)** | Mac runs live ModelProviderV2; Pixel is ADB client |
 | `RUNTIME_ADB_FORWARDED_MAC` | **not claimed as Pixel local** | Port-forward to Mac llama-server ≠ on-device |
-| `RUNTIME_UNAVAILABLE` | **active until ADB authorize** | Cannot prove Pixel-local path |
+| `RUNTIME_UNAVAILABLE` | **false for client path** | ADB works; on-device local still unavailable |
 
-**Decision token:** `RUNTIME_UNAVAILABLE` for on-device local inference in this PR,
-with preferred product path `RUNTIME_NEARBY_EDGE_MAC` once Mac live qualifies.
+**Decision:** Prefer **`RUNTIME_NEARBY_EDGE_MAC`**. Keep **`PIXEL6A_LIVE_LOCAL_MODEL_PASS=false`** until a verified on-device runtime + micro GGUF path exists. ADB connectivity alone never upgrades evidence to `LIVE_PIXEL`.
 
-## Why not force on-device
+## Why on-device local stays false
 
-1. No authorized ADB session → cannot push runtimes, pull thermal stats, or start on-device servers.
-2. No 7B+ models on Pixel by policy; even micro GGUF needs a runnable Android runtime + authorize.
-3. Fabricating Pixel-local success would violate KIRBY honesty rules.
-
-## Owner approve steps (exact) — clear `PIXEL_ADB_BLOCKED`
-
-1. Unlock Pixel 6a; connect USB-C to this Mac.
-2. On Pixel: **Settings → Developer options → USB debugging** = ON.
-3. When prompted **Allow USB debugging?** → tap **Allow** (optionally Always allow this computer).
-4. Set USB mode to **File transfer / MTP** (not Charge only) if the authorize prompt never appears.
-5. On Mac: `adb kill-server && adb start-server && adb devices -l`
-6. Expect a line like `<serial> device product:bluejay ... model:Pixel_6a`
-7. Re-run: `npm run bakeoff:kirby-live` (or `tsx scripts/run_kirby_live_promotion.ts`)
-
-Until step 6 succeeds, gates `PIXEL6A_LIVE_LOCAL_MODEL_PASS` and related remain **false**.
+1. No on-device inference binary/runtime (llama-cli/server, ollama, Termux+GGUF).
+2. No gunnchAI Android client to host a local session.
+3. Pushing/installing a full Android runtime + weights is out of scope for this research PR and would risk fabricating Pixel-local success.
+4. Battery was ~20% at preflight — even with AC charge, skipping on-device model load is the safe default.
 
 ## Split-execution provenance
 
-When Mac live succeeds and Pixel is client-only:
+- Inference host = Mac (`LIVE_MAC`) when micro provider passes.
+- Device role = **ADB-connected client** (`pixel6a_adb_client`).
+- Evidence class for Pixel-local claims = `UNAVAILABLE`.
+- Gate `DEVICE_EDGE_ROUTING_PROVENANCE_PASS` records Mac compute + Pixel client explicitly.
 
-- Inference host = Mac (`LIVE_MAC`)
-- Device role = client / display / input
-- Evidence class for Pixel-local claims = `UNAVAILABLE`
-- Gate `DEVICE_EDGE_ROUTING_PROVENANCE_PASS` may pass **only** if routing artifacts
-  explicitly record Mac as compute and Pixel as client (never as local model host).
+## Owner path to genuine LIVE_PIXEL (future)
+
+1. Install a supported on-device runtime (e.g. Termux + llama.cpp Android build, or product Android client).
+2. Place a **micro** Apache-2.0 GGUF (≪7B) with provenance on device.
+3. Run inference **on device** (not via `adb reverse` to Mac).
+4. Re-run `npm run bakeoff:kirby-live` and expect `evidence_class=LIVE_PIXEL`.
