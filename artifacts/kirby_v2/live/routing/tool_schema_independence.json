@@ -1,0 +1,8 @@
+{
+  "proposal_ok": true,
+  "broker_read_ok": true,
+  "untrusted_denied": true,
+  "provider_family": "local_gguf",
+  "tool_contract": "ToolInvocationV2",
+  "note": "No llama.cpp schema leaked above adapter"
+}

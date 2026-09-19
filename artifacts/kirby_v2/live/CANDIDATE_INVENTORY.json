@@ -1,0 +1,61 @@
+{
+  "schema": "kirby.live.candidate_inventory.v1",
+  "captured_at": "2026-09-18T22:26:01.158Z",
+  "host_mem_gb": 8,
+  "free_disk_gb": 1.1,
+  "free_ram_mb": 887,
+  "policy": {
+    "no_7b_plus_on_pixel": true,
+    "prefer_tiny_gguf_for_8gb_mac": true
+  },
+  "candidates": [
+    {
+      "candidate_id": "live-smollm2-135m-q4_k_m",
+      "display_name": "SmolLM2-135M-Instruct Q4_K_M",
+      "parameters": "135M",
+      "quant": "Q4_K_M",
+      "license": "Apache-2.0",
+      "license_ok": true,
+      "source_model_card": "https://huggingface.co/HuggingFaceTB/SmolLM2-135M-Instruct",
+      "gguf_repo": "https://huggingface.co/bartowski/SmolLM2-135M-Instruct-GGUF",
+      "download_url": "https://huggingface.co/bartowski/SmolLM2-135M-Instruct-GGUF/resolve/main/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+      "filename": "SmolLM2-135M-Instruct-Q4_K_M.gguf",
+      "expected_sha256": "2e8040ceae7815abe0dcb3540b9995eaa1fa0d2ca9e797d0a635ae4433c68c2d",
+      "expected_bytes": 105454432,
+      "target_hosts": [
+        "mac_8gb",
+        "pixel6a_micro"
+      ],
+      "fits_mac_8gb": true,
+      "fits_pixel_micro": true,
+      "notes": "Nano/micro router candidate. Apache-2.0. ~101 MiB. Not a 7B+ Pixel load.",
+      "evidence_class": "LIVE_MAC",
+      "runnable_planned": true,
+      "pixel_runnable_planned": false
+    },
+    {
+      "candidate_id": "live-smollm2-360m-q4_k_m",
+      "display_name": "SmolLM2-360M-Instruct Q4_K_M",
+      "parameters": "360M",
+      "quant": "Q4_K_M",
+      "license": "Apache-2.0",
+      "license_ok": true,
+      "source_model_card": "https://huggingface.co/HuggingFaceTB/SmolLM2-360M-Instruct",
+      "gguf_repo": "https://huggingface.co/bartowski/SmolLM2-360M-Instruct-GGUF",
+      "download_url": "https://huggingface.co/bartowski/SmolLM2-360M-Instruct-GGUF/resolve/main/SmolLM2-360M-Instruct-Q4_K_M.gguf",
+      "filename": "SmolLM2-360M-Instruct-Q4_K_M.gguf",
+      "expected_sha256": "2fa3f013dcdd7b99f9b237717fa0b12d75bbb89984cc1274be1471a465bac9c2",
+      "expected_bytes": 270590880,
+      "target_hosts": [
+        "mac_8gb"
+      ],
+      "fits_mac_8gb": true,
+      "fits_pixel_micro": false,
+      "notes": "Optional Mac local-assistant rung if RAM/disk allow. Too large for Pixel micro policy.",
+      "evidence_class": "LIVE_MAC",
+      "runnable_planned": true,
+      "pixel_runnable_planned": false
+    }
+  ],
+  "honesty": "No unknown-license weights. No fabricated remote success."
+}
