@@ -1,0 +1,13 @@
+{
+  "host": {
+    "chip": "Apple M2",
+    "mem_gb": 8,
+    "metal": false
+  },
+  "micro_edge_workstation_sparse": {
+    "micro": "sim adapters preferred for SLOT_A (live GGUF unavailable)",
+    "edge": "sim adapters for SLOT_B/D; live Ollama absent",
+    "workstation": "resource-incompatible for large live workstation weights (8GB RAM); simulated proofs still run",
+    "sparse": "No sparse MoE live runtime detected (vLLM/MLX absent)"
+  }
+}

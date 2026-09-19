@@ -59,7 +59,9 @@
     "product-completion": "tsx src/product-completion/cli.ts",
     "test:product-completion": "jest tests/product-completion --runInBand --forceExit",
     "eval:wave003": "tsx src/evals/wave003/cli.ts",
-    "test:wave003": "jest tests/evals/wave003.test.ts --runInBand"
+    "test:wave003": "jest tests/evals/wave003.test.ts --runInBand",
+    "bakeoff:kirby": "tsx scripts/run_kirby_provider_bakeoff.ts",
+    "test:kirby-bakeoff": "jest tests/kirby_v2/provider_bakeoff.test.ts tests/kirby_v2/kirby_foundation.test.ts --runInBand"
   },
   "keywords": [
     "ai",
