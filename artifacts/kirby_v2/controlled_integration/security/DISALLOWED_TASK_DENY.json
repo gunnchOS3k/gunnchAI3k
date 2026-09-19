@@ -1,0 +1,23 @@
+{
+  "ok": false,
+  "text": "",
+  "error": "DISALLOWED_TASK_CLASS",
+  "denied": true,
+  "provenance": {
+    "schema": "gunnchai.nearby_edge.provenance.v1",
+    "request_id": "5f88b395-1943-4d91-a38c-dd78ea62e2c7",
+    "compute_host": "mac_nearby_edge",
+    "evidence_class": "LIVE_MAC",
+    "device_role": "pixel6a_adb_client",
+    "transport": "ADB_REVERSE",
+    "model_id": "smollm2-135m-instruct-q4_k_m",
+    "provider_id": "prov_llamacpp_live",
+    "promotion_state": "CONTROLLED_INTEGRATION",
+    "production_default": false,
+    "on_device_local": false,
+    "adb_reverse_is_not_on_device": true,
+    "privacy_label": "device_local_adjacent",
+    "task_class": "exam_answer_dump",
+    "timestamp": "2026-09-18T23:42:18.386Z"
+  }
+}
