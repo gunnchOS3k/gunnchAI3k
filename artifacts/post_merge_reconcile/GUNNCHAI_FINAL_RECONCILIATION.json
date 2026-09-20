@@ -57,10 +57,10 @@
     },
     "adb_released": true
   },
-  "candidate_sha": "USE_BRANCH_TIP",
+  "candidate_sha": "21defeb340040a1e0cace1e457a4239cc132dd49",
   "worktree": ".worktrees/kirby-main-reconciliation",
   "draft_pr_only": true,
   "merged": false,
-  "candidate_note": "Agent B must pin the tip of integration/kirby-controlled-stack-main-reconciliation (not USE_BRANCH_TIP literal).",
+  "candidate_note": "Final reconciliation candidate for Agent B WAIKE pin.",
   "candidate_branch": "integration/kirby-controlled-stack-main-reconciliation"
 }
