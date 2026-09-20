@@ -1,6 +1,6 @@
 {
   "artifact": "GUNNCHAI_FINAL_RECONCILIATION",
-  "generated_at": "2026-09-20T16:38:41Z",
+  "generated_at": "2026-09-20T16:44:26Z",
   "repo": "gunnchOS3k/gunnchAI3k",
   "branch": "integration/kirby-controlled-stack-main-reconciliation",
   "accepted_main_sha": "4f46c8f1da405cdfb7c519cadd377127302ecf3f",
@@ -57,10 +57,20 @@
     },
     "adb_released": true
   },
-  "candidate_sha": "21defeb340040a1e0cace1e457a4239cc132dd49",
+  "candidate_sha": "c8259ff22ad51c0d8c6afd99e62039cb69ff75b4",
   "worktree": ".worktrees/kirby-main-reconciliation",
   "draft_pr_only": true,
   "merged": false,
   "candidate_note": "Final reconciliation candidate for Agent B WAIKE pin.",
-  "candidate_branch": "integration/kirby-controlled-stack-main-reconciliation"
+  "candidate_branch": "integration/kirby-controlled-stack-main-reconciliation",
+  "draft_pr": {
+    "status": "BLOCKED_LOCAL_API_PROXY",
+    "detail": "api.github.com CONNECT 403 via Cursor sandbox proxy; Actions PR create disabled by org policy; browser MCP unavailable in this agent",
+    "compare_url": "https://github.com/gunnchOS3k/gunnchAI3k/compare/main...integration/kirby-controlled-stack-main-reconciliation?expand=1&quick_pull=1",
+    "title": "Reconcile controlled Kirby/Nearby Edge stack onto accepted main",
+    "draft_required": true,
+    "do_not_merge": true,
+    "actions_attempt": "https://github.com/gunnchOS3k/gunnchAI3k/actions/runs/35523555453"
+  },
+  "adb_released": true
 }
