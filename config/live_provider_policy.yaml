@@ -1,0 +1,45 @@
+schema: gunnchai.live_provider_policy.v1
+claim_boundary: >
+  SmolLM2-135M may enter CONTROLLED_INTEGRATION for earned micro tasks only.
+  Never PRODUCTION_DEFAULT. Nearby-edge is Mac compute; Pixel ADB client is not on-device inference.
+
+providers:
+  smollm2-135m-instruct-q4_k_m:
+    provider_id: prov_llamacpp_live
+    promotion_state: CONTROLLED_INTEGRATION
+    production_default: false
+    evidence_class: LIVE_MAC
+    allowed_task_classes:
+      - intent_route
+      - micro_router
+      - short_assist
+      - health_probe
+      - capability_discovery
+    disallowed_task_classes:
+      - long_form_tutor
+      - exam_answer_dump
+      - shell_proposal
+      - computer_use
+      - production_chat_default
+      - unbounded_generation
+    max_output_tokens: 96
+    max_latency_ms: 60000
+    requires_feature_flag: GUNNCHAI_LIVE_PROVIDER_INTEGRATION
+
+nearby_edge:
+  requires_feature_flag: GUNNCHAI_NEARBY_EDGE
+  preferred_transport_pixel: ADB_REVERSE
+  allowed_transports:
+    - ADB_REVERSE
+    - LOCALHOST
+    - LOCAL_LAN_TLS
+  forbid_unauthenticated_lan: true
+  idle_shutdown_ms: 300000
+  rate_limit:
+    requests_per_minute: 30
+    burst: 5
+
+gates_frozen_until_earned:
+  PIXEL6A_LIVE_LOCAL_MODEL_PASS: false
+  GUNNCHAI_ANDROID_PRODUCTION_CLIENT_PASS: false
+  PRODUCTION_DEFAULT_PROVIDER_FROZEN: false

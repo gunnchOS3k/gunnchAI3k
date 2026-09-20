@@ -1,0 +1,6 @@
+{
+  "PIXEL_EDGE_MODEL_BAKEOFF_NOT_RUN": true,
+  "reason": "No Pixel 6a / adb device connected; Android inference not installed or tested",
+  "connected": false,
+  "adb_devices": "List of devices attached"
+}

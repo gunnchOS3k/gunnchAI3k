@@ -1,0 +1,29 @@
+{
+  "reps": 20,
+  "ok": 20,
+  "rate": 1,
+  "predeclared_threshold": 0.7,
+  "pass": true,
+  "details": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+  ]
+}

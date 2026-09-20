@@ -1,0 +1,129 @@
+{
+  "PROVIDER_BAKEOFF_EXECUTED": {
+    "status": "PASS",
+    "evidence": [
+      "artifacts/kirby_v2/bakeoff/"
+    ],
+    "detail": "Harness ran end-to-end with labeled simulated adapters"
+  },
+  "PROVIDER_BAKEOFF_HOST_BASELINE": {
+    "status": "PASS",
+    "evidence": [
+      "artifacts/kirby_v2/bakeoff/",
+      "artifacts/kirby_v2/bakeoff/HOST_CAPABILITY_BASELINE.json"
+    ]
+  },
+  "PROVIDER_BAKEOFF_CANDIDATE_INVENTORY": {
+    "status": "PASS",
+    "evidence": [
+      "artifacts/kirby_v2/bakeoff/",
+      "artifacts/kirby_v2/bakeoff/candidate_inventory.json"
+    ]
+  },
+  "PROVIDER_BAKEOFF_ADAPTER_CONFORMANCE": {
+    "status": "PASS",
+    "evidence": [
+      "artifacts/kirby_v2/bakeoff/",
+      "artifacts/kirby_v2/bakeoff/adapter_conformance.json"
+    ]
+  },
+  "PROVIDER_BAKEOFF_SUITES_RUN": {
+    "status": "PASS",
+    "evidence": [
+      "artifacts/kirby_v2/bakeoff/",
+      "artifacts/kirby_v2/bakeoff/benchmark_results.jsonl"
+    ]
+  },
+  "PROVIDER_BAKEOFF_OFFLINE_CORE": {
+    "status": "PASS",
+    "evidence": [
+      "artifacts/kirby_v2/bakeoff/",
+      "artifacts/kirby_v2/bakeoff/offline_results.md"
+    ]
+  },
+  "PROVIDER_BAKEOFF_SAFETY_INJECTION": {
+    "status": "PASS",
+    "evidence": [
+      "artifacts/kirby_v2/bakeoff/",
+      "artifacts/kirby_v2/bakeoff/security_results/"
+    ]
+  },
+  "PROVIDER_BAKEOFF_FALLBACK_CHAIN": {
+    "status": "PASS",
+    "evidence": [
+      "artifacts/kirby_v2/bakeoff/",
+      "artifacts/kirby_v2/bakeoff/routing_traces/"
+    ]
+  },
+  "PROVIDER_BAKEOFF_WAIKE_REPLACEABILITY": {
+    "status": "PASS",
+    "evidence": [
+      "artifacts/kirby_v2/bakeoff/",
+      "artifacts/kirby_v2/bakeoff/verification_traces/"
+    ]
+  },
+  "PROVIDER_BAKEOFF_TOOL_INDEPENDENCE": {
+    "status": "PASS",
+    "evidence": [
+      "artifacts/kirby_v2/bakeoff/",
+      "artifacts/kirby_v2/bakeoff/verification_traces/"
+    ]
+  },
+  "PROVIDER_BAKEOFF_BOUNDED_AGENT": {
+    "status": "PASS",
+    "evidence": [
+      "artifacts/kirby_v2/bakeoff/"
+    ]
+  },
+  "PROVIDER_BAKEOFF_PARETO_BY_TIER": {
+    "status": "PASS",
+    "evidence": [
+      "artifacts/kirby_v2/bakeoff/",
+      "artifacts/kirby_v2/bakeoff/pareto_fronts.json"
+    ]
+  },
+  "PROVIDER_BAKEOFF_QUALIFICATION_MATRIX": {
+    "status": "PASS",
+    "evidence": [
+      "artifacts/kirby_v2/bakeoff/",
+      "artifacts/kirby_v2/bakeoff/qualification_matrix.json"
+    ],
+    "detail": "preferred=3"
+  },
+  "PROVIDER_BAKEOFF_NO_OVERALL_WINNER": {
+    "status": "PASS",
+    "evidence": [
+      "artifacts/kirby_v2/bakeoff/"
+    ],
+    "detail": "Pareto-by-tier only; no permanent single winner selected"
+  },
+  "PROVIDER_BAKEOFF_PIXEL_OPTIONAL": {
+    "status": "PASS",
+    "evidence": [
+      "artifacts/kirby_v2/bakeoff/",
+      "artifacts/kirby_v2/bakeoff/pixel6a/"
+    ],
+    "detail": "PIXEL_EDGE_MODEL_BAKEOFF_NOT_RUN=true"
+  },
+  "PROVIDER_BAKEOFF_COMPUTER_USE_OPTIONAL": {
+    "status": "PASS",
+    "evidence": [
+      "artifacts/kirby_v2/bakeoff/"
+    ],
+    "detail": "COMPUTER_USE_BAKEOFF_RUN=true; live_model=false"
+  },
+  "PROVIDER_BAKEOFF_LONG_CONTEXT_OPTIONAL": {
+    "status": "PASS",
+    "evidence": [
+      "artifacts/kirby_v2/bakeoff/"
+    ],
+    "detail": "LONG_CONTEXT_LIVE=false"
+  },
+  "PROVIDER_BAKEOFF_HONEST_EVIDENCE": {
+    "status": "PASS",
+    "evidence": [
+      "artifacts/kirby_v2/bakeoff/"
+    ],
+    "detail": "Simulated vs unavailable live paths labeled; no fabricated live model success"
+  }
+}

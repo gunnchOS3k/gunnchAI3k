@@ -1,0 +1,37 @@
+{
+  "schema": "gunnchai.kirby4.gates.v1",
+  "gates": {
+    "CONTROLLED_PROVIDER_PROMOTION_DOC": true,
+    "LIVE_PROVIDER_POLICY": true,
+    "FEATURE_FLAGS_DEFAULT_OFF": true,
+    "NEARBY_EDGE_SERVER": true,
+    "PAIRING_SESSION_AUTH": true,
+    "PROVENANCE_ON_RESPONSE": true,
+    "CONTROLLED_ROUTER_WIRED": true,
+    "PILOT_CLIENT_NOT_PRODUCTION_UI": true,
+    "PIXEL_NEARBY_EDGE_PHYSICAL_JOURNEY_PASS": false,
+    "WAIKE_NEARBY_EDGE_CONTRACT": true,
+    "CAPSULE_NEARBY_EDGE_CONTRACT": true,
+    "PIXEL_OFFLINE_HONESTY": true,
+    "RESOURCE_GUARD_8GB": true,
+    "SECURITY_THREAT_CASES": true,
+    "PRIVACY_LABELS": true,
+    "FALLBACK_MATRIX": true,
+    "ROLLBACK_VIA_FLAGS": true,
+    "MICRO_EARNED_TASK_PASS": true,
+    "PIXEL6A_LIVE_LOCAL_MODEL_PASS": false,
+    "GUNNCHAI_ANDROID_PRODUCTION_CLIENT_PASS": false,
+    "PRODUCTION_DEFAULT_PROVIDER_FROZEN": false
+  },
+  "unearned_remain_false": {
+    "PIXEL6A_LIVE_LOCAL_MODEL_PASS": false,
+    "GUNNCHAI_ANDROID_PRODUCTION_CLIENT_PASS": false,
+    "PRODUCTION_DEFAULT_PROVIDER_FROZEN": false
+  },
+  "physical_retry": {
+    "at": "2026-09-18T23:48:42Z",
+    "PIXEL_NEARBY_EDGE_PHYSICAL_JOURNEY_PASS": false,
+    "detail": "PIXEL_ADB_OFFLINE_AFTER_REAUTH_RETRY",
+    "note": "Brief authorize then offline; fail closed"
+  }
+}

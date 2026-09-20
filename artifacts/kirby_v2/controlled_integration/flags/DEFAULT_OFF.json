@@ -1,0 +1,8 @@
+{
+  "schema": "gunnchai.feature_flags.snapshot.v1",
+  "flags": {
+    "GUNNCHAI_LIVE_PROVIDER_INTEGRATION": false,
+    "GUNNCHAI_NEARBY_EDGE": false
+  },
+  "note": "Defaults off — no product behavior change"
+}

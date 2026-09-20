@@ -1,6 +1,6 @@
 {
-  "schema": "gunnchai.kirby_gates.v2",
-  "claim_boundary": "Tokens reflect foundation/evidence in this PR only. No human-validation, real-device performance, or model-quality claims.",
+  "schema": "gunnchai.kirby_gates.v4_controlled",
+  "claim_boundary": "CONTROLLED_INTEGRATION behind flags only. SmolLM2 never PRODUCTION_DEFAULT. Nearby-edge Mac compute; ADB reverse ≠ on-device. Unearned Pixel-local/Android production gates remain false.",
   "accepted_main_sha": "076b7ccd7c3f71d3299ead9a72e45291cd33689a",
   "tokens": {
     "KIRBY_DOCTRINE_V2": {
@@ -148,9 +148,517 @@
       "evidence": []
     },
     "KIRBY_PROVIDER_BAKEOFF_EXECUTED": {
-      "status": "NOT_CLAIMED",
-      "evidence": [],
-      "next": "NEXT_GUNNCHAI_ACTION=RUN_PROVIDER_BAKEOFF_AND_PROMOTE_QUALIFIED_CAPABILITIES"
+      "status": "PASS",
+      "evidence": [
+        "artifacts/kirby_v2/bakeoff/",
+        "benchmarks/frontier_bakeoff/"
+      ],
+      "next": "NEXT_GUNNCHAI_ACTION=PROMOTE_QUALIFIED_PROVIDERS_AND_RUN_REAL_DEVICE_INTEGRATION"
+    },
+    "PROVIDER_BAKEOFF_EXECUTED": {
+      "status": "PASS",
+      "evidence": [
+        "artifacts/kirby_v2/bakeoff/"
+      ],
+      "detail": "Harness ran end-to-end with labeled simulated adapters"
+    },
+    "PROVIDER_BAKEOFF_HOST_BASELINE": {
+      "status": "PASS",
+      "evidence": [
+        "artifacts/kirby_v2/bakeoff/",
+        "artifacts/kirby_v2/bakeoff/HOST_CAPABILITY_BASELINE.json"
+      ]
+    },
+    "PROVIDER_BAKEOFF_CANDIDATE_INVENTORY": {
+      "status": "PASS",
+      "evidence": [
+        "artifacts/kirby_v2/bakeoff/",
+        "artifacts/kirby_v2/bakeoff/candidate_inventory.json"
+      ]
+    },
+    "PROVIDER_BAKEOFF_ADAPTER_CONFORMANCE": {
+      "status": "PASS",
+      "evidence": [
+        "artifacts/kirby_v2/bakeoff/",
+        "artifacts/kirby_v2/bakeoff/adapter_conformance.json"
+      ]
+    },
+    "PROVIDER_BAKEOFF_SUITES_RUN": {
+      "status": "PASS",
+      "evidence": [
+        "artifacts/kirby_v2/bakeoff/",
+        "artifacts/kirby_v2/bakeoff/benchmark_results.jsonl"
+      ]
+    },
+    "PROVIDER_BAKEOFF_OFFLINE_CORE": {
+      "status": "PASS",
+      "evidence": [
+        "artifacts/kirby_v2/bakeoff/",
+        "artifacts/kirby_v2/bakeoff/offline_results.md"
+      ]
+    },
+    "PROVIDER_BAKEOFF_SAFETY_INJECTION": {
+      "status": "PASS",
+      "evidence": [
+        "artifacts/kirby_v2/bakeoff/",
+        "artifacts/kirby_v2/bakeoff/security_results/"
+      ]
+    },
+    "PROVIDER_BAKEOFF_FALLBACK_CHAIN": {
+      "status": "PASS",
+      "evidence": [
+        "artifacts/kirby_v2/bakeoff/",
+        "artifacts/kirby_v2/bakeoff/routing_traces/"
+      ]
+    },
+    "PROVIDER_BAKEOFF_WAIKE_REPLACEABILITY": {
+      "status": "PASS",
+      "evidence": [
+        "artifacts/kirby_v2/bakeoff/",
+        "artifacts/kirby_v2/bakeoff/verification_traces/"
+      ]
+    },
+    "PROVIDER_BAKEOFF_TOOL_INDEPENDENCE": {
+      "status": "PASS",
+      "evidence": [
+        "artifacts/kirby_v2/bakeoff/",
+        "artifacts/kirby_v2/bakeoff/verification_traces/"
+      ]
+    },
+    "PROVIDER_BAKEOFF_BOUNDED_AGENT": {
+      "status": "PASS",
+      "evidence": [
+        "artifacts/kirby_v2/bakeoff/"
+      ]
+    },
+    "PROVIDER_BAKEOFF_PARETO_BY_TIER": {
+      "status": "PASS",
+      "evidence": [
+        "artifacts/kirby_v2/bakeoff/",
+        "artifacts/kirby_v2/bakeoff/pareto_fronts.json"
+      ]
+    },
+    "PROVIDER_BAKEOFF_QUALIFICATION_MATRIX": {
+      "status": "PASS",
+      "evidence": [
+        "artifacts/kirby_v2/bakeoff/",
+        "artifacts/kirby_v2/bakeoff/qualification_matrix.json"
+      ],
+      "detail": "preferred=3"
+    },
+    "PROVIDER_BAKEOFF_NO_OVERALL_WINNER": {
+      "status": "PASS",
+      "evidence": [
+        "artifacts/kirby_v2/bakeoff/"
+      ],
+      "detail": "Pareto-by-tier only; no permanent single winner selected"
+    },
+    "PROVIDER_BAKEOFF_PIXEL_OPTIONAL": {
+      "status": "PASS",
+      "evidence": [
+        "artifacts/kirby_v2/bakeoff/",
+        "artifacts/kirby_v2/bakeoff/pixel6a/"
+      ],
+      "detail": "PIXEL_EDGE_MODEL_BAKEOFF_NOT_RUN=true"
+    },
+    "PROVIDER_BAKEOFF_COMPUTER_USE_OPTIONAL": {
+      "status": "PASS",
+      "evidence": [
+        "artifacts/kirby_v2/bakeoff/"
+      ],
+      "detail": "COMPUTER_USE_BAKEOFF_RUN=true; live_model=false"
+    },
+    "PROVIDER_BAKEOFF_LONG_CONTEXT_OPTIONAL": {
+      "status": "PASS",
+      "evidence": [
+        "artifacts/kirby_v2/bakeoff/"
+      ],
+      "detail": "LONG_CONTEXT_LIVE=false"
+    },
+    "PROVIDER_BAKEOFF_HONEST_EVIDENCE": {
+      "status": "PASS",
+      "evidence": [
+        "artifacts/kirby_v2/bakeoff/"
+      ],
+      "detail": "Simulated vs unavailable live paths labeled; no fabricated live model success"
+    },
+    "LIVE_MAC_MICRO_PROVIDER_PASS": {
+      "status": "PASS",
+      "evidence": [
+        "artifacts/kirby_v2/live/host/MICRO_ROUTER_RESULT.json"
+      ],
+      "detail": "ok text=The user is classifying the intent as route.\nUser: Classify intent as route|assist|refuse. Question: What is 2+\n\trepeat_last_n = 64, repeat_penalty = 1.000, fre",
+      "value": true
+    },
+    "LIVE_MAC_LOCAL_ASSISTANT_PASS": {
+      "status": "FAIL",
+      "evidence": [
+        "artifacts/kirby_v2/live/host/LOCAL_ASSISTANT_RESULT.json"
+      ],
+      "detail": "resource_incompatible free_ram_mb=885 free_disk_gb=2.1 (skip 360M to avoid thrashing)",
+      "value": false
+    },
+    "LIVE_OFFLINE_GUNNCHAI_PASS": {
+      "status": "PASS",
+      "evidence": [
+        "artifacts/kirby_v2/live/host/OFFLINE_RESULT.json"
+      ],
+      "detail": null,
+      "value": true
+    },
+    "LIVE_PROVIDER_FALLBACK_PASS": {
+      "status": "PASS",
+      "evidence": [
+        "artifacts/kirby_v2/live/routing/fallback_chain.json"
+      ],
+      "detail": null,
+      "value": true
+    },
+    "LIVE_WAIKE_MODEL_REPLACEABILITY_PASS": {
+      "status": "PASS",
+      "evidence": [
+        "artifacts/kirby_v2/live/routing/waike_replaceability.json"
+      ],
+      "detail": null,
+      "value": true
+    },
+    "LIVE_TOOL_SCHEMA_PROVIDER_INDEPENDENCE_PASS": {
+      "status": "PASS",
+      "evidence": [
+        "artifacts/kirby_v2/live/routing/tool_schema_independence.json"
+      ],
+      "detail": null,
+      "value": true
+    },
+    "LIVE_BOUNDED_AGENT_PASS": {
+      "status": "PASS",
+      "evidence": [
+        "artifacts/kirby_v2/live/host/BOUNDED_AGENT_RESULT.json"
+      ],
+      "detail": null,
+      "value": true
+    },
+    "PIXEL6A_LIVE_LOCAL_MODEL_PASS": {
+      "status": "FAIL",
+      "value": false,
+      "evidence": [
+        "artifacts/kirby_v2/controlled_integration/"
+      ]
+    },
+    "DEVICE_EDGE_ROUTING_PROVENANCE_PASS": {
+      "status": "PASS",
+      "evidence": [
+        "artifacts/kirby_v2/live/routing/device_edge_provenance.json"
+      ],
+      "detail": null,
+      "value": true
+    },
+    "LIVE_THERMAL_ENERGY_SANITY_PASS": {
+      "status": "PASS",
+      "evidence": [
+        "artifacts/kirby_v2/live/thermal/MAC_SHORT_BURST.json",
+        "artifacts/kirby_v2/live/thermal/PIXEL_THERMAL_SNAPSHOT.json"
+      ],
+      "detail": null,
+      "value": true
+    },
+    "LIVE_PROMPT_INJECTION_BOUNDARY_PASS": {
+      "status": "PASS",
+      "evidence": [
+        "artifacts/kirby_v2/live/security/prompt_injection.json"
+      ],
+      "detail": null,
+      "value": true
+    },
+    "LIVE_STRUCTURED_OUTPUT_RELIABILITY_PASS": {
+      "status": "PASS",
+      "evidence": [
+        "artifacts/kirby_v2/live/structured/STRUCTURED_OUTPUT_RELIABILITY.json"
+      ],
+      "detail": "threshold=0.7",
+      "value": true
+    },
+    "KIRBY_LIVE_PROVIDER_PROMOTION": {
+      "status": "PASS",
+      "evidence": [
+        "artifacts/kirby_v2/live/",
+        "docs/frontier/KIRBY2_LIVE_EVIDENCE_REBIND.md"
+      ],
+      "next": "NEXT_GUNNCHAI_ACTION=PROMOTE_LIVE_QUALIFIED_PROVIDER_TO_CONTROLLED_PRODUCT_INTEGRATION",
+      "detail": "{\"microPass\":true,\"assistantPass\":false,\"offlinePass\":true,\"fallbackPass\":true,\"replacePass\":true,\"toolPass\":true,\"agentPass\":true,\"pixelLocalPass\":false,\"injPass\":true,\"structuredPass\":true,\"liveQualified\":true,\"promotion_state\":\"LIVE_QUALIFIED\",\"pixel_classification\":\"PIXEL_READY\",\"android_client\":\"GUNNCHAI_ANDROID_CLIENT_NOT_AVAILABLE\",\"nextAction\":\"NEXT_GUNNCHAI_ACTION=PROMOTE_LIVE_QUALIFIED_PROVIDER_TO_CONTROLLED_PRODUCT_INTEGRATION\"}"
+    },
+    "PIXEL6A_ADB_CONNECTED": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/live/pixel6a/PIXEL_BASELINE.json"
+      ],
+      "detail": "Pixel 6a bluejay authorized; PIXEL_ADB_BLOCKED cleared"
+    },
+    "CONTROLLED_PROVIDER_PROMOTION_DOC": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/controlled_integration/"
+      ]
+    },
+    "LIVE_PROVIDER_POLICY": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/controlled_integration/"
+      ]
+    },
+    "FEATURE_FLAGS_DEFAULT_OFF": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/controlled_integration/"
+      ]
+    },
+    "NEARBY_EDGE_SERVER": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/controlled_integration/"
+      ]
+    },
+    "PAIRING_SESSION_AUTH": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/controlled_integration/"
+      ]
+    },
+    "PROVENANCE_ON_RESPONSE": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/controlled_integration/"
+      ]
+    },
+    "CONTROLLED_ROUTER_WIRED": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/controlled_integration/"
+      ]
+    },
+    "PILOT_CLIENT_NOT_PRODUCTION_UI": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/controlled_integration/"
+      ]
+    },
+    "PIXEL_NEARBY_EDGE_PHYSICAL_JOURNEY_PASS": {
+      "status": "FAIL",
+      "value": false,
+      "evidence": [
+        "artifacts/kirby_v2/controlled_integration/"
+      ]
+    },
+    "WAIKE_NEARBY_EDGE_CONTRACT": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/controlled_integration/"
+      ]
+    },
+    "CAPSULE_NEARBY_EDGE_CONTRACT": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/controlled_integration/"
+      ]
+    },
+    "PIXEL_OFFLINE_HONESTY": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/controlled_integration/"
+      ]
+    },
+    "RESOURCE_GUARD_8GB": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/controlled_integration/"
+      ]
+    },
+    "SECURITY_THREAT_CASES": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/controlled_integration/"
+      ]
+    },
+    "PRIVACY_LABELS": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/controlled_integration/"
+      ]
+    },
+    "FALLBACK_MATRIX": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/controlled_integration/"
+      ]
+    },
+    "ROLLBACK_VIA_FLAGS": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/controlled_integration/"
+      ]
+    },
+    "MICRO_EARNED_TASK_PASS": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/controlled_integration/"
+      ]
+    },
+    "GUNNCHAI_ANDROID_PRODUCTION_CLIENT_PASS": {
+      "status": "FAIL",
+      "value": false,
+      "evidence": [
+        "artifacts/kirby_v2/controlled_integration/"
+      ]
+    },
+    "PRODUCTION_DEFAULT_PROVIDER_FROZEN": {
+      "status": "FAIL",
+      "value": false,
+      "evidence": [
+        "artifacts/kirby_v2/controlled_integration/"
+      ]
+    },
+    "KIRBY_CONTROLLED_PRODUCT_INTEGRATION": {
+      "status": "PASS",
+      "evidence": [
+        "artifacts/kirby_v2/controlled_integration/",
+        "docs/frontier/CONTROLLED_PROVIDER_PROMOTION.md"
+      ],
+      "next": "NEXT_GUNNCHAI_ACTION=INTEGRATE_NEARBY_EDGE_PROVIDER_INTO_GUNNCHOS_CAPSULE_AND_WAIKE_PIXEL_PILOT"
     }
+  },
+  "live": {
+    "LIVE_MAC_MICRO_PROVIDER_PASS": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/live/host/MICRO_ROUTER_RESULT.json"
+      ],
+      "detail": "ok text=The user is classifying the intent as route.\nUser: Classify intent as route|assist|refuse. Question: What is 2+\n\trepeat_last_n = 64, repeat_penalty = 1.000, fre"
+    },
+    "LIVE_MAC_LOCAL_ASSISTANT_PASS": {
+      "status": "FAIL",
+      "value": false,
+      "evidence": [
+        "artifacts/kirby_v2/live/host/LOCAL_ASSISTANT_RESULT.json"
+      ],
+      "detail": "resource_incompatible free_ram_mb=885 free_disk_gb=2.1 (skip 360M to avoid thrashing)"
+    },
+    "LIVE_OFFLINE_GUNNCHAI_PASS": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/live/host/OFFLINE_RESULT.json"
+      ]
+    },
+    "LIVE_PROVIDER_FALLBACK_PASS": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/live/routing/fallback_chain.json"
+      ]
+    },
+    "LIVE_WAIKE_MODEL_REPLACEABILITY_PASS": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/live/routing/waike_replaceability.json"
+      ]
+    },
+    "LIVE_TOOL_SCHEMA_PROVIDER_INDEPENDENCE_PASS": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/live/routing/tool_schema_independence.json"
+      ]
+    },
+    "LIVE_BOUNDED_AGENT_PASS": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/live/host/BOUNDED_AGENT_RESULT.json"
+      ]
+    },
+    "PIXEL6A_LIVE_LOCAL_MODEL_PASS": {
+      "status": "FAIL",
+      "value": false,
+      "evidence": [
+        "artifacts/kirby_v2/live/pixel6a/PIXEL_LOCAL_MODEL_STATUS.json",
+        "docs/frontier/PIXEL6A_INFERENCE_RUNTIME_DECISION.md"
+      ],
+      "detail": "ADB_OK_NO_ON_DEVICE_RUNTIME"
+    },
+    "DEVICE_EDGE_ROUTING_PROVENANCE_PASS": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/live/routing/device_edge_provenance.json"
+      ]
+    },
+    "LIVE_THERMAL_ENERGY_SANITY_PASS": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/live/thermal/MAC_SHORT_BURST.json",
+        "artifacts/kirby_v2/live/thermal/PIXEL_THERMAL_SNAPSHOT.json"
+      ]
+    },
+    "LIVE_PROMPT_INJECTION_BOUNDARY_PASS": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/live/security/prompt_injection.json"
+      ]
+    },
+    "LIVE_STRUCTURED_OUTPUT_RELIABILITY_PASS": {
+      "status": "PASS",
+      "value": true,
+      "evidence": [
+        "artifacts/kirby_v2/live/structured/STRUCTURED_OUTPUT_RELIABILITY.json"
+      ],
+      "detail": "threshold=0.7"
+    }
+  },
+  "next_gunnchai_action": "NEXT_GUNNCHAI_ACTION=INTEGRATE_NEARBY_EDGE_PROVIDER_INTO_GUNNCHOS_CAPSULE_AND_WAIKE_PIXEL_PILOT",
+  "secondary_pixel_action": "NEXT_GUNNCHAI_ACTION=KEEP_PIXEL_AS_CLIENT_AND_QUALIFY_NEARBY_EDGE_EXECUTION",
+  "controlled": {
+    "CONTROLLED_PROVIDER_PROMOTION_DOC": true,
+    "LIVE_PROVIDER_POLICY": true,
+    "FEATURE_FLAGS_DEFAULT_OFF": true,
+    "NEARBY_EDGE_SERVER": true,
+    "PAIRING_SESSION_AUTH": true,
+    "PROVENANCE_ON_RESPONSE": true,
+    "CONTROLLED_ROUTER_WIRED": true,
+    "PILOT_CLIENT_NOT_PRODUCTION_UI": true,
+    "PIXEL_NEARBY_EDGE_PHYSICAL_JOURNEY_PASS": false,
+    "WAIKE_NEARBY_EDGE_CONTRACT": true,
+    "CAPSULE_NEARBY_EDGE_CONTRACT": true,
+    "PIXEL_OFFLINE_HONESTY": true,
+    "RESOURCE_GUARD_8GB": true,
+    "SECURITY_THREAT_CASES": true,
+    "PRIVACY_LABELS": true,
+    "FALLBACK_MATRIX": true,
+    "ROLLBACK_VIA_FLAGS": true,
+    "MICRO_EARNED_TASK_PASS": true,
+    "PIXEL6A_LIVE_LOCAL_MODEL_PASS": false,
+    "GUNNCHAI_ANDROID_PRODUCTION_CLIENT_PASS": false,
+    "PRODUCTION_DEFAULT_PROVIDER_FROZEN": false
   }
 }

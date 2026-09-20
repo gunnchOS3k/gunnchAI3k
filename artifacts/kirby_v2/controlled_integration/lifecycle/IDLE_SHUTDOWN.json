@@ -1,0 +1,4 @@
+{
+  "idle_shutdown_ms": 300000,
+  "sessions_cleared_on_close": true
+}

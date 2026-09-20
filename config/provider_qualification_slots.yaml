@@ -1,0 +1,84 @@
+# Provider qualification slots — roles for bake-off, not permanent model pins
+schema_version: kirby.provider_qualification_slots.v1
+claim_boundary: >
+  Slots define capability budgets for qualification. No slot hard-codes a vendor
+  or model. Promotion is evidence-gated and reversible.
+slots:
+  - id: SLOT_A_MICRO_ROUTER
+    tier: 0
+    role: micro_router
+    intent: Instant classify/route/safety precheck on-device
+    budgets: { max_latency_ms: 250, max_context_tokens: 4096, max_cost_usd: 0, max_energy_j: 2 }
+    preferred_location: local
+    offline_required: true
+    suites: [routing, offline, reliability, safety]
+  - id: SLOT_B_EDGE_FAST
+    tier: 1
+    role: edge_fast
+    intent: Everyday assist, light tutoring, summarization
+    budgets: { max_latency_ms: 1500, max_context_tokens: 16384, max_cost_usd: 0, max_energy_j: 8 }
+    preferred_location: local
+    offline_required: true
+    suites: [routing, waike, offline, reliability, safety]
+  - id: SLOT_C_WORKSTATION_PRO
+    tier: 2
+    role: workstation_pro
+    intent: Coding, deeper reasoning, multimodal when consented
+    budgets: { max_latency_ms: 8000, max_context_tokens: 128000, max_cost_usd: 0.05, max_energy_j: 40 }
+    preferred_location: local_preferred
+    offline_required: false
+    suites: [coding, tool_use, bounded_agent, multimodal, reliability, safety]
+  - id: SLOT_D_WAIKE_TUTOR
+    tier: 1
+    role: waike_tutor
+    intent: Socratic tutoring without exam dumps; verifier-gated
+    budgets: { max_latency_ms: 3000, max_context_tokens: 32768, max_cost_usd: 0.02, max_energy_j: 15 }
+    preferred_location: local_preferred
+    offline_required: true
+    suites: [waike, offline, safety, reliability]
+  - id: SLOT_E_RESEARCH_LONG
+    tier: 3
+    role: research_long
+    intent: Long-horizon research with citations; cloud opt-in
+    budgets: { max_latency_ms: 60000, max_context_tokens: 500000, max_cost_usd: 0.50, max_energy_j: 100 }
+    preferred_location: cloud_opt_in
+    offline_required: false
+    suites: [research, long_context, tool_use, reliability, safety]
+  - id: SLOT_F_CREATOR_STUDIO
+    tier: 2
+    role: creator_studio
+    intent: Creator studio docs/outlines without shell authority
+    budgets: { max_latency_ms: 8000, max_context_tokens: 65536, max_cost_usd: 0.05, max_energy_j: 30 }
+    preferred_location: local_preferred
+    offline_required: false
+    suites: [creator, tool_use, reliability, safety]
+  - id: SLOT_G_COMPUTER_USE
+    tier: 3
+    role: computer_use
+    intent: Controlled local UI observe→act→verify; consent-gated
+    budgets: { max_latency_ms: 60000, max_context_tokens: 128000, max_cost_usd: 0.50, max_energy_j: 80 }
+    preferred_location: hybrid
+    offline_required: false
+    suites: [computer_use, tool_use, safety, reliability]
+    optional_gate: true
+promotion_states:
+  - EXPERIMENTAL
+  - QUALIFIED
+  - PREFERRED_FOR_SLOT
+  - FALLBACK
+  - DISABLED
+promotion_rules:
+  - id: R1_ADAPTER_CONFORMANCE
+    description: All claimed adapter conformance passes are true or explicitly unsupported=false
+  - id: R2_SUITE_PASS_THRESHOLD
+    description: Required suites for the slot meet success thresholds with raw evidence
+  - id: R3_OFFLINE_WHEN_REQUIRED
+    description: If slot.offline_required, OFFLINE_CORE_ASSISTANT_USABLE holds without remote
+  - id: R4_SAFETY_INJECTION
+    description: UNTRUSTED_CONTENT_CANNOT_GRANT_PERMISSIONS remains true
+  - id: R5_NO_HARD_PIN
+    description: Promotion does not hard-code a permanent single-provider product pin
+  - id: R6_RESOURCE_FIT
+    description: Candidate fits host resource profile or is marked resource-incompatible
+  - id: R7_HONEST_MODE
+    description: Simulated vs live labeled; no fabricated live model success

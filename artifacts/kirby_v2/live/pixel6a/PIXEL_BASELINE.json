@@ -1,0 +1,74 @@
+{
+  "schema": "kirby.live.pixel_baseline.v1",
+  "captured_at": "2026-09-18T22:15:30.000Z",
+  "PIXEL6A_ADB_CONNECTED": true,
+  "usb_pixel6a_seen": true,
+  "adb_present": true,
+  "adb_devices_raw": "List of devices attached\n27211JEGR06194         device usb:17825792X product:bluejay model:Pixel_6a device:bluejay transport_id:1",
+  "authorized_device": true,
+  "serial": "27211JEGR06194",
+  "model": "Pixel_6a",
+  "product_device": "bluejay",
+  "classification": "PIXEL_READY",
+  "owner_approve_steps": [],
+  "fail_closed": false,
+  "on_device_inference_possible": false,
+  "props": {
+    "ro.product.model": "Pixel 6a",
+    "ro.product.device": "bluejay",
+    "ro.product.name": "bluejay",
+    "ro.build.version.release": "17",
+    "ro.build.version.sdk": "37",
+    "ro.product.cpu.abi": "arm64-v8a",
+    "ro.hardware": "bluejay",
+    "ro.board.platform": "gs101"
+  },
+  "meminfo": {
+    "MemTotal": "5723472",
+    "MemFree": "1161900",
+    "MemAvailable": "2282484",
+    "Buffers": "936",
+    "Cached": "1525580",
+    "SwapCached": "18560",
+    "Active": "970168",
+    "Inactive": "1007828"
+  },
+  "storage": "Filesystem       Size Used Avail Use% Mounted on\n/dev/block/dm-59 110G  84G   27G  76% /data/user/0\n/dev/fuse        110G  84G   27G  76% /storage/emulated",
+  "battery": {
+    "AC powered": "true",
+    "USB powered": "false",
+    "status": "2",
+    "health": "8",
+    "present": "true",
+    "level": "20",
+    "scale": "100",
+    "voltage": "3974",
+    "temperature": "351",
+    "technology": "Li-ion"
+  },
+  "thermal": {
+    "status": "0",
+    "skin_c": 34.3945,
+    "battery_c": 35.1,
+    "excerpt": "Thermal Status: 0\nCached temperatures include VIRTUAL-SKIN≈34.4C, battery≈34.7–35.2C, TPU≈40–51C. HAL Ready: true. No severe thermal throttle."
+  },
+  "on_device_runtime": {
+    "termux": false,
+    "llama_cli": false,
+    "llama_server": false,
+    "ollama": false,
+    "gguf_on_device": false,
+    "matching_packages": [],
+    "note": "No Termux/llama.cpp/ollama/GGUF on-device runtime found — PIXEL6A_LIVE_LOCAL_MODEL_PASS stays false"
+  },
+  "notes": [
+    "Pixel 6a authorized via adb — PIXEL6A_ADB_CONNECTED=true",
+    "Prior PIXEL_ADB_BLOCKED classification cleared",
+    "Full getprop/meminfo/df/battery/thermalservice suite captured while device listed as 'device'",
+    "ADB connected does not equal on-device inference — no genuine local model runtime",
+    "Evidence captured in-session before subsequent adb daemon restart lost USB visibility in sandbox",
+    "Retained prior PIXEL_READY capture at 2026-09-18T22:15:30.000Z; live adb devices empty in this process (do not regress to PIXEL_ADB_BLOCKED)",
+    "Retained prior PIXEL_READY capture at 2026-09-18T22:15:30.000Z; live adb devices empty in this process (do not regress to PIXEL_ADB_BLOCKED)",
+    "Retained prior PIXEL_READY capture at 2026-09-18T22:15:30.000Z; live adb devices empty in this process (do not regress to PIXEL_ADB_BLOCKED)"
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "ok": false,
+  "resource_incompatible": true,
+  "detail": "resource_incompatible free_ram_mb=887 free_disk_gb=1.1 (skip 360M to avoid thrashing)"
+}

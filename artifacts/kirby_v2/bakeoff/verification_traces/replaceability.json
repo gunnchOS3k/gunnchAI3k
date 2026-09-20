@@ -1,0 +1,50 @@
+[
+  {
+    "suite": "proofs",
+    "task_id": "fallback_chain",
+    "model_id": "sim-qwen-workstation",
+    "provider_id": "prov_qwen",
+    "success": true,
+    "latency_ms": 1,
+    "cost_usd": 0,
+    "energy_j": 0,
+    "verifier_pass": true,
+    "evidence_mode": "simulated_deterministic",
+    "detail": "sim-qwen-workstation -> sim-mistral-workstation -> sim-glm-tools -> sim-llama-edge-fast -> sim-gemma-edge -> sim-micro-router",
+    "tokens": {
+      "MODEL_ROUTER_FALLBACK_CHAIN_PASS": true
+    }
+  },
+  {
+    "suite": "proofs",
+    "task_id": "waike_replaceability",
+    "model_id": "sim-micro-router,sim-llama-edge-fast",
+    "provider_id": "multi",
+    "success": true,
+    "latency_ms": 1,
+    "cost_usd": 0,
+    "energy_j": 0,
+    "verifier_pass": true,
+    "evidence_mode": "simulated_deterministic",
+    "detail": "adapters=6",
+    "tokens": {
+      "WAIKE_MODEL_REPLACEABILITY_PASS": true
+    }
+  },
+  {
+    "suite": "proofs",
+    "task_id": "tool_schema_independence",
+    "model_id": "sim-micro-router,sim-llama-edge-fast",
+    "provider_id": "multi",
+    "success": true,
+    "latency_ms": 1,
+    "cost_usd": 0,
+    "energy_j": 0,
+    "verifier_pass": true,
+    "evidence_mode": "simulated_deterministic",
+    "detail": "ToolInvocation v2 identical broker path across adapters",
+    "tokens": {
+      "TOOL_SCHEMA_PROVIDER_INDEPENDENCE_PASS": true
+    }
+  }
+]
