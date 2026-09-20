@@ -57,11 +57,11 @@
     },
     "adb_released": true
   },
-  "candidate_sha": "c8259ff22ad51c0d8c6afd99e62039cb69ff75b4",
+  "candidate_sha": "65017f4206a5e665fb4599dac25edb411da01eeb",
   "worktree": ".worktrees/kirby-main-reconciliation",
   "draft_pr_only": true,
   "merged": false,
-  "candidate_note": "Final reconciliation candidate for Agent B WAIKE pin.",
+  "candidate_note": "Authoritative Agent B handoff tip (branch HEAD).",
   "candidate_branch": "integration/kirby-controlled-stack-main-reconciliation",
   "draft_pr": {
     "status": "BLOCKED_LOCAL_API_PROXY",
