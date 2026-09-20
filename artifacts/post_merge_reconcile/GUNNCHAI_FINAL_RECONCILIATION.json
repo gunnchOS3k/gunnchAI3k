@@ -57,8 +57,9 @@
     },
     "adb_released": true
   },
-  "candidate_sha": "PENDING_POST_COMMIT",
+  "candidate_sha": "b42a6d30bb1e997869b31ea193c7d8e19807aeaf",
   "worktree": ".worktrees/kirby-main-reconciliation",
   "draft_pr_only": true,
-  "merged": false
+  "merged": false,
+  "candidate_note": "Branch tip for Agent B WAIKE pin; includes clean merge onto accepted main plus post-merge revalidation."
 }
