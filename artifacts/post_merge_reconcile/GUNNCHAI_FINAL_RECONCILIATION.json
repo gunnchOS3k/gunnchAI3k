@@ -57,9 +57,10 @@
     },
     "adb_released": true
   },
-  "candidate_sha": "b42a6d30bb1e997869b31ea193c7d8e19807aeaf",
+  "candidate_sha": "USE_BRANCH_TIP",
   "worktree": ".worktrees/kirby-main-reconciliation",
   "draft_pr_only": true,
   "merged": false,
-  "candidate_note": "Branch tip for Agent B WAIKE pin; includes clean merge onto accepted main plus post-merge revalidation."
+  "candidate_note": "Agent B must pin the tip of integration/kirby-controlled-stack-main-reconciliation (not USE_BRANCH_TIP literal).",
+  "candidate_branch": "integration/kirby-controlled-stack-main-reconciliation"
 }
