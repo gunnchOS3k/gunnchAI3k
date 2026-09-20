@@ -1,0 +1,35 @@
+{
+  "artifact": "GUNNCHAI_FINAL_RECONCILIATION",
+  "generated_at": "2026-09-20T16:29:38Z",
+  "repo": "gunnchOS3k/gunnchAI3k",
+  "branch": "integration/kirby-controlled-stack-main-reconciliation",
+  "accepted_main_sha": "4f46c8f1da405cdfb7c519cadd377127302ecf3f",
+  "stack_tip_sha": "aa61e924793672f40a3720a6799b6ecd6d6e6a82",
+  "merge_base_sha": "32d50c2bb47c80df01a6278c95415440bf3833b0",
+  "divergence": {
+    "ahead_by": 5,
+    "behind_by": 1
+  },
+  "strategy": "real_merge",
+  "merge_from": "origin/main@4f46c8f1da405cdfb7c519cadd377127302ecf3f",
+  "merge_of": "aa61e924793672f40a3720a6799b6ecd6d6e6a82",
+  "conflicts": [],
+  "conflict_count": 0,
+  "resolution": "clean_ort_merge_no_conflicts",
+  "preserved": [
+    "PR #50 history on accepted main",
+    "provider bake-off",
+    "live-provider promotion",
+    "Nearby Edge runtime",
+    "security/fallback/resource guards",
+    "WAIKE contracts"
+  ],
+  "truth_boundaries": {
+    "PRODUCTION_DEFAULT_PROVIDER_FROZEN": false,
+    "PIXEL6A_LIVE_LOCAL_MODEL_PASS": false
+  },
+  "candidate_sha": "2832610c2b43d5c0aa467270c788cf45085a09f4",
+  "worktree": ".worktrees/kirby-main-reconciliation",
+  "draft_pr_only": true,
+  "merged": false
+}
