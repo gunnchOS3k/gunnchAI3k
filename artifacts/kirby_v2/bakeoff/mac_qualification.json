@@ -2,7 +2,7 @@
   "host": {
     "chip": "Apple M2",
     "mem_gb": 8,
-    "metal": false
+    "metal": true
   },
   "micro_edge_workstation_sparse": {
     "micro": "sim adapters preferred for SLOT_A (live GGUF unavailable)",

@@ -4,11 +4,9 @@
   "production_default": false,
   "microPass": true,
   "executeOk": true,
-  "pixelJourneyPass": false,
-  "pixelJourneyDetail": "PIXEL_ADB_OFFLINE_AFTER_REAUTH_RETRY",
-  "adbOk": false,
-  "adbOffline": true,
+  "pixelJourneyPass": true,
+  "pixelJourneyDetail": "ADB_REVERSE_PIXEL_CHROME_FULL_JOURNEY_PASS",
+  "adbOk": true,
   "provenance_present": true,
-  "physical_retry_note": "Re-auth briefly succeeded then device stuck offline; physical gate remains false",
   "nextAction": "NEXT_GUNNCHAI_ACTION=INTEGRATE_NEARBY_EDGE_PROVIDER_INTO_GUNNCHOS_CAPSULE_AND_WAIKE_PIXEL_PILOT"
 }

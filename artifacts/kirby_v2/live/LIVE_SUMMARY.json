@@ -1,6 +1,6 @@
 {
   "microPass": true,
-  "assistantPass": false,
+  "assistantPass": true,
   "offlinePass": true,
   "fallbackPass": true,
   "replacePass": true,
@@ -13,8 +13,5 @@
   "promotion_state": "LIVE_QUALIFIED",
   "pixel_classification": "PIXEL_READY",
   "android_client": "GUNNCHAI_ANDROID_CLIENT_NOT_AVAILABLE",
-  "nextAction": "NEXT_GUNNCHAI_ACTION=PROMOTE_LIVE_QUALIFIED_PROVIDER_TO_CONTROLLED_PRODUCT_INTEGRATION",
-  "PIXEL6A_ADB_CONNECTED": true,
-  "runtime_decision": "RUNTIME_NEARBY_EDGE_MAC_PREFERRED",
-  "secondary_pixel_action": "NEXT_GUNNCHAI_ACTION=KEEP_PIXEL_AS_CLIENT_AND_QUALIFY_NEARBY_EDGE_EXECUTION"
+  "nextAction": "NEXT_GUNNCHAI_ACTION=PROMOTE_LIVE_QUALIFIED_PROVIDER_TO_CONTROLLED_PRODUCT_INTEGRATION"
 }

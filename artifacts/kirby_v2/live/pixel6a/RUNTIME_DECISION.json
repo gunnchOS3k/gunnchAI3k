@@ -1,13 +1,13 @@
 {
   "schema": "kirby.live.pixel_runtime_decision.v1",
-  "captured_at": "2026-09-18T22:28:10.169994Z",
+  "captured_at": "2026-09-20T16:37:24.497Z",
   "PIXEL6A_ADB_CONNECTED": true,
   "classification": "PIXEL_READY",
   "RUNTIME_ON_DEVICE_LOCAL": false,
   "RUNTIME_NEARBY_EDGE_MAC": true,
   "RUNTIME_ADB_FORWARDED_MAC": false,
-  "RUNTIME_UNAVAILABLE": false,
-  "decision": "RUNTIME_NEARBY_EDGE_MAC_PREFERRED \u2014 ADB client ready; no on-device inference binary/runtime",
+  "RUNTIME_UNAVAILABLE": true,
+  "decision": "RUNTIME_NEARBY_EDGE_MAC_PREFERRED — ADB client ready; no on-device inference binary/runtime",
   "honesty": {
     "adb_forwarded_mac_not_claimed_as_pixel_local": true,
     "note": "ADB connectivity alone never sets LIVE_PIXEL or PIXEL6A_LIVE_LOCAL_MODEL_PASS"

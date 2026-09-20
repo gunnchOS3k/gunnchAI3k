@@ -12,10 +12,10 @@
   "LIVE_QUALIFIED": true,
   "simulated_never_live_qualified": true,
   "production_default": false,
-  "captured_at": "2026-09-18T22:26:49.493Z",
+  "captured_at": "2026-09-20T16:37:41.835Z",
   "gates_snapshot": {
     "LIVE_MAC_MICRO_PROVIDER_PASS": true,
-    "LIVE_MAC_LOCAL_ASSISTANT_PASS": false,
+    "LIVE_MAC_LOCAL_ASSISTANT_PASS": true,
     "LIVE_OFFLINE_GUNNCHAI_PASS": true,
     "LIVE_PROVIDER_FALLBACK_PASS": true,
     "LIVE_WAIKE_MODEL_REPLACEABILITY_PASS": true,

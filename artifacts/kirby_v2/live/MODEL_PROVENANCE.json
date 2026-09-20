@@ -1,6 +1,6 @@
 {
   "schema": "kirby.live.model_provenance.v1",
-  "captured_at": "2026-09-18T22:26:01.158Z",
+  "captured_at": "2026-09-20T16:37:18.630Z",
   "policy": {
     "unknown_license_weights_forbidden": true,
     "seven_b_plus_on_pixel_forbidden": true,

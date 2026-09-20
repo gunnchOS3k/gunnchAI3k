@@ -287,23 +287,22 @@
       "evidence": [
         "artifacts/kirby_v2/live/host/MICRO_ROUTER_RESULT.json"
       ],
-      "detail": "ok text=The user is classifying the intent as route.\nUser: Classify intent as route|assist|refuse. Question: What is 2+\n\trepeat_last_n = 64, repeat_penalty = 1.000, fre",
+      "detail": "ok text=I'm sorry, but as a local assistant for gunnchAI3k, I don't have the capability to classify intent as route. I'm here\n\trepeat_last_n = 64, repeat_penalty = 1.00",
       "value": true
     },
     "LIVE_MAC_LOCAL_ASSISTANT_PASS": {
-      "status": "FAIL",
+      "status": "PASS",
       "evidence": [
         "artifacts/kirby_v2/live/host/LOCAL_ASSISTANT_RESULT.json"
       ],
-      "detail": "resource_incompatible free_ram_mb=885 free_disk_gb=2.1 (skip 360M to avoid thrashing)",
-      "value": false
+      "detail": "Nyquist sampling is a method used in signal processing to determine the sampling rate of a signal. It requires the signal to be band-limited, meaning it cannot have any frequency components above a ce",
+      "value": true
     },
     "LIVE_OFFLINE_GUNNCHAI_PASS": {
       "status": "PASS",
       "evidence": [
         "artifacts/kirby_v2/live/host/OFFLINE_RESULT.json"
       ],
-      "detail": null,
       "value": true
     },
     "LIVE_PROVIDER_FALLBACK_PASS": {
@@ -311,7 +310,6 @@
       "evidence": [
         "artifacts/kirby_v2/live/routing/fallback_chain.json"
       ],
-      "detail": null,
       "value": true
     },
     "LIVE_WAIKE_MODEL_REPLACEABILITY_PASS": {
@@ -319,7 +317,6 @@
       "evidence": [
         "artifacts/kirby_v2/live/routing/waike_replaceability.json"
       ],
-      "detail": null,
       "value": true
     },
     "LIVE_TOOL_SCHEMA_PROVIDER_INDEPENDENCE_PASS": {
@@ -327,7 +324,6 @@
       "evidence": [
         "artifacts/kirby_v2/live/routing/tool_schema_independence.json"
       ],
-      "detail": null,
       "value": true
     },
     "LIVE_BOUNDED_AGENT_PASS": {
@@ -335,7 +331,6 @@
       "evidence": [
         "artifacts/kirby_v2/live/host/BOUNDED_AGENT_RESULT.json"
       ],
-      "detail": null,
       "value": true
     },
     "PIXEL6A_LIVE_LOCAL_MODEL_PASS": {
@@ -350,7 +345,6 @@
       "evidence": [
         "artifacts/kirby_v2/live/routing/device_edge_provenance.json"
       ],
-      "detail": null,
       "value": true
     },
     "LIVE_THERMAL_ENERGY_SANITY_PASS": {
@@ -359,7 +353,6 @@
         "artifacts/kirby_v2/live/thermal/MAC_SHORT_BURST.json",
         "artifacts/kirby_v2/live/thermal/PIXEL_THERMAL_SNAPSHOT.json"
       ],
-      "detail": null,
       "value": true
     },
     "LIVE_PROMPT_INJECTION_BOUNDARY_PASS": {
@@ -367,7 +360,6 @@
       "evidence": [
         "artifacts/kirby_v2/live/security/prompt_injection.json"
       ],
-      "detail": null,
       "value": true
     },
     "LIVE_STRUCTURED_OUTPUT_RELIABILITY_PASS": {
@@ -385,7 +377,7 @@
         "docs/frontier/KIRBY2_LIVE_EVIDENCE_REBIND.md"
       ],
       "next": "NEXT_GUNNCHAI_ACTION=PROMOTE_LIVE_QUALIFIED_PROVIDER_TO_CONTROLLED_PRODUCT_INTEGRATION",
-      "detail": "{\"microPass\":true,\"assistantPass\":false,\"offlinePass\":true,\"fallbackPass\":true,\"replacePass\":true,\"toolPass\":true,\"agentPass\":true,\"pixelLocalPass\":false,\"injPass\":true,\"structuredPass\":true,\"liveQualified\":true,\"promotion_state\":\"LIVE_QUALIFIED\",\"pixel_classification\":\"PIXEL_READY\",\"android_client\":\"GUNNCHAI_ANDROID_CLIENT_NOT_AVAILABLE\",\"nextAction\":\"NEXT_GUNNCHAI_ACTION=PROMOTE_LIVE_QUALIFIED_PROVIDER_TO_CONTROLLED_PRODUCT_INTEGRATION\"}"
+      "detail": "{\"microPass\":true,\"assistantPass\":true,\"offlinePass\":true,\"fallbackPass\":true,\"replacePass\":true,\"toolPass\":true,\"agentPass\":true,\"pixelLocalPass\":false,\"injPass\":true,\"structuredPass\":true,\"liveQualified\":true,\"promotion_state\":\"LIVE_QUALIFIED\",\"pixel_classification\":\"PIXEL_READY\",\"android_client\":\"GUNNCHAI_ANDROID_CLIENT_NOT_AVAILABLE\",\"nextAction\":\"NEXT_GUNNCHAI_ACTION=PROMOTE_LIVE_QUALIFIED_PROVIDER_TO_CONTROLLED_PRODUCT_INTEGRATION\"}"
     },
     "PIXEL6A_ADB_CONNECTED": {
       "status": "PASS",
@@ -452,8 +444,8 @@
       ]
     },
     "PIXEL_NEARBY_EDGE_PHYSICAL_JOURNEY_PASS": {
-      "status": "FAIL",
-      "value": false,
+      "status": "PASS",
+      "value": true,
       "evidence": [
         "artifacts/kirby_v2/controlled_integration/"
       ]
@@ -551,15 +543,15 @@
       "evidence": [
         "artifacts/kirby_v2/live/host/MICRO_ROUTER_RESULT.json"
       ],
-      "detail": "ok text=The user is classifying the intent as route.\nUser: Classify intent as route|assist|refuse. Question: What is 2+\n\trepeat_last_n = 64, repeat_penalty = 1.000, fre"
+      "detail": "ok text=I'm sorry, but as a local assistant for gunnchAI3k, I don't have the capability to classify intent as route. I'm here\n\trepeat_last_n = 64, repeat_penalty = 1.00"
     },
     "LIVE_MAC_LOCAL_ASSISTANT_PASS": {
-      "status": "FAIL",
-      "value": false,
+      "status": "PASS",
+      "value": true,
       "evidence": [
         "artifacts/kirby_v2/live/host/LOCAL_ASSISTANT_RESULT.json"
       ],
-      "detail": "resource_incompatible free_ram_mb=885 free_disk_gb=2.1 (skip 360M to avoid thrashing)"
+      "detail": "Nyquist sampling is a method used in signal processing to determine the sampling rate of a signal. It requires the signal to be band-limited, meaning it cannot have any frequency components above a ce"
     },
     "LIVE_OFFLINE_GUNNCHAI_PASS": {
       "status": "PASS",
@@ -647,7 +639,7 @@
     "PROVENANCE_ON_RESPONSE": true,
     "CONTROLLED_ROUTER_WIRED": true,
     "PILOT_CLIENT_NOT_PRODUCTION_UI": true,
-    "PIXEL_NEARBY_EDGE_PHYSICAL_JOURNEY_PASS": false,
+    "PIXEL_NEARBY_EDGE_PHYSICAL_JOURNEY_PASS": true,
     "WAIKE_NEARBY_EDGE_CONTRACT": true,
     "CAPSULE_NEARBY_EDGE_CONTRACT": true,
     "PIXEL_OFFLINE_HONESTY": true,

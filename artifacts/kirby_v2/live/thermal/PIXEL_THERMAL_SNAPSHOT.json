@@ -1,10 +1,10 @@
 {
   "captured": true,
-  "battery_level": "20",
-  "battery_temperature_raw": "351",
+  "battery_level": "79",
+  "battery_temperature_raw": "284",
   "thermal_status": "0",
-  "skin_c": 34.3945,
-  "battery_c": 35.1,
+  "skin_c": null,
+  "battery_c": 28.4,
   "on_device_inference_load": false,
   "note": "Pixel thermal snapshot only (no on-device model load). Status 0 = NONE. Battery ~20% AC charging observed at preflight.",
   "severe_thermal_stop": false

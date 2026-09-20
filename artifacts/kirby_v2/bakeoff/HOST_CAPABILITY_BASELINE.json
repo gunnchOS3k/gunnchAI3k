@@ -1,6 +1,6 @@
 {
   "schema": "kirby.host_capability_baseline.v1",
-  "captured_at": "2026-09-18T21:43:29.517Z",
+  "captured_at": "2026-09-20T16:37:16.811Z",
   "host": {
     "platform": "darwin",
     "os_release": "ProductName:\t\tmacOS\nProductVersion:\t\t26.6.2\nBuildVersion:\t\t25G83",
@@ -10,9 +10,9 @@
     "memsize_gb": 8,
     "cpu_brand": "Apple M2",
     "apple_silicon": true,
-    "metal_supported": false,
-    "free_disk_bytes": 4823019520,
-    "free_disk_gb": 4.5,
+    "metal_supported": true,
+    "free_disk_bytes": 15027318784,
+    "free_disk_gb": 14,
     "hardware_overview": {
       "Model Name": "MacBook Pro",
       "Model Identifier": "Mac14,7",
@@ -24,8 +24,7 @@
       "OS Loader Version": "18000.161.10",
       "Serial Number (system)": "[REDACTED]",
       "Hardware UUID": "[REDACTED]",
-      "Provisioning UDID": "[REDACTED]",
-      "Activation Lock Status": "Enabled"
+      "Provisioning UDID": "[REDACTED]"
     }
   },
   "runtimes": {
@@ -33,7 +32,7 @@
       "present": true
     },
     "metal": {
-      "present": false,
+      "present": true,
       "notes": "From SPDisplaysDataType"
     },
     "python": {
@@ -81,10 +80,10 @@
     }
   },
   "pixel6a": {
-    "connected": false,
+    "connected": true,
     "PIXEL_EDGE_MODEL_BAKEOFF_NOT_RUN": true,
-    "reason": "No Pixel 6a / adb device connected; Android inference not installed or tested",
-    "adb_devices": "List of devices attached"
+    "reason": "Device listed but no supported Android inference runtime path for bake-off",
+    "adb_devices": "List of devices attached\n27211JEGR06194         device usb:17825792X product:bluejay model:Pixel_6a device:bluejay transport_id:13"
   },
   "honesty": {
     "live_model_inference_attempted": false,

@@ -1,27 +1,31 @@
 {
   "schema": "gunnchai.kirby4.pairing_trace.v1",
-  "retry_at": "2026-09-18T23:48:42Z",
   "steps": [
     {
-      "step": "adb_reauth",
+      "step": "pair",
+      "via": "pixel_chrome_cdp_fetch",
       "ok": true,
-      "note": "Brief AUTHORIZED after adb kill-server/start-server"
+      "status": 200
     },
     {
-      "step": "pixel_chrome_cdp_attempt",
-      "ok": false,
-      "error": "TypeError: Failed to fetch via ADB reverse / Chrome CDP"
+      "step": "execute",
+      "ok": true,
+      "status": 200
     },
     {
-      "step": "physical_gate",
-      "ok": false,
-      "note": "Fail closed — Mac localhost pair/exec does not earn PIXEL_NEARBY_EDGE_PHYSICAL_JOURNEY_PASS"
+      "step": "provider_disconnect_fallback",
+      "ok": true,
+      "error": "PROVIDER_UNAVAILABLE"
     },
     {
-      "step": "final_adb_state",
-      "ok": false,
-      "state": "offline",
-      "usb_present": true
+      "step": "session_recover",
+      "ok": true
+    },
+    {
+      "step": "revoke_then_deny",
+      "revoke_ok": true,
+      "denied": true,
+      "status": 401
     }
   ]
 }

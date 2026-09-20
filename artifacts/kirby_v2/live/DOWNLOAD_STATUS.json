@@ -1,6 +1,6 @@
 {
   "candidate_id": "live-smollm2-135m-q4_k_m",
   "ok": true,
-  "path": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/.worktrees/kirby-v2/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
+  "path": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/.worktrees/kirby-main-reconciliation/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf",
   "detail": "verified existing weights at /Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/models/local/SmolLM2-135M-Instruct-Q4_K_M.gguf"
 }

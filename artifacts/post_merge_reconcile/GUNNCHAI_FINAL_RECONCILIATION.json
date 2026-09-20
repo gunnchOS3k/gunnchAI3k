@@ -1,6 +1,6 @@
 {
   "artifact": "GUNNCHAI_FINAL_RECONCILIATION",
-  "generated_at": "2026-09-20T16:29:38Z",
+  "generated_at": "2026-09-20T16:38:41Z",
   "repo": "gunnchOS3k/gunnchAI3k",
   "branch": "integration/kirby-controlled-stack-main-reconciliation",
   "accepted_main_sha": "4f46c8f1da405cdfb7c519cadd377127302ecf3f",
@@ -28,7 +28,36 @@
     "PRODUCTION_DEFAULT_PROVIDER_FROZEN": false,
     "PIXEL6A_LIVE_LOCAL_MODEL_PASS": false
   },
-  "candidate_sha": "2832610c2b43d5c0aa467270c788cf45085a09f4",
+  "validation": {
+    "core_proof_unit": "PASS",
+    "provider_bakeoff": "PASS",
+    "live_provider_promotion": "PASS",
+    "controlled_integration": "PASS",
+    "kirby_jest_matrix": "PASS 36/36",
+    "security_fallback_resource_artifacts": "PASS",
+    "waike_nearby_edge_contracts": "PASS"
+  },
+  "nearby_edge_physical": {
+    "PIXEL_NEARBY_EDGE_PHYSICAL_JOURNEY_PASS": true,
+    "detail": "ADB_REVERSE_PIXEL_CHROME_FULL_JOURNEY_PASS",
+    "earned_via": "scripts/run_kirby_controlled_integration.ts embedded physical journey",
+    "evidence_paths": [
+      "artifacts/kirby_v2/controlled_integration/pixel_journey/PHYSICAL_PIXEL_JOURNEY.json",
+      "artifacts/kirby_v2/controlled_integration/pixel_journey/JOURNEY_LOG.json",
+      "artifacts/kirby_v2/controlled_integration/pixel_journey/PAIRING_TRACE.json",
+      "artifacts/kirby_v2/controlled_integration/pixel_journey/EXECUTION_PROVENANCE.json",
+      "artifacts/kirby_v2/controlled_integration/pixel_journey/OFFLINE_HONESTY.json",
+      "artifacts/kirby_v2/controlled_integration/pixel_journey/screenshot.png",
+      "artifacts/kirby_v2/controlled_integration/gates/GATE_SUMMARY.json"
+    ],
+    "honesty": {
+      "RUNTIME_ON_DEVICE_LOCAL": false,
+      "adb_reverse_is_not_on_device": true,
+      "PIXEL6A_LIVE_LOCAL_MODEL_PASS": false
+    },
+    "adb_released": true
+  },
+  "candidate_sha": "PENDING_POST_COMMIT",
   "worktree": ".worktrees/kirby-main-reconciliation",
   "draft_pr_only": true,
   "merged": false

@@ -1,6 +1,6 @@
 {
   "schema": "kirby.candidate_inventory.v1",
-  "captured_at": "2026-09-18T21:43:30.098Z",
+  "captured_at": "2026-09-20T16:37:17.206Z",
   "honesty": "Inventory includes simulated architecture adapters plus honest NO_CANDIDATE_AVAILABLE for live local/remote. No live weight success fabricated.",
   "local_first_ladder": [
     "fixture/sim micro",
@@ -84,7 +84,7 @@
       "license": "Apache-2.0-or-equivalent-candidate",
       "provenance": "public-pattern-shape-only; not a downloaded weight inventory",
       "resource_fit": "resource_incompatible",
-      "resource_reason": "Host RAM 8GB / free disk 4.5GB tight for tier 2 live weights",
+      "resource_reason": "Host RAM 8GB / free disk 14GB tight for tier 2 live weights",
       "offline_capable": true,
       "supports_computer_use": false,
       "notes": "SIMULATED adapter for structural/control-plane proofs. Not a live model quality claim. No weight download performed."
@@ -104,7 +104,7 @@
       "license": "Apache-2.0-or-equivalent-candidate",
       "provenance": "public-pattern-shape-only; not a downloaded weight inventory",
       "resource_fit": "resource_incompatible",
-      "resource_reason": "Host RAM 8GB / free disk 4.5GB tight for tier 2 live weights",
+      "resource_reason": "Host RAM 8GB / free disk 14GB tight for tier 2 live weights",
       "offline_capable": true,
       "supports_computer_use": false,
       "notes": "SIMULATED adapter for structural/control-plane proofs. Not a live model quality claim. No weight download performed."
@@ -125,7 +125,7 @@
       "license": "Apache-2.0-or-equivalent-candidate",
       "provenance": "public-pattern-shape-only; not a downloaded weight inventory",
       "resource_fit": "resource_incompatible",
-      "resource_reason": "Host RAM 8GB / free disk 4.5GB tight for tier 2 live weights",
+      "resource_reason": "Host RAM 8GB / free disk 14GB tight for tier 2 live weights",
       "offline_capable": true,
       "supports_computer_use": false,
       "notes": "SIMULATED adapter for structural/control-plane proofs. Not a live model quality claim. No weight download performed."

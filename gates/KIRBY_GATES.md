@@ -27,10 +27,9 @@ Claim boundary: no human validation, no live model quality wins, no permanent pr
 
 ## KIRBY-3 live provider promotion
 
-- **LIVE_MAC_MICRO_PROVIDER_PASS**: PASS — ok text=The user is classifying the intent as route.
-User: Classify intent as route|assist|refuse. Question: What is 2+
-	repeat_last_n = 64, repeat_penalty = 1.000, fre
-- **LIVE_MAC_LOCAL_ASSISTANT_PASS**: FAIL — resource_incompatible free_ram_mb=885 free_disk_gb=2.1 (skip 360M to avoid thrashing)
+- **LIVE_MAC_MICRO_PROVIDER_PASS**: PASS — ok text=I'm sorry, but as a local assistant for gunnchAI3k, I don't have the capability to classify intent as route. I'm here
+	repeat_last_n = 64, repeat_penalty = 1.00
+- **LIVE_MAC_LOCAL_ASSISTANT_PASS**: PASS — Nyquist sampling is a method used in signal processing to determine the sampling rate of a signal. It requires the signal to be band-limited, meaning it cannot have any frequency components above a ce
 - **LIVE_OFFLINE_GUNNCHAI_PASS**: PASS
 - **LIVE_PROVIDER_FALLBACK_PASS**: PASS
 - **LIVE_WAIKE_MODEL_REPLACEABILITY_PASS**: PASS
@@ -54,7 +53,7 @@ Next: `NEXT_GUNNCHAI_ACTION=PROMOTE_LIVE_QUALIFIED_PROVIDER_TO_CONTROLLED_PRODUC
 - **PROVENANCE_ON_RESPONSE**: true
 - **CONTROLLED_ROUTER_WIRED**: true
 - **PILOT_CLIENT_NOT_PRODUCTION_UI**: true
-- **PIXEL_NEARBY_EDGE_PHYSICAL_JOURNEY_PASS**: false
+- **PIXEL_NEARBY_EDGE_PHYSICAL_JOURNEY_PASS**: true
 - **WAIKE_NEARBY_EDGE_CONTRACT**: true
 - **CAPSULE_NEARBY_EDGE_CONTRACT**: true
 - **PIXEL_OFFLINE_HONESTY**: true

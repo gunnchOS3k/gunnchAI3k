@@ -1,51 +1,28 @@
 {
-  "PIXEL_NEARBY_EDGE_PHYSICAL_JOURNEY_PASS": false,
-  "detail": "PIXEL_ADB_OFFLINE_AFTER_REAUTH_RETRY",
-  "blocker": "PIXEL_ADB_OFFLINE_USB_PRESENT",
-  "retry_at": "2026-09-18T23:48:42Z",
-  "adb_timeline": [
-    "adb kill-server && adb start-server → briefly AUTHORIZED (device product:bluejay model:Pixel_6a)",
-    "adb shell id succeeded (uid=2000)",
-    "Subsequent contention / adb usb / multi-client use → device flapped offline",
-    "Chrome CDP physical attempt: adb reverse OK but Pixel Chrome fetch failed (Failed to fetch); gate kept false (honest)",
-    "Final state: USB Pixel 6a present in ioreg, adb devices shows offline"
-  ],
-  "owner_steps_if_blocked": [
-    "Unlock Pixel 6a and keep screen on",
-    "Notification shade → USB / Android System → File transfer / MTP (not Charging only)",
-    "If RSA dialog appears: tap Allow USB debugging (optionally Always allow from this computer)",
-    "Developer options → Revoke USB debugging authorizations → unplug/replug → re-allow",
-    "Toggle USB debugging OFF then ON",
-    "Stop other adb clients (other agents/scripts) contending for serial 27211JEGR06194",
-    "On Mac: adb kill-server && adb start-server && adb devices -l (expect: device, not offline/unauthorized)",
-    "Re-run: ANDROID_SERIAL=27211JEGR06194 npx tsx scripts/run_pixel_physical_nearby_edge_journey.ts"
-  ],
+  "PIXEL_NEARBY_EDGE_PHYSICAL_JOURNEY_PASS": true,
+  "detail": "ADB_REVERSE_PIXEL_CHROME_FULL_JOURNEY_PASS",
   "steps": {
-    "adb_reverse": false,
-    "pilot_chrome_opened": false,
-    "pair": false,
-    "execute_smollm2": false,
-    "provenance_nearby_edge": false,
-    "provider_disconnect_honest_fallback": false,
-    "session_recover": false,
-    "revoke_denied": false
+    "adb_reverse": true,
+    "pilot_chrome_opened": true,
+    "pair": true,
+    "execute_smollm2": true,
+    "provenance_nearby_edge": true,
+    "provider_disconnect_honest_fallback": true,
+    "session_recover": true,
+    "revoke_denied": true
   },
   "transport": {
-    "mode": "LOCALHOST",
-    "preferred_for_pixel": false,
-    "adb_reverse_applied": false,
-    "note": "Physical ADB_REVERSE journey not earned while adb offline"
+    "mode": "ADB_REVERSE",
+    "preferred_for_pixel": true,
+    "adb_reverse_applied": true,
+    "note": "ADB_REVERSE preferred; ADB reverse ≠ on-device inference"
   },
-  "adb_connected": false,
+  "adb_connected": true,
   "adb_unauthorized": false,
-  "adb_offline": true,
-  "adb_raw": "List of devices attached\n27211JEGR06194         offline usb:17825792X transport_id:23",
   "honesty": {
     "PIXEL6A_LIVE_LOCAL_MODEL_PASS": false,
     "GUNNCHAI_ANDROID_PRODUCTION_CLIENT_PASS": false,
     "RUNTIME_ON_DEVICE_LOCAL": false,
-    "adb_reverse_is_not_on_device": true,
-    "mac_nearby_edge_still_valid": true,
-    "do_not_claim_physical_pass_on_mac_fallback": true
+    "adb_reverse_is_not_on_device": true
   }
 }
