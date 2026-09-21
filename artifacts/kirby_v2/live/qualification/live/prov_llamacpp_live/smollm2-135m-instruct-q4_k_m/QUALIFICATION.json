@@ -12,7 +12,7 @@
   "LIVE_QUALIFIED": true,
   "simulated_never_live_qualified": true,
   "production_default": false,
-  "captured_at": "2026-09-20T16:37:41.835Z",
+  "captured_at": "2026-09-21T03:05:30.624Z",
   "gates_snapshot": {
     "LIVE_MAC_MICRO_PROVIDER_PASS": true,
     "LIVE_MAC_LOCAL_ASSISTANT_PASS": true,

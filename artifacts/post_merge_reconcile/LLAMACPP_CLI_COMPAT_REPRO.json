@@ -1,0 +1,95 @@
+{
+  "captured_at": "2026-09-21T03:07:59Z",
+  "parent_pr54_head": "851e7916d6d5c7da23a8f30dba6bdfd389daa8ac",
+  "child_branch": "integration/pr54-llamacpp-cli-compat-closure",
+  "failure_signature": {
+    "message": "llama.cpp exited 1 / error: invalid argument: -no-cnv",
+    "source_pre_fix": "src/user-ready/local_fast_runtime.ts hardcoded -no-cnv onto llama-cli"
+  },
+  "host_llama": {
+    "cli_binary": "/opt/homebrew/bin/llama-cli",
+    "completion_binary": "/opt/homebrew/bin/llama-completion",
+    "version": "version: 10310 (cb26014d9)\nbuilt with AppleClang 21.0.0.21000101 for Darwin arm64",
+    "cli_help_lists_no_cnv": true,
+    "completion_help_lists_no_cnv": true,
+    "cli_help_excerpt_cnv": [
+      "-cnv,  --conversation, -no-cnv, --no-conversation"
+    ]
+  },
+  "tip_llamacpp": {
+    "repo": "https://github.com/ggml-org/llama.cpp",
+    "commit": "ce8caa6e60a03093351d6016a818720e0d46f0fb",
+    "arg_cpp_evidence": {
+      "flag": "-no-cnv / --no-conversation",
+      "set_examples": [
+        "LLAMA_EXAMPLE_COMPLETION"
+      ],
+      "excluded_from": [
+        "LLAMA_EXAMPLE_CLI"
+      ],
+      "consequence": "tip llama-cli rejects -no-cnv with: error: invalid argument: -no-cnv"
+    },
+    "confirm_tip_llama_cli_no_longer_accepts_no_cnv": true
+  },
+  "stderr_invalid_argument_class_demo": {
+    "command": [
+      "llama-cli",
+      "--definitely-not-a-real-flag-xyz"
+    ],
+    "exit_code": 1,
+    "stderr": "error: invalid argument: --definitely-not-a-real-flag-xyz\n"
+  },
+  "generated_cli_args": {
+    "modernSimulatedArgs": [
+      "-m",
+      "/tmp/model.gguf",
+      "-p",
+      "ping",
+      "-n",
+      "8",
+      "-c",
+      "256",
+      "-ngl",
+      "0",
+      "--temp",
+      "0.2",
+      "--no-warmup",
+      "-st",
+      "--simple-io",
+      "--log-disable"
+    ],
+    "modernConversationFlag": "-st",
+    "modernNotes": [
+      "MAPPED_NO_CNV_TO_SINGLE_TURN"
+    ],
+    "liveBinary": "/opt/homebrew/bin/llama-cli",
+    "liveArgs": [
+      "-m",
+      "/tmp/model.gguf",
+      "-p",
+      "ping",
+      "-n",
+      "8",
+      "-c",
+      "256",
+      "-ngl",
+      "0",
+      "--temp",
+      "0.2",
+      "--no-warmup",
+      "-no-cnv",
+      "-st",
+      "--simple-io",
+      "--log-disable"
+    ],
+    "liveConversationFlag": "-no-cnv",
+    "liveNotes": [],
+    "liveVersion": "",
+    "liveSupportsNoCnv": true
+  },
+  "fix": {
+    "adapter": "src/system-layer/local_inference/llamacpp_cli_compat.ts",
+    "prefer": "binary whose --help lists -no-cnv (usually llama-cli on Homebrew; llama-completion on tip)",
+    "fallback": "llama-cli -st when -no-cnv absent and completion unavailable"
+  }
+}

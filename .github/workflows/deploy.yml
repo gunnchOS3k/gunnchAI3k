@@ -1,9 +1,13 @@
 name: Deploy gunnchAI3k
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
+      - integration/pr54-llamacpp-cli-compat-closure
   pull_request:
-    branches: [main]
+    branches:
+      - main
+      - integration/kirby-controlled-stack-main-reconciliation
   workflow_dispatch:
 
 permissions:

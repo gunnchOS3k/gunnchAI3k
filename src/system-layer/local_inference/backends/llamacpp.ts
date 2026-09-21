@@ -16,6 +16,11 @@ import type {
   LocalInferenceBackend,
 } from './interface';
 import { DeterministicBaselineBackend } from './deterministic';
+import {
+  buildLlamaInvocation,
+  discoverLlamaBinary,
+  shouldFailLlamaExit,
+} from '../llamacpp_cli_compat';
 
 const DEFAULT_N_PREDICT = 64;
 /** Nano-fallback context only. Not a Local Fast/Pro window. */
@@ -100,21 +105,28 @@ export function discoverGguf(cwd = process.cwd()): string | null {
 }
 
 function discoverBinary(): string | null {
-  const candidates = ['llama-cli', 'llama-completion', 'llama-server', 'main'];
-  for (const c of candidates) {
-    const hit = which(c);
-    if (hit) return hit;
-  }
-  const homebrew = [
-    '/opt/homebrew/bin/llama-cli',
-    '/usr/local/bin/llama-cli',
-    '/opt/homebrew/bin/llama-completion',
-    '/opt/homebrew/bin/llama-server',
-  ];
-  for (const p of homebrew) {
-    if (fs.existsSync(p)) return p;
-  }
-  return null;
+  return (
+    process.env.GUNNCHAI3K_LLAMA_CLI_BIN ||
+    discoverLlamaBinary() ||
+    (() => {
+      const candidates = ['llama-completion', 'llama-cli', 'llama-server', 'main'];
+      for (const c of candidates) {
+        const hit = which(c);
+        if (hit) return hit;
+      }
+      const homebrew = [
+        '/opt/homebrew/bin/llama-completion',
+        '/usr/local/bin/llama-completion',
+        '/opt/homebrew/bin/llama-cli',
+        '/usr/local/bin/llama-cli',
+        '/opt/homebrew/bin/llama-server',
+      ];
+      for (const p of homebrew) {
+        if (fs.existsSync(p)) return p;
+      }
+      return null;
+    })()
+  );
 }
 
 function runtimeVersion(binary: string): string | null {
@@ -290,29 +302,22 @@ function runLlamaOnce(
 
   return new Promise((resolve, reject) => {
     const t0 = Date.now();
-    const llamaArgs = [
-      '-m',
-      gguf,
-      '-p',
+    const invocation = buildLlamaInvocation({
+      binary,
+      modelPath: gguf,
       prompt,
-      '-n',
-      String(nPredict),
-      '-c',
-      String(ctx),
-      '-ngl',
-      String(ngl),
-      '--temp',
-      '0.2',
-      '--no-warmup',
-      '-no-cnv',
-      '-st',
-      '--simple-io',
-      '--log-disable',
-    ];
-
+      nPredict,
+      ctx,
+      ngl,
+      temperature: 0.2,
+      conversationMode: 'disabled',
+      singleTurn: true,
+    });
     const useTime = process.platform === 'darwin' && fs.existsSync('/usr/bin/time');
-    const cmd = useTime ? '/usr/bin/time' : binary;
-    const args = useTime ? ['-l', binary, ...llamaArgs] : llamaArgs;
+    const cmd = useTime ? '/usr/bin/time' : invocation.binary;
+    const args = useTime
+      ? ['-l', invocation.binary, ...invocation.args]
+      : invocation.args;
 
     const child = spawn(cmd, args, {
       env: { ...process.env },
@@ -339,7 +344,7 @@ function runLlamaOnce(
       const latencyMs = Math.max(1, Date.now() - t0);
       const rssMatch = /(\d+)\s+maximum resident set size/.exec(stderr);
       const peakRssBytes = rssMatch ? Number(rssMatch[1]) : null;
-      if (code !== 0 && !stdout.trim()) {
+      if (shouldFailLlamaExit(code, stdout, stderr)) {
         reject(
           new Error(
             `llama.cpp exited ${code}: ${stderr.slice(0, 400) || 'no stderr'}`,

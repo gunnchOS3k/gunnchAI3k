@@ -1,7 +1,7 @@
 {
   "memsize_gb": 8,
-  "free_mb": 300,
-  "available_mb": 1350,
+  "free_mb": 138,
+  "available_mb": 1216,
   "pressure": "ok",
   "allow_micro": true,
   "allow_360m": false,

@@ -1,8 +1,8 @@
 {
   "schema": "gunnchai.user_ready_003.v1",
   "packet": "AI-USER-READY-003",
-  "generatedAt": "2026-08-15T16:57:48.658Z",
-  "accepted_main_base": "da733a9",
+  "generatedAt": "2026-09-21T03:09:27.016Z",
+  "accepted_main_base": "86ee80052b6fc8f02c453dca6d899196e6da81f4",
   "tokens": {
     "GUNNCHAI_APP_PRODUCT_COMPLETE": false,
     "GUNNCHAI_FRONTIER_PRODUCT_PARITY": false,
@@ -68,15 +68,15 @@
   },
   "coverage": {
     "required": 16,
-    "implemented": 10,
+    "implemented": 16,
     "runtime": 10,
-    "offline": 9,
+    "offline": 15,
     "cloud_only": 0,
     "cloud_consent": 7,
     "open": 0,
-    "gap": 6,
-    "complete": 10,
-    "partial": 6,
+    "gap": 0,
+    "complete": 16,
+    "partial": 0,
     "implemented_ids": [
       "AI-UR-001",
       "AI-UR-002",
@@ -86,7 +86,13 @@
       "AI-UR-006",
       "AI-UR-007",
       "AI-UR-008",
+      "AI-UR-009",
+      "AI-UR-010",
+      "AI-UR-011",
+      "AI-UR-012",
       "AI-UR-013",
+      "AI-UR-014",
+      "AI-UR-015",
       "AI-UR-016"
     ],
     "runtime_ids": [
@@ -109,7 +115,13 @@
       "AI-UR-005",
       "AI-UR-006",
       "AI-UR-008",
+      "AI-UR-009",
+      "AI-UR-010",
+      "AI-UR-011",
+      "AI-UR-012",
       "AI-UR-013",
+      "AI-UR-014",
+      "AI-UR-015",
       "AI-UR-016"
     ],
     "cloud_consent_ids": [
@@ -131,17 +143,16 @@
       "AI-UR-006",
       "AI-UR-007",
       "AI-UR-008",
-      "AI-UR-013",
-      "AI-UR-016"
-    ],
-    "partial_ids": [
       "AI-UR-009",
       "AI-UR-010",
       "AI-UR-011",
       "AI-UR-012",
+      "AI-UR-013",
       "AI-UR-014",
-      "AI-UR-015"
-    ]
+      "AI-UR-015",
+      "AI-UR-016"
+    ],
+    "partial_ids": []
   },
   "results": [
     {
@@ -182,7 +193,7 @@
       "cloud_only": false,
       "notes": "DOCX + code artifacts with targeted edit versions. Canvas UI OPEN.",
       "evidence": {
-        "docx": "/var/folders/dp/z5frf3m511jcdpdf8v878v8h0000gn/T/gunnchai-ur004-keZmf5/base003/base/artifacts/lab_report.docx",
+        "docx": "/var/folders/dp/z5frf3m511jcdpdf8v878v8h0000gn/T/gunnchai-ur004-BGPGfX/base003/base/artifacts/lab_report.docx",
         "versions": 2,
         "codeExists": true
       }
@@ -242,63 +253,63 @@
             "id": "general",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 1107,
-            "outputChars": 251
+            "latencyMs": 956,
+            "outputChars": 238
           },
           {
             "id": "summarization",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 700,
+            "latencyMs": 1026,
             "outputChars": 112
           },
           {
             "id": "waike",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 814,
-            "outputChars": 194
+            "latencyMs": 950,
+            "outputChars": 197
           },
           {
             "id": "source_grounded",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 863,
+            "latencyMs": 998,
             "outputChars": 229
           },
           {
             "id": "basic_code",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 899,
+            "latencyMs": 572,
             "outputChars": 40
           },
           {
             "id": "structured_output",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 1002,
-            "outputChars": 30
+            "latencyMs": 772,
+            "outputChars": 26
           },
           {
             "id": "hallucination_resistance",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 1451,
-            "outputChars": 373
+            "latencyMs": 675,
+            "outputChars": 272
           },
           {
             "id": "refusal_permission",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 1106,
-            "outputChars": 198
+            "latencyMs": 816,
+            "outputChars": 224
           },
           {
             "id": "context_retention",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 762,
+            "latencyMs": 679,
             "outputChars": 159
           }
         ],
@@ -360,8 +371,8 @@
       "notes": "CI digital gate PASS: local allowlist/sandbox DRAFT semantics + recorded live sandbox DRAFT PR https://github.com/gunnchOS3k/gunnchai-ai-ur-013-sandbox/pull/2 (RECORDED_LIVE_PR_ARTIFACT_OK_GH_UNAVAILABLE). Live open this run optional supplemental.",
       "evidence": {
         "mode": "ci_digital_gate_plus_recorded_live_pr",
-        "branch": "agent/ai-ur-013-fix-add-msumd6vq",
-        "commit": "6bbf8d15016dad175930b08c5a99397df3483f4c",
+        "branch": "agent/ai-ur-013-fix-add-muao2fiu",
+        "commit": "dc09e6100cd6b07dc50d9beefb27a1c6a23ab2b2",
         "pr_url": "https://github.com/gunnchOS3k/gunnchai-ai-ur-013-sandbox/pull/2",
         "pr_number": 2,
         "remote_pushed": false,
@@ -410,8 +421,8 @@
     },
     "coding": {
       "mode": "ci_digital_gate_plus_recorded_live_pr",
-      "branch": "agent/ai-ur-013-fix-add-msumd6vq",
-      "commit": "6bbf8d15016dad175930b08c5a99397df3483f4c",
+      "branch": "agent/ai-ur-013-fix-add-muao2fiu",
+      "commit": "dc09e6100cd6b07dc50d9beefb27a1c6a23ab2b2",
       "pr_url": "https://github.com/gunnchOS3k/gunnchai-ai-ur-013-sandbox/pull/2",
       "pr_number": 2,
       "remote_pushed": false,
@@ -432,15 +443,12 @@
   },
   "stubChallengeFailures": [],
   "next_packet": [
-    "AI-UR-009 real allowlisted tool execution for custom agents COMPLETE",
-    "AI-UR-010 real LOCAL/PROVIDER STT+TTS for voice COMPLETE",
-    "AI-UR-011 neural VLM for vision COMPLETE (OCR heuristics remain PARTIAL)",
-    "AI-UR-012 real allowlisted local OS/desktop automation COMPLETE",
-    "AI-UR-014 real TTS speech audio overview COMPLETE",
-    "AI-UR-015 button→backend wired companion UI COMPLETE",
-    "LOCAL_PRO hashed HOST_OBSERVED when resources safe",
-    "HUMAN_E6 companion polish validation",
-    "device-os pixel proof for companion/cowrite chrome"
+    "LOCAL_PRO HOST_OBSERVED when RAM/disk safe (do not fake)",
+    "Live microphone HUMAN_PENDING",
+    "Darwin AX GUI computer-use of third-party apps DEVICE/HUMAN pending",
+    "HUMAN_E6 companion polish",
+    "device-os Pixel proof",
+    "WAIKE runtime mastery still below 0.95 — knowledge-gap limited"
   ],
   "remaining_open": [
     "LOCAL_PRO hashed inference (still OPEN/ABSENT)"
@@ -454,8 +462,8 @@
     "local_fast": true,
     "local_pro": false,
     "coverage": {
-      "complete": 10,
-      "partial": 6,
+      "complete": 16,
+      "partial": 0,
       "open": 0,
       "complete_ids": [
         "AI-UR-001",
@@ -466,17 +474,16 @@
         "AI-UR-006",
         "AI-UR-007",
         "AI-UR-008",
-        "AI-UR-013",
-        "AI-UR-016"
-      ],
-      "partial_ids": [
         "AI-UR-009",
         "AI-UR-010",
         "AI-UR-011",
         "AI-UR-012",
+        "AI-UR-013",
         "AI-UR-014",
-        "AI-UR-015"
+        "AI-UR-015",
+        "AI-UR-016"
       ],
+      "partial_ids": [],
       "open_ids": []
     },
     "HUMAN_E6": false,
