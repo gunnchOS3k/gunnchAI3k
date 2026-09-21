@@ -200,3 +200,11 @@ Leave secrets blank. Local tests do not need keys. Discord/OpenAI/music values a
 ## Contribution path
 
 Keep tokens honest. Label mocks. Never merge `main` from Cursor, never force-push, never commit credentials, never claim frontier AI or Oulu affiliation.
+
+## Feedback & Suggestions
+
+Tried this project? File public feedback via the ecosystem hub:
+
+https://github.com/gunnchOS3k/gunnchos-research-portal/blob/main/FEEDBACK.md
+
+Security vulnerabilities: private only — https://github.com/gunnchOS3k/gunnchos-research-portal/blob/main/SECURITY.md
