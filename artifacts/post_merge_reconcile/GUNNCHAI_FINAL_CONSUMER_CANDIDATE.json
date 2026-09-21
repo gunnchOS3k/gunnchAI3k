@@ -11,10 +11,10 @@
   "child_pr": {
     "branch": "integration/pr54-llamacpp-cli-compat-closure",
     "base": "integration/kirby-controlled-stack-main-reconciliation",
-    "head": "4d0fb1f8feda8f6fcbf7bde8e4c8c2c86c71908f",
+    "head": "e2460342648026b0569fc9c5547474ee44b2497d",
     "policy": "DRAFT_ONLY_DO_NOT_MERGE"
   },
-  "exact_candidate_sha_for_waike": "4d0fb1f8feda8f6fcbf7bde8e4c8c2c86c71908f",
+  "exact_candidate_sha_for_waike": "e2460342648026b0569fc9c5547474ee44b2497d",
   "llamacpp": {
     "tip_commit_at_repro": "ce8caa6e60a03093351d6016a818720e0d46f0fb",
     "host_version": "version: 10310 (cb26014d9)\nbuilt with AppleClang 21.0.0.21000101 for Darwin arm64",
@@ -55,7 +55,7 @@
     "released": true
   },
   "ci": {
-    "status": "PENDING_PUSH",
+    "status": "PUSHED_AWAITING_ACTIONS",
     "note": "Workflows expanded to run on PR base integration/kirby-controlled-stack-main-reconciliation and child branch push; builds llama-cli+llama-completion",
     "required_workflows": [
       "AI-USER-READY-002 market packet",
