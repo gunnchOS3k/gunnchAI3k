@@ -3,9 +3,12 @@
  * Nano 135M is never accepted as Fast. Latency/memory are HOST/GUEST OBSERVED only.
  */
 
-import { execFileSync } from 'node:child_process';
-import * as fs from 'node:fs';
 import * as path from 'node:path';
+import {
+  buildLlamaInvocation,
+  discoverLlamaBinary,
+  shouldFailLlamaExit,
+} from '../system-layer/local_inference/llamacpp_cli_compat';
 import {
   FAST_SHA256,
   ModelDownloadManager,
@@ -116,24 +119,8 @@ const FAST_CASES: FastPromptCase[] = [
   },
 ];
 
-function which(bin: string): string | null {
-  try {
-    const out = execFileSync('which', [bin], { encoding: 'utf8' }).trim();
-    return out || null;
-  } catch {
-    return null;
-  }
-}
-
 function discoverLlama(): string | null {
-  for (const c of ['llama-cli', 'llama-completion']) {
-    const hit = which(c);
-    if (hit) return hit;
-  }
-  for (const p of ['/opt/homebrew/bin/llama-cli', '/usr/local/bin/llama-cli']) {
-    if (fs.existsSync(p)) return p;
-  }
-  return null;
+  return discoverLlamaBinary();
 }
 
 export function observationClass(): ObservationClass {
@@ -170,32 +157,22 @@ export async function inferWithExplicitGguf(
   opts?: { nPredict?: number; ctx?: number },
 ): Promise<{ text: string; latencyMs: number; peakRssBytes: number | null; ctx: number }> {
   const { spawn } = await import('node:child_process');
-  const binary = discoverLlama();
-  if (!binary) throw new Error('LLAMA_CLI_ABSENT');
   assertNotNanoFast(ggufPath, null);
   const nPredict = opts?.nPredict ?? 48;
   const ctx = opts?.ctx ?? 2048;
+  const invocation = buildLlamaInvocation({
+    modelPath: ggufPath,
+    prompt,
+    nPredict,
+    ctx,
+    ngl: 0,
+    temperature: 0.2,
+    conversationMode: 'disabled',
+    singleTurn: true,
+  });
+  const { binary, args } = invocation;
   return new Promise((resolve, reject) => {
     const t0 = Date.now();
-    const args = [
-      '-m',
-      ggufPath,
-      '-p',
-      prompt,
-      '-n',
-      String(nPredict),
-      '-c',
-      String(ctx),
-      '-ngl',
-      '0',
-      '--temp',
-      '0.2',
-      '--no-warmup',
-      '-no-cnv',
-      '-st',
-      '--simple-io',
-      '--log-disable',
-    ];
     const child = spawn(binary, args, { env: { ...process.env } });
     let stdout = '';
     let stderr = '';
@@ -215,7 +192,7 @@ export async function inferWithExplicitGguf(
     });
     child.on('close', (code) => {
       clearTimeout(timer);
-      if (code !== 0 && !stdout.trim()) {
+      if (shouldFailLlamaExit(code, stdout, stderr)) {
         reject(new Error(`llama.cpp exited ${code}: ${stderr.slice(0, 300)}`));
         return;
       }

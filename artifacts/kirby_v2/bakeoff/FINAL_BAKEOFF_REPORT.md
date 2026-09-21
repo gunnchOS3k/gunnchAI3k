@@ -10,7 +10,7 @@ Live local (Ollama/GGUF inventory) and live remote providers were marked `NO_CAN
 - Arch: arm64
 - RAM: 8 GB
 - Metal: true
-- Free disk: 14 GB
+- Free disk: 8.7 GB
 - llama.cpp: true
 - Ollama: false
 - Pixel: PIXEL_EDGE_MODEL_BAKEOFF_NOT_RUN=true

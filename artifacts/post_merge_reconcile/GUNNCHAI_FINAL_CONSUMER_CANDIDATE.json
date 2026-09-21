@@ -1,0 +1,116 @@
+{
+  "schema": "gunnchai.final_consumer_candidate.v1",
+  "captured_at": "2026-09-21T04:02:38Z",
+  "parent_pr": {
+    "number": 54,
+    "head": "851e7916d6d5c7da23a8f30dba6bdfd389daa8ac",
+    "base": "main",
+    "branch": "integration/kirby-controlled-stack-main-reconciliation",
+    "policy": "DRAFT_ONLY_DO_NOT_MERGE"
+  },
+  "child_pr": {
+    "branch": "integration/pr54-llamacpp-cli-compat-closure",
+    "base": "integration/kirby-controlled-stack-main-reconciliation",
+    "head": "e2d1adcb5847cf00282fb7fa64970254b14e344e",
+    "policy": "DRAFT_ONLY_DO_NOT_MERGE",
+    "draft_pr_number": 55,
+    "draft_pr_url": "https://github.com/gunnchOS3k/gunnchAI3k/pull/55"
+  },
+  "exact_candidate_sha_for_waike": "e2d1adcb5847cf00282fb7fa64970254b14e344e",
+  "llamacpp": {
+    "tip_commit_at_repro": "ce8caa6e60a03093351d6016a818720e0d46f0fb",
+    "host_version": "version: 10310 (cb26014d9)\nbuilt with AppleClang 21.0.0.21000101 for Darwin arm64",
+    "capability": {
+      "tip_llama_cli_accepts_no_cnv": false,
+      "tip_no_cnv_lives_on": "llama-completion",
+      "adapter": "src/system-layer/local_inference/llamacpp_cli_compat.ts"
+    }
+  },
+  "user_ready": {
+    "002": {
+      "AI_USER_READY_002_DIGITAL_PASS": true,
+      "ci_run_id": 35558185933
+    },
+    "003": {
+      "AI_USER_READY_003_DIGITAL_PASS": true,
+      "ci_run_id": 35558185930
+    },
+    "004": {
+      "AI_USER_READY_004_DIGITAL_PASS": true,
+      "ci_run_id": 35558185916
+    }
+  },
+  "nearby_edge": {
+    "status": "DIGITAL_REVALIDATED",
+    "physical_reproof": false,
+    "reason": "CLI-only llama.cpp adapter fix; prior pixel_journey evidence remains valid after empty-stdout/--log-disable fix"
+  },
+  "truth_boundaries": {
+    "PRODUCTION_DEFAULT_PROVIDER_FROZEN": false,
+    "PIXEL6A_LIVE_LOCAL_MODEL_PASS": false,
+    "nearby_mac_is_not_on_device": true
+  },
+  "adb": {
+    "used_for_physical_reproof": false,
+    "released": true,
+    "reverse_tunnels_cleared": true
+  },
+  "ci": {
+    "status": "GREEN",
+    "required_all_success": true,
+    "head_sha": "e2d1adcb5847cf00282fb7fa64970254b14e344e",
+    "note": "Windows Pilot 0 windows-2025 soak is intentionally non-required for this CLI-compat child (authentic Windows evidence workflow; not a user-ready gate).",
+    "required_workflows": {
+      "AI-USER-READY-002": {
+        "id": 35558185933,
+        "name": "AI-USER-READY-002 market packet",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/gunnchOS3k/gunnchAI3k/actions/runs/35558185933"
+      },
+      "AI-USER-READY-003": {
+        "id": 35558185930,
+        "name": "AI-USER-READY-003 market packet",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/gunnchOS3k/gunnchAI3k/actions/runs/35558185930"
+      },
+      "AI-USER-READY-004": {
+        "id": 35558185916,
+        "name": "AI-USER-READY-004 market packet",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/gunnchOS3k/gunnchAI3k/actions/runs/35558185916"
+      },
+      "Gate 1 post-merge integrity": {
+        "id": 35558185834,
+        "name": "Gate 1 post-merge integrity",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/gunnchOS3k/gunnchAI3k/actions/runs/35558185834"
+      },
+      "Deploy gunnchAI3k": {
+        "id": 35558185881,
+        "name": "Deploy gunnchAI3k",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/gunnchOS3k/gunnchAI3k/actions/runs/35558185881"
+      },
+      "ai-waike-mastery": {
+        "id": 35558185914,
+        "name": "ai-waike-mastery",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/gunnchOS3k/gunnchAI3k/actions/runs/35558185914"
+      }
+    },
+    "run_ids": {
+      "AI-USER-READY-002": 35558185933,
+      "AI-USER-READY-003": 35558185930,
+      "AI-USER-READY-004": 35558185916,
+      "Gate1": 35558185834,
+      "Deploy": 35558185881,
+      "ai-waike-mastery": 35558185914
+    }
+  }
+}
