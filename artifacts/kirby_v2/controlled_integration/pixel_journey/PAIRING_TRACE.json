@@ -1,0 +1,31 @@
+{
+  "schema": "gunnchai.kirby4.pairing_trace.v1",
+  "steps": [
+    {
+      "step": "pair",
+      "via": "pixel_chrome_cdp_fetch",
+      "ok": true,
+      "status": 200
+    },
+    {
+      "step": "execute",
+      "ok": true,
+      "status": 200
+    },
+    {
+      "step": "provider_disconnect_fallback",
+      "ok": true,
+      "error": "PROVIDER_UNAVAILABLE"
+    },
+    {
+      "step": "session_recover",
+      "ok": true
+    },
+    {
+      "step": "revoke_then_deny",
+      "revoke_ok": true,
+      "denied": true,
+      "status": 401
+    }
+  ]
+}

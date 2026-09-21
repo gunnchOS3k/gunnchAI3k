@@ -1,0 +1,12 @@
+{
+  "schema": "gunnchai.kirby4.controlled_summary.v1",
+  "promotion_state": "CONTROLLED_INTEGRATION",
+  "production_default": false,
+  "microPass": true,
+  "executeOk": true,
+  "pixelJourneyPass": true,
+  "pixelJourneyDetail": "ADB_REVERSE_PIXEL_CHROME_FULL_JOURNEY_PASS",
+  "adbOk": true,
+  "provenance_present": true,
+  "nextAction": "NEXT_GUNNCHAI_ACTION=INTEGRATE_NEARBY_EDGE_PROVIDER_INTO_GUNNCHOS_CAPSULE_AND_WAIKE_PIXEL_PILOT"
+}

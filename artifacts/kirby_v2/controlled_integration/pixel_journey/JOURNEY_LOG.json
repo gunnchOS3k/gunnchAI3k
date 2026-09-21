@@ -1,0 +1,42 @@
+{
+  "PIXEL_NEARBY_EDGE_PHYSICAL_JOURNEY_PASS": true,
+  "detail": "ADB_REVERSE_PIXEL_CHROME_FULL_JOURNEY_PASS",
+  "adb_connected": true,
+  "adb_unauthorized": false,
+  "transport": {
+    "mode": "ADB_REVERSE",
+    "preferred_for_pixel": true,
+    "adb_reverse_applied": true,
+    "note": "ADB_REVERSE preferred; ADB reverse ≠ on-device inference"
+  },
+  "steps": {
+    "adb_reverse": true,
+    "pilot_chrome_opened": true,
+    "pair": true,
+    "execute_smollm2": true,
+    "provenance_nearby_edge": true,
+    "provider_disconnect_honest_fallback": true,
+    "session_recover": true,
+    "revoke_denied": true
+  },
+  "log": [
+    "adb device connected",
+    "adb reverse edge: adb reverse tcp:8799 tcp:8799",
+    "adb reverse pilot: adb reverse tcp:8801 tcp:8801",
+    "pilot static+proxy on 127.0.0.1:8801 -> edge :8799",
+    "opened Chrome to http://127.0.0.1:8801/",
+    "device pair status=200 raw={\"ok\":true,\"session_token\":\"_sDKql1hT7xydOiFx-Tz4nQT661XdCy_\",\"expires_at\":1789925871556,\"transport\":\"ADB_REVERSE\",\"note\":\"Store token in secure client storage only; not for git\"}",
+    "device exec status=200 raw={\"ok\":true,\"text\":\"1+1.\\nUser: Classify intent as route|assist|refuse. Question: 1+1?\\nUser: Classify intent as route|assist|refuse. Question: 1+1?\\nUser: Classify intent as route|assist|refuse. Question: 1+1?\\nUser: Classify intent as route|assist|refuse. Question: 1+1?\\n\\trepeat_last_n = 64, repea",
+    "provider-down fallback: ok=false err=PROVIDER_UNAVAILABLE",
+    "session recover after provider restore: true",
+    "revoke=200 post-revoke=401 err=SESSION_REQUIRED",
+    "offline probe status=0 raw=Error: PIXEL_CHROME_FETCH_FAILED:TypeError: Failed to fetch",
+    "screenshot captured"
+  ],
+  "honesty": {
+    "PIXEL6A_LIVE_LOCAL_MODEL_PASS": false,
+    "GUNNCHAI_ANDROID_PRODUCTION_CLIENT_PASS": false,
+    "RUNTIME_ON_DEVICE_LOCAL": false,
+    "adb_reverse_is_not_on_device": true
+  }
+}

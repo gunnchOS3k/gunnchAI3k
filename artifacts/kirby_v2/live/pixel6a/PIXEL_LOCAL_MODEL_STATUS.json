@@ -1,0 +1,17 @@
+{
+  "PIXEL6A_LIVE_LOCAL_MODEL_PASS": false,
+  "PIXEL6A_ADB_CONNECTED": true,
+  "reason": "ADB connected to Pixel 6a, but no on-device inference runtime (no llama.cpp/ollama/Termux+GGUF). ADB-forwarded Mac inference is NOT claimed as LIVE_PIXEL.",
+  "on_device_runtime": {
+    "termux": false,
+    "llama_cli": false,
+    "llama_server": false,
+    "ollama": false,
+    "gguf_on_device": false,
+    "matching_packages": [],
+    "note": "No Termux/llama.cpp/ollama/GGUF on-device runtime found — PIXEL6A_LIVE_LOCAL_MODEL_PASS stays false"
+  },
+  "owner_approve_steps": [],
+  "adb_forwarded_mac_not_claimed_as_pixel": true,
+  "attempted_on_device_inference": false
+}

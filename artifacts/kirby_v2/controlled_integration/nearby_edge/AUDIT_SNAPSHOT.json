@@ -1,0 +1,66 @@
+{
+  "entries": [
+    {
+      "ts": "2026-09-20T16:37:43.294Z",
+      "event": "pair_ok",
+      "client_label": "controlled_integration_runner"
+    },
+    {
+      "ts": "2026-09-20T16:37:44.208Z",
+      "event": "execute",
+      "ok": true,
+      "task_class": "intent_route",
+      "request_id": "f13f24bb-ccc8-4d6e-b0ee-2ae18d35c705"
+    },
+    {
+      "ts": "2026-09-20T16:37:44.210Z",
+      "event": "execute_deny",
+      "ok": false,
+      "error": "DISALLOWED_TASK_CLASS",
+      "task_class": "exam_answer_dump",
+      "request_id": "8f2b6c97-9bfe-47ef-a13d-e79b4f15d412"
+    },
+    {
+      "ts": "2026-09-20T16:37:44.211Z",
+      "event": "auth_deny",
+      "path": "/v1/execute"
+    },
+    {
+      "ts": "2026-09-20T16:37:51.556Z",
+      "event": "pair_ok",
+      "client_label": "pixel_chrome_pilot"
+    },
+    {
+      "ts": "2026-09-20T16:37:52.558Z",
+      "event": "execute",
+      "ok": true,
+      "task_class": "intent_route",
+      "request_id": "31d281a9-5b00-4802-8538-04effc59e99d"
+    },
+    {
+      "ts": "2026-09-20T16:37:52.619Z",
+      "event": "execute",
+      "ok": false,
+      "error": "PROVIDER_UNAVAILABLE",
+      "task_class": "intent_route",
+      "request_id": "c5ddcd19-64e4-455f-a9ca-1d881f08547e"
+    },
+    {
+      "ts": "2026-09-20T16:37:53.463Z",
+      "event": "execute",
+      "ok": true,
+      "task_class": "intent_route",
+      "request_id": "3c894ea3-9ada-4be8-b27b-d7047d02ab26"
+    },
+    {
+      "ts": "2026-09-20T16:37:53.534Z",
+      "event": "session_revoke",
+      "client_label": "pixel_chrome_pilot"
+    },
+    {
+      "ts": "2026-09-20T16:37:53.577Z",
+      "event": "auth_deny",
+      "path": "/v1/execute"
+    }
+  ]
+}

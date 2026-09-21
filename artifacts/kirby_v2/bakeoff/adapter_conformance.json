@@ -1,0 +1,984 @@
+{
+  "schema": "kirby.adapter_conformance.v1",
+  "adapters": [
+    {
+      "model_id": "sim-micro-router",
+      "results": [
+        {
+          "pass_id": "MODEL_PROVIDER_V2_META",
+          "supported": true,
+          "passed": true,
+          "evidence": "meta family=fixture hidden_cot_exposed=false",
+          "simulated": true
+        },
+        {
+          "pass_id": "MODEL_PROVIDER_V2_COMPLETE",
+          "supported": true,
+          "passed": true,
+          "evidence": "ok=true finish=stop",
+          "simulated": true
+        },
+        {
+          "pass_id": "STREAMING",
+          "supported": true,
+          "passed": true,
+          "evidence": "stream yielded chunks",
+          "simulated": true
+        },
+        {
+          "pass_id": "STRUCTURED_OUTPUT",
+          "supported": true,
+          "passed": true,
+          "evidence": "[sim:sim-micro-router] {\"ok\":true,\"schema_keys\":[\"type\",\"properties\"]}",
+          "simulated": true
+        },
+        {
+          "pass_id": "TOOL_PROPOSAL",
+          "supported": true,
+          "passed": true,
+          "evidence": "[sim:sim-micro-router] TOOL_PROPOSAL:{\"tool\":\"files.read\",\"args\":{\"path\":\"README.md\"}}",
+          "simulated": true
+        },
+        {
+          "pass_id": "CANCELLATION",
+          "supported": true,
+          "passed": true,
+          "evidence": "error=CANCELLED",
+          "simulated": true
+        },
+        {
+          "pass_id": "TIMEOUT",
+          "supported": true,
+          "passed": true,
+          "evidence": "error=TIMEOUT",
+          "simulated": true
+        },
+        {
+          "pass_id": "HEALTHCHECK",
+          "supported": true,
+          "passed": true,
+          "evidence": "health=healthy",
+          "simulated": true
+        },
+        {
+          "pass_id": "PROVENANCE",
+          "supported": true,
+          "passed": true,
+          "evidence": "SIMULATED adapter for structural/control-plane proofs. Not a live model quality claim. No weight download performed.",
+          "simulated": true
+        },
+        {
+          "pass_id": "LICENSE",
+          "supported": true,
+          "passed": true,
+          "evidence": "Candidate license recorded at inventory layer; adapter does not invent license compliance",
+          "simulated": true
+        },
+        {
+          "pass_id": "RESOURCE",
+          "supported": true,
+          "passed": true,
+          "evidence": "tier_hint=0 energy_hint=0.4",
+          "simulated": true
+        },
+        {
+          "pass_id": "PRIVACY",
+          "supported": true,
+          "passed": true,
+          "evidence": "privacy_class=device_local",
+          "simulated": true
+        }
+      ]
+    },
+    {
+      "model_id": "sim-llama-edge-fast",
+      "results": [
+        {
+          "pass_id": "MODEL_PROVIDER_V2_META",
+          "supported": true,
+          "passed": true,
+          "evidence": "meta family=llama hidden_cot_exposed=false",
+          "simulated": true
+        },
+        {
+          "pass_id": "MODEL_PROVIDER_V2_COMPLETE",
+          "supported": true,
+          "passed": true,
+          "evidence": "ok=true finish=stop",
+          "simulated": true
+        },
+        {
+          "pass_id": "STREAMING",
+          "supported": true,
+          "passed": true,
+          "evidence": "stream yielded chunks",
+          "simulated": true
+        },
+        {
+          "pass_id": "STRUCTURED_OUTPUT",
+          "supported": true,
+          "passed": true,
+          "evidence": "[sim:sim-llama-edge-fast] {\"ok\":true,\"schema_keys\":[\"type\",\"properties\"]}",
+          "simulated": true
+        },
+        {
+          "pass_id": "TOOL_PROPOSAL",
+          "supported": true,
+          "passed": true,
+          "evidence": "[sim:sim-llama-edge-fast] TOOL_PROPOSAL:{\"tool\":\"files.read\",\"args\":{\"path\":\"README.md\"}}",
+          "simulated": true
+        },
+        {
+          "pass_id": "CANCELLATION",
+          "supported": true,
+          "passed": true,
+          "evidence": "error=CANCELLED",
+          "simulated": true
+        },
+        {
+          "pass_id": "TIMEOUT",
+          "supported": true,
+          "passed": true,
+          "evidence": "error=TIMEOUT",
+          "simulated": true
+        },
+        {
+          "pass_id": "HEALTHCHECK",
+          "supported": true,
+          "passed": true,
+          "evidence": "health=healthy",
+          "simulated": true
+        },
+        {
+          "pass_id": "PROVENANCE",
+          "supported": true,
+          "passed": true,
+          "evidence": "SIMULATED adapter for structural/control-plane proofs. Not a live model quality claim. No weight download performed.",
+          "simulated": true
+        },
+        {
+          "pass_id": "LICENSE",
+          "supported": true,
+          "passed": true,
+          "evidence": "Candidate license recorded at inventory layer; adapter does not invent license compliance",
+          "simulated": true
+        },
+        {
+          "pass_id": "RESOURCE",
+          "supported": true,
+          "passed": true,
+          "evidence": "tier_hint=1 energy_hint=0.4",
+          "simulated": true
+        },
+        {
+          "pass_id": "PRIVACY",
+          "supported": true,
+          "passed": true,
+          "evidence": "privacy_class=device_local",
+          "simulated": true
+        }
+      ]
+    },
+    {
+      "model_id": "sim-gemma-edge",
+      "results": [
+        {
+          "pass_id": "MODEL_PROVIDER_V2_META",
+          "supported": true,
+          "passed": true,
+          "evidence": "meta family=gemma hidden_cot_exposed=false",
+          "simulated": true
+        },
+        {
+          "pass_id": "MODEL_PROVIDER_V2_COMPLETE",
+          "supported": true,
+          "passed": true,
+          "evidence": "ok=true finish=stop",
+          "simulated": true
+        },
+        {
+          "pass_id": "STREAMING",
+          "supported": true,
+          "passed": true,
+          "evidence": "stream yielded chunks",
+          "simulated": true
+        },
+        {
+          "pass_id": "STRUCTURED_OUTPUT",
+          "supported": true,
+          "passed": true,
+          "evidence": "[sim:sim-gemma-edge] {\"ok\":true,\"schema_keys\":[\"type\",\"properties\"]}",
+          "simulated": true
+        },
+        {
+          "pass_id": "TOOL_PROPOSAL",
+          "supported": true,
+          "passed": true,
+          "evidence": "[sim:sim-gemma-edge] TOOL_PROPOSAL:{\"tool\":\"files.read\",\"args\":{\"path\":\"README.md\"}}",
+          "simulated": true
+        },
+        {
+          "pass_id": "CANCELLATION",
+          "supported": true,
+          "passed": true,
+          "evidence": "error=CANCELLED",
+          "simulated": true
+        },
+        {
+          "pass_id": "TIMEOUT",
+          "supported": true,
+          "passed": true,
+          "evidence": "error=TIMEOUT",
+          "simulated": true
+        },
+        {
+          "pass_id": "HEALTHCHECK",
+          "supported": true,
+          "passed": true,
+          "evidence": "health=healthy",
+          "simulated": true
+        },
+        {
+          "pass_id": "PROVENANCE",
+          "supported": true,
+          "passed": true,
+          "evidence": "SIMULATED adapter for structural/control-plane proofs. Not a live model quality claim. No weight download performed.",
+          "simulated": true
+        },
+        {
+          "pass_id": "LICENSE",
+          "supported": true,
+          "passed": true,
+          "evidence": "Candidate license recorded at inventory layer; adapter does not invent license compliance",
+          "simulated": true
+        },
+        {
+          "pass_id": "RESOURCE",
+          "supported": true,
+          "passed": true,
+          "evidence": "tier_hint=1 energy_hint=0.4",
+          "simulated": true
+        },
+        {
+          "pass_id": "PRIVACY",
+          "supported": true,
+          "passed": true,
+          "evidence": "privacy_class=device_local",
+          "simulated": true
+        }
+      ]
+    },
+    {
+      "model_id": "sim-qwen-workstation",
+      "results": [
+        {
+          "pass_id": "MODEL_PROVIDER_V2_META",
+          "supported": true,
+          "passed": true,
+          "evidence": "meta family=qwen hidden_cot_exposed=false",
+          "simulated": true
+        },
+        {
+          "pass_id": "MODEL_PROVIDER_V2_COMPLETE",
+          "supported": true,
+          "passed": true,
+          "evidence": "ok=true finish=stop",
+          "simulated": true
+        },
+        {
+          "pass_id": "STREAMING",
+          "supported": true,
+          "passed": true,
+          "evidence": "stream yielded chunks",
+          "simulated": true
+        },
+        {
+          "pass_id": "STRUCTURED_OUTPUT",
+          "supported": true,
+          "passed": true,
+          "evidence": "[sim:sim-qwen-workstation] {\"ok\":true,\"schema_keys\":[\"type\",\"properties\"]}",
+          "simulated": true
+        },
+        {
+          "pass_id": "TOOL_PROPOSAL",
+          "supported": true,
+          "passed": true,
+          "evidence": "[sim:sim-qwen-workstation] TOOL_PROPOSAL:{\"tool\":\"files.read\",\"args\":{\"path\":\"README.md\"}}",
+          "simulated": true
+        },
+        {
+          "pass_id": "CANCELLATION",
+          "supported": true,
+          "passed": true,
+          "evidence": "error=CANCELLED",
+          "simulated": true
+        },
+        {
+          "pass_id": "TIMEOUT",
+          "supported": true,
+          "passed": true,
+          "evidence": "error=TIMEOUT",
+          "simulated": true
+        },
+        {
+          "pass_id": "HEALTHCHECK",
+          "supported": true,
+          "passed": true,
+          "evidence": "health=healthy",
+          "simulated": true
+        },
+        {
+          "pass_id": "PROVENANCE",
+          "supported": true,
+          "passed": true,
+          "evidence": "SIMULATED adapter for structural/control-plane proofs. Not a live model quality claim. No weight download performed.",
+          "simulated": true
+        },
+        {
+          "pass_id": "LICENSE",
+          "supported": true,
+          "passed": true,
+          "evidence": "Candidate license recorded at inventory layer; adapter does not invent license compliance",
+          "simulated": true
+        },
+        {
+          "pass_id": "RESOURCE",
+          "supported": true,
+          "passed": true,
+          "evidence": "tier_hint=2 energy_hint=0.4",
+          "simulated": true
+        },
+        {
+          "pass_id": "PRIVACY",
+          "supported": true,
+          "passed": true,
+          "evidence": "privacy_class=device_local",
+          "simulated": true
+        }
+      ]
+    },
+    {
+      "model_id": "sim-mistral-workstation",
+      "results": [
+        {
+          "pass_id": "MODEL_PROVIDER_V2_META",
+          "supported": true,
+          "passed": true,
+          "evidence": "meta family=mistral hidden_cot_exposed=false",
+          "simulated": true
+        },
+        {
+          "pass_id": "MODEL_PROVIDER_V2_COMPLETE",
+          "supported": true,
+          "passed": true,
+          "evidence": "ok=true finish=stop",
+          "simulated": true
+        },
+        {
+          "pass_id": "STREAMING",
+          "supported": true,
+          "passed": true,
+          "evidence": "stream yielded chunks",
+          "simulated": true
+        },
+        {
+          "pass_id": "STRUCTURED_OUTPUT",
+          "supported": true,
+          "passed": true,
+          "evidence": "[sim:sim-mistral-workstation] {\"ok\":true,\"schema_keys\":[\"type\",\"properties\"]}",
+          "simulated": true
+        },
+        {
+          "pass_id": "TOOL_PROPOSAL",
+          "supported": true,
+          "passed": true,
+          "evidence": "[sim:sim-mistral-workstation] TOOL_PROPOSAL:{\"tool\":\"files.read\",\"args\":{\"path\":\"README.md\"}}",
+          "simulated": true
+        },
+        {
+          "pass_id": "CANCELLATION",
+          "supported": true,
+          "passed": true,
+          "evidence": "error=CANCELLED",
+          "simulated": true
+        },
+        {
+          "pass_id": "TIMEOUT",
+          "supported": true,
+          "passed": true,
+          "evidence": "error=TIMEOUT",
+          "simulated": true
+        },
+        {
+          "pass_id": "HEALTHCHECK",
+          "supported": true,
+          "passed": true,
+          "evidence": "health=healthy",
+          "simulated": true
+        },
+        {
+          "pass_id": "PROVENANCE",
+          "supported": true,
+          "passed": true,
+          "evidence": "SIMULATED adapter for structural/control-plane proofs. Not a live model quality claim. No weight download performed.",
+          "simulated": true
+        },
+        {
+          "pass_id": "LICENSE",
+          "supported": true,
+          "passed": true,
+          "evidence": "Candidate license recorded at inventory layer; adapter does not invent license compliance",
+          "simulated": true
+        },
+        {
+          "pass_id": "RESOURCE",
+          "supported": true,
+          "passed": true,
+          "evidence": "tier_hint=2 energy_hint=0.4",
+          "simulated": true
+        },
+        {
+          "pass_id": "PRIVACY",
+          "supported": true,
+          "passed": true,
+          "evidence": "privacy_class=device_local",
+          "simulated": true
+        }
+      ]
+    },
+    {
+      "model_id": "sim-glm-tools",
+      "results": [
+        {
+          "pass_id": "MODEL_PROVIDER_V2_META",
+          "supported": true,
+          "passed": true,
+          "evidence": "meta family=glm hidden_cot_exposed=false",
+          "simulated": true
+        },
+        {
+          "pass_id": "MODEL_PROVIDER_V2_COMPLETE",
+          "supported": true,
+          "passed": true,
+          "evidence": "ok=true finish=stop",
+          "simulated": true
+        },
+        {
+          "pass_id": "STREAMING",
+          "supported": true,
+          "passed": true,
+          "evidence": "stream yielded chunks",
+          "simulated": true
+        },
+        {
+          "pass_id": "STRUCTURED_OUTPUT",
+          "supported": true,
+          "passed": true,
+          "evidence": "[sim:sim-glm-tools] {\"ok\":true,\"schema_keys\":[\"type\",\"properties\"]}",
+          "simulated": true
+        },
+        {
+          "pass_id": "TOOL_PROPOSAL",
+          "supported": true,
+          "passed": true,
+          "evidence": "[sim:sim-glm-tools] TOOL_PROPOSAL:{\"tool\":\"files.read\",\"args\":{\"path\":\"README.md\"}}",
+          "simulated": true
+        },
+        {
+          "pass_id": "CANCELLATION",
+          "supported": true,
+          "passed": true,
+          "evidence": "error=CANCELLED",
+          "simulated": true
+        },
+        {
+          "pass_id": "TIMEOUT",
+          "supported": true,
+          "passed": true,
+          "evidence": "error=TIMEOUT",
+          "simulated": true
+        },
+        {
+          "pass_id": "HEALTHCHECK",
+          "supported": true,
+          "passed": true,
+          "evidence": "health=healthy",
+          "simulated": true
+        },
+        {
+          "pass_id": "PROVENANCE",
+          "supported": true,
+          "passed": true,
+          "evidence": "SIMULATED adapter for structural/control-plane proofs. Not a live model quality claim. No weight download performed.",
+          "simulated": true
+        },
+        {
+          "pass_id": "LICENSE",
+          "supported": true,
+          "passed": true,
+          "evidence": "Candidate license recorded at inventory layer; adapter does not invent license compliance",
+          "simulated": true
+        },
+        {
+          "pass_id": "RESOURCE",
+          "supported": true,
+          "passed": true,
+          "evidence": "tier_hint=2 energy_hint=0.4",
+          "simulated": true
+        },
+        {
+          "pass_id": "PRIVACY",
+          "supported": true,
+          "passed": true,
+          "evidence": "privacy_class=device_local",
+          "simulated": true
+        }
+      ]
+    },
+    {
+      "model_id": "sim-openai-frontier-shape",
+      "results": [
+        {
+          "pass_id": "MODEL_PROVIDER_V2_META",
+          "supported": true,
+          "passed": true,
+          "evidence": "meta family=openai hidden_cot_exposed=false",
+          "simulated": true
+        },
+        {
+          "pass_id": "MODEL_PROVIDER_V2_COMPLETE",
+          "supported": true,
+          "passed": true,
+          "evidence": "ok=true finish=stop",
+          "simulated": true
+        },
+        {
+          "pass_id": "STREAMING",
+          "supported": true,
+          "passed": true,
+          "evidence": "stream yielded chunks",
+          "simulated": true
+        },
+        {
+          "pass_id": "STRUCTURED_OUTPUT",
+          "supported": true,
+          "passed": true,
+          "evidence": "[sim:sim-openai-frontier-shape] {\"ok\":true,\"schema_keys\":[\"type\",\"properties\"]}",
+          "simulated": true
+        },
+        {
+          "pass_id": "TOOL_PROPOSAL",
+          "supported": true,
+          "passed": true,
+          "evidence": "[sim:sim-openai-frontier-shape] TOOL_PROPOSAL:{\"tool\":\"files.read\",\"args\":{\"path\":\"README.md\"}}",
+          "simulated": true
+        },
+        {
+          "pass_id": "CANCELLATION",
+          "supported": true,
+          "passed": true,
+          "evidence": "error=CANCELLED",
+          "simulated": true
+        },
+        {
+          "pass_id": "TIMEOUT",
+          "supported": true,
+          "passed": true,
+          "evidence": "error=TIMEOUT",
+          "simulated": true
+        },
+        {
+          "pass_id": "HEALTHCHECK",
+          "supported": true,
+          "passed": true,
+          "evidence": "health=healthy",
+          "simulated": true
+        },
+        {
+          "pass_id": "PROVENANCE",
+          "supported": true,
+          "passed": true,
+          "evidence": "SIMULATED adapter for structural/control-plane proofs. Not a live model quality claim. No weight download performed.",
+          "simulated": true
+        },
+        {
+          "pass_id": "LICENSE",
+          "supported": true,
+          "passed": true,
+          "evidence": "Candidate license recorded at inventory layer; adapter does not invent license compliance",
+          "simulated": true
+        },
+        {
+          "pass_id": "RESOURCE",
+          "supported": true,
+          "passed": true,
+          "evidence": "tier_hint=3 energy_hint=0.05",
+          "simulated": true
+        },
+        {
+          "pass_id": "PRIVACY",
+          "supported": true,
+          "passed": true,
+          "evidence": "privacy_class=personal",
+          "simulated": true
+        }
+      ]
+    },
+    {
+      "model_id": "sim-anthropic-frontier-shape",
+      "results": [
+        {
+          "pass_id": "MODEL_PROVIDER_V2_META",
+          "supported": true,
+          "passed": true,
+          "evidence": "meta family=anthropic hidden_cot_exposed=false",
+          "simulated": true
+        },
+        {
+          "pass_id": "MODEL_PROVIDER_V2_COMPLETE",
+          "supported": true,
+          "passed": true,
+          "evidence": "ok=true finish=stop",
+          "simulated": true
+        },
+        {
+          "pass_id": "STREAMING",
+          "supported": true,
+          "passed": true,
+          "evidence": "stream yielded chunks",
+          "simulated": true
+        },
+        {
+          "pass_id": "STRUCTURED_OUTPUT",
+          "supported": true,
+          "passed": true,
+          "evidence": "[sim:sim-anthropic-frontier-shape] {\"ok\":true,\"schema_keys\":[\"type\",\"properties\"]}",
+          "simulated": true
+        },
+        {
+          "pass_id": "TOOL_PROPOSAL",
+          "supported": true,
+          "passed": true,
+          "evidence": "[sim:sim-anthropic-frontier-shape] TOOL_PROPOSAL:{\"tool\":\"files.read\",\"args\":{\"path\":\"README.md\"}}",
+          "simulated": true
+        },
+        {
+          "pass_id": "CANCELLATION",
+          "supported": true,
+          "passed": true,
+          "evidence": "error=CANCELLED",
+          "simulated": true
+        },
+        {
+          "pass_id": "TIMEOUT",
+          "supported": true,
+          "passed": true,
+          "evidence": "error=TIMEOUT",
+          "simulated": true
+        },
+        {
+          "pass_id": "HEALTHCHECK",
+          "supported": true,
+          "passed": true,
+          "evidence": "health=healthy",
+          "simulated": true
+        },
+        {
+          "pass_id": "PROVENANCE",
+          "supported": true,
+          "passed": true,
+          "evidence": "SIMULATED adapter for structural/control-plane proofs. Not a live model quality claim. No weight download performed.",
+          "simulated": true
+        },
+        {
+          "pass_id": "LICENSE",
+          "supported": true,
+          "passed": true,
+          "evidence": "Candidate license recorded at inventory layer; adapter does not invent license compliance",
+          "simulated": true
+        },
+        {
+          "pass_id": "RESOURCE",
+          "supported": true,
+          "passed": true,
+          "evidence": "tier_hint=3 energy_hint=0.05",
+          "simulated": true
+        },
+        {
+          "pass_id": "PRIVACY",
+          "supported": true,
+          "passed": true,
+          "evidence": "privacy_class=personal",
+          "simulated": true
+        }
+      ]
+    },
+    {
+      "model_id": "sim-gemini-multimodal-shape",
+      "results": [
+        {
+          "pass_id": "MODEL_PROVIDER_V2_META",
+          "supported": true,
+          "passed": true,
+          "evidence": "meta family=gemini hidden_cot_exposed=false",
+          "simulated": true
+        },
+        {
+          "pass_id": "MODEL_PROVIDER_V2_COMPLETE",
+          "supported": true,
+          "passed": true,
+          "evidence": "ok=true finish=stop",
+          "simulated": true
+        },
+        {
+          "pass_id": "STREAMING",
+          "supported": true,
+          "passed": true,
+          "evidence": "stream yielded chunks",
+          "simulated": true
+        },
+        {
+          "pass_id": "STRUCTURED_OUTPUT",
+          "supported": true,
+          "passed": true,
+          "evidence": "[sim:sim-gemini-multimodal-shape] {\"ok\":true,\"schema_keys\":[\"type\",\"properties\"]}",
+          "simulated": true
+        },
+        {
+          "pass_id": "TOOL_PROPOSAL",
+          "supported": true,
+          "passed": true,
+          "evidence": "[sim:sim-gemini-multimodal-shape] TOOL_PROPOSAL:{\"tool\":\"files.read\",\"args\":{\"path\":\"README.md\"}}",
+          "simulated": true
+        },
+        {
+          "pass_id": "CANCELLATION",
+          "supported": true,
+          "passed": true,
+          "evidence": "error=CANCELLED",
+          "simulated": true
+        },
+        {
+          "pass_id": "TIMEOUT",
+          "supported": true,
+          "passed": true,
+          "evidence": "error=TIMEOUT",
+          "simulated": true
+        },
+        {
+          "pass_id": "HEALTHCHECK",
+          "supported": true,
+          "passed": true,
+          "evidence": "health=healthy",
+          "simulated": true
+        },
+        {
+          "pass_id": "PROVENANCE",
+          "supported": true,
+          "passed": true,
+          "evidence": "SIMULATED adapter for structural/control-plane proofs. Not a live model quality claim. No weight download performed.",
+          "simulated": true
+        },
+        {
+          "pass_id": "LICENSE",
+          "supported": true,
+          "passed": true,
+          "evidence": "Candidate license recorded at inventory layer; adapter does not invent license compliance",
+          "simulated": true
+        },
+        {
+          "pass_id": "RESOURCE",
+          "supported": true,
+          "passed": true,
+          "evidence": "tier_hint=3 energy_hint=0.05",
+          "simulated": true
+        },
+        {
+          "pass_id": "PRIVACY",
+          "supported": true,
+          "passed": true,
+          "evidence": "privacy_class=personal",
+          "simulated": true
+        }
+      ]
+    },
+    {
+      "model_id": "sim-kimi-long-context-shape",
+      "results": [
+        {
+          "pass_id": "MODEL_PROVIDER_V2_META",
+          "supported": true,
+          "passed": true,
+          "evidence": "meta family=kimi hidden_cot_exposed=false",
+          "simulated": true
+        },
+        {
+          "pass_id": "MODEL_PROVIDER_V2_COMPLETE",
+          "supported": true,
+          "passed": true,
+          "evidence": "ok=true finish=stop",
+          "simulated": true
+        },
+        {
+          "pass_id": "STREAMING",
+          "supported": true,
+          "passed": true,
+          "evidence": "stream yielded chunks",
+          "simulated": true
+        },
+        {
+          "pass_id": "STRUCTURED_OUTPUT",
+          "supported": true,
+          "passed": true,
+          "evidence": "[sim:sim-kimi-long-context-shape] {\"ok\":true,\"schema_keys\":[\"type\",\"properties\"]}",
+          "simulated": true
+        },
+        {
+          "pass_id": "TOOL_PROPOSAL",
+          "supported": true,
+          "passed": true,
+          "evidence": "[sim:sim-kimi-long-context-shape] TOOL_PROPOSAL:{\"tool\":\"files.read\",\"args\":{\"path\":\"README.md\"}}",
+          "simulated": true
+        },
+        {
+          "pass_id": "CANCELLATION",
+          "supported": true,
+          "passed": true,
+          "evidence": "error=CANCELLED",
+          "simulated": true
+        },
+        {
+          "pass_id": "TIMEOUT",
+          "supported": true,
+          "passed": true,
+          "evidence": "error=TIMEOUT",
+          "simulated": true
+        },
+        {
+          "pass_id": "HEALTHCHECK",
+          "supported": true,
+          "passed": true,
+          "evidence": "health=healthy",
+          "simulated": true
+        },
+        {
+          "pass_id": "PROVENANCE",
+          "supported": true,
+          "passed": true,
+          "evidence": "SIMULATED adapter for structural/control-plane proofs. Not a live model quality claim. No weight download performed.",
+          "simulated": true
+        },
+        {
+          "pass_id": "LICENSE",
+          "supported": true,
+          "passed": true,
+          "evidence": "Candidate license recorded at inventory layer; adapter does not invent license compliance",
+          "simulated": true
+        },
+        {
+          "pass_id": "RESOURCE",
+          "supported": true,
+          "passed": true,
+          "evidence": "tier_hint=3 energy_hint=0.05",
+          "simulated": true
+        },
+        {
+          "pass_id": "PRIVACY",
+          "supported": true,
+          "passed": true,
+          "evidence": "privacy_class=personal",
+          "simulated": true
+        }
+      ]
+    },
+    {
+      "model_id": "sim-deepseek-efficient-shape",
+      "results": [
+        {
+          "pass_id": "MODEL_PROVIDER_V2_META",
+          "supported": true,
+          "passed": true,
+          "evidence": "meta family=deepseek hidden_cot_exposed=false",
+          "simulated": true
+        },
+        {
+          "pass_id": "MODEL_PROVIDER_V2_COMPLETE",
+          "supported": true,
+          "passed": true,
+          "evidence": "ok=true finish=stop",
+          "simulated": true
+        },
+        {
+          "pass_id": "STREAMING",
+          "supported": true,
+          "passed": true,
+          "evidence": "stream yielded chunks",
+          "simulated": true
+        },
+        {
+          "pass_id": "STRUCTURED_OUTPUT",
+          "supported": true,
+          "passed": true,
+          "evidence": "[sim:sim-deepseek-efficient-shape] {\"ok\":true,\"schema_keys\":[\"type\",\"properties\"]}",
+          "simulated": true
+        },
+        {
+          "pass_id": "TOOL_PROPOSAL",
+          "supported": true,
+          "passed": true,
+          "evidence": "[sim:sim-deepseek-efficient-shape] TOOL_PROPOSAL:{\"tool\":\"files.read\",\"args\":{\"path\":\"README.md\"}}",
+          "simulated": true
+        },
+        {
+          "pass_id": "CANCELLATION",
+          "supported": true,
+          "passed": true,
+          "evidence": "error=CANCELLED",
+          "simulated": true
+        },
+        {
+          "pass_id": "TIMEOUT",
+          "supported": true,
+          "passed": true,
+          "evidence": "error=TIMEOUT",
+          "simulated": true
+        },
+        {
+          "pass_id": "HEALTHCHECK",
+          "supported": true,
+          "passed": true,
+          "evidence": "health=healthy",
+          "simulated": true
+        },
+        {
+          "pass_id": "PROVENANCE",
+          "supported": true,
+          "passed": true,
+          "evidence": "SIMULATED adapter for structural/control-plane proofs. Not a live model quality claim. No weight download performed.",
+          "simulated": true
+        },
+        {
+          "pass_id": "LICENSE",
+          "supported": true,
+          "passed": true,
+          "evidence": "Candidate license recorded at inventory layer; adapter does not invent license compliance",
+          "simulated": true
+        },
+        {
+          "pass_id": "RESOURCE",
+          "supported": true,
+          "passed": true,
+          "evidence": "tier_hint=2 energy_hint=0.05",
+          "simulated": true
+        },
+        {
+          "pass_id": "PRIVACY",
+          "supported": true,
+          "passed": true,
+          "evidence": "privacy_class=personal",
+          "simulated": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "PIXEL_NEARBY_EDGE_PHYSICAL_JOURNEY_PASS": true,
+  "detail": "ADB_REVERSE_PIXEL_CHROME_FULL_JOURNEY_PASS",
+  "steps": {
+    "adb_reverse": true,
+    "pilot_chrome_opened": true,
+    "pair": true,
+    "execute_smollm2": true,
+    "provenance_nearby_edge": true,
+    "provider_disconnect_honest_fallback": true,
+    "session_recover": true,
+    "revoke_denied": true
+  },
+  "transport": {
+    "mode": "ADB_REVERSE",
+    "preferred_for_pixel": true,
+    "adb_reverse_applied": true,
+    "note": "ADB_REVERSE preferred; ADB reverse ≠ on-device inference"
+  },
+  "adb_connected": true,
+  "adb_unauthorized": false,
+  "honesty": {
+    "PIXEL6A_LIVE_LOCAL_MODEL_PASS": false,
+    "GUNNCHAI_ANDROID_PRODUCTION_CLIENT_PASS": false,
+    "RUNTIME_ON_DEVICE_LOCAL": false,
+    "adb_reverse_is_not_on_device": true
+  }
+}

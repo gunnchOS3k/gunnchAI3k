@@ -1,0 +1,5 @@
+{
+  "ok": true,
+  "raw": "Error: PIXEL_CHROME_FETCH_FAILED:TypeError: Failed to fetch",
+  "note": "Pixel cannot fabricate local model success when Mac unavailable"
+}

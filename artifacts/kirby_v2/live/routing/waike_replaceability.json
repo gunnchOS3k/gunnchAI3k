@@ -1,0 +1,7 @@
+{
+  "live_ok": true,
+  "sim_ok": true,
+  "shell_blocked": true,
+  "contract_unchanged": true,
+  "note": "Same WAIKE contract; provider swappable under ModelProviderV2"
+}

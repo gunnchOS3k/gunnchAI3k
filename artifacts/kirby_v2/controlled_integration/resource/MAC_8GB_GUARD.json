@@ -1,0 +1,9 @@
+{
+  "memsize_gb": 8,
+  "free_mb": 300,
+  "available_mb": 1350,
+  "pressure": "ok",
+  "allow_micro": true,
+  "allow_360m": false,
+  "note": "M2/8GB class: micro allowed unless available_mb critical; skip 360M on 8GB"
+}

@@ -1,0 +1,39 @@
+{
+  "schema": "kirby.live.mac_baseline.v1",
+  "captured_at": "2026-09-20T16:37:17.512Z",
+  "host": {
+    "platform": "darwin",
+    "arch": "arm64",
+    "os_release": "ProductName:\t\tmacOS\nProductVersion:\t\t26.6.2\nBuildVersion:\t\t25G83",
+    "memsize_bytes": 8589934592,
+    "memsize_gb": 8,
+    "free_ram_mb": 946,
+    "free_disk_bytes": 15026999296,
+    "free_disk_gb": 14,
+    "cpu_brand": "unknown",
+    "apple_silicon": true
+  },
+  "runtimes": {
+    "llama_cli": {
+      "present": true,
+      "path": "/opt/homebrew/bin/llama-completion",
+      "version": "version: 10310 (cb26014d9)"
+    },
+    "llama_server": {
+      "present": true,
+      "path": "/opt/homebrew/bin/llama-server"
+    },
+    "adb": {
+      "present": true,
+      "path": "/opt/homebrew/bin/adb"
+    },
+    "node": {
+      "present": true,
+      "version": "v24.9.0"
+    }
+  },
+  "honesty": {
+    "live_model_inference_attempted": true,
+    "note": "Preflight only. Weights download gated by MODEL_PROVENANCE.json."
+  }
+}
