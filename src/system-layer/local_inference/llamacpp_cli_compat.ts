@@ -208,8 +208,11 @@ export function probeLlamaCapability(
 
 /**
  * Discover a binary suitable for one-shot completion / non-conversation runs.
- * Prefers llama-cli when it still supports -no-cnv (legacy / Homebrew).
- * On tip installs where llama-cli dropped -no-cnv, prefers llama-completion.
+ *
+ * Prefer llama-cli when it can express one-shot intent (-no-cnv OR -st). Tip
+ * llama-cli dropped -no-cnv but still supports -st single-turn; that path
+ * produces real stdout. Preferring llama-completion solely because it still
+ * lists -no-cnv is wrong: completion + --log-disable yields empty stdout.
  */
 export function discoverLlamaCompletionBinary(): string | null {
   const envPreferred =
@@ -236,8 +239,9 @@ export function discoverLlamaCompletionBinary(): string | null {
   }
   if (existing.length === 0) return null;
 
-  // Prefer a binary whose --help still lists -no-cnv (preserves disable-conversation intent).
+  // 1) llama-cli with legacy -no-cnv
   for (const candidate of existing) {
+    if (classifyBinary(candidate) !== 'llama-cli') continue;
     try {
       const cap = probeLlamaCapability(candidate);
       if (cap.supportsNoCnv) return candidate;
@@ -246,9 +250,27 @@ export function discoverLlamaCompletionBinary(): string | null {
     }
   }
 
-  // Tip llama-cli without -no-cnv: prefer sibling llama-completion if present.
-  const completion = existing.find((p) => classifyBinary(p) === 'llama-completion');
-  if (completion) return completion;
+  // 2) tip llama-cli with -st single-turn (maps disable-conversation intent)
+  for (const candidate of existing) {
+    if (classifyBinary(candidate) !== 'llama-cli') continue;
+    try {
+      const cap = probeLlamaCapability(candidate);
+      if (cap.supportsSingleTurn) return candidate;
+    } catch {
+      /* try next */
+    }
+  }
+
+  // 3) llama-completion with -no-cnv
+  for (const candidate of existing) {
+    if (classifyBinary(candidate) !== 'llama-completion') continue;
+    try {
+      const cap = probeLlamaCapability(candidate);
+      if (cap.supportsNoCnv) return candidate;
+    } catch {
+      /* try next */
+    }
+  }
 
   return existing[0];
 }
@@ -330,11 +352,13 @@ export function resolveBinaryForIntent(
 
   let capability = probeLlamaCapability(binary, opts);
 
-  // Completion/non-cnv intent: if selected binary lacks -no-cnv, prefer llama-completion.
-  // Skip binary switching when help is injected (unit tests) so overrides stay coherent.
+  // Tip llama-cli dropped -no-cnv but keeps -st: keep cli and map via single-turn.
+  // Only switch to llama-completion when the selected binary cannot express
+  // disable-conversation at all (no -no-cnv and no -st).
   if (
     intent === 'disabled' &&
     !capability.supportsNoCnv &&
+    !capability.supportsSingleTurn &&
     opts?.helpTextOverride == null
   ) {
     const completion =
@@ -343,7 +367,7 @@ export function resolveBinaryForIntent(
         : siblingCompletionBinary(binary) || which('llama-completion');
     if (completion && completion !== binary) {
       const completionCap = probeLlamaCapability(completion, opts);
-      if (completionCap.supportsNoCnv || completionCap.kind === 'llama-completion') {
+      if (completionCap.supportsNoCnv || completionCap.supportsSingleTurn) {
         notes.push(`SWITCHED_TO_LLAMA_COMPLETION_FOR_NO_CNV:${path.basename(completion)}`);
         binary = completion;
         capability = completionCap;
@@ -399,8 +423,14 @@ export function buildLlamaInvocation(input: BuildLlamaArgsInput): BuiltLlamaInvo
   args.push(...conv.flags);
 
   // Avoid duplicating -st when conversation mapping already emitted it.
+  // On llama-completion with -no-cnv, do not also force -st (redundant / noisy).
   const wantSingleTurn = input.singleTurn !== false;
-  if (wantSingleTurn && capability.supportsSingleTurn && !conv.flags.includes('-st')) {
+  if (
+    wantSingleTurn &&
+    capability.supportsSingleTurn &&
+    !conv.flags.includes('-st') &&
+    !(capability.kind === 'llama-completion' && conv.flags.includes('-no-cnv'))
+  ) {
     args.push('-st');
   }
 
@@ -410,8 +440,16 @@ export function buildLlamaInvocation(input: BuildLlamaArgsInput): BuiltLlamaInvo
     notes.push('SKIPPED_UNSUPPORTED_FLAG:--simple-io');
   }
 
-  if (input.logDisable !== false && capability.supportsLogDisable) {
+  // llama-completion + --log-disable yields empty stdout/stderr (exit 0) on
+  // current tip/Homebrew builds — never emit it for completion binaries.
+  const allowLogDisable =
+    input.logDisable !== false &&
+    capability.supportsLogDisable &&
+    capability.kind !== 'llama-completion';
+  if (allowLogDisable) {
     args.push('--log-disable');
+  } else if (input.logDisable !== false && capability.kind === 'llama-completion') {
+    notes.push('SKIPPED_LOG_DISABLE_ON_LLAMA_COMPLETION');
   } else if (input.logDisable !== false && !capability.supportsLogDisable) {
     notes.push('SKIPPED_UNSUPPORTED_FLAG:--log-disable');
   }

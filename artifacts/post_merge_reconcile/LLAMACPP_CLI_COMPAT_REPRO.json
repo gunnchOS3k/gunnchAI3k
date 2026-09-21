@@ -1,5 +1,5 @@
 {
-  "captured_at": "2026-09-21T03:07:59Z",
+  "captured_at": "2026-09-21T03:37:59Z",
   "parent_pr54_head": "851e7916d6d5c7da23a8f30dba6bdfd389daa8ac",
   "child_branch": "integration/pr54-llamacpp-cli-compat-closure",
   "failure_signature": {
@@ -91,5 +91,10 @@
     "adapter": "src/system-layer/local_inference/llamacpp_cli_compat.ts",
     "prefer": "binary whose --help lists -no-cnv (usually llama-cli on Homebrew; llama-completion on tip)",
     "fallback": "llama-cli -st when -no-cnv absent and completion unavailable"
+  },
+  "ci_empty_output_root_cause": {
+    "observed": "AI-UR-016 LOCAL_FAST direct inference produced empty output (not invalid -no-cnv)",
+    "mechanism": "discover preferred llama-completion (still lists -no-cnv) then emitted --log-disable; llama-completion + --log-disable yields empty stdout/stderr exit 0",
+    "fix": "prefer tip llama-cli + -st; never emit --log-disable on llama-completion"
   }
 }

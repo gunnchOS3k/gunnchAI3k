@@ -79,7 +79,7 @@ describe('llamacpp_cli_compat capability adapter', () => {
     expect(inv.conversationModeApplied).toBe('disabled');
   });
 
-  it('modern completion binary retains -no-cnv', () => {
+  it('modern completion binary retains -no-cnv and skips --log-disable', () => {
     const inv = buildLlamaInvocation({
       binary: '/fake/llama-completion',
       modelPath: '/m.gguf',
@@ -91,7 +91,27 @@ describe('llamacpp_cli_compat capability adapter', () => {
       versionOverride: 'version: tip-completion',
     });
     expect(inv.args).toContain('-no-cnv');
+    expect(inv.args).not.toContain('--log-disable');
+    expect(inv.args).not.toContain('-st');
     expect(inv.capability.kind).toBe('llama-completion');
+    expect(inv.notes).toContain('SKIPPED_LOG_DISABLE_ON_LLAMA_COMPLETION');
+  });
+
+  it('tip llama-cli without -no-cnv stays on cli with -st (does not prefer empty completion path)', () => {
+    const inv = buildLlamaInvocation({
+      binary: '/fake/llama-cli',
+      modelPath: '/m.gguf',
+      prompt: 'hi',
+      nPredict: 8,
+      ctx: 256,
+      conversationMode: 'disabled',
+      helpTextOverride: MODERN_CLI_HELP,
+      versionOverride: 'tip-cli',
+    });
+    expect(inv.binary).toBe('/fake/llama-cli');
+    expect(inv.args).toContain('-st');
+    expect(inv.args).not.toContain('-no-cnv');
+    expect(inv.notes).toContain('MAPPED_NO_CNV_TO_SINGLE_TURN');
   });
 
   it('unsupported optional flags are skipped without inventing invalid args', () => {
