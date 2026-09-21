@@ -1,6 +1,6 @@
 {
   "schema": "kirby.live.pixel_runtime_decision.v1",
-  "captured_at": "2026-09-20T16:37:24.497Z",
+  "captured_at": "2026-09-21T03:05:17.726Z",
   "PIXEL6A_ADB_CONNECTED": true,
   "classification": "PIXEL_READY",
   "RUNTIME_ON_DEVICE_LOCAL": false,

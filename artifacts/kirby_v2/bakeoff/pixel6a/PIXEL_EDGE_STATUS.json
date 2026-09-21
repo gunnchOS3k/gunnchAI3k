@@ -2,5 +2,5 @@
   "PIXEL_EDGE_MODEL_BAKEOFF_NOT_RUN": true,
   "reason": "Device listed but no supported Android inference runtime path for bake-off",
   "connected": true,
-  "adb_devices": "List of devices attached\n27211JEGR06194         device usb:17825792X product:bluejay model:Pixel_6a device:bluejay transport_id:13"
+  "adb_devices": "List of devices attached\n27211JEGR06194         device usb:17825792X product:bluejay model:Pixel_6a device:bluejay transport_id:20"
 }
