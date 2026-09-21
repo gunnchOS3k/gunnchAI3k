@@ -358,3 +358,11 @@ npm run user-ready:001
 ```
 
 This packet does **not** claim Fast/Pro weights, frontier parity, app-product-complete, or HUMAN_E6. SmolLM2-135M Q4_K_M 512-ctx is Nano fallback only. Pixels: VISUAL UNAVAILABLE. Remaining OPEN: `benchmarks/NEXT_PACKET_OPEN.md`.
+
+## Feedback & Suggestions
+
+Tried this project? File public feedback via the ecosystem hub:
+
+https://github.com/gunnchOS3k/gunnchos-research-portal/blob/main/FEEDBACK.md
+
+Security vulnerabilities: private only — https://github.com/gunnchOS3k/gunnchos-research-portal/blob/main/SECURITY.md

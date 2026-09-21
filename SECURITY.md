@@ -248,3 +248,5 @@ ENCRYPT_SENSITIVE_DATA=true
 **🔒 Security is not just a feature—it's the foundation of gunnchAI3k's architecture.**
 
 *Built with security-first principles for enterprise environments.*
+
+Do not post exploitable security details publicly. Prefer private advisories: https://github.com/gunnchOS3k/gunnchos-research-portal/security/advisories/new
