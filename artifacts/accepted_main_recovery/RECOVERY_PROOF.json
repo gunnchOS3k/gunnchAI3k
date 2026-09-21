@@ -1,0 +1,31 @@
+{
+  "schema": "accepted_main_recovery.v1",
+  "generated_at_utc": "2026-09-21T14:36:59Z",
+  "repo": "gunnchAI3k",
+  "original_pr": 55,
+  "recovery_branch": "recovery/pr55-accepted-main-convergence",
+  "merge_authorized": false,
+  "method": "git merge --no-ff <exact-missing-child-tip> onto current origin/main",
+  "history_rewrite": false,
+  "force_push": false,
+  "main_sha": "205d1969acd7650151c4c23319a9155fd88fae44",
+  "missing_child_sha": "d4a5c6d857c303b6a8d1ed564d6cbedb4dfc6343",
+  "merge_base": "851e7916d6d5c7da23a8f30dba6bdfd389daa8ac",
+  "commits_missing_before": 5,
+  "recovery_branch_sha": "fb4f885377cffd021e67fe5caa6858e006cb66bf",
+  "child_tip_is_ancestor_of_recovery": true,
+  "consumer_sha_e2d1adc_included": true,
+  "diff_summary": {
+    "files_changed": 71,
+    "insertions": 1524,
+    "deletions": 506,
+    "shortstat": "71 files changed, 1524 insertions(+), 506 deletions(-)"
+  },
+  "duplicate_work_check": "child_tip_not_ancestor_of_main_before_recovery; recovery_tree_equals_tip_tree; main_unique_content_preserved",
+  "conflicts": "none",
+  "ci": {
+    "status": "pending_local_then_github",
+    "notes": "Local required tests run in recovery worktree; GitHub CI will run on draft PR."
+  },
+  "owner_landing_note": "DO NOT MERGE until owner approval. Prefer normal merge commit (no squash/rebase)."
+}
