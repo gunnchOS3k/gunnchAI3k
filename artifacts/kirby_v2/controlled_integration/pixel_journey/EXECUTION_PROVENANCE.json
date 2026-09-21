@@ -2,7 +2,7 @@
   "ok": true,
   "provenance": {
     "schema": "gunnchai.nearby_edge.provenance.v1",
-    "request_id": "31d281a9-5b00-4802-8538-04effc59e99d",
+    "request_id": "5a5b7f98-53a6-4064-97e5-0f0545e4e4f4",
     "compute_host": "mac_nearby_edge",
     "evidence_class": "LIVE_MAC",
     "device_role": "pixel6a_adb_client",
@@ -15,7 +15,7 @@
     "adb_reverse_is_not_on_device": true,
     "privacy_label": "device_local_adjacent",
     "task_class": "intent_route",
-    "timestamp": "2026-09-20T16:37:52.558Z"
+    "timestamp": "2026-09-21T03:05:08.471Z"
   },
   "compute_host": "mac_nearby_edge",
   "expected_compute_host": "mac_nearby_edge",

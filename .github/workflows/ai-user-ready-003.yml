@@ -2,9 +2,14 @@ name: AI-USER-READY-003 market packet
 
 on:
   pull_request:
-    branches: [main]
+    branches:
+      - main
+      - integration/kirby-controlled-stack-main-reconciliation
   push:
-    branches: [main, 'stream/ai-user-ready-003-research-vision-coding']
+    branches:
+      - main
+      - 'stream/ai-user-ready-003-research-vision-coding'
+      - integration/pr54-llamacpp-cli-compat-closure
   workflow_dispatch:
 
 permissions:
@@ -40,15 +45,25 @@ jobs:
       - name: Provision llama.cpp
         run: |
           set -euo pipefail
-          if command -v llama-cli >/dev/null 2>&1; then
-            echo "llama-cli already on PATH: $(command -v llama-cli)"
+          if command -v llama-cli >/dev/null 2>&1 && command -v llama-completion >/dev/null 2>&1; then
+            echo "llama binaries on PATH: $(command -v llama-cli) $(command -v llama-completion)"
+            llama-cli --version || true
+            llama-completion --version || true
             exit 0
           fi
           git clone --depth 1 https://github.com/ggml-org/llama.cpp .llama-cpp-src
+          echo "llama.cpp tip: $(git -C .llama-cpp-src rev-parse HEAD)"
           cmake -S .llama-cpp-src -B .llama-cpp-src/build -DGGML_NATIVE=OFF
-          cmake --build .llama-cpp-src/build --target llama-cli -j "$(nproc)"
+          cmake --build .llama-cpp-src/build --target llama-cli llama-completion -j "$(nproc)"
           echo "$PWD/.llama-cpp-src/build/bin" >> "$GITHUB_PATH"
           test -x .llama-cpp-src/build/bin/llama-cli
+          test -x .llama-cpp-src/build/bin/llama-completion
+          .llama-cpp-src/build/bin/llama-cli --version || true
+          .llama-cpp-src/build/bin/llama-completion --version || true
+          .llama-cpp-src/build/bin/llama-cli --help > /tmp/llama-cli-help.txt 2>&1 || true
+          .llama-cpp-src/build/bin/llama-completion --help > /tmp/llama-completion-help.txt 2>&1 || true
+          echo "llama-cli -no-cnv in help: $(grep -c -- '-no-cnv' /tmp/llama-cli-help.txt || true)"
+          echo "llama-completion -no-cnv in help: $(grep -c -- '-no-cnv' /tmp/llama-completion-help.txt || true)"
       - name: CLI packet 003 (CI digital coding gate + recorded live DRAFT PR evidence)
         env:
           GUNNCHAI_FAST_NETWORK_CONSENT: "1"

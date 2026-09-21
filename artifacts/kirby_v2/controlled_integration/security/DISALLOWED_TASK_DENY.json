@@ -5,7 +5,7 @@
   "denied": true,
   "provenance": {
     "schema": "gunnchai.nearby_edge.provenance.v1",
-    "request_id": "8f2b6c97-9bfe-47ef-a13d-e79b4f15d412",
+    "request_id": "f2e2d7a5-9bf0-402a-8b56-be704044c042",
     "compute_host": "mac_nearby_edge",
     "evidence_class": "LIVE_MAC",
     "device_role": "pixel6a_adb_client",
@@ -18,6 +18,6 @@
     "adb_reverse_is_not_on_device": true,
     "privacy_label": "device_local_adjacent",
     "task_class": "exam_answer_dump",
-    "timestamp": "2026-09-20T16:37:44.210Z"
+    "timestamp": "2026-09-21T03:05:01.610Z"
   }
 }

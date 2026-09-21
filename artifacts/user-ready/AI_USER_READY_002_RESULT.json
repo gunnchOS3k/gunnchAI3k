@@ -1,7 +1,7 @@
 {
   "schema": "gunnchai.user_ready_002.v1",
   "packet": "AI-USER-READY-002",
-  "generatedAt": "2026-08-15T16:57:29.488Z",
+  "generatedAt": "2026-09-21T03:09:22.153Z",
   "tokens": {
     "GUNNCHAI_APP_PRODUCT_COMPLETE": false,
     "GUNNCHAI_FRONTIER_PRODUCT_PARITY": false,
@@ -61,15 +61,15 @@
   },
   "coverage": {
     "required": 16,
-    "implemented": 10,
+    "implemented": 16,
     "runtime": 10,
-    "offline": 9,
+    "offline": 15,
     "cloud_only": 0,
     "cloud_consent": 7,
     "open": 0,
-    "gap": 6,
-    "complete": 10,
-    "partial": 6,
+    "gap": 0,
+    "complete": 16,
+    "partial": 0,
     "implemented_ids": [
       "AI-UR-001",
       "AI-UR-002",
@@ -79,7 +79,13 @@
       "AI-UR-006",
       "AI-UR-007",
       "AI-UR-008",
+      "AI-UR-009",
+      "AI-UR-010",
+      "AI-UR-011",
+      "AI-UR-012",
       "AI-UR-013",
+      "AI-UR-014",
+      "AI-UR-015",
       "AI-UR-016"
     ],
     "runtime_ids": [
@@ -102,7 +108,13 @@
       "AI-UR-005",
       "AI-UR-006",
       "AI-UR-008",
+      "AI-UR-009",
+      "AI-UR-010",
+      "AI-UR-011",
+      "AI-UR-012",
       "AI-UR-013",
+      "AI-UR-014",
+      "AI-UR-015",
       "AI-UR-016"
     ],
     "cloud_consent_ids": [
@@ -124,17 +136,16 @@
       "AI-UR-006",
       "AI-UR-007",
       "AI-UR-008",
-      "AI-UR-013",
-      "AI-UR-016"
-    ],
-    "partial_ids": [
       "AI-UR-009",
       "AI-UR-010",
       "AI-UR-011",
       "AI-UR-012",
+      "AI-UR-013",
       "AI-UR-014",
-      "AI-UR-015"
-    ]
+      "AI-UR-015",
+      "AI-UR-016"
+    ],
+    "partial_ids": []
   },
   "results": [
     {
@@ -175,7 +186,7 @@
       "cloud_only": false,
       "notes": "DOCX + code artifacts with targeted edit versions. Canvas UI OPEN.",
       "evidence": {
-        "docx": "/var/folders/dp/z5frf3m511jcdpdf8v878v8h0000gn/T/gunnchai-ur004-keZmf5/base003/base/artifacts/lab_report.docx",
+        "docx": "/var/folders/dp/z5frf3m511jcdpdf8v878v8h0000gn/T/gunnchai-ur004-BGPGfX/base003/base/artifacts/lab_report.docx",
         "versions": 2,
         "codeExists": true
       }
@@ -281,8 +292,8 @@
       "cloud_only": false,
       "notes": "Sandbox branch + tests + DRAFT_PR.json. Live GitHub DRAFT PR not opened this run → PARTIAL.",
       "evidence": {
-        "branch": "agent/ai-ur-013-fix-add-msumcli4",
-        "commit": "4ad4b5952f8c5e91350cf63a7f6ca9e227246d9c",
+        "branch": "agent/ai-ur-013-fix-add-muao24k2",
+        "commit": "190970e70c1fe85c73ce24098bbe0f0f97f14995",
         "tests_passed": true,
         "mainUnchanged": true,
         "diffOnlyRejected": true,
@@ -307,63 +318,63 @@
             "id": "general",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 1107,
-            "outputChars": 251
+            "latencyMs": 956,
+            "outputChars": 238
           },
           {
             "id": "summarization",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 700,
+            "latencyMs": 1026,
             "outputChars": 112
           },
           {
             "id": "waike",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 814,
-            "outputChars": 194
+            "latencyMs": 950,
+            "outputChars": 197
           },
           {
             "id": "source_grounded",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 863,
+            "latencyMs": 998,
             "outputChars": 229
           },
           {
             "id": "basic_code",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 899,
+            "latencyMs": 572,
             "outputChars": 40
           },
           {
             "id": "structured_output",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 1002,
-            "outputChars": 30
+            "latencyMs": 772,
+            "outputChars": 26
           },
           {
             "id": "hallucination_resistance",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 1451,
-            "outputChars": 373
+            "latencyMs": 675,
+            "outputChars": 272
           },
           {
             "id": "refusal_permission",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 1106,
-            "outputChars": 198
+            "latencyMs": 816,
+            "outputChars": 224
           },
           {
             "id": "context_retention",
             "realInference": true,
             "usedNano": false,
-            "latencyMs": 762,
+            "latencyMs": 679,
             "outputChars": 159
           }
         ],
@@ -373,15 +384,12 @@
   ],
   "stubChallengeFailures": [],
   "next_packet": [
-    "AI-UR-009 real allowlisted tool execution for custom agents COMPLETE",
-    "AI-UR-010 real LOCAL/PROVIDER STT+TTS for voice COMPLETE",
-    "AI-UR-011 neural VLM for vision COMPLETE (OCR heuristics remain PARTIAL)",
-    "AI-UR-012 real allowlisted local OS/desktop automation COMPLETE",
-    "AI-UR-014 real TTS speech audio overview COMPLETE",
-    "AI-UR-015 button→backend wired companion UI COMPLETE",
-    "LOCAL_PRO hashed HOST_OBSERVED when resources safe",
-    "HUMAN_E6 companion polish validation",
-    "device-os pixel proof for companion/cowrite chrome"
+    "LOCAL_PRO HOST_OBSERVED when RAM/disk safe (do not fake)",
+    "Live microphone HUMAN_PENDING",
+    "Darwin AX GUI computer-use of third-party apps DEVICE/HUMAN pending",
+    "HUMAN_E6 companion polish",
+    "device-os Pixel proof",
+    "WAIKE runtime mastery still below 0.95 — knowledge-gap limited"
   ],
   "allImplementedPassed": true
 }
