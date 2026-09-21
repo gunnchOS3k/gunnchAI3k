@@ -1,0 +1,63 @@
+{
+  "schema": "gunnchai.local_pro_ab.v1",
+  "packet": "STREAM-B-PKT-001",
+  "generatedAt": "2026-08-16T16:30:00Z",
+  "gunnchai_main_tip": "c429750ff83b2a5344a6e1f40f5c7d27a863bf4d",
+  "waike_main_tip": "7a0d4fe3d0f3da39d105ef21a97d1fd1d792c997",
+  "host": {
+    "freememBytes_observed": 673873920,
+    "totalmemBytes": 8589934592,
+    "freeDiskBytes_observed": 68040884224,
+    "resourceSafe": false,
+    "minFreeMemRequiredBytes": 2147483648,
+    "llama_cpp": "version: 10310 (cb26014d9)",
+    "llama_cli_path": "/opt/homebrew/bin/llama-cli"
+  },
+  "candidate": {
+    "id": "Qwen2.5-1.5B-Instruct-Q4_K_M",
+    "catalog_id": "local-pro-qwen2_5-1_5b",
+    "role": "LOCAL_PRO_candidate",
+    "license": "Apache-2.0",
+    "quant": "Q4_K_M",
+    "sha256": "1adf0b11065d8ad2e8123ea110d1ec956dab4ab038eab665614adba04b6c3370",
+    "bytes": 986048768,
+    "contextTokens": 4096,
+    "downloadUrl": "https://huggingface.co/bartowski/Qwen2.5-1.5B-Instruct-GGUF/resolve/main/Qwen2.5-1.5B-Instruct-Q4_K_M.gguf",
+    "present": false
+  },
+  "incumbent": {
+    "id": "SmolLM2-360M-Instruct-Q4_K_M",
+    "role": "LOCAL_FAST_incumbent",
+    "license": "Apache-2.0",
+    "quant": "Q4_K_M",
+    "sha256": "2fa3f013dcdd7b99f9b237717fa0b12d75bbb89984cc1274be1471a465bac9c2",
+    "bytes": 270590880,
+    "contextTokens": 2048,
+    "present": true
+  },
+  "held_out_benchmark": {
+    "design": "frozen WAIKE stratified 6 quiz + 2 mid + 2 final × 12 courses = 120 (SAME as stronger_model_compare)",
+    "status": "NOT_RUN_CANDIDATE",
+    "reason": "LOCAL_PRO_RESOURCE_PENDING: freemem (~0.67 GiB) below 2 GiB gate; no ~1GB Pro download attempted; no post-hoc tuning",
+    "prior_incumbent_vs_nano_preserved": {
+      "note": "Preserve 360M negative A/B vs 135M — do not smash",
+      "MODEL_A_135M_overall": 0.30833333333333335,
+      "MODEL_B_360M_overall": 0.2916666666666667,
+      "delta_overall": -0.016666666666666663,
+      "adoption_recommendation": "DO_NOT_ADOPT_AS_MASTERY_SOLVER_DEFAULT"
+    }
+  },
+  "metrics_observed": {
+    "latencyMs": null,
+    "rssBytes": null,
+    "host_observed_inference": false
+  },
+  "adoption": "DO_NOT_ADOPT",
+  "WAIKE_AI_DIGITAL_MASTERY_PASS": false,
+  "DIGITAL_MASTERY_PASS": false,
+  "OPEN": [
+    "Local Pro weights absent; host freemem unsafe for download+inference",
+    "Held-out Pro vs incumbent deferred until resourceSafe",
+    "Preserve 360M negative A/B result (delta_overall < 0)"
+  ]
+}

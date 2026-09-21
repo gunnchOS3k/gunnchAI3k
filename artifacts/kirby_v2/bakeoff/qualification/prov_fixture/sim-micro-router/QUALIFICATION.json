@@ -1,0 +1,158 @@
+{
+  "schema": "kirby.provider_qualification.v1",
+  "provider_id": "prov_fixture",
+  "model_id": "sim-micro-router",
+  "candidate_id": "fixture::sim-micro-router",
+  "evidence_mode": "simulated_deterministic",
+  "slots": [
+    "SLOT_A_MICRO_ROUTER"
+  ],
+  "conformance": [
+    {
+      "pass_id": "MODEL_PROVIDER_V2_META",
+      "supported": true,
+      "passed": true,
+      "evidence": "meta family=fixture hidden_cot_exposed=false",
+      "simulated": true
+    },
+    {
+      "pass_id": "MODEL_PROVIDER_V2_COMPLETE",
+      "supported": true,
+      "passed": true,
+      "evidence": "ok=true finish=stop",
+      "simulated": true
+    },
+    {
+      "pass_id": "STREAMING",
+      "supported": true,
+      "passed": true,
+      "evidence": "stream yielded chunks",
+      "simulated": true
+    },
+    {
+      "pass_id": "STRUCTURED_OUTPUT",
+      "supported": true,
+      "passed": true,
+      "evidence": "[sim:sim-micro-router] {\"ok\":true,\"schema_keys\":[\"type\",\"properties\"]}",
+      "simulated": true
+    },
+    {
+      "pass_id": "TOOL_PROPOSAL",
+      "supported": true,
+      "passed": true,
+      "evidence": "[sim:sim-micro-router] TOOL_PROPOSAL:{\"tool\":\"files.read\",\"args\":{\"path\":\"README.md\"}}",
+      "simulated": true
+    },
+    {
+      "pass_id": "CANCELLATION",
+      "supported": true,
+      "passed": true,
+      "evidence": "error=CANCELLED",
+      "simulated": true
+    },
+    {
+      "pass_id": "TIMEOUT",
+      "supported": true,
+      "passed": true,
+      "evidence": "error=TIMEOUT",
+      "simulated": true
+    },
+    {
+      "pass_id": "HEALTHCHECK",
+      "supported": true,
+      "passed": true,
+      "evidence": "health=healthy",
+      "simulated": true
+    },
+    {
+      "pass_id": "PROVENANCE",
+      "supported": true,
+      "passed": true,
+      "evidence": "SIMULATED adapter for structural/control-plane proofs. Not a live model quality claim. No weight download performed.",
+      "simulated": true
+    },
+    {
+      "pass_id": "LICENSE",
+      "supported": true,
+      "passed": true,
+      "evidence": "Candidate license recorded at inventory layer; adapter does not invent license compliance",
+      "simulated": true
+    },
+    {
+      "pass_id": "RESOURCE",
+      "supported": true,
+      "passed": true,
+      "evidence": "tier_hint=0 energy_hint=0.4",
+      "simulated": true
+    },
+    {
+      "pass_id": "PRIVACY",
+      "supported": true,
+      "passed": true,
+      "evidence": "privacy_class=device_local",
+      "simulated": true
+    }
+  ],
+  "suite_summary": {
+    "routing": {
+      "attempts": 1,
+      "successes": 1
+    },
+    "waike": {
+      "attempts": 1,
+      "successes": 1
+    },
+    "coding": {
+      "attempts": 1,
+      "successes": 1
+    },
+    "device": {
+      "attempts": 1,
+      "successes": 1
+    },
+    "research": {
+      "attempts": 1,
+      "successes": 1
+    },
+    "creator": {
+      "attempts": 1,
+      "successes": 1
+    },
+    "tool_use": {
+      "attempts": 1,
+      "successes": 1
+    },
+    "bounded_agent": {
+      "attempts": 1,
+      "successes": 1
+    },
+    "offline": {
+      "attempts": 1,
+      "successes": 1
+    },
+    "reliability": {
+      "attempts": 6,
+      "successes": 6
+    }
+  },
+  "promotion_state": "PREFERRED_FOR_SLOT",
+  "promotion_rules": {
+    "R1_ADAPTER_CONFORMANCE": true,
+    "R2_SUITE_PASS_THRESHOLD": true,
+    "R3_OFFLINE_WHEN_REQUIRED": true,
+    "R4_SAFETY_INJECTION": true,
+    "R5_NO_HARD_PIN": true,
+    "R6_RESOURCE_FIT": true,
+    "R7_HONEST_MODE": true
+  },
+  "preferred_slots": [
+    "SLOT_A_MICRO_ROUTER"
+  ],
+  "fallback_slots": [],
+  "honesty": {
+    "simulated": true,
+    "live_success_fabricated": false,
+    "note": "Qualified for control-plane/architecture proofs only — not a live model quality promotion"
+  },
+  "captured_at": "2026-09-21T03:05:11.019Z"
+}

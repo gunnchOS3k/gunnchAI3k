@@ -1,0 +1,12 @@
+{
+  "generated_at_utc": "2026-09-18T21:20:48.340860+00:00",
+  "accepted_main_sha": "076b7ccd7c3f71d3299ead9a72e45291cd33689a",
+  "branch": "research/kirby-frontier-capability-adoption-v2",
+  "head_sha_at_artifact_gen": "076b7ccd7c3f71d3299ead9a72e45291cd33689a",
+  "kirby_tests": "17/17 PASS",
+  "full_jest": "61 suites / 287 tests PASS",
+  "evidence_files": [
+    "artifacts/kirby_v2/FULL_TEST_RUN.log",
+    "tests/kirby_v2/kirby_foundation.test.ts"
+  ]
+}

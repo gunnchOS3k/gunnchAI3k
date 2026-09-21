@@ -2,9 +2,13 @@ name: Gate 1 post-merge integrity
 
 on:
   pull_request:
-    branches: [main]
+    branches:
+      - main
+      - integration/kirby-controlled-stack-main-reconciliation
   push:
-    branches: [main]
+    branches:
+      - main
+      - integration/pr54-llamacpp-cli-compat-closure
   workflow_dispatch:
 
 permissions:

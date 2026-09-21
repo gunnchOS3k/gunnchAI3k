@@ -1,0 +1,93 @@
+[
+  {
+    "model_id": "sim-micro-router",
+    "latency_p50": 1,
+    "cost_usd": 0,
+    "energy_j": 0.6267999999999999,
+    "successes": 15
+  },
+  {
+    "model_id": "sim-llama-edge-fast",
+    "latency_p50": 1,
+    "cost_usd": 0,
+    "energy_j": 0.6284,
+    "successes": 15
+  },
+  {
+    "model_id": "sim-gemma-edge",
+    "latency_p50": 1,
+    "cost_usd": 0,
+    "energy_j": 0.6252,
+    "successes": 15
+  },
+  {
+    "model_id": "sim-qwen-workstation",
+    "latency_p50": 1,
+    "cost_usd": 0,
+    "energy_j": 0.1492,
+    "successes": 11
+  },
+  {
+    "model_id": "sim-mistral-workstation",
+    "latency_p50": 1,
+    "cost_usd": 0,
+    "energy_j": 0.1408,
+    "successes": 8
+  },
+  {
+    "model_id": "sim-glm-tools",
+    "latency_p50": 1,
+    "cost_usd": 0,
+    "energy_j": 0.1348,
+    "successes": 8
+  },
+  {
+    "model_id": "sim-openai-frontier-shape",
+    "latency_p50": 1,
+    "cost_usd": 0.0011020000000000001,
+    "energy_j": 0.028650000000000002,
+    "successes": 7
+  },
+  {
+    "model_id": "sim-anthropic-frontier-shape",
+    "latency_p50": 1,
+    "cost_usd": 0.001142,
+    "energy_j": 0.0189,
+    "successes": 6
+  },
+  {
+    "model_id": "sim-gemini-multimodal-shape",
+    "latency_p50": 1,
+    "cost_usd": 0.001126,
+    "energy_j": 0.0188,
+    "successes": 6
+  },
+  {
+    "model_id": "sim-kimi-long-context-shape",
+    "latency_p50": 1,
+    "cost_usd": 0.001126,
+    "energy_j": 0.0088,
+    "successes": 5
+  },
+  {
+    "model_id": "sim-deepseek-efficient-shape",
+    "latency_p50": 1,
+    "cost_usd": 0.001142,
+    "energy_j": 0.0089,
+    "successes": 5
+  },
+  {
+    "model_id": "control_plane",
+    "latency_p50": 1,
+    "cost_usd": 0,
+    "energy_j": 0,
+    "successes": 1
+  },
+  {
+    "model_id": "sim-micro-router,sim-llama-edge-fast",
+    "latency_p50": 1,
+    "cost_usd": 0,
+    "energy_j": 0,
+    "successes": 2
+  }
+]

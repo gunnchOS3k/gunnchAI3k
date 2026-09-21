@@ -1,0 +1,272 @@
+{
+  "schema": "kirby.qualification_matrix.v1",
+  "slots_schema_ref": "config/provider_qualification_slots.yaml",
+  "legacy_slots": [
+    {
+      "id": "SLOT_A_MICRO_ROUTER",
+      "description": "Instant classify/route/safety precheck on-device"
+    },
+    {
+      "id": "SLOT_B_EDGE_FAST",
+      "description": "Everyday assist, light tutoring, summarization"
+    },
+    {
+      "id": "SLOT_C_WORKSTATION_PRO",
+      "description": "Coding, deeper reasoning, multimodal when consented"
+    },
+    {
+      "id": "SLOT_D_WAIKE_TUTOR",
+      "description": "Socratic tutoring without exam dumps"
+    },
+    {
+      "id": "SLOT_E_RESEARCH_LONG",
+      "description": "Long-horizon research with citations"
+    },
+    {
+      "id": "SLOT_F_CREATOR_STUDIO",
+      "description": "Creator studio docs/outlines"
+    },
+    {
+      "id": "SLOT_G_COMPUTER_USE",
+      "description": "Controlled local UI computer-use"
+    },
+    {
+      "id": "tier_fit",
+      "description": "Fits ladder tier budgets"
+    },
+    {
+      "id": "offline_degrade",
+      "description": "Degrades offline without crash"
+    },
+    {
+      "id": "safety",
+      "description": "Injection/safety guards hold"
+    },
+    {
+      "id": "verifier_pass",
+      "description": "Domain verifier contracts pass"
+    },
+    {
+      "id": "tool_broker",
+      "description": "Tools are broker-mediated"
+    }
+  ],
+  "qualifications": [
+    {
+      "model_id": "sim-micro-router",
+      "provider_id": "prov_fixture",
+      "promotion_state": "PREFERRED_FOR_SLOT",
+      "preferred_slots": [
+        "SLOT_A_MICRO_ROUTER"
+      ],
+      "evidence_mode": "simulated_deterministic",
+      "rules": {
+        "R1_ADAPTER_CONFORMANCE": true,
+        "R2_SUITE_PASS_THRESHOLD": true,
+        "R3_OFFLINE_WHEN_REQUIRED": true,
+        "R4_SAFETY_INJECTION": true,
+        "R5_NO_HARD_PIN": true,
+        "R6_RESOURCE_FIT": true,
+        "R7_HONEST_MODE": true
+      }
+    },
+    {
+      "model_id": "sim-llama-edge-fast",
+      "provider_id": "prov_llama",
+      "promotion_state": "PREFERRED_FOR_SLOT",
+      "preferred_slots": [
+        "SLOT_B_EDGE_FAST",
+        "SLOT_D_WAIKE_TUTOR"
+      ],
+      "evidence_mode": "simulated_deterministic",
+      "rules": {
+        "R1_ADAPTER_CONFORMANCE": true,
+        "R2_SUITE_PASS_THRESHOLD": true,
+        "R3_OFFLINE_WHEN_REQUIRED": true,
+        "R4_SAFETY_INJECTION": true,
+        "R5_NO_HARD_PIN": true,
+        "R6_RESOURCE_FIT": true,
+        "R7_HONEST_MODE": true
+      }
+    },
+    {
+      "model_id": "sim-gemma-edge",
+      "provider_id": "prov_gemma",
+      "promotion_state": "PREFERRED_FOR_SLOT",
+      "preferred_slots": [
+        "SLOT_B_EDGE_FAST",
+        "SLOT_D_WAIKE_TUTOR"
+      ],
+      "evidence_mode": "simulated_deterministic",
+      "rules": {
+        "R1_ADAPTER_CONFORMANCE": true,
+        "R2_SUITE_PASS_THRESHOLD": true,
+        "R3_OFFLINE_WHEN_REQUIRED": true,
+        "R4_SAFETY_INJECTION": true,
+        "R5_NO_HARD_PIN": true,
+        "R6_RESOURCE_FIT": true,
+        "R7_HONEST_MODE": true
+      }
+    },
+    {
+      "model_id": "sim-qwen-workstation",
+      "provider_id": "prov_qwen",
+      "promotion_state": "QUALIFIED",
+      "preferred_slots": [],
+      "evidence_mode": "simulated_deterministic",
+      "rules": {
+        "R1_ADAPTER_CONFORMANCE": true,
+        "R2_SUITE_PASS_THRESHOLD": true,
+        "R3_OFFLINE_WHEN_REQUIRED": true,
+        "R4_SAFETY_INJECTION": true,
+        "R5_NO_HARD_PIN": true,
+        "R6_RESOURCE_FIT": true,
+        "R7_HONEST_MODE": true
+      }
+    },
+    {
+      "model_id": "sim-mistral-workstation",
+      "provider_id": "prov_mistral",
+      "promotion_state": "QUALIFIED",
+      "preferred_slots": [],
+      "evidence_mode": "simulated_deterministic",
+      "rules": {
+        "R1_ADAPTER_CONFORMANCE": true,
+        "R2_SUITE_PASS_THRESHOLD": true,
+        "R3_OFFLINE_WHEN_REQUIRED": true,
+        "R4_SAFETY_INJECTION": true,
+        "R5_NO_HARD_PIN": true,
+        "R6_RESOURCE_FIT": true,
+        "R7_HONEST_MODE": true
+      }
+    },
+    {
+      "model_id": "sim-glm-tools",
+      "provider_id": "prov_glm",
+      "promotion_state": "QUALIFIED",
+      "preferred_slots": [],
+      "evidence_mode": "simulated_deterministic",
+      "rules": {
+        "R1_ADAPTER_CONFORMANCE": true,
+        "R2_SUITE_PASS_THRESHOLD": true,
+        "R3_OFFLINE_WHEN_REQUIRED": true,
+        "R4_SAFETY_INJECTION": true,
+        "R5_NO_HARD_PIN": true,
+        "R6_RESOURCE_FIT": true,
+        "R7_HONEST_MODE": true
+      }
+    },
+    {
+      "model_id": "sim-openai-frontier-shape",
+      "provider_id": "prov_openai",
+      "promotion_state": "QUALIFIED",
+      "preferred_slots": [],
+      "evidence_mode": "simulated_deterministic",
+      "rules": {
+        "R1_ADAPTER_CONFORMANCE": true,
+        "R2_SUITE_PASS_THRESHOLD": true,
+        "R3_OFFLINE_WHEN_REQUIRED": true,
+        "R4_SAFETY_INJECTION": true,
+        "R5_NO_HARD_PIN": true,
+        "R6_RESOURCE_FIT": true,
+        "R7_HONEST_MODE": true
+      }
+    },
+    {
+      "model_id": "sim-anthropic-frontier-shape",
+      "provider_id": "prov_anthropic",
+      "promotion_state": "QUALIFIED",
+      "preferred_slots": [],
+      "evidence_mode": "simulated_deterministic",
+      "rules": {
+        "R1_ADAPTER_CONFORMANCE": true,
+        "R2_SUITE_PASS_THRESHOLD": true,
+        "R3_OFFLINE_WHEN_REQUIRED": true,
+        "R4_SAFETY_INJECTION": true,
+        "R5_NO_HARD_PIN": true,
+        "R6_RESOURCE_FIT": true,
+        "R7_HONEST_MODE": true
+      }
+    },
+    {
+      "model_id": "sim-gemini-multimodal-shape",
+      "provider_id": "prov_gemini",
+      "promotion_state": "QUALIFIED",
+      "preferred_slots": [],
+      "evidence_mode": "simulated_deterministic",
+      "rules": {
+        "R1_ADAPTER_CONFORMANCE": true,
+        "R2_SUITE_PASS_THRESHOLD": true,
+        "R3_OFFLINE_WHEN_REQUIRED": true,
+        "R4_SAFETY_INJECTION": true,
+        "R5_NO_HARD_PIN": true,
+        "R6_RESOURCE_FIT": true,
+        "R7_HONEST_MODE": true
+      }
+    },
+    {
+      "model_id": "sim-kimi-long-context-shape",
+      "provider_id": "prov_kimi",
+      "promotion_state": "QUALIFIED",
+      "preferred_slots": [],
+      "evidence_mode": "simulated_deterministic",
+      "rules": {
+        "R1_ADAPTER_CONFORMANCE": true,
+        "R2_SUITE_PASS_THRESHOLD": true,
+        "R3_OFFLINE_WHEN_REQUIRED": true,
+        "R4_SAFETY_INJECTION": true,
+        "R5_NO_HARD_PIN": true,
+        "R6_RESOURCE_FIT": true,
+        "R7_HONEST_MODE": true
+      }
+    },
+    {
+      "model_id": "sim-deepseek-efficient-shape",
+      "provider_id": "prov_deepseek",
+      "promotion_state": "QUALIFIED",
+      "preferred_slots": [],
+      "evidence_mode": "simulated_deterministic",
+      "rules": {
+        "R1_ADAPTER_CONFORMANCE": true,
+        "R2_SUITE_PASS_THRESHOLD": true,
+        "R3_OFFLINE_WHEN_REQUIRED": true,
+        "R4_SAFETY_INJECTION": true,
+        "R5_NO_HARD_PIN": true,
+        "R6_RESOURCE_FIT": true,
+        "R7_HONEST_MODE": true
+      }
+    },
+    {
+      "model_id": "NO_CANDIDATE_AVAILABLE",
+      "provider_id": "prov_live_local",
+      "promotion_state": "DISABLED",
+      "preferred_slots": [],
+      "evidence_mode": "unavailable",
+      "rules": {
+        "R1_ADAPTER_CONFORMANCE": false,
+        "R2_SUITE_PASS_THRESHOLD": false,
+        "R3_OFFLINE_WHEN_REQUIRED": false,
+        "R4_SAFETY_INJECTION": false,
+        "R5_NO_HARD_PIN": false,
+        "R6_RESOURCE_FIT": false,
+        "R7_HONEST_MODE": false
+      }
+    },
+    {
+      "model_id": "NO_CANDIDATE_AVAILABLE",
+      "provider_id": "prov_live_remote",
+      "promotion_state": "DISABLED",
+      "preferred_slots": [],
+      "evidence_mode": "unavailable",
+      "rules": {
+        "R1_ADAPTER_CONFORMANCE": false,
+        "R2_SUITE_PASS_THRESHOLD": false,
+        "R3_OFFLINE_WHEN_REQUIRED": false,
+        "R4_SAFETY_INJECTION": false,
+        "R5_NO_HARD_PIN": false,
+        "R6_RESOURCE_FIT": false,
+        "R7_HONEST_MODE": false
+      }
+    }
+  ]
+}

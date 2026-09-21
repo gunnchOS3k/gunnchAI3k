@@ -1,0 +1,11 @@
+{
+  "schema": "waike.public_course_catalog.v1",
+  "course_id": "GENERAL_IT",
+  "title": "General IT — Operator to Support Specialist",
+  "lesson_excerpt": "At the Gary Civic Tech Desk the machine remembers (files), calculates (apps), and talks (network). Ticket 4417 is a remember-job failure: an unsaved essay was wiped by the idle timer.",
+  "learning_objectives": [
+    "Name the three jobs a computer actually has",
+    "Write ticket notes without patron PII"
+  ],
+  "note": "Public catalog only. No instructor keys, gold keys, or exam answers."
+}

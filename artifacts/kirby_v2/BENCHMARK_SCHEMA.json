@@ -1,0 +1,17 @@
+{
+  "suites": [
+    "waike",
+    "coding",
+    "device",
+    "research",
+    "creator"
+  ],
+  "qualification_slots": [
+    "tier_fit",
+    "offline_degrade",
+    "safety",
+    "verifier_pass",
+    "tool_broker"
+  ],
+  "ranking": "pareto_by_tier_only"
+}

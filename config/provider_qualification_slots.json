@@ -1,0 +1,27 @@
+{
+  "schema_version": "kirby.provider_qualification_slots.v1",
+  "slots": [
+    {
+      "id": "SLOT_A_MICRO_ROUTER"
+    },
+    {
+      "id": "SLOT_B_EDGE_FAST"
+    },
+    {
+      "id": "SLOT_C_WORKSTATION_PRO"
+    },
+    {
+      "id": "SLOT_D_WAIKE_TUTOR"
+    },
+    {
+      "id": "SLOT_E_RESEARCH_LONG"
+    },
+    {
+      "id": "SLOT_F_CREATOR_STUDIO"
+    },
+    {
+      "id": "SLOT_G_COMPUTER_USE"
+    }
+  ],
+  "source": "config/provider_qualification_slots.yaml"
+}

@@ -1,0 +1,29 @@
+{
+  "profiles": [
+    {
+      "profileId": "low_battery",
+      "batteryPct": 8,
+      "storageHealth": "healthy",
+      "network": "connected"
+    },
+    {
+      "profileId": "storage_pressure",
+      "batteryPct": 72,
+      "storageHealth": "pressure",
+      "network": "connected"
+    },
+    {
+      "profileId": "network_disconnected",
+      "batteryPct": 55,
+      "storageHealth": "healthy",
+      "network": "disconnected"
+    },
+    {
+      "profileId": "healthy_control",
+      "batteryPct": 88,
+      "storageHealth": "healthy",
+      "network": "connected"
+    }
+  ],
+  "fabricatedPhysicalFactsForbidden": true
+}

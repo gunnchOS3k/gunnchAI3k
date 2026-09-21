@@ -1,0 +1,25 @@
+{
+  "schema": "stream_b.pr_status.v1",
+  "note": "Branches pushed successfully. GitHub REST/GraphQL API returns Forbidden from this agent environment (token lacks API scope or proxy blocks api.github.com). Owner must open DRAFT PRs from the compare links.",
+  "blocker_class": "EXTERNAL_PARTY_REQUIRED",
+  "pull_requests": {
+    "gunnchAI3k": {
+      "branch": "eng/stream-b-gunnchai-pre-human-exhaustion",
+      "tip_sha": "30cbdd3",
+      "draft_create_url": "https://github.com/gunnchOS3k/gunnchAI3k/compare/main...eng/stream-b-gunnchai-pre-human-exhaustion?quick_pull=1&draft=1",
+      "status": "BRANCH_PUSHED_DRAFT_PR_PENDING_OWNER"
+    },
+    "waike-research-ops": {
+      "branch": "eng/stream-b-waike-ops-exhaustion-ledger",
+      "tip_sha": "b41b260",
+      "draft_create_url": "https://github.com/gunnchOS3k/waike-research-ops/compare/main...eng/stream-b-waike-ops-exhaustion-ledger?quick_pull=1&draft=1",
+      "status": "BRANCH_PUSHED_DRAFT_PR_PENDING_OWNER"
+    },
+    "gunnchos-waike-learning-platform": {
+      "status": "PATCH_BUNDLED_IN_WAIKE_OPS",
+      "patch_path": "artifacts/digital_engineering_exhaustion/stream_b/waike_lp_patch/",
+      "blocker_class": "EXTERNAL_PARTY_REQUIRED",
+      "reason": "LP .git outside workspace; owner apply + DRAFT PR required"
+    }
+  }
+}

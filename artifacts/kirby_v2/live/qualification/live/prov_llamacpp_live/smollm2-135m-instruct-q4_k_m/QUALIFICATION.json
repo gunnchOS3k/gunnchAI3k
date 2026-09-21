@@ -1,0 +1,30 @@
+{
+  "schema": "kirby.provider_qualification.live.v1",
+  "provider_id": "prov_llamacpp_live",
+  "model_id": "smollm2-135m-instruct-q4_k_m",
+  "evidence_class": "LIVE_MAC",
+  "evidence_mode": "live_local",
+  "promotion_state": "LIVE_QUALIFIED",
+  "preferred_slots_live": [
+    "SLOT_A_MICRO_ROUTER"
+  ],
+  "PREFERRED_FOR_SLOT_LIVE": true,
+  "LIVE_QUALIFIED": true,
+  "simulated_never_live_qualified": true,
+  "production_default": false,
+  "captured_at": "2026-09-21T03:05:30.624Z",
+  "gates_snapshot": {
+    "LIVE_MAC_MICRO_PROVIDER_PASS": true,
+    "LIVE_MAC_LOCAL_ASSISTANT_PASS": true,
+    "LIVE_OFFLINE_GUNNCHAI_PASS": true,
+    "LIVE_PROVIDER_FALLBACK_PASS": true,
+    "LIVE_WAIKE_MODEL_REPLACEABILITY_PASS": true,
+    "LIVE_TOOL_SCHEMA_PROVIDER_INDEPENDENCE_PASS": true,
+    "LIVE_BOUNDED_AGENT_PASS": true,
+    "PIXEL6A_LIVE_LOCAL_MODEL_PASS": false,
+    "DEVICE_EDGE_ROUTING_PROVENANCE_PASS": true,
+    "LIVE_THERMAL_ENERGY_SANITY_PASS": true,
+    "LIVE_PROMPT_INJECTION_BOUNDARY_PASS": true,
+    "LIVE_STRUCTURED_OUTPUT_RELIABILITY_PASS": true
+  }
+}

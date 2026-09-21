@@ -1,0 +1,21 @@
+{
+  "runtime_family": "MASTERY_002_REAL_RUNTIME_12C",
+  "runtime_score": 0.30833333333333335,
+  "heuristic_family_not_blended": true,
+  "heuristic_score": 0.6298076923076923,
+  "scores_equal_is_not_a_blend": true,
+  "diagnosis": {
+    "primary": "MODEL_KNOWLEDGE_GAP",
+    "also": [
+      "PREREQUISITE_GAP",
+      "REASONING_FAILURE",
+      "CALCULATION_FAILURE",
+      "CONCEPT_CONFUSION"
+    ],
+    "note": "Existing census: 71/83 misses are model-knowledge on Smol/Fast-class local models. Tools/vision remediate calculation and chart items only; do not fake 100%."
+  },
+  "tool_remediation_probe": true,
+  "vision_chart_probe": true,
+  "fake_100": false,
+  "HUMAN_E6": false
+}

@@ -1,0 +1,123 @@
+{
+  "budget": {
+    "mode": "medium",
+    "max_steps": 8,
+    "max_tool_calls": 6,
+    "max_tokens": 8192,
+    "max_latency_ms": 8000,
+    "max_cost_usd": 0.05,
+    "require_verifier": true,
+    "allow_cloud": false,
+    "persist_hidden_cot": false
+  },
+  "result": {
+    "ok": true,
+    "selected": {
+      "model_id": "qwen-local-pro",
+      "provider_id": "prov_qwen",
+      "scores": {
+        "quality": 0.6,
+        "latency": 0.925,
+        "cost": 1,
+        "energy": 0.75,
+        "privacy": 1,
+        "offline": 1,
+        "tool_fit": 1,
+        "verifier_fit": 1
+      },
+      "dominated": false,
+      "reason": "tier_hint=2 loc=local"
+    },
+    "pareto_front": [
+      {
+        "model_id": "qwen-local-pro",
+        "provider_id": "prov_qwen",
+        "scores": {
+          "quality": 0.6,
+          "latency": 0.925,
+          "cost": 1,
+          "energy": 0.75,
+          "privacy": 1,
+          "offline": 1,
+          "tool_fit": 1,
+          "verifier_fit": 1
+        },
+        "dominated": false,
+        "reason": "tier_hint=2 loc=local"
+      },
+      {
+        "model_id": "gemma-local-fast",
+        "provider_id": "prov_gemma",
+        "scores": {
+          "quality": 0.4,
+          "latency": 0.95,
+          "cost": 1,
+          "energy": 0.75,
+          "privacy": 1,
+          "offline": 1,
+          "tool_fit": 1,
+          "verifier_fit": 1
+        },
+        "dominated": false,
+        "reason": "tier_hint=1 loc=local"
+      },
+      {
+        "model_id": "mistral-edge",
+        "provider_id": "prov_mistral",
+        "scores": {
+          "quality": 0.4,
+          "latency": 0.95,
+          "cost": 1,
+          "energy": 0.75,
+          "privacy": 1,
+          "offline": 1,
+          "tool_fit": 1,
+          "verifier_fit": 1
+        },
+        "dominated": false,
+        "reason": "tier_hint=1 loc=local"
+      },
+      {
+        "model_id": "llama-local-nano",
+        "provider_id": "prov_llama",
+        "scores": {
+          "quality": 0.2,
+          "latency": 0.975,
+          "cost": 1,
+          "energy": 0.75,
+          "privacy": 1,
+          "offline": 1,
+          "tool_fit": 1,
+          "verifier_fit": 1
+        },
+        "dominated": false,
+        "reason": "tier_hint=0 loc=local"
+      },
+      {
+        "model_id": "fixture-always",
+        "provider_id": "prov_fixture",
+        "scores": {
+          "quality": 0.2,
+          "latency": 0.975,
+          "cost": 1,
+          "energy": 0.75,
+          "privacy": 1,
+          "offline": 1,
+          "tool_fit": 1,
+          "verifier_fit": 1
+        },
+        "dominated": false,
+        "reason": "tier_hint=0 loc=local"
+      }
+    ],
+    "fallback_chain": [
+      "qwen-local-pro",
+      "gemma-local-fast",
+      "mistral-edge",
+      "llama-local-nano",
+      "fixture-always"
+    ],
+    "tier": 1,
+    "reason": "Pareto selection among 5 non-dominated of 5 eligible"
+  }
+}

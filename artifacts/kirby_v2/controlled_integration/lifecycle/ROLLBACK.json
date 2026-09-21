@@ -1,0 +1,9 @@
+{
+  "method": "Set GUNNCHAI_LIVE_PROVIDER_INTEGRATION=0 and GUNNCHAI_NEARBY_EDGE=0",
+  "flags_after": {
+    "GUNNCHAI_LIVE_PROVIDER_INTEGRATION": false,
+    "GUNNCHAI_NEARBY_EDGE": false
+  },
+  "reversible": true,
+  "production_default_unchanged": true
+}

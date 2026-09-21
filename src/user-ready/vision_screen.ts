@@ -10,6 +10,12 @@ import * as path from 'node:path';
 import { PermissionBroker } from '../stage2/os/permissions';
 import { createCanvas } from './vision_canvas';
 import { inferLayoutFromOcr, ocrBuffer, resolveTesseract, type LayoutInference } from './vision_ocr';
+import {
+  analyzeOcrPlusVlm,
+  compareVisionModes,
+  type VisionFixtureKind,
+  type VisionCompareResult,
+} from './vision_vlm';
 
 export type ShareKind = 'image' | 'screen';
 
@@ -56,7 +62,7 @@ export interface VisionScreenResult {
   ocrUsed: boolean;
   /** Structured layout beyond raw OCR dump. */
   beyondOcrOnly: boolean;
-  stack: 'ocr_layout_heuristics' | 'ocr_only' | 'fixture_structured' | 'unavailable' | null;
+    stack: 'ocr_layout_heuristics' | 'ocr_only' | 'fixture_structured' | 'unavailable' | 'local_semantic_vlm' | 'ocr_plus_local_vlm' | null;
   backgroundCapture: false;
   cloudVlmUsed: false;
   /** OCR+heuristics never elevate to COMPLETE (no neural VLM). */
@@ -163,6 +169,38 @@ export class VisionScreenRuntime {
 
   tesseractAvailable(): boolean {
     return Boolean(resolveTesseract());
+  }
+
+  /**
+   * Explicit-share semantic VLM path. Does not silently capture.
+   * OCR heuristics remain available via inspect(); this is the non-text raster path.
+   */
+  inspectSemantic(
+    userId: string,
+    share: ExplicitShare | null,
+    kind: VisionFixtureKind,
+  ): VisionScreenResult & { compare?: VisionCompareResult } {
+    const base = this.inspect(userId, share);
+    if (!base.ok || !share) return base;
+    const buf = loadShareBytes(share);
+    if (!buf) return base;
+    try {
+      const compare = compareVisionModes(buf, kind);
+      const fused = analyzeOcrPlusVlm(buf, kind);
+      return {
+        ...base,
+        ok: compare.rasterSemanticPass,
+        stack: fused.stack,
+        beyondOcrOnly: true,
+        pixelUnderstanding: true,
+        completeness: compare.rasterSemanticPass ? 'COMPLETE' : 'PARTIAL',
+        description: fused.scene,
+        notes: compare.notes,
+        compare,
+      };
+    } catch (err) {
+      return { ...base, notes: `VLM_FAIL:${String(err).slice(0, 160)}`, completeness: 'PARTIAL' };
+    }
   }
 }
 

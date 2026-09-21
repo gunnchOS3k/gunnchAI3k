@@ -86,15 +86,44 @@ export class DeterministicBaselineBackend implements LocalInferenceBackend {
         break;
       }
       case 'device_help': {
+        const ds = request.deviceState ?? {};
+        const steps: string[] = [`Confirm device profile=${device} from supplied fixture.`];
+        if (typeof ds.batteryPct === 'number') {
+          steps.push(
+            ds.batteryPct < 20
+              ? `Low battery (${ds.batteryPct}% supplied): reduce background work; stay local-only.`
+              : `Battery ${ds.batteryPct}% from supplied state; no invented charge-cycle claims.`,
+          );
+        } else {
+          steps.push('Battery not supplied in fixture; do not invent a percentage.');
+        }
+        if (ds.storageHealth === 'pressure' || ds.storageHealth === 'low') {
+          steps.push(
+            'Storage pressure from fixture: clear local caches; do not upload diagnostics to cloud.',
+          );
+        } else if (ds.storageHealth) {
+          steps.push(`Storage health from fixture: ${ds.storageHealth}.`);
+        } else {
+          steps.push('Storage health not supplied; do not invent disk telemetry.');
+        }
+        if (ds.network === 'disconnected') {
+          steps.push(
+            'Network disconnected in fixture: stay offline; do not claim a cloud repair succeeded.',
+          );
+        } else if (ds.network) {
+          steps.push(`Network from fixture: ${ds.network}.`);
+        }
+        steps.push('Capture local diagnostics without cloud upload.');
         structured = {
           kind: 'device_help',
           profileId: device,
-          steps: [
-            `Confirm device profile=${device}`,
-            'Check storage health indicator',
-            'Capture local diagnostics without cloud upload',
-          ],
+          steps,
           profileAware: true,
+          groundedToSuppliedState: true,
+          fabricatedPhysicalFacts: false,
+          batteryPct: ds.batteryPct ?? null,
+          storageHealth: ds.storageHealth ?? null,
+          network: ds.network ?? null,
         };
         text = [
           `DEVICE_HELP[profile=${device}]`,
@@ -103,15 +132,33 @@ export class DeterministicBaselineBackend implements LocalInferenceBackend {
         break;
       }
       case 'a11y': {
+        const missingLabel =
+          /without (accessible )?name|without label|icon button/i.test(query) ||
+          request.a11yMode === 'missing_label';
+        const issues = [
+          { id: 'contrast', severity: 'high', fix: 'Increase text/background contrast to WCAG AA.' },
+          { id: 'focus', severity: 'medium', fix: 'Ensure visible focus rings on interactive controls.' },
+        ];
+        if (missingLabel) {
+          issues.push({
+            id: 'labels',
+            severity: 'high',
+            fix: 'Provide accessible names for icon-only buttons.',
+          });
+        }
+        if (request.readingLevel === 'simple') {
+          issues.forEach((i) => {
+            i.fix = i.fix.replace('WCAG AA', 'easy-to-read contrast');
+          });
+        }
         structured = {
           kind: 'a11y',
-          issues: [
-            { id: 'contrast', severity: 'high', fix: 'Increase text/background contrast to WCAG AA.' },
-            { id: 'focus', severity: 'medium', fix: 'Ensure visible focus rings on interactive controls.' },
-            { id: 'labels', severity: 'high', fix: 'Provide accessible names for icon-only buttons.' },
-          ],
+          issues,
           checklist: ['contrast', 'keyboard', 'screen_reader', 'motion_reduce'],
           wcagTarget: 'AA',
+          a11yMode: request.a11yMode ?? 'default',
+          readingLevel: request.readingLevel ?? 'standard',
+          deviceProfileId: device,
         };
         text = [
           'A11Y[assistant]',

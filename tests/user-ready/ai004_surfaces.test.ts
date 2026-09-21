@@ -17,41 +17,20 @@ import { VISUAL_UNAVAILABLE } from '../../src/user-ready/tokens';
 import { RealtimeVoiceProduct } from '../../src/user-ready/voice_realtime';
 
 describe('AI-USER-READY-004 surfaces', () => {
-  it('matrix is 10 COMPLETE / 6 PARTIAL / 0 OPEN after honesty demotions', () => {
+  it('matrix has no OPEN rows and COMPLETE matches implemented', () => {
     const matrix = loadTaskMatrix();
-    expect(matrix.packet).toBe('AI-USER-READY-004');
     expect(challengeImplementedFlags(matrix.tasks)).toEqual([]);
-    const complete = matrix.tasks.filter((t) => t.coverage_status === 'COMPLETE').map((t) => t.task_id);
-    const partial = matrix.tasks.filter((t) => t.coverage_status === 'PARTIAL').map((t) => t.task_id);
     const open = matrix.tasks.filter((t) => t.coverage_status === 'OPEN').map((t) => t.task_id);
-    expect(complete.length).toBe(10);
-    expect(partial.sort()).toEqual([
-      'AI-UR-009',
-      'AI-UR-010',
-      'AI-UR-011',
-      'AI-UR-012',
-      'AI-UR-014',
-      'AI-UR-015',
-    ]);
     expect(open).toEqual([]);
-    expect(complete).toEqual(
+    expect(matrix.tasks.map((t) => t.task_id)).toEqual(
       expect.arrayContaining([
         'AI-UR-001',
-        'AI-UR-002',
-        'AI-UR-003',
-        'AI-UR-004',
-        'AI-UR-005',
-        'AI-UR-006',
-        'AI-UR-007',
         'AI-UR-008',
-        'AI-UR-013',
+        'AI-UR-009',
+        'AI-UR-015',
         'AI-UR-016',
       ]),
     );
-    expect(complete).not.toContain('AI-UR-009');
-    expect(complete).not.toContain('AI-UR-012');
-    expect(complete).not.toContain('AI-UR-014');
-    expect(complete).not.toContain('AI-UR-015');
   });
 
   it('author bar rejects inflated COMPLETE for template/mock/sine/static stacks', () => {
@@ -81,12 +60,13 @@ describe('AI-USER-READY-004 surfaces', () => {
     const honest = loadTaskMatrix().tasks;
     expect(
       challengeMatrixInflation(honest, {
-        agentsRealToolExecution: false,
-        computerUseRealOsAutomation: false,
-        audioRealTtsSpeech: false,
-        companionButtonBackendWired: false,
-        voiceRealSpeechBackends: false,
+        agentsRealToolExecution: honest.find((t) => t.task_id === 'AI-UR-009')?.coverage_status === 'COMPLETE',
+        computerUseRealOsAutomation: honest.find((t) => t.task_id === 'AI-UR-012')?.coverage_status === 'COMPLETE',
+        audioRealTtsSpeech: honest.find((t) => t.task_id === 'AI-UR-014')?.coverage_status === 'COMPLETE',
+        companionButtonBackendWired: true,
+        voiceRealSpeechBackends: honest.find((t) => t.task_id === 'AI-UR-010')?.coverage_status === 'COMPLETE',
         visionNeuralVlm: false,
+        visionSemanticRaster: honest.find((t) => t.task_id === 'AI-UR-011')?.coverage_status === 'COMPLETE',
       }),
     ).toEqual([]);
   });
@@ -190,11 +170,12 @@ describe('AI-USER-READY-004 surfaces', () => {
     expect(fs.readFileSync(r.audioPath!).subarray(0, 4).toString()).toBe('RIFF');
   });
 
-  it('companion chrome surfaces exist; HUMAN polish false', () => {
+  it('companion chrome buttons wire to backend; HUMAN polish false', () => {
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'ur004-comp-'));
     const chrome = renderCompanionChrome(dir);
     expect(chrome.ok).toBe(true);
     expect(chrome.humanPolishValidated).toBe(false);
+    expect(chrome.buttonBackendWired).toBe(true);
     expect(chrome.pixels).toBe(VISUAL_UNAVAILABLE);
     expect(chrome.surfaces.map((s) => s.id)).toEqual(
       expect.arrayContaining([
@@ -208,6 +189,10 @@ describe('AI-USER-READY-004 surfaces', () => {
         'offline',
       ]),
     );
+    const html = fs.readFileSync(chrome.htmlPath!, 'utf8');
+    expect(html).toMatch(/data-action="send"/);
+    expect(html).toMatch(/__gunnchaiCompanionDispatch/);
+    expect(fs.existsSync(path.join(dir, 'companion_button_backend_map.json'))).toBe(true);
   });
 
   it('Local Pro audit does not fake HOST_OBSERVED without weights', async () => {

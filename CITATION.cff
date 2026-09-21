@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+title: gunnchAI3k
+message: "If you use this local-first intelligence layer, please cite it."
+authors:
+  - family-names: Gunn
+    given-names: Edmund
+    suffix: Jr.
+repository-code: https://github.com/gunnchOS3k/gunnchAI3k
+license: MIT
+type: software
+abstract: >
+  Local-first intelligence routing, tutoring, and WAIKE curriculum consumption
+  for the gunnchOS3k experimental computing portfolio. Not a frontier-parity
+  claim and not a University of Oulu affiliation claim.

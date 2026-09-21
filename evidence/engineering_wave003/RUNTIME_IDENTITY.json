@@ -1,0 +1,12 @@
+{
+  "hostClass": "CURSOR_BACKGROUND_AGENT",
+  "lowResourceHost": true,
+  "backends": [
+    "deterministic",
+    "local-rag",
+    "governance-runtime",
+    "model-router"
+  ],
+  "localNeuralOptional": "llama.cpp nano fallback only; not required for wave003 PASS",
+  "requirementProofCrossCheckOnly": true
+}

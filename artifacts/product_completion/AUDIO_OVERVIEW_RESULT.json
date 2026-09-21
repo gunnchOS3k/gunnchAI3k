@@ -1,0 +1,23 @@
+{
+  "realTtsSpeech": true,
+  "backend": "formant_klatt_v1",
+  "chapters": [
+    {
+      "title": "OFDM notes",
+      "startSec": 0,
+      "endSec": 5.777777777777778,
+      "sourceIds": [
+        "src-ofdm"
+      ]
+    },
+    {
+      "title": "Lab procedure",
+      "startSec": 5.777777777777778,
+      "endSec": 9.833333333333332,
+      "sourceIds": [
+        "src-lab"
+      ]
+    }
+  ],
+  "bytes": 547564
+}

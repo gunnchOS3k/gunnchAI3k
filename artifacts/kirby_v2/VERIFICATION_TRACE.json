@@ -1,0 +1,38 @@
+{
+  "waike": [
+    {
+      "verifier_id": "safety_v1",
+      "passed": true,
+      "detail": "safety keyword scan"
+    },
+    {
+      "verifier_id": "waike_mastery_v1",
+      "passed": true,
+      "detail": "academic integrity gate"
+    }
+  ],
+  "coding": [
+    {
+      "verifier_id": "safety_v1",
+      "passed": true,
+      "detail": "safety keyword scan"
+    },
+    {
+      "verifier_id": "coding_build_v1",
+      "passed": true,
+      "detail": "tests_passed artifact present"
+    }
+  ],
+  "networking": [
+    {
+      "verifier_id": "safety_v1",
+      "passed": true,
+      "detail": "safety keyword scan"
+    },
+    {
+      "verifier_id": "networking_invariant_v1",
+      "passed": true,
+      "detail": "fail_closed=true"
+    }
+  ]
+}

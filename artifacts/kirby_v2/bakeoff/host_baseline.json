@@ -1,0 +1,92 @@
+{
+  "schema": "kirby.host_capability_baseline.v1",
+  "captured_at": "2026-09-21T03:05:10.646Z",
+  "host": {
+    "platform": "darwin",
+    "os_release": "ProductName:\t\tmacOS\nProductVersion:\t\t26.6.2\nBuildVersion:\t\t25G83",
+    "arch": "arm64",
+    "hostname_redacted": "Edm**********************",
+    "memsize_bytes": 8589934592,
+    "memsize_gb": 8,
+    "cpu_brand": "Apple M2",
+    "apple_silicon": true,
+    "metal_supported": true,
+    "free_disk_bytes": 9366102016,
+    "free_disk_gb": 8.7,
+    "hardware_overview": {
+      "Model Name": "MacBook Pro",
+      "Model Identifier": "Mac14,7",
+      "Model Number": "MNEJ3LL/A",
+      "Chip": "Apple M2",
+      "Total Number of Cores": "8 (4 Performance and 4 Efficiency)",
+      "Memory": "8 GB",
+      "System Firmware Version": "18000.161.10",
+      "OS Loader Version": "18000.161.10",
+      "Serial Number (system)": "[REDACTED]",
+      "Hardware UUID": "[REDACTED]",
+      "Provisioning UDID": "[REDACTED]"
+    }
+  },
+  "runtimes": {
+    "apple_silicon": {
+      "present": true
+    },
+    "metal": {
+      "present": true,
+      "notes": "From SPDisplaysDataType"
+    },
+    "python": {
+      "present": true,
+      "path": "/opt/homebrew/bin/python3",
+      "version": "Python 3.14.7"
+    },
+    "node": {
+      "present": true,
+      "path": "/opt/homebrew/bin/node",
+      "version": "v24.9.0"
+    },
+    "docker": {
+      "present": false,
+      "notes": "Not found on PATH (docker)"
+    },
+    "podman": {
+      "present": false,
+      "notes": "Not found on PATH (podman)"
+    },
+    "ollama": {
+      "present": false,
+      "notes": "Not found on PATH (ollama)"
+    },
+    "llama_cpp": {
+      "present": true,
+      "path": "/opt/homebrew/bin/llama-cli",
+      "version": "version: 10310 (cb26014d9)"
+    },
+    "mlx": {
+      "present": false,
+      "notes": "Not found on PATH (mlx)"
+    },
+    "vllm": {
+      "present": false,
+      "notes": "Not found on PATH (vllm)"
+    },
+    "onnxruntime": {
+      "present": false,
+      "notes": "Not found on PATH (onnxruntime)"
+    },
+    "coreml_tools": {
+      "present": false,
+      "notes": "coremlcompiler/coremltools not found"
+    }
+  },
+  "pixel6a": {
+    "connected": true,
+    "PIXEL_EDGE_MODEL_BAKEOFF_NOT_RUN": true,
+    "reason": "Device listed but no supported Android inference runtime path for bake-off",
+    "adb_devices": "List of devices attached\n27211JEGR06194         device usb:17825792X product:bluejay model:Pixel_6a device:bluejay transport_id:20"
+  },
+  "honesty": {
+    "live_model_inference_attempted": false,
+    "note": "Host discovery only. Live weight downloads and remote provider calls are out of scope for offline-required suites. Structural proofs use labeled simulated adapters."
+  }
+}

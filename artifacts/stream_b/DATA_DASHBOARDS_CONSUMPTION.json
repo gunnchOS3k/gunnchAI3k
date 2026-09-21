@@ -1,0 +1,511 @@
+{
+  "schema": "gunnchai.data_dashboards_consumption.v1",
+  "packet": "STREAM-B-PKT-003",
+  "course_id": "DATA_DASHBOARDS",
+  "discovery": {
+    "method": "filesystem_scan",
+    "hardcoded_course_names": false,
+    "course_count": 14,
+    "found": true,
+    "lab_ids": [
+      "lab_dashboard_capstone",
+      "lab_dashboard_chart",
+      "lab_debug_pipeline",
+      "lab_freshness_sla",
+      "lab_join_integrity",
+      "lab_kpi_calc",
+      "lab_normalize_transform",
+      "lab_pii_redact_etl",
+      "lab_schema_ingest",
+      "lab_sql_select"
+    ],
+    "weeks": 10
+  },
+  "lesson_grounding": {
+    "ok": true,
+    "lesson_id": "DATA_DASHBOARDS-w01",
+    "title": "Week 1: Schema first — ingest without inventing columns",
+    "excerpt": "# Week 1: Schema first — ingest without inventing columns\n\nPier Ledger Bench opens with schema discipline, not a dashboard mock. Ticket DL-3101 drops a pier foot-traffic CSV into the desk warehouse. Before any chart, you declare table pier_visits with columns visit_id, pier_bay, ",
+    "path": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/waike-research-ops/curriculum/digital_rc/DATA_DASHBOARDS/weeks/w01/lesson.md"
+  },
+  "socratic": {
+    "mode": "LEARNER_TUTOR",
+    "socratic": true,
+    "prompts": [
+      "Before charting \"Week 1: Schema first — ingest without inventing columns\", which schema columns must exist in the CSV?",
+      "What WHERE predicate makes a busy-bay query honest?",
+      "How do you prove avg_headcount without a green tile screenshot?",
+      "Which pipeline stage failed, and what evidence would re-run prove?"
+    ],
+    "discloses_final_answers": false
+  },
+  "tools": {
+    "stages": [
+      "ingest",
+      "transform",
+      "calc",
+      "chart",
+      "debug"
+    ],
+    "real_execution": true,
+    "used_instructor_keys": false,
+    "attempted": 6,
+    "passed": 6,
+    "results": [
+      {
+        "tool_id": "data_ingest",
+        "input": {
+          "path": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/artifacts/waike-mastery/tool_artifacts/pier_visits_dl3101.csv",
+          "rows": 3
+        },
+        "command": [
+          "node",
+          "-e",
+          "fs.writeFileSync(csv)"
+        ],
+        "stdout": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/artifacts/waike-mastery/tool_artifacts/pier_visits_dl3101.csv",
+        "stderr": "",
+        "exit_code": 0,
+        "artifact_path": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/artifacts/waike-mastery/tool_artifacts/pier_visits_dl3101.csv",
+        "artifact_hash": "8b1a3443f020c39b2508cdf1a2e457dd0d79009295a33be9708f5e0e5027db2b",
+        "grader_ok": true,
+        "grader_detail": "csv_written",
+        "real_execution": true,
+        "fixture_style": false
+      },
+      {
+        "tool_id": "data_transform",
+        "input": {
+          "aliases": 3
+        },
+        "command": [
+          "python3",
+          "-c",
+          "<normalize_bays>"
+        ],
+        "stdout": "{\"rows_in\": 3, \"rows_out\": 2, \"negatives_dropped\": true}\n",
+        "stderr": "",
+        "exit_code": 0,
+        "artifact_hash": "33e2c6297fb379bc35ab281ad2cfed37e73a1853408b7b88fbae88ed1d64c622",
+        "grader_ok": true,
+        "grader_detail": "normalized",
+        "real_execution": true,
+        "fixture_style": false
+      },
+      {
+        "tool_id": "data_calc",
+        "input": {
+          "expr": "(42+55)/2"
+        },
+        "command": [
+          "python3",
+          "-c",
+          "print((42+55)/2)"
+        ],
+        "stdout": "48.5\n",
+        "stderr": "",
+        "exit_code": 0,
+        "artifact_hash": "63ccc1263d0fa10f3ce519a8b752c85ddbb04521700c0238da5b4faa894b6721",
+        "grader_ok": true,
+        "grader_detail": "value=48.5",
+        "real_execution": true,
+        "fixture_style": false
+      },
+      {
+        "tool_id": "data_chart",
+        "input": {
+          "bars": [
+            40,
+            50,
+            30
+          ]
+        },
+        "command": [
+          "node",
+          "-e",
+          "fs.writeFileSync(svg)"
+        ],
+        "stdout": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/artifacts/waike-mastery/tool_artifacts/chart_stub.svg",
+        "stderr": "",
+        "exit_code": 0,
+        "artifact_path": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/artifacts/waike-mastery/tool_artifacts/chart_stub.svg",
+        "artifact_hash": "c4f68df3438e20bfd5fd73a9cfca63983a6d0892d439775a48d720a0dcfd07f3",
+        "grader_ok": true,
+        "grader_detail": "svg_hash=c4f68df3438e",
+        "real_execution": true,
+        "fixture_style": false
+      },
+      {
+        "tool_id": "data_processing",
+        "input": {
+          "csv": "name,score"
+        },
+        "command": [
+          "python3",
+          "-c",
+          "<csv_avg>"
+        ],
+        "stdout": "{\"n\": 3, \"avg\": 80.0}\n785189604092ab14\n",
+        "stderr": "",
+        "exit_code": 0,
+        "artifact_hash": "011be98348189db1c4a59cfcbedf418040c2c9585a5fcaf2a81f33c118159d50",
+        "grader_ok": true,
+        "grader_detail": "avg_80",
+        "real_execution": true,
+        "fixture_style": false
+      },
+      {
+        "tool_id": "data_debug",
+        "input": {
+          "failed_stage": "transform"
+        },
+        "command": [
+          "python3",
+          "-c",
+          "<debug_pipeline>"
+        ],
+        "stdout": "transform NULL_HEADCOUNT True\n",
+        "stderr": "",
+        "exit_code": 0,
+        "artifact_hash": "e03a3a249967424acc9ac783c06ee179dbc9f91f4eff2fb5ea3e2879672a6709",
+        "grader_ok": true,
+        "grader_detail": "stage_named",
+        "real_execution": true,
+        "fixture_style": false
+      }
+    ]
+  },
+  "misconception": {
+    "schema": "gunnchai.misconception_diagnosis_suite.v1",
+    "course_id": "DATA_DASHBOARDS",
+    "cases": [
+      {
+        "item_id": "mis-prereq",
+        "hypothesized_failure": "PREREQUISITE_GAP",
+        "skill_id": "skill:DATA_DASHBOARDS:w02",
+        "feedback": "Focus next on skill:DATA_DASHBOARDS:w02. Try an isomorphic practice item, then reassess.",
+        "demeaning_label_used": false
+      },
+      {
+        "item_id": "mis-concept",
+        "hypothesized_failure": "CONCEPT_CONFUSION",
+        "skill_id": "skill:DATA_DASHBOARDS:w02",
+        "feedback": "Focus next on skill:DATA_DASHBOARDS:w02. Try an isomorphic practice item, then reassess.",
+        "demeaning_label_used": false
+      },
+      {
+        "item_id": "mis-calc",
+        "hypothesized_failure": "CALCULATION_FAILURE",
+        "skill_id": "skill:DATA_DASHBOARDS:w02",
+        "feedback": "Focus next on skill:DATA_DASHBOARDS:w02. Try an isomorphic practice item, then reassess.",
+        "demeaning_label_used": false
+      },
+      {
+        "item_id": "mis-instr",
+        "hypothesized_failure": "INSTRUCTION_INTERPRETATION_FAILURE",
+        "skill_id": "skill:DATA_DASHBOARDS:w02",
+        "feedback": "Focus next on skill:DATA_DASHBOARDS:w02. Try an isomorphic practice item, then reassess.",
+        "demeaning_label_used": false
+      }
+    ],
+    "HUMAN_LEARNING_CLAIMED": false
+  },
+  "remediation": {
+    "schema": "gunnchai.remediation_transfer.v1",
+    "engine_version": "gunnchai.remediation_engine.v1",
+    "course_id": "DATA_DASHBOARDS",
+    "item_id": "DATA_DASHBOARDS:rem-schema",
+    "steps": [
+      {
+        "step": "FAIL",
+        "ok": true,
+        "detail": "Gap identified on machine-graded miss"
+      },
+      {
+        "step": "PREREQ",
+        "ok": true,
+        "detail": "Revisit skill:DATA_DASHBOARDS:w01 prerequisites"
+      },
+      {
+        "step": "EXPLANATION",
+        "ok": true,
+        "detail": "Gap on skill:DATA_DASHBOARDS:w01 — revisit prerequisites before new content."
+      },
+      {
+        "step": "ANALOG",
+        "ok": true,
+        "detail": "Worked analog example (no answer-key dump)"
+      },
+      {
+        "step": "UNSEEN",
+        "ok": true,
+        "detail": "Unseen isomorphic item correct"
+      },
+      {
+        "step": "TRANSFER",
+        "ok": true,
+        "detail": "Transfer item correct"
+      }
+    ],
+    "REMEDIATION_SUCCESS": true,
+    "MEMORIZATION": false,
+    "transfer_ok": true,
+    "unseen_ok": true,
+    "HUMAN_LEARNING_CLAIMED": false,
+    "evidence_state": "CERTAINLY_FILLED",
+    "synthetic_learner_delta": {
+      "pre_score": 0.4,
+      "post_score": 0.7,
+      "delta": 0.29999999999999993,
+      "note": "Synthetic opaque learner delta only — not a human learning claim."
+    }
+  },
+  "remediation_loop": {
+    "finalEvidenceState": "CERTAINLY_FILLED",
+    "states": [
+      "GAP_IDENTIFIED",
+      "REMEDIATION_ASSIGNED",
+      "PRACTICE_IN_PROGRESS",
+      "REASSESSED",
+      "TRANSFER_CHECKED",
+      "CERTAINLY_FILLED"
+    ],
+    "steps": [
+      {
+        "step": "DIAGNOSE",
+        "evidenceState": "GAP_IDENTIFIED"
+      },
+      {
+        "step": "ASSIGN",
+        "evidenceState": "REMEDIATION_ASSIGNED"
+      },
+      {
+        "step": "PRACTICE",
+        "evidenceState": "PRACTICE_IN_PROGRESS"
+      },
+      {
+        "step": "REASSESS",
+        "evidenceState": "REASSESSED"
+      },
+      {
+        "step": "TRANSFER",
+        "evidenceState": "TRANSFER_CHECKED"
+      },
+      {
+        "step": "CLOSE",
+        "evidenceState": "CERTAINLY_FILLED"
+      }
+    ]
+  },
+  "educator_copilot": {
+    "evidence": {
+      "schema": "gunnchai.educator_copilot_evidence.v1",
+      "course_id": "DATA_DASHBOARDS",
+      "intents_covered": [
+        "planning",
+        "first_time_teacher",
+        "live_support",
+        "grading_assist",
+        "feedback",
+        "analytics"
+      ],
+      "sessions": [
+        {
+          "mode": "EDUCATOR_COPILOT",
+          "courseId": "DATA_DASHBOARDS",
+          "intent": "planning",
+          "actions": [
+            "Map hook → lab → quiz",
+            "Check skill-graph prerequisites"
+          ],
+          "permissions": {
+            "mayReadStudentMaterials": true,
+            "mayReadInstructorKeys": true,
+            "maySelfGrade": false,
+            "mayPublishGradesWithoutHuman": false,
+            "hitlGradingRequired": true,
+            "mayDiscloseFinalAnswersToLearner": false,
+            "gradingAgent": "hitl"
+          },
+          "hitlGradingRequired": true,
+          "autoPublishGrades": false,
+          "publishWithoutHumanBlocked": true
+        },
+        {
+          "mode": "EDUCATOR_COPILOT",
+          "courseId": "DATA_DASHBOARDS",
+          "intent": "first_time_teacher",
+          "actions": [
+            "Read instructor packet offline",
+            "Demo empty-lab fail"
+          ],
+          "permissions": {
+            "mayReadStudentMaterials": true,
+            "mayReadInstructorKeys": true,
+            "maySelfGrade": false,
+            "mayPublishGradesWithoutHuman": false,
+            "hitlGradingRequired": true,
+            "mayDiscloseFinalAnswersToLearner": false,
+            "gradingAgent": "hitl"
+          },
+          "hitlGradingRequired": true,
+          "autoPublishGrades": false,
+          "publishWithoutHumanBlocked": true
+        },
+        {
+          "mode": "EDUCATOR_COPILOT",
+          "courseId": "DATA_DASHBOARDS",
+          "intent": "live_support",
+          "actions": [
+            "Socratic learner channel",
+            "Never paste answer keys to learners"
+          ],
+          "permissions": {
+            "mayReadStudentMaterials": true,
+            "mayReadInstructorKeys": true,
+            "maySelfGrade": false,
+            "mayPublishGradesWithoutHuman": false,
+            "hitlGradingRequired": true,
+            "mayDiscloseFinalAnswersToLearner": false,
+            "gradingAgent": "hitl"
+          },
+          "hitlGradingRequired": true,
+          "autoPublishGrades": false,
+          "publishWithoutHumanBlocked": true
+        },
+        {
+          "mode": "EDUCATOR_COPILOT",
+          "courseId": "DATA_DASHBOARDS",
+          "intent": "grading_assist",
+          "actions": [
+            "Propose rubric scores",
+            "Require human confirm before publish"
+          ],
+          "permissions": {
+            "mayReadStudentMaterials": true,
+            "mayReadInstructorKeys": true,
+            "maySelfGrade": false,
+            "mayPublishGradesWithoutHuman": false,
+            "hitlGradingRequired": true,
+            "mayDiscloseFinalAnswersToLearner": false,
+            "gradingAgent": "hitl"
+          },
+          "hitlGradingRequired": true,
+          "autoPublishGrades": false,
+          "publishWithoutHumanBlocked": true
+        },
+        {
+          "mode": "EDUCATOR_COPILOT",
+          "courseId": "DATA_DASHBOARDS",
+          "intent": "feedback",
+          "actions": [
+            "Skill-focused comments only",
+            "No demeaning labels"
+          ],
+          "permissions": {
+            "mayReadStudentMaterials": true,
+            "mayReadInstructorKeys": true,
+            "maySelfGrade": false,
+            "mayPublishGradesWithoutHuman": false,
+            "hitlGradingRequired": true,
+            "mayDiscloseFinalAnswersToLearner": false,
+            "gradingAgent": "hitl"
+          },
+          "hitlGradingRequired": true,
+          "autoPublishGrades": false,
+          "publishWithoutHumanBlocked": true
+        },
+        {
+          "mode": "EDUCATOR_COPILOT",
+          "courseId": "DATA_DASHBOARDS",
+          "intent": "analytics",
+          "actions": [
+            "Aggregate by domain",
+            "Opaque learner refs"
+          ],
+          "permissions": {
+            "mayReadStudentMaterials": true,
+            "mayReadInstructorKeys": true,
+            "maySelfGrade": false,
+            "mayPublishGradesWithoutHuman": false,
+            "hitlGradingRequired": true,
+            "mayDiscloseFinalAnswersToLearner": false,
+            "gradingAgent": "hitl"
+          },
+          "hitlGradingRequired": true,
+          "autoPublishGrades": false,
+          "publishWithoutHumanBlocked": true
+        }
+      ],
+      "grade_assist": {
+        "mode": "EDUCATOR_COPILOT",
+        "courseId": "DATA_DASHBOARDS",
+        "proposedScore": 0.72,
+        "status": "AWAITING_HUMAN_CONFIRM",
+        "published": false,
+        "hitlRequired": true
+      },
+      "hitl_ok": true,
+      "publish_blocked": true,
+      "HUMAN_LEARNING_CLAIMED": false,
+      "note": "Educator surfaces only; no auto-publish; no demeaning labels; keys never to learners."
+    },
+    "live_support": {
+      "mode": "EDUCATOR_COPILOT",
+      "courseId": "DATA_DASHBOARDS",
+      "intent": "live_support",
+      "actions": [
+        "Socratic learner channel",
+        "Never paste answer keys to learners"
+      ],
+      "permissions": {
+        "mayReadStudentMaterials": true,
+        "mayReadInstructorKeys": true,
+        "maySelfGrade": false,
+        "mayPublishGradesWithoutHuman": false,
+        "hitlGradingRequired": true,
+        "mayDiscloseFinalAnswersToLearner": false,
+        "gradingAgent": "hitl"
+      },
+      "hitlGradingRequired": true,
+      "autoPublishGrades": false,
+      "publishWithoutHumanBlocked": true
+    },
+    "grade_assist": {
+      "mode": "EDUCATOR_COPILOT",
+      "courseId": "DATA_DASHBOARDS",
+      "proposedScore": 0.8,
+      "status": "AWAITING_HUMAN_CONFIRM",
+      "published": false,
+      "hitlRequired": true
+    }
+  },
+  "curriculum_defect_candidates": {
+    "candidates": [
+      {
+        "id": "DD-VERIFY-OK",
+        "claim": "course.json present and ≥10 lab folders on disk",
+        "independent_path": "/Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/waike-research-ops/curriculum/digital_rc/DATA_DASHBOARDS/labs",
+        "verified": true
+      }
+    ],
+    "self_graded": false
+  },
+  "gunnchai_contract_present": true,
+  "key_leak_guard": {
+    "LEARNER_TUTOR_blocked": true,
+    "MASTERY_BENCHMARK_blocked": true,
+    "EDUCATOR_may_read_keys": true,
+    "WAIKE_AI_NO_KEY_LEAK_PASS": true
+  },
+  "score_family_id_for_eval": "MASTERY_003_DATA_DASHBOARDS_RUNTIME",
+  "historical_12c_untouched": true,
+  "historical_12c_family": "MASTERY_002_REAL_RUNTIME_12C",
+  "historical_12c_score": 0.30833333333333335,
+  "comm_pd_family_separate": "MASTERY_002_COMM_PD_ETHICS_RUNTIME",
+  "SELF_GRADED": false,
+  "REAL_STUDENT": false,
+  "REAL_TEACHER": false,
+  "HUMAN_E6": false,
+  "claim_boundary": "DATA_DASHBOARDS consumption with real ingest/transform/calc/chart/debug tools. MASTERY_003_DATA_DASHBOARDS_RUNTIME unblended with historical 120-item 0.30833 and COMM_PD family. No instructor keys in learner modes. No self-grading."
+}

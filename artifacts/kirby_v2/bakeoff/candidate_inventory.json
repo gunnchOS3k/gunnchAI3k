@@ -1,0 +1,274 @@
+{
+  "schema": "kirby.candidate_inventory.v1",
+  "captured_at": "2026-09-21T03:05:11.014Z",
+  "honesty": "Inventory includes simulated architecture adapters plus honest NO_CANDIDATE_AVAILABLE for live local/remote. No live weight success fabricated.",
+  "local_first_ladder": [
+    "fixture/sim micro",
+    "llama.cpp binary present but no GGUF bake-off inventory",
+    "ollama absent",
+    "remote deferred for offline suites"
+  ],
+  "candidates": [
+    {
+      "candidate_id": "fixture::sim-micro-router",
+      "provider_id": "prov_fixture",
+      "model_id": "sim-micro-router",
+      "family": "fixture",
+      "slot_hints": [
+        "SLOT_A_MICRO_ROUTER"
+      ],
+      "tier_hint": 0,
+      "location": "local",
+      "runnable": true,
+      "evidence_mode": "simulated_deterministic",
+      "license": "Apache-2.0-or-equivalent-candidate",
+      "provenance": "public-pattern-shape-only; not a downloaded weight inventory",
+      "resource_fit": "fits",
+      "offline_capable": true,
+      "supports_computer_use": false,
+      "notes": "SIMULATED adapter for structural/control-plane proofs. Not a live model quality claim. No weight download performed."
+    },
+    {
+      "candidate_id": "llama::sim-llama-edge-fast",
+      "provider_id": "prov_llama",
+      "model_id": "sim-llama-edge-fast",
+      "family": "llama",
+      "slot_hints": [
+        "SLOT_B_EDGE_FAST",
+        "SLOT_D_WAIKE_TUTOR"
+      ],
+      "tier_hint": 1,
+      "location": "local",
+      "runnable": true,
+      "evidence_mode": "simulated_deterministic",
+      "license": "Apache-2.0-or-equivalent-candidate",
+      "provenance": "public-pattern-shape-only; not a downloaded weight inventory",
+      "resource_fit": "fits",
+      "offline_capable": true,
+      "supports_computer_use": false,
+      "notes": "SIMULATED adapter for structural/control-plane proofs. Not a live model quality claim. No weight download performed."
+    },
+    {
+      "candidate_id": "gemma::sim-gemma-edge",
+      "provider_id": "prov_gemma",
+      "model_id": "sim-gemma-edge",
+      "family": "gemma",
+      "slot_hints": [
+        "SLOT_B_EDGE_FAST",
+        "SLOT_D_WAIKE_TUTOR"
+      ],
+      "tier_hint": 1,
+      "location": "local",
+      "runnable": true,
+      "evidence_mode": "simulated_deterministic",
+      "license": "Apache-2.0-or-equivalent-candidate",
+      "provenance": "public-pattern-shape-only; not a downloaded weight inventory",
+      "resource_fit": "fits",
+      "offline_capable": true,
+      "supports_computer_use": false,
+      "notes": "SIMULATED adapter for structural/control-plane proofs. Not a live model quality claim. No weight download performed."
+    },
+    {
+      "candidate_id": "qwen::sim-qwen-workstation",
+      "provider_id": "prov_qwen",
+      "model_id": "sim-qwen-workstation",
+      "family": "qwen",
+      "slot_hints": [
+        "SLOT_C_WORKSTATION_PRO",
+        "SLOT_F_CREATOR_STUDIO"
+      ],
+      "tier_hint": 2,
+      "location": "local",
+      "runnable": true,
+      "evidence_mode": "simulated_deterministic",
+      "license": "Apache-2.0-or-equivalent-candidate",
+      "provenance": "public-pattern-shape-only; not a downloaded weight inventory",
+      "resource_fit": "resource_incompatible",
+      "resource_reason": "Host RAM 8GB / free disk 8.7GB tight for tier 2 live weights",
+      "offline_capable": true,
+      "supports_computer_use": false,
+      "notes": "SIMULATED adapter for structural/control-plane proofs. Not a live model quality claim. No weight download performed."
+    },
+    {
+      "candidate_id": "mistral::sim-mistral-workstation",
+      "provider_id": "prov_mistral",
+      "model_id": "sim-mistral-workstation",
+      "family": "mistral",
+      "slot_hints": [
+        "SLOT_C_WORKSTATION_PRO"
+      ],
+      "tier_hint": 2,
+      "location": "local",
+      "runnable": true,
+      "evidence_mode": "simulated_deterministic",
+      "license": "Apache-2.0-or-equivalent-candidate",
+      "provenance": "public-pattern-shape-only; not a downloaded weight inventory",
+      "resource_fit": "resource_incompatible",
+      "resource_reason": "Host RAM 8GB / free disk 8.7GB tight for tier 2 live weights",
+      "offline_capable": true,
+      "supports_computer_use": false,
+      "notes": "SIMULATED adapter for structural/control-plane proofs. Not a live model quality claim. No weight download performed."
+    },
+    {
+      "candidate_id": "glm::sim-glm-tools",
+      "provider_id": "prov_glm",
+      "model_id": "sim-glm-tools",
+      "family": "glm",
+      "slot_hints": [
+        "SLOT_C_WORKSTATION_PRO",
+        "SLOT_F_CREATOR_STUDIO"
+      ],
+      "tier_hint": 2,
+      "location": "local",
+      "runnable": true,
+      "evidence_mode": "simulated_deterministic",
+      "license": "Apache-2.0-or-equivalent-candidate",
+      "provenance": "public-pattern-shape-only; not a downloaded weight inventory",
+      "resource_fit": "resource_incompatible",
+      "resource_reason": "Host RAM 8GB / free disk 8.7GB tight for tier 2 live weights",
+      "offline_capable": true,
+      "supports_computer_use": false,
+      "notes": "SIMULATED adapter for structural/control-plane proofs. Not a live model quality claim. No weight download performed."
+    },
+    {
+      "candidate_id": "openai::sim-openai-frontier-shape",
+      "provider_id": "prov_openai",
+      "model_id": "sim-openai-frontier-shape",
+      "family": "openai",
+      "slot_hints": [
+        "SLOT_E_RESEARCH_LONG",
+        "SLOT_G_COMPUTER_USE"
+      ],
+      "tier_hint": 3,
+      "location": "cloud",
+      "runnable": true,
+      "evidence_mode": "simulated_deterministic",
+      "license": "vendor-TOS-candidate",
+      "provenance": "public-pattern-shape-only; not a downloaded weight inventory",
+      "resource_fit": "unknown",
+      "offline_capable": false,
+      "supports_computer_use": true,
+      "notes": "SIMULATED adapter for structural/control-plane proofs. Not a live model quality claim. No weight download performed."
+    },
+    {
+      "candidate_id": "anthropic::sim-anthropic-frontier-shape",
+      "provider_id": "prov_anthropic",
+      "model_id": "sim-anthropic-frontier-shape",
+      "family": "anthropic",
+      "slot_hints": [
+        "SLOT_E_RESEARCH_LONG",
+        "SLOT_G_COMPUTER_USE"
+      ],
+      "tier_hint": 3,
+      "location": "cloud",
+      "runnable": true,
+      "evidence_mode": "simulated_deterministic",
+      "license": "vendor-TOS-candidate",
+      "provenance": "public-pattern-shape-only; not a downloaded weight inventory",
+      "resource_fit": "unknown",
+      "offline_capable": false,
+      "supports_computer_use": true,
+      "notes": "SIMULATED adapter for structural/control-plane proofs. Not a live model quality claim. No weight download performed."
+    },
+    {
+      "candidate_id": "gemini::sim-gemini-multimodal-shape",
+      "provider_id": "prov_gemini",
+      "model_id": "sim-gemini-multimodal-shape",
+      "family": "gemini",
+      "slot_hints": [
+        "SLOT_E_RESEARCH_LONG"
+      ],
+      "tier_hint": 3,
+      "location": "cloud",
+      "runnable": true,
+      "evidence_mode": "simulated_deterministic",
+      "license": "vendor-TOS-candidate",
+      "provenance": "public-pattern-shape-only; not a downloaded weight inventory",
+      "resource_fit": "unknown",
+      "offline_capable": false,
+      "supports_computer_use": false,
+      "notes": "SIMULATED adapter for structural/control-plane proofs. Not a live model quality claim. No weight download performed."
+    },
+    {
+      "candidate_id": "kimi::sim-kimi-long-context-shape",
+      "provider_id": "prov_kimi",
+      "model_id": "sim-kimi-long-context-shape",
+      "family": "kimi",
+      "slot_hints": [
+        "SLOT_E_RESEARCH_LONG"
+      ],
+      "tier_hint": 3,
+      "location": "cloud",
+      "runnable": true,
+      "evidence_mode": "simulated_deterministic",
+      "license": "vendor-TOS-candidate",
+      "provenance": "public-pattern-shape-only; not a downloaded weight inventory",
+      "resource_fit": "unknown",
+      "offline_capable": false,
+      "supports_computer_use": false,
+      "notes": "SIMULATED adapter for structural/control-plane proofs. Not a live model quality claim. No weight download performed."
+    },
+    {
+      "candidate_id": "deepseek::sim-deepseek-efficient-shape",
+      "provider_id": "prov_deepseek",
+      "model_id": "sim-deepseek-efficient-shape",
+      "family": "deepseek",
+      "slot_hints": [
+        "SLOT_C_WORKSTATION_PRO"
+      ],
+      "tier_hint": 2,
+      "location": "cloud",
+      "runnable": true,
+      "evidence_mode": "simulated_deterministic",
+      "license": "vendor-TOS-candidate",
+      "provenance": "public-pattern-shape-only; not a downloaded weight inventory",
+      "resource_fit": "unknown",
+      "offline_capable": false,
+      "supports_computer_use": false,
+      "notes": "SIMULATED adapter for structural/control-plane proofs. Not a live model quality claim. No weight download performed."
+    },
+    {
+      "candidate_id": "live_local::NO_CANDIDATE_AVAILABLE",
+      "provider_id": "prov_live_local",
+      "model_id": "NO_CANDIDATE_AVAILABLE",
+      "family": "local_gguf",
+      "slot_hints": [
+        "SLOT_A_MICRO_ROUTER",
+        "SLOT_B_EDGE_FAST"
+      ],
+      "tier_hint": 0,
+      "location": "local",
+      "runnable": false,
+      "evidence_mode": "unavailable",
+      "license": "n/a",
+      "provenance": "n/a",
+      "resource_fit": "resource_incompatible",
+      "resource_reason": "No Ollama models and no GGUF bake-off inventory path; llama.cpp binary alone is not a model",
+      "offline_capable": true,
+      "supports_computer_use": false,
+      "notes": "Live local ladder empty for this host session",
+      "NO_CANDIDATE_AVAILABLE": true
+    },
+    {
+      "candidate_id": "live_remote::NO_CANDIDATE_AVAILABLE",
+      "provider_id": "prov_live_remote",
+      "model_id": "NO_CANDIDATE_AVAILABLE",
+      "family": "fixture",
+      "slot_hints": [
+        "SLOT_E_RESEARCH_LONG"
+      ],
+      "tier_hint": 3,
+      "location": "cloud",
+      "runnable": false,
+      "evidence_mode": "unavailable",
+      "license": "n/a",
+      "provenance": "n/a",
+      "resource_fit": "unknown",
+      "resource_reason": "Remote live bake-off not authorized; offline-required suites forbid remote dependency",
+      "offline_capable": false,
+      "supports_computer_use": false,
+      "notes": "Cloud live credentials/calls not used in this bake-off run",
+      "NO_CANDIDATE_AVAILABLE": true
+    }
+  ]
+}

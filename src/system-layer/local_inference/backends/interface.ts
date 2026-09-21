@@ -19,6 +19,13 @@ export interface InferenceRequest {
   query: string;
   contextDocs?: Array<{ id: string; text: string }>;
   deviceProfileId?: string;
+  deviceState?: {
+    batteryPct?: number;
+    storageHealth?: string;
+    network?: string;
+  };
+  a11yMode?: string;
+  readingLevel?: string;
 }
 
 export interface InferenceResult {

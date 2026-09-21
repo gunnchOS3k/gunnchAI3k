@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "gunnchai.engineering_wave003.v1",
+  "type": "object",
+  "required": ["schema", "wave", "results", "summary", "independentDigitalReproduction"],
+  "properties": {
+    "schema": { "const": "gunnchai.engineering_wave003.v1" },
+    "wave": { "const": "003" },
+    "results": { "type": "array" },
+    "summary": { "type": "object" },
+    "independentDigitalReproduction": { "enum": ["PASS", "PARTIAL", "FAIL"] }
+  }
+}

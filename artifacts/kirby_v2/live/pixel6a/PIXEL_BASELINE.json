@@ -1,0 +1,80 @@
+{
+  "schema": "kirby.live.pixel_baseline.v1",
+  "captured_at": "2026-09-21T03:05:13.510Z",
+  "PIXEL6A_ADB_CONNECTED": true,
+  "usb_pixel6a_seen": true,
+  "adb_present": true,
+  "adb_devices_raw": "List of devices attached\n27211JEGR06194         device usb:17825792X product:bluejay model:Pixel_6a device:bluejay transport_id:20",
+  "authorized_device": true,
+  "serial": "27211JEGR06194",
+  "model": "Pixel_6a",
+  "classification": "PIXEL_READY",
+  "owner_approve_steps": [],
+  "fail_closed": false,
+  "on_device_inference_possible": false,
+  "product_device": "bluejay",
+  "props": {
+    "ro.product.model": "Pixel 6a",
+    "ro.product.device": "bluejay",
+    "ro.product.name": "bluejay",
+    "ro.build.version.release": "17",
+    "ro.build.version.sdk": "37",
+    "ro.product.cpu.abi": "arm64-v8a",
+    "ro.hardware": "bluejay",
+    "ro.board.platform": "gs101"
+  },
+  "meminfo": {
+    "MemTotal": "5723472",
+    "MemFree": "105840",
+    "MemAvailable": "1071844",
+    "Buffers": "1120",
+    "Cached": "1391600",
+    "SwapCached": "23228",
+    "Active": "1519052",
+    "Inactive": "1049684"
+  },
+  "storage": "Filesystem       Size Used Avail Use% Mounted on\n/dev/block/dm-59 110G  84G   26G  77% /data/user/0\n/dev/fuse        110G  84G   26G  77% /storage/emulated",
+  "battery": {
+    "AC powered": "true",
+    "USB powered": "false",
+    "Wireless powered": "false",
+    "Dock powered": "false",
+    "Max charging current": "3000000",
+    "Time when the latest updated value of the Max charging current was sent via battery changed broadcast": "+2d5h2m43s312ms",
+    "Max charging voltage": "5000000",
+    "Charge counter": "3844000",
+    "status": "2",
+    "health": "8",
+    "present": "true",
+    "level": "91",
+    "scale": "100",
+    "voltage": "4306",
+    "Time when the latest updated value of the voltage was sent via battery changed broadcast": "+2d5h16m42s295ms",
+    "The last voltage value sent via the battery changed broadcast": "4306",
+    "temperature": "239",
+    "technology": "Li-ion",
+    "Charging state": "1",
+    "Charging policy": "1",
+    "Capacity level": "2"
+  },
+  "thermal": {
+    "status": "0",
+    "battery_c": 23.9,
+    "excerpt": "IsStatusOverride: false\nThermalEventListeners:\n\tcallbacks: 9\n\tkilled: false\n\tbroadcasts count: -1\nThermalStatusListeners:\n\tcallbacks: 12\n\tkilled: false\n\tbroadcasts count: -1\nThermal Status: 0\nCached temperatures:\n\tTemperature{mValue=33.286003, mType=-1, mName=neutral_therm, mStatus=1}\n\tTemperature{mValue=38.717003, mType=-1, mName=charger_skin_therm, mStatus=0}\n\tTemperature{mValue=0.0, mType=4, mName=VIRTUAL-USB-UI, mStatus=0}\n\tTemperature{mValue=32.685, mType=-1, mName=disp_therm, mStatus=0}\n\tTemperature{mValue=33.531002, mType=-1, mName=quiet_therm, mStatus=0}\n\tTemperature{mValue=35.311, mType=-1, mName=skin_therm1, mStatus=0}\n\tTemperature{mValue=36.981003, mType=-1, mName=skin_therm2, mStatus=0}\n\tTemperature{mValue=34.7, mType=2, mName=battery, mStatus=0}\n\tTemperature{mValue=51.000004, mType=9, mName=TPU, mStatus=0}\n\tTemperature{mValue=33.597, mType=-1, mName=usb_pwr_therm2, mStatus=0}\n\tTemperature{mValue=34.3945, mType=5, mName=cellular-emergency, mStatus=0}\n\tTemperature{mValue=34.132, mType=-1, mName=gnss_tcxo_therm, mStatus=0}\n\tTemperature{mValue=36.909206, mType=3, mName=VIRTUAL-SKIN, mStatus=0}\nHAL Ready: true\nHAL connection:\n\tThermalHAL AIDL 3  connected: yes\nCurrent temperatures from HAL:\n\tTemperature{mValue=23.900002, mType=2, mName=battery, mStatus=0}\n\tTemperature{mValue=25.183203, mType=3, mName=VIRTUAL-SKIN, mStatus=0}\n\tTemperature{mValue=26.097002, mType=-1, mName=skin_therm2, mStatus=0}\n\tTemperature{mValue=24.691002, mType=-1, mName=neutral_therm, mStatus=0}\n\tTemperature{mValue=25.183203, mType=5, mName=cellular-emergency, mStatus=0}\n\tTemperature{mValue=29.000002, mType=9, mName=TPU, mStatus=0}\n\tTemperature{mValue=26.752, mType=-1, mName=charger_skin_therm, mStatus=0}\n\tTemperature{mValue=25.160002, mType=-1, mName=usb_pwr_therm2, mStatus=0}\n\tTemperature{"
+  },
+  "on_device_runtime": {
+    "termux": false,
+    "llama_cli": false,
+    "llama_server": false,
+    "ollama": false,
+    "gguf_on_device": false,
+    "matching_packages": [],
+    "note": "No Termux/llama.cpp/ollama/GGUF on-device runtime found — PIXEL6A_LIVE_LOCAL_MODEL_PASS stays false"
+  },
+  "notes": [
+    "Pixel 6a authorized via adb — PIXEL6A_ADB_CONNECTED=true",
+    "Prior PIXEL_ADB_BLOCKED classification cleared",
+    "No Termux/llama.cpp/ollama/GGUF on-device runtime found — PIXEL6A_LIVE_LOCAL_MODEL_PASS stays false",
+    "ADB connected does not equal on-device inference — no genuine local model runtime"
+  ]
+}

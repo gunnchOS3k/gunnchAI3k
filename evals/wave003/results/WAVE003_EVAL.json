@@ -1,0 +1,1127 @@
+{
+  "schema": "gunnchai.engineering_wave003.v1",
+  "wave": "003",
+  "generatedAt": "2026-08-20T00:54:21.610Z",
+  "branch": "eng/wave003-integrity-repair",
+  "acceptedMainSha": "a28ff83b6efe95cdb8be9d959f908516b2666367",
+  "doctrine": {
+    "independentEvaluator": true,
+    "validationImportsRequirementProof": false,
+    "requirementProofRole": "cross-check-only"
+  },
+  "targetRequirements": [
+    "AI-LOCAL-001",
+    "AI-LOCAL-002",
+    "AI-LOCAL-003",
+    "AI-LOCAL-005",
+    "AI-LOCAL-006",
+    "AI-LOCAL-007",
+    "AI-LOCAL-008",
+    "AI-LOCAL-009",
+    "AI-LOCAL-011",
+    "AI-GOV-001",
+    "AI-GOV-003",
+    "AI-GOV-004",
+    "AI-GOV-005",
+    "AI-GOV-006",
+    "AI-GOV-007",
+    "AI-GOV-008",
+    "AI-GOV-010",
+    "AI-GOV-011",
+    "AI-GOV-012"
+  ],
+  "results": [
+    {
+      "requirementId": "AI-GOV-001",
+      "title": "AI governance: Declared purpose",
+      "runtimeKind": "LOCAL_GOVERNANCE_RUNTIME",
+      "metrics": {
+        "purposeLength": 147,
+        "purposeStructureComplete": true
+      },
+      "negativeCases": [
+        {
+          "id": "purpose-declared",
+          "description": "Governance exposes non-empty declared purpose",
+          "passed": true,
+          "detail": "Local-first gunnchAI assist for tutoring, code, device help, accessibility, coac"
+        },
+        {
+          "id": "purpose-structure",
+          "description": "Purpose record includes users, uses, out-of-scope, limitations",
+          "passed": true,
+          "detail": "{\"purpose\":\"Local-first gunnchAI assist for tutoring, code, device help, accessibility, coaching, network diagnosis, and retrieval — not a general cloud agent.\",\"intendedUsers\":[\"students\",\"local operators\",\"device owners using gunnchOS local-first mode\"],\"intendedUses\":[\"offline tutoring packs\",\"local code assistance\",\"device-state-grounded help\",\"bounded accessibility checklist\"],\"outOfScope\":[\"GENERAL_ASR\",\"GENERAL_VLM\",\"GENERAL_BIAS_AUDIT\",\"trained game-playing agent\",\"cloud-sole-path assist\"],\"limitations\":[\"Deterministic/template runtimes are not neural quality claims.\",\"Physical device facts must come from supplied fixtures, never invented.\",\"HUMAN_E6 and HUMAN_ACCESSIBILITY_VALIDATED remain false.\"]}"
+        },
+        {
+          "id": "purpose-required-block",
+          "description": "Declared purpose persisted on governance state",
+          "passed": true,
+          "detail": "147"
+        }
+      ],
+      "evidencePaths": [
+        "src/system-layer/product_service/governance.ts#declarePurpose"
+      ],
+      "notes": "Purpose structure validated: intended users/uses/out-of-scope/limitations.",
+      "validationState": "VALIDATED",
+      "crossCheckRequirementProof": {
+        "runtimeProven": true,
+        "note": "requirement_proof.ts agrees node is RUNTIME (cross-check only)"
+      }
+    },
+    {
+      "requirementId": "AI-GOV-003",
+      "title": "AI governance: Data minimization",
+      "runtimeKind": "LOCAL_GOVERNANCE_RUNTIME",
+      "metrics": {
+        "minimizationApplied": true
+      },
+      "negativeCases": [
+        {
+          "id": "email-redacted",
+          "description": "Email stripped from minimized query",
+          "passed": true,
+          "detail": "help [redacted-email] with homework at [redacted-phone]"
+        },
+        {
+          "id": "phone-redacted",
+          "description": "Phone stripped from minimized query",
+          "passed": true,
+          "detail": "help [redacted-email] with homework at [redacted-phone]"
+        },
+        {
+          "id": "minimization-flag",
+          "description": "MinimizationApplied true when redactions occur",
+          "passed": true,
+          "detail": "true"
+        }
+      ],
+      "evidencePaths": [
+        "src/system-layer/product_service/governance.ts#setMinimization"
+      ],
+      "notes": "PII hint stripping + max query length minimization at decision time.",
+      "validationState": "VALIDATED",
+      "crossCheckRequirementProof": {
+        "runtimeProven": true,
+        "note": "requirement_proof.ts agrees node is RUNTIME (cross-check only)"
+      }
+    },
+    {
+      "requirementId": "AI-GOV-004",
+      "title": "AI governance: Local/cloud processing disclosure",
+      "runtimeKind": "LOCAL_GOVERNANCE_RUNTIME",
+      "metrics": {
+        "cloudPermitted": false
+      },
+      "negativeCases": [
+        {
+          "id": "local-only-disclosure",
+          "description": "Disclosure states LOCAL-ONLY posture",
+          "passed": true,
+          "detail": "DISCLOSURE: LOCAL-ONLY for tutoring. No cloud model call is permitted under current policy (processingMode=local-only; u"
+        },
+        {
+          "id": "cloud-not-permitted",
+          "description": "Cloud not permitted without consent in local-only mode",
+          "passed": true,
+          "detail": "false"
+        }
+      ],
+      "evidencePaths": [
+        "src/system-layer/privacy_policy.ts"
+      ],
+      "notes": "User-visible local/cloud disclosure via governance + privacy policy evaluator.",
+      "validationState": "VALIDATED",
+      "crossCheckRequirementProof": {
+        "runtimeProven": true,
+        "note": "requirement_proof.ts agrees node is RUNTIME (cross-check only)"
+      }
+    },
+    {
+      "requirementId": "AI-GOV-005",
+      "title": "AI governance: Model and version identification",
+      "runtimeKind": "LOCAL_GOVERNANCE_RUNTIME",
+      "metrics": {
+        "historyLength": 3
+      },
+      "negativeCases": [
+        {
+          "id": "active-version",
+          "description": "Active model version tracked",
+          "passed": true,
+          "detail": "wave003-eval@3"
+        },
+        {
+          "id": "history",
+          "description": "Model version history retains prior versions",
+          "passed": true,
+          "detail": "wave003-eval@3,wave003-eval@2,wave003-eval@1"
+        },
+        {
+          "id": "decision-exposes-version",
+          "description": "Assist decisions expose modelVersion field",
+          "passed": true,
+          "detail": "wave003-eval@3"
+        }
+      ],
+      "evidencePaths": [
+        "src/system-layer/product_service/governance.ts#setModelVersion"
+      ],
+      "notes": "Model/version identification with bounded history (not cloud model registry).",
+      "validationState": "VALIDATED",
+      "crossCheckRequirementProof": {
+        "runtimeProven": true,
+        "note": "requirement_proof.ts agrees node is RUNTIME (cross-check only)"
+      }
+    },
+    {
+      "requirementId": "AI-GOV-006",
+      "title": "AI governance: Evaluation baseline",
+      "runtimeKind": "LOCAL_GOVERNANCE_RUNTIME",
+      "metrics": {
+        "evalBaselineRef": "4c315ccd5ac33366444b5a780d17900924239a50",
+        "datasetsPresent": true,
+        "baselineComplete": true
+      },
+      "negativeCases": [
+        {
+          "id": "schema",
+          "description": "Baseline schema is versioned evaluation_baseline.v1",
+          "passed": true,
+          "detail": "gunnchai.engineering_wave003.evaluation_baseline.v1"
+        },
+        {
+          "id": "commits-env-hashes",
+          "description": "Baseline includes commits, environment, fixture hashes",
+          "passed": true,
+          "detail": "{\"head\":\"4c315ccd5ac33366444b5a780d17900924239a50\",\"node\":\"v24.9.0\",\"fixtureCount\":8}"
+        },
+        {
+          "id": "per-req-thresholds",
+          "description": "Every target requirement has metrics, thresholds, current_result, validation_state",
+          "passed": true,
+          "detail": "true"
+        }
+      ],
+      "evidencePaths": [
+        "evidence/engineering_wave003/EVALUATION_BASELINE.json"
+      ],
+      "notes": "Versioned EVALUATION_BASELINE.json completeness + meaningful per-req thresholds.",
+      "validationState": "VALIDATED",
+      "crossCheckRequirementProof": {
+        "runtimeProven": true,
+        "note": "requirement_proof.ts agrees node is RUNTIME (cross-check only)"
+      }
+    },
+    {
+      "requirementId": "AI-GOV-007",
+      "title": "AI governance: Failure analysis",
+      "runtimeKind": "LOCAL_TEMPLATE_ENGINE",
+      "metrics": {
+        "goodScore": 3,
+        "badScore": 0
+      },
+      "negativeCases": [
+        {
+          "id": "failure-modes-declared",
+          "description": "Capability spec declares failure modes",
+          "passed": true,
+          "detail": "empty_concept,missing_check,text_only"
+        },
+        {
+          "id": "structured-beats-text-only",
+          "description": "Structured tutoring beats text-only failure mode",
+          "passed": true,
+          "detail": "tutoring_rubric_coverage"
+        },
+        {
+          "id": "text-only-fails",
+          "description": "Text-only response fails structured metric",
+          "passed": true,
+          "detail": "FAIL: system only returned text without structured evaluation fields."
+        }
+      ],
+      "evidencePaths": [
+        "src/system-layer/evaluation/metrics.ts"
+      ],
+      "notes": "Failure analysis via declared failureModes + structured metric scoring (not log slogans).",
+      "validationState": "VALIDATED",
+      "crossCheckRequirementProof": {
+        "runtimeProven": true,
+        "note": "requirement_proof.ts agrees node is RUNTIME (cross-check only)"
+      }
+    },
+    {
+      "requirementId": "AI-GOV-008",
+      "title": "AI governance: Bias and accessibility evaluation",
+      "runtimeKind": "LOCAL_TEMPLATE_ENGINE",
+      "metrics": {
+        "inScopeChecks": 3,
+        "differentialExecuted": true,
+        "generalBiasAudit": false,
+        "dimensions": 5
+      },
+      "negativeCases": [
+        {
+          "id": "differential-executed",
+          "description": "Bounded differential eval executed on supported dimensions",
+          "passed": true,
+          "detail": "language,reading-level,input-length,a11y-mode,device-profile"
+        },
+        {
+          "id": "missing-label-delta",
+          "description": "Labeled vs unlabeled control changes labels issue",
+          "passed": true,
+          "detail": "labelDiff=true"
+        },
+        {
+          "id": "scope-honest",
+          "description": "Scope file denies general bias audit / VLM claims",
+          "passed": true,
+          "detail": "GENERAL_VLM,GENERAL_BIAS_AUDIT,GENERAL_ASR,HUMAN_E6"
+        }
+      ],
+      "evidencePaths": [
+        "evals/wave003/fixtures/bias_a11y_scope.json",
+        "evidence/engineering_wave003/BIAS_ACCESSIBILITY_EVALUATION.json"
+      ],
+      "notes": "Bounded differential a11y/language/input/device-profile eval. GENERAL_BIAS_AUDIT remains false.",
+      "validationState": "VALIDATED",
+      "crossCheckRequirementProof": {
+        "runtimeProven": true,
+        "note": "requirement_proof.ts agrees node is RUNTIME (cross-check only)"
+      }
+    },
+    {
+      "requirementId": "AI-GOV-010",
+      "title": "AI governance: Safe fallback",
+      "runtimeKind": "LOCAL_ROUTER",
+      "metrics": {
+        "fallbackRole": "NANO_LOCAL"
+      },
+      "negativeCases": [
+        {
+          "id": "safe-fallback-flag",
+          "description": "Governance safe fallback enabled",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "id": "nano-fallback-tier",
+          "description": "Router selects nano fallback when primary unavailable",
+          "passed": true,
+          "detail": "NANO_LOCAL:Selected nano-smollm-135m (NANO_LOCAL) for task=tutoring; privacy=personal; context=512; ram=4096MB; offline=false; cloudOk=false; preference=balanced; [nano-fallback-tier]"
+        },
+        {
+          "id": "not-cloud-fallback",
+          "description": "Fallback chain does not require cloud for basic tutoring",
+          "passed": true,
+          "detail": "local"
+        }
+      ],
+      "evidencePaths": [
+        "src/stage2/fleet/router.ts",
+        "src/system-layer/product_service/governance.ts#setSafeFallback"
+      ],
+      "notes": "Safe local fallback chain (nano tier) with governance fallbackSafe flag.",
+      "validationState": "VALIDATED",
+      "crossCheckRequirementProof": {
+        "runtimeProven": true,
+        "note": "requirement_proof.ts agrees node is RUNTIME (cross-check only)"
+      }
+    },
+    {
+      "requirementId": "AI-GOV-011",
+      "title": "AI governance: Monitoring",
+      "runtimeKind": "LOCAL_GOVERNANCE_RUNTIME",
+      "metrics": {
+        "eventCount": 8,
+        "privacyLeaks": 0,
+        "missingEventTypes": 0,
+        "latencyFieldPresent": true
+      },
+      "negativeCases": [
+        {
+          "id": "required-events",
+          "description": "Required monitoring event types observed",
+          "passed": true,
+          "detail": "none-missing"
+        },
+        {
+          "id": "no-sentinel-leaks",
+          "description": "Privacy sentinels do not appear in monitor jsonl or event details",
+          "passed": true,
+          "detail": "no-leaks"
+        },
+        {
+          "id": "redactions-and-latency",
+          "description": "Redaction tokens present and latencyMs on events",
+          "passed": true,
+          "detail": "redactions=true latency=true"
+        }
+      ],
+      "evidencePaths": [
+        "src/system-layer/product_service/governance.ts#record",
+        "evidence/engineering_wave003/MONITORING_PRIVACY_RESULT.json"
+      ],
+      "notes": "Monitoring covers invocation/identity/route/fallback/error/eval/rollback with privacy sentinels redacted.",
+      "validationState": "VALIDATED",
+      "crossCheckRequirementProof": {
+        "runtimeProven": true,
+        "note": "requirement_proof.ts agrees node is RUNTIME (cross-check only)"
+      }
+    },
+    {
+      "requirementId": "AI-GOV-012",
+      "title": "AI governance: Rollback capability",
+      "runtimeKind": "LOCAL_GOVERNANCE_RUNTIME",
+      "metrics": {
+        "snapshotCount": 10,
+        "activeModelVersion": "wave003-eval@1"
+      },
+      "negativeCases": [
+        {
+          "id": "governance-rollback",
+          "description": "Governance snapshot rollback restores prior consent",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "id": "model-rollback",
+          "description": "Model version rollback restores prior active version",
+          "passed": true,
+          "detail": "wave003-eval@1"
+        },
+        {
+          "id": "history-retained",
+          "description": "Model history retained after rollback",
+          "passed": true,
+          "detail": "wave003-eval@1,wave003-eval@2,wave003-eval@3"
+        }
+      ],
+      "evidencePaths": [
+        "src/system-layer/product_service/governance.ts#rollback",
+        "src/system-layer/product_service/governance.ts#rollbackModel"
+      ],
+      "notes": "Governance state + model version rollback with bounded snapshot history.",
+      "validationState": "VALIDATED",
+      "crossCheckRequirementProof": {
+        "runtimeProven": true,
+        "note": "requirement_proof.ts agrees node is RUNTIME (cross-check only)"
+      }
+    },
+    {
+      "requirementId": "AI-LOCAL-001",
+      "title": "Local-first AI: Offline tutoring packs",
+      "runtimeKind": "LOCAL_TEMPLATE_ENGINE",
+      "metrics": {
+        "offlinePackPresent": true,
+        "waikeFixturePresent": true,
+        "structuredSteps": 3,
+        "networkDenied": true
+      },
+      "negativeCases": [
+        {
+          "id": "network-denied",
+          "description": "Cloud endpoints blocked in local-only mode",
+          "passed": true,
+          "detail": "verification=local-only-enforced cloudRejected=true"
+        },
+        {
+          "id": "no-cloud-tutor-response",
+          "description": "Tutoring response must not claim cloud upload",
+          "passed": true,
+          "detail": "Local tutoring response (fixture-backed deterministic provider — NOT a trained LLM).\n\nQuery: teach binary search from of"
+        },
+        {
+          "id": "structured-rubric",
+          "description": "Tutoring must expose steps + check (not text-only)",
+          "passed": true,
+          "detail": "{\"kind\":\"tutoring\",\"steps\":3}"
+        }
+      ],
+      "evidencePaths": [
+        "fixtures/local-runtime/documents/tutoring-basics.md",
+        "fixtures/waike/public/curriculum/digital_rc/GENERAL_IT/course.json"
+      ],
+      "notes": "Deterministic offline tutoring rubric with local-only network guard. WAIKE fixture present for curriculum scope; not a neural tutor quality claim.",
+      "validationState": "VALIDATED",
+      "crossCheckRequirementProof": {
+        "runtimeProven": true,
+        "note": "requirement_proof.ts agrees node is RUNTIME (cross-check only)"
+      }
+    },
+    {
+      "requirementId": "AI-LOCAL-002",
+      "title": "Local-first AI: Local code assistance",
+      "runtimeKind": "LOCAL_TEMPLATE_ENGINE",
+      "metrics": {
+        "hasCodeFence": true,
+        "codingAgentOk": true
+      },
+      "negativeCases": [
+        {
+          "id": "typed-early-return",
+          "description": "Code assist exposes typed early-return guard",
+          "passed": true,
+          "detail": "early-return-guard"
+        },
+        {
+          "id": "coding-agent-edit",
+          "description": "Fixture-repo coding agent edits file before merge gate",
+          "passed": true,
+          "detail": "awaiting_approval"
+        },
+        {
+          "id": "no-merge-without-approval",
+          "description": "Merge remains blocked pending approval",
+          "passed": true,
+          "detail": "true"
+        }
+      ],
+      "evidencePaths": [
+        "src/system-layer/local_inference/backends/deterministic.ts",
+        "src/phase_xiv/computer_use/coding_agent.ts",
+        "evals/wave003/fixtures/code_fixture_repo/README.md"
+      ],
+      "notes": "Structured local code assist plus sandboxed coding-agent E2E on ephemeral fixture repo.",
+      "validationState": "VALIDATED",
+      "crossCheckRequirementProof": {
+        "runtimeProven": true,
+        "note": "requirement_proof.ts agrees node is RUNTIME (cross-check only)"
+      }
+    },
+    {
+      "requirementId": "AI-LOCAL-003",
+      "title": "Local-first AI: Device help",
+      "runtimeKind": "LOCAL_TEMPLATE_ENGINE",
+      "metrics": {
+        "groundedProfiles": 4,
+        "fabricatedPhysicalFacts": false
+      },
+      "negativeCases": [
+        {
+          "id": "four-profile-grounding",
+          "description": "Recommendations ground to low battery, storage pressure, disconnected, healthy fixtures",
+          "passed": true,
+          "detail": "[\"low_battery\",\"storage_pressure\",\"network_disconnected\",\"healthy_control\"]"
+        },
+        {
+          "id": "no-cloud-upload",
+          "description": "Device help must not recommend cloud upload",
+          "passed": true,
+          "detail": "DEVICE_HELP[profile=low_battery]\nConfirm device profile=low_battery from supplied fixture.\nLow battery (8% supplied): reduce background work; stay local-only.\nS"
+        },
+        {
+          "id": "no-fabricated-physical",
+          "description": "No fabricated physical facts outside supplied state",
+          "passed": true,
+          "detail": "true"
+        }
+      ],
+      "evidencePaths": [
+        "evals/wave003/fixtures/device_state.json",
+        "evals/wave003/fixtures/device_states.json"
+      ],
+      "notes": "Device help grounded to supplied fixture state (battery/storage/network); no invented telemetry.",
+      "validationState": "VALIDATED",
+      "crossCheckRequirementProof": {
+        "runtimeProven": true,
+        "note": "requirement_proof.ts agrees node is RUNTIME (cross-check only)"
+      }
+    },
+    {
+      "requirementId": "AI-LOCAL-005",
+      "title": "Local-first AI: Basic translation",
+      "runtimeKind": "LOCAL_TEMPLATE_ENGINE",
+      "metrics": {
+        "glossaryHit": true,
+        "offline": true,
+        "generalMtClaim": false
+      },
+      "negativeCases": [
+        {
+          "id": "glossary-hit",
+          "description": "Supported glossary pair translates deterministically",
+          "passed": true,
+          "detail": "hola"
+        },
+        {
+          "id": "unsupported-passthrough",
+          "description": "Unsupported pair does not claim neural MT",
+          "passed": true,
+          "detail": "[local-passthrough:hello]"
+        },
+        {
+          "id": "no-general-mt-claim",
+          "description": "Output must not claim general machine translation",
+          "passed": true,
+          "detail": "scope=glossary-only"
+        }
+      ],
+      "evidencePaths": [
+        "src/system-layer/local_inference/backends/deterministic.ts#translation"
+      ],
+      "notes": "Offline glossary translation only. GENERAL_MT claim boundary remains false.",
+      "validationState": "VALIDATED",
+      "crossCheckRequirementProof": {
+        "runtimeProven": true,
+        "note": "requirement_proof.ts agrees node is RUNTIME (cross-check only)"
+      }
+    },
+    {
+      "requirementId": "AI-LOCAL-006",
+      "title": "Local-first AI: Accessibility services",
+      "runtimeKind": "LOCAL_TEMPLATE_ENGINE",
+      "metrics": {
+        "issueCount": 3,
+        "wcagTarget": "AA"
+      },
+      "negativeCases": [
+        {
+          "id": "labels-issue",
+          "description": "Accessibility assistant flags missing labels",
+          "passed": true,
+          "detail": "contrast,focus,labels"
+        },
+        {
+          "id": "wcag-target",
+          "description": "WCAG AA target declared",
+          "passed": true,
+          "detail": "AA"
+        },
+        {
+          "id": "structured-not-vague",
+          "description": "Must not return vague pretty UI advice only",
+          "passed": true,
+          "detail": "3"
+        }
+      ],
+      "evidencePaths": [
+        "evals/wave003/fixtures/a11y_ui.json"
+      ],
+      "notes": "Structured a11y checklist from deterministic assistant; not a full audit platform.",
+      "validationState": "VALIDATED",
+      "crossCheckRequirementProof": {
+        "runtimeProven": true,
+        "note": "requirement_proof.ts agrees node is RUNTIME (cross-check only)"
+      }
+    },
+    {
+      "requirementId": "AI-LOCAL-007",
+      "title": "Local-first AI: Local document retrieval",
+      "runtimeKind": "LOCAL_RAG_INDEX",
+      "metrics": {
+        "precision": 1,
+        "recall": 1,
+        "hitCount": 1
+      },
+      "negativeCases": [
+        {
+          "id": "grounded-hit",
+          "description": "Known marker retrieved from mini corpus",
+          "passed": true,
+          "detail": "1"
+        },
+        {
+          "id": "ungrounded-refusal",
+          "description": "Absent claim not grounded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "id": "attribution-lines",
+          "description": "Attribution lines present on hit",
+          "passed": true,
+          "detail": "1"
+        }
+      ],
+      "evidencePaths": [
+        "evals/wave003/fixtures/mini_corpus/doc-a.md"
+      ],
+      "notes": "Mini-corpus retrieval metrics on local RAG engine (not cloud search).",
+      "validationState": "VALIDATED",
+      "crossCheckRequirementProof": {
+        "runtimeProven": true,
+        "note": "requirement_proof.ts agrees node is RUNTIME (cross-check only)"
+      }
+    },
+    {
+      "requirementId": "AI-LOCAL-008",
+      "title": "Local-first AI: Game AI",
+      "runtimeKind": "LOCAL_TEMPLATE_ENGINE",
+      "metrics": {
+        "fixtureWave": 7,
+        "tips": 2,
+        "trainedGamePlayingAgent": false
+      },
+      "negativeCases": [
+        {
+          "id": "state-analysis",
+          "description": "Game coach reads tempo from query/state",
+          "passed": true,
+          "detail": "{\"tempo\":\"high\",\"risk\":\"moderate\"}"
+        },
+        {
+          "id": "actionable-tips",
+          "description": "Returns >=2 actionable tips",
+          "passed": true,
+          "detail": "2"
+        },
+        {
+          "id": "deterministic-kind",
+          "description": "Uses structured game_coach kind",
+          "passed": true,
+          "detail": "game_coach"
+        }
+      ],
+      "evidencePaths": [
+        "evals/wave003/fixtures/game_state.json"
+      ],
+      "notes": "Deterministic game-state coach VALIDATED with NOT_TRAINED_GAME_PLAYING_AGENT boundary; not a learned policy/agent.",
+      "validationState": "VALIDATED",
+      "crossCheckRequirementProof": {
+        "runtimeProven": true,
+        "note": "requirement_proof.ts agrees node is RUNTIME (cross-check only)"
+      }
+    },
+    {
+      "requirementId": "AI-LOCAL-009",
+      "title": "Local-first AI: Connectivity diagnosis",
+      "runtimeKind": "LOCAL_TEMPLATE_ENGINE",
+      "metrics": {
+        "bearerPresent": true,
+        "dnsLocal": true
+      },
+      "negativeCases": [
+        {
+          "id": "local-diagnosis",
+          "description": "Network assist performs local-only diagnosis",
+          "passed": true,
+          "detail": "Local connectivity diagnosis without outbound probes."
+        },
+        {
+          "id": "checklist-present",
+          "description": "Checklist includes bearer + offline cache fields",
+          "passed": true,
+          "detail": "bearer_present,dns_resolves_local,offline_cache_ok,no_forced_cloud"
+        },
+        {
+          "id": "no-invented-cloud-success",
+          "description": "Must not invent successful cloud calls when telemetry says zero",
+          "passed": true,
+          "detail": "cloudCallsAttempted=0"
+        }
+      ],
+      "evidencePaths": [
+        "evals/wave003/fixtures/connectivity_telemetry.json",
+        "fixtures/local-runtime/documents/connectivity-diagnosis.md"
+      ],
+      "notes": "Connectivity diagnosis uses structured telemetry fixture + approved local pack.",
+      "validationState": "VALIDATED",
+      "crossCheckRequirementProof": {
+        "runtimeProven": true,
+        "note": "requirement_proof.ts agrees node is RUNTIME (cross-check only)"
+      }
+    },
+    {
+      "requirementId": "AI-LOCAL-011",
+      "title": "Cloud models not sole path to basic operation",
+      "runtimeKind": "LOCAL_PRODUCT_SERVICE",
+      "metrics": {
+        "selectedRole": "LOCAL_FAST",
+        "assistOk": true,
+        "cloudSolePath": false
+      },
+      "negativeCases": [
+        {
+          "id": "offline-route-local",
+          "description": "Offline routing selects local tier (cloud consent ignored)",
+          "passed": true,
+          "detail": "LOCAL_FAST/local"
+        },
+        {
+          "id": "cloud-call-rejected",
+          "description": "Outbound cloud LLM call rejected under local-only guard",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "id": "basic-assist-without-cloud",
+          "description": "Product assist succeeds without cloud path",
+          "passed": true,
+          "detail": "{\"ok\":true,\"processingMode\":\"local-only\",\"offline\":true}"
+        }
+      ],
+      "evidencePaths": [
+        "src/stage2/fleet/router.ts",
+        "src/local-runtime/network.ts",
+        "src/system-layer/product_service/service.ts"
+      ],
+      "notes": "Cross-cutting offline kill-switch: router + network guard + product assist all remain local-viable.",
+      "validationState": "VALIDATED",
+      "crossCheckRequirementProof": {
+        "runtimeProven": true,
+        "note": "requirement_proof.ts agrees node is RUNTIME (cross-check only)"
+      }
+    }
+  ],
+  "summary": {
+    "validated": 19,
+    "implementedValidationOpen": 0,
+    "reclassify": 0,
+    "blockedEnvironment": 0,
+    "blockedExternal": 0,
+    "total": 19
+  },
+  "claimBoundaries": {
+    "HUMAN_E6": false,
+    "GENERAL_ASR": false,
+    "GENERAL_VLM": false,
+    "GENERAL_MT": false,
+    "LOCAL_PRO_PRIMARY": false,
+    "CLOUD_SOLE_PATH": false,
+    "GENERAL_BIAS_AUDIT": false,
+    "HUMAN_ACCESSIBILITY_VALIDATED": false,
+    "NOT_TRAINED_GAME_PLAYING_AGENT": true
+  },
+  "independentDigitalReproduction": "PASS",
+  "allTargetEvaluated": true,
+  "releaseComplete": true,
+  "independentReproduction": {
+    "schema": "gunnchai.engineering_wave003.independent_reproduction.v1",
+    "primaryRunId": "b17ae179-b008-4c59-8ddf-6aeffead9528",
+    "freshRunId": "f5bc228e-75ef-43e1-b121-5210424aa207",
+    "primaryCommit": "4c315ccd5ac33366444b5a780d17900924239a50",
+    "freshCommit": "4c315ccd5ac33366444b5a780d17900924239a50",
+    "evaluatorHash": "7bfb598f424c957cf2aa2de4297d8169ef92c25a50852ec52161d1d0eb955367",
+    "fixtureHashes": {
+      "a11y_ui.json": "559e5c0759e504695100f98a6463277c79e4c34c05b3a5b226b58834497088aa",
+      "bias_a11y_scope.json": "b261f1e3f83fc023d40ca9d5b180eaadb9f7ee03ed4b8a6a37ba9401d17a0e80",
+      "code_fixture_repo/README.md": "16cc508641aba9ef5b341a57e12594877670312f3810a8522c8ec191ef4ae1f7",
+      "connectivity_telemetry.json": "c2650222172427c39a9505310366e64199b4d9af4925de2c914bd734e269ce80",
+      "device_state.json": "03178c1f1eb9cf06d7c885b1fa7179704b1be5b77f49c07cded1e94971f32986",
+      "device_states.json": "42c6da7cd1320a757d8269f3cc0ed617212dbb0337685c9b043017b895245a09",
+      "game_state.json": "46089e8bd41a02991457a7fa74c3a311c81b78791c28b90e342717bc775d62fb",
+      "mini_corpus/doc-a.md": "0c3f81c4824a6bfa4291fb68d4e5927fe14a06411eb5e4075879bc1b703a488a"
+    },
+    "seed": "wave003-integrity-repair",
+    "perRequirementStateMatch": true,
+    "metricComparison": [
+      {
+        "requirementId": "AI-GOV-001",
+        "metric": "purposeLength",
+        "primary": 147,
+        "fresh": 147,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-GOV-001",
+        "metric": "purposeStructureComplete",
+        "primary": true,
+        "fresh": true,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-GOV-003",
+        "metric": "minimizationApplied",
+        "primary": true,
+        "fresh": true,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-GOV-004",
+        "metric": "cloudPermitted",
+        "primary": false,
+        "fresh": false,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-GOV-005",
+        "metric": "historyLength",
+        "primary": 3,
+        "fresh": 3,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-GOV-006",
+        "metric": "evalBaselineRef",
+        "primary": "4c315ccd5ac33366444b5a780d17900924239a50",
+        "fresh": "4c315ccd5ac33366444b5a780d17900924239a50",
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-GOV-006",
+        "metric": "datasetsPresent",
+        "primary": true,
+        "fresh": true,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-GOV-006",
+        "metric": "baselineComplete",
+        "primary": true,
+        "fresh": true,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-GOV-007",
+        "metric": "goodScore",
+        "primary": 3,
+        "fresh": 3,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-GOV-007",
+        "metric": "badScore",
+        "primary": 0,
+        "fresh": 0,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-GOV-008",
+        "metric": "inScopeChecks",
+        "primary": 3,
+        "fresh": 3,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-GOV-008",
+        "metric": "differentialExecuted",
+        "primary": true,
+        "fresh": true,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-GOV-008",
+        "metric": "generalBiasAudit",
+        "primary": false,
+        "fresh": false,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-GOV-008",
+        "metric": "dimensions",
+        "primary": 5,
+        "fresh": 5,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-GOV-010",
+        "metric": "fallbackRole",
+        "primary": "NANO_LOCAL",
+        "fresh": "NANO_LOCAL",
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-GOV-011",
+        "metric": "privacyLeaks",
+        "primary": 0,
+        "fresh": 0,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-GOV-011",
+        "metric": "missingEventTypes",
+        "primary": 0,
+        "fresh": 0,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-GOV-011",
+        "metric": "latencyFieldPresent",
+        "primary": true,
+        "fresh": true,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-GOV-012",
+        "metric": "activeModelVersion",
+        "primary": "wave003-eval@1",
+        "fresh": "wave003-eval@1",
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-001",
+        "metric": "offlinePackPresent",
+        "primary": true,
+        "fresh": true,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-001",
+        "metric": "waikeFixturePresent",
+        "primary": true,
+        "fresh": true,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-001",
+        "metric": "structuredSteps",
+        "primary": 3,
+        "fresh": 3,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-001",
+        "metric": "networkDenied",
+        "primary": true,
+        "fresh": true,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-002",
+        "metric": "hasCodeFence",
+        "primary": true,
+        "fresh": true,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-002",
+        "metric": "codingAgentOk",
+        "primary": true,
+        "fresh": true,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-003",
+        "metric": "groundedProfiles",
+        "primary": 4,
+        "fresh": 4,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-003",
+        "metric": "fabricatedPhysicalFacts",
+        "primary": false,
+        "fresh": false,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-005",
+        "metric": "glossaryHit",
+        "primary": true,
+        "fresh": true,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-005",
+        "metric": "offline",
+        "primary": true,
+        "fresh": true,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-005",
+        "metric": "generalMtClaim",
+        "primary": false,
+        "fresh": false,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-006",
+        "metric": "issueCount",
+        "primary": 3,
+        "fresh": 3,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-006",
+        "metric": "wcagTarget",
+        "primary": "AA",
+        "fresh": "AA",
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-007",
+        "metric": "precision",
+        "primary": 1,
+        "fresh": 1,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-007",
+        "metric": "recall",
+        "primary": 1,
+        "fresh": 1,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-007",
+        "metric": "hitCount",
+        "primary": 1,
+        "fresh": 1,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-008",
+        "metric": "fixtureWave",
+        "primary": 7,
+        "fresh": 7,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-008",
+        "metric": "tips",
+        "primary": 2,
+        "fresh": 2,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-008",
+        "metric": "trainedGamePlayingAgent",
+        "primary": false,
+        "fresh": false,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-009",
+        "metric": "bearerPresent",
+        "primary": true,
+        "fresh": true,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-009",
+        "metric": "dnsLocal",
+        "primary": true,
+        "fresh": true,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-011",
+        "metric": "selectedRole",
+        "primary": "LOCAL_FAST",
+        "fresh": "LOCAL_FAST",
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-011",
+        "metric": "assistOk",
+        "primary": true,
+        "fresh": true,
+        "withinTolerance": true
+      },
+      {
+        "requirementId": "AI-LOCAL-011",
+        "metric": "cloudSolePath",
+        "primary": false,
+        "fresh": false,
+        "withinTolerance": true
+      }
+    ],
+    "tolerances": {
+      "latencyMsAbs": 50000,
+      "ignoreMetricKeys": [
+        "generatedAt",
+        "latencyMs",
+        "eventCount",
+        "snapshotCount"
+      ]
+    },
+    "unexpected_differences": [],
+    "result": "PASS",
+    "childExitCode": 0,
+    "method": "primary-vs-fresh-node-process; exact state equivalence; not inferred from child exit 0"
+  }
+}

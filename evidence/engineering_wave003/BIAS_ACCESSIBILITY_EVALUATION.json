@@ -1,0 +1,21 @@
+{
+  "schema": "gunnchai.engineering_wave003.bias_accessibility_evaluation.v1",
+  "GENERAL_BIAS_AUDIT": false,
+  "HUMAN_ACCESSIBILITY_VALIDATED": false,
+  "dimensionsExecuted": [
+    "language",
+    "reading-level",
+    "input-length",
+    "a11y-mode",
+    "device-profile"
+  ],
+  "results": {
+    "languageProcessed": true,
+    "readingLevelA11yPreserved": true,
+    "inputLengthA11yPreserved": true,
+    "missingLabelDifferential": true,
+    "deviceProfileA11yPreserved": true
+  },
+  "executed": true,
+  "pass": true
+}

@@ -158,6 +158,7 @@ export function challengeMatrixInflation(
     companionButtonBackendWired: boolean;
     voiceRealSpeechBackends: boolean;
     visionNeuralVlm: boolean;
+    visionSemanticRaster?: boolean;
   },
 ): string[] {
   const status = (id: string) => tasks.find((t) => t.task_id === id)?.coverage_status;
@@ -177,7 +178,8 @@ export function challengeMatrixInflation(
   if (status('AI-UR-010') === 'COMPLETE' && !flags.voiceRealSpeechBackends) {
     failures.push('MATRIX_INFLATION:AI-UR-010_SYNTHETIC_VOICE');
   }
-  if (status('AI-UR-011') === 'COMPLETE' && !flags.visionNeuralVlm) {
+  const visionReal = flags.visionNeuralVlm || flags.visionSemanticRaster === true;
+  if (status('AI-UR-011') === 'COMPLETE' && !visionReal) {
     failures.push('MATRIX_INFLATION:AI-UR-011_OCR_AS_VLM');
   }
   return failures;

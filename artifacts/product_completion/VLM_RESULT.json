@@ -1,0 +1,78 @@
+[
+  {
+    "kind": "chart",
+    "vlmBars": [
+      {
+        "color": "red",
+        "heightPx": 70,
+        "approxValue": 80
+      },
+      {
+        "color": "blue",
+        "heightPx": 35,
+        "approxValue": 40
+      },
+      {
+        "color": "green",
+        "heightPx": 50,
+        "approxValue": 57
+      }
+    ],
+    "ocrNonText": false,
+    "vlmNonText": true,
+    "pass": true
+  },
+  {
+    "kind": "photo_object",
+    "ocrNonText": false,
+    "vlmNonText": true,
+    "pass": true
+  },
+  {
+    "kind": "ui_screenshot",
+    "ocrNonText": false,
+    "vlmNonText": true,
+    "pass": true
+  },
+  {
+    "kind": "waike_figure",
+    "ocrNonText": false,
+    "vlmNonText": true,
+    "pass": true
+  },
+  {
+    "kind": "game_screenshot",
+    "ocrNonText": false,
+    "vlmNonText": true,
+    "pass": true
+  },
+  {
+    "kind": "compiler_screenshot",
+    "ocrNonText": false,
+    "vlmNonText": true,
+    "pass": true
+  },
+  {
+    "kind": "mixed_text_image",
+    "vlmBars": [
+      {
+        "color": "black",
+        "heightPx": 16,
+        "approxValue": 16
+      },
+      {
+        "color": "red",
+        "heightPx": 40,
+        "approxValue": 41
+      },
+      {
+        "color": "blue",
+        "heightPx": 22,
+        "approxValue": 22
+      }
+    ],
+    "ocrNonText": false,
+    "vlmNonText": true,
+    "pass": true
+  }
+]

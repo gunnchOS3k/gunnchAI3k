@@ -1,0 +1,528 @@
+npm warn Unknown env config "devdir". This will stop working in the next major version of npm.
+ts-jest[config] (WARN) 
+    The "ts-jest" config option "isolatedModules" is deprecated and will be removed in v30.0.0. Please use "isolatedModules: true" in /Users/gunnchos/Downloads/gunnchos-7gc-research-product-spine/repos/gunnchAI3k/.worktrees/kirby-v2/tsconfig.json instead, see https://www.typescriptlang.org/tsconfig/#isolatedModules
+  
+PASS tests/user-ready/ai004_surfaces.test.ts
+  AI-USER-READY-004 surfaces
+    ✓ matrix has no OPEN rows and COMPLETE matches implemented (3 ms)
+    ✓ author bar rejects inflated COMPLETE for template/mock/sine/static stacks
+    ✓ cowrite create/edit/persist/reopen with provenance; rejects silent overwrite (11 ms)
+    ✓ custom agents fail-closed; unrestricted rejected (2 ms)
+    ✓ synthetic voice stays PARTIAL; mic/mute/barge-in work (4 ms)
+    ✓ computer use allowlist + cancel; blocks finance/medical (1 ms)
+    ✓ audio overview grounds script and rejects hallucinations (237 ms)
+    ✓ companion chrome buttons wire to backend; HUMAN polish false (8 ms)
+    ✓ Local Pro audit does not fake HOST_OBSERVED without weights (2 ms)
+
+Switched to a new branch 'agent/ai-ur-013-fix-add-mu7go89i'
+Switched to branch 'main'
+Switched to branch 'agent/ai-ur-013-fix-add-mu7go89i'
+PASS tests/user-ready/market_runtime.test.ts
+  AI-USER-READY tokens + matrix honesty
+    ✓ keeps product-complete, frontier-parity, and HUMAN_E6 false (1 ms)
+    ✓ loads baseline + matrix with COMPLETE/PARTIAL/OPEN and no stub flags (14 ms)
+    ✓ labels Nano as fallback only; Fast never uses 135M; Pro uses pinned hashed candidate
+    ✓ Socratic engine never leaks a withheld answer (1 ms)
+    ✓ companion heuristic is VISUAL UNAVAILABLE without pixels
+  AI-USER-READY-001 packet CLI runtime
+    ✓ evaluates AI-UR-001..006 only and writes 001 result without Fast (102 ms)
+  AI-USER-READY-002 market packet
+    ✓ runs COMPLETE runtimes; OCR inspect path stays PARTIAL evidence while matrix VLM is separate (1106 ms)
+
+PASS tests/product-completion/digital_product.test.ts
+  digital product completion surfaces
+    ✓ custom agents execute allowlisted tools and fail closed (39 ms)
+    ✓ formant STT/TTS is real speech WAV and does not echo source text into STT (104 ms)
+    ✓ local voice requires mic, supports mute/barge-in/cancel (224 ms)
+    ✓ VLM_ONLY reads bar chart pixels that OCR_ONLY cannot (293 ms)
+    ✓ computer-use lab editor writes a REAL sandbox file (1578 ms)
+    ✓ audio overview is SOLO_NARRATOR real TTS and rejects ungrounded claims (235 ms)
+    ✓ companion wires research/notebook/tutor/vision/audio/coding; HUMAN_E6 false (9 ms)
+    ✓ security regression fail-closed (53 ms)
+    ✓ matrix has no OPEN and HUMAN_E6 stays false (1 ms)
+
+PASS tests/reactivation.test.ts
+  Startup configuration
+    ✓ fails cleanly when DISCORD_BOT_TOKEN is missing (1 ms)
+    ✓ lists required env vars
+    ✓ sends awake message by default unless SEND_ONLINE_GREETING=false
+  Mention routing
+    ✓ detects real Discord mention by user id (2 ms)
+    ✓ detects @gunnchAI3k text alias (1 ms)
+    ✓ ignores messages from other bots (1 ms)
+    ✓ ignores regular messages without mention (1 ms)
+    ✓ routes @gunnchAI3k help to help response (2 ms)
+    ✓ routes flashcards for probability via SSJ or fallback (2 ms)
+    ✓ routes practice test for robotics (1 ms)
+    ✓ routes lock me in for probability
+    ✓ routes music status without treating as play command (1 ms)
+  Music routing helpers
+    ✓ detects YouTube URLs in queries (1 ms)
+    ✓ extracts song query from play message
+    ✓ classifies music-related messages (1 ms)
+  Graceful shutdown
+    ✓ registers shutdown handlers without throwing
+
+PASS tests/local-runtime/local-runtime.smoke.test.ts
+  Gate 1 gunnchAI3k local-first runtime smoke
+    ✓ reports healthy runtime with version + model/runtime identification (15 ms)
+    ✓ network disabled / local-only verification succeeds without outbound (8 ms)
+    ✓ local request succeeds with grounded fixture retrieval + source attribution (12 ms)
+    ✓ basic tutoring, code-assistance, device-help, accessibility, connectivity work (11 ms)
+    ✓ cloud call attempt is rejected in local-only mode (15 ms)
+    ✓ unsafe unsupported request is handled safely (8 ms)
+    ✓ timeout works (60 ms)
+    ✓ runtime restart works (18 ms)
+    ✓ resource metrics are captured (14 ms)
+    ✓ writes local audit records (8 ms)
+    ✓ health HTTP endpoint serves identification + disclosure (31 ms)
+    ✓ fixture provider is never labeled as trained LLM; discovery contract present (12 ms)
+
+PASS tests/system-layer/os_integration.test.ts
+  Continuance VI gunnchOS integration
+    ✓ discovers capabilities, model status, rag status, permissions (45 ms)
+    ✓ documents QEMU host-forward topology explicitly (6 ms)
+    ✓ serves input interpretation, safety alert, continuity, consent, audit, attribution (11 ms)
+    ✓ supports model rollback, timeout fallback, and cancel registry (27 ms)
+    ✓ ai_interface client discovers and assists over HTTP (83 ms)
+    ✓ re-proves all normative AI requirement nodes as RUNTIME (7 ms)
+
+PASS tests/basic.test.ts
+  gunnchAI3k Basic Tests
+    Environment Setup
+      ✓ should have required environment variables
+      ✓ should have test environment variables set
+    Basic Functionality
+      ✓ should perform basic string operations (1 ms)
+      ✓ should handle array operations
+      ✓ should handle object operations
+    Music Command Detection
+      ✓ should detect music-related messages
+      ✓ should not detect non-music messages
+    Study Command Detection
+      ✓ should detect study-related messages
+      ✓ should not detect non-study messages
+    String Processing
+      ✓ should extract song queries from messages
+      ✓ should validate YouTube URLs (1 ms)
+    Response Generation
+      ✓ should generate music responses
+      ✓ should generate study responses
+
+PASS tests/system-layer/product_service.test.ts
+  Continuance VII product service
+    ✓ exposes health token, routes, and requirement RUNTIME nodes (28 ms)
+    ✓ serves structured assist with provenance for every system capability route (109 ms)
+    ✓ covers continuity, content adaptation, and connection path routes (21 ms)
+    ✓ denies assist without required permissions (8 ms)
+    ✓ runs HTTP product API for health, assist, rag, governance (56 ms)
+
+PASS tests/ssj-infinity.test.ts
+  SSJInfinity
+    Flashcard Request Detection
+      ✓ should detect flashcard requests (7 ms)
+      ✓ should not detect non-flashcard requests (3 ms)
+    Practice Test Request Detection
+      ✓ should detect practice test requests (2 ms)
+    Weekly Assessment Request Detection
+      ✓ should detect weekly assessment requests (1 ms)
+    Study Help Request Detection
+      ✓ should detect study help requests (2 ms)
+    Lock-In Request Detection
+      ✓ should detect lock-in requests (1 ms)
+    Empathetic Response Generation
+      ✓ should generate empathetic responses (1 ms)
+    Mention Processing
+      ✓ should process mentions and return responses (1 ms)
+      ✓ should handle midterm-specific requests (1 ms)
+      ✓ should handle probability-specific requests (1 ms)
+      ✓ should handle robotics-specific requests (1 ms)
+
+PASS tests/user-ready/model_manager.test.ts
+  model download manager
+    ✓ rejects empty-file SHA, fake bytes, and Nano-as-Fast (2 ms)
+    ✓ resumes downloads, verifies SHA, quarantines mismatch, uninstalls, rolls back (50 ms)
+
+PASS tests/launch-features.test.ts
+  Startup greeting controls
+    ✓ enables awake message by default unless SEND_ONLINE_GREETING=false (1 ms)
+    ✓ disables auto channel discovery by default
+    ✓ reads announcement channel id when set (1 ms)
+  NYU graduation announcement
+    ✓ uses gunnchAI3k bot voice and third-person Edmund references
+  Mission roadmap responses
+    ✓ detects roadmap questions (1 ms)
+    ✓ includes game jam, hackathons, SpectrumX, and Oulu portfolio language
+  Admin graduation launch
+    ✓ detects launch commands (1 ms)
+    ✓ refuses non-admins
+    ✓ requires admin env for admins
+    ✓ allows admin two-step confirm in same channel (1 ms)
+
+PASS tests/user-ready/deep_research.test.ts
+  AI-UR-007 consent-gated Deep Research
+    ✓ blocks fetch without consent and does not silently use cloud (1 ms)
+    ✓ derives search terms from the query and rejects empty discovery+seed
+    ✓ discovers beyond seeds, follow-ups from gaps, cites only read bodies, rejects invented URLs (5 ms)
+    ✓ marks synthetic discovery.gunnchai.local as PARTIAL not COMPLETE (1 ms)
+
+PASS tests/user-ready/vision_screen.test.ts
+  AI-UR-011 vision/screen explicit share
+    ✓ refuses missing share and missing permission; never background-captures (12 ms)
+    ✓ OCR+layout heuristics on real PNG fixtures stay PARTIAL (not neural VLM COMPLETE) (513 ms)
+    ✓ fixture-only PNG without OCR path stays PARTIAL (not COMPLETE) (165 ms)
+    ✓ rejects IHDR-only PNG as insufficient pixel understanding (152 ms)
+
+PASS tests/waike-mastery/mastery.test.ts
+  AI-WAIKE-MASTERY-002 honesty + discovery
+    ✓ hard-separates instructor key access (25 ms)
+    ✓ demotes mastery PASS; infra smoke is separate; REAL_* stay false (1 ms)
+    ✓ blocks false mastery PASS at 0.55 smoke bar (3 ms)
+    ✓ canary uses canary_text, feeds discovery, proves refusal (12 ms)
+    ✓ rejects demeaning student labels (2 ms)
+    ✓ discovers current WAIKE 12-course universe dynamically (1 ms)
+
+PASS tests/system-layer/evaluation_harness.test.ts
+  Continuance IV evaluation harness
+    ✓ defines baseline, dataset, metric, latency, memory, failure, privacy, fallback, model version (8 ms)
+    ✓ FAILS text-only results (does not treat returning text as success) (10 ms)
+    ✓ system structured outputs beat non-AI baselines for every capability (190 ms)
+    ✓ does not claim DIGITALLY_VALIDATED or FULL platform complete (183 ms)
+
+PASS tests/youtube-music.test.ts
+  YouTubeMusicManager
+    Service Status
+      ✓ should return service status (3 ms)
+    Recommended Tracks
+      ✓ should return recommended tracks (2 ms)
+    Cache Stats
+      ✓ should return cache statistics (1 ms)
+    Search Functionality
+      ✓ should search for tracks (4 ms)
+      ✓ should cache search results
+    Playback Functionality
+      ✓ should play tracks
+      ✓ should handle YouTube URLs (1 ms)
+      ✓ should reject invalid YouTube URLs (9 ms)
+    Playlist Creation
+      ✓ should create playlists (1 ms)
+    Cache Management
+      ✓ should clear cache (1 ms)
+
+PASS tests/independent-eval/independent_eval.test.ts
+  independent evals (not SmolLM2-as-final-intelligence)
+    ✓ keeps product-complete and frontier-parity false (1 ms)
+    ✓ labels SmolLM2-135M Q4_K_M 512-ctx as Nano fallback only (13 ms)
+    ✓ experience review is VISUAL UNAVAILABLE without pixels (1 ms)
+    ✓ runs digitally executable independent evals (147 ms)
+
+PASS tests/integration.test.ts
+  gunnchAI3k Integration Tests
+    Bot Initialization
+      ✓ should initialize all components (3 ms)
+      ✓ should have all required properties (1 ms)
+    Music Command Detection
+      ✓ should detect various music commands (1 ms)
+    Environment Variables
+      ✓ should have required environment variables (1 ms)
+    Bot Startup
+      ✓ should start without errors (2 ms)
+    Error Handling
+      ✓ should exit process when Discord login fails (5 ms)
+
+PASS tests/journeys/waike_to_gunnchai.test.ts
+  WAIKE → gunnchAI journey (mocks labeled)
+    ✓ keeps learner mode off instructor keys and blocks self-grade (3 ms)
+    ✓ labels Discord tutor cards as hardcoded mocks, not live course.json (1 ms)
+    ✓ keyword-routes software questions toward WAIKE (keyword mock) (1 ms)
+    ✓ accepts waike-research-ops/ as a grounding prefix
+    ✓ keeps frontier parity and REAL_* tokens false on the journey (2 ms)
+    ✓ discovers digital-RC courses when the sibling repo is present (REAL) (1 ms)
+
+PASS tests/system-layer/local_inference.test.ts
+  Continuance IV local_inference adapter
+    ✓ selects llama.cpp as architecture and probes without forced installs (29 ms)
+    ✓ deterministic backend returns structured fields for new capabilities (1 ms)
+    ✓ llama.cpp falls back cleanly when unavailable with placeholders (24 ms)
+    ✓ onnxruntime remains non-primary probe with fallback (1 ms)
+    ✓ wires RAG through existing local-runtime fixtures (26 ms)
+    ✓ cloud stub never invents production keys (1 ms)
+
+PASS tests/stage2/os_integration.test.ts
+  stage2 os integration smoke
+    ✓ capability API routes via router with shared user_id (2 ms)
+    ✓ permission broker denies network search without grant (3 ms)
+    ✓ resource-aware routing uses simulated OS telemetry
+    ✓ HTTP adapter smoke for device-os callers (15 ms)
+    ✓ sync interface stays local-default without fake cloud claim
+
+PASS tests/system-layer/product_surfaces.test.ts
+  Continuance VI product surfaces
+    ✓ exercises WAIKE, code, device, archive, connectivity, accessibility callers (151 ms)
+    ✓ exercises product callers through ai_interface HTTP client (69 ms)
+
+PASS tests/system-layer/platform_status.test.ts
+  platform status Cont VII
+    ✓ treats Discord as non-normative and earns FULL when digital criteria prove (175 ms)
+    ✓ evaluateDigitalPlatformComplete rejects missing normative runtime (1 ms)
+
+Switched to a new branch 'agent/ai-ur-013-fix-add-mu7gofr5'
+Switched to branch 'main'
+Switched to branch 'agent/ai-ur-013-fix-add-mu7gofr5'
+Switched to a new branch 'agent/ai-ur-013-fix-add-mu7gog54'
+Switched to branch 'main'
+Switched to branch 'agent/ai-ur-013-fix-add-mu7gog54'
+PASS tests/user-ready/coding_agent_pr.test.ts
+  AI-UR-013 coding agent DRAFT PR
+    ✓ blocks production repos and forbidden git (40 ms)
+    ✓ rejects proposed-diff-only as acceptance (1 ms)
+    ✓ edits a sandbox repo, runs tests, commits on a branch, writes a DRAFT PR, leaves main unchanged (569 ms)
+    ✓ CI digital gate requires recorded live DRAFT PR; rejects JSON-only (1016 ms)
+
+PASS tests/phase_xiv/agent_runtime.test.ts
+  phase_xiv gunnchAgent runtime
+    ✓ covers high-impact approval actions
+    ✓ plans, interrupts, resumes, and rolls back file writes (3 ms)
+    ✓ requires approval for delete and does not execute until approved (2 ms)
+    ✓ lab report E2E produces plot/docx/pdf and stops before submit (73 ms)
+
+PASS tests/waike-mastery/choice_parser.test.ts
+  choice_parser adversarial corpus
+    ✓ uses final-only parser version
+    ✓ bare_A → A (2 ms)
+    ✓ answer_colon_A → A (1 ms)
+    ✓ option_A → A
+    ✓ paren_A → A (1 ms)
+    ✓ not_B_semicolon_A → A (1 ms)
+    ✓ multiline_final → C
+    ✓ json_answer → B
+    ✓ lowercase_c → C
+    ✓ unicode_fullwidth → C (1 ms)
+    ✓ reasoning_mentions_ABCD_chooses_C → C
+    ✓ changes_answer_at_end → D (1 ms)
+    ✓ first_A_final_B → B
+    ✓ prompt_echo_ABCD_must_not_leak → B
+    ✓ prompt_echo_only_no_answer → null
+    ✓ json_final_field → D
+    ✓ never reads gold keys (API has no gold parameter)
+
+PASS tests/stage2/memory.test.ts
+  stage2 gunnchMemory controls
+    ✓ encrypts round-trip (54 ms)
+    ✓ supports domains and full control surface (157 ms)
+    ✓ resolves dark→light preference contradiction (37 ms)
+    ✓ persists under artifacts/stage2/memory style path (13 ms)
+
+PASS tests/system-layer/governance_runtime.test.ts
+  Continuance VI GovernanceRuntime
+    ✓ enforces purpose, consent, minimization, disclosure, override, fallback, monitor, rollback (7 ms)
+    ✓ rolls back model versions from history (2 ms)
+
+PASS tests/user-ready/local_fast.test.ts
+  AI-UR-016 Local Fast runtime
+    ✓ never labels Nano SHA or 135M filename as Fast (6 ms)
+    ✓ runs real Fast inference when hashed 360M GGUF and llama-cli are present (1 ms)
+
+PASS tests/simple-bot.test.ts
+  SimpleGunnchAI3k
+    Constructor
+      ✓ should create a SimpleGunnchAI3k instance (1 ms)
+    Start Method
+      ✓ should start without throwing errors (2 ms)
+    Music Command Detection
+      ✓ should detect music-related messages (1 ms)
+      ✓ should not detect non-music messages (1 ms)
+
+PASS tests/system-layer/task_router.test.ts
+  Continuance III task_router
+    ✓ routes all capabilities locally by default (7 ms)
+    ✓ rejects code on handheld profile
+    ✓ allows cloud only with consent + cloud-allowed + eligible capability
+    ✓ forces local for sensitive data even with cloud consent
+    ✓ keeps local-only capabilities offline by policy (1 ms)
+
+PASS tests/stage2/memory_privacy.test.ts
+  stage2 memory privacy
+    ✓ blocks cross-user and cross-project leakage (51 ms)
+    ✓ deleted memories do not reappear via default import (27 ms)
+    ✓ rejects cloud sync without permission (26 ms)
+
+PASS tests/evals/wave003.test.ts
+  engineering wave003 independent validation
+    ✓ core scorer does not import requirement_proof as source of truth (1 ms)
+    ✓ evaluates all 19 target requirements with evidence artifacts (143 ms)
+    ✓ perturbed reproduction comparison fails the release gate (186 ms)
+
+PASS tests/stage2/projects.test.ts
+  stage2 projects
+    ✓ Wireless Lab E2E create→files→ask→task→decision→restart→reopen (4 ms)
+    ✓ isolates two projects with no leakage (2 ms)
+
+PASS tests/phase_xiv/artifacts_scheduled.test.ts
+  phase_xiv artifacts + scheduled
+    ✓ creates docx/xlsx/pptx/pdf/svg/notebook/website/code and targeted edits (139 ms)
+    ✓ runs scheduled tasks and forbids high-impact actions (23 ms)
+
+PASS tests/stage2/fleet.test.ts
+  stage2 fleet
+    ✓ covers all required roles and marks 135M as nano-only (2 ms)
+    ✓ writes dated MODEL_CANDIDATE_MATRIX json+md (3 ms)
+    ✓ routes by task/privacy/ram and builds fallback chain (2 ms)
+    ✓ writes benchmark baseline across required lanes (1 ms)
+
+PASS tests/system-layer/rag_engine.test.ts
+  Continuance V LocalRagEngine
+    ✓ ingests, chunks, indexes, searches, attributes, deletes, and rebuilds (14 ms)
+    ✓ chunks long text with overlap metadata (1 ms)
+
+PASS tests/system-layer/privacy_policy.test.ts
+  Wave C privacy / local-cloud disclosure
+    ✓ blocks cloud in local-only mode (1 ms)
+    ✓ requires explicit consent when cloud-allowed (1 ms)
+    ✓ never permits cloud for sensitive local data
+    ✓ formats a user-visible banner (1 ms)
+
+PASS tests/system-layer/model_registry.test.ts
+  Wave C model_registry
+    ✓ registers versioned models with license + integrity + device profiles (11 ms)
+    ✓ verifies on-disk artifact hashes (1 ms)
+    ✓ never labels deterministic baselines as trained LLMs
+    ✓ filters models by device profile
+
+PASS tests/stage2/router_failures.test.ts
+  stage2 router failure modes
+    ✓ handles unavailable (2 ms)
+    ✓ handles ram
+    ✓ handles offline
+    ✓ handles cloud_denied
+    ✓ handles cloud_timeout (2 ms)
+    ✓ handles context_too_large (2 ms)
+    ✓ handles crash (1 ms)
+    ✓ handles low_battery (1 ms)
+    ✓ handles thermal
+    ✓ denies cloud when sensitive privacy
+
+PASS tests/phase_xiv/multimodal_voice.test.ts
+  phase_xiv multimodal + voice
+    ✓ gates vision and screen on permissions (2 ms)
+    ✓ supports ASR/TTS/barge-in and prepares high-impact voice actions (9 ms)
+
+PASS tests/system-layer/pre_human_exhaustion.test.ts
+  tool_registry
+    ✓ deny-by-default for unknown tools and stamps provenance (2 ms)
+  runtime_metrics
+    ✓ records latency and memory samples (1 ms)
+  SYNTHETIC pre-human suite
+    ✓ passes labeled synthetic fixtures (2 ms)
+
+PASS tests/phase_xiv/competitive.test.ts
+  phase_xiv competitive harness
+    ✓ has ≥150 distinct tasks and leaves competitor scores null (114 ms)
+    ✓ runs local/hybrid harness without fabricating competitor scores (36 ms)
+
+PASS tests/system-layer/device_capability.test.ts
+  Wave C device capability detection stub
+    ✓ loads Student / Handheld / DS-XL profiles (1 ms)
+    ✓ resolves friendly aliases (1 ms)
+    ✓ reports inference budget without physical claims
+
+PASS tests/stage2/citation_integrity.test.ts
+  stage2 citation integrity
+    ✓ fails fabricated citations against controlled local sources (2 ms)
+
+PASS tests/tutor/promptInjectionAndHallucination.test.ts
+  promptInjectionGuard
+    ✓ blocks classic injection and wraps untrusted content (3 ms)
+  hallucinationGuard
+    ✓ flags fabricated citations and absolute claims without sources (3 ms)
+
+PASS tests/phase_xiv/collab_continuity.test.ts
+  phase_xiv collab + continuity
+    ✓ blocks personal memory leak into shared assist (21 ms)
+    ✓ hands off across devices with sensitive blocked by default (1 ms)
+
+PASS tests/phase_xiv/mcp_skills.test.ts
+  phase_xiv mcp + skills
+    ✓ discovers, authorizes, invokes, and revokes connectors (1 ms)
+    ✓ registers required gunnchSkills (1 ms)
+
+PASS tests/readme_supervisor_front_door.test.ts
+  supervisor-facing README
+    ✓ does not present retired SSJ/doctoral marketing as current truth (1 ms)
+    ✓ states local-first routing and honest frontier boundary
+
+PASS tests/system-layer/capability_mechanisms.test.ts
+  Continuance IV capability mechanisms + local RAG
+    ✓ registers a mechanism for every system capability (1 ms)
+    ✓ retrieves local RAG corpus docs for binary search queries (6 ms)
+
+PASS tests/stage2/research.test.ts
+  stage2 research foundation
+    ✓ offline local-only marks web unavailable (1 ms)
+
+PASS tests/stage2/eval_harness.test.ts
+  stage2 eval harness
+    ✓ has ≥50 tasks across required domains (1 ms)
+    ✓ runs result store with latency/cost/human_score fields (3 ms)
+
+PASS tests/phase_xiv/long_context.test.ts
+  phase_xiv long context
+    ✓ retrieves/summarizes with honest supported tokens and null claimed tokens (4 ms)
+
+PASS tests/phase_xiv/computer_use.test.ts
+  phase_xiv computer use + coding agent
+    ✓ runs generic accessibility UI actions (1 ms)
+    ✓ coding agent E2E stops before merge (43 ms)
+
+PASS tests/tutor/academicIntegrityPolicy.test.ts
+  academicIntegrityPolicy
+    ✓ refuses active exam cheating (1 ms)
+    ✓ allows practice
+
+PASS tests/online-awake.test.ts
+  Online awake message
+    ✓ uses gunnchAI3k bot voice and mentions Edmund in third person (1 ms)
+
+PASS tests/tutor/skillRouter.test.ts
+  skillRouter
+    ✓ routes wireless queries
+    ✓ defaults to digital confidence
+
+PASS tests/tutor/sourcePolicy.test.ts
+  sourcePolicy
+    ✓ accepts waike sources
+
+PASS tests/tutor/responseModes.test.ts
+  responseModes
+    ✓ parses beginner
+
+PASS tests/tutor/waikeTutorCards.test.ts
+  waikeTutorCards
+    ✓ lists cards (1 ms)
+
+PASS tests/kirby_v2/kirby_foundation.test.ts
+  Kirby v2 foundation
+    ✓ capability registry loads all normalized classes (2 ms)
+    ✓ provider registry has no single-provider hard dependency
+    ✓ reasoning policy selects budget not provider and keeps TaskState without hidden CoT (1 ms)
+    ✓ model router returns Pareto front and fallback chain
+    ✓ tool invocation: models propose, broker authorizes; untrusted cannot grant (1 ms)
+    ✓ agent runtime specialists and budgets
+    ✓ computer use prefers a11y and blocks malicious UI
+    ✓ multimodal shedding under budget
+    ✓ memory planes + privacy + poisoned retrieval cannot grant perms
+    ✓ context manager metrics
+    ✓ verification plane domain rules (1 ms)
+    ✓ background tasks forbid indefinite autonomy (5 ms)
+    ✓ efficiency primary metrics (1 ms)
+    ✓ prompt injection suites (1 ms)
+    ✓ integration contracts deny model-owned shell
+    ✓ bakeoff harness schema + Pareto by tier
+    ✓ agent budget tracker (1 ms)
+
+Test Suites: 61 passed, 61 total
+Tests:       287 passed, 287 total
+Snapshots:   0 total
+Time:        19.436 s
+Ran all test suites.
+Force exiting Jest: Have you considered using `--detectOpenHandles` to detect async operations that kept running after all tests finished?

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#1a1a1a" />
+  <title>gunnchAI Nearby-Edge Pilot (NOT PRODUCTION)</title>
+  <style>
+    :root { --bg: #12141a; --fg: #e8eaef; --muted: #9aa3b2; --accent: #3d7ea6; --warn: #c45c26; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "IBM Plex Sans", "Segoe UI", sans-serif; background: radial-gradient(1200px 600px at 20% -10%, #1e2a38, var(--bg)); color: var(--fg); min-height: 100vh; }
+    main { max-width: 40rem; margin: 0 auto; padding: 1.5rem; }
+    h1 { font-size: 1.25rem; font-weight: 600; margin: 0 0 0.25rem; }
+    .banner { color: var(--warn); font-size: 0.8rem; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 1rem; }
+    label { display: block; font-size: 0.85rem; color: var(--muted); margin: 0.75rem 0 0.25rem; }
+    input, textarea, select, button { width: 100%; padding: 0.65rem 0.75rem; border-radius: 6px; border: 1px solid #2a3140; background: #0d0f14; color: var(--fg); font: inherit; }
+    button { background: var(--accent); border: none; cursor: pointer; margin-top: 0.75rem; font-weight: 600; }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
+    pre { white-space: pre-wrap; background: #0d0f14; border: 1px solid #2a3140; padding: 0.75rem; border-radius: 6px; font-size: 0.8rem; }
+    .meta { font-size: 0.75rem; color: var(--muted); margin-top: 1rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="banner">PILOT_CLIENT_NOT_PRODUCTION_UI — ADB reverse ≠ on-device inference</p>
+    <h1>gunnchAI Nearby-Edge Pilot</h1>
+    <p class="meta">Mac executes CONTROLLED_INTEGRATION micro tasks. Pixel is client only.</p>
+
+    <label>Base URL (via adb reverse → Mac localhost)</label>
+    <input id="baseUrl" value="http://127.0.0.1:8799" />
+
+    <label>Pairing code (one-time)</label>
+    <input id="pairCode" placeholder="Enter code from Mac owner" autocomplete="off" />
+
+    <button id="pairBtn" type="button">Pair session</button>
+
+    <label>Task class</label>
+    <select id="task">
+      <option value="intent_route">intent_route</option>
+      <option value="micro_router">micro_router</option>
+      <option value="short_assist">short_assist</option>
+      <option value="health_probe">health_probe</option>
+    </select>
+
+    <label>Prompt</label>
+    <textarea id="prompt" rows="3">Classify intent as route|assist|refuse. Question: What is 2+2?</textarea>
+
+    <button id="runBtn" type="button" disabled>Execute</button>
+
+    <label>Output + provenance</label>
+    <pre id="out">Not paired.</pre>
+    <p class="meta" id="offlineHint"></p>
+  </main>
+  <script>
+    const state = { token: null };
+    const $ = (id) => document.getElementById(id);
+
+    async function pair() {
+      const base = $('baseUrl').value.replace(/\/$/, '');
+      try {
+        const res = await fetch(base + '/v1/session/pair', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ code: $('pairCode').value.trim(), client_label: 'pixel_pilot_pwa' }),
+        });
+        const body = await res.json();
+        if (!body.ok) throw new Error(body.error || 'pair failed');
+        state.token = body.session_token;
+        $('runBtn').disabled = false;
+        $('out').textContent = JSON.stringify({ paired: true, expires_at: body.expires_at, transport: body.transport }, null, 2);
+        $('offlineHint').textContent = '';
+      } catch (e) {
+        $('out').textContent = 'Pair failed: ' + e.message;
+        $('offlineHint').textContent = 'If Mac nearby-edge or internet path is down, gunnchAI stays honestly unavailable — no fabricated Pixel-local success.';
+      }
+    }
+
+    async function run() {
+      const base = $('baseUrl').value.replace(/\/$/, '');
+      try {
+        const res = await fetch(base + '/v1/execute', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + state.token,
+          },
+          body: JSON.stringify({
+            task_class: $('task').value,
+            prompt: $('prompt').value,
+          }),
+        });
+        const body = await res.json();
+        $('out').textContent = JSON.stringify(body, null, 2);
+        if (body.provenance) {
+          $('offlineHint').textContent =
+            'Provenance: compute=' + body.provenance.compute_host +
+            ' device_role=' + body.provenance.device_role +
+            ' on_device_local=' + body.provenance.on_device_local;
+        }
+      } catch (e) {
+        $('out').textContent = 'Execute failed: ' + e.message;
+        $('offlineHint').textContent = 'OFFLINE_HONEST: Mac nearby-edge unreachable. PIXEL6A_LIVE_LOCAL_MODEL_PASS remains false.';
+      }
+    }
+
+    $('pairBtn').addEventListener('click', pair);
+    $('runBtn').addEventListener('click', run);
+  </script>
+</body>
+</html>

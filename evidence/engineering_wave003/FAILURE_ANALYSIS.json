@@ -1,0 +1,5 @@
+{
+  "failureCaseCount": 0,
+  "failures": [],
+  "capabilityFailureModes": "src/system-layer/evaluation/metrics.ts"
+}

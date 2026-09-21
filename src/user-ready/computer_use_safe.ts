@@ -47,6 +47,7 @@ export const ALLOWLISTED_TEST_ENVS = new Set([
   'lab.local.test-ui',
   'lab.local.a11y-tree',
   'fixtures.user-ready.computer-use',
+  'lab.local.isolated-editor',
 ]);
 
 export class SafeComputerUseRuntime {

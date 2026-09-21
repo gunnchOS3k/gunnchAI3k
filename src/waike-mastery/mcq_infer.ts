@@ -2,24 +2,18 @@
  * Lean MCQ inference for Mastery-002 — short prompt, small n_predict, no structured overlay.
  * Does not touch REAL_SOLVER_BASELINE_V1 settings; used only for post-baseline runtime runs.
  */
-import { execFileSync, spawnSync } from 'node:child_process';
+import { spawnSync } from 'node:child_process';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { discoverGguf } from '../system-layer/local_inference/backends/llamacpp';
+import {
+  buildLlamaInvocation,
+  discoverLlamaBinary,
+  shouldFailLlamaExit,
+} from '../system-layer/local_inference/llamacpp_cli_compat';
 
 function whichLlama(): string | null {
-  const candidates = [
-    '/opt/homebrew/bin/llama-cli',
-    '/usr/local/bin/llama-cli',
-  ];
-  for (const c of candidates) {
-    if (fs.existsSync(c)) return c;
-  }
-  try {
-    return execFileSync('which', ['llama-cli'], { encoding: 'utf8' }).trim() || null;
-  } catch {
-    return null;
-  }
+  return discoverLlamaBinary();
 }
 
 export interface LeanMcqResult {
@@ -64,38 +58,60 @@ export function leanMcqInfer(opts: {
   }
 
   const t0 = Date.now();
-  const r = spawnSync(
-    binary,
-    [
-      '-m',
-      gguf,
-      '-p',
-      opts.prompt,
-      '-n',
-      String(nPredict),
-      '-c',
-      String(ctx),
-      '-ngl',
-      process.env.GUNNCHAI3K_LLAMA_NGL || '0',
-      '--temp',
-      '0',
-      '-no-cnv',
-      '-st',
-      '--simple-io',
-    ],
-    { encoding: 'utf8', timeout: timeoutMs, maxBuffer: 4 * 1024 * 1024 },
-  );
+  let invocation;
+  try {
+    invocation = buildLlamaInvocation({
+      binary,
+      modelPath: gguf,
+      prompt: opts.prompt,
+      nPredict,
+      ctx,
+      ngl: Number(process.env.GUNNCHAI3K_LLAMA_NGL || 0),
+      temperature: 0,
+      conversationMode: 'disabled',
+      singleTurn: true,
+      logDisable: false,
+    });
+  } catch (err) {
+    return {
+      text: '',
+      latency_ms: Date.now() - t0,
+      model: gguf,
+      binary,
+      n_predict: nPredict,
+      ctx,
+      ok: false,
+      detail: err instanceof Error ? err.message : String(err),
+    };
+  }
+  const r = spawnSync(invocation.binary, invocation.args, {
+    encoding: 'utf8',
+    timeout: timeoutMs,
+    maxBuffer: 4 * 1024 * 1024,
+  });
   const latency = Date.now() - t0;
   if (r.error) {
     return {
       text: '',
       latency_ms: latency,
       model: gguf,
-      binary,
+      binary: invocation.binary,
       n_predict: nPredict,
       ctx,
       ok: false,
       detail: r.error.message,
+    };
+  }
+  if (shouldFailLlamaExit(r.status, r.stdout || '', r.stderr || '')) {
+    return {
+      text: '',
+      latency_ms: latency,
+      model: gguf,
+      binary: invocation.binary,
+      n_predict: nPredict,
+      ctx,
+      ok: false,
+      detail: `llama_exit_${r.status}:${(r.stderr || '').slice(0, 200)}`,
     };
   }
   let text = (r.stdout || '').trim();
@@ -122,7 +138,7 @@ export function leanMcqInfer(opts: {
     text,
     latency_ms: latency,
     model: gguf,
-    binary,
+    binary: invocation.binary,
     n_predict: nPredict,
     ctx,
     ok: r.status === 0 || text.length > 0,

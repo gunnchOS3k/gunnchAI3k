@@ -1,7 +1,7 @@
 {
   "schema": "gunnchai.market_ai_capability_baseline.v1",
-  "packet": "AI-USER-READY-003",
-  "researched_at": "2026-08-14",
+  "packet": "GUNNCHAI-DIGITAL-PRODUCT-COMPLETION-001",
+  "researched_at": "2026-08-18",
   "doctrine": "Executable tasks from official product surfaces, not slogans. No BETTER_THAN_* scores. No frontier quality claim. SmolLM2-135M Q4_K_M 512-ctx is Nano fallback only.",
   "tokens": {
     "HUMAN_E6": false,
@@ -15,7 +15,7 @@
     "BETTER_THAN_PERPLEXITY": false,
     "BETTER_THAN_COPILOT": false
   },
-  "research_method": "Official help centers, product docs, and vendor blogs refreshed 2026-08-13 for AI-USER-READY-002 (ChatGPT Deep Research + Scheduled Tasks, Gemini Deep Research, Gemini Notebook/NotebookLM, Khanmigo, Copilot cloud agent). Third-party roundups used only as pointers; capability classes below are grounded in vendor pages. | packet_003 behavior refresh (no superiority claims). | packet_003 behavior refresh (no superiority claims).",
+  "research_method": "Official help centers, product docs, and vendor blogs refreshed 2026-08-18 for GUNNCHAI-DIGITAL-PRODUCT-COMPLETION-001 (ChatGPT Voice Live/Advanced/Standard, custom GPT capabilities, Claude artifacts/computer use, Gemini Deep Research, Gemini Notebook/NotebookLM Audio Overview, Khanmigo, Copilot coding agent, Perplexity Projects). Third-party roundups used only as pointers; capability classes below are grounded in vendor pages. Purpose: executable capability list, not superiority claims.",
   "products": [
     {
       "id": "chatgpt",
@@ -52,6 +52,12 @@
           "id": "chatgpt.conversation",
           "executable_task": "Follow multi-turn natural-language instructions and keep in-thread context.",
           "not_a_slogan": true
+        },
+        {
+          "id": "chatgpt.voice_live",
+          "executable_task": "Speak and hear a spoken response (Live: overlapping listen/speak; Advanced: video/screen on mobile; Standard: turn-by-turn transcription first). Official help: ChatGPT Voice.",
+          "not_a_slogan": true,
+          "source": "https://help.openai.com/en/articles/20001274-chatgpt-voice"
         },
         {
           "id": "chatgpt.web_search_citations",

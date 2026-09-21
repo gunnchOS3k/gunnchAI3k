@@ -1,0 +1,20 @@
+{
+  "inScope": [
+    "structured_a11y_checklist",
+    "wcag_aa_target_declaration",
+    "bounded_differential_eval"
+  ],
+  "outOfScope": [
+    "GENERAL_VLM",
+    "GENERAL_BIAS_AUDIT",
+    "HUMAN_E6"
+  ],
+  "aiGov008State": "VALIDATED",
+  "metrics": {
+    "inScopeChecks": 3,
+    "differentialExecuted": true,
+    "generalBiasAudit": false,
+    "dimensions": 5
+  },
+  "GENERAL_BIAS_AUDIT": false
+}

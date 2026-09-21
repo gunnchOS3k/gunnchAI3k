@@ -1,0 +1,10 @@
+{
+  "requirementId": "AI-LOCAL-011",
+  "validationState": "VALIDATED",
+  "metrics": {
+    "selectedRole": "LOCAL_FAST",
+    "assistOk": true,
+    "cloudSolePath": false
+  },
+  "cloudSolePathClaim": false
+}

@@ -8,6 +8,10 @@ import * as fs from 'node:fs';
 import * as os from 'node:os';
 import * as path from 'node:path';
 import { parseFinalChoice } from './choice_parser';
+import {
+  buildLlamaInvocation,
+  discoverLlamaBinary,
+} from '../system-layer/local_inference/llamacpp_cli_compat';
 
 export interface ModelCard {
   id: string;
@@ -52,33 +56,26 @@ export function listAvailableLocalModels(cwd: string): ModelCard[] {
 }
 
 function whichLlama(): string | null {
-  try {
-    return execFileSync('which', ['llama-cli'], { encoding: 'utf8' }).trim() || null;
-  } catch {
-    return null;
-  }
+  return discoverLlamaBinary();
 }
 
 function quickInfer(binary: string, model: string, prompt: string): { text: string; tok_per_sec: number | null } {
-  const r = spawnSync(
+  const invocation = buildLlamaInvocation({
     binary,
-    [
-      '-m',
-      model,
-      '-p',
-      prompt,
-      '-n',
-      '12',
-      '-c',
-      '256',
-      '--temp',
-      '0',
-      '-no-cnv',
-      '-st',
-      '--simple-io',
-    ],
-    { encoding: 'utf8', timeout: 120_000 },
-  );
+    modelPath: model,
+    prompt,
+    nPredict: 12,
+    ctx: 256,
+    temperature: 0,
+    conversationMode: 'disabled',
+    singleTurn: true,
+    logDisable: false,
+    noWarmup: false,
+  });
+  const r = spawnSync(invocation.binary, invocation.args, {
+    encoding: 'utf8',
+    timeout: 120_000,
+  });
   const combined = (r.stdout || '') + (r.stderr || '');
   const tps = /Generation:\s*([\d.]+)\s*t\/s/i.exec(combined);
   let out = r.stdout || '';

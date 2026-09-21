@@ -1,0 +1,80 @@
+{
+  "artifact": "GUNNCHAI_FINAL_RECONCILIATION",
+  "generated_at": "2026-09-20T16:50:20Z",
+  "repo": "gunnchOS3k/gunnchAI3k",
+  "branch": "integration/kirby-controlled-stack-main-reconciliation",
+  "accepted_main_sha": "4f46c8f1da405cdfb7c519cadd377127302ecf3f",
+  "stack_tip_sha": "aa61e924793672f40a3720a6799b6ecd6d6e6a82",
+  "merge_base_sha": "32d50c2bb47c80df01a6278c95415440bf3833b0",
+  "divergence": {
+    "ahead_by": 5,
+    "behind_by": 1
+  },
+  "strategy": "real_merge",
+  "merge_from": "origin/main@4f46c8f1da405cdfb7c519cadd377127302ecf3f",
+  "merge_of": "aa61e924793672f40a3720a6799b6ecd6d6e6a82",
+  "conflicts": [],
+  "conflict_count": 0,
+  "resolution": "clean_ort_merge_no_conflicts",
+  "preserved": [
+    "PR #50 history on accepted main",
+    "provider bake-off",
+    "live-provider promotion",
+    "Nearby Edge runtime",
+    "security/fallback/resource guards",
+    "WAIKE contracts"
+  ],
+  "truth_boundaries": {
+    "PRODUCTION_DEFAULT_PROVIDER_FROZEN": false,
+    "PIXEL6A_LIVE_LOCAL_MODEL_PASS": false
+  },
+  "validation": {
+    "core_proof_unit": "PASS",
+    "provider_bakeoff": "PASS",
+    "live_provider_promotion": "PASS",
+    "controlled_integration": "PASS",
+    "kirby_jest_matrix": "PASS 36/36",
+    "security_fallback_resource_artifacts": "PASS",
+    "waike_nearby_edge_contracts": "PASS"
+  },
+  "nearby_edge_physical": {
+    "PIXEL_NEARBY_EDGE_PHYSICAL_JOURNEY_PASS": true,
+    "detail": "ADB_REVERSE_PIXEL_CHROME_FULL_JOURNEY_PASS",
+    "earned_via": "scripts/run_kirby_controlled_integration.ts embedded physical journey",
+    "evidence_paths": [
+      "artifacts/kirby_v2/controlled_integration/pixel_journey/PHYSICAL_PIXEL_JOURNEY.json",
+      "artifacts/kirby_v2/controlled_integration/pixel_journey/JOURNEY_LOG.json",
+      "artifacts/kirby_v2/controlled_integration/pixel_journey/PAIRING_TRACE.json",
+      "artifacts/kirby_v2/controlled_integration/pixel_journey/EXECUTION_PROVENANCE.json",
+      "artifacts/kirby_v2/controlled_integration/pixel_journey/OFFLINE_HONESTY.json",
+      "artifacts/kirby_v2/controlled_integration/pixel_journey/screenshot.png",
+      "artifacts/kirby_v2/controlled_integration/gates/GATE_SUMMARY.json"
+    ],
+    "honesty": {
+      "RUNTIME_ON_DEVICE_LOCAL": false,
+      "adb_reverse_is_not_on_device": true,
+      "PIXEL6A_LIVE_LOCAL_MODEL_PASS": false
+    },
+    "adb_released": true
+  },
+  "candidate_sha": "853ed28bd3bd34f01a1b415c7bfa1e0075e0d2a5",
+  "worktree": ".worktrees/kirby-main-reconciliation",
+  "draft_pr_only": true,
+  "merged": false,
+  "candidate_note": "Authoritative tip = branch HEAD (local==origin).",
+  "candidate_branch": "integration/kirby-controlled-stack-main-reconciliation",
+  "draft_pr": {
+    "status": "OPEN",
+    "number": 54,
+    "url": "https://github.com/gunnchOS3k/gunnchAI3k/pull/54",
+    "title": "Reconcile controlled Kirby/Nearby Edge stack onto accepted main",
+    "base": "main",
+    "head": "integration/kirby-controlled-stack-main-reconciliation",
+    "draft_required": true,
+    "do_not_merge": true,
+    "branch_pushed": true,
+    "local_tip": "853ed28bd3bd34f01a1b415c7bfa1e0075e0d2a5",
+    "remote_tip": "853ed28bd3bd34f01a1b415c7bfa1e0075e0d2a5"
+  },
+  "adb_released": true
+}

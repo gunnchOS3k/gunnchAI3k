@@ -1,0 +1,55 @@
+# Model ladder tiers 0–4 — roles, not permanent model pins
+schema_version: frontier.model_ladder.v2
+claim_boundary: Tier slots are capability budgets. Model names below are qualification candidates only, not product requirements.
+tiers:
+  - tier: 0
+    role: nano_local
+    intent: Instant device-local assist, classify, route, safety precheck
+    budgets: { max_latency_ms: 250, max_context_tokens: 4096, max_cost_usd: 0 }
+    preferred_location: local
+    fallback: fail_closed_local
+  - tier: 1
+    role: local_fast
+    intent: Everyday tutoring, summarization, light tools
+    budgets: { max_latency_ms: 1500, max_context_tokens: 16384, max_cost_usd: 0 }
+    preferred_location: local
+    fallback: tier_0
+  - tier: 2
+    role: local_pro_or_efficient_cloud
+    intent: Coding, deeper reasoning, multimodal when consented
+    budgets: { max_latency_ms: 8000, max_context_tokens: 128000, max_cost_usd: 0.05 }
+    preferred_location: local_preferred
+    fallback: tier_1
+  - tier: 3
+    role: frontier_research
+    intent: Long-horizon research, hard coding, computer-use with consent
+    budgets: { max_latency_ms: 60000, max_context_tokens: 500000, max_cost_usd: 0.50 }
+    preferred_location: cloud_opt_in
+    fallback: tier_2
+  - tier: 4
+    role: multi_agent_orchestration
+    intent: Decomposition across specialists with verifier gate
+    budgets: { max_latency_ms: 300000, max_context_tokens: 1000000, max_cost_usd: 2.00 }
+    preferred_location: hybrid
+    fallback: tier_3
+qualification_candidates_public_patterns_only:
+  - family: openai_gpt
+    examples: [GPT-5.6]
+  - family: anthropic_claude
+    examples: [Claude Sonnet 5]
+  - family: google_gemini
+    examples: [Gemini]
+  - family: deepseek
+    examples: [DeepSeek]
+  - family: mistral
+    examples: [Mistral]
+  - family: google_gemma
+    examples: [Gemma]
+  - family: moonshot_kimi
+    examples: [Kimi]
+  - family: zhipu_glm
+    examples: [GLM]
+  - family: meta_llama
+    examples: [Llama]
+  - family: alibaba_qwen
+    examples: [Qwen]
