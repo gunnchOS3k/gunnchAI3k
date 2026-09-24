@@ -1,0 +1,9 @@
+{
+  "suite": "answer_support_check",
+  "split": "initial",
+  "created_at": "2026-09-23",
+  "cases": [
+    {"id": "av-1", "state": {"context": "Paris is the capital of France", "answer": "Paris"}, "gold_supported": true},
+    {"id": "av-2", "state": {"context": "No population figures given", "answer": "The city has 12 million people"}, "gold_supported": false}
+  ]
+}

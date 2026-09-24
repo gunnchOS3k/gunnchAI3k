@@ -22,3 +22,9 @@
 | Benchmarks | `benchmarks/` |
 | Journey test | `tests/journeys/waike_to_gunnchai.test.ts` |
 | History | `docs/history/` |
+| System One decision contract | `src/decision_plane/contracts.ts` |
+| Decision broker | `src/decision_plane/decision_broker.ts` |
+| TypeSafe adapter | `src/providers/typesafe/` |
+| WAIKE System One contract | `integrations/waike/system_one_decision_contract_v1.ts` |
+| Capsule System One contract | `integrations/gunnchos_capsule/system_one_decision_contract_v1.ts` |
+| KIRBY-5 tests | `tests/kirby5/` |

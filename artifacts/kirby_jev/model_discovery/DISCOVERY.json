@@ -1,0 +1,14 @@
+{
+  "label": "not_live",
+  "LIVE_JEV_ACCESS_REQUIRED": true,
+  "models": [],
+  "fetched_at": null,
+  "reason": "TYPESAFE_API_KEY unset in KIRBY-5 execution environment",
+  "fixture_models_for_contract_tests": [
+    {
+      "name": "jev-fixture",
+      "description": "Contract fixture System One model. Not live. Not a production pin.",
+      "release_date": "2026-09-15"
+    }
+  ]
+}
