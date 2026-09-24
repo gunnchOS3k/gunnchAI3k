@@ -1,0 +1,19 @@
+{
+  "suite": "intent_route",
+  "split": "initial",
+  "created_at": "2026-09-23",
+  "held_out": false,
+  "notes": "Initial fixture suite. Do not retune after observing Jev.",
+  "cases": [
+    {"id": "ir-1", "state": {"text": "Explain Kirchhoff's laws for my circuits homework"}, "gold": "tutoring"},
+    {"id": "ir-2", "state": {"text": "Fix this TypeScript compile error in DecisionBroker"}, "gold": "coding"},
+    {"id": "ir-3", "state": {"text": "Find peer-reviewed sources on mmWave beamforming"}, "gold": "research"},
+    {"id": "ir-4", "state": {"text": "My Pixel 6a battery is draining after the last update"}, "gold": "device_help"},
+    {"id": "ir-5", "state": {"text": "Add captions and increase contrast on this slide"}, "gold": "accessibility"},
+    {"id": "ir-6", "state": {"text": "Translate this paragraph into Spanish"}, "gold": "translation"},
+    {"id": "ir-7", "state": {"text": "WiFi keeps dropping when I go offline"}, "gold": "connectivity"},
+    {"id": "ir-8", "state": {"text": "Write a short product launch image caption"}, "gold": "creator"},
+    {"id": "ir-9", "state": {"text": "What time is it in Tokyo?"}, "gold": "general_assist"},
+    {"id": "ir-10", "state": {"text": "Can you walk me through a practice quiz on OS scheduling?"}, "gold": "tutoring"}
+  ]
+}

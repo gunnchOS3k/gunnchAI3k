@@ -1,0 +1,11 @@
+{
+  "label": "simulated_fixture_only",
+  "live": false,
+  "LIVE_JEV_LIVE_LATENCY_MEASURED": false,
+  "note": "Vendor latency claims not independently verified from this deployment environment.",
+  "p50": null,
+  "p95": null,
+  "p99": null,
+  "timeout_count": 0,
+  "source": "none_live"
+}

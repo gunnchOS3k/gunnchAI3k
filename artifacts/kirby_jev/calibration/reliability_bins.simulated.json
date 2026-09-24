@@ -1,0 +1,10 @@
+{
+  "label": "simulated_fixture_only",
+  "live": false,
+  "note": "Metric functions exercised on tiny synthetic samples. Not a CALIBRATED claim.",
+  "n": 4,
+  "bins": [
+    {"bin": 0, "count": 1, "avg_confidence": 0.2, "avg_accuracy": 0.0},
+    {"bin": 1, "count": 3, "avg_confidence": 0.63, "avg_accuracy": 0.67}
+  ]
+}
