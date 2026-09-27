@@ -1,0 +1,6 @@
+{
+  "label": "unit_verified",
+  "jev_bypasses_broker": false,
+  "untrusted_content_can_grant_permissions": false,
+  "mutating_auto_authorize": false
+}

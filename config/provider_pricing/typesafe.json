@@ -1,0 +1,7 @@
+{
+  "captured_at": "2026-09-23",
+  "source": "https://docs.typesafe.ai/models (public docs mention prices; live rate card not independently verified in this wave)",
+  "input_rate": null,
+  "output_rate": null,
+  "notes": "Early-access vendor pricing is unpublished to this repo. Cost accounting is wired to this file. Do not hardcode rates in business logic. LIVE_JEV_ACCESS_REQUIRED for measured cost."
+}

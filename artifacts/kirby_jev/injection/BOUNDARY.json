@@ -1,0 +1,6 @@
+{
+  "label": "unit_verified",
+  "untrusted_state_overrides_questions": false,
+  "untrusted_state_overrides_privacy_or_consent": false,
+  "signal_is_sole_security_boundary": false
+}

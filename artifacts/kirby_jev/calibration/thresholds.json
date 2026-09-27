@@ -1,0 +1,35 @@
+{
+  "label": "not_live",
+  "intent_route": {
+    "auto_branch_threshold": null,
+    "fallback_below": null,
+    "evidence": "LIVE_JEV_ACCESS_REQUIRED — no calibrated live samples"
+  },
+  "task_feature_inference": {
+    "auto_branch_threshold": null,
+    "fallback_below": null,
+    "evidence": "LIVE_JEV_ACCESS_REQUIRED — no calibrated live samples"
+  },
+  "retrieval_relevance": {
+    "auto_branch_threshold": null,
+    "fallback_below": null,
+    "evidence": "LIVE_JEV_ACCESS_REQUIRED — no calibrated live samples"
+  },
+  "tool_class_proposal": {
+    "auto_branch_threshold": null,
+    "fallback_below": null,
+    "evidence": "LIVE_JEV_ACCESS_REQUIRED — no calibrated live samples"
+  },
+  "agent_continue_stop": {
+    "auto_branch_threshold": null,
+    "fallback_below": null,
+    "evidence": "LIVE_JEV_ACCESS_REQUIRED — no calibrated live samples"
+  },
+  "waike_tutor_mode": {
+    "auto_branch_threshold": null,
+    "fallback_below": null,
+    "evidence": "LIVE_JEV_ACCESS_REQUIRED — grading remains disallowed"
+  },
+  "CALIBRATED_CLAIM": false,
+  "reason": "sample_count_below_policy_and_no_live_jev"
+}

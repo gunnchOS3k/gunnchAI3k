@@ -1,0 +1,9 @@
+{
+  "label": "unit_verified",
+  "flags_off": "deterministic_local",
+  "offline": "deterministic_local",
+  "privacy_deny": "deterministic_local",
+  "timeout": "deterministic_local",
+  "auth_failure": "deterministic_local",
+  "offline_core_breaks_when_jev_down": false
+}

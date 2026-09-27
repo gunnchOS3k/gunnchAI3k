@@ -1,0 +1,7 @@
+{
+  "label": "contract",
+  "local_first": true,
+  "unauthenticated_lan_inference": false,
+  "device_local_secrets_blocked": true,
+  "pixel_local_inference_claimed": false
+}

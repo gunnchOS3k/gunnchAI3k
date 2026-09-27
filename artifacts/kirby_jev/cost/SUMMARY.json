@@ -1,0 +1,10 @@
+{
+  "label": "unmeasured",
+  "live": false,
+  "JEV_LIVE_COST_MEASURED": false,
+  "pricing_file": "config/provider_pricing/typesafe.json",
+  "input_rate": null,
+  "output_rate": null,
+  "observed_usd": null,
+  "note": "Rates unpublished to this repo. Cost accountant reads config, not hardcoded business logic."
+}

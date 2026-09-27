@@ -1,0 +1,52 @@
+{
+  "intent_route": {
+    "auto_branch_threshold": null,
+    "fallback_below": null,
+    "evidence": "LIVE_JEV_ACCESS_REQUIRED — no calibrated live samples"
+  },
+  "task_feature_inference": {
+    "auto_branch_threshold": null,
+    "fallback_below": null,
+    "evidence": "LIVE_JEV_ACCESS_REQUIRED — no calibrated live samples"
+  },
+  "retrieval_relevance": {
+    "auto_branch_threshold": null,
+    "fallback_below": null,
+    "evidence": "LIVE_JEV_ACCESS_REQUIRED — no calibrated live samples"
+  },
+  "tool_class_proposal": {
+    "auto_branch_threshold": null,
+    "fallback_below": null,
+    "evidence": "LIVE_JEV_ACCESS_REQUIRED — no calibrated live samples"
+  },
+  "agent_continue_stop": {
+    "auto_branch_threshold": null,
+    "fallback_below": null,
+    "evidence": "LIVE_JEV_ACCESS_REQUIRED — no calibrated live samples"
+  },
+  "agent_stuck_detection": {
+    "auto_branch_threshold": null,
+    "fallback_below": null,
+    "evidence": "LIVE_JEV_ACCESS_REQUIRED — no calibrated live samples"
+  },
+  "answer_support_check": {
+    "auto_branch_threshold": null,
+    "fallback_below": null,
+    "evidence": "LIVE_JEV_ACCESS_REQUIRED — no calibrated live samples"
+  },
+  "prompt_injection_signal": {
+    "auto_branch_threshold": null,
+    "fallback_below": null,
+    "evidence": "defense-in-depth signal only; never sole security boundary"
+  },
+  "waike_tutor_mode": {
+    "auto_branch_threshold": null,
+    "fallback_below": null,
+    "evidence": "LIVE_JEV_ACCESS_REQUIRED — grading remains disallowed"
+  },
+  "bulk_triage": {
+    "auto_branch_threshold": null,
+    "fallback_below": null,
+    "evidence": "LIVE_JEV_ACCESS_REQUIRED — no calibrated live samples"
+  }
+}

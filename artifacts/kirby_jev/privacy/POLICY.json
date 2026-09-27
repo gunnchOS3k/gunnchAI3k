@@ -1,0 +1,9 @@
+{
+  "label": "policy",
+  "offline_ineligible": true,
+  "device_local_denied": true,
+  "cloud_consent_required": true,
+  "sensitive_default_deny": true,
+  "remote_is_cloud": true,
+  "claimed_private_or_local": false
+}

@@ -1,0 +1,26 @@
+{
+  "label": "simulated_and_unavailable",
+  "live": false,
+  "LIVE_JEV_ACCESS_REQUIRED": true,
+  "note": "No universal winner. Per-task fronts only. Live Jev not measured. Nearby-edge SmolLM2 remains CONTROLLED_INTEGRATION, not PRODUCTION_DEFAULT, and was not re-run here.",
+  "baselines": {
+    "deterministic_rules": {"status": "available", "offline_fit": true, "privacy_fit": true},
+    "local_micro_router": {"status": "available_via_ModelRouterV2", "offline_fit": true},
+    "nearby_edge_smollm2": {"status": "not_re_run_this_wave", "production_default": false},
+    "structured_llm_wrapper": {"status": "not_configured"},
+    "jev_live": {"status": "unavailable", "reason": "TYPESAFE_API_KEY unset"},
+    "jev_fixture": {"status": "contract_only", "live": false}
+  },
+  "per_task": {
+    "intent_route": {
+      "pareto": ["deterministic_rules"],
+      "jev_live": "unmeasured",
+      "winner": null
+    },
+    "task_feature_inference": {"pareto": ["deterministic_rules"], "winner": null},
+    "retrieval_relevance": {"pareto": ["deterministic_rules"], "winner": null},
+    "tool_class_proposal": {"pareto": ["deterministic_rules"], "winner": null},
+    "agent_continue_stop": {"pareto": ["deterministic_rules"], "winner": null},
+    "waike_tutor_mode": {"pareto": ["deterministic_rules"], "winner": null}
+  }
+}

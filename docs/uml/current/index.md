@@ -10,3 +10,4 @@ Backed by `src/local-runtime`, `src/system-layer`, `src/stage2`, `src/waike-mast
 | Model-routing sequence | [sequence_model_routing.md](sequence_model_routing.md) |
 | Agent / task state machine | [state_agent_task.md](state_agent_task.md) |
 | Local / edge / cloud deployment | [deployment.md](deployment.md) |
+| System One decision plane | [system_one_decision_plane.md](system_one_decision_plane.md) |

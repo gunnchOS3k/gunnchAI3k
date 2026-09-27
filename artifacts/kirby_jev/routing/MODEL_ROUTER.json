@@ -1,0 +1,7 @@
+{
+  "label": "unit_verified",
+  "replaces_ModelRouterV2": false,
+  "hard_constraints_preserved": true,
+  "inferred_features_require_confidence_gate": true,
+  "JEV_INTENT_ROUTER_QUALIFIED": false
+}

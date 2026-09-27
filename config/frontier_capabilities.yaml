@@ -576,3 +576,179 @@ capabilities:
     qualification_slots: [tier_fit, offline_degrade, safety, verifier_pass]
     integrations: [waike, device_os, creator, research]
     references: [public_frontier_patterns_only]
+  - id: typed_probabilistic_decision
+    name: "Typed probabilistic decision"
+    capability_class: SYSTEM_ONE_DECISION_PLANE
+    description: "Provider-independent typed decisions with probabilities. Jev is one candidate implementation."
+    adoption_status: research
+    maturity: foundation
+    local_offline_viable: partial
+    cloud_optional: true
+    consent_required: true
+    verification_required: true
+    side_effect_class: read_only
+    privacy_class: personal
+    budget_dimensions: [latency_ms, tokens, cost_usd]
+    device_constraints: [offline, network]
+    provider_agnostic: true
+    hard_provider_pin: false
+    hidden_cot_required: false
+    broker_mediated: true
+    kirby_absorption_notes: "Absorb the System One pattern, not the TypeSafe identity."
+    qualification_slots: [schema_validity, calibration, privacy_fit, offline_fit]
+    integrations: [waike, device_os, research]
+    references: [docs/frontier/SYSTEM_ONE_DECISION_PLANE.md]
+  - id: calibrated_binary_decision
+    name: "Calibrated binary decision"
+    capability_class: SYSTEM_ONE_DECISION_PLANE
+    description: "Yes/no probability decisions."
+    adoption_status: research
+    maturity: foundation
+    local_offline_viable: partial
+    cloud_optional: true
+    consent_required: true
+    verification_required: true
+    side_effect_class: read_only
+    privacy_class: personal
+    budget_dimensions: [latency_ms, tokens, cost_usd]
+    device_constraints: [offline, network]
+    provider_agnostic: true
+    hard_provider_pin: false
+    hidden_cot_required: false
+    broker_mediated: true
+    kirby_absorption_notes: "Calibration unearned until live gunnchAI evals."
+    qualification_slots: [brier, ece, log_loss]
+    integrations: [waike, device_os, research]
+    references: [docs/frontier/JEV_CALIBRATION_EVAL_PLAN.md]
+  - id: calibrated_choice_selection
+    name: "Calibrated choice selection"
+    capability_class: SYSTEM_ONE_DECISION_PLANE
+    description: "Categorical choice with confidence and a probability distribution."
+    adoption_status: research
+    maturity: foundation
+    local_offline_viable: partial
+    cloud_optional: true
+    consent_required: true
+    verification_required: true
+    side_effect_class: read_only
+    privacy_class: personal
+    budget_dimensions: [latency_ms, tokens, cost_usd]
+    device_constraints: [offline, network]
+    provider_agnostic: true
+    hard_provider_pin: false
+    hidden_cot_required: false
+    broker_mediated: true
+    kirby_absorption_notes: "Use hierarchical routing above 24 choices."
+    qualification_slots: [top1, nll, cardinality]
+    integrations: [waike, device_os, research]
+    references: [docs/frontier/SYSTEM_ONE_DECISION_PLANE.md]
+  - id: calibrated_ordinal_scoring
+    name: "Calibrated ordinal scoring"
+    capability_class: SYSTEM_ONE_DECISION_PLANE
+    description: "Ordered rubric scoring with expected score and level probabilities."
+    adoption_status: research
+    maturity: foundation
+    local_offline_viable: partial
+    cloud_optional: true
+    consent_required: true
+    verification_required: true
+    side_effect_class: read_only
+    privacy_class: personal
+    budget_dimensions: [latency_ms, tokens, cost_usd]
+    device_constraints: [offline, network]
+    provider_agnostic: true
+    hard_provider_pin: false
+    hidden_cot_required: false
+    broker_mediated: true
+    kirby_absorption_notes: "Not a grading authority."
+    qualification_slots: [mae, rmse, ordinal_error]
+    integrations: [waike, research]
+    references: [docs/frontier/JEV_CALIBRATION_EVAL_PLAN.md]
+  - id: parallel_decision_batch
+    name: "Parallel decision batch"
+    capability_class: SYSTEM_ONE_DECISION_PLANE
+    description: "Many named questions against one shared state."
+    adoption_status: research
+    maturity: foundation
+    local_offline_viable: partial
+    cloud_optional: true
+    consent_required: true
+    verification_required: false
+    side_effect_class: read_only
+    privacy_class: personal
+    budget_dimensions: [latency_ms, tokens, cost_usd]
+    device_constraints: [offline, network]
+    provider_agnostic: true
+    hard_provider_pin: false
+    hidden_cot_required: false
+    broker_mediated: true
+    kirby_absorption_notes: "Measure Pattern A vs B; do not assume vendor optimum."
+    qualification_slots: [latency, cost, stability]
+    integrations: [research]
+    references: [docs/frontier/SYSTEM_ONE_DECISION_PLANE.md]
+  - id: confidence_aware_branching
+    name: "Confidence-aware branching"
+    capability_class: SYSTEM_ONE_DECISION_PLANE
+    description: "Product-owned ConfidenceGate with task-specific thresholds."
+    adoption_status: research
+    maturity: foundation
+    local_offline_viable: true
+    cloud_optional: true
+    consent_required: false
+    verification_required: true
+    side_effect_class: read_only
+    privacy_class: personal
+    budget_dimensions: [latency_ms]
+    device_constraints: [offline]
+    provider_agnostic: true
+    hard_provider_pin: false
+    hidden_cot_required: false
+    broker_mediated: true
+    kirby_absorption_notes: "Thresholds stay null until calibration evidence exists."
+    qualification_slots: [coverage, error_rate_auto]
+    integrations: [waike, device_os]
+    references: [docs/frontier/JEV_PROMOTION_POLICY.md]
+  - id: fast_decision_verifier
+    name: "Fast decision verifier"
+    capability_class: SYSTEM_ONE_DECISION_PLANE
+    description: "Triage whether a slower verifier is needed."
+    adoption_status: research
+    maturity: foundation
+    local_offline_viable: partial
+    cloud_optional: true
+    consent_required: true
+    verification_required: true
+    side_effect_class: read_only
+    privacy_class: personal
+    budget_dimensions: [latency_ms, tokens, cost_usd]
+    device_constraints: [offline, network]
+    provider_agnostic: true
+    hard_provider_pin: false
+    hidden_cot_required: false
+    broker_mediated: true
+    kirby_absorption_notes: "Cannot replace deterministic verification."
+    qualification_slots: [false_negative_rate]
+    integrations: [waike, research]
+    references: [docs/frontier/SYSTEM_ONE_DECISION_PLANE.md]
+  - id: large_scale_decision_map_reduce
+    name: "Large-scale decision map-reduce"
+    capability_class: SYSTEM_ONE_DECISION_PLANE
+    description: "Bounded batch classification / triage / labeling."
+    adoption_status: research
+    maturity: foundation
+    local_offline_viable: partial
+    cloud_optional: true
+    consent_required: true
+    verification_required: true
+    side_effect_class: read_only
+    privacy_class: personal
+    budget_dimensions: [latency_ms, tokens, cost_usd]
+    device_constraints: [offline, network, rate_limit]
+    provider_agnostic: true
+    hard_provider_pin: false
+    hidden_cot_required: false
+    broker_mediated: true
+    kirby_absorption_notes: "Respect API/budget/rate constraints."
+    qualification_slots: [throughput, cost]
+    integrations: [research]
+    references: [docs/frontier/SYSTEM_ONE_DECISION_PLANE.md]
