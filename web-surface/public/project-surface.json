@@ -1,0 +1,22 @@
+{
+  "repo": "gunnchAI3k",
+  "productName": "gunnchAI3k",
+  "family": "gunnchAI",
+  "classification": "BACKEND_CONTROL_SURFACE_WORKER",
+  "acceptedSha": "e08b68bdbc26715a903bca51a9740f621a3b2dd6",
+  "status": "STAGING_WORKER",
+  "summary": "Executive-assistant and edge-computing codebase. The Node, Express, native, and local-model pieces are not a Cloudflare Worker.",
+  "capabilities": [
+    "Read the architecture and what is actually available",
+    "Open the source repository"
+  ],
+  "limitations": [
+    "No hosted model inference is claimed",
+    "The backend does not run on this Worker",
+    "This page is a staging control surface"
+  ],
+  "sourceUrl": "https://github.com/gunnchOS3k/gunnchAI3k",
+  "returnUrlEnv": "GUNNCHOS_PORTAL_URL",
+  "returnUrl": "https://gunnchos-site.gunnchos-finds.workers.dev",
+  "workerName": "gunnchos-gunnchai"
+}
