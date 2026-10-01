@@ -7,45 +7,76 @@
   <title>gunnchAI3k · gunnchOS</title>
   <link rel="stylesheet" href="/styles.css">
 </head>
-<body style="--accent:#7ec8c3">
+<body data-surfacekit="v2" data-theme="dark">
   <a class="skip" href="#content">Skip to content</a>
   <header class="top">
     <p class="mark">gunnchOS</p>
-    <a id="portal-return" href="#return" aria-label="Return to gunnchOS">← gunnchOS</a>
+    <nav class="tools" aria-label="Surface">
+      <button type="button" id="theme-toggle">Light theme</button>
+      <a id="portal-return" href="#return" aria-label="Return to gunnchOS">← gunnchOS</a>
+    </nav>
   </header>
   <main id="content">
-    <p class="kicker">gunnchAI</p>
+    <p class="kicker">gunnchAI · STAGING_WORKER</p>
     <h1>gunnchAI3k</h1>
-    <p class="badge">STAGING_WORKER</p>
     <p class="lead">Executive-assistant and edge-computing codebase. The Node, Express, native, and local-model pieces are not a Cloudflare Worker.</p>
-    <section aria-labelledby="what">
-      <h2 id="what">What is this?</h2>
-      <p>Executive-assistant and edge-computing codebase. The Node, Express, native, and local-model pieces are not a Cloudflare Worker.</p>
-      <p>The backend or agent runtime is not this Worker. This is a status surface.</p>
+    
+    <p><a class="cta" id="primary-action" href="#explore">Run local demo</a></p>
+    <section id="explore" aria-labelledby="explore-title">
+      <h2 id="explore-title">Run local demo</h2>
+      <p id="diagram-note"></p>
+      <div class="layout">
+        <div>
+          <svg id="diagram" role="img" aria-labelledby="diagram-note" viewBox="0 0 640 160"></svg>
+          <label for="row-select">Repository record</label>
+          <select id="row-select"></select>
+          <label for="row-filter">Filter records</label>
+          <input id="row-filter" type="search" placeholder="Filter by text in the repository records">
+        </div>
+        <div id="detail" tabindex="0" aria-live="polite"></div>
+      </div>
+      <div id="directory"></div>
+      <table id="evidence">
+        <caption>Records copied from this repository</caption>
+        <thead><tr id="evidence-head"></tr></thead>
+        <tbody id="evidence-body"></tbody>
+      </table>
     </section>
-    <section aria-labelledby="why">
-      <h2 id="why">Why does it exist?</h2>
-      <p>It gives this repository a public web surface inside the gunnchOS ecosystem without pretending the original runtime runs on Cloudflare Workers.</p>
+    <section id="overview" aria-labelledby="overview-title">
+      <h2 id="overview-title">Overview</h2>
+      <div class="cards"><article><h3>Overview</h3><p># gunnchAI3k Local-first intelligence for the gunnchOS3k ecosystem: capability routing, tutoring, creation/coding, research/citations, device help, accessibility, translation, connectivity diagnosis, and WAIKE curriculum consumption. &gt; **Not** a chatbot-only product. **Not** frontier-parity. **Not** “100% intelligence”, doctoral, or SSJ marketing. **Not** a University of Oulu affiliation or admission claim. `GUNNCHAI</p></article><article><h3>What is this?</h3><p>An intelligence **layer** that routes tasks to local fixtures, optional local GGUF/llama.cpp, or a **cloud stub that fails closed**. It is a supporting workload for devices, labs, and WAIKE education — not a dissertation paper and not a commercial assistant.</p></article><article><h3>Why does it exist?</h3><p>Equitable, privacy-respecting assistance for education, creation, and device work — local-first by default, with explicit consent before anything may leave the device.</p></article></div>
     </section>
-    <section aria-labelledby="today">
-      <h2 id="today">What can I actually do with it today?</h2>
-      <ul><li>Read the architecture and what is actually available</li><li>Open the source repository</li></ul>
+    <section id="methods" aria-labelledby="methods-title">
+      <h2 id="methods-title">Methods</h2>
+      <p># Reproducibility — gunnchAI3k This repository is a local-first intelligence **prototype**. It does not produce RF results and does not claim frontier model quality. ```bash git clone https://github.com/gunnchOS3k/gunnchAI3k.git cd gunnchAI3k npm ci npm run test:local-runtime npm run test:stage2 npm run test:waike-mastery npm run test:journeys ``` Expected: Jest PASS for those suites. `test:waike-mastery` live discovery **skips** if `waike-research-ops` is not adjacent and `WAIKE_REPO_ROOT` is unset. ## Tool versions | Tool | Guidance | |---|---| | Node | 20+ (`package.json` `engines`) | | Python | 3.10+ for `prove:stage2` / WAIKE grader bridge | | llama.cpp | Optional; only for `system-laye</p>
+      <p>Native research runtimes stay on a local checkout. This page shows repository records only.</p>
     </section>
-    <section aria-labelledby="tech">
-      <h2 id="tech">What technology is inside it?</h2>
-      <p>Classification BACKEND_CONTROL_SURFACE_WORKER. Accepted source <code>e08b68bdbc26715a903bca51a9740f621a3b2dd6</code>.</p>
+    <section id="artifacts" aria-labelledby="artifacts-title">
+      <h2 id="artifacts-title">Artifacts</h2>
+      <ul><li><code>docs/00_GUNNCHAI3K_TUTOR_VISION.md</code></li><li><code>docs/01_TUTOR_PERSONA_AND_VOICE.md</code></li><li><code>docs/02_KNOWLEDGE_SCOPE.md</code></li><li><code>docs/03_SOURCE_GROUNDING_POLICY.md</code></li><li><code>docs/04_SOCRATIC_TUTORING_POLICY.md</code></li><li><code>docs/05_NO_CHEATING_AND_ACADEMIC_INTEGRITY.md</code></li><li><code>docs/06_CHILD_SAFETY_AND_BOUNDARIES.md</code></li><li><code>docs/07_WAIKE_CURRICULUM_INTEGRATION.md</code></li><li><code>docs/08_SKILL_LEVEL_ROUTING.md</code></li><li><code>docs/09_ASSESSMENT_GENERATION.md</code></li><li><code>docs/10_RAG_ARCHITECTURE.md</code></li><li><code>docs/11_AGENT_TOOLS_AND_GUARDRAILS.md</code></li></ul>
     </section>
-    <section aria-labelledby="evidence">
-      <h2 id="evidence">What evidence exists?</h2>
-      <p><a href="https://github.com/gunnchOS3k/gunnchAI3k">Source repository</a>. Read the repository for methods, results, and status. This page does not add new experimental claims.</p>
+    <section id="source" aria-labelledby="source-title">
+      <h2 id="source-title">Source</h2>
+      <p><a href="https://github.com/gunnchOS3k/gunnchAI3k">Source repository</a></p>
+      <p>Pinned source <code>e08b68bdbc26715a903bca51a9740f621a3b2dd6</code></p>
     </section>
-    <section aria-labelledby="limits">
-      <h2 id="limits">What is not finished?</h2>
+    <section id="limits" aria-labelledby="limits-title">
+      <h2 id="limits-title">Limitations</h2>
       <ul><li>No hosted model inference is claimed</li><li>The backend does not run on this Worker</li><li>This page is a staging control surface</li></ul>
     </section>
-    <section aria-labelledby="fit">
-      <h2 id="fit">Where does it fit in gunnchOS?</h2>
-      <p>Family: gunnchAI. Return with the gunnchOS link in the header.</p>
+    <section id="about" aria-labelledby="about-title">
+      <h2 id="about-title">About / Build status / Evidence</h2>
+      <h2 id="what">What is this?</h2>
+      <p>Executive-assistant and edge-computing codebase. The Node, Express, native, and local-model pieces are not a Cloudflare Worker.</p>
+      <p>The research code is not executing here. This is a research surface.</p>
+      <h2 id="why">Why does it exist?</h2>
+      <p>It gives this repository a public web surface inside the gunnchOS ecosystem without pretending the original runtime runs on Cloudflare Workers.</p>
+      <h2 id="today">What can I actually do with it today?</h2>
+      <p>Use the primary action to inspect repository records, then open the source for the local toolchain.</p>
+      <h2 id="unfinished">What is not finished?</h2>
+      <ul><li>No hosted model inference is claimed</li><li>The backend does not run on this Worker</li><li>This page is a staging control surface</li></ul>
+      <p class="badge">STAGING_WORKER</p>
+      <p>Runtime mode on this page: LOCAL/DEMO. No remote model call is made.</p>
     </section>
   </main>
   <script src="/app.js"></script>

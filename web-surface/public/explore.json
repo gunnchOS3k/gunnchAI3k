@@ -1,0 +1,112 @@
+{
+  "schema": "gunnchos.surfacekit.v2",
+  "measured_topology": false,
+  "diagram_note": "Reading aid built from repository headings. It is not a measured topology and it is not a live system.",
+  "nodes": [
+    {
+      "id": "overview",
+      "label": "Overview"
+    },
+    {
+      "id": "what-is-this",
+      "label": "What is this?"
+    },
+    {
+      "id": "why-does-it-exist",
+      "label": "Why does it exist?"
+    },
+    {
+      "id": "where-does-it-fit",
+      "label": "Where does it fit?"
+    }
+  ],
+  "rows": [
+    {
+      "source": "README.md",
+      "scenario_id": "Overview",
+      "site_id": "gunnchAI",
+      "ethical_framing": "# gunnchAI3k Local-first intelligence for the gunnchOS3k ecosystem: capability routing, tutoring, creation/coding, research/citations, device help, accessibility, translation, connectivity diagnosis, and WAIKE curriculum consumption. > **Not** a chatbot-only product. **Not** frontier-parity. **Not** \u201c100% intelligence\u201d, doctoral, or SSJ marketing. **Not** a University of Oulu affiliation or admission claim. `GUNNCHAI"
+    },
+    {
+      "source": "README.md",
+      "scenario_id": "What is this?",
+      "site_id": "gunnchAI",
+      "ethical_framing": "An intelligence **layer** that routes tasks to local fixtures, optional local GGUF/llama.cpp, or a **cloud stub that fails closed**. It is a supporting workload for devices, labs, and WAIKE education \u2014 not a dissertation paper and not a commercial assistant."
+    },
+    {
+      "source": "README.md",
+      "scenario_id": "Why does it exist?",
+      "site_id": "gunnchAI",
+      "ethical_framing": "Equitable, privacy-respecting assistance for education, creation, and device work \u2014 local-first by default, with explicit consent before anything may leave the device."
+    },
+    {
+      "source": "README.md",
+      "scenario_id": "Where does it fit?",
+      "site_id": "gunnchAI",
+      "ethical_framing": "Product Charter layer 5. Consumed by Device Lab AI workloads. Tutors against WAIKE digital-RC courses when the sibling repo is present."
+    },
+    {
+      "source": "README.md",
+      "scenario_id": "What is real today?",
+      "site_id": "gunnchAI",
+      "ethical_framing": "- Three **routing** stacks with tests (keyword Gate 1, system-layer policy, Stage 2 fleet constraint solver) - Fixture-backed tutoring, device help, a11y, translation glossary, connectivity checklists - WAIKE **contract discovery** + isolated Python grader (`src/waike-mastery/`) when `waike-research-ops` is adjacent - Offline research/citation over a local corpus (fabricated `source_id` rejected) - Coding-agent **san"
+    },
+    {
+      "source": "README.md",
+      "scenario_id": "What is simulated / modelled?",
+      "site_id": "gunnchAI",
+      "ethical_framing": "- Stage 2 `GunnchAiCapabilityApi.invoke` **echoes** the routed model id \u2014 it does not run eight specialist models - Discord `/waike lesson` bodies and `src/tutor/waikeTutorCards.ts` are **hardcoded mocks**, not live `course.json` - Cloud destinations are `cloud-policy-stub` / `CLOUD_NOT_IMPLEMENTED` - Optional local-model provider still answers with fixture text unless llama.cpp + GGUF are actually present - Personal"
+    }
+  ],
+  "sources": [],
+  "sections": [
+    {
+      "id": "overview",
+      "title": "Overview",
+      "body": "# gunnchAI3k Local-first intelligence for the gunnchOS3k ecosystem: capability routing, tutoring, creation/coding, research/citations, device help, accessibility, translation, connectivity diagnosis, and WAIKE curriculum consumption. > **Not** a chatbot-only product. **Not** frontier-parity. **Not** \u201c100% intelligence\u201d, doctoral, or SSJ marketing. **Not** a University of Oulu affiliation or admission claim. `GUNNCHAI"
+    },
+    {
+      "id": "what-is-this",
+      "title": "What is this?",
+      "body": "An intelligence **layer** that routes tasks to local fixtures, optional local GGUF/llama.cpp, or a **cloud stub that fails closed**. It is a supporting workload for devices, labs, and WAIKE education \u2014 not a dissertation paper and not a commercial assistant."
+    },
+    {
+      "id": "why-does-it-exist",
+      "title": "Why does it exist?",
+      "body": "Equitable, privacy-respecting assistance for education, creation, and device work \u2014 local-first by default, with explicit consent before anything may leave the device."
+    },
+    {
+      "id": "where-does-it-fit",
+      "title": "Where does it fit?",
+      "body": "Product Charter layer 5. Consumed by Device Lab AI workloads. Tutors against WAIKE digital-RC courses when the sibling repo is present."
+    },
+    {
+      "id": "what-is-real-today",
+      "title": "What is real today?",
+      "body": "- Three **routing** stacks with tests (keyword Gate 1, system-layer policy, Stage 2 fleet constraint solver) - Fixture-backed tutoring, device help, a11y, translation glossary, connectivity checklists - WAIKE **contract discovery** + isolated Python grader (`src/waike-mastery/`) when `waike-research-ops` is adjacent - Offline research/citation over a local corpus (fabricated `source_id` rejected) - Coding-agent **san"
+    },
+    {
+      "id": "what-is-simulated-modelled",
+      "title": "What is simulated / modelled?",
+      "body": "- Stage 2 `GunnchAiCapabilityApi.invoke` **echoes** the routed model id \u2014 it does not run eight specialist models - Discord `/waike lesson` bodies and `src/tutor/waikeTutorCards.ts` are **hardcoded mocks**, not live `course.json` - Cloud destinations are `cloud-policy-stub` / `CLOUD_NOT_IMPLEMENTED` - Optional local-model provider still answers with fixture text unless llama.cpp + GGUF are actually present - Personal"
+    }
+  ],
+  "artifacts": [
+    "docs/00_GUNNCHAI3K_TUTOR_VISION.md",
+    "docs/01_TUTOR_PERSONA_AND_VOICE.md",
+    "docs/02_KNOWLEDGE_SCOPE.md",
+    "docs/03_SOURCE_GROUNDING_POLICY.md",
+    "docs/04_SOCRATIC_TUTORING_POLICY.md",
+    "docs/05_NO_CHEATING_AND_ACADEMIC_INTEGRITY.md",
+    "docs/06_CHILD_SAFETY_AND_BOUNDARIES.md",
+    "docs/07_WAIKE_CURRICULUM_INTEGRATION.md",
+    "docs/08_SKILL_LEVEL_ROUTING.md",
+    "docs/09_ASSESSMENT_GENERATION.md",
+    "docs/10_RAG_ARCHITECTURE.md",
+    "docs/11_AGENT_TOOLS_AND_GUARDRAILS.md"
+  ],
+  "methods": "# Reproducibility \u2014 gunnchAI3k This repository is a local-first intelligence **prototype**. It does not produce RF results and does not claim frontier model quality. ```bash git clone https://github.com/gunnchOS3k/gunnchAI3k.git cd gunnchAI3k npm ci npm run test:local-runtime npm run test:stage2 npm run test:waike-mastery npm run test:journeys ``` Expected: Jest PASS for those suites. `test:waike-mastery` live discovery **skips** if `waike-research-ops` is not adjacent and `WAIKE_REPO_ROOT` is unset. ## Tool versions | Tool | Guidance | |---|---| | Node | 20+ (`package.json` `engines`) | | Python | 3.10+ for `prove:stage2` / WAIKE grader bridge | | llama.cpp | Optional; only for `system-laye",
+  "cards": [],
+  "runtime_mode": "LOCAL/DEMO",
+  "runtime_boot": false
+}
