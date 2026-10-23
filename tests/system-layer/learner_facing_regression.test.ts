@@ -2,7 +2,9 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import {
+  attributionForCompletedRun,
   completionAfterPrompt,
+  learnerCompletionFromStdout,
   learnerFacingText,
   truthfulModelId,
 } from '../../src/system-layer/local_inference/backends/llamacpp';
@@ -118,6 +120,94 @@ describe('learner-facing prompt, scaffold, and retrieval', () => {
     assert.equal(service.includes('awardGrade'), false);
     assert.equal(service.includes('completion_established'), false);
     assert.match(server, /app\.listen\(port, PRODUCT_SERVICE_BIND_HOST/);
+  });
+
+  it('returns empty when the completion is missing instead of banner text', () => {
+    const prompt = 'You are gunnchAI3k local offline assistant.\nQuery: Say hello in one sentence.';
+    const stdout = [
+      '▄▄▄▄▄▄',
+      'build: b1234',
+      'model: SmolLM2-135M',
+      'Loading model',
+      `> ${prompt}`,
+      '[ Prompt: 10.0 t/s | Generation: 0.0 t/s ]',
+      'Exiting...',
+    ].join('\n');
+    assert.equal(learnerCompletionFromStdout(stdout, prompt), '');
+    assert.equal(learnerCompletionFromStdout('build: b1234\nmodel: SmolLM2\nLoading model\n', prompt), '');
+  });
+
+  it('keeps a short answer and a partial prompt echo out of the learner text', () => {
+    const prompt = [
+      'You are gunnchAI3k local offline assistant.',
+      'Capability: tutoring',
+      'Query: Say hello in one sentence.',
+      'Respond with concise, actionable local guidance. Do not invent cloud calls.',
+    ].join('\n');
+    const partial = [
+      'llama.cpp console',
+      '> You are gunnchAI3k local offline assistant.',
+      'Capability: tutoring',
+      'Query: Say hello in one sentence.',
+      'Respond with concise, actionable local guidance. Do not invent clo',
+      'Hi.',
+      '[ Prompt: 140.6 t/s | Generation: 268.8 t/s ]',
+      'Exiting...',
+    ].join('\n');
+    assert.equal(learnerCompletionFromStdout(partial, prompt), 'Hi.');
+    const short = '> Say hello in one sentence.\nHi\n[ Prompt: 10.0 t/s | Generation: 20.0 t/s ]\n';
+    assert.equal(completionAfterPrompt(short, 'Say hello in one sentence.'), 'Hi');
+    assert.equal(learnerCompletionFromStdout(short, 'Say hello in one sentence.'), 'Hi');
+  });
+
+  it('reads an ordinary llama.cpp console without keeping the prompt', () => {
+    const prompt = 'Say hello in one sentence.';
+    const stdout = [
+      '█ banner',
+      'build: cb26014d9',
+      'model: SmolLM2',
+      `> ${prompt}`,
+      'Hello!',
+      '',
+      '[ Prompt: 140.6 t/s | Generation: 268.8 t/s ]',
+      'Exiting...',
+    ].join('\n');
+    assert.equal(learnerCompletionFromStdout(stdout, prompt), 'Hello!');
+  });
+
+  it('does not match a short token inside a longer unrelated word', () => {
+    const program = {
+      id: 'waike:curriculum/programs.md',
+      text: 'A program is a set of instructions.',
+    };
+    const profile = {
+      id: 'local-runtime:fixtures/local-runtime/documents/device-help.md',
+      text: 'Confirm the device profile before continuing.',
+    };
+    const ramLesson = {
+      id: 'waike:curriculum/memory.md',
+      text: 'RAM holds the data the computer is using right now.',
+    };
+    assert.equal(relevantContext('Explain RAM in one sentence.', [program]), undefined);
+    assert.equal(
+      relevantContext('Explain a file extension in one sentence.', [profile]),
+      undefined,
+    );
+    assert.deepEqual(
+      relevantContext('Explain RAM in one sentence.', [program, ramLesson])?.map((hit) => hit.id),
+      ['waike:curriculum/memory.md'],
+    );
+  });
+
+  it('keeps a real llama.cpp run labeled llama.cpp when the completion is empty', () => {
+    const ran = attributionForCompletedRun('');
+    assert.equal(ran.text, '');
+    assert.equal(ran.backend, 'llama.cpp');
+    assert.equal(ran.realInference, true);
+    assert.equal(ran.isTrainedLlm, true);
+    assert.equal(ran.grounded, false);
+    assert.equal(truthfulModelId(ran.isTrainedLlm), 'llama.cpp');
+    assert.equal(ran.text.includes('TUTORING['), false);
   });
 
   it('keeps cloud processing disabled for local-only tutoring', () => {

@@ -52,6 +52,15 @@ const CONTEXT_STOPWORDS = new Set([
   'practical',
 ]);
 
+function wholeWords(text: string): Set<string> {
+  return new Set(
+    text
+      .toLowerCase()
+      .split(/\W+/)
+      .filter((term) => term.length > 0),
+  );
+}
+
 export function relevantContext(
   query: string,
   hits: Array<{ id: string; text: string }>,
@@ -62,9 +71,10 @@ export function relevantContext(
     .filter((term) => term.length > 2 && !CONTEXT_STOPWORDS.has(term));
   if (!terms.length) return undefined;
   const matched = hits.filter((hit) => {
-    const hay = hit.text.toLowerCase();
-    const found = terms.filter((term) => hay.includes(term));
+    const hay = wholeWords(hit.text);
+    const found = terms.filter((term) => hay.has(term));
     // One shared word such as "file" is not enough to paste a fixture.
+    // A short token must be its own word, not a piece of a longer word.
     return terms.length === 1 ? found.length === 1 : found.length >= 2;
   });
   return matched.length ? matched.slice(0, 3) : undefined;

@@ -182,6 +182,23 @@ export function learnerFacingText(modelCompletion: string): string {
   return modelCompletion.trim();
 }
 
+/** A finished llama.cpp run stays llama.cpp even when the completion is empty. */
+export function attributionForCompletedRun(modelText: string): {
+  backend: 'llama.cpp';
+  realInference: true;
+  isTrainedLlm: true;
+  grounded: false;
+  text: string;
+} {
+  return {
+    backend: 'llama.cpp',
+    realInference: true,
+    isTrainedLlm: true,
+    grounded: false,
+    text: learnerFacingText(modelText),
+  };
+}
+
 export function truthfulModelId(
   isTrainedLlm: boolean,
 ): 'llama.cpp' | 'deterministic-baseline' {
@@ -218,6 +235,16 @@ export function completionAfterPrompt(stdout: string, prompt: string): string {
     .trim();
 }
 
+/** Learner text is the completion after the prompt echo. No echo means abstain. */
+export function learnerCompletionFromStdout(stdout: string, prompt: string): string {
+  const hasTurn = stdout.includes('\n> ') || stdout.startsWith('> ');
+  if (!hasTurn) return '';
+  const text = completionAfterPrompt(stdout, prompt)
+    .replace(/available commands:[\s\S]*?(?=\n>|\nHello|\nI'm|\nI |\n[A-Z])/i, '')
+    .trim();
+  return text;
+}
+
 function parseLlamaOutput(
   stdout: string,
   stderr: string,
@@ -243,34 +270,8 @@ function parseLlamaOutput(
   const outputTokensMatch =
     /(?:eval|generation|predicted).*?(\d+)\s*tokens?/i.exec(combined);
 
-  // Keep only tokens generated after the echoed prompt. A short answer is still an answer.
-  let text = completionAfterPrompt(stdout, prompt);
-  text = text
-    .replace(/available commands:[\s\S]*?(?=\n>|\nHello|\nI'm|\nI |\n[A-Z])/i, '')
-    .trim();
-
-  if (!text) {
-    const lines = stdout
-      .split('\n')
-      .map((l) => l.trim())
-      .filter(
-        (l) =>
-          l &&
-          !l.startsWith('▄') &&
-          !l.startsWith('█') &&
-          !l.startsWith('▀') &&
-          !l.startsWith('build') &&
-          !l.startsWith('model') &&
-          !l.startsWith('ftype') &&
-          !l.startsWith('modalities') &&
-          !l.startsWith('Loading') &&
-          !l.startsWith('available') &&
-          !l.startsWith('/') &&
-          !l.startsWith('>') &&
-          !l.startsWith('[ Prompt'),
-      );
-    text = lines.slice(-6).join('\n').trim();
-  }
+  // Empty completion stays empty. Do not rebuild an answer from banners or the prompt.
+  const text = learnerCompletionFromStdout(stdout, prompt);
 
   const promptTokPerSec = Number.isFinite(promptTps) ? promptTps : null;
   const generationTokPerSec = Number.isFinite(genTps) ? genTps : null;
@@ -312,7 +313,8 @@ function parseLlamaOutput(
 
 function estimateOutputTokens(text: string): number {
   const words = text.split(/\s+/).filter(Boolean).length;
-  return Math.max(1, Math.round(words * 1.3));
+  if (!words) return 0;
+  return Math.round(words * 1.3);
 }
 
 function runLlamaOnce(
@@ -526,6 +528,7 @@ export class LlamaCppBackend implements LocalInferenceBackend {
         prompt,
       );
       const modelText = parsed.text.trim();
+      const ran = attributionForCompletedRun(modelText);
       const peakRss =
         parsed.metrics.peakRssBytes ??
         Math.max(
@@ -534,30 +537,29 @@ export class LlamaCppBackend implements LocalInferenceBackend {
         );
 
       return {
-        backend: 'llama.cpp',
-        text: learnerFacingText(modelText),
+        backend: ran.backend,
+        text: ran.text,
         structured: {
           ...structuredFallback.structured,
           selectedArchitecture: 'llama.cpp',
           metricsMode: 'measured',
-          realInference: modelText.length > 0,
+          realInference: ran.realInference,
           modelPath: availability.ggufPath,
           binary: availability.binaryOrModule,
           rawModelChars: modelText.length,
           llmNarrative: modelText,
           llamaMetrics: parsed.metrics,
           scaffoldInLearnerText: false,
+          completionEmpty: modelText.length === 0,
         },
-        grounded: false,
+        grounded: ran.grounded,
         sources: request.contextDocs?.map((d) => d.id) ?? [],
         latencyMs: run.latencyMs,
         memoryStubBytes: peakRss,
-        isTrainedLlm: modelText.length > 0,
-        fallbackUsed: modelText.length === 0,
+        isTrainedLlm: ran.isTrainedLlm,
+        fallbackUsed: false,
         fallbackReason:
-          modelText.length === 0
-            ? 'Model completion was empty after the echoed prompt was removed.'
-            : undefined,
+          modelText.length === 0 ? 'completion_empty' : undefined,
       };
     } catch (err) {
       const message = err instanceof Error ? err.message : String(err);
