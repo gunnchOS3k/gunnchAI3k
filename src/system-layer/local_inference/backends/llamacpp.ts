@@ -171,6 +171,53 @@ function buildPrompt(request: InferenceRequest): string {
     .join('\n');
 }
 
+function sharedPrefixLength(left: string, right: string): number {
+  const n = Math.min(left.length, right.length);
+  let i = 0;
+  while (i < n && left[i] === right[i]) i += 1;
+  return i;
+}
+
+export function learnerFacingText(modelCompletion: string): string {
+  return modelCompletion.trim();
+}
+
+export function truthfulModelId(
+  isTrainedLlm: boolean,
+): 'llama.cpp' | 'deterministic-baseline' {
+  return isTrainedLlm ? 'llama.cpp' : 'deterministic-baseline';
+}
+
+export function completionAfterPrompt(stdout: string, prompt: string): string {
+  let text = stdout;
+  const gt = stdout.lastIndexOf('\n> ');
+  if (gt >= 0) text = stdout.slice(gt + 3);
+  else if (stdout.startsWith('> ')) text = stdout.slice(2);
+  text = text.replace(/^\uFEFF/, '');
+  const echoed = prompt.replace(/\r\n/g, '\n').trim();
+  let rest = text.replace(/\r\n/g, '\n').trimStart();
+  if (echoed && rest.startsWith(echoed)) {
+    rest = rest.slice(echoed.length);
+  } else if (echoed) {
+    for (const line of echoed.split('\n')) {
+      if (!rest.startsWith(line)) break;
+      rest = rest.slice(line.length).replace(/^\n/, '');
+    }
+  }
+  if (echoed) {
+    for (const line of echoed.split('\n')) {
+      const needle = line.trim();
+      if (needle.length < 24) continue;
+      const shared = sharedPrefixLength(rest.trimStart(), needle);
+      if (shared >= 24) rest = rest.trimStart().slice(shared);
+    }
+  }
+  return rest
+    .replace(/\n?\[ Prompt:[\s\S]*$/i, '')
+    .replace(/\n?Exiting\.\.\.[\s\S]*$/i, '')
+    .trim();
+}
+
 function parseLlamaOutput(
   stdout: string,
   stderr: string,
@@ -181,6 +228,7 @@ function parseLlamaOutput(
   nPredict: number,
   ctx: number,
   hardwarePath: LlamaRunMetrics['hardwarePath'],
+  prompt = '',
 ): { text: string; metrics: LlamaRunMetrics } {
   const combined = `${stdout}\n${stderr}`;
   const promptTps = Number(
@@ -195,22 +243,13 @@ function parseLlamaOutput(
   const outputTokensMatch =
     /(?:eval|generation|predicted).*?(\d+)\s*tokens?/i.exec(combined);
 
-  // Extract assistant response after the echoed "> prompt" line.
-  let text = stdout;
-  const gt = stdout.lastIndexOf('\n> ');
-  if (gt >= 0) {
-    text = stdout.slice(gt + 3);
-    const firstNl = text.indexOf('\n');
-    if (firstNl >= 0) text = text.slice(firstNl + 1);
-  }
+  // Keep only tokens generated after the echoed prompt. A short answer is still an answer.
+  let text = completionAfterPrompt(stdout, prompt);
   text = text
-    .replace(/\[ Prompt:[\s\S]*$/i, '')
-    .replace(/Exiting\.\.\.[\s\S]*$/i, '')
     .replace(/available commands:[\s\S]*?(?=\n>|\nHello|\nI'm|\nI |\n[A-Z])/i, '')
     .trim();
 
-  // Fallback: take last non-banner block
-  if (!text || text.length < 8) {
+  if (!text) {
     const lines = stdout
       .split('\n')
       .map((l) => l.trim())
@@ -484,8 +523,9 @@ export class LlamaCppBackend implements LocalInferenceBackend {
         run.nPredict,
         run.ctx,
         run.hardwarePath,
+        prompt,
       );
-      const modelText = parsed.text;
+      const modelText = parsed.text.trim();
       const peakRss =
         parsed.metrics.peakRssBytes ??
         Math.max(
@@ -495,26 +535,29 @@ export class LlamaCppBackend implements LocalInferenceBackend {
 
       return {
         backend: 'llama.cpp',
-        text:
-          `[llama.cpp REAL local inference]\n${modelText}\n\n` +
-          `[structured overlay]\n${structuredFallback.text}`,
+        text: learnerFacingText(modelText),
         structured: {
           ...structuredFallback.structured,
           selectedArchitecture: 'llama.cpp',
           metricsMode: 'measured',
-          realInference: true,
+          realInference: modelText.length > 0,
           modelPath: availability.ggufPath,
           binary: availability.binaryOrModule,
           rawModelChars: modelText.length,
           llmNarrative: modelText,
           llamaMetrics: parsed.metrics,
+          scaffoldInLearnerText: false,
         },
-        grounded: structuredFallback.grounded,
-        sources: structuredFallback.sources,
+        grounded: false,
+        sources: request.contextDocs?.map((d) => d.id) ?? [],
         latencyMs: run.latencyMs,
         memoryStubBytes: peakRss,
-        isTrainedLlm: true,
-        fallbackUsed: false,
+        isTrainedLlm: modelText.length > 0,
+        fallbackUsed: modelText.length === 0,
+        fallbackReason:
+          modelText.length === 0
+            ? 'Model completion was empty after the echoed prompt was removed.'
+            : undefined,
       };
     } catch (err) {
       const message = err instanceof Error ? err.message : String(err);

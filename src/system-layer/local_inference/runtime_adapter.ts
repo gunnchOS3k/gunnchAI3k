@@ -20,6 +20,56 @@ import type {
   LocalInferenceBackend,
 } from './backends/interface';
 
+const CONTEXT_STOPWORDS = new Set([
+  'say',
+  'the',
+  'and',
+  'for',
+  'with',
+  'what',
+  'how',
+  'explain',
+  'sentence',
+  'versus',
+  'help',
+  'please',
+  'about',
+  'from',
+  'this',
+  'that',
+  'into',
+  'your',
+  'you',
+  'are',
+  'was',
+  'can',
+  'does',
+  'not',
+  'one',
+  'basic',
+  'simple',
+  'concept',
+  'practical',
+]);
+
+export function relevantContext(
+  query: string,
+  hits: Array<{ id: string; text: string }>,
+): Array<{ id: string; text: string }> | undefined {
+  const terms = query
+    .toLowerCase()
+    .split(/\W+/)
+    .filter((term) => term.length > 2 && !CONTEXT_STOPWORDS.has(term));
+  if (!terms.length) return undefined;
+  const matched = hits.filter((hit) => {
+    const hay = hit.text.toLowerCase();
+    const found = terms.filter((term) => hay.includes(term));
+    // One shared word such as "file" is not enough to paste a fixture.
+    return terms.length === 1 ? found.length === 1 : found.length >= 2;
+  });
+  return matched.length ? matched.slice(0, 3) : undefined;
+}
+
 export type PreferredBackendHint =
   | 'deterministic-baseline'
   | 'local-runtime-fixture'
@@ -111,17 +161,17 @@ export class LocalInferenceRuntimeAdapter {
       };
     }
 
-    // hybrid / llm — llama.cpp with deterministic structured overlay
+    // hybrid / llm — llama.cpp. The rubric stays in structured fields.
+    // Only a content-term match may enter the prompt. One shared function word
+    // is not a lesson source.
+    const contextDocs = mech.usesLocalRag
+      ? relevantContext(request.query, retrieveForQuery(request.query, this.cwd, 3))
+      : undefined;
     const llamaResult = await this.llama.infer({
       capability: request.capability,
       query: request.query,
       deviceProfileId: request.deviceProfileId,
-      contextDocs: mech.usesLocalRag
-        ? retrieveForQuery(request.query, this.cwd, 3).map((h) => ({
-            id: h.id,
-            text: h.text,
-          }))
-        : undefined,
+      contextDocs,
     });
     return {
       ...llamaResult,

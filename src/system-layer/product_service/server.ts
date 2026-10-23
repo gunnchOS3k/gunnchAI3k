@@ -3,6 +3,8 @@
  */
 
 import express, { type Express, type Request, type Response } from 'express';
+
+export const PRODUCT_SERVICE_BIND_HOST = '127.0.0.1';
 import type { GunnchAIProductService } from './service';
 import type { AssistRequest, PermissionScope, ProductRoute } from './types';
 import { OS_INTEGRATION_TOKEN, PRODUCT_SERVICE_TOKEN } from './types';
@@ -269,7 +271,7 @@ export async function startProductServiceServer(
   });
 
   const server = await new Promise<ReturnType<Express['listen']>>((resolve) => {
-    const s = app.listen(port, '127.0.0.1', () => resolve(s));
+    const s = app.listen(port, PRODUCT_SERVICE_BIND_HOST, () => resolve(s));
   });
   const address = server.address();
   const boundPort = typeof address === 'object' && address ? address.port : port;
@@ -278,7 +280,7 @@ export async function startProductServiceServer(
     app,
     server,
     port: boundPort,
-    baseUrl: `http://127.0.0.1:${boundPort}`,
+    baseUrl: `http://${PRODUCT_SERVICE_BIND_HOST}:${boundPort}`,
     close: () =>
       new Promise((resolve, reject) => {
         server.close((err) => (err ? reject(err) : resolve()));
