@@ -362,6 +362,33 @@ describe('learner-facing prompt, scaffold, and retrieval', () => {
     );
   });
 
+  it('drops nested and malformed grade or completion values from a suggestion-only tutoring response', () => {
+    const response = suggestionOnlyTutoring({
+      capability: 'tutoring',
+      text: '{"grade":{"points":10},"completion":{"established":true},"note":"lesson"}',
+      extra: { grade: { points: 9 }, keep: 'visible', nested: { completion: true } },
+      citations: [{ source: 'lesson', grade: 1, completion: 'done' }],
+      structured: {
+        answerKind: 'source-backed',
+        modelCompletion: 'model text stays separate',
+        wrapped: { grade: 1, completion: 'done', source: 'lesson' },
+        encoded: '{"completion":{"established":true},"grade":4,"keep":"excerpt"}',
+        malformed: '{"grade":',
+      },
+    });
+    assert.equal(response.suggestion_only, true);
+    assert.equal(response.structured.modelCompletion, 'model text stays separate');
+    assert.equal(response.extra.keep, 'visible');
+    assert.equal(response.structured.wrapped.source, 'lesson');
+    assert.equal(response.citations[0]?.source, 'lesson');
+    assert.equal(JSON.parse(response.text).note, 'lesson');
+    assert.equal(JSON.parse(response.structured.encoded).keep, 'excerpt');
+    assert.equal(response.structured.malformed, '');
+    const flat = JSON.stringify(response);
+    assert.equal(flat.includes('"grade"'), false);
+    assert.equal(flat.includes('"completion"'), false);
+  });
+
   it('asks llama.cpp for more than 64 tokens and does not feed fixture hits to tutoring', () => {
     assert.equal(DEFAULT_N_PREDICT > 64, true);
     const adapter = source('src/system-layer/local_inference/runtime_adapter.ts');
