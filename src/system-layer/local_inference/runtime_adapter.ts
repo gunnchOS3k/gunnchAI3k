@@ -10,6 +10,11 @@ import type { SystemCapability } from '../model_registry';
 import type { DeviceProfileId } from '../model_registry';
 import { mechanismFor } from '../capability_mechanisms';
 import { retrieveForQuery } from '../local_rag';
+import {
+  composeLearnerAnswer,
+  defaultLessonRoots,
+  matchAuthorizedLesson,
+} from './authorized_lessons';
 import { DeterministicBaselineBackend } from './backends/deterministic';
 import { LlamaCppBackend } from './backends/llamacpp';
 import { OnnxRuntimeBackend } from './backends/onnxruntime';
@@ -171,23 +176,34 @@ export class LocalInferenceRuntimeAdapter {
       };
     }
 
-    // hybrid / llm — llama.cpp. The rubric stays in structured fields.
-    // Only a content-term match may enter the prompt. One shared function word
-    // is not a lesson source.
-    const contextDocs = mech.usesLocalRag
-      ? relevantContext(request.query, retrieveForQuery(request.query, this.cwd, 3))
-      : undefined;
+    // hybrid / llm — llama.cpp. Fixture hits do not enter the prompt.
+    // A matched lesson.md excerpt is the learner text. The completion stays
+    // in structured.modelCompletion and is not pasted beside the excerpt.
     const llamaResult = await this.llama.infer({
       capability: request.capability,
       query: request.query,
       deviceProfileId: request.deviceProfileId,
-      contextDocs,
+    });
+    const lesson = matchAuthorizedLesson(
+      request.query,
+      defaultLessonRoots(),
+    );
+    const answer = composeLearnerAnswer({
+      query: request.query,
+      modelText: llamaResult.text,
+      lesson,
     });
     return {
       ...llamaResult,
+      text: answer.text,
+      grounded: answer.grounded,
+      sources: answer.sources,
       structured: {
         ...llamaResult.structured,
         mechanism: mech.mechanism,
+        modelCompletion: llamaResult.text,
+        answerKind: answer.kind,
+        sourceExcerpt: lesson?.excerpt ?? null,
       },
     };
   }

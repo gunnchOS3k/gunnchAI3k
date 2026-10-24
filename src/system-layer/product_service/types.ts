@@ -115,6 +115,10 @@ export interface AssistResponse {
   text: string;
   structured: StructuredAssistPayload;
   provenance: ProvenanceRecord;
+  /** Present for tutoring so an empty list is not filled with unrelated section files. */
+  citations?: Array<{ source: string; snippet: string; content_hash: string }>;
+  /** Tutoring stays advice. Grade and completion fields are not part of this response. */
+  suggestion_only?: true;
   governance: {
     purposeDeclared: boolean;
     purpose: string;
