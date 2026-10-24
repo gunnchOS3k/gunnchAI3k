@@ -17,6 +17,7 @@ import {
 } from '../../src/system-layer/local_inference/backends/llamacpp';
 import { relevantContext } from '../../src/system-layer/local_inference/runtime_adapter';
 import { evaluateCloudDisclosure } from '../../src/system-layer/privacy_policy';
+import { assistGroundedTutoring } from '../../src/system-layer/product_service/in_process_tutoring';
 import { suggestionOnlyTutoring } from '../../src/system-layer/product_service/suggestion_only';
 import { PRODUCT_SERVICE_BIND_HOST } from '../../src/system-layer/product_service/server';
 
@@ -384,6 +385,33 @@ describe('learner-facing prompt, scaffold, and retrieval', () => {
     assert.equal(JSON.parse(response.text).note, 'lesson');
     assert.equal(JSON.parse(response.structured.encoded).keep, 'excerpt');
     assert.equal(response.structured.malformed, '');
+    const flat = JSON.stringify(response);
+    assert.equal(flat.includes('"grade"'), false);
+    assert.equal(flat.includes('"completion"'), false);
+  });
+
+  it('returns suggestion-only grounded tutoring from a lesson without loading a model', () => {
+    const lessonRoot = mkdtempSync(join(tmpdir(), 'waike-lesson-'));
+    const lessonDir = join(lessonRoot, 'DIGITAL_CONFIDENCE', 'weeks', 'w01');
+    mkdirSync(lessonDir, { recursive: true });
+    const body = [
+      'Files and memory are different jobs.',
+      '',
+      'A saved file is data written to storage. Application memory holds working state.',
+    ].join('\n');
+    writeFileSync(join(lessonDir, 'lesson.md'), body);
+    const response = assistGroundedTutoring('saved file storage application memory', {
+      roots: [lessonRoot],
+    });
+    const excerpt = response.structured.sourceExcerpt;
+    assert.equal(response.suggestion_only, true);
+    assert.equal(response.structured.realInference, false);
+    assert.equal(response.structured.modelCompletion, '');
+    assert.equal(typeof excerpt, 'string');
+    assert.equal(excerpt.length > 0, true);
+    assert.equal(body.includes(String(excerpt)), true);
+    assert.equal(response.text.includes(String(excerpt)), true);
+    assert.equal(response.provenance.realInference, false);
     const flat = JSON.stringify(response);
     assert.equal(flat.includes('"grade"'), false);
     assert.equal(flat.includes('"completion"'), false);
