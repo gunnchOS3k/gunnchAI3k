@@ -5,7 +5,7 @@
 
 import { randomUUID } from 'node:crypto';
 import * as path from 'node:path';
-import { LlamaCppBackend } from '../local_inference/backends/llamacpp';
+import { LlamaCppBackend, truthfulModelId } from '../local_inference/backends/llamacpp';
 import { LocalInferenceRuntimeAdapter } from '../local_inference/runtime_adapter';
 import { mechanismFor } from '../capability_mechanisms';
 import type { SystemCapability } from '../model_registry';
@@ -725,7 +725,7 @@ export class GunnchAIProductService {
       structured,
       provenance: {
         capability,
-        modelId: inference.isTrainedLlm ? 'llama.cpp' : 'deterministic-baseline',
+        modelId: truthfulModelId(inference.isTrainedLlm),
         modelVersion: this.governance.getState().activeModelVersion,
         backend: inference.backend,
         mechanism: mech.mechanism,
