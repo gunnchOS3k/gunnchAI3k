@@ -22,7 +22,8 @@ import {
   shouldFailLlamaExit,
 } from '../llamacpp_cli_compat';
 
-const DEFAULT_N_PREDICT = 64;
+/** Long enough for a short contrast. 64 tokens stopped CPU versus RAM at "but". */
+export const DEFAULT_N_PREDICT = 160;
 /** Nano-fallback context only. Not a Local Fast/Pro window. */
 const DEFAULT_CTX = 512;
 /** Absolute floor for tiny GGUF hosts (MiB). */

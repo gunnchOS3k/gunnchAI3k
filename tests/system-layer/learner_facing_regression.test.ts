@@ -1,9 +1,16 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import {
+  composeLearnerAnswer,
+  matchAuthorizedLesson,
+  tutoringCitations,
+} from '../../src/system-layer/local_inference/authorized_lessons';
 import {
   attributionForCompletedRun,
   completionAfterPrompt,
+  DEFAULT_N_PREDICT,
   learnerCompletionFromStdout,
   learnerFacingText,
   truthfulModelId,
@@ -220,5 +227,125 @@ describe('learner-facing prompt, scaffold, and retrieval', () => {
     assert.equal(decision.cloudPermitted, false);
     assert.equal(decision.dataLeavesDevice, false);
     assert.equal(decision.processingMode, 'local-only');
+  });
+
+  it('matches a lesson paragraph and ignores fixtures, substrings, and split topics', () => {
+    const root = mkdtempSync(join(tmpdir(), 'waike-lessons-'));
+    const confidence = join(root, 'digital_rc', 'DIGITAL_CONFIDENCE', 'weeks', 'w01');
+    const hardware = join(root, 'digital_rc', 'DIGITAL_CONFIDENCE', 'weeks', 'w06');
+    const noise = join(root, 'knowledge');
+    mkdirSync(confidence, { recursive: true });
+    mkdirSync(hardware, { recursive: true });
+    mkdirSync(noise, { recursive: true });
+    writeFileSync(
+      join(confidence, 'lesson.md'),
+      [
+        'Week 1 names three jobs.',
+        '',
+        'Guided practice: save essay.txt in a folder you own, close the editor, and reopen the file.',
+        '',
+        'A file extension is the suffix after the last dot in a file name.',
+      ].join('\n'),
+    );
+    writeFileSync(
+      join(hardware, 'lesson.md'),
+      [
+        'Count RAM in the firmware screen.',
+        '',
+        'CPU observations belong in a different note.',
+        '',
+        'RAM holds working data and the CPU executes instructions.',
+      ].join('\n'),
+    );
+    writeFileSync(
+      join(noise, 'skill_tree.yaml'),
+      'digital confidence file practical\n',
+    );
+    writeFileSync(
+      join(noise, 'lesson.md'),
+      'A program stores a profile. This paragraph is a program profile.',
+    );
+
+    const extension = matchAuthorizedLesson(
+      'Explain a file extension in one sentence.',
+      [root],
+    );
+    assert.equal(extension?.excerpt.includes('suffix after the last dot'), true);
+    assert.equal(extension?.id.includes('w01'), true);
+
+    const practical = matchAuthorizedLesson(
+      'Help me with the Digital Confidence file practical.',
+      [root],
+    );
+    assert.equal(practical?.excerpt.includes('essay.txt'), true);
+    assert.equal(practical?.excerpt.includes('skill_tree'), false);
+
+    const contrast = matchAuthorizedLesson('Explain CPU versus RAM.', [root]);
+    assert.equal(contrast?.excerpt.includes('CPU executes'), true);
+    assert.equal(contrast?.excerpt.includes('firmware'), false);
+
+    assert.equal(
+      matchAuthorizedLesson('Explain RAM in one sentence.', [
+        join(noise),
+      ]),
+      null,
+    );
+    assert.equal(matchAuthorizedLesson('Say hello in one sentence.', [root]), null);
+  });
+
+  it('keeps model text out of a source answer and abstains on an unsourced number', () => {
+    const lesson = {
+      id: 'waike:digital_rc/DIGITAL_CONFIDENCE/weeks/w01/lesson.md',
+      sourcePath: 'lesson.md',
+      excerpt: 'Save essay.txt and reopen the file.',
+    };
+    const grounded = composeLearnerAnswer({
+      query: 'Help me with the Digital Confidence file practical.',
+      modelText: 'Digital Confidence and Computer Basics\n\nIntroduction',
+      lesson,
+    });
+    assert.equal(grounded.kind, 'source-backed');
+    assert.equal(grounded.grounded, true);
+    assert.equal(grounded.text.includes('essay.txt'), true);
+    assert.equal(grounded.text.includes('Introduction'), false);
+    assert.deepEqual(grounded.sources, [lesson.id]);
+
+    const model = composeLearnerAnswer({
+      query: 'Explain a variable in one sentence.',
+      modelText: 'A variable stores a value.',
+      lesson: null,
+    });
+    assert.equal(model.kind, 'model-completion');
+    assert.equal(model.text, 'A variable stores a value.');
+    assert.equal(model.grounded, false);
+
+    const abstain = composeLearnerAnswer({
+      query: 'What is the boiling point of tungsten?',
+      modelText: 'The boiling point of tungsten is approximately 3523 degrees Celsius.',
+      lesson: null,
+    });
+    assert.equal(abstain.kind, 'abstain');
+    assert.equal(abstain.text.includes('3523'), false);
+    assert.equal(/\d/.test(abstain.text), false);
+    const cites = tutoringCitations(abstain);
+    assert.equal(cites.length, 1);
+    assert.equal(cites[0]?.source, 'local:no-authorized-lesson');
+    assert.equal(cites[0]?.source.includes('SHARED_CONTENT'), false);
+    const lessonCites = tutoringCitations(grounded);
+    assert.equal(lessonCites[0]?.source, lesson.id);
+    assert.equal(lessonCites[0]?.snippet.includes('Introduction'), false);
+  });
+
+  it('asks llama.cpp for more than 64 tokens and does not feed fixture hits to tutoring', () => {
+    assert.equal(DEFAULT_N_PREDICT > 64, true);
+    const adapter = source('src/system-layer/local_inference/runtime_adapter.ts');
+    const tutoring = adapter.slice(
+      adapter.indexOf('hybrid / llm'),
+      adapter.indexOf('private async inferWithLocalRag'),
+    );
+    assert.equal(tutoring.includes('contextDocs'), false);
+    assert.equal(tutoring.includes('modelCompletion'), true);
+    assert.equal(source('src/system-layer/product_service/service.ts').includes('tutoringCitations'), true);
+    assert.equal(source('src/system-layer/product_service/server.ts').includes(PRODUCT_SERVICE_BIND_HOST), true);
   });
 });

@@ -115,6 +115,8 @@ export interface AssistResponse {
   text: string;
   structured: StructuredAssistPayload;
   provenance: ProvenanceRecord;
+  /** Present for tutoring so an empty list is not filled with unrelated section files. */
+  citations?: Array<{ source: string; snippet: string; content_hash: string }>;
   governance: {
     purposeDeclared: boolean;
     purpose: string;
