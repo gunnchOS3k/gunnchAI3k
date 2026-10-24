@@ -6,6 +6,7 @@
 import { randomUUID } from 'node:crypto';
 import * as path from 'node:path';
 import { tutoringCitations } from '../local_inference/authorized_lessons';
+import { suggestionOnlyTutoring } from './suggestion_only';
 import { LlamaCppBackend, truthfulModelId } from '../local_inference/backends/llamacpp';
 import { LocalInferenceRuntimeAdapter } from '../local_inference/runtime_adapter';
 import { mechanismFor } from '../capability_mechanisms';
@@ -700,7 +701,7 @@ export class GunnchAIProductService {
           })
         : undefined;
 
-    return {
+    const response = {
       ok: true,
       requestId,
       capability: req.capability,
@@ -720,6 +721,7 @@ export class GunnchAIProductService {
         evalBaselineRef: decision.evalBaselineRef,
       },
     };
+    return req.capability === 'tutoring' ? suggestionOnlyTutoring(response) : response;
   }
 
   private async handleSystemCapability(

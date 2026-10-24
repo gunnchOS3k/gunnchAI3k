@@ -17,6 +17,7 @@ import {
 } from '../../src/system-layer/local_inference/backends/llamacpp';
 import { relevantContext } from '../../src/system-layer/local_inference/runtime_adapter';
 import { evaluateCloudDisclosure } from '../../src/system-layer/privacy_policy';
+import { suggestionOnlyTutoring } from '../../src/system-layer/product_service/suggestion_only';
 import { PRODUCT_SERVICE_BIND_HOST } from '../../src/system-layer/product_service/server';
 
 const root = join(__dirname, '../..');
@@ -334,6 +335,31 @@ describe('learner-facing prompt, scaffold, and retrieval', () => {
     const lessonCites = tutoringCitations(grounded);
     assert.equal(lessonCites[0]?.source, lesson.id);
     assert.equal(lessonCites[0]?.snippet.includes('Introduction'), false);
+  });
+
+  it('keeps a suggestion-only tutoring response free of grade and completion fields', () => {
+    const response = suggestionOnlyTutoring({
+      capability: 'tutoring',
+      text: 'Source: lesson',
+      grade: { points: 10 },
+      completion: { established: true },
+      structured: {
+        answerKind: 'source-backed',
+        modelCompletion: 'model text stays separate',
+        grade: 1,
+        completion: 'done',
+      },
+    });
+    assert.equal(response.suggestion_only, true);
+    assert.equal(Object.hasOwn(response, 'grade'), false);
+    assert.equal(Object.hasOwn(response, 'completion'), false);
+    assert.equal(Object.hasOwn(response.structured, 'grade'), false);
+    assert.equal(Object.hasOwn(response.structured, 'completion'), false);
+    assert.equal(response.structured.modelCompletion, 'model text stays separate');
+    assert.equal(
+      source('src/system-layer/product_service/service.ts').includes('suggestionOnlyTutoring'),
+      true,
+    );
   });
 
   it('asks llama.cpp for more than 64 tokens and does not feed fixture hits to tutoring', () => {
